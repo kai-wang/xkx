@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE muclient>
-<!-- Saved on Wednesday, December 04, 2013, 12:09 AM -->
+<!-- Saved on Thursday, December 05, 2013, 10:59 PM -->
 <!-- MuClient version 4.84 -->
 <!-- Written by Nick Gammon -->
 <!-- Home Page: http://www.mushclient.com/ -->
@@ -8,7 +8,7 @@
 <world
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-12-04 00:09:54"
+   date_saved="2013-12-05 22:59:52"
 
    auto_say_override_prefix="-"
    auto_say_string="say "
@@ -113,7 +113,7 @@
 <triggers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-12-04 00:09:54"
+   date_saved="2013-12-05 22:59:52"
   >
   <trigger
    custom_colour="16"
@@ -161,7 +161,6 @@
   <send>jump</send>
   </trigger>
   <trigger
-   enabled="y"
    group="item"
    keep_evaluating="y"
    match="^  .*[Ë«|¼þ|Ö»](\S+)\((.+)\)$"
@@ -171,7 +170,6 @@
   >
   </trigger>
   <trigger
-   enabled="y"
    group="bei_task1"
    keep_evaluating="y"
    match="^(#)+$"
@@ -640,7 +638,7 @@ drop gang dao</send>
 <aliases
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-12-04 00:09:54"
+   date_saved="2013-12-05 22:59:52"
   >
   <alias
    match="^show (.*)$"
@@ -723,7 +721,7 @@ perform stick.luanda</send>
 <timers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-12-04 00:09:54"
+   date_saved="2013-12-05 22:59:52"
   >
   <timer enabled="y" second="30.00" offset_second="0.00" >
   <send>hi</send>
@@ -736,7 +734,7 @@ perform stick.luanda</send>
 <macros
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-12-04 00:09:54"
+   date_saved="2013-12-05 22:59:52"
   >
 
   <macro name="up" type="send_now" >
@@ -830,13 +828,13 @@ perform stick.luanda</send>
 <variables
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-12-04 00:09:54"
+   date_saved="2013-12-05 22:59:52"
   >
   <variable name="baobiao_exp">142</variable>
   <variable name="baobiao_loc">ÂÒÊ¯ÆÂ</variable>
   <variable name="baobiao_qn">23</variable>
   <variable name="baobiao_yl">1</variable>
-  <variable name="bei_npc">Ãç¾Å¸ç</variable>
+  <variable name="bei_npc">³ðÈýÃÃ</variable>
   <variable name="busydelay">0.2</variable>
   <variable name="fight_interval">1</variable>
   <variable name="fz_coin">3143</variable>
@@ -850,14 +848,14 @@ perform stick.luanda</send>
   <variable name="gf_loc">µØ°²ÃÅÎ÷´ó½Ö</variable>
   <variable name="gf_npc">ÕÔÒ»ÉË</variable>
   <variable name="gf_option"></variable>
-  <variable name="me_name">ÖíÌã</variable>
+  <variable name="me_name">°×Óñ¾©</variable>
   <variable name="quqing_loc">Îä¹¦</variable>
   <variable name="shan_exp">267</variable>
   <variable name="shan_npc">Òó½õ</variable>
   <variable name="shan_qn">19</variable>
   <variable name="shan_yl">2</variable>
   <variable name="walk_deepth">5</variable>
-  <variable name="weapon">bang</variable>
+  <variable name="weapon">mudan jian</variable>
   <variable name="wei_item">±ùÌÇºùÂ«</variable>
 </variables>
 
@@ -866,7 +864,7 @@ perform stick.luanda</send>
 <colours
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-12-04 00:09:54"
+   date_saved="2013-12-05 22:59:52"
   >
 
 <ansi>
@@ -923,7 +921,7 @@ perform stick.luanda</send>
 <keypad
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-12-04 00:09:54"
+   date_saved="2013-12-05 22:59:52"
   >
 
   <key name="0" >
@@ -1037,7 +1035,7 @@ perform stick.luanda</send>
 <printing
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-12-04 00:09:54"
+   date_saved="2013-12-05 22:59:52"
   >
 
 <ansi>

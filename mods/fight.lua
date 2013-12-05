@@ -40,6 +40,9 @@ function attack_begin()
 	if  0 ~= IsTimer("fight_timer") then
 		local ninterval = tonumber(var.fight_interval)
 		AddTimer("fight_timer", 0, 0, ninterval, "", timer_flag.Enabled + timer_flag.Temporary + timer_flag.Replace, "fight.perform_busy")
+		print("创建定时器")
+	else
+		EnableTimer("fight_timer", true)
 	end --if
 
 	if 0 ~= IsTrigger("fight_busy_success") then
@@ -61,6 +64,9 @@ function attack_begin()
  end --function
 
 function attack_end()
+	print("disable timer")
+	ResetTimer("fight_timer")
+	EnableTimer("fight_timer", false)
 	DeleteTimer("fight_timer")
 	DeleteTrigger("fight_busy_success")
  end --function
