@@ -77,7 +77,8 @@ foundnpc = function(name, line, wildcards)
 	gf.search = 0
 	walk.stop()
 
-	fight.init("kill " .. npc_id, busy_list, attack_list)
+	fight.prepare(busy_list, attack_list)
+	Execute("kill " .. npc_id)
 	fight.start()
 end
 

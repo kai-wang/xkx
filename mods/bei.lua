@@ -8,6 +8,99 @@ module ("bei", package.seeall)
 local bei_info = {}
 local task1 = dofile("worlds\\xkx\\mods\\task1.lua")
 
+local mapping = {
+	["大理国"] = "大理",
+	["峨嵋山"] = "峨眉山",
+	["青城山"] = "青城",
+	["紫禁城"] = "北京紫禁城"
+}
+
+main = function()
+	EnableTriggerGroup("bei", true)
+	Execute("fly wm;e;n;e;e;e;task")
+end
+
+done = function()
+	EnableTriggerGroup("bei", false)
+end
+
+fail = function()
+	EnableTriggerGroup("bei", false)
+end
+
+start = function(name, line, wildcards)
+	var.task_npc = wildcards[2]
+	var.task_id = me.id .. "'s task"
+	var.task_fullname = (var.task_id):gsub("^%l", string.upper)
+	Execute("task1;set task1")
+	Execute("fly wm;u;loc " .. me.id .. "'s task")
+end
+
+location = function(name, line, wildcards)
+	local city = parse()
+	var.task_loc = wildcards[3]
+	if(city == nil) then
+		print("找不到匹配的城市")
+		fail()
+	else
+		print(city .. " " .. var.task_loc .. " " .. var.task_npc)
+		if(mapping[city] ~= nil) then
+			var.task_city = mapping[city]
+		else
+			var.task_city = city
+		end
+		
+		walk.sl(var.task_city, var.task_loc)
+	end
+end
+
+foundnpc = function(name, line, wildcards)
+	local busy_list = me.profile.task_busy_list()
+	local attack_list = me.profile.task_attack_list()
+
+	walk.stop()
+
+	fight.prepare(busy_list, attack_list)
+	Execute("jiali max;kill " .. var.task_id)
+	fight.start()
+end
+
+
+npcdie = function(name, line, wildcards)
+	wait.make(function()
+		fight.stop()
+		wait.time(2)
+		Execute("get all from corpse")
+		wait.time(1)
+		Execute("halt;fly wm;u;jiali 0;yun regenerate;yun recover")
+		dazuo_start()
+		Execute("d;yun recover;yun regenerate")
+		done()
+	end)
+end
+
+
+search = function(name, line, wildcards)
+    AddTrigger("quqing_1", "^(> )*    " .. var.task_npc .. "正坐在地下运功疗伤。$", "", 49193, -1, 0, "", "bei.foundnpc2")
+	fight.stop()
+	Execute("halt")
+	walk.walkaround(5)
+end
+
+
+foundnpc2 = function()
+	local busy_list = me.profile.task_busy_list()
+	local attack_list = me.profile.task_attack_list()
+
+	walk.stop()
+	fight.prepare(busy_list, attack_list)
+	Execute("jiali max;kill " .. var.task_id)
+	fight.start()
+end
+
+go = function()
+	walk.sl(var.task_city, var.task_loc)
+end
 
 function task1_init(name, line, wildcards)
 	var.bei_npc = wildcards[2]
@@ -35,9 +128,9 @@ function task1_end()
 	if(bei_info.matrix == {}) then
 		return
 	else
-		local city = parse()
-		print("city "..city)
-		if(city == nil) then fail() end
+		--local city = parse()
+		--print("city "..city)
+		--if(city == nil) then fail() end
 	end
 end
 
@@ -85,6 +178,24 @@ function checkSimilarity(v1)
 	if(task1[name] ~= nil) then
 		return name
 	else
+		local city, score = nil, 0
+		for i, v in ipairs(task1) do
+			if(#v.city == #name) then
+				local lastmatch, m = 0, 0
+				for j = 1, #words do
+					if(v.city:sub(j*2-1, j*2) == words[j]) then
+						if(lastmatch == 1) then m = m + 1.5 else m = m + 1 end
+						lastmatch = 1
+						if(m > score) then score = m city = v.city end
+					end
+					lastmatch = 0
+				end
+			end
+		end
+		print(city)
+		return city
+	end
+	--[[
 		local city, maxMatchNum = nil, 0
 		for j = 1, #words do
 			for i, v in ipairs(task1) do
@@ -100,8 +211,46 @@ function checkSimilarity(v1)
 		end
 
 		return city
+	end]]--
+end
+
+
+function test(name)
+	local words = {}
+	for i = 1, #name do
+		table.insert(words, name:sub(i*2-1, i*2))
+	end
+	
+	local name = table.concat(words, "")
+	print("最匹配的字： "..name)
+	if(task1[name] ~= nil) then
+		return name
+	else
+		local city, score = nil, 0
+		for i, v in ipairs(task1) do
+			if(#v.city == #name) then
+				local lastmatch, m = 0, 0
+				for j = 1, #words do
+					if(v.city:sub(j*2-1, j*2) == words[j]) then
+						if(j == 1) then 
+							m = m + 1.2
+						elseif(lastmatch == 1) then 
+							m = m + 1.5 
+						else
+							m = m + 1 
+						end
+						lastmatch = 1
+						if(m > score) then score = m city = v.city end
+					end
+					lastmatch = 0
+				end
+			end
+		end
+		print(city)
+		return city
 	end
 end
+
 
 function calculateDist(v1, v2, pos)
 	local score = 0
@@ -203,6 +352,7 @@ end
 
 ---------手动保存一下task1的内容--------------------------
 function save(name)
+	var.task_city = name
 	table.insert(task1, {["city"]=name, ["desc"]=table.concat(bei_info.matrix, "\n")})
 	local content = serialize.save("task1", task1)
 	local file = io.open("worlds\\xkx\\mods\\task1.lua", "w")
