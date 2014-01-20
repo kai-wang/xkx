@@ -1,5 +1,6 @@
 require "wait"
 require "tprint"
+--module ("misc", package.seeall)
 ------------------------------------------------------------------------------
 --                 variable
 ------------------------------------------------------------------------------
@@ -132,6 +133,38 @@ end --function
 --                 dazuo
 ------------------------------------------------------------------------------
 
+dazuo = {}
+
+dazuo.start = function(callback)
+	EnableTriggerGroup("dazuo", true)
+	dazuo.done_flag = false
+	Execute("et;dazuo max")
+	if(callback ~= nil) then
+		msg.subscribe("msg_dazuo_end", callback)
+	else
+		msg.unsubscribe("msg_dazuo_end")
+	end
+end
+
+dazuo.continue = function()
+	if(not dazuo.done_flag) then
+		Execute("er;ef;dazuo max")
+	else
+		dazuo.done()
+	end
+end
+
+dazuo.done = function()
+	EnableTriggerGroup("dazuo", false)
+	msg.broadcast("msg_dazuo_end")
+end
+
+dazuo.halt = function()
+	Execute("halt;er")
+	dazuo.done()
+end
+
+--[[
 function dazuo_end()
 	msg.broadcast("msg_dazuo_end")
 end
@@ -173,7 +206,7 @@ function dazuo_start()
 	end
 	msg.broadcast("msg_dazuo_end")
 end
-
+]]--
 
 ------------------------------------------------------------------------------
 --                 jump_tower

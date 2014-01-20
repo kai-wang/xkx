@@ -1,6 +1,7 @@
 require "tprint"
 
 me = {}
+me.package = {}
 
 
 function whoami(n, l, w)

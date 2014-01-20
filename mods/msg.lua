@@ -41,7 +41,8 @@ end
 function broadcast(msg)
 	local t = mc[msg]
 
-	if(t ~= nil) then
+	if(t ~= nil and t.func ~= nil) then
+		ColourNote("navy", "tomato", "msg: " .. msg .. "触发了")--print("msg: " .. msg .. "触发了")
 		t.func()--unpack(t.args))
 	else
 		ColourNote("navy", "tomato", "msg: " .. msg .. "触发了")--print("msg: " .. msg .. "触发了")

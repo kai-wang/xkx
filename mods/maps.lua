@@ -180,7 +180,16 @@ map["move"] = function(dir)
 			map.currentRoom = roomAll[v.to]
 			local zone = map.currentRoom["zone"]
 			print("zone " .. zone)
-			if(string.find(zone, map.currentRegion)==nil) then
+			local zt = utils.split(zone, "|")
+			local found = false
+			for i, v in ipairs(zt) do
+				if(map.currentRegion == v) then 
+					found = true
+				end
+			end
+			
+			if(not found) then
+			--if(zone ~= map.currentRegion) then
 				--支持一个房间隶属于多个区域
 				map.currentRoom["zone"] = zone .. "|" ..map.currentRegion
 			end

@@ -7,13 +7,7 @@ module ("bei", package.seeall)
 
 local bei_info = {}
 local task1 = dofile("worlds\\xkx\\mods\\task1.lua")
-
-local mapping = {
-	["大理国"] = "大理",
-	["峨嵋山"] = "峨眉山",
-	["青城山"] = "青城",
-	["紫禁城"] = "北京紫禁城"
-}
+local task1_array = {}
 
 main = function()
 	EnableTriggerGroup("bei", true)
@@ -26,16 +20,70 @@ end
 
 fail = function()
 	EnableTriggerGroup("bei", false)
+	Execute("fly wm")
+end
+
+pause = function()
+	EnableTriggerGroup("bei", false)
+	Execute("fly wm")
 end
 
 start = function(name, line, wildcards)
 	var.task_npc = wildcards[2]
 	var.task_id = me.id .. "'s task"
 	var.task_fullname = (var.task_id):gsub("^%l", string.upper)
+	var.task_found = false
+	
+	Execute("fly wm")
+	parseTask1()
+	--[[
 	Execute("task1;set task1")
+	Execute("fly wm;u;loc " .. me.id .. "'s task")
+	]]--
+end
+
+parseTask1 = function()
+	wait.make(function()
+		EnableTriggerGroup("bei_task1", true)
+		Execute("task1;set task1")
+		local l, w = wait.regexp("^(> )*(你现在没有任何使命！)|(设定环境变数：task1 = \"YES\")$")
+		EnableTriggerGroup("bei_task1", false)
+		if(l and string.match(l, "你现在没有任何使命")) then
+			fail()
+		else
+			local city = parse()
+			if(city == nil) then
+				print("找不到匹配的城市")
+				fail()
+			else
+				var.task_city = city
+				locateTask()				
+			end
+		end
+	end)
+end
+
+locateTask = function()
 	Execute("fly wm;u;loc " .. me.id .. "'s task")
 end
 
+
+go = function(name, line, wildcards)
+	var.task_loc = wildcards[3]
+	print(var.task_city .. " " .. var.task_loc .. " " .. var.task_npc)
+	walk.sl(var.task_city, var.task_loc, bei.notfound, bei.fail)
+end
+
+faint = function()
+	var.faint = 1
+end
+
+awake = function()
+	var.faint = 0
+	fail()
+end
+
+--[[
 location = function(name, line, wildcards)
 	local city = parse()
 	var.task_loc = wildcards[3]
@@ -44,13 +92,21 @@ location = function(name, line, wildcards)
 		fail()
 	else
 		print(city .. " " .. var.task_loc .. " " .. var.task_npc)
-		if(mapping[city] ~= nil) then
-			var.task_city = mapping[city]
-		else
-			var.task_city = city
-		end
-		
-		walk.sl(var.task_city, var.task_loc)
+		walk.sl(var.task_city, var.task_loc, notfound, fail)
+	end
+end
+]]--
+
+-- 走完都没找到
+notfound = function()
+	if(var.task_found) then return end
+	if(var.task_retry == nil) then var.task_retry = 0 end
+	if(tonumber(var.task_retry) < 3) then
+		var.task_retry = tonumber(var.task_retry) + 1
+		-- 暂停，飞回去，过段时间再来
+		pause()
+	else
+		fail()
 	end
 end
 
@@ -59,6 +115,7 @@ foundnpc = function(name, line, wildcards)
 	local attack_list = me.profile.task_attack_list()
 
 	walk.stop()
+	var.task_found = true
 
 	fight.prepare(busy_list, attack_list)
 	Execute("jiali max;kill " .. var.task_id)
@@ -70,42 +127,42 @@ npcdie = function(name, line, wildcards)
 	wait.make(function()
 		fight.stop()
 		wait.time(2)
-		Execute("get all from corpse")
+		item.lookandget()
+		--Execute("look corpse;get all from corpse")
 		wait.time(1)
 		Execute("halt;fly wm;u;jiali 0;yun regenerate;yun recover")
+		dazuo.start(function()
+			if(me.package.sell_list ~= nil) then
+				for i, v in ipairs(me.package.sell_list) do
+					print("give " .. v.id .. " to ouye zi")
+					Execute("give " .. v.id .. " to ouye zi")
+				end
+			end
+			Execute("d;er;et")
+			bei.done()
+		end)
+		--[[
 		dazuo_start()
 		Execute("d;yun recover;yun regenerate")
 		done()
+		]]--
 	end)
 end
 
-
+-------- task 跑了，在原地范围内进行深度为5的遍历-----------------------------------
 search = function(name, line, wildcards)
-    AddTrigger("quqing_1", "^(> )*    " .. var.task_npc .. "正坐在地下运功疗伤。$", "", 49193, -1, 0, "", "bei.foundnpc2")
+	var.task_found = false
 	fight.stop()
 	Execute("halt")
-	walk.walkaround(5)
+	walk.walkaround(5, wildcards[2])
 end
 
-
-foundnpc2 = function()
-	local busy_list = me.profile.task_busy_list()
-	local attack_list = me.profile.task_attack_list()
-
-	walk.stop()
-	fight.prepare(busy_list, attack_list)
-	Execute("jiali max;kill " .. var.task_id)
-	fight.start()
-end
-
-go = function()
-	walk.sl(var.task_city, var.task_loc)
-end
-
+-----------------------------------------------------------------------------------------------------------------------------
+--------------------------------------以下是解析task1相关--------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------
 function task1_init(name, line, wildcards)
 	var.bei_npc = wildcards[2]
 	print(var.bei_npc)
-	EnableTriggerGroup("bei_task1",true)
 	bei_info.start = true
 	bei_info.matrix = {}
 end
@@ -123,19 +180,17 @@ function log_task1(name, line, wildcards, style)
 	table.insert(bei_info.matrix, str)
 end
 
+--[[
 function task1_end()
 	EnableTriggerGroup("bei_task1",false)
 	if(bei_info.matrix == {}) then
-		return
-	else
-		--local city = parse()
-		--print("city "..city)
-		--if(city == nil) then fail() end
+		fail()
 	end
 end
-
+]]--
 
 function parse()
+	if(bei_info.matrix == {}) then return end
 	local str = table.concat(bei_info.matrix, "\n")
 	local array = stringToArray(str)
 
@@ -147,8 +202,9 @@ end
 function checkSimilarity(v1)
 
 	local words, score, maxscore  = {}, {}, 0
-	for i, v in ipairs(task1) do
-		local v2 = stringToArray(v.desc)
+	for i, v in ipairs(task1_array) do
+		--local v2 = stringToArray(v.desc)
+		local v2 = v.array
 		if(#v1 == #v2) then
 			for j = 1, #v1 do
 				if(score[j] == nil) then score[j] = 1000000000 end
@@ -359,4 +415,21 @@ function save(name)
 	file:write("local " .. content)
 	file:write("\r\nreturn task1")
 	file:close()
+	
+	parse_array()
 end
+
+---------把字模转换成数字-----------------------------------
+function parse_array()
+	for i, v in ipairs(task1) do
+		local tbl = {}
+		tbl.city = v.city
+		tbl.array = stringToArray(v.desc)
+		table.insert(task1_array, tbl)
+	end
+end
+
+
+parse_array()
+
+

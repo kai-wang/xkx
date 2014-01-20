@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE muclient>
-<!-- Saved on Wednesday, October 30, 2013, 12:22 AM -->
+<!-- Saved on Thursday, January 02, 2014, 11:42 PM -->
 <!-- MuClient version 4.84 -->
 <!-- Written by Nick Gammon -->
 <!-- Home Page: http://www.mushclient.com/ -->
@@ -8,7 +8,7 @@
 <world
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-10-30 00:22:01"
+   date_saved="2014-01-02 23:42:19"
 
    auto_say_override_prefix="-"
    auto_say_string="say "
@@ -51,6 +51,7 @@
    enable_command_stack="y"
    enable_scripts="y"
    enable_speed_walk="y"
+   enable_timers="y"
    enable_triggers="y"
    history_lines="1000"
    hyperlink_adds_to_command_history="y"
@@ -113,7 +114,7 @@
 <triggers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-10-30 00:22:01"
+   date_saved="2014-01-02 23:42:19"
   >
   <trigger
    custom_colour="16"
@@ -379,7 +380,7 @@
 <aliases
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-10-30 00:22:01"
+   date_saved="2014-01-02 23:42:19"
   >
   <alias
    match="^show (.*)$"
@@ -413,7 +414,7 @@
 <timers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-10-30 00:22:01"
+   date_saved="2014-01-02 23:42:19"
   >
   <timer enabled="y" second="30.00" offset_second="0.00"    send_to="12"
 >
@@ -427,7 +428,7 @@
 <macros
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-10-30 00:22:01"
+   date_saved="2014-01-02 23:42:19"
   >
 
   <macro name="up" type="send_now" >
@@ -521,7 +522,7 @@
 <variables
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-10-30 00:22:01"
+   date_saved="2014-01-02 23:42:19"
   >
   <variable name="baobiao_exp">126</variable>
   <variable name="baobiao_loc">ÂÒÊ¯ÆÂ</variable>
@@ -540,7 +541,7 @@
 <colours
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-10-30 00:22:01"
+   date_saved="2014-01-02 23:42:19"
   >
 
 <ansi>
@@ -597,7 +598,7 @@
 <keypad
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-10-30 00:22:01"
+   date_saved="2014-01-02 23:42:19"
   >
 
   <key name="0" >
@@ -711,7 +712,7 @@
 <printing
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-10-30 00:22:01"
+   date_saved="2014-01-02 23:42:19"
   >
 
 <ansi>
