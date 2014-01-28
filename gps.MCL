@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE muclient>
-<!-- Saved on Saturday, October 19, 2013, 10:43 AM -->
+<!-- Saved on Tuesday, January 28, 2014, 11:54 PM -->
 <!-- MuClient version 4.84 -->
 <!-- Written by Nick Gammon -->
 <!-- Home Page: http://www.mushclient.com/ -->
@@ -8,7 +8,7 @@
 <world
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-10-19 10:43:24"
+   date_saved="2014-01-28 23:54:33"
 
    auto_say_override_prefix="-"
    auto_say_string="say "
@@ -112,7 +112,7 @@
 <triggers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-10-19 10:43:24"
+   date_saved="2014-01-28 23:54:33"
   >
   <trigger
    custom_colour="16"
@@ -387,7 +387,7 @@
 <aliases
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-10-19 10:43:24"
+   date_saved="2014-01-28 23:54:33"
   >
   <alias
    match="^show (.*)$"
@@ -421,9 +421,9 @@
 <timers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-10-19 10:43:24"
+   date_saved="2014-01-28 23:54:33"
   >
-  <timer enabled="y" second="30.00" offset_second="0.00"    send_to="12"
+  <timer second="30.00" offset_second="0.00"    send_to="12"
 >
   <send>quqing.main()</send>
 
@@ -435,7 +435,7 @@
 <macros
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-10-19 10:43:24"
+   date_saved="2014-01-28 23:54:33"
   >
 
   <macro name="up" type="send_now" >
@@ -529,13 +529,13 @@
 <variables
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-10-19 10:43:24"
+   date_saved="2014-01-28 23:54:33"
   >
   <variable name="baobiao_exp">142</variable>
   <variable name="baobiao_loc">Ãö½­</variable>
   <variable name="baobiao_qn">23</variable>
   <variable name="baobiao_yl">1</variable>
-  <variable name="quqing_loc">º¼ÖÝ</variable>
+  <variable name="quqing_loc">¼ÎÐË</variable>
   <variable name="shan_exp">267</variable>
   <variable name="shan_npc">Òó½õ</variable>
   <variable name="shan_qn">19</variable>
@@ -548,7 +548,7 @@
 <colours
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-10-19 10:43:24"
+   date_saved="2014-01-28 23:54:33"
   >
 
 <ansi>
@@ -605,7 +605,7 @@
 <keypad
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-10-19 10:43:24"
+   date_saved="2014-01-28 23:54:33"
   >
 
   <key name="0" >
@@ -719,7 +719,7 @@
 <printing
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-10-19 10:43:24"
+   date_saved="2014-01-28 23:54:33"
   >
 
 <ansi>

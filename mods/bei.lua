@@ -23,9 +23,25 @@ fail = function()
 	Execute("fly wm")
 end
 
+done2 = function()
+	walk.stop()
+	fight.stop()
+	Execute("fly wm")
+	done()
+end
+
 pause = function()
 	EnableTriggerGroup("bei", false)
 	Execute("fly wm")
+	wait.make(function()
+		wait.time(60)
+		msg.broadcast("msg_task_retry")
+	end)
+end
+
+resume = function()
+	EnableTriggerGroup("bei", true)
+	Execute("fly wm;u;loc " .. me.id .. "'s task")
 end
 
 start = function(name, line, wildcards)
@@ -33,13 +49,11 @@ start = function(name, line, wildcards)
 	var.task_id = me.id .. "'s task"
 	var.task_fullname = (var.task_id):gsub("^%l", string.upper)
 	var.task_found = false
+	var.task_retry_times = 0
+	var.task_search = false
 	
 	Execute("fly wm")
 	parseTask1()
-	--[[
-	Execute("task1;set task1")
-	Execute("fly wm;u;loc " .. me.id .. "'s task")
-	]]--
 end
 
 parseTask1 = function()
@@ -57,20 +71,20 @@ parseTask1 = function()
 				fail()
 			else
 				var.task_city = city
-				locateTask()				
+				Execute("fly wm;u;loc " .. me.id .. "'s task")
 			end
 		end
 	end)
 end
 
-locateTask = function()
-	Execute("fly wm;u;loc " .. me.id .. "'s task")
-end
-
-
-go = function(name, line, wildcards)
+location = function(name, line, wildcards)
 	var.task_loc = wildcards[3]
 	print(var.task_city .. " " .. var.task_loc .. " " .. var.task_npc)
+	go()
+end
+
+go = function()
+	fight.prepare(busy_list, attack_list)
 	walk.sl(var.task_city, var.task_loc, bei.notfound, bei.fail)
 end
 
@@ -83,43 +97,36 @@ awake = function()
 	fail()
 end
 
---[[
-location = function(name, line, wildcards)
-	local city = parse()
-	var.task_loc = wildcards[3]
-	if(city == nil) then
-		print("找不到匹配的城市")
-		fail()
-	else
-		print(city .. " " .. var.task_loc .. " " .. var.task_npc)
-		walk.sl(var.task_city, var.task_loc, notfound, fail)
-	end
-end
-]]--
-
 -- 走完都没找到
 notfound = function()
+	print("找不到 " .. var.task_search_times)
 	if(var.task_found) then return end
-	if(var.task_retry == nil) then var.task_retry = 0 end
-	if(tonumber(var.task_retry) < 3) then
-		var.task_retry = tonumber(var.task_retry) + 1
-		-- 暂停，飞回去，过段时间再来
-		pause()
-	else
+	if(var.task_search_times >= 3) then 
 		fail()
+	else
+		var.task_search_times = var.task_search_times + 1 
+		if(not var.task_search) then 
+			--没找过先原地遍历
+			var.task_found = false
+			fight.stop()
+			Execute("halt")
+			walk.walkaround(3)
+		else
+			--遍历过了还找不到，先飞回去，然后过一分钟再继续
+			pause()
+		end
 	end
 end
 
 foundnpc = function(name, line, wildcards)
-	local busy_list = me.profile.task_busy_list()
-	local attack_list = me.profile.task_attack_list()
+	local busy_list = me.profile.busy_list
+	local attack_list = me.profile.attack_list2
 
 	walk.stop()
 	var.task_found = true
 
 	fight.prepare(busy_list, attack_list)
-	Execute("jiali max;kill " .. var.task_id)
-	fight.start()
+	fight.start("jiali max;kill " .. var.task_id)
 end
 
 
@@ -141,11 +148,6 @@ npcdie = function(name, line, wildcards)
 			Execute("d;er;et")
 			bei.done()
 		end)
-		--[[
-		dazuo_start()
-		Execute("d;yun recover;yun regenerate")
-		done()
-		]]--
 	end)
 end
 
@@ -154,7 +156,8 @@ search = function(name, line, wildcards)
 	var.task_found = false
 	fight.stop()
 	Execute("halt")
-	walk.walkaround(5, wildcards[2])
+	print("task 跑了 【" .. wildcards[3] .. "】")
+	walk.walkaround(5, wildcards[3])
 end
 
 -----------------------------------------------------------------------------------------------------------------------------

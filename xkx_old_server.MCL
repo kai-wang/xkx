@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE muclient>
-<!-- Saved on Tuesday, November 26, 2013, 1:20 AM -->
+<!-- Saved on Tuesday, January 28, 2014, 10:21 PM -->
 <!-- MuClient version 4.84 -->
 <!-- Written by Nick Gammon -->
 <!-- Home Page: http://www.mushclient.com/ -->
@@ -8,7 +8,7 @@
 <world
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-11-26 01:20:26"
+   date_saved="2014-01-28 22:21:12"
 
    auto_say_override_prefix="-"
    auto_say_string="say "
@@ -25,7 +25,7 @@
    script_filename="D:\Apps\MUSHclient\worlds\xkx\main.lua"
    script_language="Lua"
    script_prefix="."
-   site="202.91.243.150"
+   site="112.124.8.59"
    spam_message="look"
    speed_walk_prefix="#"
    terminal_identification="mushclient"
@@ -113,7 +113,7 @@
 <triggers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-11-26 01:20:26"
+   date_saved="2014-01-28 22:21:12"
   >
   <trigger
    custom_colour="15"
@@ -416,7 +416,7 @@
 <aliases
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-11-26 01:20:26"
+   date_saved="2014-01-28 22:21:12"
   >
   <alias
    match="^(\S*) (.*)$"
@@ -572,7 +572,7 @@ wait.make(walk)</send>
 <timers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-11-26 01:20:26"
+   date_saved="2014-01-28 22:21:12"
   >
   <timer second="30.00" offset_second="0.00"    send_to="12"
 >
@@ -586,7 +586,7 @@ wait.make(walk)</send>
 <macros
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-11-26 01:20:26"
+   date_saved="2014-01-28 22:21:12"
   >
 
   <macro name="up" type="send_now" >
@@ -680,7 +680,7 @@ wait.make(walk)</send>
 <variables
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-11-26 01:20:26"
+   date_saved="2014-01-28 22:21:12"
   >
   <variable name="baobiao_exp">188</variable>
   <variable name="baobiao_loc">ÌìÉ½½ÅÏÂ</variable>
@@ -703,7 +703,7 @@ wait.make(walk)</send>
 <colours
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-11-26 01:20:26"
+   date_saved="2014-01-28 22:21:12"
   >
 
 <ansi>
@@ -760,7 +760,7 @@ wait.make(walk)</send>
 <keypad
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-11-26 01:20:26"
+   date_saved="2014-01-28 22:21:12"
   >
 
   <key name="0" >
@@ -874,7 +874,7 @@ wait.make(walk)</send>
 <printing
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2013-11-26 01:20:26"
+   date_saved="2014-01-28 22:21:12"
   >
 
 <ansi>

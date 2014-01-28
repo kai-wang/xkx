@@ -57,6 +57,16 @@ function classify(name, line, wildcards, style)
 	end
 end
 
+function classify2(name, line, wildcards, style)
+	local item = wildcards[2]
+	local color = item_list[item].color
+	if(color == "yellow" or color == "white" or color == "blue") then
+		table.insert(sell_list, item_list[item])
+	else
+		table.insert(me.package.store_list, item_list[item])
+	end
+end
+
 function get(name, line, wildcards, style)
 	local item, item_id = wildcards[1], string.lower(wildcards[2])
 

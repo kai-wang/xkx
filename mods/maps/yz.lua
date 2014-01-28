@@ -572,6 +572,7 @@ local region = {}
         region.rooms[40].links["climb tree"] = {}
           region.rooms[40].links["climb tree"].to = 67
           region.rooms[40].links["climb tree"].con = "k1:Á÷Ã¥Í·"
+		  region.rooms[40].links["climb tree"].block = "y"
         region.rooms[40].links.e = {}
           region.rooms[40].links.e.to = 68
           region.rooms[40].links.e.con = ""

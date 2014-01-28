@@ -130,13 +130,12 @@ handlers = {
 	------ aw:3:flatter ÐÇËÞÀÏÏÉ---------------------------------------
 	["aw"] = function(interval, action)
 		Execute(action)
-		if(interval ~= nil) then
+		if(interval ~= nil and tonumber(interval) > 0) then
 			handlers["w"](interval)
 		else
 			handlers.done()
 		end
 	end,
-
 	------ c:yingxiong ling--------------------------------------------
 	["c"] = function(item)
 		Execute("look " .. item)
@@ -440,11 +439,15 @@ function walkaround(dp, dir)
 			return
 		else
 			for i, v in pairs(room.links) do
-				if(not walked[v.to] and v.attr ~= "danger") then
+				if(not walked[v.to] and v.attr ~= "danger" and (v.block == nil or v.block ~= "y")) then
 					if(dir ~= nil and directions[i] == dir and deepth == 1) then
-						table.insert(tbl, 1, {["from"]=room.id, ["to"]=v.to, ["path"]=i})
+						local p = i
+						if(v.con ~= nil and v.con ~= "") then print(v.con) p = "[" .. v.con .. "]" .. i end
+						table.insert(tbl, 1, {["from"]=room.id, ["to"]=v.to, ["path"]=p})
 					else
-						table.insert(tbl, {["from"]=room.id, ["to"]=v.to, ["path"]=i})
+						local p = i
+						if(v.con ~= nil and v.con ~= "") then print(v.con) p = "[" .. v.con .. "]" .. i end
+						table.insert(tbl, {["from"]=room.id, ["to"]=v.to, ["path"]=p})
 					end
 					
 					walked[v.to] = true
