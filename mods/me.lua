@@ -4,6 +4,21 @@ me = {}
 me.package = {}
 
 
+me.init = function()
+	wait.make(function()
+		Execute("title")
+		local l, w = wait.regexp("\\((\\w+)\\)")
+		local id = string.lower(w[1])
+		me.profile = dofile("worlds\\xkx\\" .. id .. ".lua")
+		me.id = var.me_id
+		me.name = var.me_name
+		
+		assert(me.id)
+		print(me.id, me.name)
+	end)
+end
+
+--[[
 function whoami(n, l, w)
 	wait.make(function()
 		Execute("score")
@@ -14,41 +29,10 @@ function whoami(n, l, w)
 		me.id = string.lower(w[1])
 		assert(me.id and me.name)
 		me.profile = dofile("worlds\\xkx\\" .. me.id .. ".lua")
-
-	--[[
-		AddTrigger("score_myname","┃姓    名：(\\S+)\\s+┃", "", 49193, -1, 0, "", "on_score_name")
-		AddTrigger("score_family","┃门    派：(\\S+)\\s+┃", "", 49193, -1, 0, "", "on_score_family")
-		AddTrigger("score_master","授业恩师：(\\S+)\\s+┃", "", 49193, -1, 0, "", "on_score_master")
-		Execute("score")
-		wait.time(1)
-		Execute("hp")
-	]]--
 	end)
 end
-
---[[
-function on_score_id(n, l, w)
-	print(w[1])
-	me.id = string.lower(w[1])
-end
-
-function on_score_name(n, l, w)
-	me.name = w[1]
-	if (0 == IsTrigger("get_ename")) then
-		DeleteTrigger("get_ename")
-	end
-	AddTrigger("score_id", me.name.."\\((\\w+)\\)", "", 49193, -1, 0, "", "on_score_id");
-	Execute("title");
-end
-
-function on_score_family(n, l, w)
-	me.profile = dofile("worlds\\xkx\\" .. me.id .. ".lua")
-end
-
-function on_score_master(n, l, w)
-	me.master = w[1]
-end
 ]]--
+
 --[[
 	精神:		js
 	精神最大值: js_max

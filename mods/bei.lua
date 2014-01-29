@@ -41,12 +41,14 @@ end
 
 resume = function()
 	EnableTriggerGroup("bei", true)
-	Execute("fly wm;u;loc " .. me.id .. "'s task")
+	Execute("fly wm;u;loc " .. var.task_id)
+	--Execute("fly wm;u;loc " .. me.id .. "'s task")
 end
 
 start = function(name, line, wildcards)
 	var.task_npc = wildcards[2]
-	var.task_id = me.id .. "'s task"
+	--直接放到id.lua文件里去了
+	--var.task_id = me.id .. "'s task"
 	var.task_fullname = (var.task_id):gsub("^%l", string.upper)
 	var.task_found = false
 	var.task_retry_times = 0
@@ -71,7 +73,8 @@ parseTask1 = function()
 				fail()
 			else
 				var.task_city = city
-				Execute("fly wm;u;loc " .. me.id .. "'s task")
+				Execute("fly wm;u;loc " .. var.task_id)
+				--Execute("fly wm;u;loc " .. me.id .. "'s task")
 			end
 		end
 	end)

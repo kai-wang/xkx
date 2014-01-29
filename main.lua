@@ -15,14 +15,10 @@ end
 
 print("µ¼ÈëÄ£¿é")
 
---loadmod("maps.lua")
---loadmod("handler.lua")
-loadmod("menpai.lua")
 loadmod("me.lua")
 loadmod("misc.lua")
 loadmod("msg.lua")
 loadmod("system.lua")
---loadmod("info_baobiao.lua")
 loadmod("baobiao.lua")
 loadmod("wei.lua")
 loadmod("info_wei.lua")
@@ -41,7 +37,7 @@ loadmod("bei.lua")
 loadmod("item.lua")
 
 map.loadall()
-whoami()
+me.init()
 
 if configcmd~=nil then
 	configcmd()

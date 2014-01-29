@@ -4,6 +4,11 @@ var.dazuo_desc = "你坐下来运气用功，一股内息开始在体内流动。"
 var.dazuo_end_desc = "你运功完毕，深深吸了口气，站了起来。"
 var.dazuo_halt_desc = "你把正在运行的真气强行压回丹田，站了起来。"
 var.dazuo_full_desc = "你的内力修为似乎已经达到了瓶颈，无法再靠打坐来提升了。"
+var.me_id = "byj"
+var.me_name = "白玉京"
+var.me_menpai = "全真"
+var.task_id = "byj's task"
+var.ttask_id = "byj's ttask"
 
 
 profile = {
