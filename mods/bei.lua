@@ -129,7 +129,7 @@ foundnpc = function(name, line, wildcards)
 	var.task_found = true
 
 	fight.prepare(busy_list, attack_list)
-	fight.start("jiali max;kill " .. var.task_id)
+	fight.start("kill " .. var.task_id)
 end
 
 

@@ -9,9 +9,18 @@ function fullme(f_done)
 	EnableTriggerGroup("HP", true)
 	wait.make(function()
 		Execute("hp;set hp")
-		EnableTriggerGroup("HP", false)
 		local l, w = wait.regexp("^(> )*设定环境变数：hp = \"YES\"$")
-		ssf(qudu(waterfood(jingqi(f_done))))
+		EnableTriggerGroup("HP", false)
+		ssf(function()
+			qudu(function()
+				foodwater(function()
+					jingqi(function()
+						call(f_done)
+					end)
+				end)
+			end)
+		end)
+
 	end)
 end
 
@@ -22,8 +31,15 @@ function ssf(f_done)
 		Execute("fly wm;e;s;w;qukuan 25 gold")
 		wait.time(5)
 		Execute("fly lj;s;give 25 gold to shouling")
+		local l, w = wait.regexp("^(> )*(这里没有这个人)|(.*你没有中生死符啊，你想中吗).*$")
+		
+		if(l:match("这里没有这个人") ~= nil) then
+			print("断线")
+			return
+		end
+		
 		wait.time(5)
-		me.status.inssf = false
+		me["ssf"] = false
 		print("生死符好了")
 		call(f_done)
 	end)
@@ -35,8 +51,8 @@ function qudu(f_done)
 	wait.make(function()
 		Execute("fly wm;u;er;et;yun cure")
 		repeat
-			local l, w = wait.regexp("^(> )*你.*消褪了！", 15)
-		until(l == nil)
+			local l, w = wait.regexp("^(> )*(你.*消褪了！)|(你并未中毒。)$", 15)
+		until((l == nil) or (l:match("你并未中毒") ~= nil))
 		Execute("halt")
 		print("驱毒完毕")
 		call(f_done)
@@ -56,32 +72,39 @@ end
 
 
 function jingqi(f_done)
-	if(me["js%"] >= 95 and me["qx%"] >= 95) then print("不用疗伤") call(f_done) return end
+	local jsP = tonumber(me["js%"])
+	local qxP = tonumber(me["qx%"])
+	if(jsP >= 95 and qxP >= 95) then print("不用疗伤") call(f_done) return end
 	
-	wait.time(function()
-		if(me["js%"] < 60 and canEatWuchange()) then
+	wait.make(function()
+		if(jsP < 60 and canEatWuchang()) then
 			Execute("fly wm;e;s;w;qukuan 5 gold")
 			wait.time(5)
 			Execute("e;s;e;e;n;buy wuchang dan")
 			wait.time(2)
 			Execute("eat wuchang dan")
+			var.last_wuchang = os.time()
 			print("无常丹好吃啊")
 			call(f_done)
 			return
 		else
-			local dannumber = math.floor((100-tonumber(me["js%"]))/5) + 1
-			Execute("fly wm;e;s;w;qukuan 6 gold")
-			wait.time(5)
-			Execute(e;s;e;e;n)
-			for i = 1, dannumber do
-				Execute("buy yangjing dan")
-				wait.time(2)
-				Execute("eat yangjing dan")
+			if(jsP < 95) then
+				local dannumber = (100-jsP)/5
+				if(dannumber == math.ceil(dannumber)) then dannumber = math.ceil(dannumber) + 1 else dannumber = math.ceil(dannumber) end
+				Execute("fly wm;e;s;w;qukuan 6 gold")
 				wait.time(5)
+				Execute("e;s;e;e;n")
+				for i = 1, dannumber do
+					Execute("buy yangjing dan")
+					wait.time(2)
+					Execute("eat yangjing dan")
+					wait.time(5)
+				end
+				print("疗精完毕")
 			end
-			print("疗精完毕")
 			Execute("fly wm;u;er;et;yun heal")
-			local l, w = wait.time("^(> )*(你并没有受伤！)|(你运功完毕，站起身来，看上去气色饱满，精神抖擞。)$")
+			--你运功完毕，缓缓站了起来，脸色看起来好了许多。
+			local l, w = wait.regexp("^(> )*(你并没有受伤！)|(你运功完毕).*$")
 			print("疗气完毕")
 			call(f_done)
 		end
@@ -90,6 +113,7 @@ end
 
 
 function foodwater(f_done)
+	if(tonumber(me["water"]) > tonumber(me["water_max"]) and tonumber(me["food"]) > tonumber(me["food_max"])) then print("不需要吃喝") call(f_done) return end
 	wait.make(function()
 		Execute("set brief;fly jx;buy zongzi;")
 		wait.time(2)

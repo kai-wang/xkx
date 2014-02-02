@@ -2,6 +2,7 @@ require "tprint"
 
 me = {}
 me.package = {}
+me.status = {}
 
 
 me.init = function()
@@ -17,21 +18,6 @@ me.init = function()
 		print(me.id, me.name)
 	end)
 end
-
---[[
-function whoami(n, l, w)
-	wait.make(function()
-		Execute("score")
-		local l, w = wait.regexp("©§ÐÕ    Ãû£º(\\S+)\\s+©§")
-		me.name = w[1]
-		Execute("title")
-		l, w = wait.regexp(me.name.."\\((\\w+)\\)")
-		me.id = string.lower(w[1])
-		assert(me.id and me.name)
-		me.profile = dofile("worlds\\xkx\\" .. me.id .. ".lua")
-	end)
-end
-]]--
 
 --[[
 	¾«Éñ:		js

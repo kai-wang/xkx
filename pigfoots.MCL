@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE muclient>
-<!-- Saved on Wednesday, January 29, 2014, 12:00 AM -->
+<!-- Saved on Sunday, February 02, 2014, 11:44 PM -->
 <!-- MuClient version 4.84 -->
 <!-- Written by Nick Gammon -->
 <!-- Home Page: http://www.mushclient.com/ -->
@@ -8,7 +8,7 @@
 <world
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-01-29 00:00:00"
+   date_saved="2014-02-02 23:44:09"
 
    auto_say_override_prefix="-"
    auto_say_string="say "
@@ -114,7 +114,7 @@
 <triggers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-01-29 00:00:00"
+   date_saved="2014-02-02 23:44:09"
   >
   <trigger
    custom_colour="16"
@@ -129,6 +129,7 @@
   </trigger>
   <trigger
    custom_colour="16"
+   enabled="y"
    expand_variables="y"
    group="bei"
    keep_evaluating="y"
@@ -173,6 +174,7 @@
   <send>jump</send>
   </trigger>
   <trigger
+   enabled="y"
    expand_variables="y"
    group="bei"
    keep_evaluating="y"
@@ -203,19 +205,9 @@
   <trigger
    group="walk_special"
    keep_evaluating="y"
-   match="^(&gt; )*(.*)(À¹×¡|°ÑÊÖÒ»À¹|ÏòÄãºÈµÀ|ºÈµÀ£º|²ÙÆðÈ­Í·¡±|·Ô¸ÀÃ»ÓÐÖØÒªµÄÊÂÇé|µ²×¡ÁËÄã|µ²×¡ÁËÄã£º|Ò»ÑÔ²»·¢£¬ÉÁÉíÀ¹ÔÚÄãÃæÇ°¡£|°ÍÒÀËµ: ÎÒ°Ñ°¢·²Ìá¹ØÔÚÎÒµÄ¿ÍÌüÀïÁË).*$"
+   match="^(&gt; )*(.*)(À¹×¡|°ÑÊÖÒ»À¹|ÏòÄãºÈµÀ|ºÈµÀ£º|²ÙÆðÈ­Í·¡±|·Ô¸ÀÃ»ÓÐÖØÒªµÄÊÂÇé|µ²×¡ÁËÄã|µ²×¡ÁËÄã£º|Ò»ÑÔ²»·¢£¬ÉÁÉíÀ¹ÔÚÄãÃæÇ°¡£|Ëµ: ÎÒ°Ñ°¢·²Ìá¹ØÔÚÎÒµÄ¿ÍÌüÀïÁË|ºÈµÀ).*$"
    regexp="y"
    script="walk.handlers.k_blocker"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
-   expand_variables="y"
-   group="dazuo"
-   keep_evaluating="y"
-   match="^(&gt; )*(@!dazuo_end_desc)$"
-   regexp="y"
-   script="dazuo.continue"
    sequence="100"
   >
   </trigger>
@@ -234,6 +226,18 @@ lll
 hp</send>
   </trigger>
   <trigger
+   enabled="y"
+   expand_variables="y"
+   group="dazuo"
+   keep_evaluating="y"
+   match="^(&gt; )*(@!dazuo_end_desc)$"
+   regexp="y"
+   script="dazuo.continue"
+   sequence="100"
+  >
+  </trigger>
+  <trigger
+   enabled="y"
    expand_variables="y"
    group="dazuo"
    keep_evaluating="y"
@@ -245,6 +249,7 @@ hp</send>
   <send>dazuo.done_flag = true</send>
   </trigger>
   <trigger
+   enabled="y"
    expand_variables="y"
    group="dazuo"
    keep_evaluating="y"
@@ -285,6 +290,7 @@ hp</send>
   >
   </trigger>
   <trigger
+   enabled="y"
    expand_variables="y"
    group="bei"
    keep_evaluating="y"
@@ -295,6 +301,7 @@ hp</send>
   >
   </trigger>
   <trigger
+   enabled="y"
    expand_variables="y"
    group="bei"
    keep_evaluating="y"
@@ -305,6 +312,7 @@ hp</send>
   >
   </trigger>
   <trigger
+   enabled="y"
    expand_variables="y"
    group="bei"
    keep_evaluating="y"
@@ -315,6 +323,7 @@ hp</send>
   >
   </trigger>
   <trigger
+   enabled="y"
    expand_variables="y"
    group="bei"
    keep_evaluating="y"
@@ -362,6 +371,7 @@ hp</send>
   >
   </trigger>
   <trigger
+   enabled="y"
    group="fight"
    keep_evaluating="y"
    match="^(&gt; )*(ÄãµÄÄÚÁ¦ÐÞÎª²»¹»|ÄãÏÖÔÚÄÚÁ¦Ì«Èõ).*$"
@@ -381,6 +391,7 @@ hp</send>
   <send>DoAfterSpecial(3,"yun regenerate;dazuo max", 10)</send>
   </trigger>
   <trigger
+   enabled="y"
    group="fight"
    keep_evaluating="y"
    match="^(&gt; )*(ÄãÂýÂýµØÒÆ¶¯Öø½Å²½£¬ËÅ»ú³öÊÖ¡£|ÄãÕý¶¢Öø.*µÄÒ»¾ÙÒ»¶¯£¬ËæÊ±×¼±¸·¢¶¯¹¥ÊÆ¡£|Äã»º»ºµØÒÆ¶¯½Å²½£¬ÏëÒªÕÒ³ö.*µÄÆÆÕÀ¡£|ÄãÄ¿²»×ª¾¦µØ¶¢Öø.*)$"
@@ -392,7 +403,7 @@ hp</send>
    enabled="y"
    group="gag"
    keep_evaluating="y"
-   match="^(&gt; )*(ÄãÉîÉîÎüÁË¼¸¿ÚÆø)|(Äã.*Çë½Ì)|(ÓÐÐ©ÐÄµÃ)|(ÄãÕýÔÚ×êÑÐ)|(ÄãÊÔ×Å.*Á·ÁË)|(ÄãÏÖÔÚ¾«Éñ±¥Âú)|(.*ÄãµÄ.*½ø²½ÁË).*$"
+   match="^(&gt; )*(ÄãÉîÉîÎüÁË¼¸¿ÚÆø)|(Äã.*Çë½Ì)|(ÓÐÐ©ÐÄµÃ)|(ÄãÕýÔÚ×êÑÐ)|(ÄãÊÔ×Å.*Á·ÁË)|(ÄãÏÖÔÚ¾«Éñ±¥Âú)|(.*ÄãµÄ.*½ø²½ÁË)|(ÄãÃæ¶Ô×ÅÊ¯±Ú¾²Ë¼Á¼¾Ã)|(Äã.*ÆÄÓÐÐÄµÃ).*$"
    omit_from_output="y"
    regexp="y"
    sequence="100"
@@ -411,7 +422,7 @@ hp</send>
   <trigger
    group="study"
    keep_evaluating="y"
-   match="^(&gt; )*(Ò²ÐíÊÇÑ§ÎÊ²»¹»Éî)|(ÄãµÄÇ±ÄÜ²»¹»)|(ÄãµÄ»ù±¾¹¦»ðºòÎ´µ½).*$"
+   match="^(&gt; )*(Ò²ÐíÊÇÑ§ÎÊ²»¹»Éî)|(ÄãµÄÇ±ÄÜ²»¹»)|(ÄãµÄ»ù±¾¹¦»ðºòÎ´µ½)|(Äã.*Ì«·ôÇ³ÁË).*$"
    regexp="y"
    send_to="12"
    sequence="100"
@@ -431,6 +442,7 @@ Execute("fly wm")</send>
   <send>enter</send>
   </trigger>
   <trigger
+   enabled="y"
    group="fight"
    match="^(&gt; )*(ÕâÀï²»×¼Õ½¶·¡£|ÕâÀï²»ÄÜÊ¹ÓÃÍâ¹¦¡£)$"
    script="fight.stop"
@@ -478,6 +490,7 @@ Execute("fly wm")</send>
   <send>yun recover</send>
   </trigger>
   <trigger
+   enabled="y"
    group="fight"
    keep_evaluating="y"
    match="^(&gt; )*\S+(Õ½¶·ÖÐµÄ¶ÔÊÖ.*ÓÃ)|(Õ½¶·ÖÐ.*ÓÃ).*$"
@@ -496,6 +509,7 @@ Execute("fly wm")</send>
   >
   </trigger>
   <trigger
+   enabled="y"
    group="fight"
    keep_evaluating="y"
    match="^(&gt; )*\S+Ä¿Ç°Õý×Ô¹Ë²»Ï¾£¬·Åµ¨¹¥»÷°É£¡$"
@@ -515,6 +529,7 @@ Execute("fly wm")</send>
   >
   </trigger>
   <trigger
+   enabled="y"
    group="bei"
    keep_evaluating="y"
    match="^(&gt; )*±´º£Ê¯¶ÔÄãÐ¦µÀ£ºÏÖÔÚÃ»ÓÐÈÎÎñ¿ÉÒÔ¸øÄã£¬ÏÈÐªÏ¢Ò»»á£¬µÈÒ»ÏÂÔÙÀ´¡£$"
@@ -524,6 +539,7 @@ Execute("fly wm")</send>
   >
   </trigger>
   <trigger
+   enabled="y"
    group="bei"
    keep_evaluating="y"
    match="^(&gt; )*±´º£Ê¯ÓÆÓÆµØ¶ÔÄãËµµÀ£º¡º(.*)¡»Õâ¸ö¼Ò»ï×î½ü±È½Ï°­ÑÛ¡£$"
@@ -533,6 +549,7 @@ Execute("fly wm")</send>
   >
   </trigger>
   <trigger
+   enabled="y"
    group="bei"
    keep_evaluating="y"
    match="^(&gt; )*¹§Ï²Äã£¡ÄãÓÖÍê³ÉÁËÒ»ÏîÈÎÎñ£¡$"
@@ -566,6 +583,7 @@ Execute("fly wm")</send>
   >
   </trigger>
   <trigger
+   enabled="y"
    expand_variables="y"
    group="bei"
    keep_evaluating="y"
@@ -603,6 +621,7 @@ Execute("fly wm")</send>
   >
   </trigger>
   <trigger
+   enabled="y"
    group="bei"
    keep_evaluating="y"
    match="^(&gt; )*Äã²»ÊÇ¸Õ´òÌý¹ýÂð£¿$"
@@ -634,6 +653,7 @@ drop gang dao</send>
   </trigger>
   <trigger
    custom_colour="16"
+   enabled="y"
    group="dazuo"
    keep_evaluating="y"
    match="^(&gt; )*ÄãµÄÄÚÁ¦ÐÞÎªÔö¼ÓÁË£¡$"
@@ -697,6 +717,7 @@ drop gang dao</send>
   >
   </trigger>
   <trigger
+   enabled="y"
    group="bei"
    keep_evaluating="y"
    match="^(&gt; )*ÄãÒª´òÌýË­µÄËùÔÚ£¿$"
@@ -706,6 +727,17 @@ drop gang dao</send>
   >
   </trigger>
   <trigger
+   group="study"
+   keep_evaluating="y"
+   match="^(&gt; )*ÄãÒ»´ÎÊäÈëÌ«¶àÃüÁîÁË¡£$"
+   regexp="y"
+   send_to="12"
+   sequence="100"
+  >
+  <send>DoAfterSpecial(10, "hp", 10)</send>
+  </trigger>
+  <trigger
+   enabled="y"
    group="bei"
    keep_evaluating="y"
    match="^(&gt; )*ÄãÖ»¾õµÃÍ·»èÄÔÕÍ£¬ÑÛÇ°Ò»ºÚ£¬½Ó×ÅÊ²Ã´Ò²²»ÖªµÀÁË¡­¡­$"
@@ -761,6 +793,7 @@ drop gang dao</send>
   >
   </trigger>
   <trigger
+   enabled="y"
    group="bei"
    keep_evaluating="y"
    match="^(&gt; )*Ò»¹ÉÅ¯Á÷·¢×Ôµ¤ÌïÁ÷ÏòÈ«Éí£¬ÂýÂýµØÄãÓÖ»Ö¸´ÁËÖª¾õ¡­¡­$"
@@ -788,20 +821,20 @@ drop gang dao</send>
   >
   </trigger>
   <trigger
-   group="bei_kill"
-   keep_evaluating="y"
-   match="^(&gt; )*ÕâÀïÃ»ÓÐÕâ¸öÈË¡£$"
-   regexp="y"
-   script="bei.search"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
    group="guanfu"
    keep_evaluating="y"
    match="^(&gt; )*ÕâÀïÃ»ÓÐÕâ¸öÈË¡£$"
    regexp="y"
    script="guanfu.search"
+   sequence="100"
+  >
+  </trigger>
+  <trigger
+   group="bei_kill"
+   keep_evaluating="y"
+   match="^(&gt; )*ÕâÀïÃ»ÓÐÕâ¸öÈË¡£$"
+   regexp="y"
+   script="bei.search"
    sequence="100"
   >
   </trigger>
@@ -881,14 +914,6 @@ drop gang dao</send>
   >
   </trigger>
   <trigger
-   group="HP"
-   match="^[&gt; ]*¡¾ Æø Ñª ¡¿\s+(\d+)\/\s+(\d+)\s+\(\s*(\d+)%\)\s+¡¾ ÄÚ Á¦ ¡¿\s+(\d+)\s\/\s(\d+).*$"
-   regexp="y"
-   script="on_hp2_update"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
    group="study"
    keep_evaluating="y"
    match="^[&gt; ]*¡¾ Æø Ñª ¡¿\s+(\d+)\/\s+(\d+)\s+\(\s*(\d+)%\)\s+¡¾ ÄÚ Á¦ ¡¿\s+(\d+)\s\/\s(\d+).*$"
@@ -904,6 +929,14 @@ else
 Execute("lll")
 end
 </send>
+  </trigger>
+  <trigger
+   group="HP"
+   match="^[&gt; ]*¡¾ Æø Ñª ¡¿\s+(\d+)\/\s+(\d+)\s+\(\s*(\d+)%\)\s+¡¾ ÄÚ Á¦ ¡¿\s+(\d+)\s\/\s(\d+).*$"
+   regexp="y"
+   script="on_hp2_update"
+   sequence="100"
+  >
   </trigger>
   <trigger
    group="HP"
@@ -1011,6 +1044,7 @@ end
   </trigger>
   <trigger
    custom_colour="9"
+   enabled="y"
    expand_variables="y"
    group="bei"
    keep_evaluating="y"
@@ -1022,6 +1056,7 @@ end
   >
   </trigger>
   <trigger
+   enabled="y"
    group="fight"
    keep_evaluating="y"
    match="^\( ÄãËÆºõÊ®·ÖÆ£±¹£¬¿´À´ÐèÒªºÃºÃÐÝÏ¢ÁË¡£ \)|\( Äã¿´ÆðÀ´ÒÑ¾­Á¦²»´ÓÐÄÁË¡£ \)  .*$"
@@ -1046,7 +1081,7 @@ end
 <aliases
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-01-29 00:00:00"
+   date_saved="2014-02-02 23:44:09"
   >
   <alias
    match="^show (.*)$"
@@ -1159,7 +1194,7 @@ dazuo.start(function() Execute("d") end)</send>
    send_to="10"
    sequence="100"
   >
-  <send>xue zhu literate 50;et;hp</send>
+  <send>xue wang taoism 50;et;hp</send>
   </alias>
   <alias
    name="qz"
@@ -1263,7 +1298,7 @@ perform stick.luanda</send>
 <timers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-01-29 00:00:00"
+   date_saved="2014-02-02 23:44:09"
   >
   <timer enabled="y" second="30.00" offset_second="0.00" >
   <send>hi</send>
@@ -1276,7 +1311,7 @@ perform stick.luanda</send>
 <macros
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-01-29 00:00:00"
+   date_saved="2014-02-02 23:44:09"
   >
 
   <macro name="up" type="send_now" >
@@ -1370,19 +1405,19 @@ perform stick.luanda</send>
 <variables
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-01-29 00:00:00"
+   date_saved="2014-02-02 23:44:09"
   >
   <variable name="baobiao_exp">142</variable>
-  <variable name="baobiao_loc">»ªÉ½½ÅÏÂ</variable>
+  <variable name="baobiao_loc">ÌìÉ½½ÅÏÂ</variable>
   <variable name="baobiao_qn">23</variable>
   <variable name="baobiao_yl">1</variable>
-  <variable name="bei_npc">·¶Ê®Êå</variable>
+  <variable name="bei_npc">±åÈý¸ç</variable>
   <variable name="busydelay">0.2</variable>
   <variable name="dazuo_desc">Äã×øÏÂÀ´ÔËÆøÓÃ¹¦£¬Ò»¹ÉÄÚÏ¢¿ªÊ¼ÔÚÌåÄÚÁ÷¶¯¡£</variable>
   <variable name="dazuo_end_desc">ÄãÔË¹¦Íê±Ï£¬ÉîÉîÎüÁË¿ÚÆø£¬Õ¾ÁËÆðÀ´¡£</variable>
   <variable name="dazuo_full_desc">ÄãµÄÄÚÁ¦ÐÞÎªËÆºõÒÑ¾­´ïµ½ÁËÆ¿¾±£¬ÎÞ·¨ÔÙ¿¿´ò×øÀ´ÌáÉýÁË¡£</variable>
   <variable name="dazuo_halt_desc">Äã°ÑÕýÔÚÔËÐÐµÄÕæÆøÇ¿ÐÐÑ¹»Øµ¤Ìï£¬Õ¾ÁËÆðÀ´¡£</variable>
-  <variable name="faint">1</variable>
+  <variable name="faint">0</variable>
   <variable name="fight_interval">1</variable>
   <variable name="fz_coin">2321</variable>
   <variable name="gf_attack_1">unwield all;wield bang;perform stick.luanda</variable>
@@ -1395,22 +1430,25 @@ perform stick.luanda</send>
   <variable name="gf_loc">Î÷´ó½Ö</variable>
   <variable name="gf_npc">»ôÔª·ç</variable>
   <variable name="gf_option"></variable>
+  <variable name="me_id">byj</variable>
+  <variable name="me_menpai">È«Õæ</variable>
   <variable name="me_name">°×Óñ¾©</variable>
   <variable name="quqing_loc">Îä¹¦</variable>
   <variable name="shan_exp">267</variable>
   <variable name="shan_npc">Òó½õ</variable>
   <variable name="shan_qn">19</variable>
   <variable name="shan_yl">2</variable>
-  <variable name="task_city">ÌúÕÆ·å</variable>
+  <variable name="task_city">Íò½Ù¹È</variable>
   <variable name="task_found">true</variable>
   <variable name="task_fullname">Byj's task</variable>
   <variable name="task_id">byj's task</variable>
-  <variable name="task_loc">ËÉÊ÷ÁÖ</variable>
-  <variable name="task_npc">·¶Ê®Êå</variable>
+  <variable name="task_loc">Ê¯ÎÝ</variable>
+  <variable name="task_npc">±åÈý¸ç</variable>
   <variable name="task_retry">3</variable>
   <variable name="task_retry_times">0</variable>
   <variable name="task_search">false</variable>
-  <variable name="walk_blocker">ÑÃÒÛ</variable>
+  <variable name="ttask_id">byj's ttask</variable>
+  <variable name="walk_blocker">ÕªÐÇ×Ó</variable>
   <variable name="walk_deepth">5</variable>
   <variable name="weapon">jian</variable>
   <variable name="wei_item">±ùÌÇºùÂ«</variable>
@@ -1421,7 +1459,7 @@ perform stick.luanda</send>
 <colours
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-01-29 00:00:00"
+   date_saved="2014-02-02 23:44:09"
   >
 
 <ansi>
@@ -1478,7 +1516,7 @@ perform stick.luanda</send>
 <keypad
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-01-29 00:00:00"
+   date_saved="2014-02-02 23:44:09"
   >
 
   <key name="0" >
@@ -1592,7 +1630,7 @@ perform stick.luanda</send>
 <printing
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-01-29 00:00:00"
+   date_saved="2014-02-02 23:44:09"
   >
 
 <ansi>
@@ -1615,4 +1653,7 @@ perform stick.luanda</send>
 
 </ansi>
 </printing>
+
+<!-- plugins -->
+<include name="color_chat.xml" plugin="y" />
 </muclient>

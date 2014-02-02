@@ -35,6 +35,7 @@ loadmod("guanfu.lua")
 loadmod("fight.lua")
 loadmod("bei.lua")
 loadmod("item.lua")
+loadmod("heal.lua")
 
 map.loadall()
 me.init()
@@ -42,19 +43,4 @@ me.init()
 if configcmd~=nil then
 	configcmd()
 end
---[[
-function test1(name, line, wildcards, styles)
-	local line_num = GetLinesInBufferCount()
-	print(line_num)
-	local styles_num = GetLineInfo(line_num,11)
-	print(styles_num)
-	for i = 1,styles_num do
-		if GetStyleInfo(line_num,i,1) == "★" then
-			jiefei_color = GetStyleInfo(line_num,i,14)
-			jiefei_color_ch = RGBColourToName (jiefei_color)
-			print("★的颜色是:"..jiefei_color_ch.."，代码是:"..jiefei_color)
-		end
-	end
-end
-]]--
 

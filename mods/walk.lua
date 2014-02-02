@@ -323,6 +323,7 @@ function findpath(regionName, roomName)
 end
 
 function continue()
+	if(walk.stop) then return end
 	if(walk_cxt.thread and coroutine.status(walk_cxt.thread) == "suspended") then
 		coroutine.resume(walk_cxt.thread)
 	end
