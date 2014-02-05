@@ -4,7 +4,7 @@ me = {}
 me.package = {}
 me.status = {}
 
-
+--[[
 me.init = function()
 	wait.make(function()
 		Execute("title")
@@ -18,6 +18,7 @@ me.init = function()
 		print(me.id, me.name)
 	end)
 end
+]]--
 
 --[[
 	¾«Éñ:		js
