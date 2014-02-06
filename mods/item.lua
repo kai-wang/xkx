@@ -67,6 +67,23 @@ function classify2(name, line, wildcards, style)
 	end
 end
 
+function test(name, line, wildcards, style)
+	local item = wildcards[3]
+	local id = string.lower(wildcards[5])
+	
+	local color = getColourName(style, item)
+	if(color == "white" or color == "blue" or color == "yellow") then
+		if(var.item_sell_list == nil) then var.item_sell_list = "" end
+		var.item_sell_list = var.item_sell_list .. "give " .. id .. " to ouye zi;"
+	elseif(color == "red" or color == "magenta") then
+		if(var.item_store_list == nil) then var.item_store_list = "" end
+		var.item_store_list = var.item_store_list .. "give " .. id .. " to byj;"-- .. var.dami_equip .. ";"
+	else
+		if(var.item_drop_list == nil) then var.item_drop_list = "" end
+		var.item_drop_list = var.item_drop_list .. "drop " .. id .. ";"
+	end		
+end
+
 function get(name, line, wildcards, style)
 	local item, item_id = wildcards[1], string.lower(wildcards[2])
 
@@ -98,7 +115,7 @@ end
 
 function getColourName(style, item)
 	for i, v in ipairs(style) do
-		if(item:find(v.text) ~= nil) then
+		if((v.text):find(item) ~= nil) then
 			return RGBColourToName(v.textcolour)
 		end
 	end

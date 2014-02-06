@@ -11,7 +11,7 @@ prepare = function(busy_list, attack_list)
 	context.busy_list = busy_list--me.profile.busy_list
 	context.attack_list = attack_list--me.profile.attack_list1
 	me.profile.powerup()
-	
+	context.infight = false
 	initBusyTimer()
 	initRecoverTimer()
 	--initEatyaoTimer()
@@ -20,10 +20,12 @@ prepare = function(busy_list, attack_list)
 end
 
 start = function(cmd)
-	if(context.infight) then return end
+	
+	if(context.infight) then print("已经在战斗中") return end
 	
 	EnableTriggerGroup("fight", true)
 	busy(cmd)
+	context.infight = true
 end
 
 stop = function()
@@ -60,14 +62,9 @@ startTimerAfter = function(name, interval)
 	end
 end
 
-stopTimer = function(name)
-	print("关闭" .. name .. " timer")
-	EnableTimer(name, false)
-end
-
 initBusyTimer = function()
 	if(IsTimer("busy") ~= eOK) then
-		AddTimer("busy", 0, 0, 2, "", timer_flag.Replace + timer_flag.Temporary, "fight.perform_busy")
+		AddTimer("busy", 0, 0, 2, "fight.perform_busy\(\)", timer_flag.Replace + timer_flag.Temporary, "")
 		SetTimerOption("busy", "send_to", 12)
 	end
 end
@@ -83,7 +80,7 @@ end
 			
 initEscapeTimer = function()
 	if(IsTimer("escape") ~= eOK) then
-		AddTimer("recover", 0, 0, 1, 
+		AddTimer("escape", 0, 0, 1, 
 		"SetTriggerOption(\"fight_escape\", \"enabled\", \"y\") Execute(\"#2(halt);fly wm;nw\")", 
 		timer_flag.Replace + timer_flag.Temporary, "")
 		SetTimerOption("escape", "send_to", 12)
@@ -100,6 +97,9 @@ initHaltTimer = function()
 end
 
 perform_busy = function(cmd)
+	if(cmd ~= nil) then
+	print("perform busy " .. cmd)
+	end
 	for i, v in ipairs(context.busy_list) do
 		if(not profile.pfm[v.i].cd) then
 			if(cmd ~= nil) then
