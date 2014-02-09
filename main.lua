@@ -37,7 +37,8 @@ loadmod("guanfu.lua")
 loadmod("fight2.lua")
 loadmod("bei.lua")
 loadmod("item.lua")
-loadmod("heal.lua")
+--loadmod("heal.lua")
+loadmod("study.lua")
 
 --include(myid .. ".lua")
 

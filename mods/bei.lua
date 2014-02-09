@@ -139,17 +139,13 @@ npcdie = function(name, line, wildcards)
 		wait.time(2)
 		item.lookandget()
 		--Execute("look corpse;get all from corpse")
-		wait.time(1)
-		Execute("halt;fly wm;u;jiali 0;yun regenerate;yun recover")
-		dazuo.start(function()
-			if(me.package.sell_list ~= nil) then
-				for i, v in ipairs(me.package.sell_list) do
-					print("give " .. v.id .. " to ouye zi")
-					Execute("give " .. v.id .. " to ouye zi")
-				end
-			end
-			Execute("d;er;et")
-			bei.done()
+		wait.time(2)
+		item.process(function()
+			Execute("fly wm;u;jiali 0;yun regenerate;yun recover")
+			dazuo.start(function()
+				Execute("d;er;et")
+				bei.done()
+			end)
 		end)
 	end)
 end

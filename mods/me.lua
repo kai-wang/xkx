@@ -1,24 +1,7 @@
 require "tprint"
 
 me = {}
-me.package = {}
 me.status = {}
-
---[[
-me.init = function()
-	wait.make(function()
-		Execute("title")
-		local l, w = wait.regexp("\\((\\w+)\\)")
-		local id = string.lower(w[1])
-		me.profile = dofile("worlds\\xkx\\" .. id .. ".lua")
-		me.id = var.me_id
-		me.name = var.me_name
-		
-		assert(me.id)
-		print(me.id, me.name)
-	end)
-end
-]]--
 
 --[[
 	精神:		js
@@ -98,4 +81,162 @@ on_hp6_update = function(name, line, wildcards)
 	me["dt"]			= tonumber(wildcards[1])
 	me["dt_max"]		= tonumber(wildcards[2])
 	me["xw"]			= tonumber(wildcards[3])
+end
+
+
+me.updateHP = function(f_done)
+	wait.make(function()
+		EnableTriggerGroup("HP", true)
+		Execute("hp;set hp")
+		local l, w = wait.regexp("^(> )*设定环境变数：hp = \"YES\"$")
+		EnableTriggerGroup("HP", false)
+		
+		call(f_done)
+	end)
+end
+
+
+me.full = function(f_done)
+	me.ssf(function()
+		me.qudu(function()
+			me.foodwater(function()
+				me.jingqi(function()
+					call(f_done)
+				end)
+			end)
+		end)
+	end)
+end
+
+me.ssf = function(f_done)
+	if(me["ssf"] == nil or (not me["ssf"])) then print("没中生死符") call(f_done) return end
+	
+	wait.make(function()
+		Execute("fly wm;e;s;w;qukuan 25 gold")
+		wait.time(5)
+		Execute("fly lj;s;give 25 gold to shouling")
+		local l, w = wait.regexp("^(> )*(这里没有这个人)|(.*你没有中生死符啊，你想中吗).*$")
+		
+		if(l:match("这里没有这个人") ~= nil) then
+			print("首领不在,断线了...........")
+			Disconnect()
+			return
+		end
+		
+		wait.time(5)
+		me["ssf"] = false
+		print("生死符好了")
+		call(f_done)
+	end)
+end
+
+me.qudu = function(f_done)
+	if(me["poison"] == nil or (not me["poison"])) then print("没有中毒") call(f_done) return end
+	
+	wait.make(function()
+		Execute("fly wm;u;er;et;yun cure")
+		repeat
+			local l, w = wait.regexp("^(> )*(你.*消褪了！)|(你并未中毒。)$", 15)
+		until((l == nil) or (l:match("你并未中毒") ~= nil))
+		Execute("halt")
+		print("驱毒完毕")
+		call(f_done)
+	end)
+end
+
+me.canEatWuchang = function()
+	if(var.last_wuchang == nil or var.last_wuchang == "") then return true end
+	
+	local now = tonumber(os.time())
+	local old = tonumber(var.last_wuchang)
+	
+	--25分钟间隔可以吃wuchag
+	if(now - old >= 1500) then return true end
+	return false
+end
+
+
+me.jingqi = function(f_done)
+	local jsP = tonumber(me["js%"])
+	local qxP = tonumber(me["qx%"])
+	if(jsP >= 95 and qxP >= 95) then print("不用疗伤") call(f_done) return end
+	
+	wait.make(function()
+		if(jsP < 60 and canEatWuchang()) then
+			Execute("fly wm;e;s;w;qukuan 5 gold")
+			wait.time(5)
+			Execute("e;s;e;e;n;buy wuchang dan")
+			wait.time(2)
+			Execute("eat wuchang dan")
+			var.last_wuchang = os.time()
+			print("无常丹好吃啊")
+			call(f_done)
+			return
+		else
+			if(jsP < 95) then
+				local dannumber = (100-jsP)/5
+				if(dannumber == math.ceil(dannumber)) then dannumber = math.ceil(dannumber) + 1 else dannumber = math.ceil(dannumber) end
+				Execute("fly wm;e;s;w;qukuan 6 gold")
+				wait.time(5)
+				Execute("e;s;e;e;n")
+				for i = 1, dannumber do
+					Execute("buy yangjing dan")
+					wait.time(2)
+					Execute("eat yangjing dan")
+					wait.time(5)
+				end
+				print("疗精完毕")
+			end
+			Execute("fly wm;u;er;et;yun heal")
+			--你运功完毕，缓缓站了起来，脸色看起来好了许多。
+			local l, w = wait.regexp("^(> )*(你并没有受伤！)|(你运功完毕).*$")
+			print("疗气完毕")
+			call(f_done)
+		end
+	end)
+end
+
+
+me.foodwater = function(f_done)
+	if(tonumber(me["water"]) > tonumber(me["water_max"]) and tonumber(me["food"]) > tonumber(me["food_max"])) then print("不需要吃喝") call(f_done) return end
+	wait.make(function()
+		Execute("set brief;fly jx;buy zongzi;")
+		wait.time(2)
+		Execute("fly xx;su;s;ed;nw;w;buy shuinang;")
+		wait.time(2)
+		Execute("eat zongzi;#8 (drink shuinang);drop zongzi;drop zong ye;")
+		wait.time(2)
+		Execute("#8 (drink shuinang);drop shuinang;unset brief;fly wm;set foodwater")
+		--wait.regexp("^(> )*设定环境变数：foodwater = \"YES\"$")
+		print("酒足饭饱了")
+		call(f_done)
+	end)
+end --function
+
+
+me.useqn = function(f_done)
+	if(tonumber(me["qn"]) >= tonumber(me["qn_max"]) * 0.1) then
+		if(var.study_seq == nil or var.study_seq == "") then var.study_seq = 1 end
+		local index = tonumber(var.study_seq)%(#me.profile.study_list)
+		if(index == 0) then index = #me.profile.study_list end
+		
+		local st = me.profile.study_list[index]
+		
+		wait.make(function()
+			msg.subscribe("msg_study_done", function()
+				Execute("halt;fly wm")
+				var.study_seq = (index + 1)%(#me.profile.study_list)
+			end)
+			
+			var.study_loc = st.loc
+			var.study_cmd = st.cmd
+			AddAlias("lll", "lll", st.cmd, 1025, "")
+			study.main()
+		end)
+		
+	end
+end
+
+function call(f)
+	if(f ~= nil) then f() end
 end

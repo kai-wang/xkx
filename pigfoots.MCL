@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE muclient>
-<!-- Saved on Friday, February 07, 2014, 12:14 AM -->
+<!-- Saved on Saturday, February 08, 2014, 11:54 PM -->
 <!-- MuClient version 4.84 -->
 <!-- Written by Nick Gammon -->
 <!-- Home Page: http://www.mushclient.com/ -->
@@ -8,7 +8,7 @@
 <world
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-07 00:14:22"
+   date_saved="2014-02-08 23:54:31"
 
    auto_say_override_prefix="-"
    auto_say_string="say "
@@ -115,7 +115,7 @@
 <triggers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-07 00:14:22"
+   date_saved="2014-02-08 23:54:31"
   >
   <trigger
    custom_colour="16"
@@ -184,12 +184,11 @@
   >
   </trigger>
   <trigger
-   enabled="y"
    group="item"
    keep_evaluating="y"
-   match="^  (\S+)(Ë«|Ö»|¼þ|°Ñ|ÕÅ|¸ù|±ú)(.+)(½£|µ¶|ÇÙ|óï|Õë|¸«|ÕÈ|°ô|¹÷|±Þ|Ñ¥|Ð¬|ÅÛ|Ã±|ÒÂ|¼×|ÊÖ)\((.*)\)$"
+   match="^  (\S+)(Ë«|Ö»|¼þ|°Ñ|ÕÅ|¸ù|±ú)(.+)(½£|µ¶|ÇÙ|óï|Õë|¸«|ÕÈ|ÂÖ|°ô|¹÷|´¸|±Þ|Ñ¥|Ð¬|ÅÛ|Ã±|ÒÂ|¼×|ÊÖ)\((.*)\)$"
    regexp="y"
-   script="item.test"
+   script="item.match1"
    sequence="100"
   >
   </trigger>
@@ -213,6 +212,17 @@
   </trigger>
   <trigger
    expand_variables="y"
+   group="study"
+   keep_evaluating="y"
+   match="^(&gt; )*(@!dazuo_end_desc)$"
+   omit_from_output="y"
+   regexp="y"
+   script="study.continue"
+   sequence="100"
+  >
+  </trigger>
+  <trigger
+   expand_variables="y"
    group="dazuo"
    keep_evaluating="y"
    match="^(&gt; )*(@!dazuo_end_desc)$"
@@ -220,20 +230,6 @@
    script="dazuo.continue"
    sequence="100"
   >
-  </trigger>
-  <trigger
-   expand_variables="y"
-   group="study"
-   keep_evaluating="y"
-   match="^(&gt; )*(@!dazuo_end_desc)$"
-   omit_from_output="y"
-   regexp="y"
-   send_to="10"
-   sequence="100"
-  >
-  <send>er
-lll
-hp</send>
   </trigger>
   <trigger
    expand_variables="y"
@@ -377,10 +373,9 @@ hp</send>
    keep_evaluating="y"
    match="^(&gt; )*(Äã½ñÌìÌ«ÀÛÁË£¬½á¹ûÊ²Ã´Ò²Ã»ÓÐÑ§µ½¡£)|(ÄãÏÖÔÚ¾«²»¹»£¬ÎÞ·¨¿ØÖÆÄÚÏ¢µÄÁ÷¶¯£¡)$"
    regexp="y"
-   send_to="12"
+   script="study.waitandtry"
    sequence="100"
   >
-  <send>DoAfterSpecial(3,"yun regenerate;dazuo max", 10)</send>
   </trigger>
   <trigger
    group="fight"
@@ -413,15 +408,11 @@ hp</send>
   <trigger
    group="study"
    keep_evaluating="y"
-   match="^(&gt; )*(Ò²ÐíÊÇÑ§ÎÊ²»¹»Éî)|(ÄãµÄÇ±ÄÜ²»¹»)|(ÄãµÄ»ù±¾¹¦»ðºòÎ´µ½)|(Äã.*Ì«·ôÇ³ÁË).*$"
+   match="^(&gt; )*(Ò²ÐíÊÇÑ§ÎÊ²»¹»Éî)|(ÄãµÄÇ±ÄÜ²»¹»)|(ÄãµÄ»ù±¾¹¦»ðºòÎ´µ½)|(Äã.*Ì«·ôÇ³ÁË)|(ÄãÒªÏòË­Çó½Ì)|(ÕâÏî¼¼ÄÜÄãµÄ³Ì¶ÈÒÑ¾­²»ÊäÄãÊ¦¸¸ÁË).*$"
    regexp="y"
-   send_to="12"
+   script="study.done"
    sequence="100"
   >
-  <send>Execute("halt")
-EnableTriggerGroup("study", false)
-Note("Ñ§ÍêÁË")
-Execute("fly wm")</send>
   </trigger>
   <trigger
    group="walk_special"
@@ -444,9 +435,9 @@ Execute("fly wm")</send>
    keep_evaluating="y"
    match="^(&gt; )*(ÖììäÏñÊÇÊÜ³èÈô¾ª)|(ÖììäËµµÀ£ºÄúÌ«¿ÍÆøÁË)|(ÖììäÐ¦×ÅËµµÀ£ºÄú¼ûÐ¦).*$"
    regexp="y"
+   script="study.givemoney"
    sequence="100"
   >
-  <send>give zhu 1 gold</send>
   </trigger>
   <trigger
    group="walk_special"
@@ -714,6 +705,14 @@ fight.stopTimer("recover")
 fight.startTimer("busy")</send>
   </trigger>
   <trigger
+   group="dazuo"
+   keep_evaluating="y"
+   match="^(&gt; )*ÄãÏÖÔÚ¾«²»¹»£¬ÎÞ·¨¿ØÖÆÄÚÏ¢µÄÁ÷¶¯£¡$"
+   regexp="y"
+   sequence="100"
+  >
+  </trigger>
+  <trigger
    group="baobiao"
    match="^(&gt; )*ÄãÏò¹ùÐñ´òÌýÓÐ¹Ø¡º±£ïÚ¡»µÄÏûÏ¢¡£$"
    regexp="y"
@@ -735,16 +734,7 @@ fight.startTimer("busy")</send>
    keep_evaluating="y"
    match="^(&gt; )*ÄãÒ»´ÎÊäÈëÌ«¶àÃüÁîÁË¡£$"
    regexp="y"
-   send_to="12"
-   sequence="100"
-  >
-  <send>DoAfterSpecial(10, "hp", 10)</send>
-  </trigger>
-  <trigger
-   group="fight"
-   match="^(&gt; )*ÄãÖ»¾õµÃÍ·»èÄÔÕÍ£¬ÑÛÇ°Ò»ºÚ£¬½Ó×ÅÊ²Ã´Ò²²»ÖªµÀÁË¡­¡­$"
-   regexp="y"
-   script="fight.faint"
+   script="study.waitandtry"
    sequence="100"
   >
   </trigger>
@@ -758,11 +748,10 @@ fight.startTimer("busy")</send>
   >
   </trigger>
   <trigger
-   group="item"
-   keep_evaluating="y"
-   match="^(&gt; )*Éè¶¨»·¾³±äÊý£ºget = &quot;YES&quot;$"
+   group="fight"
+   match="^(&gt; )*ÄãÖ»¾õµÃÍ·»èÄÔÕÍ£¬ÑÛÇ°Ò»ºÚ£¬½Ó×ÅÊ²Ã´Ò²²»ÖªµÀÁË¡­¡­$"
    regexp="y"
-   script="item.done"
+   script="fight.faint"
    sequence="100"
   >
   </trigger>
@@ -922,20 +911,14 @@ fight.startTimer("busy")</send>
   >
   </trigger>
   <trigger
-   group="study"
+   group="study_check"
    keep_evaluating="y"
    match="^[&gt; ]*¡¾ Æø Ñª ¡¿\s+(\d+)\/\s+(\d+)\s+\(\s*(\d+)%\)\s+¡¾ ÄÚ Á¦ ¡¿\s+(\d+)\s\/\s(\d+).*$"
    regexp="y"
-   send_to="12"
+   script="study.check"
    sequence="100"
   >
-  <send>local nl, nlm = "%4", "%5"
-
-if(tonumber(nl)&lt;tonumber(nlm)*0.3) then
-Execute("er;et;dazuo max")
-else
-Execute("lll")
-end
+  <send>
 </send>
   </trigger>
   <trigger
@@ -1046,9 +1029,9 @@ end
   <trigger
    group="item"
    keep_evaluating="y"
-   match="^¡¡¡¡(\S+)\((.*)\)$"
+   match="^¡¡¡¡(\S+)(½£|µ¶|ÇÙ|óï|Õë|¸«|ÕÈ|°ô|¹÷|ÂÖ|´¸|±Þ|Ñ¥|Ð¬|ÅÛ|Ã±|ÒÂ|¼×|ÊÖ)\((.*)\)$"
    regexp="y"
-   script="item.record2"
+   script="item.match2"
    sequence="100"
   >
   </trigger>
@@ -1059,7 +1042,7 @@ end
 <aliases
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-07 00:14:22"
+   date_saved="2014-02-08 23:54:31"
   >
   <alias
    match="^show (.*)$"
@@ -1167,12 +1150,12 @@ dazuo.start(function() Execute("halt;fly wm") end)</send>
   <send>fly lj</send>
   </alias>
   <alias
+   name="lll"
    match="lll"
    enabled="y"
-   send_to="10"
    sequence="100"
   >
-  <send>xue wang taoism 50;et;hp</send>
+  <send>xue wang xiantian-qigong 30;yun regenerate</send>
   </alias>
   <alias
    name="qz"
@@ -1271,6 +1254,15 @@ perform stick.luanda</send>
   <send>fly wm</send>
   </alias>
   <alias
+   name="xyl"
+   match="xyl"
+   enabled="y"
+   send_to="10"
+   sequence="100"
+  >
+  <send>fly xyl</send>
+  </alias>
+  <alias
    name="yp"
    match="yp"
    enabled="y"
@@ -1294,7 +1286,7 @@ perform stick.luanda</send>
 <timers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-07 00:14:22"
+   date_saved="2014-02-08 23:54:31"
   >
   <timer enabled="y" second="30.00" offset_second="0.00" >
   <send>hi</send>
@@ -1307,7 +1299,7 @@ perform stick.luanda</send>
 <macros
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-07 00:14:22"
+   date_saved="2014-02-08 23:54:31"
   >
 
   <macro name="up" type="send_now" >
@@ -1401,13 +1393,13 @@ perform stick.luanda</send>
 <variables
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-07 00:14:22"
+   date_saved="2014-02-08 23:54:31"
   >
   <variable name="baobiao_exp">142</variable>
   <variable name="baobiao_loc">ÌìÉ½½ÅÏÂ</variable>
   <variable name="baobiao_qn">23</variable>
   <variable name="baobiao_yl">1</variable>
-  <variable name="bei_npc">¿×¶þ¸ç</variable>
+  <variable name="bei_npc">¿µ´ó¸ç</variable>
   <variable name="busydelay">0.2</variable>
   <variable name="dazuo_desc">Äã×øÏÂÀ´ÔËÆøÓÃ¹¦£¬Ò»¹ÉÄÚÏ¢¿ªÊ¼ÔÚÌåÄÚÁ÷¶¯¡£</variable>
   <variable name="dazuo_end_desc">ÄãÔË¹¦Íê±Ï£¬ÉîÉîÎüÁË¿ÚÆø£¬Õ¾ÁËÆðÀ´¡£</variable>
@@ -1426,8 +1418,9 @@ perform stick.luanda</send>
   <variable name="gf_loc">Î÷´ó½Ö</variable>
   <variable name="gf_npc">»ôÔª·ç</variable>
   <variable name="gf_option"></variable>
-  <variable name="item_drop_list">drop chang jian;drop chang jian;drop dao pao;drop ma xie;</variable>
-  <variable name="item_store_list">give songluan hushou to byj;give cangyan mao to byj;give baiwei yi to byj;</variable>
+  <variable name="item_drop_list"></variable>
+  <variable name="item_sell_list">give chunjiang hushou to ouye zi;give mingmou yi to ouye zi;give tianping mao to ouye zi;give taohua jian to ouye zi;</variable>
+  <variable name="item_store_list"></variable>
   <variable name="me_id">byj</variable>
   <variable name="me_menpai">È«Õæ</variable>
   <variable name="me_name">°×Óñ¾©</variable>
@@ -1436,12 +1429,15 @@ perform stick.luanda</send>
   <variable name="shan_npc">Òó½õ</variable>
   <variable name="shan_qn">19</variable>
   <variable name="shan_yl">2</variable>
-  <variable name="task_city">×Ï½û³Ç</variable>
+  <variable name="study_cmd">xue wang xiantian-qigong 30;yun regenerate</variable>
+  <variable name="study_loc">wcy</variable>
+  <variable name="study_seq">1</variable>
+  <variable name="task_city">´óÀí¹ú</variable>
   <variable name="task_found">true</variable>
   <variable name="task_fullname">Byj's task</variable>
   <variable name="task_id">byj's task</variable>
-  <variable name="task_loc">ºó»¨Ô·</variable>
-  <variable name="task_npc">¿×¶þ¸ç</variable>
+  <variable name="task_loc">É£ÁÖ</variable>
+  <variable name="task_npc">¿µ´ó¸ç</variable>
   <variable name="task_retry">3</variable>
   <variable name="task_retry_times">0</variable>
   <variable name="task_search">false</variable>
@@ -1457,7 +1453,7 @@ perform stick.luanda</send>
 <colours
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-07 00:14:22"
+   date_saved="2014-02-08 23:54:31"
   >
 
 <ansi>
@@ -1514,7 +1510,7 @@ perform stick.luanda</send>
 <keypad
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-07 00:14:22"
+   date_saved="2014-02-08 23:54:31"
   >
 
   <key name="0" >
@@ -1628,7 +1624,7 @@ perform stick.luanda</send>
 <printing
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-07 00:14:22"
+   date_saved="2014-02-08 23:54:31"
   >
 
 <ansi>

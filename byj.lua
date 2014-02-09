@@ -49,6 +49,12 @@ profile = {
 		[5] = { i = 7, action = "unwield all;perform finger.sandie"}
 	},
 	
+	study_list = {
+		[1] = { loc = "wcy", cmd = "xue wang xiantian-qigong 30;yun regenerate" },
+		[2] = { loc = "fly wm;e;s;s;e;n;", cmd = "xue wang xiantian-qigong 50;yun regenerate" },
+		[3] = { loc = "wcy", cmd = "xue wang strike 30;yun regenerate" }
+	},
+	
 	powerup = function()
 		Execute("yun powerup")
 	end,
