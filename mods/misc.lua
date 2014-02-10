@@ -63,6 +63,7 @@ end --function
 dazuo = {}
 
 dazuo.start = function(callback)
+	print("¿ªÊ¼´ò×ø")
 	EnableTriggerGroup("dazuo", true)
 	dazuo.done_flag = false
 	Execute("et;dazuo max")

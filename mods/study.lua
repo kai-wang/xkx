@@ -24,14 +24,15 @@ function start()
 			done()
 		else
 			Execute(var.study_loc)
-			Execute("lll;hp")
+			Execute("lll")
+			Execute("hp")
 		end
 	end)
 end
 
 function continue()
-	Execute("er;et")
 	EnableTriggerGroup("study_check", true)
+	Execute("er;et")
 	Execute("lll;hp")
 end
 

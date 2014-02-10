@@ -97,11 +97,13 @@ end
 
 
 me.full = function(f_done)
-	me.ssf(function()
-		me.qudu(function()
-			me.foodwater(function()
-				me.jingqi(function()
-					call(f_done)
+	me.updateHP(function()
+		me.ssf(function()
+			me.qudu(function()
+				me.foodwater(function()
+					me.jingqi(function()
+						call(f_done)
+					end)
 				end)
 			end)
 		end)
@@ -109,7 +111,7 @@ me.full = function(f_done)
 end
 
 me.ssf = function(f_done)
-	if(me["ssf"] == nil or (not me["ssf"])) then print("没中生死符") call(f_done) return end
+	if(me["in_ssf"] == nil or (not me["in_ssf"])) then print("没中生死符") call(f_done) return end
 	
 	wait.make(function()
 		Execute("fly wm;e;s;w;qukuan 25 gold")
@@ -124,14 +126,14 @@ me.ssf = function(f_done)
 		end
 		
 		wait.time(5)
-		me["ssf"] = false
+		me["in_ssf"] = false
 		print("生死符好了")
 		call(f_done)
 	end)
 end
 
 me.qudu = function(f_done)
-	if(me["poison"] == nil or (not me["poison"])) then print("没有中毒") call(f_done) return end
+	if(me["in_poison"] == nil or (not me["in_poison"])) then print("没有中毒") call(f_done) return end
 	
 	wait.make(function()
 		Execute("fly wm;u;er;et;yun cure")
@@ -162,7 +164,7 @@ me.jingqi = function(f_done)
 	if(jsP >= 95 and qxP >= 95) then print("不用疗伤") call(f_done) return end
 	
 	wait.make(function()
-		if(jsP < 60 and canEatWuchang()) then
+		if((jsP < 60 or qxP < 30)and me.canEatWuchang()) then
 			Execute("fly wm;e;s;w;qukuan 5 gold")
 			wait.time(5)
 			Execute("e;s;e;e;n;buy wuchang dan")
@@ -215,7 +217,7 @@ end --function
 
 
 me.useqn = function(f_done)
-	if(tonumber(me["qn"]) >= tonumber(me["qn_max"]) * 0.1) then
+	if(tonumber(me["qn"]) > tonumber(me["qn_max"]) * 0.3) then
 		if(var.study_seq == nil or var.study_seq == "") then var.study_seq = 1 end
 		local index = tonumber(var.study_seq)%(#me.profile.study_list)
 		if(index == 0) then index = #me.profile.study_list end
@@ -223,18 +225,20 @@ me.useqn = function(f_done)
 		local st = me.profile.study_list[index]
 		
 		wait.make(function()
-			msg.subscribe("msg_study_done", function()
-				Execute("halt;fly wm")
-				var.study_seq = (index + 1)%(#me.profile.study_list)
-			end)
+			msg.subscribe("msg_study_done", function() call(f_done) end)
 			
 			var.study_loc = st.loc
 			var.study_cmd = st.cmd
 			AddAlias("lll", "lll", st.cmd, 1025, "")
+			SetAliasOption("lll", "send_to", 10)
 			study.main()
+			var.study_seq = (index + 1)%(#me.profile.study_list)
 		end)
-		
+	else
+		msg.broadcast("msg_study_done")
+		print("不需要花qn")
 	end
+	
 end
 
 function call(f)
