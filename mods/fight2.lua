@@ -164,6 +164,12 @@ eatyao = function()
 	startTimer("eatyao")
 end
 
+faint = function()
+	fight.stop()
+	me.profile.reset_cd_status()
+	msg.broadcast("msg_fight_faint")
+end
+
 
 on_busy_success = function()
 	--stopTimer("busy")

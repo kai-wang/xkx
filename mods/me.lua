@@ -114,7 +114,7 @@ me.ssf = function(f_done)
 	if(me["in_ssf"] == nil or (not me["in_ssf"])) then print("没中生死符") call(f_done) return end
 	
 	wait.make(function()
-		Execute("fly wm;e;s;w;qukuan 25 gold")
+		Execute("fly wm;e;s;w;qukuan 15 gold")
 		wait.time(5)
 		Execute("fly lj;s;give 25 gold to shouling")
 		local l, w = wait.regexp("^(> )*(这里没有这个人)|(.*你没有中生死符啊，你想中吗).*$")
@@ -172,6 +172,7 @@ me.jingqi = function(f_done)
 			Execute("eat wuchang dan")
 			var.last_wuchang = os.time()
 			print("无常丹好吃啊")
+			wait.time(5)
 			call(f_done)
 			return
 		else
@@ -217,7 +218,7 @@ end --function
 
 
 me.useqn = function(f_done)
-	if(tonumber(me["qn"]) > tonumber(me["qn_max"]) * 0.3) then
+	if(tonumber(me["qn"]) >= tonumber(me["qn_max"])*0.9) then
 		if(var.study_seq == nil or var.study_seq == "") then var.study_seq = 1 end
 		local index = tonumber(var.study_seq)%(#me.profile.study_list)
 		if(index == 0) then index = #me.profile.study_list end

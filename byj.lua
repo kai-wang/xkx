@@ -29,6 +29,12 @@ profile = {
 		end
 	end,
 	
+	reset_cd_status = function()
+		for i, v in ipairs(profile.pfm) do
+			v.cd = false
+		end
+	end,
+	
 	busy_list = {
 		[1] = {	i = 6, action = "wield " .. var.weapon .. ";enable parry sun-finger;perform parry.qiankun" 	},
 		[2] = {	i = 5, action = "wield " .. var.weapon .. ";enable sword quanzhen-jian;perform sword.ding" 	}
@@ -50,9 +56,9 @@ profile = {
 	},
 	
 	study_list = {
-		[1] = { loc = "wcy", cmd = "xue wang xiantian-qigong 30;yun regenerate" },
-		[2] = { loc = "fly wm;e;s;s;e;n;", cmd = "xue wang xiantian-qigong 50;yun regenerate" },
-		[3] = { loc = "wcy", cmd = "xue wang strike 30;yun regenerate" }
+		[1] = { loc = "wcy", cmd = "xue wang xiantian-qigong 40;yun regenerate" },
+		[2] = { loc = "fly wm;e;s;s;e;n;", cmd = "xue zhu literate 40;yun regenerate" },
+		[3] = { loc = "wcy", cmd = "xue wang strike 40;yun regenerate" }
 	},
 	
 	powerup = function()

@@ -62,13 +62,13 @@ end --function
 
 dazuo = {}
 
-dazuo.start = function(callback)
+dazuo.start = function(f_done)
 	print("¿ªÊ¼´ò×ø")
 	EnableTriggerGroup("dazuo", true)
 	dazuo.done_flag = false
 	Execute("et;dazuo max")
-	if(callback ~= nil) then
-		msg.subscribe("msg_dazuo_end", callback)
+	if(f_done ~= nil) then
+		msg.subscribe("msg_dazuo_end", f_done)
 	else
 		msg.unsubscribe("msg_dazuo_end")
 	end

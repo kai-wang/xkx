@@ -11,16 +11,23 @@ local task1_array = {}
 
 main = function()
 	EnableTriggerGroup("bei", true)
+	
+	msg.subscribe("msg_task_retry", bei.resume)
+	msg.subscribe("msg_fight_awake", bei.faint)
+	msg.subscribe("msg_fight_escape", bei.escape)
+	
 	Execute("fly wm;e;n;e;e;e;task")
 end
 
 done = function()
 	EnableTriggerGroup("bei", false)
+	msg.broadcast("msg_task_done")
 end
 
 fail = function()
 	EnableTriggerGroup("bei", false)
 	Execute("fly wm")
+	msg.broadcast("msg_task_fail")
 end
 
 done2 = function()
@@ -30,15 +37,20 @@ done2 = function()
 	done()
 end
 
+---先暂停，过一会再重试-----------------------
 pause = function()
+	walk.stop()
+	fight.stop()
 	EnableTriggerGroup("bei", false)
-	Execute("fly wm")
+	Execute("fly wm;nw")
 	wait.make(function()
+		--一分钟后重新开始找
 		wait.time(60)
 		msg.broadcast("msg_task_retry")
 	end)
 end
 
+---重新开始-----------------------------------
 resume = function()
 	EnableTriggerGroup("bei", true)
 	Execute("fly wm;u;loc " .. var.task_id)
@@ -102,22 +114,20 @@ end
 
 -- 走完都没找到
 notfound = function()
-	print("找不到 " .. var.task_search_times)
 	if(var.task_found) then return end
-	if(var.task_search_times >= 3) then 
+	print("走完了没找到 " .. var.task_retry_times)
+
+	----------retry 3次还找不到就放弃吧----------------
+	if(tonumber(var.task_retry_times) >= tonumber(var.task_retry_max)) then 
 		fail()
 	else
-		var.task_search_times = var.task_search_times + 1 
-		if(not var.task_search) then 
-			--没找过先原地遍历
-			var.task_found = false
-			fight.stop()
-			Execute("halt")
-			walk.walkaround(3)
-		else
-			--遍历过了还找不到，先飞回去，然后过一分钟再继续
-			pause()
-		end
+		var.task_retry_times = tonumber(var.task_retry_times) + 1 
+		
+		var.task_found = false
+		fight.stop()
+		Execute("halt")
+		--如果还找不到就暂停一下
+		walk.walkaround(3, nil, bei.pause, bei.pause)
 	end
 end
 
@@ -132,20 +142,24 @@ foundnpc = function(name, line, wildcards)
 	fight.start("kill " .. var.task_id)
 end
 
-
+----看到npc死了，把东西捡起来------------------------------------
 npcdie = function(name, line, wildcards)
 	wait.make(function()
+		walk.stop()
 		fight.stop()
-		wait.time(2)
-		item.lookandget()
-		--Execute("look corpse;get all from corpse")
-		wait.time(2)
-		item.process(bei.cleanup)
+		local l, w  = wait.regexp("^(> )*" .. var.task_npc .. "扑在地上挣扎了几下，口中喷出几口鲜血，死了！$", 5)
+		if(l == nil) then
+			cleanup()
+		else
+			wait.time(3)
+			item.lookandget(bei.cleanup)
+		end
 	end)
 end
 
-cleanup = function()
 
+----task结束后的善后工作，疗伤学习打坐----------------------------
+cleanup = function()
 	Execute("fly wm;u;jiali 0;er;et")
 	me.updateHP(function()
 		me.full(function()

@@ -431,8 +431,8 @@ function setroom(id)
 	walk_cxt.currentId = id
 end
 
-
-function walkaround(dp, dir, f_done, f_fail)
+function get
+function walkaround(dp, dir)
 	local room = roomAll[walk_cxt.currentId]
 	local tbl, walked = {}, {}
 	local walk_deepth = tonumber(dp)
@@ -492,7 +492,7 @@ function walkaround(dp, dir, f_done, f_fail)
 	findexit(room, room.id, 1)
 	--tprint(tbl)
 
-	step_by_step(tbl, f_done, f_fail)
+	step_by_step(tbl)
 end
 
 function info()

@@ -8,15 +8,21 @@ local sell_list, store_list, drop_list, item_list = {}, {}, {}, {}
 local item_name = "µ¶|½£|Õë|ÇÙ|¸«|ÕÈ|¼×|ÅÛ|Ñ¥|Ã±|ÒÂ"
 
 
-function lookandget()
+function lookandget(f_done)
 	var.item_store_list = ""
 	var.item_sell_list = ""
 	var.item_drop_list = ""
+	
 	wait.make(function()
 		EnableTriggerGroup("item", true)
 		Execute("look corpse;get all from corpse;set get ok")
 		local l, w = wait.regexp("Éè¶¨»·¾³±äÊý£ºget = \"ok\"")
 		EnableTriggerGroup("item", false)
+		
+		if(var.item_drop_list ~= nil and var.item_drop_list ~= "") then Execute(var.item_drop_list) end
+		if(var.item_sell_list ~= nil and var.item_sell_list ~= "") then Execute("fly wm;u;" .. var.item_sell_list) end
+		if(var.item_store_list ~= nil and var.item_drop_list ~= "") then Execute("fly wm;nw") Execute(var.item_store_list) end
+		call(f_done)
 	end)
 end
 
@@ -52,17 +58,18 @@ function sort(item, id, style)
 	end
 end
 
-
+--[[
 function process(f_done)
 	wait.make(function()
 		Execute("halt;fly wm;u")
-		if(var.item_sell_list ~= nil) then Execute(var.item_sell_list) end
-		if(var.item_drop_list ~= nil) then Execute(var.item_drop_list) end
-		if(var.item_store_list ~= nil) then Execute("fly wm;nw") Execute(var.item_store_list) end
+		if(var.item_sell_list ~= nil and var.item_sell_list ~= "") then Execute(var.item_sell_list) end
+		if(var.item_drop_list ~= nil and var.item_drop_list ~= "") then Execute(var.item_drop_list) end
+		if(var.item_store_list ~= nil and var.item_drop_list ~= "") then Execute("fly wm;nw") Execute(var.item_store_list) end
 		
 		if(f_done ~= nil) then f_done() end
 	end)
 end
+]]--
 
 function getColourName(style, item)
 	for i, v in ipairs(style) do
