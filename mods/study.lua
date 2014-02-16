@@ -9,12 +9,14 @@ function main()
 	EnableTriggerGroup("study", true)
 	EnableTriggerGroup("study_check", true)
 	EnableTriggerGroup("HP", false)
-	start()
+	me.profile.int_wear(study.start)
+	--start()
 end
 
 function done()
 	EnableTriggerGroup("study", false)
 	EnableTriggerGroup("study_check", false)
+	me.profile.fight_wear()
 	msg.broadcast("msg_study_done")
 end
 
@@ -33,8 +35,21 @@ end
 function continue()
 	EnableTriggerGroup("study_check", true)
 	Execute("er;et")
-	Execute("lll;hp")
+	Execute("lll;hp;hp")
 end
+
+function givemoney()
+	wait.make(function()
+		Execute("give zhu 1 gold")
+		local l, w = wait.regexp("(> )*(朱熹同意指点你一些读书写字的问题。)|(你没有那么多的黄金。)$")
+		if(l:match("你没有那么多") ~= nil) then
+			Execute("s;w;n;w;qukuan 1 gold")
+			wait.time(5)
+			Execute("e;s;e;n;give zhu 1 gold")
+		end
+	end)
+end
+
 
 function waitandtry()
 	wait.make(function()

@@ -440,7 +440,7 @@ map["loadall"] = function()
 	"gyz",
 	"gyz1",
 	"ws",
-	"ws2",
+	"hsc1",
 	"mz",
 	"xyl",
 	"xyl1",

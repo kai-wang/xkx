@@ -62,6 +62,11 @@ blocker_npcs["家丁"] = "jia ding"
 blocker_npcs["高根明"] = "gao genming"
 
 ---------------------------------------------------------- 特殊命令-------------------------------------------------------------------
+walk_special = function(cmd, h_ok, h_fail)
+	
+end
+
+
 handlers = {
 	context=nil, f_ok=nil, f_fail=nil, stop_flag = false,
 
@@ -190,6 +195,19 @@ handlers = {
 			end
 		end)
 	end,
+	
+	["xyl"] = function()
+		wait.make(function()
+			Execute("ask su xinghe about 秘密地道")
+			local l, w = wait.regexp("^(> )*(这里没有这个人)|(苏星河把你送到石室的门口)|(苏星河说道：想要知道密道就得加入逍遥派).*$")
+			if(l:match("苏星河把你送到石室的门口")) then 
+				handlers.fail()
+			else
+				wait.time(1)
+				handlers.done()
+			end
+		end)
+	end,
 
 	["press"] = function()
 		Execute("press " .. var.fz_coin)
@@ -240,7 +258,8 @@ run = function(path)
 			if(pos1 >= 1) then Execute(path:sub(1, pos1-1)) end
 			local pos3 = path:find(";", pos2)
 			local tt = utils.split(path:sub(pos1+1, pos2-1), ":")
-			local handler_ok = function()
+			
+			local h_ok = function()
 				Execute("halt")
 				if(pos3 ~= nil) then
 					walk.run(path:sub(pos3+1))
@@ -251,9 +270,9 @@ run = function(path)
 
 			EnableTriggerGroup("walk_special", true)
 			if(pos3 ~= nil) then
-				handlers.init(path:sub(pos2+1, pos3-1), handler_ok, walk.fail)
+				handlers.init(path:sub(pos2+1, pos3-1), h_ok, walk.fail)
 			else
-				handlers.init(path:sub(pos2+1), handler_ok, walk.fail)
+				handlers.init(path:sub(pos2+1), h_ok, walk.fail)
 			end
 
 			handlers[tt[1]](unpack(tt,2))
@@ -498,3 +517,8 @@ end
 function info()
 	tprint(walk_cxt)
 end
+
+
+
+------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------

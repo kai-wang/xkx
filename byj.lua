@@ -9,6 +9,8 @@ var.me_name = "°×Óñ¾©"
 var.me_menpai = "È«Õæ"
 var.task_id = "byj's task"
 var.ttask_id = "byj's ttask"
+var.heal_dummy_id = "hqly"
+var.bag_dummy_id = "hsly"
 
 
 profile = {
@@ -78,7 +80,22 @@ profile = {
 			"", flag, -1, 0, "", "fight.on_perform")
 			
 		SetTriggerOption("fight_perform_cd", "group", "fight")
-	end
+	end,
+	
+	login = function()
+		Execute(var.login_drop)
+		Execute(var.login_wear)
+	end,
+	
+	int_wear = function(f_done)
+		Execute("tuo all;wear cangyan mao;wear dongmei hushou;wear yuquan yi;wield zimang jian")
+		call(f_done)
+	end,
+	
+	fight_wear = function(f_done)
+		Execute("tuo all")
+		Execute(var.login_wear)
+	end,
 }
 
 

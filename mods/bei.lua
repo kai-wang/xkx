@@ -22,6 +22,10 @@ end
 done = function()
 	EnableTriggerGroup("bei", false)
 	msg.broadcast("msg_task_done")
+	wait.make(function()
+		wait.time(1)
+		Execute("bei1")
+	end)
 end
 
 fail = function()
@@ -64,7 +68,6 @@ start = function(name, line, wildcards)
 	var.task_fullname = (var.task_id):gsub("^%l", string.upper)
 	var.task_found = false
 	var.task_retry_times = 0
-	var.task_search = false
 	
 	Execute("fly wm")
 	parseTask1()
@@ -114,7 +117,7 @@ end
 
 -- 走完都没找到
 notfound = function()
-	if(var.task_found) then return end
+	if(var.task_found == "true") then return end
 	print("走完了没找到 " .. var.task_retry_times)
 
 	----------retry 3次还找不到就放弃吧----------------

@@ -6,20 +6,7 @@ require "tprint"
 ------------------------------------------------------------------------------
 act_flag = false
 event_status = false
-------------------------------------------------------------------------------
---                 supply water and food
-------------------------------------------------------------------------------
-function chihe()
-	wait.make(function()
-		Execute("set brief;fly jx;buy zongzi;")
-		wait.time(2)
-		Execute("fly xx;su;s;ed;nw;w;buy shuinang;")
-		wait.time(2)
-		Execute("eat zongzi;#8 (drink shuinang);drop zongzi;drop zong ye;")
-		wait.time(2)
-		Execute("#8 (drink shuinang);drop shuinang;unset brief;fly wm;")
-	end)
-end --function
+
 
 ------------------------------------------------------------------------------
 --                 event
@@ -111,3 +98,8 @@ function jump_tower()
 		end --while
 	end)  -- end of coroutine
 end --function
+
+
+function test()
+	print("fadfadfa")
+end

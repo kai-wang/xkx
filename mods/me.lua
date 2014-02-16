@@ -1,7 +1,7 @@
 require "tprint"
 
 me = {}
-me.status = {}
+--me.status = {}
 
 --[[
 	精神:		js
@@ -116,8 +116,8 @@ me.ssf = function(f_done)
 	wait.make(function()
 		Execute("fly wm;e;s;w;qukuan 15 gold")
 		wait.time(5)
-		Execute("fly lj;s;give 25 gold to shouling")
-		local l, w = wait.regexp("^(> )*(这里没有这个人)|(.*你没有中生死符啊，你想中吗).*$")
+		Execute("fly lj;s;give 15 gold to shouling")
+		local l, w = wait.regexp("^(> )*(这里没有这个人)|(.*你没有中生死符啊，你想中吗)|(.*你身上的生死符已解了).*$")
 		
 		if(l:match("这里没有这个人") ~= nil) then
 			print("首领不在,断线了...........")
@@ -226,7 +226,7 @@ me.useqn = function(f_done)
 		local st = me.profile.study_list[index]
 		
 		wait.make(function()
-			msg.subscribe("msg_study_done", function() call(f_done) end)
+			--msg.subscribe("msg_study_done", function() call(f_done) end)
 			
 			var.study_loc = st.loc
 			var.study_cmd = st.cmd

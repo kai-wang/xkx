@@ -30,7 +30,7 @@ loadmod("info_shan.lua")
 
 loadmod("roominfo.lua")
 loadmod("maps.lua")
-loadmod("walk.lua")
+loadmod("walk2.lua")
 
 loadmod("quqing.lua")
 loadmod("guanfu.lua")

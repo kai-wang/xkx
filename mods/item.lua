@@ -78,3 +78,69 @@ function getColourName(style, item)
 		end
 	end
 end
+
+
+function prepare(name, f_ok, f_fail)
+
+	wait.make(function()
+		if(name == "雄黄") then
+			Execute("nw;l xionghuang")
+			local l, w = wait.regexp("^(> )*(你要看什么)|(这是一包雄黄).*$")
+			if(l:match("你要看什么")) then 
+				Execute("fly wm;e;s;s;e;e;n;buy xionghuang")
+				wait.time(5)
+				Execute("fly wm;nw;l xionghuang")
+				local l, w = wait.regexp("^(> )*(你要看什么)|(这是一包雄黄).*$")
+				if(l:match("你要看什么")) then call(f_fail) else call(f_ok) end
+			else 
+				call(f_ok) 
+			end
+			return
+		end
+		
+		if(name == "英雄令") then
+			Execute("nw;l yingxiong ling")
+			local l, w = wait.regexp("^(> )*(你要看什么)|(这是一块用于通行少林寺的铁铸令牌).*$")
+			if(l:match("你要看什么")) then 
+				Execute("fly wm;e;s;w;qukuan 1 gold")
+				wait.time(5)
+				Execute("e;s;s;s;give seng 1 gold;fly wm;nw;l yingxiong ling")
+				local l, w = wait.regexp("^(> )*(你要看什么)|(这是一块用于通行少林寺的铁铸令牌).*$")
+				if(l:match("你要看什么")) then call(f_fail) else call(f_ok) end
+			else 
+				call(f_ok) 
+			end
+			return
+		end
+		
+		if(name == "重阳令") then
+			Execute("nw;l chongyang ling")
+			local l, w = wait.regexp("^(> )*(你要看什么)|(这是一块用于通行重阳宫的铁铸令牌).*$")
+			if(l:match("你要看什么")) then 
+				Execute("fly wm;e;s;w;qukuan 1 gold")
+				wait.time(5)
+				Execute("e;s;w;give daoren 1 gold;fly wm;nw;l chongyang ling")
+				local l, w = wait.regexp("^(> )*(你要看什么)|(这是一块用于通行重阳宫的铁铸令牌).*$")
+				if(l:match("你要看什么")) then call(f_fail) else call(f_ok) end
+			else 
+				call(f_ok) 
+			end
+			return
+		end
+		
+		if(name == "火折") then
+			Execute("nw;l fire")
+			local l, w = wait.regexp("^(> )*(你要看什么)|(这是一支用于引火的火折).*$")
+			if(l:match("你要看什么")) then 
+				Execute("fly wm;e;s;s;e;s;buy fire")
+				wait.time(5)
+				Execute("fly wm;nw;l fire")
+				local l, w = wait.regexp("^(> )*(你要看什么)|(这是一支用于引火的火折).*$")
+				if(l:match("你要看什么")) then call(f_fail) else call(f_ok) end
+			else 
+				call(f_ok) 
+			end
+			return
+		end
+	end)
+end
