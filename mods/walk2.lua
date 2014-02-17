@@ -390,7 +390,7 @@ function step_by_step(path)
 	assert(p ~= nil)
 	
 	c.walk_next = function()
-		if(c.stop) then print("slow walk stop") walk_stop() return end
+		if(c.stop) then walk_stop() return end
 		
 		local p = c.iter()
 		--执行到最后设置"set run ok"----------
@@ -428,7 +428,11 @@ function resume()
 	r.stop = false
 	
 	local p = w.iter()
-	step(p.path, w.walk_next, walk_fail, walk_stop)
+	if(p ~= nil) then
+		step(p.path, w.walk_next, walk_fail, walk_stop)
+	else
+		walk_ok()
+	end
 end
 
 function walk_fail()
