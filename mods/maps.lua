@@ -465,6 +465,14 @@ map["loadall"] = function()
 end
 
 
+map["g_all"] = function()
+	for i, v in pairs(regions) do
+		map["g_path"](v.name)
+		print(v.name)
+		map["save"](v.name)
+	end
+end
+
 --	生成相对路径
 map["g_path"] = function(name)
 	local region = regions[name]
@@ -695,11 +703,15 @@ function find_path(rooms, start, destination)
 						if dest.con == nil or dest.con == "" then
 							table.insert(new_path, dir)
 						else
+						--新的格式为|aw:3:flatter 星宿老仙:n|
+							table.insert(new_path, "|!" .. dest.con .. ":" .. dir .. "|")
+						--[[ 以下代码适配老的walk，格式为[aw:3:flatter 星宿老仙]n
 							if(string.find(dest.con, ":")==nil) then
 								table.insert(new_path, dest.con..";"..dir)
 							else
 								table.insert(new_path, "["..dest.con.."]"..dir)
 							end
+						]]
 						end
 
 						-- if the destination is where we want to go, we now know how to get there

@@ -130,7 +130,7 @@ notfound = function()
 		fight.stop()
 		Execute("halt")
 		--如果还找不到就暂停一下
-		walk.walkaround(3, nil, bei.pause, bei.pause)
+		walk.walkaround(3, nil)--, bei.pause, bei.pause)
 	end
 end
 
@@ -187,7 +187,10 @@ search = function(name, line, wildcards)
 	fight.stop()
 	Execute("halt")
 	print("task 跑了 【" .. wildcards[3] .. "】")
-	walk.walkaround(5, wildcards[3])
+	local dir = wildcards[3]
+	dir = dir:gsub("边","")
+	dir = dir:gsub("面", "")
+	walk.walkaround(5, dir)
 end
 
 -----------------------------------------------------------------------------------------------------------------------------

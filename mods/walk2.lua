@@ -2,7 +2,7 @@ require "wait"
 require "tprint"
 require "var"
 
-module ("walk2", package.seeall)
+module ("walk", package.seeall)
 
 local walk_cxt = {}
 
@@ -24,8 +24,10 @@ directions["se"] = "东南"
 directions["ne"] = "东北"
 directions["sw"] = "西南"
 directions["nw"] = "西北"
-directions["enter"] = "里面"
-directions["out"] = "外面"
+directions["enter"] = "里"
+directions["out"] = "外"
+directions["d"] = "下"
+directions["u"] = "上"
 
 local mappings = {}
 
@@ -77,6 +79,9 @@ function run(path)
 	local tbl = utils.split(path, "|")
 	local c = run_cxt
 	
+	c.stop = false
+	c.fail = false
+	
 	--iterator---------------------------------
 	local iterator = function(tbl)
 		local i, n = 0, #tbl
@@ -90,17 +95,17 @@ function run(path)
 	if(p == nil) then print("path 为空") run_fail() return end
 	
 	c.run_next = function()
+		if(c.fail) then print("run fail") run_fail() return end
 		if(c.stop) then print("run stop") run_stop() return end
 		
 		local p = c.iter()
 		--执行到最后设置"set run ok"----------
 		if(p == nil) then
 			Execute("set run ok")
-			--print("run ok")
-			--在这里调用f_ok------------------
+			--从trigger里调用run_ok------------------
 			--run_ok()
 		else -- 继续下一条命令----------------
-			run_cmd(p, c.run_next, f_fail)
+			run_cmd(p, c.run_next, run_fail, run_stop)
 		end
 	end
 	
@@ -122,7 +127,7 @@ end
 function run_stop()
 	EnableTriggerGroup("walk_special", false)
 	EnableTriggerGroup("walk", false)
-	msg.broadcast("msg_run_fail")
+	msg.broadcast("msg_run_stop")
 end
 
 
@@ -130,13 +135,19 @@ function run_cmd(cmd, f_ok, f_fail, f_stop)
 	--if(walk_cxt.run_stop) then return end
 	
 	-- 用 !来区别是特殊命令还是一般命令-------
-	if(cmd:sub(1,1) ~= "!") then
-		if(cmd ~= "") then Execute(cmd) end
+	if(cmd == "") then 
 		call(f_ok)
 	else
-		-- aw:3:flatter 星宿老仙
-		print("special cmd: " .. cmd:sub(2))
-		run_special(cmd:sub(2), f_ok, f_fail, f_stop)
+		local c = cmd:sub(1,1)
+		if(c == ";") then cmd = cmd:sub(2) end
+		if(c ~= "!") then 
+			Execute(cmd) 
+			call(f_ok)
+		else
+			-- aw:3:flatter 星宿老仙
+			print("special cmd: " .. cmd:sub(2))
+			run_special(cmd:sub(2), f_ok, f_fail, f_stop)
+		end
 	end
 end
 
@@ -159,15 +170,16 @@ handlers = {
 		c.f_stop = f_stop
 		
 		c.cmd = tbl
-		c.stop = false
+		--直接check run_cxt.stop了 --------------
+		--c.stop = false
 		c.block = false
 	end,
 	
 	run = function()
 		EnableTriggerGroup("walk_special", true)
 		local c = handlers.cxt
-		
-		c.stop = false
+		--直接check run_cxt.stop了 --------------
+		--c.stop = false
 		c.block = false
 		--aw:3:flatter 星宿老仙:nw
 		--第一个是特殊命令，最后一个是路径-------
@@ -176,12 +188,7 @@ handlers = {
 		
 		if(func == nil) then print("没有对应的handler：" .. c.cmd[1]) handlers.fail() else func(unpack(c.cmd, 2, #c.cmd-1)) end
 	end,
-	
-	stop = function()
-		local c = handlers.cxt
-		c.stop = true
-	end,
-	
+		
 	----遇到挡路的npc时调用 ---------------------
 	block = function()
 		local c = handlers.cxt
@@ -194,38 +201,41 @@ handlers = {
 	end,
 	
 	done = function()
-		local c = handlers.cxt
+		local c, r = handlers.cxt, run_cxt
 		--EnableTriggerGroup("walk_special", false)
-		if(c.stop) then print("run special stop") call(c.f_stop)
-		else
-			wait.make(function()
-				local cmd = c.cmd[#c.cmd]
-				Execute(cmd .. ";set run_special_handle ok")
-				local l, w = wait.regexp("^(> )*设定环境变数：run_special_handle = \"ok\"$")
-				if(not c.block) then 
-					print("no blocker") 
-					EnableTriggerGroup("walk_special", false)
-					call(c.f_ok)
-				else 
-					handlers.run() 
-				end
-			end)
-		end
+		if(r.fail) then handlers.fail() return end
+		if(r.stop) then handlers.stop() return end
+		
+		wait.make(function()
+			local cmd = c.cmd[#c.cmd]
+			Execute(cmd .. ";set run_special_handle ok")
+			local l, w = wait.regexp("^(> )*设定环境变数：run_special_handle = \"ok\"$")
+			if(not c.block) then 
+				print("no blocker") 
+				EnableTriggerGroup("walk_special", false)
+				call(c.f_ok)
+			else 
+				handlers.run() 
+			end
+		end)
+	end,
+	
+	stop = function()
+		print("special handle stop")
+		EnableTriggerGroup("walk_special", false)
+		local c = handlers.cxt
+		call(c.f_stop)
 	end,
 	
 	fail = function()
-		print("handle fail")
+		print("special handle fail")
 		EnableTriggerGroup("walk_special", false)
 		local c = handlers.cxt
 		call(c.f_fail)
 	end,
 	
 	["aw"] = function(interval, action)
-		local c = handlers.cxt
-		if(c.stop) then call(c.f_stop) return end
-		
 		wait.make(function()
-			print(interval, action)
 			Execute(action)
 			if(interval ~= nil and tonumber(interval) > 0) then wait.time(tonumber(interval)) end
 			handlers.done()
@@ -234,11 +244,12 @@ handlers = {
 	
 	------ a:yell boat-------------------------------------------------
 	["a"] = function(action)
-		local c = handlers.cxt
-		if(c.stop) then call(c.f_stop) else Execute(action) end
+		Execute(action)
+		--tri里调用handlers.done()
+		--handlers.done()
 	end,
 	
-	["k1"] = function(name)
+	["k1"] = function()
 		local c = handlers.cxt
 		local cmd = c.cmd[#c.cmd]
 		Execute(cmd .. ";set walk_special_handle ok")
@@ -249,33 +260,10 @@ handlers = {
 		var.walk_blocker_name = wildcards[2]
 		var.walk_blocker_id = blocker_npcs[var.walk_blocker_name]
 		
+		print("blocker: " .. var.walk_blocker_name .. " " .. var.walk_blocker_id)
+		
 		if(var.walk_blocker_id == nil) then print("没有blocker id") handlers.fail() return end
 		Execute("kill " .. var.walk_blocker_id)
-	end,
-	
-	["gw"] = function()
-		local c = handlers.cxt
-		
-		wait.make(function()
-			Execute("e")
-			local l, w = wait.regexp("^(> )*(你见江面结冻，便壮起胆子踩冰而过。)|(船夫在旁边拿眼瞪着你看。冰面化冻，还是乘船吧！)$")
-			if(l and string.match(l, "你见江面结冻，便壮起胆子踩冰而过。")) then
-				Execute("e")
-				call(c.f_ok)
-			else
-				Execute("give 1 gold to chuan fu")
-				l, w = wait.regexp("^(> )*(船很快停靠彼岸。你抬脚跨出船来。)|(你身上没有这样东西。)|(这里没有这个人。)$")
-				if(l and string.match(l, "船很快停靠彼岸")) then
-					call(c.f_ok)
-				else
-					call(c.f_fail)
-				end
-			end
-		end)
-	end,
-	
-	["w"] = function()
-		
 	end,
 	
 	blocker_dead = function(line, name, wildcards)
@@ -287,7 +275,28 @@ handlers = {
 		end
 		
 		handlers.done()
-	end	
+	end,
+	
+	["gw"] = function()
+		local c = handlers.cxt
+		
+		wait.make(function()
+			Execute("e")
+			local l, w = wait.regexp("^(> )*(你见江面结冻，便壮起胆子踩冰而过。)|(船夫在旁边拿眼瞪着你看。冰面化冻，还是乘船吧！)$")
+			if(l and string.match(l, "你见江面结冻，便壮起胆子踩冰而过。")) then
+				Execute("e")
+				handlers.done()
+			else
+				Execute("give 1 gold to chuan fu")
+				l, w = wait.regexp("^(> )*(船很快停靠彼岸。你抬脚跨出船来。)|(你身上没有这样东西。)|(这里没有这个人。)$")
+				if(l and string.match(l, "船很快停靠彼岸")) then
+					handlers.done()
+				else
+					handlers.fail()
+				end
+			end
+		end)
+	end
 }
 
 -------------------------------------------------------------------------------------------------------------------------------
@@ -361,21 +370,15 @@ function sl(regionName, roomName)
 		end
 	end
 	
-	
-	if(path == nil or path == {}) then
-		walk_fail()
-	else
-		local w, r = walk_cxt, run_cxt
-		w.stop = false
-		r.stop = false
-		
-		step_by_step(path)
-	end
+	step_by_step(path)
 end
 
 function step_by_step(path)
-	
 	local c = walk_cxt
+	c.stop = false
+	c.fail = false
+	
+	if(path == nil or #path == 0) then walk_fail() return end
 	
 	--iterator---------------------------------
 	local iterator = function(tbl)
@@ -385,14 +388,20 @@ function step_by_step(path)
 	
 	c.iter = iterator(path)
 	local p = c.iter()
+	local roomId = p.to
 	
-	-- path 肯定不会为空了-------------------------------
+	--应该肯定不会为空了----------------------
 	assert(p ~= nil)
 	
 	c.walk_next = function()
+		if(c.fail) then walk_fail() return end
+		
+		print("当前房间: " .. roomId)
+		walk_cxt.currentId = roomId
+		
 		if(c.stop) then walk_stop() return end
 		
-		local p = c.iter()
+		p = c.iter()
 		--执行到最后设置"set run ok"----------
 		if(p == nil) then
 			--Execute("set slowwalk ok")
@@ -400,6 +409,7 @@ function step_by_step(path)
 			--在这里调用f_ok------------------
 			walk_ok()
 		else -- 继续下一条命令----------------
+			roomId = p.to
 			step(p.path, c.walk_next, walk_fail, walk_stop)
 		end
 	end
@@ -422,10 +432,20 @@ function stop()
 	r.stop = true
 end
 
+function fail()
+	local w, r = walk_cxt, run_cxt
+	w.fail = true
+	r.fail = true
+end
+
+--暂时不需要resume吧----------------------------------------------------------------
+--还需要在run和handle上面加一个，如果正在handle的时候stop了，需要把handle resume----
 function resume()
 	local w, r = walk_cxt, run_cxt
 	w.stop = false
+	w.fail = false
 	r.stop = false
+	r.fail = false
 	
 	local p = w.iter()
 	if(p ~= nil) then
@@ -455,4 +475,66 @@ function walk_ok()
 	EnableTriggerGroup("walk_special", false)
 	EnableTriggerGroup("walk", false)
 	msg.broadcast("msg_slowwalk_ok")
+end
+
+
+
+
+function walkaround(dp, dir)
+	
+	local room = roomAll[walk_cxt.currentId]
+	local tbl, walked = {}, {}
+	local walk_deepth = tonumber(dp)
+	
+	--if(dir ~= nil) then dir = dir:gsub("边","") end 
+	--if(var.walk_deepth ~= nil) then walk_deepth = tonumber(var.walk_deepth) end
+	
+	--声明一下两个函数-------------------------------------------------------------------
+	local enqueue, findexit
+	
+	enqueue = function(d, v, room, deepth)
+		local p = d
+		if(v.con ~= nil and v.con ~= "") then p = "|!" .. v.con .. ":" .. d .. "|" end
+		print("1", v.to, room.id, p)
+		table.insert(tbl, {["from"]=room.id, ["to"]=v.to, ["path"]=p})
+		
+		walked[v.to] = true
+		--deepth = deepth + 1
+		findexit(roomAll[v.to], room.id, deepth+1)
+		local stepback = find_path(roomAll, v.to, room.id)
+		if(stepback) then
+			local path = table.concat(stepback, ";")
+			print("2", v.to, room.id, path)
+			table.insert(tbl, {["from"]=v.to, ["to"]=room.id, ["path"]=path})
+		else
+			table.insert(tbl, {["from"]=v.to, ["to"]=room.id, ["path"]=roomAll[room.id].path})
+		end
+	end
+	
+	findexit = function(room, from, deepth)
+		--走到头了
+		if(deepth == walk_deepth) then return end
+		
+		-------------------优先找符合dir的房间的路径------------------------------------------------------
+		if(deepth == 1 and dir ~= nil) then
+			for i, v in pairs(room.links) do
+				if(not walked[v.to] and v.attr ~= "danger" and v.block ~= "y" and directions[i] == dir) then
+					enqueue(i, v, room, deepth)
+				end
+			end
+		end
+		------------------找剩下的还没做过的房间-----------------------------------------------------------
+		for i, v in pairs(room.links) do
+			if(not walked[v.to] and v.attr ~= "danger" and v.block ~= "y") then
+				enqueue(i, v, room, deepth)
+			end
+		end
+	end
+
+	--tprint(walked)
+	walked[room.id] = true
+	findexit(room, room.id, 1)
+	tprint(tbl)
+
+	step_by_step(tbl)
 end

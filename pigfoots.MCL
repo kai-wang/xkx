@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE muclient>
-<!-- Saved on Tuesday, February 18, 2014, 12:31 AM -->
+<!-- Saved on Wednesday, February 19, 2014, 12:46 AM -->
 <!-- MuClient version 4.84 -->
 <!-- Written by Nick Gammon -->
 <!-- Home Page: http://www.mushclient.com/ -->
@@ -8,7 +8,7 @@
 <world
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-18 00:31:23"
+   date_saved="2014-02-19 00:46:46"
 
    auto_say_override_prefix="-"
    auto_say_string="say "
@@ -116,7 +116,7 @@
 <triggers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-18 00:31:23"
+   date_saved="2014-02-19 00:46:46"
   >
   <trigger
    custom_colour="16"
@@ -141,7 +141,6 @@
   >
   </trigger>
   <trigger
-   enabled="y"
    group="gag"
    keep_evaluating="y"
    match="(Ò»ÍÅÑÌÎíÖ®ÖÐ|ÍÑÁËÏÂÀ´)¡£"
@@ -207,7 +206,7 @@
    keep_evaluating="y"
    match="^(&gt; )*(.*)(À¹×¡|°ÑÊÖÒ»À¹|ÏòÄãºÈµÀ|ºÈµÀ£º|²ÙÆðÈ­Í·¡±|·Ô¸ÀÃ»ÓÐÖØÒªµÄÊÂÇé|µ²×¡ÁËÄã|µ²×¡ÁËÄã£º|Ò»ÑÔ²»·¢£¬ÉÁÉíÀ¹ÔÚÄãÃæÇ°¡£|Ëµ: ÎÒ°Ñ°¢·²Ìá¹ØÔÚÎÒµÄ¿ÍÌüÀïÁË|ºÈµÀ).*$"
    regexp="y"
-   script="walk2.handlers.k_blocker"
+   script="walk.handlers.k_blocker"
    sequence="100"
   >
   </trigger>
@@ -307,9 +306,9 @@
    expand_variables="y"
    group="walk_special"
    keep_evaluating="y"
-   match="^(&gt; )*(@!walk_blocker_name)ÆËÔÚµØÉÏÕõÔúÁË¼¸ÏÂ£¬¿ÚÖÐÅç³ö¼¸¿ÚÏÊÑª£¬ËÀÁË£¡$"
+   match="^(&gt; )*(@!walk_blocker_name)(ÆËÔÚµØÉÏÕõÔúÁË¼¸ÏÂ£¬¿ÚÖÐÅç³ö¼¸¿ÚÏÊÑª£¬ËÀÁË£¡)|(.*Âä»Ä¶øÌÓÁË)$"
    regexp="y"
-   script="walk2.handlers.blocker_dead"
+   script="walk.handlers.blocker_dead"
    sequence="100"
   >
   </trigger>
@@ -378,7 +377,6 @@
   >
   </trigger>
   <trigger
-   enabled="y"
    group="gag"
    keep_evaluating="y"
    match="^(&gt; )*(ÄãÉîÉîÎüÁË¼¸¿ÚÆø)|(Äã.*Çë½Ì)|(ÓÐÐ©ÐÄµÃ)|(ÄãÕýÔÚ×êÑÐ)|(ÄãÊÔ×Å.*Á·ÁË)|(ÄãÏÖÔÚ¾«Éñ±¥Âú)|(.*ÄãµÄ.*½ø²½ÁË)|(ÄãÃæ¶Ô×ÅÊ¯±Ú¾²Ë¼Á¼¾Ã)|(Äã.*ÆÄÓÐÐÄµÃ)|(ÄãÑÐ¶Á).*$"
@@ -390,7 +388,7 @@
   <trigger
    group="study"
    keep_evaluating="y"
-   match="^(&gt; )*(Ò²ÐíÊÇÑ§ÎÊ²»¹»Éî)|(ÄãµÄÇ±ÄÜ²»¹»)|(ÄãµÄ»ù±¾¹¦»ðºòÎ´µ½)|(Äã.*Ì«·ôÇ³ÁË)|(ÄãÒªÏòË­Çó½Ì)|(ÕâÏî¼¼ÄÜÄãµÄ³Ì¶ÈÒÑ¾­²»ÊäÄãÊ¦¸¸ÁË).*$"
+   match="^(&gt; )*(Ò²ÐíÊÇÑ§ÎÊ²»¹»Éî)|(ÄãµÄÇ±ÄÜ²»¹»)|(ÄãµÄ»ù±¾¹¦»ðºòÎ´µ½)|(Äã.*Ì«·ôÇ³ÁË)|(ÄãÒªÏòË­Çó½Ì)|(ÕâÏî¼¼ÄÜÄãµÄ³Ì¶ÈÒÑ¾­²»ÊäÄãÊ¦¸¸ÁË)|(ÄãÑÐ¶ÁÁËÒ»»á¶ù.*¶ÔÄã¶øÑÔ¶¼Ì«Ç³ÁË).*$"
    regexp="y"
    script="study.done"
    sequence="100"
@@ -670,6 +668,15 @@ fight.startTimer("busy")</send>
   >
   </trigger>
   <trigger
+   group="bei"
+   keep_evaluating="y"
+   match="^(&gt; )*ÄãÏÖÔÚÃ»ÓÐÈÎºÎÊ¹Ãü£¡$"
+   regexp="y"
+   script="bei.fail"
+   sequence="100"
+  >
+  </trigger>
+  <trigger
    group="baobiao"
    match="^(&gt; )*ÄãÏò¹ùÐñ´òÌýÓÐ¹Ø¡º±£ïÚ¡»µÄÏûÏ¢¡£$"
    regexp="y"
@@ -696,14 +703,6 @@ fight.startTimer("busy")</send>
   >
   </trigger>
   <trigger
-   group="fight"
-   match="^(&gt; )*ÄãÖ»¾õµÃÍ·»èÄÔÕÍ£¬ÑÛÇ°Ò»ºÚ£¬½Ó×ÅÊ²Ã´Ò²²»ÖªµÀÁË¡­¡­$"
-   regexp="y"
-   script="fight.faint"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
    group="bei"
    keep_evaluating="y"
    match="^(&gt; )*ÄãÖ»¾õµÃÍ·»èÄÔÕÍ£¬ÑÛÇ°Ò»ºÚ£¬½Ó×ÅÊ²Ã´Ò²²»ÖªµÀÁË¡­¡­$"
@@ -713,11 +712,19 @@ fight.startTimer("busy")</send>
   >
   </trigger>
   <trigger
+   group="fight"
+   match="^(&gt; )*ÄãÖ»¾õµÃÍ·»èÄÔÕÍ£¬ÑÛÇ°Ò»ºÚ£¬½Ó×ÅÊ²Ã´Ò²²»ÖªµÀÁË¡­¡­$"
+   regexp="y"
+   script="fight.faint"
+   sequence="100"
+  >
+  </trigger>
+  <trigger
    group="walk"
    keep_evaluating="y"
    match="^(&gt; )*Éè¶¨»·¾³±äÊý£ºrun = &quot;ok&quot;$"
    regexp="y"
-   script="walk2.run_ok"
+   script="walk.run_ok"
    sequence="100"
   >
   </trigger>
@@ -763,7 +770,7 @@ fight.startTimer("busy")</send>
    keep_evaluating="y"
    match="^(&gt; )*Õâ¸ö·½ÏòÃ»ÓÐ³öÂ·¡£$"
    regexp="y"
-   script="walk2.run_fail"
+   script="walk.run_fail"
    sequence="100"
   >
   </trigger>
@@ -841,14 +848,6 @@ fight.startTimer("busy")</send>
   >
   </trigger>
   <trigger
-   group="HP"
-   match="^[&gt; ]*¡¾ Æø Ñª ¡¿\s+(\d+)\/\s+(\d+)\s+\(\s*(\d+)%\)\s+¡¾ ÄÚ Á¦ ¡¿\s+(\d+)\s\/\s(\d+).*$"
-   regexp="y"
-   script="on_hp2_update"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
    group="study_check"
    keep_evaluating="y"
    match="^[&gt; ]*¡¾ Æø Ñª ¡¿\s+(\d+)\/\s+(\d+)\s+\(\s*(\d+)%\)\s+¡¾ ÄÚ Á¦ ¡¿\s+(\d+)\s\/\s(\d+).*$"
@@ -858,6 +857,14 @@ fight.startTimer("busy")</send>
   >
   <send>
 </send>
+  </trigger>
+  <trigger
+   group="HP"
+   match="^[&gt; ]*¡¾ Æø Ñª ¡¿\s+(\d+)\/\s+(\d+)\s+\(\s*(\d+)%\)\s+¡¾ ÄÚ Á¦ ¡¿\s+(\d+)\s\/\s(\d+).*$"
+   regexp="y"
+   script="on_hp2_update"
+   sequence="100"
+  >
   </trigger>
   <trigger
    group="HP"
@@ -980,7 +987,7 @@ fight.startTimer("busy")</send>
 <aliases
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-18 00:31:23"
+   date_saved="2014-02-19 00:46:46"
   >
   <alias
    match="^show (.*)$"
@@ -1112,7 +1119,7 @@ dazuo.start(function() Execute("halt;fly wm") end)</send>
    send_to="10"
    sequence="100"
   >
-  <send>xue zhu literate 40;yun regenerate</send>
+  <send>xue wang sun-finger 50;yun regenerate</send>
   </alias>
   <alias
    name="lz"
@@ -1269,7 +1276,7 @@ perform stick.luanda</send>
 <timers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-18 00:31:23"
+   date_saved="2014-02-19 00:46:46"
   >
   <timer name="idle" second="30.00" offset_second="0.00" >
   <send>hi</send>
@@ -1282,7 +1289,7 @@ perform stick.luanda</send>
 <macros
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-18 00:31:23"
+   date_saved="2014-02-19 00:46:46"
   >
 
   <macro name="up" type="send_now" >
@@ -1376,14 +1383,14 @@ perform stick.luanda</send>
 <variables
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-18 00:31:23"
+   date_saved="2014-02-19 00:46:46"
   >
   <variable name="bag_dummy_id">hsly</variable>
   <variable name="baobiao_exp">142</variable>
   <variable name="baobiao_loc">ÖÐÌõÉ½ÃÜÁÖ</variable>
   <variable name="baobiao_qn">23</variable>
   <variable name="baobiao_yl">1</variable>
-  <variable name="bei_npc">ºÎÊ®Îå¸ç</variable>
+  <variable name="bei_npc">À×Ê®Áù¸ç</variable>
   <variable name="blocker_id">guan bing</variable>
   <variable name="busydelay">0.2</variable>
   <variable name="dazuo_desc">Äã×øÏÂÀ´ÔËÆøÓÃ¹¦£¬Ò»¹ÉÄÚÏ¢¿ªÊ¼ÔÚÌåÄÚÁ÷¶¯¡£</variable>
@@ -1405,7 +1412,7 @@ perform stick.luanda</send>
   <variable name="gf_option"></variable>
   <variable name="heal_dummy_id">hqly</variable>
   <variable name="item_drop_list"></variable>
-  <variable name="item_sell_list">give zimang yi to ouye zi;</variable>
+  <variable name="item_sell_list"></variable>
   <variable name="item_store_list"></variable>
   <variable name="last_wuchang">1392522072</variable>
   <variable name="login_drop">drop dao pao;drop ma xie</variable>
@@ -1421,12 +1428,12 @@ perform stick.luanda</send>
   <variable name="study_cmd">xue zhu literate 40;yun regenerate</variable>
   <variable name="study_loc">fly wm;e;s;s;e;n;</variable>
   <variable name="study_seq">0</variable>
-  <variable name="task_city">¸£ÖÝ</variable>
+  <variable name="task_city">áÔÉ½</variable>
   <variable name="task_found">true</variable>
   <variable name="task_fullname">Byj's task</variable>
   <variable name="task_id">byj's task</variable>
-  <variable name="task_loc">¸£ÍþïÚ¾Ö</variable>
-  <variable name="task_npc">ºÎÊ®Îå¸ç</variable>
+  <variable name="task_loc">É½µÀ</variable>
+  <variable name="task_npc">À×Ê®Áù¸ç</variable>
   <variable name="task_retry_max">3</variable>
   <variable name="task_retry_times">0</variable>
   <variable name="task_search">false</variable>
@@ -1444,7 +1451,7 @@ perform stick.luanda</send>
 <colours
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-18 00:31:23"
+   date_saved="2014-02-19 00:46:46"
   >
 
 <ansi>
@@ -1501,7 +1508,7 @@ perform stick.luanda</send>
 <keypad
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-18 00:31:23"
+   date_saved="2014-02-19 00:46:46"
   >
 
   <key name="0" >
@@ -1615,7 +1622,7 @@ perform stick.luanda</send>
 <printing
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-18 00:31:23"
+   date_saved="2014-02-19 00:46:46"
   >
 
 <ansi>
