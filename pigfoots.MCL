@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE muclient>
-<!-- Saved on Wednesday, February 19, 2014, 12:46 AM -->
+<!-- Saved on Friday, February 21, 2014, 12:40 AM -->
 <!-- MuClient version 4.84 -->
 <!-- Written by Nick Gammon -->
 <!-- Home Page: http://www.mushclient.com/ -->
@@ -8,7 +8,7 @@
 <world
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-19 00:46:46"
+   date_saved="2014-02-21 00:40:17"
 
    auto_say_override_prefix="-"
    auto_say_string="say "
@@ -116,7 +116,7 @@
 <triggers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-19 00:46:46"
+   date_saved="2014-02-21 00:40:17"
   >
   <trigger
    custom_colour="16"
@@ -386,6 +386,15 @@
   >
   </trigger>
   <trigger
+   group="bei"
+   keep_evaluating="y"
+   match="^(&gt; )*(ÄãÏÖÔÚÃ»ÓÐÈÎºÎÊ¹Ãü£¡)|(ÄãÒª´òÌýË­µÄËùÔÚ£¿)$"
+   regexp="y"
+   script="bei.done"
+   sequence="100"
+  >
+  </trigger>
+  <trigger
    group="study"
    keep_evaluating="y"
    match="^(&gt; )*(Ò²ÐíÊÇÑ§ÎÊ²»¹»Éî)|(ÄãµÄÇ±ÄÜ²»¹»)|(ÄãµÄ»ù±¾¹¦»ðºòÎ´µ½)|(Äã.*Ì«·ôÇ³ÁË)|(ÄãÒªÏòË­Çó½Ì)|(ÕâÏî¼¼ÄÜÄãµÄ³Ì¶ÈÒÑ¾­²»ÊäÄãÊ¦¸¸ÁË)|(ÄãÑÐ¶ÁÁËÒ»»á¶ù.*¶ÔÄã¶øÑÔ¶¼Ì«Ç³ÁË).*$"
@@ -491,6 +500,15 @@ get wan</send>
   <trigger
    group="bei"
    keep_evaluating="y"
+   match="^(&gt; )*±´º£Ê¯¶ÔÄãÀäÀäÒ»Ð¦µÀ£ºÈÃÄã°ìµÄÊÂÈçºÎÁË£¿$"
+   regexp="y"
+   script="bei.resume"
+   sequence="100"
+  >
+  </trigger>
+  <trigger
+   group="bei"
+   keep_evaluating="y"
    match="^(&gt; )*±´º£Ê¯¶ÔÄãÐ¦µÀ£ºÏÖÔÚÃ»ÓÐÈÎÎñ¿ÉÒÔ¸øÄã£¬ÏÈÐªÏ¢Ò»»á£¬µÈÒ»ÏÂÔÙÀ´¡£$"
    regexp="y"
    script="bei.fail"
@@ -546,10 +564,9 @@ get wan</send>
    keep_evaluating="y"
    match="^(&gt; )*¿´ÆðÀ´(@!task_npc)ÏëÉ±ËÀÄã£¡$"
    regexp="y"
-   send_to="12"
+   script="bei.startFight"
    sequence="100"
   >
-  <send>fight.startTimer("busy")</send>
   </trigger>
   <trigger
    group="guanfu"
@@ -574,7 +591,7 @@ get wan</send>
    keep_evaluating="y"
    match="^(&gt; )*Äã²»ÊÇ¸Õ´òÌý¹ýÂð£¿$"
    regexp="y"
-   script="bei.pause"
+   script="bei.reloc"
    sequence="100"
   >
   </trigger>
@@ -589,6 +606,16 @@ get wan</send>
 drop yin jian
 drop gang jian
 drop gang dao</send>
+  </trigger>
+  <trigger
+   enabled="y"
+   group="bei"
+   keep_evaluating="y"
+   match="^(&gt; )*ÄãµÄ¾«ÔªÃ»ÓÐËðÉË£¬²»ÐèÒª³ÔÒ©¡£$"
+   regexp="y"
+   sequence="100"
+  >
+  <send>drop yangjing dan</send>
   </trigger>
   <trigger
    custom_colour="16"
@@ -640,6 +667,17 @@ drop gang dao</send>
    enabled="y"
    group="system"
    keep_evaluating="y"
+   match="^(&gt; )*ÄãÁìÈ¡ÁË°ëÐ¡Ê±Ë«±¶Ê±¼ä.*$"
+   regexp="y"
+   send_to="12"
+   sequence="100"
+  >
+  <send>SetVariable("double_bonus", "true")</send>
+  </trigger>
+  <trigger
+   enabled="y"
+   group="system"
+   keep_evaluating="y"
    match="^(&gt; )*ÄãÆËÔÚµØÉÏÕõÔúÁË¼¸ÏÂ£¬¿ÚÖÐÅç³ö¼¸¿ÚÏÊÑª£¬ËÀÁË£¡$"
    regexp="y"
    script="on_system_dead"
@@ -668,28 +706,10 @@ fight.startTimer("busy")</send>
   >
   </trigger>
   <trigger
-   group="bei"
-   keep_evaluating="y"
-   match="^(&gt; )*ÄãÏÖÔÚÃ»ÓÐÈÎºÎÊ¹Ãü£¡$"
-   regexp="y"
-   script="bei.fail"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
    group="baobiao"
    match="^(&gt; )*ÄãÏò¹ùÐñ´òÌýÓÐ¹Ø¡º±£ïÚ¡»µÄÏûÏ¢¡£$"
    regexp="y"
    script="baobiao.ask"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
-   group="bei"
-   keep_evaluating="y"
-   match="^(&gt; )*ÄãÒª´òÌýË­µÄËùÔÚ£¿$"
-   regexp="y"
-   script="bei.fail"
    sequence="100"
   >
   </trigger>
@@ -752,7 +772,7 @@ fight.startTimer("busy")</send>
    keep_evaluating="y"
    match="^(&gt; )*Ò»¹ÉÅ¯Á÷·¢×Ôµ¤ÌïÁ÷ÏòÈ«Éí£¬ÂýÂýµØÄãÓÖ»Ö¸´ÁËÖª¾õ¡­¡­$"
    regexp="y"
-   script="bei.awake"
+   script="bei.cleanup"
    sequence="100"
   >
   </trigger>
@@ -775,20 +795,20 @@ fight.startTimer("busy")</send>
   >
   </trigger>
   <trigger
-   group="guanfu"
-   keep_evaluating="y"
-   match="^(&gt; )*ÕâÀïÃ»ÓÐÕâ¸öÈË¡£$"
-   regexp="y"
-   script="guanfu.search"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
    group="bei_kill"
    keep_evaluating="y"
    match="^(&gt; )*ÕâÀïÃ»ÓÐÕâ¸öÈË¡£$"
    regexp="y"
    script="bei.search"
+   sequence="100"
+  >
+  </trigger>
+  <trigger
+   group="guanfu"
+   keep_evaluating="y"
+   match="^(&gt; )*ÕâÀïÃ»ÓÐÕâ¸öÈË¡£$"
+   regexp="y"
+   script="guanfu.search"
    sequence="100"
   >
   </trigger>
@@ -848,6 +868,14 @@ fight.startTimer("busy")</send>
   >
   </trigger>
   <trigger
+   group="HP"
+   match="^[&gt; ]*¡¾ Æø Ñª ¡¿\s+(\d+)\/\s+(\d+)\s+\(\s*(\d+)%\)\s+¡¾ ÄÚ Á¦ ¡¿\s+(\d+)\s\/\s(\d+).*$"
+   regexp="y"
+   script="on_hp2_update"
+   sequence="100"
+  >
+  </trigger>
+  <trigger
    group="study_check"
    keep_evaluating="y"
    match="^[&gt; ]*¡¾ Æø Ñª ¡¿\s+(\d+)\/\s+(\d+)\s+\(\s*(\d+)%\)\s+¡¾ ÄÚ Á¦ ¡¿\s+(\d+)\s\/\s(\d+).*$"
@@ -857,14 +885,6 @@ fight.startTimer("busy")</send>
   >
   <send>
 </send>
-  </trigger>
-  <trigger
-   group="HP"
-   match="^[&gt; ]*¡¾ Æø Ñª ¡¿\s+(\d+)\/\s+(\d+)\s+\(\s*(\d+)%\)\s+¡¾ ÄÚ Á¦ ¡¿\s+(\d+)\s\/\s(\d+).*$"
-   regexp="y"
-   script="on_hp2_update"
-   sequence="100"
-  >
   </trigger>
   <trigger
    group="HP"
@@ -987,7 +1007,7 @@ fight.startTimer("busy")</send>
 <aliases
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-19 00:46:46"
+   date_saved="2014-02-21 00:40:17"
   >
   <alias
    match="^show (.*)$"
@@ -1026,15 +1046,6 @@ SetAliasOption("%1", "send_to", 10)</send>
    sequence="100"
   >
   <send>baobiao.main()</send>
-  </alias>
-  <alias
-   match="c"
-   enabled="y"
-   sequence="100"
-  >
-  <send>perform dodge.canghaiyixiao
-perform stick.chan
-</send>
   </alias>
   <alias
    name="dl"
@@ -1119,7 +1130,7 @@ dazuo.start(function() Execute("halt;fly wm") end)</send>
    send_to="10"
    sequence="100"
   >
-  <send>xue wang sun-finger 50;yun regenerate</send>
+  <send>xue wang xiantian-qigong 40;yun regenerate</send>
   </alias>
   <alias
    name="lz"
@@ -1219,15 +1230,6 @@ dazuo.start(function() Execute("halt;fly wm") end)</send>
   <send>unset brief</send>
   </alias>
   <alias
-   match="v"
-   enabled="y"
-   sequence="100"
-  >
-  <send>wield bang
-perform dodge.canghaiyixiao
-perform stick.luanda</send>
-  </alias>
-  <alias
    match="wcy"
    enabled="y"
    send_to="10"
@@ -1276,7 +1278,7 @@ perform stick.luanda</send>
 <timers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-19 00:46:46"
+   date_saved="2014-02-21 00:40:17"
   >
   <timer name="idle" second="30.00" offset_second="0.00" >
   <send>hi</send>
@@ -1289,7 +1291,7 @@ perform stick.luanda</send>
 <macros
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-19 00:46:46"
+   date_saved="2014-02-21 00:40:17"
   >
 
   <macro name="up" type="send_now" >
@@ -1383,20 +1385,21 @@ perform stick.luanda</send>
 <variables
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-19 00:46:46"
+   date_saved="2014-02-21 00:40:17"
   >
   <variable name="bag_dummy_id">hsly</variable>
   <variable name="baobiao_exp">142</variable>
   <variable name="baobiao_loc">ÖÐÌõÉ½ÃÜÁÖ</variable>
   <variable name="baobiao_qn">23</variable>
   <variable name="baobiao_yl">1</variable>
-  <variable name="bei_npc">À×Ê®Áù¸ç</variable>
+  <variable name="bei_npc">ÌÙÊ®Êå</variable>
   <variable name="blocker_id">guan bing</variable>
   <variable name="busydelay">0.2</variable>
   <variable name="dazuo_desc">Äã×øÏÂÀ´ÔËÆøÓÃ¹¦£¬Ò»¹ÉÄÚÏ¢¿ªÊ¼ÔÚÌåÄÚÁ÷¶¯¡£</variable>
   <variable name="dazuo_end_desc">ÄãÔË¹¦Íê±Ï£¬ÉîÉîÎüÁË¿ÚÆø£¬Õ¾ÁËÆðÀ´¡£</variable>
   <variable name="dazuo_full_desc">ÄãµÄÄÚÁ¦ÐÞÎªËÆºõÒÑ¾­´ïµ½ÁËÆ¿¾±£¬ÎÞ·¨ÔÙ¿¿´ò×øÀ´ÌáÉýÁË¡£</variable>
   <variable name="dazuo_halt_desc">Äã°ÑÕýÔÚÔËÐÐµÄÕæÆøÇ¿ÐÐÑ¹»Øµ¤Ìï£¬Õ¾ÁËÆðÀ´¡£</variable>
+  <variable name="double_bonus">true</variable>
   <variable name="faint">0</variable>
   <variable name="fight_interval">1</variable>
   <variable name="fz_coin">2321</variable>
@@ -1412,8 +1415,8 @@ perform stick.luanda</send>
   <variable name="gf_option"></variable>
   <variable name="heal_dummy_id">hqly</variable>
   <variable name="item_drop_list"></variable>
-  <variable name="item_sell_list"></variable>
-  <variable name="item_store_list"></variable>
+  <variable name="item_sell_list">give qinghe yi to ouye zi;</variable>
+  <variable name="item_store_list">give hanshan xue to byj;</variable>
   <variable name="last_wuchang">1392522072</variable>
   <variable name="login_drop">drop dao pao;drop ma xie</variable>
   <variable name="login_wear">give yinling xue to byj;give songluan hushou to byj;give cangyan mao to byj;give yuquan yi to byj;give chunjiang jian to byj;wear all;wield jian</variable>
@@ -1425,22 +1428,25 @@ perform stick.luanda</send>
   <variable name="shan_npc">Òó½õ</variable>
   <variable name="shan_qn">19</variable>
   <variable name="shan_yl">2</variable>
-  <variable name="study_cmd">xue zhu literate 40;yun regenerate</variable>
-  <variable name="study_loc">fly wm;e;s;s;e;n;</variable>
-  <variable name="study_seq">0</variable>
-  <variable name="task_city">áÔÉ½</variable>
+  <variable name="study_cmd">xue wang xiantian-qigong 40;yun regenerate</variable>
+  <variable name="study_loc">wcy</variable>
+  <variable name="study_seq">2</variable>
+  <variable name="task_auto_kill">true</variable>
+  <variable name="task_city">±±¾©</variable>
+  <variable name="task_escape_dir">ÄÏ</variable>
   <variable name="task_found">true</variable>
   <variable name="task_fullname">Byj's task</variable>
   <variable name="task_id">byj's task</variable>
-  <variable name="task_loc">É½µÀ</variable>
-  <variable name="task_npc">À×Ê®Áù¸ç</variable>
+  <variable name="task_loc">Íõ¸®¾®´ó½Ö</variable>
+  <variable name="task_npc">ÌÙÊ®Êå</variable>
   <variable name="task_retry_max">3</variable>
   <variable name="task_retry_times">0</variable>
   <variable name="task_search">false</variable>
+  <variable name="task_start_time">1392903329</variable>
+  <variable name="task_status">done</variable>
   <variable name="ttask_id">byj's ttask</variable>
   <variable name="walk_blocker">¹Ù±ø</variable>
-  <variable name="walk_blocker_id">ya yi</variable>
-  <variable name="walk_blocker_name">ÑÃÒÛ</variable>
+  <variable name="walk_blocker_name">Ð»ÑÌ¿Í</variable>
   <variable name="walk_deepth">5</variable>
   <variable name="weapon">jian</variable>
   <variable name="wei_item">±ùÌÇºùÂ«</variable>
@@ -1451,7 +1457,7 @@ perform stick.luanda</send>
 <colours
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-19 00:46:46"
+   date_saved="2014-02-21 00:40:17"
   >
 
 <ansi>
@@ -1508,7 +1514,7 @@ perform stick.luanda</send>
 <keypad
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-19 00:46:46"
+   date_saved="2014-02-21 00:40:17"
   >
 
   <key name="0" >
@@ -1622,7 +1628,7 @@ perform stick.luanda</send>
 <printing
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-19 00:46:46"
+   date_saved="2014-02-21 00:40:17"
   >
 
 <ansi>

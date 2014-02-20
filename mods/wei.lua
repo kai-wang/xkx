@@ -2,7 +2,7 @@ require "wait"
 require "tprint"
 require "utils"
 
-local wei_list = require 'worlds\\xkx\\mods\\info_baobiao'
+--local wei_list = require 'worlds\\xkx\\mods\\info_baobiao'
 
 wei = {}
 wei.delay = 2

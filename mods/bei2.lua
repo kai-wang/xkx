@@ -12,72 +12,61 @@ local task1_array = {}
 main = function()
 	EnableTriggerGroup("bei", true)
 	
+	msg.subscribe("msg_task_retry", bei.resume)
+	msg.subscribe("msg_fight_awake", bei.faint)
+	msg.subscribe("msg_fight_escape", bei.escape)
+	
+	--[[
 	msg.subscribe("msg_slowwalk_ok", bei.notfound)
 	msg.subscribe("msg_slowwalk_fail", bei.fail)
-	
+	]]--
 	Execute("fly wm;e;n;e;e;e;task")
 end
 
 exit = function()
 	EnableTriggerGroup("bei", false)
-	EnableTriggerGroup("bei_task1", false)
-	
-	msg.unsubscribe("msg_slowwalk_ok")
-	msg.unsubscribe("msg_slowwalk_fail")
-	msg.unsubscribe("msg_slowwalk_stop")
-	
 	msg.broadcast("msg_bei_exit")
 end
 
-available = function(t)
-	if(t == nil or t == 0) then msg.broadcast("msg_bei_available")
-	else
-		wait.make(function()
-			wait.time(t)
-			msg.broadcast("msg_bei_available")
-		end)
-	end
-end
-
-
 done = function()
-	var.task_status = "done"
-	exit()
-	
-	if(var.double_bonus ~= "true") then
-		local elapse = os.time() - tonumber(var.bei_start_time)
-		local remaining = 240 - elapse
-		if(remaining <= 0) then available() else available(remaining) end
-	else
-		available()
-	end
+	EnableTriggerGroup("bei", false)
+	msg.broadcast("msg_task_done")
+	wait.make(function()
+		wait.time(1)
+		Execute("bei1")
+	end)
 end
 
 fail = function()
-	var.task_status = "fail"
-	exit()
-	--先暂时间隔5分钟，应该要计算出来的
-	available(300)
 	Execute("halt;fly wm")
+	exit()
 end
 
-retry = function()
-	var.task_status = "retry"
-	if(tonumber(var.task_retry_times) >= tonumber(var.task_retry_max)) then fail() return end
-	
-	exit()
-	--15秒后重新做
-	available(15)
-	var.task_retry_times = tonumber(var.task_retry_times) + 1
-	Execute("halt;fly wm")
+done2 = function()
+	walk.stop()
+	fight.stop()
+	Execute("fly wm")
+	done()
 end
 
-reloc = function()
+---先暂停，过一会再重试-----------------------
+pause = function()
+	walk.stop()
+	fight.stop()
+	EnableTriggerGroup("bei", false)
+	Execute("fly wm;nw")
 	wait.make(function()
-		Execute("fly wm")
-		wait.time(10)
-		Execute("u;loc " .. var.task_id)
+		--一分钟后重新开始找
+		wait.time(60)
+		msg.broadcast("msg_task_retry")
 	end)
+end
+
+---重新开始-----------------------------------
+resume = function()
+	EnableTriggerGroup("bei", true)
+	Execute("fly wm;u;loc " .. var.task_id)
+	--Execute("fly wm;u;loc " .. me.id .. "'s task")
 end
 
 start = function(name, line, wildcards)
@@ -87,18 +76,6 @@ start = function(name, line, wildcards)
 	var.task_fullname = (var.task_id):gsub("^%l", string.upper)
 	var.task_found = false
 	var.task_retry_times = 0
-	var.task_status = "start"
-	var.task_start_time = os.time()
-	var.task_escape_dir = ""
-	
-	parseAndLoc()
-end
-
-resume = function()
-	var.task_found = false
-	var.task_retry_times = 0
-	var.task_status = "start"
-	var.task_escape_dir = ""
 	
 	parseAndLoc()
 end
@@ -110,7 +87,7 @@ parseAndLoc = function()
 		local l, w = wait.regexp("^(> )*(你现在没有任何使命！)|(设定环境变数：task1 = \"YES\")$")
 		EnableTriggerGroup("bei_task1", false)
 		if(l and string.match(l, "你现在没有任何使命")) then
-			done()
+			fail()
 		else
 			local city = parse()
 			if(city == nil) then
@@ -128,15 +105,7 @@ end
 location = function(name, line, wildcards)
 	var.task_loc = wildcards[3]
 	print(var.task_city .. " " .. var.task_loc .. " " .. var.task_npc)
-	--go()
-	
-	local busy_list = me.profile.busy_list
-	local attack_list = me.profile.attack_list2
-	fight.prepare(busy_list, attack_list)
-	
-	--如果slowwalk走完还没有stop，说明没找到
-	msg.subscribe("msg_slowalk_stop", bei.notfound)
-	walk.sl(var.task_city, var.task_loc)
+	go()
 end
 
 go = function()
@@ -146,63 +115,41 @@ go = function()
 end
 
 faint = function()
-	fight.stop()
-	walk.stop()
-	
-	me.profile.reset_cd_status()
+	var.faint = 1
+end
+
+awake = function()
+	var.faint = 0
+	fail()
 end
 
 -- 走完都没找到
 notfound = function()
-	var.task_found = false
-	fight.stop()
-	Execute("halt")
-	--如果walkaround走完还没找到，就retry吧
-	msg.subscribe("msg_slowwalk_ok", bei.retry)
-	walk.walkaround(5)
+--	if(var.task_found == "true") then return end
+	print("走完了没找到 " .. var.task_retry_times)
+
+	----------retry 3次还找不到就放弃吧----------------
+	if(tonumber(var.task_retry_times) >= tonumber(var.task_retry_max)) then 
+		fail()
+	else
+		var.task_retry_times = tonumber(var.task_retry_times) + 1 
+		
+		var.task_found = false
+		fight.stop()
+		Execute("halt")
+		--如果还找不到就暂停一下
+		walk.walkaround(3, nil)--, bei.pause, bei.pause)
+	end
 end
 
 foundnpc = function(name, line, wildcards)
-	msg.subscribe("msg_slowwalk_stop", function()
-		var.task_found = true
-		if(var.task_auto_kill == "true") then
-			startFight()
-		else
-			Execute("tuna 10")
-		end
-	end)
-	
-	walk.stop()
-end
-
-startFight = function()
 	local busy_list = me.profile.busy_list
 	local attack_list = me.profile.attack_list2
-	fight.prepare(busy_list, attack_list)
-	
-	fight.start("kill " .. var.task_id)
-end
 
--------- task 跑了，在原地范围内进行深度为5的遍历-----------------------------------
-search = function(name, line, wildcards)
-	print("task 往【" .. wildcards[3] .. "】跑了")
-	local dir = wildcards[3]
-	dir = dir:gsub("边","")
-	dir = dir:gsub("面", "")
-	var.task_escape_dir = dir
-	
-	walk.stop()
-	searchTask()
-end
-
-searchTask = function()
-	wait.make(function()
-		repeat
-			wait.time(1)
-			Execute("suicide")
-			local l, w = wait.regexp("^(> )*(你正忙着呢，没空自杀！)|(请用 suicide -f 确定自杀。)$")
-		until(l:match("确定自杀") ~= nil)
-		walk.walkaround(3, var.task_escape_dir)
+	walk.stop(function()
+		var.task_found = true
+		fight.prepare(busy_list, attack_list)
+		fight.start("kill " .. var.task_id)
 	end)
 end
 
@@ -240,6 +187,18 @@ cleanup = function()
 			me.useqn()
 		end)
 	end)
+end
+
+-------- task 跑了，在原地范围内进行深度为5的遍历-----------------------------------
+search = function(name, line, wildcards)
+	var.task_found = false
+	fight.stop()
+	Execute("halt")
+	print("task 跑了 【" .. wildcards[3] .. "】")
+	local dir = wildcards[3]
+	dir = dir:gsub("边","")
+	dir = dir:gsub("面", "")
+	walk.walkaround(5, dir)
 end
 
 -----------------------------------------------------------------------------------------------------------------------------

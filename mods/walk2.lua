@@ -4,8 +4,6 @@ require "var"
 
 module ("walk", package.seeall)
 
-local walk_cxt = {}
-
 local directions = {}
 
 directions["e"] = "东"
@@ -35,6 +33,10 @@ mappings["大理国"] = "大理"
 mappings["峨嵋山"] = "峨眉山"
 mappings["青城山"] = "青城"
 mappings["紫禁城"] = "北京紫禁城"
+mappings["光明顶"] = "明教"
+mappings["重阳宫"] = "全真教"
+mappings["黄河地区"] = "河套地区"
+mappings["光明顶"] = "明教"
 
 
 local blocker_npcs = {}
@@ -430,6 +432,8 @@ function stop()
 	local w, r = walk_cxt, run_cxt
 	w.stop = true
 	r.stop = true
+	
+	--msg.subscribe("msg_slowwalk_stop", function() call(f_stop) end)
 end
 
 function fail()
@@ -495,7 +499,6 @@ function walkaround(dp, dir)
 	enqueue = function(d, v, room, deepth)
 		local p = d
 		if(v.con ~= nil and v.con ~= "") then p = "|!" .. v.con .. ":" .. d .. "|" end
-		print("1", v.to, room.id, p)
 		table.insert(tbl, {["from"]=room.id, ["to"]=v.to, ["path"]=p})
 		
 		walked[v.to] = true
@@ -504,7 +507,6 @@ function walkaround(dp, dir)
 		local stepback = find_path(roomAll, v.to, room.id)
 		if(stepback) then
 			local path = table.concat(stepback, ";")
-			print("2", v.to, room.id, path)
 			table.insert(tbl, {["from"]=v.to, ["to"]=room.id, ["path"]=path})
 		else
 			table.insert(tbl, {["from"]=v.to, ["to"]=room.id, ["path"]=roomAll[room.id].path})
@@ -534,7 +536,7 @@ function walkaround(dp, dir)
 	--tprint(walked)
 	walked[room.id] = true
 	findexit(room, room.id, 1)
-	tprint(tbl)
+	--tprint(tbl)
 
 	step_by_step(tbl)
 end

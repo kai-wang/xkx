@@ -178,8 +178,9 @@ me.jingqi = function(f_done)
 		else
 			if(jsP < 95) then
 				local dannumber = (100-jsP)/5
+				local price = dannumber * 35
 				if(dannumber == math.ceil(dannumber)) then dannumber = math.ceil(dannumber) + 1 else dannumber = math.ceil(dannumber) end
-				Execute("fly wm;e;s;w;qukuan 6 gold")
+				Execute("fly wm;e;s;w;qukuan " .. price .. " silver")
 				wait.time(5)
 				Execute("e;s;e;e;n")
 				for i = 1, dannumber do
