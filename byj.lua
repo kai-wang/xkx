@@ -44,8 +44,8 @@ profile = {
 	
 	attack_list1 = {
 		[1] = {	i = 1, action = "enable sword quanzhen-jian;wield ".. var.weapon .. ";perform sword.sanqing"},
-		[2] = {	i = 3, action = "enable sword quanzhen-jian;enable dodge qixing-bufa;wield ".. var.weapon .. ";perform dodge.qixing"},
-		[3] = {	i = 8, action = "enable sword jinshe-jian;unwield all;wield " .. var.weapon .. ";perform sword.wandao"},
+		[3] = {	i = 3, action = "enable sword quanzhen-jian;enable dodge qixing-bufa;wield ".. var.weapon .. ";perform dodge.qixing"},
+		[2] = {	i = 8, action = "enable sword jinshe-jian;unwield all;wield " .. var.weapon .. ";perform sword.wandao"},
 		[4] = {	i = 4, action = "unwield all;hubo"}
 	},
 	

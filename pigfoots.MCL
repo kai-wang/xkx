@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE muclient>
-<!-- Saved on Friday, February 21, 2014, 12:40 AM -->
+<!-- Saved on Tuesday, February 25, 2014, 12:59 AM -->
 <!-- MuClient version 4.84 -->
 <!-- Written by Nick Gammon -->
 <!-- Home Page: http://www.mushclient.com/ -->
@@ -8,7 +8,7 @@
 <world
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-21 00:40:17"
+   date_saved="2014-02-25 00:59:27"
 
    auto_say_override_prefix="-"
    auto_say_string="say "
@@ -116,7 +116,7 @@
 <triggers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-21 00:40:17"
+   date_saved="2014-02-25 00:59:27"
   >
   <trigger
    custom_colour="16"
@@ -131,6 +131,7 @@
   </trigger>
   <trigger
    custom_colour="16"
+   enabled="y"
    expand_variables="y"
    group="bei"
    keep_evaluating="y"
@@ -174,6 +175,7 @@
   <send>jump</send>
   </trigger>
   <trigger
+   enabled="y"
    expand_variables="y"
    group="bei"
    keep_evaluating="y"
@@ -204,11 +206,13 @@
   <trigger
    group="walk_special"
    keep_evaluating="y"
-   match="^(&gt; )*(.*)(À¹×¡|°ÑÊÖÒ»À¹|ÏòÄãºÈµÀ|ºÈµÀ£º|²ÙÆðÈ­Í·¡±|·Ô¸ÀÃ»ÓÐÖØÒªµÄÊÂÇé|µ²×¡ÁËÄã|µ²×¡ÁËÄã£º|Ò»ÑÔ²»·¢£¬ÉÁÉíÀ¹ÔÚÄãÃæÇ°¡£|Ëµ: ÎÒ°Ñ°¢·²Ìá¹ØÔÚÎÒµÄ¿ÍÌüÀïÁË|ºÈµÀ).*$"
+   match="^(&gt; )*(.*)(À¹×¡ÁËÄãµÄÈ¥Â·|ºÈµÀ£º¡°Íþ¡­¡­Îä¡­¡­¡£¡±|ÉÏÇ°µ²×¡Äã|À¹×¡ÄãËµ|ºÈµÀ£º¡°µ½Ä½ÈÝÉ½×¯²»ÒªÂÒ´³|ºÈµÀ£º.*ÐÝ×ß|°ÑÊÖÒ»À¹|ÏòÄãºÈµÀ|²ÙÆðÈ­Í·|µ²×¡ÁËÄã|À¹×¡ÁËÄã|Ò»ÑÔ²»·¢£¬ÉÁÉíÀ¹ÔÚÄãÃæÇ°¡£|Ëµ: ÎÒ°Ñ°¢·²Ìá¹ØÔÚÎÒµÄ¿ÍÌüÀïÁË).*$"
    regexp="y"
-   script="walk.handlers.k_blocker"
+   send_to="12"
    sequence="100"
   >
+  <send>SetVariable("walk_blocker_name", "%2")
+walk.handlers.k_blocker()</send>
   </trigger>
   <trigger
    expand_variables="y"
@@ -283,6 +287,7 @@
   >
   </trigger>
   <trigger
+   enabled="y"
    expand_variables="y"
    group="bei"
    keep_evaluating="y"
@@ -293,6 +298,7 @@
   >
   </trigger>
   <trigger
+   enabled="y"
    expand_variables="y"
    group="bei"
    keep_evaluating="y"
@@ -386,6 +392,7 @@
   >
   </trigger>
   <trigger
+   enabled="y"
    group="bei"
    keep_evaluating="y"
    match="^(&gt; )*(ÄãÏÖÔÚÃ»ÓÐÈÎºÎÊ¹Ãü£¡)|(ÄãÒª´òÌýË­µÄËùÔÚ£¿)$"
@@ -395,9 +402,20 @@
   >
   </trigger>
   <trigger
+   group="walk_special"
+   keep_evaluating="y"
+   match="^(&gt; )*(ÎÞ¸ùµÀ³¤|¸ß¸ùÃ÷|Ê©´÷×Ó|ÂéÒÂ³¤ÀÏ)ºÈµÀ£º(.*ÃæÊÇ)|(´ËÄË).*$"
+   regexp="y"
+   send_to="12"
+   sequence="100"
+  >
+  <send>SetVariable("walk_blocker_name", wildcards[2])
+walk.handlers.k_blocker()</send>
+  </trigger>
+  <trigger
    group="study"
    keep_evaluating="y"
-   match="^(&gt; )*(Ò²ÐíÊÇÑ§ÎÊ²»¹»Éî)|(ÄãµÄÇ±ÄÜ²»¹»)|(ÄãµÄ»ù±¾¹¦»ðºòÎ´µ½)|(Äã.*Ì«·ôÇ³ÁË)|(ÄãÒªÏòË­Çó½Ì)|(ÕâÏî¼¼ÄÜÄãµÄ³Ì¶ÈÒÑ¾­²»ÊäÄãÊ¦¸¸ÁË)|(ÄãÑÐ¶ÁÁËÒ»»á¶ù.*¶ÔÄã¶øÑÔ¶¼Ì«Ç³ÁË).*$"
+   match="^(&gt; )*(Ò²ÐíÊÇÑ§ÎÊ²»¹»Éî)|(ÄãµÄÇ±ÄÜ²»¹»)|(ÄãµÄ»ù±¾¹¦»ðºòÎ´µ½)|(Äã.*Ì«·ôÇ³ÁË)|(ÄãÒªÏòË­Çó½Ì)|(ÕâÏî¼¼ÄÜÄãµÄ³Ì¶ÈÒÑ¾­²»ÊäÄãÊ¦¸¸ÁË)|(ÄãÑÐ¶ÁÁËÒ»»á¶ù.*¶ÔÄã¶øÑÔ¶¼Ì«Ç³ÁË)|(Äã¶Ô×ÅÊ¯±ÚÚ¤Ë¼¿àÏëÁËÒ»»á£¬ºÁÎÞÊÕ»ñ).*$"
    regexp="y"
    script="study.done"
    sequence="100"
@@ -498,6 +516,7 @@ get wan</send>
   >
   </trigger>
   <trigger
+   enabled="y"
    group="bei"
    keep_evaluating="y"
    match="^(&gt; )*±´º£Ê¯¶ÔÄãÀäÀäÒ»Ð¦µÀ£ºÈÃÄã°ìµÄÊÂÈçºÎÁË£¿$"
@@ -507,6 +526,7 @@ get wan</send>
   >
   </trigger>
   <trigger
+   enabled="y"
    group="bei"
    keep_evaluating="y"
    match="^(&gt; )*±´º£Ê¯¶ÔÄãÐ¦µÀ£ºÏÖÔÚÃ»ÓÐÈÎÎñ¿ÉÒÔ¸øÄã£¬ÏÈÐªÏ¢Ò»»á£¬µÈÒ»ÏÂÔÙÀ´¡£$"
@@ -516,6 +536,7 @@ get wan</send>
   >
   </trigger>
   <trigger
+   enabled="y"
    group="bei"
    keep_evaluating="y"
    match="^(&gt; )*±´º£Ê¯ÓÆÓÆµØ¶ÔÄãËµµÀ£º¡º(.*)¡»Õâ¸ö¼Ò»ï×î½ü±È½Ï°­ÑÛ¡£$"
@@ -525,6 +546,47 @@ get wan</send>
   >
   </trigger>
   <trigger
+   group="walk_special"
+   keep_evaluating="y"
+   match="^(&gt; )*µêÐ¡¶þÅÜµ½ÃÅ±ßÀ¹×¡£º¿Í¹ÙÒÑ¾­¸¶ÁËÒø×Ó.$"
+   regexp="y"
+   script="walk.handlers.leave_hotel"
+   sequence="100"
+  >
+  </trigger>
+  <trigger
+   group="walk_special"
+   keep_evaluating="y"
+   match="^(&gt; )*µêÐ¡¶þÒ»ÏÂµ²ÔÚÂ¥ÌÝÇ°.*$"
+   regexp="y"
+   script="walk.handlers.enter_hotel"
+   sequence="100"
+  >
+  </trigger>
+  <trigger
+   group="walk_special"
+   keep_evaluating="y"
+   match="^(&gt; )*¶¨ÒÝÊ¦Ì«À¹×¡Äã£º·ÇºãÉ½µÜ×Ó£¬Çëµ½´ËÖ¹²½£¡$"
+   regexp="y"
+   send_to="12"
+   sequence="100"
+  >
+  <send>SetVariable("walk_blocker_name", "¶¨ÒÝÊ¦Ì«")
+walk.handlers.k_blocker()</send>
+  </trigger>
+  <trigger
+   group="walk_special"
+   keep_evaluating="y"
+   match="^(&gt; )*·òÈË·Ô¸ÀÃ»ÓÐÖØÒªµÄÊÂÇé²»Òª´òÈÅÐ¡½ãÐÝÏ¢¡£$"
+   regexp="y"
+   send_to="12"
+   sequence="100"
+  >
+  <send>SetVariable("walk_blocker_name","Ñ¾÷ß")
+walk.handlers.k_blocker()</send>
+  </trigger>
+  <trigger
+   enabled="y"
    group="bei"
    keep_evaluating="y"
    match="^(&gt; )*¹§Ï²Äã£¡ÄãÓÖÍê³ÉÁËÒ»ÏîÈÎÎñ£¡$"
@@ -559,6 +621,7 @@ get wan</send>
   >
   </trigger>
   <trigger
+   enabled="y"
    expand_variables="y"
    group="bei"
    keep_evaluating="y"
@@ -567,6 +630,17 @@ get wan</send>
    script="bei.startFight"
    sequence="100"
   >
+  </trigger>
+  <trigger
+   group="walk_special"
+   keep_evaluating="y"
+   match="^(&gt; )*ÃÉÃæÅ®ÀÉÉìÊÖÀ¹×¡Äã£¬ËµµÀ£º¡°¶Ô²»Æð£¬±¾ÃÅÖØµØ£¬Çë»Ø£¡¡±$"
+   regexp="y"
+   send_to="12"
+   sequence="100"
+  >
+  <send>SetVariable("walk_blocker_name", "ÃÉÃæÅ®ÀÉ")
+walk.handlers.k_blocker()</send>
   </trigger>
   <trigger
    group="guanfu"
@@ -587,6 +661,7 @@ get wan</send>
   >
   </trigger>
   <trigger
+   enabled="y"
    group="bei"
    keep_evaluating="y"
    match="^(&gt; )*Äã²»ÊÇ¸Õ´òÌý¹ýÂð£¿$"
@@ -723,6 +798,7 @@ fight.startTimer("busy")</send>
   >
   </trigger>
   <trigger
+   enabled="y"
    group="bei"
    keep_evaluating="y"
    match="^(&gt; )*ÄãÖ»¾õµÃÍ·»èÄÔÕÍ£¬ÑÛÇ°Ò»ºÚ£¬½Ó×ÅÊ²Ã´Ò²²»ÖªµÀÁË¡­¡­$"
@@ -758,6 +834,17 @@ fight.startTimer("busy")</send>
   <send>push stone</send>
   </trigger>
   <trigger
+   group="walk_special"
+   keep_evaluating="y"
+   match="^(&gt; )*ÎÀÊ¿¶ÔÄã´óºðÒ»Éù.*$"
+   regexp="y"
+   send_to="12"
+   sequence="100"
+  >
+  <send>SetVariable("walk_blocker_name", "»Ê¹¬ÎÀÊ¿")
+walk.handlers.k_blocker()</send>
+  </trigger>
+  <trigger
    enabled="y"
    group="system"
    keep_evaluating="y"
@@ -768,6 +855,7 @@ fight.startTimer("busy")</send>
   >
   </trigger>
   <trigger
+   enabled="y"
    group="bei"
    keep_evaluating="y"
    match="^(&gt; )*Ò»¹ÉÅ¯Á÷·¢×Ôµ¤ÌïÁ÷ÏòÈ«Éí£¬ÂýÂýµØÄãÓÖ»Ö¸´ÁËÖª¾õ¡­¡­$"
@@ -784,6 +872,17 @@ fight.startTimer("busy")</send>
    script="guanfu.fail"
    sequence="100"
   >
+  </trigger>
+  <trigger
+   group="walk_special"
+   keep_evaluating="y"
+   match="^(&gt; )*ÕÅËÉÏªºÈµÀ£ºÄã²»ÊÇÎäµ±µÜ×Ó£¬²»µÃÈëÄÚ¡£$"
+   regexp="y"
+   send_to="12"
+   sequence="100"
+  >
+  <send>SetVariable("walk_blocker_name", "ÕÅËÉÏª")
+walk.handlers.k_blocker()</send>
   </trigger>
   <trigger
    group="walk"
@@ -833,6 +932,17 @@ fight.startTimer("busy")</send>
   <send>DoAfterSpecial(1, "yell boat", 10)</send>
   </trigger>
   <trigger
+   group="walk_special"
+   keep_evaluating="y"
+   match="^(&gt; )*Öì¹Ú¾ÞòþÒ»Ô¾À¹×¡ÄãµÄÈ¥Â·¡£$"
+   regexp="y"
+   send_to="12"
+   sequence="100"
+  >
+  <send>SetVariable("walk_blocker_name","³à¹Ú¾Þòþ")
+walk.handlers.k_blocker()</send>
+  </trigger>
+  <trigger
    expand_variables="y"
    group="shan"
    match="^[&gt; ]*(@!shan_npc)ÆËÔÚµØÉÏÕõÔúÁË¼¸ÏÂ£¬¿ÚÖÐÅç³ö¼¸¿ÚÏÊÑª£¬ËÀÁË£¡$"
@@ -868,14 +978,6 @@ fight.startTimer("busy")</send>
   >
   </trigger>
   <trigger
-   group="HP"
-   match="^[&gt; ]*¡¾ Æø Ñª ¡¿\s+(\d+)\/\s+(\d+)\s+\(\s*(\d+)%\)\s+¡¾ ÄÚ Á¦ ¡¿\s+(\d+)\s\/\s(\d+).*$"
-   regexp="y"
-   script="on_hp2_update"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
    group="study_check"
    keep_evaluating="y"
    match="^[&gt; ]*¡¾ Æø Ñª ¡¿\s+(\d+)\/\s+(\d+)\s+\(\s*(\d+)%\)\s+¡¾ ÄÚ Á¦ ¡¿\s+(\d+)\s\/\s(\d+).*$"
@@ -885,6 +987,14 @@ fight.startTimer("busy")</send>
   >
   <send>
 </send>
+  </trigger>
+  <trigger
+   group="HP"
+   match="^[&gt; ]*¡¾ Æø Ñª ¡¿\s+(\d+)\/\s+(\d+)\s+\(\s*(\d+)%\)\s+¡¾ ÄÚ Á¦ ¡¿\s+(\d+)\s\/\s(\d+).*$"
+   regexp="y"
+   script="on_hp2_update"
+   sequence="100"
+  >
   </trigger>
   <trigger
    group="HP"
@@ -972,6 +1082,7 @@ fight.startTimer("busy")</send>
   </trigger>
   <trigger
    custom_colour="9"
+   enabled="y"
    expand_variables="y"
    group="bei"
    keep_evaluating="y"
@@ -1000,6 +1111,12 @@ fight.startTimer("busy")</send>
    sequence="100"
   >
   </trigger>
+  <trigger
+   enabled="y"
+   match="ÄãÐÄÖÐÁ¬Ì¾£º¡°Ì«¿ÉÏ§ÁË£¡¡±"
+   sequence="100"
+  >
+  </trigger>
 </triggers>
 
 <!-- aliases -->
@@ -1007,7 +1124,7 @@ fight.startTimer("busy")</send>
 <aliases
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-21 00:40:17"
+   date_saved="2014-02-25 00:59:27"
   >
   <alias
    match="^show (.*)$"
@@ -1038,6 +1155,15 @@ SetAliasOption("%1", "send_to", 10)</send>
    sequence="100"
   >
   <send>bei.main()</send>
+  </alias>
+  <alias
+   name="bj"
+   match="bj"
+   enabled="y"
+   send_to="10"
+   sequence="100"
+  >
+  <send>fly bj</send>
   </alias>
   <alias
    match="bo"
@@ -1115,6 +1241,14 @@ dazuo.start(function() Execute("halt;fly wm") end)</send>
 </send>
   </alias>
   <alias
+   match="kt"
+   enabled="y"
+   send_to="12"
+   sequence="100"
+  >
+  <send>bei.startFight()</send>
+  </alias>
+  <alias
    name="lj"
    match="lj"
    enabled="y"
@@ -1130,7 +1264,7 @@ dazuo.start(function() Execute("halt;fly wm") end)</send>
    send_to="10"
    sequence="100"
   >
-  <send>xue wang xiantian-qigong 40;yun regenerate</send>
+  <send>lian sword 30;yun recover</send>
   </alias>
   <alias
    name="lz"
@@ -1140,6 +1274,15 @@ dazuo.start(function() Execute("halt;fly wm") end)</send>
    sequence="100"
   >
   <send>fly lz</send>
+  </alias>
+  <alias
+   name="ns"
+   match="ns"
+   enabled="y"
+   send_to="10"
+   sequence="100"
+  >
+  <send>fly ns</send>
   </alias>
   <alias
    match="qn"
@@ -1238,6 +1381,15 @@ dazuo.start(function() Execute("halt;fly wm") end)</send>
   <send>set brief;fly qzj;knock gate;e;e;e;e;e;e;e;e;e;ne;ne;e;n;e;e;s;enter;unset brief</send>
   </alias>
   <alias
+   name="wg"
+   match="wg"
+   enabled="y"
+   send_to="10"
+   sequence="100"
+  >
+  <send>fly wg</send>
+  </alias>
+  <alias
    name="wm"
    match="wm"
    enabled="y"
@@ -1278,7 +1430,7 @@ dazuo.start(function() Execute("halt;fly wm") end)</send>
 <timers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-21 00:40:17"
+   date_saved="2014-02-25 00:59:27"
   >
   <timer name="idle" second="30.00" offset_second="0.00" >
   <send>hi</send>
@@ -1291,7 +1443,7 @@ dazuo.start(function() Execute("halt;fly wm") end)</send>
 <macros
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-21 00:40:17"
+   date_saved="2014-02-25 00:59:27"
   >
 
   <macro name="up" type="send_now" >
@@ -1385,14 +1537,14 @@ dazuo.start(function() Execute("halt;fly wm") end)</send>
 <variables
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-21 00:40:17"
+   date_saved="2014-02-25 00:59:27"
   >
   <variable name="bag_dummy_id">hsly</variable>
   <variable name="baobiao_exp">142</variable>
   <variable name="baobiao_loc">ÖÐÌõÉ½ÃÜÁÖ</variable>
   <variable name="baobiao_qn">23</variable>
   <variable name="baobiao_yl">1</variable>
-  <variable name="bei_npc">ÌÙÊ®Êå</variable>
+  <variable name="bei_npc">·¶°Ë¸ç</variable>
   <variable name="blocker_id">guan bing</variable>
   <variable name="busydelay">0.2</variable>
   <variable name="dazuo_desc">Äã×øÏÂÀ´ÔËÆøÓÃ¹¦£¬Ò»¹ÉÄÚÏ¢¿ªÊ¼ÔÚÌåÄÚÁ÷¶¯¡£</variable>
@@ -1415,8 +1567,8 @@ dazuo.start(function() Execute("halt;fly wm") end)</send>
   <variable name="gf_option"></variable>
   <variable name="heal_dummy_id">hqly</variable>
   <variable name="item_drop_list"></variable>
-  <variable name="item_sell_list">give qinghe yi to ouye zi;</variable>
-  <variable name="item_store_list">give hanshan xue to byj;</variable>
+  <variable name="item_sell_list">give wugou yi to ouye zi;give ruiqi jian to ouye zi;</variable>
+  <variable name="item_store_list"></variable>
   <variable name="last_wuchang">1392522072</variable>
   <variable name="login_drop">drop dao pao;drop ma xie</variable>
   <variable name="login_wear">give yinling xue to byj;give songluan hushou to byj;give cangyan mao to byj;give yuquan yi to byj;give chunjiang jian to byj;wear all;wield jian</variable>
@@ -1424,29 +1576,31 @@ dazuo.start(function() Execute("halt;fly wm") end)</send>
   <variable name="me_menpai">È«Õæ</variable>
   <variable name="me_name">°×Óñ¾©</variable>
   <variable name="quqing_loc">Îä¹¦</variable>
+  <variable name="room_lz_ylj">true</variable>
   <variable name="shan_exp">267</variable>
   <variable name="shan_npc">Òó½õ</variable>
   <variable name="shan_qn">19</variable>
   <variable name="shan_yl">2</variable>
-  <variable name="study_cmd">xue wang xiantian-qigong 40;yun regenerate</variable>
-  <variable name="study_loc">wcy</variable>
-  <variable name="study_seq">2</variable>
+  <variable name="study_cmd">xue zhu literate 40;yun regenerate</variable>
+  <variable name="study_loc">fly wm;e;s;s;e;n;</variable>
+  <variable name="study_seq">0</variable>
   <variable name="task_auto_kill">true</variable>
-  <variable name="task_city">±±¾©</variable>
-  <variable name="task_escape_dir">ÄÏ</variable>
-  <variable name="task_found">true</variable>
+  <variable name="task_city">ÖØÑô¹¬</variable>
+  <variable name="task_escape_dir"></variable>
+  <variable name="task_found">false</variable>
   <variable name="task_fullname">Byj's task</variable>
   <variable name="task_id">byj's task</variable>
-  <variable name="task_loc">Íõ¸®¾®´ó½Ö</variable>
-  <variable name="task_npc">ÌÙÊ®Êå</variable>
+  <variable name="task_loc">ºóÉ½Ð¡Â·</variable>
+  <variable name="task_npc">·¶°Ë¸ç</variable>
   <variable name="task_retry_max">3</variable>
   <variable name="task_retry_times">0</variable>
   <variable name="task_search">false</variable>
-  <variable name="task_start_time">1392903329</variable>
-  <variable name="task_status">done</variable>
+  <variable name="task_start_time">1393079304</variable>
+  <variable name="task_status">fail</variable>
   <variable name="ttask_id">byj's ttask</variable>
   <variable name="walk_blocker">¹Ù±ø</variable>
-  <variable name="walk_blocker_name">Ð»ÑÌ¿Í</variable>
+  <variable name="walk_blocker_id">shi daizi</variable>
+  <variable name="walk_blocker_name"></variable>
   <variable name="walk_deepth">5</variable>
   <variable name="weapon">jian</variable>
   <variable name="wei_item">±ùÌÇºùÂ«</variable>
@@ -1457,7 +1611,7 @@ dazuo.start(function() Execute("halt;fly wm") end)</send>
 <colours
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-21 00:40:17"
+   date_saved="2014-02-25 00:59:27"
   >
 
 <ansi>
@@ -1514,7 +1668,7 @@ dazuo.start(function() Execute("halt;fly wm") end)</send>
 <keypad
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-21 00:40:17"
+   date_saved="2014-02-25 00:59:27"
   >
 
   <key name="0" >
@@ -1628,7 +1782,7 @@ dazuo.start(function() Execute("halt;fly wm") end)</send>
 <printing
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-21 00:40:17"
+   date_saved="2014-02-25 00:59:27"
   >
 
 <ansi>

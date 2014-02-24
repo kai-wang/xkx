@@ -312,6 +312,7 @@ local region = {}
           region.rooms[22].links.s.to = 1651
           region.rooms[22].links.s.con = ""
     region.rooms[23] = {}
+	  region.rooms[23].attr = "danger"
       region.rooms[23].path = "fly wjg;n;n"
       region.rooms[23].name = "∫Û‘∫"
       region.rooms[23].zone = "ÕÚΩŸπ»"

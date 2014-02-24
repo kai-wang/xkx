@@ -103,3 +103,144 @@ end --function
 function test()
 	print("fadfadfa")
 end
+
+function get_xionghuang(f_ok)
+	wait.make(function()
+		Execute("give xionghuang to " .. var.me_id)
+		local l, w = wait.regexp("^(> )*(你身上没有这样东西)|(.*给你一包雄黄).*$")
+		if(l:match("你身上没有这样东西") ~= nil) then
+			Execute("set brief;fly wm;e;s;s;e;e;n;buy xionghuang")
+			wait.time(5)
+			Execute("fly wm;nw;give xionghuang to " .. var.me_id)
+			l, w = wait.regexp("^(> )*(你身上没有这样东西)|(.*给你一包雄黄).*$")
+			if(l:match("你身上没有这样东西") ~= nil) then print("雄黄失败了") call(f_fail) return end
+		end
+		print("雄黄准备好了")
+		call(f_ok)
+	end)
+end
+
+function get_fire(f_ok, f_fail)
+	wait.make(function()
+		Execute("give fire to " .. var.me_id)
+		local l, w = wait.regexp("^(> )*(你身上没有这样东西)|(.*给你一支火折).*$")
+		if(l:match("你身上没有这样东西") ~= nil) then
+			Execute("set brief;fly wm;e;s;s;e;s;buy fire")
+			wait.time(5)
+			Execute("fly wm;nw;give fire to " .. var.me_id)
+			l, w = wait.regexp("^(> )*(你身上没有这样东西)|(.*给你一支火折).*$")
+			if(l:match("你身上没有这样东西") ~= nil) then print("火折失败了") call(f_fail) return end
+		end
+		print("火折准备好了")
+		call(f_ok)
+	end)
+end
+
+function get_yaopai(f_ok, f_fail)
+	wait.make(function()
+		Execute("look yao pai")
+		local l, w = wait.regexp("^(> )*(你要看什么)|(一块银质腰牌).*$")
+		if(l:match("你要看什么") ~= nil) then
+			Execute("set brief;fly lz;w;n;n;e;ask nu about 腰牌")
+			wait.time(5)
+			Execute("fly wm;nw;look yao pai")
+			l, w = wait.regexp("^(> )*(你要看什么)|(一块银质腰牌).*$")
+			if(l:match("你要看什么") ~= nil) then print("腰牌失败了") call(f_fail) return end
+		end
+		print("腰牌准备好了")
+		call(f_ok)
+	end)
+end
+
+function get_shanpai(f_ok, f_fail)
+	wait.make(function()
+		Execute("get shan pai;look shan pai")
+		local l, w = wait.regexp("^(> )*(你要看什么)|(赏善铜牌).*$")
+		if(l:match("你要看什么") ~= nil) then
+			Execute("set brief;fly hy;n;w;w;w;w;s;n;s;ask zhang about 赏善")
+			wait.time(5)
+			Execute("fly wm;nw;get shan pai;look shan pai")
+			l, w = wait.regexp("^(> )*(你要看什么)|(赏善铜牌).*$")
+			if(l:match("你要看什么") ~= nil) then print("赏善铜牌失败了") call(f_fail) return end
+		end
+		print("赏善铜牌准备好了")
+		call(f_ok)
+	end)
+end
+
+function get_sling(f_ok, f_fail)
+	wait.make(function()
+		Execute("get yingxiong ling;look yingxiong ling")
+		local l, w = wait.regexp("^(> )*(你要看什么)|(少林英雄令).*")
+		if(l:match("你要看什么") ~= nil) then
+			Execute("set brief;fly wm;e;s;s;s;s;give 1 gold to seng")
+			wait.time(5)
+			Execute("fly wm;nw;get yingxiong ling;look yingxiong ling")
+			l, w = wait.regexp("^(> )*(你要看什么)|(少林英雄令).*")
+			if(l:match("你要看什么") ~= nil) then print("少林英雄令失败了") call(f_fail) return end
+		end
+		print("少林英雄令准备好了 ")
+		call(f_ok)
+	end)
+end
+
+function get_qling(f_ok, f_fail)
+	if(var.me_menpai == "全真") then call(f_ok) return end
+	
+	wait.make(function()
+		Execute("get chongyang ling;look chongyang ling")
+		local l, w = wait.regexp("^(> )*(你要看什么)|(重阳令).*")
+		if(l:match("你要看什么") ~= nil) then
+			Execute("set brief;fly wm;e;s;s;w;w;give 1 gold to daoren")
+			wait.time(5)
+			Execute("fly wm;nw;get chongyang ling;look chongyang ling")
+			local l, w = wait.regexp("^(> )*(你要看什么)|(重阳令).*")
+			if(l:match("你要看什么") ~= nil) then print("重阳令失败了") call(f_fail) return end
+		end
+		print("重阳令准备好了 ")
+		call(f_ok)
+	end)
+end
+
+function get_ditu(f_ok, f_fail)
+	wait.make(function()
+		Execute("get gaochang ditu;look gaochang ditu")
+		local l, w = wait.regexp("^(> )*(你要看什么)|(高昌迷宫地图).*$")
+		if(l:match("你要看什么") ~= nil) then
+			Execute("set brief;fly gw;n;n;n;e;e;ne;e;n")
+			wait.time(3)
+			Execute("fly xx;su;s;ed;ask li about 苏普;ask li about 父母;look shou juan")
+			l, w = wait.regexp("^(> )*(这是一方雪白的手绢)|(你要看什么).*$")
+			if(l:match("你要看什么") ~= nil) then
+				call(f_fail)
+				return
+			else
+				Execute("fly wm;nw;bandage;tuo shou juan;bandage;tuo shou juan")
+				repeat
+					wait.time(2)
+					Execute("look shou juan")
+					local l, w = wait.regexp("^(> )*(这是一方雪白的手绢)|(.*了点变化)|(你仔细研究了一下，才发现这是张地图).*$")
+				until(l:match("这是张地图") ~= nil)
+				Execute("get gaochang ditu;look gaochang ditu")
+				l, w = wait.regexp("^(> )*(高昌迷宫地图)|(你要看什么).*$")
+				if(l:match("你身上没有这样东西") ~= nil) then
+					call(f_fail)
+					return
+				end
+			end
+		end
+		print("高昌迷宫地图准备好了")
+		call(f_ok)
+	end)
+end
+
+function busy_test(f_done)
+	wait.make(function()
+		repeat
+			wait.time(1)
+			Execute("suicide")
+			local l, w = wait.regexp("^(> )*(你正忙着呢，没空自杀！)|(请用 suicide -f 确定自杀。)$")
+		until(l:match("确定自杀") ~= nil)
+		call(f_done)
+	end)
+end

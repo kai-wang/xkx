@@ -41,30 +41,39 @@ mappings["光明顶"] = "明教"
 
 local blocker_npcs = {}
 
-blocker_npcs["衙役"] = "ya yi"
-blocker_npcs["宋兵"] = "song bing"
-blocker_npcs["亲兵"] = "qin bing"
-blocker_npcs["一品堂武士"] = "wu shi"
-blocker_npcs["卫士"] = "wei shi"
-blocker_npcs["崔员外"] = "cui yuanwai"
-blocker_npcs["校尉"] = "xiao wei"
-blocker_npcs["官兵"] = "guan bing"
-blocker_npcs["江百胜"] = "jiang baisheng"
-blocker_npcs["女管家"] = "guan jia"
-blocker_npcs["门卫"] = "men wei"
-blocker_npcs["流氓头"] = "liumang tou"
-blocker_npcs["夫人"] = "ya huan"
-blocker_npcs["锦衣卫士"] = "wei shi"
-blocker_npcs["黄衣卫士"] = "wei shi"
-blocker_npcs["山贼头"] = "shanzei tou"
-blocker_npcs["静心师太"] = "jingxin shitai"
-blocker_npcs["摘星子"] = "zhaixing zi"
-blocker_npcs["出尘子"] = "chuchen zi"
-blocker_npcs["采花子"] = "caihua zi"
-blocker_npcs["管家"] = "guan jia"
-blocker_npcs["家丁"] = "jia ding"
-blocker_npcs["高根明"] = "gao genming"
-
+blocker_npcs["衙役"] = {id = "ya yi"}
+blocker_npcs["宋兵"] = {id = "song bing"}
+blocker_npcs["亲兵"] = {id = "qin bing"}
+blocker_npcs["一品堂武士"] = {id = "wu shi"}
+blocker_npcs["卫士"] = {id = "wei shi"}
+blocker_npcs["崔员外"] = {id = "cui yuanwai"}
+blocker_npcs["校尉"] = {id = "xiao wei"}
+blocker_npcs["官兵"] = {id = "bing"}
+blocker_npcs["江百胜"] = {id = "jiang baisheng"}
+blocker_npcs["女管家"] = {id = "guan jia"}
+blocker_npcs["门卫"] = {id = "men wei"}
+blocker_npcs["流氓头"] = {id = "liumang tou"}
+blocker_npcs["夫人"] = {id = "ya huan"}
+blocker_npcs["锦衣卫士"] = {id = "wei shi"}
+blocker_npcs["黄衣卫士"] = {id = "wei shi"}
+blocker_npcs["山贼头"] = {id = "tou"}
+blocker_npcs["静心师太"] = {id = "jingxin shitai"}
+blocker_npcs["摘星子"] = {id = "zhaixing zi"}
+blocker_npcs["出尘子"] = {id = "chuchen zi"}
+blocker_npcs["采花子"] = {id = "caihua zi"}
+blocker_npcs["管家"] = {id = "guan jia"}
+blocker_npcs["家丁"] = {id = "jia ding"}
+blocker_npcs["高根明"] = {id = "gao genming"}
+blocker_npcs["施戴子"] = {id = "shi daizi"}
+blocker_npcs["皇宫卫士"] = {id = "wei shi"}
+blocker_npcs["蟒蛇"] = {id = "mang she"}
+blocker_npcs["阿碧"] = {id = "a bi"}
+blocker_npcs["蒙面女郎"] = {id = "nv lang", pfm = true}
+blocker_npcs["张松溪"] = {id = "zhang songxi", pfm = true}
+blocker_npcs["莫声谷"] = {id = "mo shenggu", pfm = true}
+blocker_npcs["赤冠巨蟒"] = {id = "ju man"}
+blocker_npcs["无根道长"] = {id = "wugen daozhang", pfm = true}
+blocker_npcs["麻衣长老"] = {id = "mayi zhanglao"}
 ---------------------------------------------------------- 特殊命令-------------------------------------------------------------------
 
 local run_cxt = {}
@@ -201,7 +210,7 @@ handlers = {
 		local c = handlers.cxt
 		c.block = false
 	end,
-	
+
 	done = function()
 		local c, r = handlers.cxt, run_cxt
 		--EnableTriggerGroup("walk_special", false)
@@ -210,6 +219,12 @@ handlers = {
 		
 		wait.make(function()
 			local cmd = c.cmd[#c.cmd]
+			repeat
+				wait.time(1)
+				Execute("suicide")
+				local l, w = wait.regexp("^(> )*(你正忙着呢，没空自杀！)|(请用 suicide -f 确定自杀。)$")
+			until(l:match("确定自杀") ~= nil)
+		
 			Execute(cmd .. ";set run_special_handle ok")
 			local l, w = wait.regexp("^(> )*设定环境变数：run_special_handle = \"ok\"$")
 			if(not c.block) then 
@@ -217,7 +232,7 @@ handlers = {
 				EnableTriggerGroup("walk_special", false)
 				call(c.f_ok)
 			else 
-				handlers.run() 
+				handlers.run()
 			end
 		end)
 	end,
@@ -236,6 +251,22 @@ handlers = {
 		call(c.f_fail)
 	end,
 	
+	done2 = function()
+		local c = handlers.cxt
+		if(c.k_blocker == true) then return end
+		
+		wait.make(function()
+			local cmd = c.cmd[#c.cmd]
+			Execute(cmd .. ";set run_special_handle ok")
+			local l, w = wait.regexp("^(> )*设定环境变数：run_special_handle = \"ok\"$")
+			if(not c.block) then 
+				print("k1 no blocker") 
+				EnableTriggerGroup("walk_special", false)
+				call(c.f_ok)
+			end
+		end)
+	end,
+	
 	["aw"] = function(interval, action)
 		wait.make(function()
 			Execute(action)
@@ -251,24 +282,81 @@ handlers = {
 		--handlers.done()
 	end,
 	
-	["k1"] = function()
+	["k1"] = function(name)
+		handlers.done2()
+	--[[
+		local c = handlers.cxt
+		if(c.k_blocker == true) then return end
+		
+		wait.make(function()
+			local cmd = c.cmd[#c.cmd]
+			Execute(cmd .. ";set run_special_handle ok")
+			local l, w = wait.regexp("^(> )*设定环境变数：run_special_handle = \"ok\"$")
+			if(not c.block) then 
+				print("k1 no blocker") 
+				EnableTriggerGroup("walk_special", false)
+				call(c.f_ok)
+			end
+		end)]]--
+		--[[
 		local c = handlers.cxt
 		local cmd = c.cmd[#c.cmd]
 		Execute(cmd .. ";set walk_special_handle ok")
+		]]--
 	end,
 	
-	k_blocker = function(line, name, wildcards)
+	["ylj"] = function()
+		if(var.room_lz_ylj == "true") then
+			me.profile.powerup()
+			handlers.done()
+		else
+			handlers.fail()
+		end
+	end,
+	
+	k_blocker = function()--line, name, wildcards)
+		local c = handlers.cxt
+		c.k_blocker = true
+		
 		handlers.block()
-		var.walk_blocker_name = wildcards[2]
+		--移到trigger里了
+		--var.walk_blocker_name = wildcards[2]
+		local bl = blocker_npcs[var.walk_blocker_name]
+		if(bl == nil) then print("没有blocker id") handlers.fail() return end
+		
+		var.walk_blocker_id = blocker_npcs[var.walk_blocker_name].id
+		print("blocker: " .. var.walk_blocker_name .. " " .. var.walk_blocker_id)
+		
+		if(bl.pfm == true) then handlers.startFight() else Execute("kill " .. var.walk_blocker_id) end
+	end,
+	
+	k_blocker2 = function()
+		local c = handlers.cxt
+		c.k_blocker = true
+		
+		handlers.block()
+		--移到trigger里了
+		--var.walk_blocker_name = wildcards[2]
 		var.walk_blocker_id = blocker_npcs[var.walk_blocker_name]
 		
 		print("blocker: " .. var.walk_blocker_name .. " " .. var.walk_blocker_id)
 		
 		if(var.walk_blocker_id == nil) then print("没有blocker id") handlers.fail() return end
-		Execute("kill " .. var.walk_blocker_id)
+		handlers.startFight()
+	end,
+	
+	startFight = function()
+		local busy_list = me.profile.busy_list
+		local attack_list = me.profile.attack_list1
+		fight.prepare(busy_list, attack_list)
+		
+		fight.start("kill " .. var.walk_blocker_id)
 	end,
 	
 	blocker_dead = function(line, name, wildcards)
+		local c = handlers.cxt
+		c.k_blocker = false
+		
 		print(var.walk_blocker_name .. "死了")
 		handlers.unblock()
 		
@@ -276,6 +364,7 @@ handlers = {
 			Execute("get yaoshi from corpse")
 		end
 		
+		--busy_test(function() print("触发handlers.done") handlers.done() end)
 		handlers.done()
 	end,
 	
@@ -298,7 +387,46 @@ handlers = {
 				end
 			end
 		end)
-	end
+	end,
+	
+	["punk"] = function()
+		Execute("sw;se;se;s;s;w;nw;ask punk about 王小二;se;e;n;n;nw;nw;ne")
+		handlers.done()
+	end,
+	
+	["thmz"] = function(dir)
+		wait.make(function()
+			repeat
+				Execute(dir)
+				local l, w = wait.regexp("^(> )*(你走出了桃花迷阵。)|(突然一阵桃花瓣象雨点般疾射你！)$")
+				wait.time(2)
+			until(l:match("你走出了"))
+			handlers.done()
+		end)
+	end,
+	
+	["hotelu"] = function()
+		handlers.done2()
+	end,
+	
+	["hoteld"] = function()
+		handlers.done()
+	end,
+	
+	enter_hotel = function()
+		handlers.block()
+		wait.make(function()
+			Execute("give 50 silver to xiao er")
+			local l, w = wait.regexp("^(> )*(你拿出.*给店小二。)|(你没有那么多的白银。)$")
+			if(l:match("你没有那么多")) then handlers.fail() else handlers.done() end
+			handlers.unblock()
+		end)
+	end,
+	
+	leave_hotel = function()
+		Execute("u;enter;out;d")
+		handlers.done()
+	end,
 }
 
 -------------------------------------------------------------------------------------------------------------------------------
@@ -481,9 +609,6 @@ function walk_ok()
 	msg.broadcast("msg_slowwalk_ok")
 end
 
-
-
-
 function walkaround(dp, dir)
 	
 	local room = roomAll[walk_cxt.currentId]
@@ -520,14 +645,16 @@ function walkaround(dp, dir)
 		-------------------优先找符合dir的房间的路径------------------------------------------------------
 		if(deepth == 1 and dir ~= nil) then
 			for i, v in pairs(room.links) do
-				if(not walked[v.to] and v.attr ~= "danger" and v.block ~= "y" and directions[i] == dir) then
+				if(not walked[v.to] and roomAll[v.to].attr ~= "danger" and v.block ~= "y" and directions[i] == dir) then
 					enqueue(i, v, room, deepth)
 				end
 			end
 		end
 		------------------找剩下的还没做过的房间-----------------------------------------------------------
 		for i, v in pairs(room.links) do
-			if(not walked[v.to] and v.attr ~= "danger" and v.block ~= "y") then
+			--tprint(room.links)
+			--if(v.attr ~= "" and v.attr ~= nil) then print("attr: " .. v.attr) else print("attr null") end
+			if(not walked[v.to] and roomAll[v.to].attr ~= "danger" and v.block ~= "y") then
 				enqueue(i, v, room, deepth)
 			end
 		end
