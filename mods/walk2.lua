@@ -52,7 +52,7 @@ blocker_npcs["官兵"] = {id = "bing"}
 blocker_npcs["江百胜"] = {id = "jiang baisheng"}
 blocker_npcs["女管家"] = {id = "guan jia"}
 blocker_npcs["门卫"] = {id = "men wei"}
-blocker_npcs["流氓头"] = {id = "liumang tou"}
+blocker_npcs["流氓头"] = {id = "tou"}
 blocker_npcs["夫人"] = {id = "ya huan"}
 blocker_npcs["锦衣卫士"] = {id = "wei shi"}
 blocker_npcs["黄衣卫士"] = {id = "wei shi"}
@@ -74,6 +74,9 @@ blocker_npcs["莫声谷"] = {id = "mo shenggu", pfm = true}
 blocker_npcs["赤冠巨蟒"] = {id = "ju man"}
 blocker_npcs["无根道长"] = {id = "wugen daozhang", pfm = true}
 blocker_npcs["麻衣长老"] = {id = "mayi zhanglao"}
+blocker_npcs["萨木活佛"] = {id = "samu huofo", pfm = true}
+blocker_npcs["嘉木活佛"] = {id = "jiamu huofo", pfm = true}
+blocker_npcs["西华子"] = {id = "xi huazi"}
 ---------------------------------------------------------- 特殊命令-------------------------------------------------------------------
 
 local run_cxt = {}
@@ -427,6 +430,27 @@ handlers = {
 		Execute("u;enter;out;d")
 		handlers.done()
 	end,
+	
+	["hsbreak"] = function()
+		if(var.me_xunzhang == "true") then
+			Execute("wear xunzhang;unwield all;wield jian;break wall")
+			handlers.done()
+		else
+			handlers.fail()
+		end
+	end,
+	
+	["mmdd"] = function()
+		if(var.me_xunzhang == "true") then
+			wait.make(function()
+				Execute("wear xunzhang;ask su about 秘密地道")
+				local l, w = wait.regexp("^(> )*(这里没有这个人)|(苏星河说道：想要知道密道就得加入逍遥派)|(苏星河把你送到石室的门口).*$")
+				if(l:match("苏星河把你送到石室的门口") == nil) then handlers.fail() else handlers.done() end
+			end)
+		else
+			handlers.fail()
+		end
+	end
 }
 
 -------------------------------------------------------------------------------------------------------------------------------

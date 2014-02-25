@@ -229,12 +229,15 @@ cleanup = function()
 		me.full(function()
 			msg.subscribe("msg_study_done", function()
 				wait.make(function()
-					wait.time(1)
-					Execute("halt;fly wm;u")
-					dazuo.start(function()
-						Execute("er;et;d")
-						bei.done()
-					end)
+					if(tonumber(me["nl"]) > tonumber(me["nl_max"]) * 1.2) then bei.done() 
+					else
+						wait.time(1)
+						Execute("halt;fly wm;u")
+						dazuo.start(function()
+							Execute("er;et;d")
+							bei.done()
+						end)
+					end
 				end)
 			end)
 			me.useqn()
@@ -486,13 +489,13 @@ function stringToArray(text)
 			table.insert(array[3], bit.shl(bit.tonumber(tbl[i]:sub(34,49), 2),1))
 			table.insert(array[4], bit.shl(bit.tonumber(tbl[i]:sub(50,65), 2),1))
 		end
-	elseif(len == 66) then
+	elseif(len == 67 or len == 68) then
 		array[1], array[2], array[3], array[4] = {}, {}, {}, {}
 		for i = 1, #tbl do
 			table.insert(array[1], bit.tonumber(tbl[i]:sub(1,17), 2))
 			table.insert(array[2], bit.shl(bit.tonumber(tbl[i]:sub(18,33), 2),1))
 			table.insert(array[3], bit.shl(bit.tonumber(tbl[i]:sub(34,49), 2),1))
-			table.insert(array[4], bit.shl(bit.tonumber(tbl[i]:sub(50,66), 2),1))
+			table.insert(array[4], bit.shl(bit.tonumber(tbl[i]:sub(50,67), 2),1))
 		end	
 	end
 

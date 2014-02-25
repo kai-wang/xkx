@@ -533,6 +533,7 @@ local region = {}
         region.rooms[38].links["use fire;zuan"] = {}
           region.rooms[38].links["use fire;zuan"].to = 2698
           region.rooms[38].links["use fire;zuan"].con = ""
+		  region.rooms[38].links["use fire;zuan"].block = "y"
         region.rooms[38].links.nd = {}
           region.rooms[38].links.nd.to = 2384
           region.rooms[38].links.nd.con = ""
