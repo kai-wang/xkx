@@ -112,7 +112,11 @@ parseAndLoc = function()
 		if(l and string.match(l, "你现在没有任何使命")) then
 			done()
 		else
+			local t1 = os.time()
 			local city = parse()
+			local t2 = os.time()
+			
+			print("解析时间 .. " .. (t2-t1) .. " ms")
 			if(city == nil) then
 				print("找不到匹配的城市")
 				fail()
@@ -224,12 +228,14 @@ end
 
 ----task结束后的善后工作，疗伤学习打坐----------------------------
 cleanup = function()
-	Execute("fly wm;u;jiali 0;er;et")
+	Execute("fly wm;jiali 0;er;et")
 	me.updateHP(function()
 		me.full(function()
 			msg.subscribe("msg_study_done", function()
 				wait.make(function()
-					if(tonumber(me["nl"]) > tonumber(me["nl_max"]) * 1.2) then bei.done() 
+					if(tonumber(me["nl"]) > tonumber(me["nl_max"]) * 1.2) then 
+						Execute("er;et;fly wm")
+						bei.done() 
 					else
 						wait.time(1)
 						Execute("halt;fly wm;u")
@@ -249,8 +255,8 @@ end
 --------------------------------------以下是解析task1相关--------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------
 function task1_init(name, line, wildcards)
-	var.bei_npc = wildcards[2]
-	print(var.bei_npc)
+	var.task_npc = wildcards[2]
+	print(var.task_npc)
 	bei_info.start = true
 	bei_info.matrix = {}
 end
@@ -480,6 +486,14 @@ function stringToArray(text)
 			table.insert(array[1], bit.tonumber(tbl[i]:sub(1,17), 2))
 			table.insert(array[2], bit.tonumber(tbl[i]:sub(18,34), 2))
 			table.insert(array[3], bit.tonumber(tbl[i]:sub(35,51), 2))
+		end
+	elseif(len == 64) then
+		array[1], array[2], array[3], array[4] = {}, {}, {}, {}
+		for i = 1, #tbl do
+			table.insert(array[1], bit.tonumber(tbl[i]:sub(1,17), 2))
+			table.insert(array[2], bit.shl(bit.tonumber(tbl[i]:sub(18,33), 2),1))
+			table.insert(array[3], bit.shl(bit.tonumber(tbl[i]:sub(34,49), 2),1))
+			table.insert(array[4], bit.shl(bit.tonumber(tbl[i]:sub(50,64), 2),1))
 		end
 	elseif(len == 65 or len == 66) then
 		array[1], array[2], array[3], array[4] = {}, {}, {}, {}

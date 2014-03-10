@@ -24,8 +24,8 @@ start = function(cmd)
 	if(context.infight) then print("已经在战斗中") return end
 	
 	EnableTriggerGroup("fight", true)
-	busy(cmd)
 	context.infight = true
+	busy(cmd)
 end
 
 stop = function()
@@ -42,14 +42,16 @@ end
 
 startTimer = function(name)
 	if(context.infight) then
-		print("开启" .. name .. " timer")
+		--print("开启" .. name .. " timer")
 		EnableTimer(name, true)
 		ResetTimer(name)
+	else
+		--print("??????????????????")
 	end
 end
 
 stopTimer = function(name)
-	print("关闭" .. name .. " timer")
+	--print("关闭" .. name .. " timer")
 	EnableTimer(name, false)
 end
 
@@ -97,9 +99,8 @@ initHaltTimer = function()
 end
 
 perform_busy = function(cmd)
-	if(cmd ~= nil) then
-	print("perform busy " .. cmd)
-	end
+	if(context.busy_list == nil) then attack(cmd) return end
+	
 	for i, v in ipairs(context.busy_list) do
 		if(not profile.pfm[v.i].cd) then
 			if(cmd ~= nil) then
@@ -112,12 +113,13 @@ perform_busy = function(cmd)
 		end
 	end
 
-	print("没有busy")
+	--print("没有busy")
 	attack(cmd)
 end
 
 perform_attack = function(cmd)
 	for i, v in ipairs(context.attack_list) do
+		--print(#context.attack_list, v.action, profile.pfm[v.i].cd)
 		if(not profile.pfm[v.i].cd) then 
 			if(cmd ~= nil) then
 				--print(cmd .. ";" .. v.action)
@@ -138,7 +140,7 @@ end
 attack = function(cmd)
 	stopTimer("busy")
 	perform_attack(cmd)
-	startTimerAfter("busy", 3)
+	startTimerAfter("busy", 1.5)
 end
 
 isTimerNotOpen = function(name)
@@ -182,11 +184,11 @@ on_busy_success = function()
 end
 
 on_perform_cd_ok = function(name, line, wildcards)
-	print("调息完毕 "..wildcards[2])
+	--print("调息完毕 "..wildcards[2])
 	me.profile.set_cd_status(wildcards[2], false)
 end
 
 on_perform = function(name, line, wildcards)
-	print("调息 "..wildcards[2])
+	--print("调息 "..wildcards[2])
 	me.profile.set_cd_status(wildcards[2], true)
 end

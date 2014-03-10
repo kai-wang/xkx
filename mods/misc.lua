@@ -142,7 +142,7 @@ function get_yaopai(f_ok, f_fail)
 		local l, w = wait.regexp("^(> )*(你要看什么)|(一块银质腰牌).*$")
 		if(l:match("你要看什么") ~= nil) then
 			Execute("set brief;fly lz;w;n;n;e;ask nu about 腰牌")
-			wait.time(5)
+			--wait.time(5)
 			Execute("fly wm;nw;look yao pai")
 			l, w = wait.regexp("^(> )*(你要看什么)|(一块银质腰牌).*$")
 			if(l:match("你要看什么") ~= nil) then print("腰牌失败了") call(f_fail) return end
@@ -158,7 +158,7 @@ function get_shanpai(f_ok, f_fail)
 		local l, w = wait.regexp("^(> )*(你要看什么)|(赏善铜牌).*$")
 		if(l:match("你要看什么") ~= nil) then
 			Execute("set brief;fly hy;n;w;w;w;w;s;n;s;ask zhang about 赏善")
-			wait.time(5)
+			--wait.time(5)
 			Execute("fly wm;nw;get shan pai;look shan pai")
 			l, w = wait.regexp("^(> )*(你要看什么)|(赏善铜牌).*$")
 			if(l:match("你要看什么") ~= nil) then print("赏善铜牌失败了") call(f_fail) return end
@@ -174,7 +174,7 @@ function get_sling(f_ok, f_fail)
 		local l, w = wait.regexp("^(> )*(你要看什么)|(少林英雄令).*")
 		if(l:match("你要看什么") ~= nil) then
 			Execute("set brief;fly wm;e;s;s;s;s;give 1 gold to seng")
-			wait.time(5)
+			--wait.time(5)
 			Execute("fly wm;nw;get yingxiong ling;look yingxiong ling")
 			l, w = wait.regexp("^(> )*(你要看什么)|(少林英雄令).*")
 			if(l:match("你要看什么") ~= nil) then print("少林英雄令失败了") call(f_fail) return end
@@ -192,7 +192,7 @@ function get_qling(f_ok, f_fail)
 		local l, w = wait.regexp("^(> )*(你要看什么)|(重阳令).*")
 		if(l:match("你要看什么") ~= nil) then
 			Execute("set brief;fly wm;e;s;s;w;w;give 1 gold to daoren")
-			wait.time(5)
+			--wait.time(5)
 			Execute("fly wm;nw;get chongyang ling;look chongyang ling")
 			local l, w = wait.regexp("^(> )*(你要看什么)|(重阳令).*")
 			if(l:match("你要看什么") ~= nil) then print("重阳令失败了") call(f_fail) return end
@@ -210,8 +210,8 @@ function get_ditu(f_ok, f_fail)
 			Execute("set brief;fly gw;n;n;n;e;e;ne;e;n")
 			wait.time(3)
 			Execute("fly xx;su;s;ed;ask li about 苏普;ask li about 父母;look shou juan")
-			l, w = wait.regexp("^(> )*(这是一方雪白的手绢)|(你要看什么).*$")
-			if(l:match("你要看什么") ~= nil) then
+			l, w = wait.regexp("^(> )*(这是一方雪白的手绢)|(你要看什么)|(这里没有这个人).*$")
+			if(l:match("你要看什么") ~= nil or l:match("这里没有这个人")) then
 				call(f_fail)
 				return
 			else
@@ -231,6 +231,14 @@ function get_ditu(f_ok, f_fail)
 		end
 		print("高昌迷宫地图准备好了")
 		call(f_ok)
+	end)
+end
+
+function get_xunzhang(f_done, f_fail)
+	wait.make(function()
+		Execute("look xunzhang")
+		local l, w = wait.regexp("^(> )*(荣誉勋章)|(你要看什么).*$")
+		if(l:match("你要看什么")) then call(f_fail) else call(f_done) end
 	end)
 end
 

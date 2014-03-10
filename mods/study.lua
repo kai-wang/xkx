@@ -41,8 +41,8 @@ end
 function givemoney()
 	wait.make(function()
 		Execute("give zhu 1 gold")
-		local l, w = wait.regexp("(> )*(朱熹同意指点你一些读书写字的问题。)|(你没有那么多的黄金。)$")
-		if(l:match("你没有那么多") ~= nil) then
+		local l, w = wait.regexp("(> )*(朱熹同意指点你一些读书写字的问题。)|(你没有那么多的黄金)|(你身上没有这样东西).*$")
+		if(l:match("朱熹同意指点") == nil) then
 			Execute("s;w;n;w;qukuan 1 gold")
 			wait.time(5)
 			Execute("e;s;e;n;give zhu 1 gold")

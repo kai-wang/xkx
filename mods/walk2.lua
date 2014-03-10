@@ -53,7 +53,7 @@ blocker_npcs["江百胜"] = {id = "jiang baisheng"}
 blocker_npcs["女管家"] = {id = "guan jia"}
 blocker_npcs["门卫"] = {id = "men wei"}
 blocker_npcs["流氓头"] = {id = "tou"}
-blocker_npcs["夫人"] = {id = "ya huan"}
+blocker_npcs["丫鬟"] = {id = "ya huan"}
 blocker_npcs["锦衣卫士"] = {id = "wei shi"}
 blocker_npcs["黄衣卫士"] = {id = "wei shi"}
 blocker_npcs["山贼头"] = {id = "tou"}
@@ -77,6 +77,9 @@ blocker_npcs["麻衣长老"] = {id = "mayi zhanglao"}
 blocker_npcs["萨木活佛"] = {id = "samu huofo", pfm = true}
 blocker_npcs["嘉木活佛"] = {id = "jiamu huofo", pfm = true}
 blocker_npcs["西华子"] = {id = "xi huazi"}
+blocker_npcs["弟子"] = {id = "di zi"}
+blocker_npcs["竹剑"] = {id = "zhu jian"}
+blocker_npcs["菊剑"] = {id = "ju jian"}
 ---------------------------------------------------------- 特殊命令-------------------------------------------------------------------
 
 local run_cxt = {}
@@ -85,10 +88,12 @@ local run_cxt = {}
 ----- path : e;s;|!aw:3:flatter 星宿老仙:nw|e;e;e;e;e;e
 ----- 记住最后一个|的前一条应当设为路径
 function run(path)
-
+	
 	print("执行路径: " .. path)
 	
 	EnableTriggerGroup("walk", true)
+	
+	run_cxt = {}
 	
 	local tbl = utils.split(path, "|")
 	local c = run_cxt
@@ -177,6 +182,7 @@ handlers = {
 	cxt = {},
 	
 	new = function(tbl, f_ok, f_fail, f_stop)
+		handlers.cxt = {}
 		local c = handlers.cxt
 		
 		c.f_ok = f_ok
@@ -272,6 +278,7 @@ handlers = {
 	
 	["aw"] = function(interval, action)
 		wait.make(function()
+			print(action)
 			Execute(action)
 			if(interval ~= nil and tonumber(interval) > 0) then wait.time(tonumber(interval)) end
 			handlers.done()
@@ -450,6 +457,29 @@ handlers = {
 		else
 			handlers.fail()
 		end
+	end,
+	
+	["gcdt"] = function()
+		wait.make(function()
+			Execute("look gaochang ditu")
+			local l, w = wait.regexp("^(> )*(这是一张高昌迷宫地图)|(你要看什么).*$")
+			if(l:match("你要看什么")) then handlers.fail() else handlers.done() end
+		end)
+	end,
+	
+	["cao"] = function()
+		wait.make(function()
+			repeat
+				Execute("take cao")
+				local l, w = wait.regexp("^(> )*(你从悬崖上摔了下来)|(你在悬崖前站定).*$")
+			until(l:match("你从悬崖上摔了下来"))
+			handlers.done()
+		end)
+	end,
+	
+	["press"] = function()
+		Execute("press " .. var.fz_coin)
+		handlers.done()
 	end
 }
 
@@ -460,45 +490,66 @@ local walk_cxt = {}
 
 
 function getRegion(name)
-	local region = regions[name]
-	if(region == nil) then
-		return regions[mappings[name]]
-	else
-		return region
+	local matched = {}
+	local re = rex.new("^" .. name .. "[0-9]{0,1}$")
+	local re2
+	
+	if(mappings[name] ~= nil) then re2 = rex.new("^" .. mappings[name] .. "[0-9]{0,1}$") end
+	
+	for i, v in pairs(regions) do
+		local a, b, t = re:match(i)
+		if(t ~= nil) then table.insert(matched, v) 
+		elseif(re2 ~= nil) then
+			a, b, t = re2:match(i)
+			if(t ~= nil) then table.insert(matched, v) end
+		end			
 	end
+	
+	return matched
+	
+	--local region = regions[name]
+	--if(region == nil) then
+	--	return regions[mappings[name]]
+	--else
+	--	return region
+	--end
 end
 
 function findpath(regionName, roomName)
 	local match = {}
-	local region = getRegion(regionName)
+	local regions = getRegion(regionName)
 	local prevRoom = nil
 	local path = nil
 
-	if(region == nil) then return end
+	if(regions == {}) then return end
 	
-	for i, v in ipairs(region.rooms) do
-		if(v.name == roomName and v.attr ~= "danger") then
-			if(prevRoom ==  nil) then
-				path = "set brief;" .. v.path .. ";unset brief;look"
-			else
-				local temp = find_path(roomAll, prevRoom, v.id)
-				if(temp == nil) then
-					path = "set brief;" .. v.path .. ";unset brief"
+	for j = 1, #regions do
+		local region = regions[j]
+		
+		for i, v in ipairs(region.rooms) do
+			if(v.name == roomName and v.attr ~= "danger") then
+				if(prevRoom ==  nil) then
+					path = "set brief;" .. v.path .. ";unset brief;look"
 				else
-					if #temp == 1 then
-						path = temp[1]
+					local temp = find_path(roomAll, prevRoom, v.id)
+					if(temp == nil) then
+						path = "set brief;" .. v.path .. ";unset brief"
 					else
-						path = "set brief;"
-						for i=1, (#temp-1) do
-							path = path .. temp[i] .. ";"
-						end
-					path = path .. "unset brief;" .. temp[#temp]
+						if #temp == 1 then
+							path = temp[1]
+						else
+							path = "set brief;"
+							for i=1, (#temp-1) do
+								path = path .. temp[i] .. ";"
+							end
+						path = path .. "unset brief;" .. temp[#temp]
+					end
+						--path = table.concat(temp, ";")
+					end
 				end
-					--path = table.concat(temp, ";")
-				end
+				table.insert(match, {["from"]=prevRoom, ["to"]=v.id, ["path"]=path})
+				prevRoom = v.id
 			end
-			table.insert(match, {["from"]=prevRoom, ["to"]=v.id, ["path"]=path})
-			prevRoom = v.id
 		end
 	end
 
@@ -528,6 +579,8 @@ function sl(regionName, roomName)
 end
 
 function step_by_step(path)
+	
+	walk_cxt = {}
 	local c = walk_cxt
 	c.stop = false
 	c.fail = false

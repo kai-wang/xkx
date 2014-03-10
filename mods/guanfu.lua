@@ -5,97 +5,158 @@ require "var"
 
 module ("guanfu", package.seeall)
 
-local items = {
-	["何首乌"] = "heshouwu"
-}
-
-local gf = {
-	eat_list = {},
-	sell_list = {},
-	drop_list = {}
-}
 
 main = function()
 	EnableTriggerGroup("guanfu", true)
-	Execute("fly wm;e;s;s;w;s;s;e;jie wenshu;fly wm;kan wenshu;")
+	
+	msg.subscribe("msg_slowwalk_ok", guanfu.notfound)
+	msg.subscribe("msg_slowwalk_fail", guanfu.fail)
+	
+	Execute("set brief;fly wm;e;s;s;w;s;s;e;jie wenshu;fly wm;kan wenshu")
 end
 
 
-done = function()
+exit = function()
 	EnableTriggerGroup("guanfu", false)
-	msg.broadcast("msg_gf_end")
+	
+	msg.unsubscribe("msg_slowwalk_ok")
+	msg.unsubscribe("msg_slowwalk_fail")
+	msg.unsubscribe("msg_slowwalk_stop")
+	
+	msg.broadcast("msg_guanfu_exit")
+end
+
+
+available = function(t)
+	if(t == nil or t == 0) then msg.broadcast("msg_guanfu_available")
+	else
+		wait.make(function()
+			wait.time(t)
+			msg.broadcast("msg_guanfu_available")
+		end)
+	end
+end
+
+done = function()
+	var.gf_status = "done"
+	exit()
+	available()
 end
 
 fail = function()
-	EnableTriggerGroup("guanfu", false)
-	msg.broadcast("msg_gf_end")
+	var.gf_status = "fail"
+	exit()
+	Execute("halt;fly wm")
 end
 
 
 start = function(name, line, wildcards)
 	local npc, city, loc = wildcards[2], wildcards[3], wildcards[4]
-	SetVariable("gf_npc", npc)
-	SetVariable("gf_city", city)
-	SetVariable("gf_loc", loc)
-
+	
+	var.gf_npc = npc
+	var.gf_city = city
+	var.gf_loc = loc
+	
 	print(city .. " " .. loc .. " " .. npc)
-	gf.found = false
-	gf.search = 0
-	--msg.subscribe("msg_slowwalk_ok", walkdone)
-	--msg.subscribe("msg_slowwalk_fail", walkfail)
-	walk.sl(city, loc)
+	var.gf_found = false
+	
+	local busy_list = {}--me.profile.busy_list
+	local attack_list = me.profile.attack_list1
+	fight.prepare(busy_list, attack_list)
+	
+	--如果slowwalk走完还没有stop，说明没找到
+	msg.subscribe("msg_slowalk_stop", guanfu.notfound)
+	walk.sl(var.gf_city, var.gf_loc)
 end
 
-walkdone = function()
-	if(not gf.found) then
-		if(gf.search == 0) then
-			search()
-			gf.search = gf.search + 1
-		else
-			tprint(gf)
-			Execute("halt;fly wm")
-			fail()
-		end
-	end
+notfound = function()
+	var.gf_found = false
+	fight.stop()
+	Execute("halt")
+	--如果walkaround走完还没找到，就retry吧
+	msg.subscribe("msg_slowwalk_ok", guanfu.fail)
+	walk.walkaround(5)
 end
-
-walkfail = function()
-	print("找不到路径")
-	Execute("halt;fly wm")
-	fail()
-end
-
 
 foundnpc = function(name, line, wildcards)
-	local npc_id = string.lower(wildcards[3])
-	SetVariable("gf_id", npc_id)
-
-	local busy_list = me.profile.gf_busy_list()
-	local attack_list = me.profile.gf_attack_list()
-
-	gf.found = true
-	gf.search = 0
+	if(wildcards[4] ~= nil and wildcards[4] ~= "") then var.gf_id = string.lower(wildcards[4]) end
+	msg.subscribe("msg_slowwalk_stop", function()
+		var.gf_found = true
+		startFight()
+	end)
+	
 	walk.stop()
+end
 
+startFight = function()
+	local busy_list = {}--me.profile.busy_list
+	local attack_list = me.profile.attack_list1
 	fight.prepare(busy_list, attack_list)
-	Execute("kill " .. npc_id)
-	fight.start()
+	
+	fight.start("kill " .. var.gf_id)
 end
 
 
-npcdie = function(name, line, wildcards)
+-------- task 跑了，在原地范围内进行深度为5的遍历-----------------------------------
+search = function(name, line, wildcards)
+	print("guanfu 往【" .. wildcards[3] .. "】跑了")
+	local dir = wildcards[3]
+	dir = dir:gsub("边","")
+	dir = dir:gsub("面", "")
+	var.gf_escape_dir = dir
+	
+	walk.stop()
+	searchTask()
+end
+
+searchTask = function()
 	wait.make(function()
-		fight.stop()
-		Execute("wancheng corpse;look corpse")
-		wait.time(2)
-		Execute("get all from corpse")
-		wait.time(1)
-		Execute("halt;fly wm;u")
-		dazuo_start()
-		Execute("d;yun recover;yun regenerate")
-		done()
+		repeat
+			wait.time(1)
+			Execute("suicide")
+			local l, w = wait.regexp("^(> )*(你正忙着呢，没空自杀！)|(请用 suicide -f 确定自杀。)$")
+		until(l:match("确定自杀") ~= nil)
+		walk.walkaround(3, var.gf_escape_dir)
 	end)
 end
+
+----看到npc死了，把东西捡起来------------------------------------
+npcdie = function(name, line, wildcards)
+	wait.make(function()
+		walk.stop()
+		fight.stop()
+		Execute("wancheng corpse")
+		wait.time(3)
+		item.lookandget(guanfu.cleanup)
+	end)
+end
+
+
+----task结束后的善后工作，疗伤学习打坐----------------------------
+cleanup = function()
+	Execute("fly wm;jiali 0;er;et")
+	me.updateHP(function()
+		me.full(function()
+			msg.subscribe("msg_study_done", me.updateHP(function()
+				wait.make(function()
+					if(tonumber(me["nl"]) > tonumber(me["nl_max"]) * 1.2) then 
+						Execute("er;et;fly wm")
+						guanfu.done() 
+					else
+						wait.time(1)
+						Execute("halt;fly wm;u")
+						dazuo.start(function()
+							Execute("er;et;d")
+							guanfu.done()
+						end)
+					end
+				end)
+			end))
+			me.useqn()
+		end)
+	end)
+end
+
 
 yesno = function(name, line, wildcards)
 	if(var.gf_money == "yes") then
@@ -109,6 +170,7 @@ yesno = function(name, line, wildcards)
 end
 
 flee = function(name, line, wildcards)
+	msg.unsubscribe("msg_slowwalk_stop")
 	fight.stop()
 	walk.stop()
 
@@ -119,40 +181,18 @@ flee = function(name, line, wildcards)
 		city, loc = wildcards[3], wildcards[5]
 	end
 
-	SetVariable("gf_city", city)
-	SetVariable("gf_loc", loc)
+	var.gf_city = city
+	var.gf_loc = loc
 
 	print(city .. " " .. loc)
-	gf.found = false
-	gf.search = 0
+	var.gf_found = false
 
 	wait.make(function()
 		wait.time(2)
 		Execute("yun recover")
 		wait.time(1)
 		Execute("halt")
-		walk.sl(city, loc)
+		msg.subscribe("msg_slowalk_stop", guanfu.notfound)
+		walk.sl(var.gf_city, var.gf_loc)
 	end)
-end
-
-
-search = function(name, line, wildcards)
-    AddTrigger("quqing_1", "^(> )*    " .. var.gf_npc .. "正坐在地下运功疗伤。$", "", 49193, -1, 0, "", "guanfu.foundnpc2")
-	fight.stop()
-	gf.found = false
-	gf.search = 1
-	Execute("halt")
-	walk.walkaround(3)
-end
-
-
-foundnpc2 = function()
-	local busy_list = me.profile.gf_busy_list()
-	local attack_list = me.profile.gf_attack_list()
-
-	walk.stop()
-	gf.found = true
-	gf.search = 0
-	fight.init("kill " .. var.gf_id, busy_list, attack_list)
-	fight.start()
 end
