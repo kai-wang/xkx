@@ -8,21 +8,21 @@ module ("guanfu", package.seeall)
 
 main = function()
 	EnableTriggerGroup("guanfu", true)
-	
+	--[[
 	msg.subscribe("msg_slowwalk_ok", guanfu.notfound)
 	msg.subscribe("msg_slowwalk_fail", guanfu.fail)
-	
+	]]--
 	Execute("set brief;fly wm;e;s;s;w;s;s;e;jie wenshu;fly wm;kan wenshu")
 end
 
 
 exit = function()
 	EnableTriggerGroup("guanfu", false)
-	
+	--[[
 	msg.unsubscribe("msg_slowwalk_ok")
 	msg.unsubscribe("msg_slowwalk_fail")
 	msg.unsubscribe("msg_slowwalk_stop")
-	
+	]]--
 	msg.broadcast("msg_guanfu_exit")
 end
 
@@ -65,8 +65,8 @@ start = function(name, line, wildcards)
 	fight.prepare(busy_list, attack_list)
 	
 	--如果slowwalk走完还没有stop，说明没找到
-	msg.subscribe("msg_slowalk_stop", guanfu.notfound)
-	walk.sl(var.gf_city, var.gf_loc)
+	--msg.subscribe("msg_slowalk_stop", guanfu.notfound)
+	walk.sl(var.gf_city, var.gf_loc, guanfu.notfound, guanfu.fail, guanfu.foundnpc)
 end
 
 notfound = function()
@@ -74,10 +74,17 @@ notfound = function()
 	fight.stop()
 	Execute("halt")
 	--如果walkaround走完还没找到，就retry吧
-	msg.subscribe("msg_slowwalk_ok", guanfu.fail)
-	walk.walkaround(5)
+	--msg.subscribe("msg_slowwalk_ok", guanfu.fail)
+	walk.walkaround(5, nil, guanfu.fail, guanfu.fail, guanfu.foundnpc)
 end
 
+
+foundnpc = function()
+	var.gf_found = true
+	startFight()
+end
+
+--[[
 foundnpc = function(name, line, wildcards)
 	if(wildcards[4] ~= nil and wildcards[4] ~= "") then var.gf_id = string.lower(wildcards[4]) end
 	msg.subscribe("msg_slowwalk_stop", function()
@@ -87,6 +94,8 @@ foundnpc = function(name, line, wildcards)
 	
 	walk.stop()
 end
+]]--
+
 
 startFight = function()
 	local busy_list = {}--me.profile.busy_list
@@ -105,7 +114,7 @@ search = function(name, line, wildcards)
 	dir = dir:gsub("面", "")
 	var.gf_escape_dir = dir
 	
-	walk.stop()
+	--walk.stop()
 	searchTask()
 end
 
@@ -116,7 +125,7 @@ searchTask = function()
 			Execute("suicide")
 			local l, w = wait.regexp("^(> )*(你正忙着呢，没空自杀！)|(请用 suicide -f 确定自杀。)$")
 		until(l:match("确定自杀") ~= nil)
-		walk.walkaround(3, var.gf_escape_dir)
+		walk.walkaround(3, var.gf_escape_dir, guanfu.fail, guanfu.fail, guanfu.foundnpc)
 	end)
 end
 
@@ -170,9 +179,9 @@ yesno = function(name, line, wildcards)
 end
 
 flee = function(name, line, wildcards)
-	msg.unsubscribe("msg_slowwalk_stop")
+	--msg.unsubscribe("msg_slowwalk_stop")
 	fight.stop()
-	walk.stop()
+	walk.abort()
 
 	local city, loc
 	if(string.match(line, "目标好像往")) then
@@ -192,7 +201,7 @@ flee = function(name, line, wildcards)
 		Execute("yun recover")
 		wait.time(1)
 		Execute("halt")
-		msg.subscribe("msg_slowalk_stop", guanfu.notfound)
-		walk.sl(var.gf_city, var.gf_loc)
+		--msg.subscribe("msg_slowalk_stop", guanfu.notfound)
+		walk.sl(var.gf_city, var.gf_loc, guanfu.notfound, guanfu.fail, guanfu.foundnpc)
 	end)
 end

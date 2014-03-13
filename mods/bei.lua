@@ -11,10 +11,11 @@ local task1_array = {}
 
 main = function()
 	EnableTriggerGroup("bei", true)
-	
+
+--[[	
 	msg.subscribe("msg_slowwalk_ok", bei.notfound)
 	msg.subscribe("msg_slowwalk_fail", bei.fail)
-	
+]]--
 	Execute("fly wm;e;n;e;e;e;task")
 end
 
@@ -22,10 +23,11 @@ exit = function()
 	EnableTriggerGroup("bei", false)
 	EnableTriggerGroup("bei_task1", false)
 	
+--[[
 	msg.unsubscribe("msg_slowwalk_ok")
 	msg.unsubscribe("msg_slowwalk_fail")
 	msg.unsubscribe("msg_slowwalk_stop")
-	
+]]--
 	msg.broadcast("msg_bei_exit")
 end
 
@@ -139,8 +141,8 @@ location = function(name, line, wildcards)
 	fight.prepare(busy_list, attack_list)
 	
 	--如果slowwalk走完还没有stop，说明没找到
-	msg.subscribe("msg_slowalk_stop", bei.notfound)
-	walk.sl(var.task_city, var.task_loc)
+	--msg.subscribe("msg_slowalk_stop", bei.notfound)
+	walk.sl(var.task_city, var.task_loc, bei.notfound, bei.fail, bei.foundnpc)
 end
 
 go = function()
@@ -151,7 +153,7 @@ end
 
 faint = function()
 	fight.stop()
-	walk.stop()
+	walk.abort()
 	
 	me.profile.reset_cd_status()
 end
@@ -162,10 +164,21 @@ notfound = function()
 	fight.stop()
 	Execute("halt")
 	--如果walkaround走完还没找到，就retry吧
-	msg.subscribe("msg_slowwalk_ok", bei.retry)
-	walk.walkaround(5)
+	--msg.subscribe("msg_slowwalk_ok", bei.retry)
+	print("走完还没找到")
+	walk.walkaround(5, nil, bei.retry, bei.fail, bei.foundnpc)
 end
 
+foundnpc = function()
+	var.task_found = true
+	if(var.task_auto_kill == "true") then
+		startFight()
+	else
+		Execute("tuna 10")
+	end
+end
+
+--[[
 foundnpc = function(name, line, wildcards)
 	msg.subscribe("msg_slowwalk_stop", function()
 		var.task_found = true
@@ -178,6 +191,7 @@ foundnpc = function(name, line, wildcards)
 	
 	walk.stop()
 end
+]]--
 
 startFight = function()
 	local busy_list = me.profile.busy_list
@@ -195,7 +209,7 @@ search = function(name, line, wildcards)
 	dir = dir:gsub("面", "")
 	var.task_escape_dir = dir
 	
-	walk.stop()
+	--walk.abort()
 	searchTask()
 end
 
@@ -206,7 +220,8 @@ searchTask = function()
 			Execute("suicide")
 			local l, w = wait.regexp("^(> )*(你正忙着呢，没空自杀！)|(请用 suicide -f 确定自杀。)$")
 		until(l:match("确定自杀") ~= nil)
-		walk.walkaround(3, var.task_escape_dir)
+		print("从 " .. var.task_escape_dir .. " 开始walkaround" )
+		walk.walkaround(3, var.task_escape_dir, bei.notfound, bei.fail, bei.foundnpc)
 	end)
 end
 

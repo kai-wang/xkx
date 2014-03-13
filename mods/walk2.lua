@@ -80,6 +80,7 @@ blocker_npcs["西华子"] = {id = "xi huazi"}
 blocker_npcs["弟子"] = {id = "di zi"}
 blocker_npcs["竹剑"] = {id = "zhu jian"}
 blocker_npcs["菊剑"] = {id = "ju jian"}
+blocker_npcs["谢烟客"] = {id = "xie yanke", pfm = true}
 ---------------------------------------------------------- 特殊命令-------------------------------------------------------------------
 
 local run_cxt = {}
@@ -87,7 +88,7 @@ local run_cxt = {}
 -----命令格式改为
 ----- path : e;s;|!aw:3:flatter 星宿老仙:nw|e;e;e;e;e;e
 ----- 记住最后一个|的前一条应当设为路径
-function run(path)
+function run(path, f_ok, f_fail, f_stop)
 	
 	print("执行路径: " .. path)
 	
@@ -111,7 +112,11 @@ function run(path)
 	local p = c.iter()
 	
 	-- path 为空-------------------------------
-	if(p == nil) then print("path 为空") run_fail() return end
+	if(p == nil) then print("path 为空") run_end(f_fail) return end	--run_fail() return end
+	
+	c.run_fail = function() run_end(f_fail) end
+	c.run_stop = function() run_end(f_stop) end
+	c.run_ok = function() run_end(f_ok) end
 	
 	c.run_next = function()
 		if(c.fail) then print("run fail") run_fail() return end
@@ -131,24 +136,27 @@ function run(path)
 	run_cmd(p, c.run_next, run_fail, run_stop)
 end
 
-function run_ok()
+function run_end(f)
 	EnableTriggerGroup("walk_special", false)
 	EnableTriggerGroup("walk", false)
-	msg.broadcast("msg_run_ok")
+	call(f)
+end
+
+
+function run_ok()
+	local c = run_cxt
+	call(c.run_ok)
 end
 
 function run_fail()
-	EnableTriggerGroup("walk_special", false)
-	EnableTriggerGroup("walk", false)
-	msg.broadcast("msg_run_fail")
+	local c = run_cxt
+	call(c.run_fail)
 end
 
 function run_stop()
-	EnableTriggerGroup("walk_special", false)
-	EnableTriggerGroup("walk", false)
-	msg.broadcast("msg_run_stop")
+	local c = run_cxt
+	call(c.run_stop)
 end
-
 
 function run_cmd(cmd, f_ok, f_fail, f_stop)
 	--if(walk_cxt.run_stop) then return end
@@ -557,9 +565,9 @@ function findpath(regionName, roomName)
 end
 
 
-function sl(regionName, roomName)
+function sl(regionName, roomName, f_ok, f_fail, f_stop)
 	local path = findpath(regionName, roomName)
-	
+	--[[
 	for x = 1, 2 do
 		if(getRegion(regionName .. x)) then
 			local path1 = findpath(regionName .. x, roomName)
@@ -574,16 +582,17 @@ function sl(regionName, roomName)
 			end
 		end
 	end
-	
-	step_by_step(path)
+	]]--
+	step_by_step(path, f_ok, f_fail, f_stop)
 end
 
-function step_by_step(path)
+function step_by_step(path, f_ok, f_fail, f_stop)
 	
 	walk_cxt = {}
 	local c = walk_cxt
 	c.stop = false
 	c.fail = false
+	c.abort = false
 	
 	if(path == nil or #path == 0) then walk_fail() return end
 	
@@ -600,12 +609,17 @@ function step_by_step(path)
 	--应该肯定不会为空了----------------------
 	assert(p ~= nil)
 	
+	c.walk_fail = function() walk_end(f_fail) end
+	c.walk_stop = function() walk_end(f_stop) end
+	c.walk_ok = function() walk_end(f_ok) end
+	
 	c.walk_next = function()
 		if(c.fail) then walk_fail() return end
 		
 		print("当前房间: " .. roomId)
 		walk_cxt.currentId = roomId
 		
+		if(c.abort) then return end
 		if(c.stop) then walk_stop() return end
 		
 		p = c.iter()
@@ -625,11 +639,12 @@ function step_by_step(path)
 end
 
 function step(cmd, f_ok, f_fail, f_stop)
+--[[
 	msg.subscribe("msg_run_ok", f_ok)
 	msg.subscribe("msg_run_stop", f_stop)
 	msg.subscribe("msg_run_fail", f_fail)
-	
-	run(cmd)
+]]--
+	run(cmd, f_ok, f_fail, f_stop)
 end
 
 
@@ -645,6 +660,11 @@ function fail()
 	local w, r = walk_cxt, run_cxt
 	w.fail = true
 	r.fail = true
+end
+
+function abort()
+	local w = walk_cxt
+	w.abort = true
 end
 
 --暂时不需要resume吧----------------------------------------------------------------
@@ -664,33 +684,54 @@ function resume()
 	end
 end
 
+function walk_end(f)
+	EnableTriggerGroup("walk_special", false)
+	EnableTriggerGroup("walk", false)
+	call(f)
+end
+
 function walk_fail()
+	print("slow walk fail")
+	local c = walk_cxt
+	call(c.walk_fail)
+--[[
 	stop()
 	print("slow walk fail")
 	EnableTriggerGroup("walk_special", false)
 	EnableTriggerGroup("walk", false)
 	msg.broadcast("msg_slowwalk_fail")
+]]--
 end
 
 function walk_stop()
 	print("slow walk stop")
+	local c = walk_cxt
+	call(c.walk_stop)
+	--[[
 	EnableTriggerGroup("walk_special", false)
 	EnableTriggerGroup("walk", false)
 	msg.broadcast("msg_slowwalk_stop")
+	]]--
 end
 
 function walk_ok()
 	print("slow walk end")
+	local c = walk_cxt
+	call(c.walk_ok)
+	--[[
 	EnableTriggerGroup("walk_special", false)
 	EnableTriggerGroup("walk", false)
 	msg.broadcast("msg_slowwalk_ok")
+	]]--
 end
 
-function walkaround(dp, dir)
-	
+function walkaround(dp, dir, f_ok, f_fail, f_stop)
+
 	local room = roomAll[walk_cxt.currentId]
 	local tbl, walked = {}, {}
 	local walk_deepth = tonumber(dp)
+	
+	if(room ==  nil) then return end
 	
 	--if(dir ~= nil) then dir = dir:gsub("边","") end 
 	--if(var.walk_deepth ~= nil) then walk_deepth = tonumber(var.walk_deepth) end
@@ -711,7 +752,7 @@ function walkaround(dp, dir)
 			local path = table.concat(stepback, ";")
 			table.insert(tbl, {["from"]=v.to, ["to"]=room.id, ["path"]=path})
 		else
-			table.insert(tbl, {["from"]=v.to, ["to"]=room.id, ["path"]=roomAll[room.id].path})
+			table.insert(tbl, {["from"]=v.to, ["to"]=room.id, ["path"]="set brief;" .. roomAll[room.id].path})
 		end
 	end
 	
@@ -742,5 +783,5 @@ function walkaround(dp, dir)
 	findexit(room, room.id, 1)
 	--tprint(tbl)
 
-	step_by_step(tbl)
+	step_by_step(tbl, f_ok, f_fail, f_stop)
 end
