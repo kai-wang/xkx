@@ -824,6 +824,7 @@ local region = {}
         region.rooms[58].links["use fire;zuan"] = {}
           region.rooms[58].links["use fire;zuan"].to = 2605
           region.rooms[58].links["use fire;zuan"].con = ""
+		  region.rooms[58].links["use fire;zuan"].block = "y"
     region.rooms[59] = {}
       region.rooms[59].path = "fly fz;s;s;w;w;n;break men;n;d;d"
       region.rooms[59].name = "井底"
@@ -908,6 +909,7 @@ local region = {}
           region.rooms[64].links.n.con = ""
       region.rooms[64].exits = "south|north"
       region.rooms[64].desc = "    这里是南方第一港泉州的北门。出此门向北可抵中原。"
+	  --[[
     region.rooms[65] = {}
       region.rooms[65].path = "fly fz;s;s;w;w;n;break men;n;d;use fire;zuan"
       region.rooms[65].name = "密道"
@@ -947,5 +949,6 @@ local region = {}
         region.rooms[67].links.d = {}
           region.rooms[67].links.d.to = 2606
           region.rooms[67].links.d.con = ""
+		  ]]--
   region.center = 358
 return region

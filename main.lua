@@ -34,7 +34,7 @@ loadmod("walk2.lua")
 
 loadmod("quqing.lua")
 loadmod("guanfu.lua")
-loadmod("fight2.lua")
+loadmod("fight.lua")
 loadmod("bei.lua")
 loadmod("item.lua")
 --loadmod("heal.lua")

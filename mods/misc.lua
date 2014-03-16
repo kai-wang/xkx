@@ -242,13 +242,48 @@ function get_xunzhang(f_done, f_fail)
 	end)
 end
 
-function busy_test(f_done)
+function busy_test(f_done, interval)
 	wait.make(function()
 		repeat
-			wait.time(1)
+			if(interval == nil) then wait.time(1) else wait.time(interval) end
 			Execute("suicide")
 			local l, w = wait.regexp("^(> )*(你正忙着呢，没空自杀！)|(请用 suicide -f 确定自杀。)$")
 		until(l:match("确定自杀") ~= nil)
 		call(f_done)
 	end)
+end
+
+
+local timer_list = {}
+ts = {}
+
+ts.new = function(name, group, interval, handler)
+	if(IsTimer(name) ~= 0) then
+		AddTimer(name, 0, 0, interval, handler, timer_flag.Replace + timer_flag.Temporary, "")
+		SetTimerOption(name, "send_to", 12)
+		SetTimerOption(name, "group", group)
+	end
+end
+
+ts.tick = function(name)
+	EnableTimer(name, true)
+end
+
+ts.reset = function(name, interval)
+	if(IsTimer(name) == 0) then
+		print(name)
+		EnableTimer(name, true)
+		local second = interval%60
+		local minute = (interval - second)/60
+		SetTimerOption(name, "minute", minute)
+		SetTimerOption(name, "second", second)
+		ResetTimer(name)
+	end
+end
+
+ts.stop = function(name)
+	if(IsTimer(name) == 0) then
+		print("timer : " .. name .. " stopped")
+		EnableTimer(name, false)
+	end	
 end

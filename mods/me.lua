@@ -219,7 +219,7 @@ end --function
 
 
 me.useqn = function(f_done)
-	if(tonumber(me["qn"]) >= tonumber(me["qn_max"])*0.9) then
+	if(tonumber(me["qn"]) >= tonumber(me["qn_max"])) then
 		if(var.study_seq == nil or var.study_seq == "") then var.study_seq = 1 end
 		local index = tonumber(var.study_seq)%(#me.profile.study_list)
 		if(index == 0) then index = #me.profile.study_list end

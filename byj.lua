@@ -7,6 +7,7 @@ var.dazuo_full_desc = "你的内力修为似乎已经达到了瓶颈，无法再靠打坐来提升了。"
 var.me_id = "byj"
 var.me_name = "白玉京"
 var.me_menpai = "全真"
+var.me_family = "全真"
 var.task_id = "byj's task"
 var.ttask_id = "byj's ttask"
 var.heal_dummy_id = "hqly"
@@ -22,7 +23,8 @@ profile = {
 		[5] = {name="定阳针", 			desc="你脚下左弓右箭", 			cd=false},
 		[6] = {name="一指乾坤", 		desc="你使出一阳指绝技", 		cd=false},
 		[7] = {name="阳关三叠", 		desc="你凝气于指，一式", 		cd=false},
-		[8] = {name="金蛇万道",			desc="你大喝一声，猛攻数招", 	cd=false}
+		[8] = {name="金蛇万道",			desc="你大喝一声，猛攻数招", 	cd=false},
+		[9] = {name="连环夺命诀",		desc="你使出苗家剑法之「连环夺命诀」", cd=false}
 	},
 	
 	set_cd_status = function(l, flag)
@@ -45,17 +47,19 @@ profile = {
 	attack_list1 = {
 		[1] = {	i = 3, action = "enable sword quanzhen-jian;enable dodge qixing-bufa;wield jian;perform dodge.qixing"},
 		[2] = {	i = 8, action = "enable sword jinshe-jian;unwield all;wield jian;perform sword.wandao"},
-		[3] = {	i = 1, action = "enable sword quanzhen-jian;wield jian;perform sword.sanqing"},
-		[4] = { i = 2, action = "enable parry jinshe-zhang;wield jian;perform parry.fugu"},
-		[5] = { i = 7, action = "unwield all;perform finger.sandie"}
+		[3] = {	i = 9, action = "enable sword miaojia-jianfa;unwield all;wield jian;perform sword.duoming"},
+		[4] = {	i = 1, action = "enable sword quanzhen-jian;wield jian;perform sword.sanqing"},
+		[5] = { i = 2, action = "enable parry jinshe-zhang;wield jian;perform parry.fugu"},
+		[6] = { i = 7, action = "unwield all;perform finger.sandie"}
 	},
 	
 	attack_list2 = {
 		[1] = { i = 3, action = "enable sword quanzhen-jian;enable dodge qixing-bufa;unwield all;perform strike.sanhua;wield ".. var.weapon .. ";perform sword.jianyi;perform dodge.qixing" },
-		[3] = {	i = 1, action = "enable sword quanzhen-jian;unwield all;perform strike.sanhua;wield ".. var.weapon .. ";perform sword.jianyi;perform sword.sanqing"},
-		[2] = {	i = 8, action = "enable sword jinshe-jian;unwield all;wield " .. var.weapon .. ";perform sword.wandao"},
-		[4] = {	i = 4, action = "unwield all;hubo"},
-		[5] = { i = 7, action = "unwield all;perform finger.sandie"}
+		[2] = {	i = 9, action = "enable sword miaojia-jianfa;unwield all;wield jian;perform sword.duoming"},
+		[3] = {	i = 8, action = "enable sword jinshe-jian;unwield all;wield " .. var.weapon .. ";perform sword.wandao"},
+		[4] = {	i = 1, action = "enable sword quanzhen-jian;unwield all;perform strike.sanhua;wield ".. var.weapon .. ";perform sword.jianyi;perform sword.sanqing"},
+		[5] = {	i = 4, action = "unwield all;hubo"},
+		[6] = { i = 7, action = "unwield all;perform finger.sandie"}
 	},
 	
 	attack_list3 = {

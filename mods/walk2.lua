@@ -488,6 +488,20 @@ handlers = {
 	["press"] = function()
 		Execute("press " .. var.fz_coin)
 		handlers.done()
+	end,
+	
+	["c"] = function(item)
+		if(item == "sling") then
+			if(var.me_family == "少林") then handlers.done() return end
+			get_sling(handlers.done, handlers.fail)
+		elseif(item == "qling") then
+			if(var.me_family == "全真") then handlers.done() return end
+			get_qling(handlers.done, handlers.fail)
+		elseif(item == "shanpai") then
+			get_shanpai(handlers.done, handlers.fail)
+		elseif(item == "fire") then
+			get_fire(handlers.done, handlers.fail)
+		end
 	end
 }
 
@@ -752,7 +766,7 @@ function walkaround(dp, dir, f_ok, f_fail, f_stop)
 			local path = table.concat(stepback, ";")
 			table.insert(tbl, {["from"]=v.to, ["to"]=room.id, ["path"]=path})
 		else
-			table.insert(tbl, {["from"]=v.to, ["to"]=room.id, ["path"]="set brief;" .. roomAll[room.id].path})
+			table.insert(tbl, {["from"]=v.to, ["to"]=room.id, ["path"]="set brief;" .. roomAll[room.id].path .. ";unset brief;look"})
 		end
 	end
 	

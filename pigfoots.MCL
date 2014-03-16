@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE muclient>
-<!-- Saved on Friday, March 14, 2014, 1:43 AM -->
+<!-- Saved on Monday, March 17, 2014, 1:33 AM -->
 <!-- MuClient version 4.84 -->
 <!-- Written by Nick Gammon -->
 <!-- Home Page: http://www.mushclient.com/ -->
@@ -8,7 +8,7 @@
 <world
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-03-14 01:43:26"
+   date_saved="2014-03-17 01:33:45"
 
    auto_say_override_prefix="-"
    auto_say_string="say "
@@ -116,7 +116,7 @@
 <triggers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-03-14 01:43:26"
+   date_saved="2014-03-17 01:33:45"
   >
   <trigger
    custom_colour="16"
@@ -273,7 +273,6 @@ walk.handlers.k_blocker()</send>
   >
   </trigger>
   <trigger
-   enabled="y"
    expand_variables="y"
    group="dazuo"
    keep_evaluating="y"
@@ -284,7 +283,6 @@ walk.handlers.k_blocker()</send>
   >
   </trigger>
   <trigger
-   enabled="y"
    expand_variables="y"
    group="dazuo"
    keep_evaluating="y"
@@ -296,7 +294,6 @@ walk.handlers.k_blocker()</send>
   <send>dazuo.done_flag = true</send>
   </trigger>
   <trigger
-   enabled="y"
    expand_variables="y"
    group="dazuo"
    keep_evaluating="y"
@@ -456,7 +453,7 @@ walk.handlers.k_blocker()</send>
   <trigger
    group="fight"
    keep_evaluating="y"
-   match="^(&gt; )*(Äã´óºÈÒ»Éù£¬½£ÕÐÍ»±ä|Äã´óºÈÒ»Éù£¬²øÉí¶øÉÏ|Äãµ¹²ÈÆßÐÇ²½·¨|ÄãÆ½ÐÄ¾²Æø|Äã½ÅÏÂ×ó¹­ÓÒ¼ý|ÄãÊ¹³öÒ»ÑôÖ¸¾ø¼¼|ÄãÄýÆøÓÚÖ¸£¬Ò»Ê½|Äã´óºÈÒ»Éù£¬ÃÍ¹¥ÊýÕÐ).*$"
+   match="^(&gt; )*(Äã´óºÈÒ»Éù£¬½£ÕÐÍ»±ä|Äã´óºÈÒ»Éù£¬²øÉí¶øÉÏ|Äãµ¹²ÈÆßÐÇ²½·¨|ÄãÆ½ÐÄ¾²Æø|Äã½ÅÏÂ×ó¹­ÓÒ¼ý|ÄãÊ¹³öÒ»ÑôÖ¸¾ø¼¼|ÄãÄýÆøÓÚÖ¸£¬Ò»Ê½|Äã´óºÈÒ»Éù£¬ÃÍ¹¥ÊýÕÐ|ÄãÊ¹³öÃç¼Ò½£·¨Ö®¡¸Á¬»·¶áÃü¾÷¡¹).*$"
    name="fight_perform_cd"
    regexp="y"
    script="fight.on_perform"
@@ -616,7 +613,7 @@ walk.handlers.k_blocker()</send>
    keep_evaluating="y"
    match="^(&gt; )*\S+Ä¿Ç°Õý×Ô¹Ë²»Ï¾£¬·Åµ¨¹¥»÷°É£¡$"
    regexp="y"
-   script="fight.attack"
+   script="fight.attack2"
    sequence="100"
   >
   </trigger>
@@ -841,7 +838,6 @@ walk.handlers.k_blocker()</send>
   </trigger>
   <trigger
    custom_colour="16"
-   enabled="y"
    group="dazuo"
    keep_evaluating="y"
    match="^(&gt; )*ÄãµÄÄÚÁ¦ÐÞÎªÔö¼ÓÁË£¡$"
@@ -917,8 +913,7 @@ walk.handlers.k_blocker()</send>
    sequence="100"
   >
   <send>print("ÎüÆøÍê±Ï")
-fight.stopTimer("recover")
-fight.startTimer("busy")</send>
+fight.busy()</send>
   </trigger>
   <trigger
    group="shan"
@@ -930,7 +925,6 @@ fight.startTimer("busy")</send>
   >
   </trigger>
   <trigger
-   enabled="y"
    group="dazuo"
    keep_evaluating="y"
    match="^(&gt; )*ÄãÏÖÔÚ¾«²»¹»£¬ÎÞ·¨¿ØÖÆÄÚÏ¢µÄÁ÷¶¯£¡$"
@@ -956,19 +950,19 @@ fight.startTimer("busy")</send>
   >
   </trigger>
   <trigger
-   group="fight"
-   match="^(&gt; )*ÄãÖ»¾õµÃÍ·»èÄÔÕÍ£¬ÑÛÇ°Ò»ºÚ£¬½Ó×ÅÊ²Ã´Ò²²»ÖªµÀÁË¡­¡­$"
-   regexp="y"
-   script="fight.faint"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
    group="bei"
    keep_evaluating="y"
    match="^(&gt; )*ÄãÖ»¾õµÃÍ·»èÄÔÕÍ£¬ÑÛÇ°Ò»ºÚ£¬½Ó×ÅÊ²Ã´Ò²²»ÖªµÀÁË¡­¡­$"
    regexp="y"
    script="bei.faint"
+   sequence="100"
+  >
+  </trigger>
+  <trigger
+   group="fight"
+   match="^(&gt; )*ÄãÖ»¾õµÃÍ·»èÄÔÕÍ£¬ÑÛÇ°Ò»ºÚ£¬½Ó×ÅÊ²Ã´Ò²²»ÖªµÀÁË¡­¡­$"
+   regexp="y"
+   script="fight.faint"
    sequence="100"
   >
   </trigger>
@@ -1027,7 +1021,7 @@ walk.handlers.k_blocker()</send>
    keep_evaluating="y"
    match="^(&gt; )*ÎÄÊéÒÑ¾­±»ÄãÈàµÄÄ£ºý²»ÇåÁË£¬¿´À´ÒÑ¾­Ã»Ê²÷áÓÃÁË£¬ÄãÖ»ºÃËæÊÖ¶ªµô¡£$"
    regexp="y"
-   script="guanfu.fail"
+   script="guanfu.exit"
    sequence="100"
   >
   </trigger>
@@ -1279,7 +1273,7 @@ walk.stop()</send>
 <aliases
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-03-14 01:43:26"
+   date_saved="2014-03-17 01:33:45"
   >
   <alias
    match="^show (.*)$"
@@ -1643,7 +1637,7 @@ guanfu.startFight()</send>
    send_to="10"
    sequence="100"
   >
-  <send>xue miao miaojia-jianfa 50;et</send>
+  <send>xue wang parry 50;yun regenerate</send>
   </alias>
   <alias
    name="lz"
@@ -2015,7 +2009,7 @@ guanfu.startFight()</send>
 <timers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-03-14 01:43:26"
+   date_saved="2014-03-17 01:33:45"
   >
   <timer name="idle" second="30.00" offset_second="0.00" >
   <send>hi</send>
@@ -2028,7 +2022,7 @@ guanfu.startFight()</send>
 <macros
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-03-14 01:43:26"
+   date_saved="2014-03-17 01:33:45"
   >
 
   <macro name="up" type="send_now" >
@@ -2122,11 +2116,11 @@ guanfu.startFight()</send>
 <variables
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-03-14 01:43:26"
+   date_saved="2014-03-17 01:33:45"
   >
   <variable name="bag_dummy_id">hsly</variable>
   <variable name="baobiao_exp">142</variable>
-  <variable name="baobiao_loc">»ªÉ½½ÅÏÂ</variable>
+  <variable name="baobiao_loc">ÖÐÌõÉ½ÃÜÁÖ</variable>
   <variable name="baobiao_qn">23</variable>
   <variable name="baobiao_yl">1</variable>
   <variable name="blocker_id">guan bing</variable>
@@ -2144,23 +2138,24 @@ guanfu.startFight()</send>
   <variable name="gf_attack_3">unwield all;hubo;wield bang</variable>
   <variable name="gf_busy_1">perform dodge.canghaiyixiao</variable>
   <variable name="gf_busy_2">unwield all;wield bang;perform stick.chan</variable>
-  <variable name="gf_city">Ñ©É½ËÂ</variable>
-  <variable name="gf_escape_dir">ÄÏ</variable>
+  <variable name="gf_city">ÌìÁúËÂ</variable>
+  <variable name="gf_escape_dir">Î÷±±</variable>
   <variable name="gf_found">true</variable>
-  <variable name="gf_id">a da</variable>
-  <variable name="gf_loc">Ñ©É½ËÂÉ½ÃÅ</variable>
-  <variable name="gf_npc">°¢´ó</variable>
+  <variable name="gf_id">wolf</variable>
+  <variable name="gf_loc">Ä²ÄáÌÃ</variable>
+  <variable name="gf_npc">»ÒÃ«¶ñÀÇ</variable>
   <variable name="gf_option"></variable>
   <variable name="gf_status">done</variable>
   <variable name="heal_dummy_id">hqly</variable>
   <variable name="item_drop_list"></variable>
   <variable name="item_eat_list"></variable>
   <variable name="item_jicun_list"></variable>
-  <variable name="item_sell_list">give mingmou yi to ouye zi;give songluan dao to ouye zi;</variable>
+  <variable name="item_sell_list"></variable>
   <variable name="item_store_list"></variable>
   <variable name="last_wuchang">1394634686</variable>
   <variable name="login_drop">drop dao pao;drop ma xie</variable>
   <variable name="login_wear">give yinling xue to byj;give songluan hushou to byj;give cangyan mao to byj;give yuquan yi to byj;give chunjiang jian to byj;wear all;wield jian</variable>
+  <variable name="me_family">È«Õæ</variable>
   <variable name="me_id">byj</variable>
   <variable name="me_menpai">È«Õæ</variable>
   <variable name="me_name">°×Óñ¾©</variable>
@@ -2170,39 +2165,39 @@ guanfu.startFight()</send>
   <variable name="shan_exp">267</variable>
   <variable name="shan_fail_times">0</variable>
   <variable name="shan_npc">Òó½õ</variable>
-  <variable name="shan_npc_id">gao kexin</variable>
-  <variable name="shan_npc_name">¸ß¿ËÐÂ</variable>
+  <variable name="shan_npc_id">yin jin</variable>
+  <variable name="shan_npc_name">Òó½õ</variable>
   <variable name="shan_qn">19</variable>
   <variable name="shan_yl">2</variable>
-  <variable name="study_cmd">xue zhu literate 40;yun regenerate</variable>
-  <variable name="study_loc">fly wm;e;s;s;e;n;</variable>
-  <variable name="study_seq">3</variable>
+  <variable name="study_cmd">xue wang strike 40;yun regenerate</variable>
+  <variable name="study_loc">wcy</variable>
+  <variable name="study_seq">0</variable>
   <variable name="task_auto_kill">true</variable>
-  <variable name="task_city">±±¾©</variable>
+  <variable name="task_city">¹ØÍâ</variable>
   <variable name="task_escape_dir"></variable>
   <variable name="task_found">true</variable>
   <variable name="task_fullname">Byj's task</variable>
   <variable name="task_id">byj's task</variable>
-  <variable name="task_loc">×¯¸®´óÌü</variable>
-  <variable name="task_npc">ÀÉÆßÒ¯</variable>
+  <variable name="task_loc">ÃÜÁÖ</variable>
+  <variable name="task_npc">ÁÖÊ®¶þÊå</variable>
   <variable name="task_retry_max">3</variable>
   <variable name="task_retry_times">0</variable>
   <variable name="task_search">false</variable>
-  <variable name="task_start_time">1394721534</variable>
+  <variable name="task_start_time">1394979841</variable>
   <variable name="task_status">done</variable>
   <variable name="ttask_id">byj's ttask</variable>
   <variable name="walk_blocker">¹Ù±ø</variable>
-  <variable name="walk_blocker_id">di zi</variable>
-  <variable name="walk_blocker_name">µÜ×Ó</variable>
+  <variable name="walk_blocker_id">ya yi</variable>
+  <variable name="walk_blocker_name">ÑÃÒÛ</variable>
   <variable name="walk_deepth">5</variable>
   <variable name="weapon">jian</variable>
   <variable name="wei_cancel_amt">50</variable>
   <variable name="wei_fail_times">0</variable>
   <variable name="wei_item">±ùÌÇºùÂ«</variable>
-  <variable name="wei_item_id">fire</variable>
-  <variable name="wei_item_name">»ðÕÛ</variable>
-  <variable name="wei_item_path">ne;d;buy fire</variable>
-  <variable name="wei_npc_name">°ÚÒÄÅ®×Ó</variable>
+  <variable name="wei_item_id">nang</variable>
+  <variable name="wei_item_name">ÃæâÎ</variable>
+  <variable name="wei_item_path">xy;w;#2 (nw);w;buy nang</variable>
+  <variable name="wei_npc_name">ÃÅÎÀ</variable>
 </variables>
 
 <!-- colours -->
@@ -2210,7 +2205,7 @@ guanfu.startFight()</send>
 <colours
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-03-14 01:43:26"
+   date_saved="2014-03-17 01:33:45"
   >
 
 <ansi>
@@ -2267,7 +2262,7 @@ guanfu.startFight()</send>
 <keypad
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-03-14 01:43:26"
+   date_saved="2014-03-17 01:33:45"
   >
 
   <key name="0" >
@@ -2381,7 +2376,7 @@ guanfu.startFight()</send>
 <printing
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-03-14 01:43:26"
+   date_saved="2014-03-17 01:33:45"
   >
 
 <ansi>
