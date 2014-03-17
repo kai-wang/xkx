@@ -244,6 +244,28 @@ end
 ----task结束后的善后工作，疗伤学习打坐----------------------------
 cleanup = function()
 	Execute("fly wm;jiali 0;er;et")
+	me.full(function()
+		me.useqn(function()
+			wait.make(function()
+				me.updateHP(function()
+					if(tonumber(me["nl"]) > tonumber(me["nl_max"]) * 1.2) then 
+						Execute("er;et;fly wm")
+						bei.done() 
+					else
+						wait.time(1)
+						Execute("halt;fly wm;u")
+						dazuo.start(function()
+							Execute("er;et;d")
+							bei.done()
+						end)
+					end
+				end)
+			end)
+		end)
+	end)
+	
+--[[
+	Execute("fly wm;jiali 0;er;et")
 	me.updateHP(function()
 		me.full(function()
 			msg.subscribe("msg_study_done", function()
@@ -264,6 +286,7 @@ cleanup = function()
 			me.useqn()
 		end)
 	end)
+]]--
 end
 
 -----------------------------------------------------------------------------------------------------------------------------

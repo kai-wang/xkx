@@ -5,6 +5,9 @@ require "var"
 
 module ("study", package.seeall)
 
+local cxt = {}
+
+--[[
 function main()
 	EnableTriggerGroup("study", true)
 	EnableTriggerGroup("study_check", true)
@@ -12,20 +15,30 @@ function main()
 	me.profile.int_wear(study.start)
 	--start()
 end
+]]--
 
 function done()
 	EnableTriggerGroup("study", false)
 	EnableTriggerGroup("study_check", false)
-	me.profile.fight_wear()
-	msg.broadcast("msg_study_done")
+	busy_test(function() me.profile.fight_wear() end)
+	busy_test(function() call(cxt.f_done) end)
+	--msg.broadcast("msg_study_done")
 end
 
-function start()
+function start(f_done)
+	EnableTriggerGroup("study", true)
+	EnableTriggerGroup("study_check", true)
+	EnableTriggerGroup("HP", false)
+	--me.profile.int_wear(study.start)
+	cxt.f_done = f_done
+	
 	wait.make(function()
 		if(var.study_loc == nil or var.study_loc == "") then 
 			done()
 		else
-			Execute(var.study_loc)
+			me.profile.int_wear()
+			wait.time(5)
+			--Execute(var.study_loc)
 			Execute("lll")
 			Execute("hp")
 		end
@@ -46,6 +59,8 @@ function givemoney()
 			Execute("s;w;n;w;qukuan 1 gold")
 			wait.time(5)
 			Execute("e;s;e;n;give zhu 1 gold")
+		else
+			Execute("dazuo 10")
 		end
 	end)
 end
@@ -62,15 +77,10 @@ end
 
 function check(line, name, wildcards)
 	local nl, nl_max = wildcards[4], wildcards[5]
-	print(nl, nl_max)
+--	print(nl, nl_max)
 	if(tonumber(nl) < tonumber(nl_max)*0.3) then
-		wait.make(function()
-			EnableTriggerGroup("study_check", false)
-			repeat
-				wait.time(1)
-				Execute("suicide")
-				local l, w = wait.regexp("^(> )*(你正忙着呢，没空自杀！)|(请用 suicide -f 确定自杀。)$")
-			until(l:match("确定自杀") ~= nil)
+		EnableTriggerGroup("study_check", false)
+		busy_test(function()
 			Execute("er;et;dazuo max")
 		end)
 	else

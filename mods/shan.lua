@@ -518,9 +518,7 @@ start = function(name, line, wildcards)
 	
 	var.shan_npc_id = t.name
 	print(var.shan_npc_name .. " id¡¾" .. var.shan_npc_id .. "¡¿  room¡¾" .. t.room .. "¡¿")
-	busy_test(function() 
-		walk.run(roomAll[t.room].path, shan.killnpc, shan.fail, shan.fail) 
-	end)
+	busy_test(function() walk.run(roomAll[t.room].path, shan.killnpc, shan.fail, shan.fail) end)
 end
 
 killnpc = function()

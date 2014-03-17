@@ -17,14 +17,12 @@ prepare = function(busy_list, attack_list)
 end
 
 action = function()
-	print("tick")
-	
+	--print("tick")
 	call(context.action)
 end
 
 
 start = function(cmd)
-	
 	if(context.infight) then print("已经在战斗中") return end
 	
 	EnableTriggerGroup("fight", true)
@@ -38,7 +36,7 @@ stop = function()
 	ts.stop("fight")
 	
 	EnableTriggerGroup("fight", false)
-	Execute("set fight end")
+	--Execute("set fight end")
 end
 
 perform_busy = function(cmd)
@@ -84,13 +82,19 @@ end
 
 attack = function(cmd)
 	--ts.disable("fight")
-	
+	wait.make(function()
+		wait.time(1)
+		perform_attack(cmd)
+		context.action = fight.perform_busy
+		ts.reset("fight", 1.5)
+	end)
+	--[[
 	busy_test(function()
 		perform_attack(cmd)
 		context.action = fight.perform_busy
 		ts.reset("fight", 1.5)
-	end, 0.5)
-	
+	end, 0.8)
+	]]--
 end
 
 attack2 = function()
@@ -100,7 +104,7 @@ attack2 = function()
 end
 
 recover = function()
-	context.action = function() Execute("recover") end
+	context.action = function() Execute("yun recover") end
 	ts.reset("fight", 0.6)
 end
 

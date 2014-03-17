@@ -233,11 +233,13 @@ me.useqn = function(f_done)
 			var.study_cmd = st.cmd
 			AddAlias("lll", "lll", st.cmd, 1025, "")
 			SetAliasOption("lll", "send_to", 10)
-			study.main()
+			Execute(var.study_loc)
+			study.start(f_done)
 			var.study_seq = (index + 1)%(#me.profile.study_list)
 		end)
 	else
-		msg.broadcast("msg_study_done")
+		--msg.broadcast("msg_study_done")
+		call(f_done)
 		print("不需要花qn")
 	end
 	

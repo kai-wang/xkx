@@ -44,42 +44,6 @@ function event(n,l,w)
 end --function
 
 ------------------------------------------------------------------------------
---                 dazuo
-------------------------------------------------------------------------------
-
-dazuo = {}
-
-dazuo.start = function(f_done)
-	print("开始打坐")
-	EnableTriggerGroup("dazuo", true)
-	dazuo.done_flag = false
-	Execute("et;dazuo max")
-	if(f_done ~= nil) then
-		msg.subscribe("msg_dazuo_end", f_done)
-	else
-		msg.unsubscribe("msg_dazuo_end")
-	end
-end
-
-dazuo.continue = function()
-	if(not dazuo.done_flag) then
-		Execute("er;ef;dazuo max")
-	else
-		dazuo.done()
-	end
-end
-
-dazuo.done = function()
-	EnableTriggerGroup("dazuo", false)
-	msg.broadcast("msg_dazuo_end")
-end
-
-dazuo.halt = function()
-	Execute("halt;er")
-	dazuo.done()
-end
-
-------------------------------------------------------------------------------
 --                 jump_tower
 ------------------------------------------------------------------------------
 function jump_tower()
@@ -243,21 +207,23 @@ function get_xunzhang(f_done, f_fail)
 end
 
 function busy_test(f_done, interval)
+	DeleteTemporaryTriggers()
+	local i = 1
 	wait.make(function()
 		repeat
-			if(interval == nil) then wait.time(1) else wait.time(interval) end
+			if(interval == nil) then i = 1 else i = interval end
 			Execute("suicide")
 			local l, w = wait.regexp("^(> )*(你正忙着呢，没空自杀！)|(请用 suicide -f 确定自杀。)$")
+			if(l:match("你正忙着呢，没空自杀") ~= nil) then wait.time(i) end
 		until(l:match("确定自杀") ~= nil)
 		call(f_done)
 	end)
 end
 
 
-local timer_list = {}
-ts = {}
+module ("ts", package.seeall)
 
-ts.new = function(name, group, interval, handler)
+new = function(name, group, interval, handler)
 	if(IsTimer(name) ~= 0) then
 		AddTimer(name, 0, 0, interval, handler, timer_flag.Replace + timer_flag.Temporary, "")
 		SetTimerOption(name, "send_to", 12)
@@ -265,13 +231,12 @@ ts.new = function(name, group, interval, handler)
 	end
 end
 
-ts.tick = function(name)
+tick = function(name)
 	EnableTimer(name, true)
 end
 
-ts.reset = function(name, interval)
+reset = function(name, interval)
 	if(IsTimer(name) == 0) then
-		print(name)
 		EnableTimer(name, true)
 		local second = interval%60
 		local minute = (interval - second)/60
@@ -281,9 +246,41 @@ ts.reset = function(name, interval)
 	end
 end
 
-ts.stop = function(name)
-	if(IsTimer(name) == 0) then
-		print("timer : " .. name .. " stopped")
-		EnableTimer(name, false)
-	end	
+stop = function(name)
+	EnableTimer(name, false)
+end
+
+
+------------------------------------------------------------------------------
+--                 dazuo
+------------------------------------------------------------------------------
+module ("dazuo", package.seeall)
+
+local cxt = {}
+
+start = function(f_done)
+	print("开始打坐")
+	EnableTriggerGroup("dazuo", true)
+	cxt.done_flag = false
+	cxt.f_done = f_done
+	Execute("et;dazuo max")
+end
+
+continue = function()
+	if(not cxt.done_flag) then
+		Execute("er;ef;dazuo max")
+	else
+		EnableTriggerGroup("dazuo", false)
+		busy_test(function() call(cxt.f_done) end)
+	end
+end
+
+done = function()
+	cxt.done_flag = true
+end
+
+halt = function()
+	Execute("halt;er")
+	EnableTriggerGroup("dazuo", false)
+	busy_test(function() call(cxt.f_done) end)
 end
