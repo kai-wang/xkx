@@ -237,16 +237,20 @@ handlers = {
 		wait.make(function()
 			local cmd = c.cmd[#c.cmd]
 			repeat
-				wait.time(1)
+				--wait.time(1)
 				Execute("suicide")
 				local l, w = wait.regexp("^(> )*(你正忙着呢，没空自杀！)|(请用 suicide -f 确定自杀。)$")
+				if(l:match("你正忙着呢")) then wait.time(1) end
 			until(l:match("确定自杀") ~= nil)
 		
-			Execute(cmd .. ";set run_special_handle ok")
-			local l, w = wait.regexp("^(> )*设定环境变数：run_special_handle = \"ok\"$")
+			--Execute(cmd .. ";set run_special_handle ok")
+			--local l, w = wait.regexp("^(> )*设定环境变数：run_special_handle = \"ok\"$")
+			Execute(cmd .. ";set run special")
+			local l, w = wait.regexp("^(> )*设定环境变数：run = \"special\"$")
 			if(not c.block) then 
 				print("no blocker") 
 				EnableTriggerGroup("walk_special", false)
+				DeleteTemporaryTriggers()
 				call(c.f_ok)
 			else 
 				handlers.run()
@@ -274,11 +278,14 @@ handlers = {
 		
 		wait.make(function()
 			local cmd = c.cmd[#c.cmd]
-			Execute(cmd .. ";set run_special_handle ok")
-			local l, w = wait.regexp("^(> )*设定环境变数：run_special_handle = \"ok\"$")
+			--Execute(cmd .. ";set run_special_handle ok")
+			--local l, w = wait.regexp("^(> )*设定环境变数：run_special_handle = \"ok\"$")
+			Execute(cmd .. ";set run special")
+			local l, w = wait.regexp("^(> )*设定环境变数：run = \"special\"$")
 			if(not c.block) then 
 				print("k1 no blocker") 
 				EnableTriggerGroup("walk_special", false)
+				DeleteTemporaryTriggers()
 				call(c.f_ok)
 			end
 		end)
@@ -302,25 +309,6 @@ handlers = {
 	
 	["k1"] = function(name)
 		handlers.done2()
-	--[[
-		local c = handlers.cxt
-		if(c.k_blocker == true) then return end
-		
-		wait.make(function()
-			local cmd = c.cmd[#c.cmd]
-			Execute(cmd .. ";set run_special_handle ok")
-			local l, w = wait.regexp("^(> )*设定环境变数：run_special_handle = \"ok\"$")
-			if(not c.block) then 
-				print("k1 no blocker") 
-				EnableTriggerGroup("walk_special", false)
-				call(c.f_ok)
-			end
-		end)]]--
-		--[[
-		local c = handlers.cxt
-		local cmd = c.cmd[#c.cmd]
-		Execute(cmd .. ";set walk_special_handle ok")
-		]]--
 	end,
 	
 	["ylj"] = function()
@@ -427,8 +415,12 @@ handlers = {
 		handlers.done2()
 	end,
 	
-	["hoteld"] = function()
-		handlers.done()
+	["hoteld"] = function(mode)
+		print("mode: " .. mode)
+		local c = handlers.cxt
+		c.leave_mode = mode
+		
+		handlers.done2()
 	end,
 	
 	enter_hotel = function()
@@ -442,8 +434,15 @@ handlers = {
 	end,
 	
 	leave_hotel = function()
-		Execute("u;enter;out;d")
-		handlers.done()
+		local c = handlers.cxt
+		print("mode---" .. c.leave_mode)
+		handlers.block()
+		wait.make(function()
+			if(c.leave_mode == "2") then Execute("u;d;set run hotel_leave") else Execute("u;enter;out;d;set run hotel_leave") end
+			local l, w = wait.regexp("^(> )*设定环境变数：run = \"hotel_leave\"")
+			handlers.unblock()
+			handlers.done()
+		end)
 	end,
 	
 	["hsbreak"] = function()

@@ -41,7 +41,9 @@ profile = {
 	
 	busy_list = {
 		[1] = {	i = 6, action = "wield " .. var.weapon .. ";enable parry sun-finger;perform parry.qiankun" 	},
-		[2] = {	i = 5, action = "wield " .. var.weapon .. ";enable sword quanzhen-jian;perform sword.ding" 	}
+		[2] = {	i = 5, action = "wield " .. var.weapon .. ";enable sword quanzhen-jian;perform sword.ding" 	},
+		[3] = { i = 7, action = "unwield all;perform finger.sandie;wield " .. var.weapon}
+		--[2] = {	i = 5, action = "wield " .. var.weapon .. ";enable sword quanzhen-jian;perform sword.ding" 	}
 	},
 	
 	attack_list1 = {
@@ -50,7 +52,7 @@ profile = {
 		[3] = {	i = 9, action = "enable sword miaojia-jianfa;unwield all;wield jian;perform sword.duoming"},
 		[4] = {	i = 1, action = "enable sword quanzhen-jian;wield jian;perform sword.sanqing"},
 		[5] = { i = 2, action = "enable parry jinshe-zhang;wield jian;perform parry.fugu"},
-		[6] = { i = 7, action = "unwield all;perform finger.sandie"}
+		[6] = { i = 7, action = "unwield all;perform finger.sandie;wield " .. var.weapon}
 	},
 	
 	attack_list2 = {
@@ -59,7 +61,7 @@ profile = {
 		[3] = {	i = 8, action = "enable sword jinshe-jian;unwield all;wield " .. var.weapon .. ";perform sword.wandao"},
 		[4] = {	i = 1, action = "enable sword quanzhen-jian;unwield all;perform strike.sanhua;wield ".. var.weapon .. ";perform sword.jianyi;perform sword.sanqing"},
 		[5] = {	i = 4, action = "unwield all;hubo"},
-		[6] = { i = 7, action = "unwield all;perform finger.sandie"}
+		[6] = { i = 7, action = "unwield all;perform finger.sandie;wield " .. var.weapon}
 	},
 	
 	attack_list3 = {
@@ -82,7 +84,7 @@ profile = {
 	init = function()
 		local flag = bit.bor(trigger_flag.KeepEvaluating, trigger_flag.RegularExpression, trigger_flag.Replace)--, trigger_flag.Temporary)
 		AddTrigger("fight_busy_success",
-			"^(> )*(.*气拔千钧的一击，竟不知如何招架！|结果.*被你攻了个措手不及!).*$",
+			"^(> )*(.*气拔千钧的一击，竟不知如何招架！|结果.*被你攻了个措手不及!|结果一指点中).*$",
 			"", flag, -1, 0, "", "fight.on_busy_success")
 		
 		SetTriggerOption("fight_busy_success", "group", "fight")

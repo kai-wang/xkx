@@ -45,6 +45,8 @@ end
 
 fail = function()
 	var.gf_status = "fail"
+	fight.stop()
+	walk.stop()
 	exit()
 	Execute("halt;fly wm")
 end
@@ -155,13 +157,13 @@ cleanup = function()
 				me.updateHP(function()
 					if(tonumber(me["nl"]) > tonumber(me["nl_max"]) * 1.2) then 
 						Execute("er;et;fly wm")
-						bei.done() 
+						guanfu.done() 
 					else
 						wait.time(1)
 						Execute("halt;fly wm;u")
 						dazuo.start(function()
 							Execute("er;et;d")
-							bei.done()
+							guanfu.done()
 						end)
 					end
 				end)

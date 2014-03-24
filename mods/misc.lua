@@ -1,68 +1,5 @@
 require "wait"
 require "tprint"
---module ("misc", package.seeall)
-------------------------------------------------------------------------------
---                 variable
-------------------------------------------------------------------------------
-act_flag = false
-event_status = false
-
-
-------------------------------------------------------------------------------
---                 event
-------------------------------------------------------------------------------
-function event_end(n,l,w)
-	wait.make(function ()  --- coroutine below here
-		wait.time(5)
-		Execute("fly wm;")
-		event_status = false
-	end)  -- end of coroutine
-end --function
-
-function event(n,l,w)
-	print("奇观来了")
-	if act_flag then
-		act_stop()
-	end --if
-	Execute("#2 (halt)")
-	if string.match(w[1],"长白山天池流星") ~= nil then           --changbaishan
-		AddTriggerEx("event_cbs","^>?\\s*船很快停靠彼岸。你抬脚跨出船来。","(se)e(se)2e(eu)(su)(eu)e(eu)(se)(sw)(sd)(exert heal)",49193, -1, 0, "", "", 11, 100)
-		Queue(EvaluateSpeedwalk("(chuansong gw)3n2e(ne)en(give 1 gold to chuan fu)"),false)
-	end --if
-	if string.match(w[1],"峨嵋金顶日出") ~= nil then           --emei
-		Queue(EvaluateSpeedwalk("(chuansong em)3(wu)3(su)(sw)(su)(se)(wu)(su)"),false)
-	end --if
-	if string.match(w[1],"衡山水帘洞瀑布") ~= nil then           --hengshan
-		Queue(EvaluateSpeedwalk("(chuansong hy)10n(nu)(nw)(nu)(ed)e(eu)"),false)
-	end --if
-	if string.match(w[1],"无量山玉壁剑舞") ~= nil then           --wuliang
-		Queue(EvaluateSpeedwalk("(fly ws)(wd)2(nd)2(wu)w"),false)
-	end --if
-	AddTrigger("event_end1","^>?\\s*【自然奇观】","",49193, -1, 0, "", "event_end")
-	AddTrigger("event_end2", "^(> )*你心中连叹：“太可惜了！”$", "", 49193, -1, 0, "", "event_end")
-	event_status = true
-end --function
-
-------------------------------------------------------------------------------
---                 jump_tower
-------------------------------------------------------------------------------
-function jump_tower()
-	act_flag = true
-	wait.make(function()  --- coroutine below here
-		while act_flag do
-			Execute("out")
-			local ll, ww = wait.regexp("^>?\\s*你已稳稳地站在地上。")
-			if ll ~= nil then
-				wait.time(2)
-				Execute("halt;enter;#6 u;")
-				Execute("dazuo 100")
-				wait.time(2.5)
-				Execute("yun powerup;yun recover;yun regenerate")
-			end --if
-		end --while
-	end)  -- end of coroutine
-end --function
-
 
 function test()
 	print("fadfadfa")
@@ -118,12 +55,12 @@ end
 
 function get_shanpai(f_ok, f_fail)
 	wait.make(function()
-		Execute("get shan pai;look shan pai")
-		local l, w = wait.regexp("^(> )*(你要看什么)|(赏善铜牌).*$")
-		if(l:match("你要看什么") ~= nil) then
+		Execute("give shan pai to " .. var.me_id)
+		local l, w = wait.regexp("^(> )*(你身上没有这样东西)|(.*给你一块赏善铜牌).*$")
+		if(l:match("你身上没有这样东西") ~= nil) then
 			Execute("set brief;fly hy;n;w;w;w;w;s;n;s;ask zhang about 赏善")
 			--wait.time(5)
-			Execute("fly wm;nw;get shan pai;look shan pai")
+			Execute("fly wm;nw;give shan pai to " .. var.me_id)
 			l, w = wait.regexp("^(> )*(你要看什么)|(赏善铜牌).*$")
 			if(l:match("你要看什么") ~= nil) then print("赏善铜牌失败了") call(f_fail) return end
 		end
@@ -283,4 +220,54 @@ halt = function()
 	Execute("halt;er")
 	EnableTriggerGroup("dazuo", false)
 	busy_test(function() call(cxt.f_done) end)
+end
+
+------------------------------------------------------------------------------
+--                 dazuo
+------------------------------------------------------------------------------
+module ("event", package.seeall)
+
+start = function(name, line, wildcards)
+	local l = wildcards[2]
+	var.event_start_time = os.time()
+	if(l:match("长白山")) then 
+		var.event_loc = "长白山" 
+		var.event_room = 1602
+	elseif(l:match("衡山")) then 
+		var.event_loc = "衡山"
+		var.event_room = 1312
+	elseif(l:match("峨嵋")) then 
+		var.event_loc = "峨嵋"
+		var.event_room = 1714
+	elseif(l:match("无量山")) then 
+		var.event_loc = "无量山"
+		var.event_room = 2680
+	end
+	
+	msg.broadcast("msg_event_start")
+end
+
+go = function(f_done)
+	local diff = os.time() - tonumber(var.event_start_time)
+	--超过3分钟就不要去做了
+	if(diff > 180) then 
+		print("开始时间超过3分钟了")
+		call(f_done)
+	else
+		local f_fail = function() 
+			Execute("halt")
+			busy_test(function() call(f_done) end)
+		end
+		
+		local f_ok = function()
+			wait.make(function()
+				--5分钟还不来就走吧
+				wait.regexp("^(> )*(【自然奇观】)|(你心中连叹).*$", 300)
+				busy_test(function() call(f_done) end)
+			end)
+		end
+		
+		local room = tonumber(var.event_room)
+		walk.run(roomAll[room].path, f_ok, f_fail, f_fail)
+	end
 end

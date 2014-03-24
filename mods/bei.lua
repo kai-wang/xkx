@@ -16,7 +16,7 @@ main = function()
 	msg.subscribe("msg_slowwalk_ok", bei.notfound)
 	msg.subscribe("msg_slowwalk_fail", bei.fail)
 ]]--
-	Execute("fly wm;e;n;e;e;e;task")
+	Execute("set brief;fly wm;e;n;e;e;e;task")
 end
 
 exit = function()
@@ -214,6 +214,11 @@ search = function(name, line, wildcards)
 end
 
 searchTask = function()
+	busy_test(function()
+		print("从 " .. var.task_escape_dir .. " 开始walkaround" )
+		walk.walkaround(3, var.task_escape_dir, bei.notfound, bei.fail, bei.foundnpc)
+	end)
+	--[[
 	wait.make(function()
 		repeat
 			wait.time(1)
@@ -223,6 +228,7 @@ searchTask = function()
 		print("从 " .. var.task_escape_dir .. " 开始walkaround" )
 		walk.walkaround(3, var.task_escape_dir, bei.notfound, bei.fail, bei.foundnpc)
 	end)
+	]]--
 end
 
 ----看到npc死了，把东西捡起来------------------------------------
@@ -234,8 +240,9 @@ npcdie = function(name, line, wildcards)
 		if(l == nil) then
 			cleanup()
 		else
-			wait.time(3)
-			item.lookandget(bei.cleanup)
+			busy_test(function()
+				item.lookandget(bei.cleanup)
+			end)
 		end
 	end)
 end
@@ -244,6 +251,8 @@ end
 ----task结束后的善后工作，疗伤学习打坐----------------------------
 cleanup = function()
 	Execute("fly wm;jiali 0;er;et")
+	me.cleanup(function() bei.done() end)
+	--[[
 	me.full(function()
 		me.useqn(function()
 			wait.make(function()
@@ -263,7 +272,7 @@ cleanup = function()
 			end)
 		end)
 	end)
-	
+	]]--
 --[[
 	Execute("fly wm;jiali 0;er;et")
 	me.updateHP(function()

@@ -87,8 +87,8 @@ end
 me.updateHP = function(f_done)
 	wait.make(function()
 		EnableTriggerGroup("HP", true)
-		Execute("hp;set hp")
-		local l, w = wait.regexp("^(> )*设定环境变数：hp = \"YES\"$")
+		Execute("hp;set check hp")
+		local l, w = wait.regexp("^(> )*设定环境变数：check = \"hp\"$")
 		EnableTriggerGroup("HP", false)
 		
 		call(f_done)
@@ -110,6 +110,31 @@ me.full = function(f_done)
 	end)
 end
 
+me.cleanup = function(f_done)
+	me.full(function()
+		me.useqn(function()
+			wait.make(function()
+				me.updateHP(function()
+					if(tonumber(me["nl"]) > tonumber(me["nl_max"]) * 1.2) then 
+						Execute("er;et;fly wm;set check full")
+						local l, w = wait.regexp("^(> )*设定环境变数：check = \"full\"$")
+						call(f_done)
+					else
+						busy_test(function()
+							Execute("fly wm;u")
+							dazuo.start(function()
+								Execute("er;et;d;set check full")
+								local l, w = wait.regexp("^(> )*设定环境变数：check = \"full\"$")
+								call(f_done)
+							end)
+						end)
+					end
+				end)
+			end)
+		end)
+	end)
+end
+
 me.ssf = function(f_done)
 	if(me["in_ssf"] == nil or (not me["in_ssf"])) then print("没中生死符") call(f_done) return end
 	
@@ -121,6 +146,7 @@ me.ssf = function(f_done)
 		
 		if(l:match("这里没有这个人") ~= nil) then
 			print("首领不在,断线了...........")
+			Execute("halt;quit")
 			Disconnect()
 			return
 		end
@@ -136,12 +162,13 @@ me.qudu = function(f_done)
 	if(me["in_poison"] == nil or (not me["in_poison"])) then print("没有中毒") call(f_done) return end
 	
 	wait.make(function()
-		Execute("fly wm;u;er;et;yun cure")
+		Execute("fly wm;nw;er;et;yun cure")
 		repeat
-			local l, w = wait.regexp("^(> )*(你.*消褪了！)|(你并未中毒。)$", 15)
+			local l, w = wait.regexp("^(> )*(你.*消褪了！)|(你并未中毒。)$", 10)
 		until((l == nil) or (l:match("你并未中毒") ~= nil))
 		Execute("halt")
 		print("驱毒完毕")
+		me["in_poison"] = false
 		call(f_done)
 	end)
 end
@@ -168,13 +195,13 @@ me.jingqi = function(f_done)
 			Execute("fly wm;e;s;w;qukuan 5 gold")
 			wait.time(5)
 			Execute("e;s;e;e;n;buy wuchang dan")
-			wait.time(2)
-			Execute("eat wuchang dan")
-			var.last_wuchang = os.time()
-			print("无常丹好吃啊")
-			wait.time(5)
-			call(f_done)
-			return
+			busy_test(function()
+				Execute("fly wm;nw;eat wuchang dan")
+				var.last_wuchang = os.time()
+				print("无常丹好吃啊")
+				wait.time(5)
+				call(f_done)
+			end)
 		else
 			if(jsP < 95) then
 				local dannumber = (100-jsP)/5
@@ -183,19 +210,17 @@ me.jingqi = function(f_done)
 				Execute("fly wm;e;s;w;qukuan " .. price .. " silver")
 				wait.time(5)
 				Execute("e;s;e;e;n")
-				for i = 1, dannumber do
-					Execute("buy yangjing dan")
-					wait.time(2)
-					Execute("eat yangjing dan")
-					wait.time(5)
-				end
-				print("疗精完毕")
+				for i = 1, dannumber do Execute("buy yangjing dan") end
+				busy_test(function()
+					Execute("fly wm;nw")
+					for i = 1, dannumber do Execute("eat yangjing dan") wait.time(5) end
+					print("疗精完毕")
+					Execute("er;et;yun heal")
+					local l, w = wait.regexp("^(> )*(你并没有受伤！)|(你运功完毕).*$")
+					print("疗气完毕")
+					call(f_done)
+				end)
 			end
-			Execute("fly wm;u;er;et;yun heal")
-			--你运功完毕，缓缓站了起来，脸色看起来好了许多。
-			local l, w = wait.regexp("^(> )*(你并没有受伤！)|(你运功完毕).*$")
-			print("疗气完毕")
-			call(f_done)
 		end
 	end)
 end
@@ -210,7 +235,7 @@ me.foodwater = function(f_done)
 		wait.time(2)
 		Execute("eat zongzi;#8 (drink shuinang);drop zongzi;drop zong ye;")
 		wait.time(2)
-		Execute("#8 (drink shuinang);drop shuinang;unset brief;fly wm;set foodwater")
+		Execute("#8 (drink shuinang);drop shuinang;unset brief;fly wm")
 		--wait.regexp("^(> )*设定环境变数：foodwater = \"YES\"$")
 		print("酒足饭饱了")
 		call(f_done)

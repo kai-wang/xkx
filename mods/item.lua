@@ -7,7 +7,8 @@ module ("item", package.seeall)
 local sell_list, store_list, drop_list, item_list = {}, {}, {}, {}
 local eat_items = {"何首乌","人参","老山参","新鲜蛇胆","熊胆"}
 local jicun_items = {"九转银丹","九转金丹"}
-local store_items = {"菩提子","美容丸","仙丹","神力丸"}
+local store_items = {"菩提子","美容丸","仙丹","神力丸","玛瑙","翡翠","珠宝","琥珀","灰玉","水晶"}
+local keep_items = {"白银","黄金","金条","银票","赏善铜牌","火折","雄黄","腰牌","少林英雄令","重阳令","高昌迷宫地图"}
 
 function lookandget(f_done)
 	var.item_store_list = ""
@@ -18,8 +19,8 @@ function lookandget(f_done)
 	
 	wait.make(function()
 		EnableTriggerGroup("item", true)
-		Execute("look corpse;get all from corpse;set get ok")
-		local l, w = wait.regexp("设定环境变数：get = \"ok\"")
+		Execute("look corpse;get all from corpse;set check item")
+		local l, w = wait.regexp("^(> )*设定环境变数：check = \"item\"$")
 		EnableTriggerGroup("item", false)
 		
 		if(var.item_eat_list ~= nil and var.item_eat_list ~= "") then Execute(var.item_eat_list) end
@@ -44,6 +45,8 @@ function match2(name, line, wildcards, style)
 	--tprint(wildcards)
 	if(wildcards[3] ~= nil and wildcards[3] ~= "") then
 		item, id = wildcards[3], string.lower(wildcards[8])
+		if(wildcards[2] == "银剑") then addtolist("drop", id) return end
+		--print(item .. " " .. wildcards[4] .. " " .. wildcards[2])
 		sort(item, id, style)
 	elseif(wildcards[7] ~= nil and wildcards[7] ~= "") then
 		item, id = wildcards[7], string.lower(wildcards[8])
@@ -59,9 +62,17 @@ function match2(name, line, wildcards, style)
 			if(item:match(v)) then addtolist("jicun", id) return end
 		end
 
+		for i, v in ipairs(keep_items) do
+			if(item:match(v)) then return end
+		end
+		
+		addtolist("drop", id)
+		
+		--[[
 		if(item:match("白银") == nil and item:match("黄金") == nil and item:match("金条") == nil and item:match("银票") == nil ) then
 			addtolist("drop", id)
 		end
+		]]--
 	end
 end
 
