@@ -17,6 +17,8 @@ end
 
 
 exit = function()
+	walk.abort()
+	fight.stop()
 	EnableTriggerGroup("guanfu", false)
 	--[[
 	msg.unsubscribe("msg_slowwalk_ok")
@@ -117,7 +119,8 @@ search = function(name, line, wildcards)
 	var.gf_escape_dir = dir
 	
 	--walk.stop()
-	searchTask()
+	if(walk.stopped()) then earchTask() end
+	--searchTask()
 end
 
 searchTask = function()

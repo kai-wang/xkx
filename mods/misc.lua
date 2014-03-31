@@ -262,7 +262,7 @@ go = function(f_done)
 		local f_ok = function()
 			wait.make(function()
 				--5分钟还不来就走吧
-				wait.regexp("^(> )*(【自然奇观】)|(你心中连叹).*$", 300)
+				wait.regexp("^(> )*(【自然奇观】)|(你心中连叹)|(你不禁叹息道).*$", 300)
 				busy_test(function() call(f_done) end)
 			end)
 		end

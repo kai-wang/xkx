@@ -20,6 +20,8 @@ main = function()
 end
 
 exit = function()
+	walk.abort()
+	fight.stop()
 	EnableTriggerGroup("bei", false)
 	EnableTriggerGroup("bei_task1", false)
 	
@@ -152,10 +154,11 @@ go = function()
 end
 
 faint = function()
-	fight.stop()
-	walk.abort()
+	--fight.stop()
+	--walk.abort()
 	
 	me.profile.reset_cd_status()
+	cleanup()
 end
 
 -- 走完都没找到
@@ -174,7 +177,7 @@ foundnpc = function()
 	if(var.task_auto_kill == "true") then
 		startFight()
 	else
-		Execute("tuna 10")
+		Execute("ask " .. var.task_id .. " about fight")
 	end
 end
 
@@ -197,7 +200,6 @@ startFight = function()
 	local busy_list = me.profile.busy_list
 	local attack_list = me.profile.attack_list2
 	fight.prepare(busy_list, attack_list)
-	
 	fight.start("kill " .. var.task_id)
 end
 
@@ -210,7 +212,8 @@ search = function(name, line, wildcards)
 	var.task_escape_dir = dir
 	
 	--walk.abort()
-	searchTask()
+	if(walk.stopped()) then searchTask() end
+	--searchTask()
 end
 
 searchTask = function()

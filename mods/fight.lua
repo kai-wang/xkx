@@ -145,3 +145,7 @@ on_perform = function(name, line, wildcards)
 	--print("µ÷Ï¢ "..wildcards[2])
 	me.profile.set_cd_status(wildcards[2], true)
 end
+
+infight = function()
+	return context.infight ~= nil and context.infight == true
+end

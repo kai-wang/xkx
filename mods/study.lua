@@ -39,7 +39,8 @@ function start(f_done)
 			me.profile.int_wear()
 			wait.time(5)
 			--Execute(var.study_loc)
-			Execute("lll")
+			--Execute("lll")
+			Execute(var.lll)
 			Execute("hp")
 		end
 	end)
@@ -48,7 +49,9 @@ end
 function continue()
 	EnableTriggerGroup("study_check", true)
 	Execute("er;et")
-	Execute("lll;hp;hp")
+	--Execute("lll;hp;hp")
+	Execute(var.lll)
+	Execute("hp;hp")
 end
 
 function givemoney()
@@ -84,7 +87,8 @@ function check(line, name, wildcards)
 			Execute("er;et;dazuo max")
 		end)
 	else
-		Execute("lll")
+		--Execute("lll")
+		Execute(var.lll)
 		EnableTriggerGroup("study_check", true)
 		Execute("hp")
 	end

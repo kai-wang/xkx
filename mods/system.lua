@@ -111,6 +111,6 @@ getitemnum = function(str)
 			str = matchs[5]
 		end
 	end
-	return str, num
+	return num
 end
 

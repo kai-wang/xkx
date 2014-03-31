@@ -727,9 +727,17 @@ function walk_stop()
 	]]--
 end
 
+function stopped()
+	local w = walk_cxt
+	--tprint(w)
+	if(w.stop == true) then return true else return false end
+end
+
 function walk_ok()
 	print("slow walk end")
 	local c = walk_cxt
+	-- add stop flag here --------
+	c.stop = true
 	call(c.walk_ok)
 	--[[
 	EnableTriggerGroup("walk_special", false)
@@ -744,7 +752,7 @@ function walkaround(dp, dir, f_ok, f_fail, f_stop)
 	local tbl, walked = {}, {}
 	local walk_deepth = tonumber(dp)
 	
-	if(room ==  nil) then return end
+	if(room ==  nil) then print("找不到当前房间 : ", walk_cxt.currentId) call(f_fail) return end
 	
 	--if(dir ~= nil) then dir = dir:gsub("边","") end 
 	--if(var.walk_deepth ~= nil) then walk_deepth = tonumber(var.walk_deepth) end

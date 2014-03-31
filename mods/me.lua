@@ -112,6 +112,7 @@ end
 
 me.cleanup = function(f_done)
 	me.full(function()
+		me.check_money(function()
 		me.useqn(function()
 			wait.make(function()
 				me.updateHP(function()
@@ -131,6 +132,7 @@ me.cleanup = function(f_done)
 					end
 				end)
 			end)
+		end)
 		end)
 	end)
 end
@@ -188,6 +190,7 @@ end
 me.jingqi = function(f_done)
 	local jsP = tonumber(me["js%"])
 	local qxP = tonumber(me["qx%"])
+	print(jsP, qxP)
 	if(jsP >= 95 and qxP >= 95) then print("不用疗伤") call(f_done) return end
 	
 	wait.make(function()
@@ -220,6 +223,15 @@ me.jingqi = function(f_done)
 					print("疗气完毕")
 					call(f_done)
 				end)
+			elseif(qxP < 90) then
+				busy_test(function()
+					Execute("er;et;yun heal")
+					local l, w = wait.regexp("^(> )*(你并没有受伤！)|(你运功完毕).*$")
+					print("疗气完毕")
+					call(f_done)
+				end)
+			else
+				call(f_done)
 			end
 		end
 	end)
@@ -255,9 +267,10 @@ me.useqn = function(f_done)
 			--msg.subscribe("msg_study_done", function() call(f_done) end)
 			
 			var.study_loc = st.loc
-			var.study_cmd = st.cmd
-			AddAlias("lll", "lll", st.cmd, 1025, "")
-			SetAliasOption("lll", "send_to", 10)
+			var.lll = st.cmd
+			--var.study_cmd = st.cmd
+			--AddAlias("lll", "lll", st.cmd, 1025, "")
+			--SetAliasOption("lll", "send_to", 10)
 			Execute(var.study_loc)
 			study.start(f_done)
 			var.study_seq = (index + 1)%(#me.profile.study_list)
@@ -268,6 +281,28 @@ me.useqn = function(f_done)
 		print("不需要花qn")
 	end
 	
+end
+
+me.check_money = function(f_done)
+	wait.make(function()
+		EnableTriggerGroup("check_money", true)
+		Execute("look silver;look gold;look gold-bar;set check money")
+		local l, w = wait.regexp("^(> )*设定环境变数：check = \"money\"$")
+		EnableTriggerGroup("check_money", false)
+		local cmd = ""
+		if(var.me_silver ~= "" and tonumber(var.me_silver) > 500) then cmd = cmd .. "cunkuan " .. tonumber(var.me_silver) .. " silver;" end
+		if(var.me_gold ~= "" and tonumber(var.me_gold) > 20) then cmd = cmd .. "cunkuan " .. tonumber(var.me_gold) .. " gold;" end
+		if(var.me_goldbar ~= "" and tonumber(var.me_goldbar) > 1) then cmd = cmd .. "cunkuan " .. tonumber(var.me_goldbar) .. " gold-bar" end
+		
+		if(cmd ~= "") then
+			Execute("fly wm;e;s;w")
+			Execute(cmd)
+			Execute("qukuan 99 silver;qukuan 8 gold")
+			wait.time(5)
+			Execute("fly wm")
+		end
+		call(f_done)
+	end)
 end
 
 function call(f)
