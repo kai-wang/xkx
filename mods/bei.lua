@@ -253,7 +253,7 @@ end
 
 ----task结束后的善后工作，疗伤学习打坐----------------------------
 cleanup = function()
-	Execute("fly wm;jiali 0;er;et")
+	Execute("set brief;fly wm;jiali 0;er;et")
 	me.cleanup(function() bei.done() end)
 	--[[
 	me.full(function()

@@ -285,22 +285,30 @@ end
 
 me.check_money = function(f_done)
 	wait.make(function()
+		var.me_silver = 1
+		var.me_gold = 1
+		var.me_goldbar = 1
+		
 		EnableTriggerGroup("check_money", true)
 		Execute("look silver;look gold;look gold-bar;set check money")
 		local l, w = wait.regexp("^(> )*设定环境变数：check = \"money\"$")
 		EnableTriggerGroup("check_money", false)
 		local cmd = ""
-		if(var.me_silver ~= "" and tonumber(var.me_silver) > 500) then cmd = cmd .. "cunkuan " .. tonumber(var.me_silver) .. " silver;" end
-		if(var.me_gold ~= "" and tonumber(var.me_gold) > 20) then cmd = cmd .. "cunkuan " .. tonumber(var.me_gold) .. " gold;" end
-		if(var.me_goldbar ~= "" and tonumber(var.me_goldbar) > 1) then cmd = cmd .. "cunkuan " .. tonumber(var.me_goldbar) .. " gold-bar" end
+		if(tonumber(var.me_silver) > 500 or tonumber(var.me_gold) > 30 or tonumber(var.me_goldbar) > 1) then
+			cmd = cmd .. "cunkuan " .. tonumber(var.me_silver) .. " silver;"
+			cmd = cmd .. "cunkuan " .. tonumber(var.me_gold) .. " gold;"
+			cmd = cmd .. "cunkuan " .. tonumber(var.me_goldbar) .. " gold-bar"
+		end
 		
 		if(cmd ~= "") then
 			Execute("fly wm;e;s;w")
 			Execute(cmd)
-			Execute("qukuan 99 silver;qukuan 8 gold")
+			Execute("qukuan 99 silver;qukuan 19 gold")
 			wait.time(5)
 			Execute("fly wm")
+			var.me_goldbar = 0
 		end
+		
 		call(f_done)
 	end)
 end

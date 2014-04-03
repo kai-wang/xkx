@@ -119,7 +119,7 @@ search = function(name, line, wildcards)
 	var.gf_escape_dir = dir
 	
 	--walk.stop()
-	if(walk.stopped()) then earchTask() end
+	if(walk.stopped()) then searchTask() end
 	--searchTask()
 end
 
@@ -154,6 +154,8 @@ end
 ----task结束后的善后工作，疗伤学习打坐----------------------------
 cleanup = function()
 	Execute("fly wm;jiali 0;er;et")
+	me.cleanup(function() guanfu.done() end)
+	--[[
 	me.full(function()
 		me.useqn(function()
 			wait.make(function()
@@ -173,6 +175,7 @@ cleanup = function()
 			end)
 		end)
 	end)
+	]]--
 --[[
 	Execute("fly wm;jiali 0;er;et")
 	me.updateHP(function()
