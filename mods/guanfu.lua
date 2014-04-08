@@ -63,6 +63,7 @@ start = function(name, line, wildcards)
 	
 	print(city .. " " .. loc .. " " .. npc)
 	var.gf_found = false
+	var.gf_status = "start"
 	
 	local busy_list = {}--me.profile.busy_list
 	local attack_list = me.profile.attack_list1
@@ -125,6 +126,7 @@ end
 
 searchTask = function()
 	busy_test(function()
+		if(var.gf_status == "done") then return end
 		walk.walkaround(3, var.gf_escape_dir, guanfu.fail, guanfu.fail, guanfu.foundnpc)
 	end)
 	--[[
@@ -142,6 +144,7 @@ end
 ----看到npc死了，把东西捡起来------------------------------------
 npcdie = function(name, line, wildcards)
 	wait.make(function()
+		var.gf_status = "done"
 		walk.stop()
 		fight.stop()
 		Execute("wancheng corpse")
@@ -154,7 +157,7 @@ end
 ----task结束后的善后工作，疗伤学习打坐----------------------------
 cleanup = function()
 	Execute("fly wm;jiali 0;er;et")
-	me.cleanup(function() guanfu.done() end)
+	me.cleanup(function() guanfu.main() end)
 	--[[
 	me.full(function()
 		me.useqn(function()

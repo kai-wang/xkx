@@ -219,6 +219,7 @@ end
 searchTask = function()
 	busy_test(function()
 		print("从 " .. var.task_escape_dir .. " 开始walkaround" )
+		if(var.task_status == "done") then return end
 		walk.walkaround(3, var.task_escape_dir, bei.notfound, bei.fail, bei.foundnpc)
 	end)
 	--[[
@@ -239,6 +240,7 @@ npcdie = function(name, line, wildcards)
 	wait.make(function()
 		walk.stop()
 		fight.stop()
+		var.task_status = "done"
 		local l, w  = wait.regexp("^(> )*" .. var.task_npc .. "扑在地上挣扎了几下，口中喷出几口鲜血，死了！$", 5)
 		if(l == nil) then
 			cleanup()
@@ -254,7 +256,7 @@ end
 ----task结束后的善后工作，疗伤学习打坐----------------------------
 cleanup = function()
 	Execute("set brief;fly wm;jiali 0;er;et")
-	me.cleanup(function() bei.done() end)
+	me.cleanup(function() bei.main() end)
 	--[[
 	me.full(function()
 		me.useqn(function()

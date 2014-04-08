@@ -81,6 +81,7 @@ blocker_npcs["µÜ×Ó"] = {id = "di zi"}
 blocker_npcs["Öñ½£"] = {id = "zhu jian"}
 blocker_npcs["¾Õ½£"] = {id = "ju jian"}
 blocker_npcs["Ğ»ÑÌ¿Í"] = {id = "xie yanke", pfm = true}
+blocker_npcs["°ÍÒÀ"] = {id = "bayi"}
 ---------------------------------------------------------- ÌØÊâÃüÁî-------------------------------------------------------------------
 
 local run_cxt = {}
@@ -607,7 +608,7 @@ function step_by_step(path, f_ok, f_fail, f_stop)
 	c.fail = false
 	c.abort = false
 	
-	if(path == nil or #path == 0) then walk_fail() return end
+	if(path == nil or #path == 0) then call(f_fail) return end
 	
 	--iterator---------------------------------
 	local iterator = function(tbl)
