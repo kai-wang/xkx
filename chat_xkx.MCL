@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE muclient>
-<!-- Saved on Saturday, February 08, 2014, 2:31 PM -->
+<!-- Saved on Sunday, April 13, 2014, 1:27 PM -->
 <!-- MuClient version 4.84 -->
 <!-- Written by Nick Gammon -->
 <!-- Home Page: http://www.mushclient.com/ -->
@@ -8,7 +8,7 @@
 <world
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-08 14:31:32"
+   date_saved="2014-04-13 13:27:20"
 
    auto_say_override_prefix="-"
    auto_say_string="say "
@@ -97,7 +97,6 @@
    unpause_on_send="y"
    use_custom_link_colour="y"
    warn_if_scripting_inactive="y"
-   wrap="y"
    wrap_column="400"
    write_world_name_to_log="y"
    > <!-- end of general world attributes -->
@@ -109,7 +108,7 @@
 <triggers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-08 14:31:32"
+   date_saved="2014-04-13 13:27:20"
   >
 </triggers>
 
@@ -118,7 +117,7 @@
 <aliases
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-08 14:31:32"
+   date_saved="2014-04-13 13:27:20"
   >
 </aliases>
 
@@ -127,7 +126,7 @@
 <timers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-08 14:31:32"
+   date_saved="2014-04-13 13:27:20"
   >
 </timers>
 
@@ -136,7 +135,7 @@
 <macros
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-08 14:31:32"
+   date_saved="2014-04-13 13:27:20"
   >
 
   <macro name="up" type="send_now" >
@@ -230,7 +229,7 @@
 <variables
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-08 14:31:32"
+   date_saved="2014-04-13 13:27:20"
   >
 </variables>
 
@@ -239,7 +238,7 @@
 <colours
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-08 14:31:32"
+   date_saved="2014-04-13 13:27:20"
   >
 
 <ansi>
@@ -296,7 +295,7 @@
 <keypad
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-08 14:31:32"
+   date_saved="2014-04-13 13:27:20"
   >
 
   <key name="0" >
@@ -410,7 +409,7 @@
 <printing
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-02-08 14:31:32"
+   date_saved="2014-04-13 13:27:20"
   >
 
 <ansi>

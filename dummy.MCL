@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE muclient>
-<!-- Saved on Tuesday, January 28, 2014, 11:54 PM -->
+<!-- Saved on Tuesday, April 15, 2014, 1:11 AM -->
 <!-- MuClient version 4.84 -->
 <!-- Written by Nick Gammon -->
 <!-- Home Page: http://www.mushclient.com/ -->
@@ -8,13 +8,13 @@
 <world
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-01-28 23:54:33"
+   date_saved="2014-04-15 01:11:08"
 
    auto_say_override_prefix="-"
    auto_say_string="say "
    chat_name="Name-not-set"
    command_stack_character=";"
-   id="1cd7edb2f608269169058bdf"
+   id="396dba4f634156118908869d"
    input_font_name="Fixedsys"
    mapping_failure="Alas, you cannot go that way."
    name="XKX"
@@ -22,7 +22,7 @@
    output_font_name="ËÎÌå"
    script_editor="notepad"
    script_editor_argument="%file"
-   script_filename="D:\Apps\MUSHclient\worlds\xkx\main.lua"
+   script_filename="D:\Apps\MUSHclient\worlds\xkx\dummy.lua"
    script_language="Lua"
    script_prefix="."
    site="112.124.8.59"
@@ -112,51 +112,19 @@
 <triggers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-01-28 23:54:33"
+   date_saved="2014-04-15 01:11:08"
   >
-  <trigger
-   custom_colour="16"
-   expand_variables="y"
-   group="shan"
-   keep_evaluating="y"
-   match="@!shan_npc"
-   regexp="y"
-   repeat="y"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
-   custom_colour="16"
-   expand_variables="y"
-   make_bold="y"
-   match="@!wei_item"
-   name="monster"
-   regexp="y"
-   repeat="y"
-   sequence="100"
-   variable="monster"
-  >
-  <send>jump</send>
-  </trigger>
   <trigger
    enabled="y"
-   group="event"
+   group="action"
    keep_evaluating="y"
-   match="^(&gt; )*¡¾Ò¥ÑÔ¡¿ÌýËµ(.*)ÎµÎªÆæ¹Û£¬²»ÉÙ½­ºþÈËÊ¿·×·×Ç°Íù¹ÛÉÍ¡£$"
+   match="^(&gt; )*¡ï (°×Óñ¾©|ÖíÌã)\(.*\)¸æËßÄã£º(\.*)$"
    regexp="y"
-   script="event"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
-   expand_variables="y"
-   group="shan"
-   match="^[&gt; ]*(@!shan_npc)ÆËÔÚµØÉÏÕõÔúÁË¼¸ÏÂ£¬¿ÚÖÐÅç³ö¼¸¿ÚÏÊÑª£¬ËÀÁË£¡$"
-   regexp="y"
-   script="on_shan_npc_dead"
    send_to="12"
    sequence="100"
   >
+  <send>local id, cmd = "%3", "%4"
+action(string.lower(id), cmd)</send>
   </trigger>
   <trigger
    group="map"
@@ -173,15 +141,6 @@
    match="^[&gt; ]*(ÄãÕýÃ¦×Å¡£|ÄãÏÖÔÚºÜÃ¦£¬Í£²»ÏÂÀ´¡£)$"
    regexp="y"
    script="on_system_busy"
-   send_to="12"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
-   group="baobiao"
-   match="^[&gt; ]*(ÕâÀïÃ»ÓÐÕâ¸öÈË¡£|Äã»¹Ã»ÓÐµ½Ä¿µÄµØ£¡|¹ùÐñËµµÀ£ºÏÖÔÚÃ»ÓÐïÚ¿ÉÒÔÈÃÄã±£¡£)$"
-   regexp="y"
-   script="on_baobiao_fail"
    send_to="12"
    sequence="100"
   >
@@ -251,75 +210,6 @@
   >
   </trigger>
   <trigger
-   group="shan"
-   match="^[&gt; ]*µ¥Õý·Ô¸ÀµÀ£º¸øÄãÔÚ.*°Ñ¡º(.*)¡»¸øÎÒÉ±ÁË£¬±ðµÄ²îÊ¹ÒÔºóÔÙËµ¡£$"
-   regexp="y"
-   script="on_shan_quest"
-   send_to="12"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
-   group="shan"
-   lines_to_match="3"
-   match="^[&gt; ]*¹§Ï²Äã£¡ÄãÓÖÍê³ÉÁËÒ»ÏîÈÎÎñ£¡\nÄã»ñµÃ½±Àø£º\n(.*)µãÊµÕ½¾­Ñé£¬(.*)µãÇ±ÄÜ£¬(.*)µã½­ºþÔÄÀú¡£$"
-   multi_line="y"
-   regexp="y"
-   script="on_shan_done"
-   send_to="12"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
-   group="baobiao"
-   match="^[&gt; ]*¹ùÐñ°ÑÒ»¸ö°ü¹üÈûÔÚÄã»³Àï¡£$"
-   regexp="y"
-   script="on_baobiao_go"
-   send_to="12"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
-   group="baobiao"
-   match="^[&gt; ]*¹ùÐñËµµÀ£ººÙºÙ£¬ÄãÉíÉÏ²»ÊÇÓÐÒ»ÌËïÚÁËÂð£¿$"
-   regexp="y"
-   script="on_baobiao_go"
-   send_to="12"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
-   group="shan"
-   match="^[&gt; ]*½­°ÙÊ¤ÉìÊÖÀ¹×¡ÄãËµµÀ£ºÃËÖ÷ºÜÃ¦£¬ÏÖÔÚ²»¼ûÍâ¿Í£¬ÄãÏÂÉ½È¥°É£¡$"
-   regexp="y"
-   script="on_shan_block"
-   send_to="12"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
-   custom_colour="16"
-   enabled="y"
-   expand_variables="y"
-   match="^[&gt; ]*Äã´Ó.*ÂòÏÂ.*(@!wei_item)¡£$"
-   regexp="y"
-   repeat="y"
-   sequence="100"
-  >
-  <send>jump</send>
-  </trigger>
-  <trigger
-   group="baobiao"
-   lines_to_match="3"
-   match="^[&gt; ]*Äã¼û¶Ô·½¶ÔÉÏÁË°µºÅ£¬±ã°ÑÊÖÖÐµÄïÚ»õ½»¸øÁË¶Ô·½¡£\nÄã»ñµÃ½±Àø£º\n(.*)µãÊµÕ½¾­Ñé£¬(.*)µãÇ±ÄÜ£¬(.*)µã½­ºþÔÄÀú¡£$"
-   multi_line="y"
-   regexp="y"
-   script="on_baobiao_done"
-   send_to="12"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
    enabled="y"
    group="system"
    match="^[&gt; ]*ÄãÆËÔÚµØÉÏÕõÔúÁË¼¸ÏÂ£¬¿ÚÖÐÅç³ö¼¸¿ÚÏÊÑª£¬ËÀÁË£¡$"
@@ -330,43 +220,11 @@
   >
   </trigger>
   <trigger
-   group="baobiao"
-   lines_to_match="4"
-   match="^[&gt; ]*ÄãÏò¹ùÐñ´òÌýÓÐ¹Ø¡º±£ïÚ¡»µÄÏûÏ¢¡£\n\n¹ùÐñ¸ßÐËµØµÀ£º¿´ÄãÎäÒÕÒ²²»´í£¬¾ÍÈÃÄãÊÔÊÔ°É\n¹ùÐñËµµÀ£ºÏÖÔÚÓÐÒ»ÌËïÚÔËÍù(.+)£¬ÄãÒª¸ºÔðÂ·ÉÏµÄ°²È«£¬²»¿ÉÓÐ²î´í¡£$"
-   multi_line="y"
-   regexp="y"
-   script="on_baobiao_ask"
-   send_to="12"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
-   group="baobiao"
-   lines_to_match="2"
-   match="^[&gt; ]*ÄãÏò¹ùÐñ´òÌýÓÐ¹Ø¡º±£ïÚ¡»µÄÏûÏ¢¡£\n¹ùÐñËµµÀ£ºÇëÉÔµÈ£¡$"
-   multi_line="y"
-   regexp="y"
-   script="on_baobiao_fail"
-   send_to="12"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
    enabled="y"
    group="system"
    match="^[&gt; ]*ÄãÖ»¾õµÃÍ·»èÄÔÕÍ£¬ÑÛÇ°Ò»ºÚ£¬½Ó×ÅÊ²Ã´Ò²²»ÖªµÀÁË¡­¡­$"
    regexp="y"
    script="on_system_fainted"
-   send_to="12"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
-   enabled="y"
-   group="wei"
-   match="^[&gt; ]*Î¤Ð¡±¦·Ô¸ÀµÀ£º¸øÄãÔÚ.*ÕÒµ½¡º(.+)¡»¸øÎÒ£¬ÎÒ»áºÃºÃÐ»Äã¡£$"
-   regexp="y"
-   script="on_wei_ask"
    send_to="12"
    sequence="100"
   >
@@ -387,7 +245,7 @@
 <aliases
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-01-28 23:54:33"
+   date_saved="2014-04-15 01:11:08"
   >
   <alias
    match="^show (.*)$"
@@ -421,7 +279,7 @@
 <timers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-01-28 23:54:33"
+   date_saved="2014-04-15 01:11:08"
   >
   <timer second="30.00" offset_second="0.00"    send_to="12"
 >
@@ -435,7 +293,7 @@
 <macros
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-01-28 23:54:33"
+   date_saved="2014-04-15 01:11:08"
   >
 
   <macro name="up" type="send_now" >
@@ -529,17 +387,29 @@
 <variables
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-01-28 23:54:33"
+   date_saved="2014-04-15 01:11:08"
   >
+  <variable name="bag_dummy_id">hsly</variable>
   <variable name="baobiao_exp">142</variable>
   <variable name="baobiao_loc">Ãö½­</variable>
   <variable name="baobiao_qn">23</variable>
   <variable name="baobiao_yl">1</variable>
+  <variable name="dazuo_desc">Äã×øÏÂÀ´ÔËÆøÓÃ¹¦£¬Ò»¹ÉÄÚÏ¢¿ªÊ¼ÔÚÌåÄÚÁ÷¶¯¡£</variable>
+  <variable name="dazuo_end_desc">ÄãÔË¹¦Íê±Ï£¬ÉîÉîÎüÁË¿ÚÆø£¬Õ¾ÁËÆðÀ´¡£</variable>
+  <variable name="dazuo_full_desc">ÄãµÄÄÚÁ¦ÐÞÎªËÆºõÒÑ¾­´ïµ½ÁËÆ¿¾±£¬ÎÞ·¨ÔÙ¿¿´ò×øÀ´ÌáÉýÁË¡£</variable>
+  <variable name="dazuo_halt_desc">Äã°ÑÕýÔÚÔËÐÐµÄÕæÆøÇ¿ÐÐÑ¹»Øµ¤Ìï£¬Õ¾ÁËÆðÀ´¡£</variable>
+  <variable name="heal_dummy_id">hqly</variable>
+  <variable name="me_family">È«Õæ</variable>
+  <variable name="me_id">byj</variable>
+  <variable name="me_menpai">È«Õæ</variable>
+  <variable name="me_name">°×Óñ¾©</variable>
   <variable name="quqing_loc">¼ÎÐË</variable>
   <variable name="shan_exp">267</variable>
   <variable name="shan_npc">Òó½õ</variable>
   <variable name="shan_qn">19</variable>
   <variable name="shan_yl">2</variable>
+  <variable name="task_id">byj's task</variable>
+  <variable name="ttask_id">byj's ttask</variable>
   <variable name="wei_item">±ùÌÇºùÂ«</variable>
 </variables>
 
@@ -548,7 +418,7 @@
 <colours
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-01-28 23:54:33"
+   date_saved="2014-04-15 01:11:08"
   >
 
 <ansi>
@@ -605,7 +475,7 @@
 <keypad
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-01-28 23:54:33"
+   date_saved="2014-04-15 01:11:08"
   >
 
   <key name="0" >
@@ -719,7 +589,7 @@
 <printing
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-01-28 23:54:33"
+   date_saved="2014-04-15 01:11:08"
   >
 
 <ansi>

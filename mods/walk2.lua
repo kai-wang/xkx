@@ -501,6 +501,8 @@ handlers = {
 			get_shanpai(handlers.done, handlers.fail)
 		elseif(item == "fire") then
 			get_fire(handlers.done, handlers.fail)
+		elseif(item == "hmling") then
+			get_heimuling(handlers.done, handlers.fail)
 		end
 	end
 }

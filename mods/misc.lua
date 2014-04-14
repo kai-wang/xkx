@@ -7,10 +7,10 @@ end
 
 function get_xionghuang(f_ok)
 	wait.make(function()
-		Execute("give xionghuang to " .. var.me_id)
+		Execute("set brief;fly wm;nw;give xionghuang to " .. var.me_id)
 		local l, w = wait.regexp("^(> )*(你身上没有这样东西)|(.*给你一包雄黄).*$")
 		if(l:match("你身上没有这样东西") ~= nil) then
-			Execute("set brief;fly wm;e;s;s;e;e;n;buy xionghuang")
+			Execute("se;e;s;s;e;e;n;buy xionghuang")
 			wait.time(5)
 			Execute("fly wm;nw;give xionghuang to " .. var.me_id)
 			l, w = wait.regexp("^(> )*(你身上没有这样东西)|(.*给你一包雄黄).*$")
@@ -23,10 +23,10 @@ end
 
 function get_fire(f_ok, f_fail)
 	wait.make(function()
-		Execute("give fire to " .. var.me_id)
+		Execute("set brief;fly wm;nw;give fire to " .. var.me_id)
 		local l, w = wait.regexp("^(> )*(你身上没有这样东西)|(.*给你一支火折).*$")
 		if(l:match("你身上没有这样东西") ~= nil) then
-			Execute("set brief;fly wm;e;s;s;e;s;buy fire")
+			Execute("se;e;s;s;e;s;buy fire")
 			wait.time(5)
 			Execute("fly wm;nw;give fire to " .. var.me_id)
 			l, w = wait.regexp("^(> )*(你身上没有这样东西)|(.*给你一支火折).*$")
@@ -39,10 +39,10 @@ end
 
 function get_yaopai(f_ok, f_fail)
 	wait.make(function()
-		Execute("look yao pai")
+		Execute("set brief;fly wm;nw;look yao pai")
 		local l, w = wait.regexp("^(> )*(你要看什么)|(一块银质腰牌).*$")
 		if(l:match("你要看什么") ~= nil) then
-			Execute("set brief;fly lz;w;n;n;e;ask nu about 腰牌")
+			Execute("fly lz;w;n;n;e;ask nu about 腰牌")
 			--wait.time(5)
 			Execute("fly wm;nw;look yao pai")
 			l, w = wait.regexp("^(> )*(你要看什么)|(一块银质腰牌).*$")
@@ -55,7 +55,7 @@ end
 
 function get_shanpai(f_ok, f_fail)
 	wait.make(function()
-		Execute("give shan pai to " .. var.me_id)
+		Execute("set brief;fly wm;nw;give shan pai to " .. var.me_id)
 		local l, w = wait.regexp("^(> )*(你身上没有这样东西)|(.*给你一块赏善铜牌).*$")
 		if(l:match("你身上没有这样东西") ~= nil) then
 			Execute("set brief;fly hy;n;w;w;w;w;s;n;s;ask zhang about 赏善")
@@ -70,11 +70,13 @@ function get_shanpai(f_ok, f_fail)
 end
 
 function get_sling(f_ok, f_fail)
+	if(var.me_menpai == "少林") then call(f_ok) return end
+	
 	wait.make(function()
-		Execute("get yingxiong ling;look yingxiong ling")
+		Execute("set brief;fly wm;nw;get yingxiong ling;look yingxiong ling")
 		local l, w = wait.regexp("^(> )*(你要看什么)|(少林英雄令).*")
 		if(l:match("你要看什么") ~= nil) then
-			Execute("set brief;fly wm;e;s;s;s;s;give 1 gold to seng")
+			Execute("se;e;s;s;s;s;give 1 gold to seng")
 			--wait.time(5)
 			Execute("fly wm;nw;get yingxiong ling;look yingxiong ling")
 			l, w = wait.regexp("^(> )*(你要看什么)|(少林英雄令).*")
@@ -89,10 +91,10 @@ function get_qling(f_ok, f_fail)
 	if(var.me_menpai == "全真") then call(f_ok) return end
 	
 	wait.make(function()
-		Execute("get chongyang ling;look chongyang ling")
+		Execute("set brief;fly wm;nw;get chongyang ling;look chongyang ling")
 		local l, w = wait.regexp("^(> )*(你要看什么)|(重阳令).*")
 		if(l:match("你要看什么") ~= nil) then
-			Execute("set brief;fly wm;e;s;s;w;w;give 1 gold to daoren")
+			Execute("se;e;s;s;w;w;give 1 gold to daoren")
 			--wait.time(5)
 			Execute("fly wm;nw;get chongyang ling;look chongyang ling")
 			local l, w = wait.regexp("^(> )*(你要看什么)|(重阳令).*")
@@ -105,10 +107,10 @@ end
 
 function get_ditu(f_ok, f_fail)
 	wait.make(function()
-		Execute("get gaochang ditu;look gaochang ditu")
+		Execute("set brief;fly wm;nw;get gaochang ditu;look gaochang ditu")
 		local l, w = wait.regexp("^(> )*(你要看什么)|(高昌迷宫地图).*$")
 		if(l:match("你要看什么") ~= nil) then
-			Execute("set brief;fly gw;n;n;n;e;e;ne;e;n")
+			Execute("fly gw;n;n;n;e;e;ne;e;n")
 			wait.time(3)
 			Execute("fly xx;su;s;ed;ask li about 苏普;ask li about 父母;look shou juan")
 			l, w = wait.regexp("^(> )*(这是一方雪白的手绢)|(你要看什么)|(这里没有这个人).*$")
@@ -137,9 +139,26 @@ end
 
 function get_xunzhang(f_done, f_fail)
 	wait.make(function()
-		Execute("look xunzhang")
+		Execute("set brief;fly wm;nw;look xunzhang")
 		local l, w = wait.regexp("^(> )*(荣誉勋章)|(你要看什么).*$")
 		if(l:match("你要看什么")) then call(f_fail) else call(f_done) end
+	end)
+end
+
+function get_heimuling(f_ok, f_fail)
+	wait.make(function()
+		Execute("set brief;fly wm;nw;look heimu ling")
+		local l, w = wait.regexp("^(> )*(黑木令)|(你要看什么).*$")
+		if(l:match("你要看什么") ~= nil) then 
+			Execute("fly qz;w;n;n;e;s;ask ren about 比剑")
+			Execute("er;et;start")
+			wait.time(3)
+			Execute("fly wm;nw;er;look heimu ling")
+			l, w = wait.regexp("^(> )*(黑木令)|(你要看什么).*$")
+			if(l:match("你要看什么") ~= nil) then print("黑木令失败了") call(f_fail) return end
+		end
+		print("黑木令准备好了")
+		call(f_ok)
 	end)
 end
 
