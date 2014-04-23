@@ -149,7 +149,9 @@ me.ssf = function(f_done)
 		if(l:match("这里没有这个人") ~= nil) then
 			print("首领不在,断线了...........")
 			Execute("halt;quit")
-			Disconnect()
+			wait.time(2)
+			Execute("halk;quit")
+			--Disconnect()
 			return
 		end
 		

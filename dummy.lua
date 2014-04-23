@@ -25,21 +25,6 @@ loadmod("system.lua")
 loadmod("roominfo.lua")
 loadmod("maps.lua")
 loadmod("walk2.lua")
+loadmod("dummy_get.lua")
 
 map.loadall()
-
-
-function action(id, cmd)
-	if(cmd == "xunzhang") then action_xz(id) end
-end
-
-
-function action_xz(id)
-	wait.make(function()
-		Execute("tuo xunzhang;give xunzhang to " .. id);
-		local l, w = wait.regexp("^(> )(这里没有这个人|你身上没有这样东西|你给.*一枚荣誉勋章).*$")
-		if(l:match("荣誉勋章")) then call(f_ok) else call(f_fail) end
-	end)
-end
-
-

@@ -529,26 +529,21 @@ function getRegion(name)
 		end			
 	end
 	
-	return matched
-	
-	--local region = regions[name]
-	--if(region == nil) then
-	--	return regions[mappings[name]]
-	--else
-	--	return region
-	--end
+	return matched	
 end
 
 function findpath(regionName, roomName)
 	local match = {}
 	local regions = getRegion(regionName)
-	local prevRoom = nil
+	--放到里面去了
+	--local prevRoom = nil
 	local path = nil
 
 	if(regions == {}) then return end
 	
 	for j = 1, #regions do
 		local region = regions[j]
+		local prevRoom = nil
 		
 		for i, v in ipairs(region.rooms) do
 			if(v.name == roomName and v.attr ~= "danger") then
@@ -583,22 +578,6 @@ end
 
 function sl(regionName, roomName, f_ok, f_fail, f_stop)
 	local path = findpath(regionName, roomName)
-	--[[
-	for x = 1, 2 do
-		if(getRegion(regionName .. x)) then
-			local path1 = findpath(regionName .. x, roomName)
-			if(path ~= nil and path ~= {}) then
-				if(path1 ~= nil) then
-					for i, v in ipairs(path1) do
-						table.insert(path, v)
-					end
-				end
-			else
-				path = path1
-			end
-		end
-	end
-	]]--
 	step_by_step(path, f_ok, f_fail, f_stop)
 end
 
@@ -655,11 +634,6 @@ function step_by_step(path, f_ok, f_fail, f_stop)
 end
 
 function step(cmd, f_ok, f_fail, f_stop)
---[[
-	msg.subscribe("msg_run_ok", f_ok)
-	msg.subscribe("msg_run_stop", f_stop)
-	msg.subscribe("msg_run_fail", f_fail)
-]]--
 	run(cmd, f_ok, f_fail, f_stop)
 end
 
@@ -668,8 +642,6 @@ function stop()
 	local w, r = walk_cxt, run_cxt
 	w.stop = true
 	r.stop = true
-	
-	--msg.subscribe("msg_slowwalk_stop", function() call(f_stop) end)
 end
 
 function fail()
@@ -710,24 +682,12 @@ function walk_fail()
 	print("slow walk fail")
 	local c = walk_cxt
 	call(c.walk_fail)
---[[
-	stop()
-	print("slow walk fail")
-	EnableTriggerGroup("walk_special", false)
-	EnableTriggerGroup("walk", false)
-	msg.broadcast("msg_slowwalk_fail")
-]]--
 end
 
 function walk_stop()
 	print("slow walk stop")
 	local c = walk_cxt
 	call(c.walk_stop)
-	--[[
-	EnableTriggerGroup("walk_special", false)
-	EnableTriggerGroup("walk", false)
-	msg.broadcast("msg_slowwalk_stop")
-	]]--
 end
 
 function stopped()
@@ -742,11 +702,6 @@ function walk_ok()
 	-- add stop flag here --------
 	c.stop = true
 	call(c.walk_ok)
-	--[[
-	EnableTriggerGroup("walk_special", false)
-	EnableTriggerGroup("walk", false)
-	msg.broadcast("msg_slowwalk_ok")
-	]]--
 end
 
 function walkaround(dp, dir, f_ok, f_fail, f_stop)
@@ -756,9 +711,6 @@ function walkaround(dp, dir, f_ok, f_fail, f_stop)
 	local walk_deepth = tonumber(dp)
 	
 	if(room ==  nil) then print("找不到当前房间 : ", walk_cxt.currentId) call(f_fail) return end
-	
-	--if(dir ~= nil) then dir = dir:gsub("边","") end 
-	--if(var.walk_deepth ~= nil) then walk_deepth = tonumber(var.walk_deepth) end
 	
 	--声明一下两个函数-------------------------------------------------------------------
 	local enqueue, findexit

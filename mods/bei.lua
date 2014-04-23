@@ -16,7 +16,7 @@ main = function()
 	msg.subscribe("msg_slowwalk_ok", bei.notfound)
 	msg.subscribe("msg_slowwalk_fail", bei.fail)
 ]]--
-	Execute("set brief;fly wm;e;n;e;e;e;task")
+	Execute("set brief;fly wm;e;n;e;e;e;task;fly wm")
 end
 
 exit = function()
@@ -110,7 +110,7 @@ end
 parseAndLoc = function()
 	wait.make(function()
 		EnableTriggerGroup("bei_task1", true)
-		Execute("fly wm;u;task1;set task1")
+		Execute("u;task1;set task1")
 		local l, w = wait.regexp("^(> )*(你现在没有任何使命！)|(设定环境变数：task1 = \"YES\")$")
 		EnableTriggerGroup("bei_task1", false)
 		if(l and string.match(l, "你现在没有任何使命")) then

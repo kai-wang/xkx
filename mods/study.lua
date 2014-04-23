@@ -20,9 +20,11 @@ end
 function done()
 	EnableTriggerGroup("study", false)
 	EnableTriggerGroup("study_check", false)
+	me.profile.fight_wear(cxt.f_done)
+	--[[
 	busy_test(function() me.profile.fight_wear() end)
 	busy_test(function() call(cxt.f_done) end)
-	--msg.broadcast("msg_study_done")
+	]]--
 end
 
 function start(f_done)
@@ -36,12 +38,10 @@ function start(f_done)
 		if(var.study_loc == nil or var.study_loc == "") then 
 			done()
 		else
-			me.profile.int_wear()
-			wait.time(5)
-			--Execute(var.study_loc)
-			--Execute("lll")
-			Execute(var.lll)
-			Execute("hp")
+			me.profile.int_wear(function()
+				Execute(var.lll)
+				Execute("hp")
+			end)
 		end
 	end)
 end
@@ -49,7 +49,6 @@ end
 function continue()
 	EnableTriggerGroup("study_check", true)
 	Execute("er;et")
-	--Execute("lll;hp;hp")
 	Execute(var.lll)
 	Execute("hp;hp")
 end
