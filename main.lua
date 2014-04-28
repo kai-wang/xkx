@@ -23,21 +23,15 @@ loadmod("msg.lua")
 loadmod("system.lua")
 loadmod("baobiao.lua")
 loadmod("wei.lua")
-loadmod("info_wei.lua")
-
 loadmod("shan.lua")
-loadmod("info_shan.lua")
-
 loadmod("roominfo.lua")
 loadmod("maps.lua")
 loadmod("walk2.lua")
-
 loadmod("quqing.lua")
 loadmod("guanfu.lua")
 loadmod("fight.lua")
 loadmod("bei.lua")
 loadmod("item.lua")
---loadmod("heal.lua")
 loadmod("study.lua")
 
 --include(myid .. ".lua")

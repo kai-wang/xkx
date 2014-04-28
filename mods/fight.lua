@@ -13,7 +13,7 @@ prepare = function(busy_list, attack_list)
 	me.profile.powerup()
 	context.infight = false
 	context.action = fight.busy
-	ts.new("fight", "fight", 2, "fight.action\(\)")
+	ts.new("fight", "fight", 1.5, "fight.action\(\)")
 end
 
 action = function()
@@ -83,18 +83,17 @@ end
 attack = function(cmd)
 	--ts.disable("fight")
 	wait.make(function()
-		wait.time(1)
+		repeat
+			Execute("touxi")
+			local l, w = wait.regexp("^(> )*(你的动作还没有完成，不能偷袭。)|(你想偷袭谁？)$")
+			if(l:match("不能偷袭")) then wait.time(0.3) end
+		until(l:match("你想偷袭谁") ~= nil)
+		
 		perform_attack(cmd)
+			
 		context.action = fight.perform_busy
 		ts.reset("fight", 1.5)
 	end)
-	--[[
-	busy_test(function()
-		perform_attack(cmd)
-		context.action = fight.perform_busy
-		ts.reset("fight", 1.5)
-	end, 0.8)
-	]]--
 end
 
 attack2 = function()
@@ -126,14 +125,6 @@ end
 on_busy_success = function()
 	--stopTimer("busy")
 	attack()
-	--[[
-	wait.make(function()
-		wait.time(1)
-		attack()
-	end)
-	]]--
-	--stopBusyTimer()
-	--attack()
 end
 
 on_perform_cd_ok = function(name, line, wildcards)

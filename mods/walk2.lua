@@ -490,6 +490,16 @@ handlers = {
 		handlers.done()
 	end,
 	
+	["circle"] = function()
+		wait.make(function()
+			Execute("circle wan")
+			local l, w = wait.regexp("^(> )*(你将碗旋开)|(很快碗又搬回了原位).*$")
+			print(l)
+			if(l:match("搬回了原位") ~= nil) then Execute("circle wan") end
+			handlers.done()
+		end)
+	end,
+	
 	["c"] = function(item)
 		if(item == "sling") then
 			if(var.me_family == "少林") then handlers.done() return end

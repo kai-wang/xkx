@@ -71,7 +71,7 @@ profile = {
 	},
 	
 	study_list = {
-		{ loc = "fly wm;e;n;e;e;n;n", cmd = "yanjiu xiantian-qigong 1000;yun regenerate"}
+		{ loc = "fly wm;e;n;e;e;n;n", cmd = "yanjiu force 1000;yun regenerate"}
 	--[[
 		[1] = { loc = "wcy", cmd = "xue wang xiantian-qigong 40;yun regenerate" },
 		[2] = { loc = "fly wm;e;s;s;e;n;", cmd = "xue zhu literate 40;yun regenerate" },

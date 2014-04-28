@@ -450,7 +450,8 @@ map["loadall"] = function()
 	"hmy",
 	"fz1",
 	"kl1",
-	"kl2"
+	"kl2",
+	"mj1"
 	}
 
 	regions = {}
