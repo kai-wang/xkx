@@ -11,11 +11,6 @@ local task1_array = {}
 
 main = function()
 	EnableTriggerGroup("bei", true)
-
---[[	
-	msg.subscribe("msg_slowwalk_ok", bei.notfound)
-	msg.subscribe("msg_slowwalk_fail", bei.fail)
-]]--
 	Execute("set brief;fly wm;e;n;e;e;e;task;fly wm")
 end
 
@@ -24,12 +19,7 @@ exit = function()
 	fight.stop()
 	EnableTriggerGroup("bei", false)
 	EnableTriggerGroup("bei_task1", false)
-	
---[[
-	msg.unsubscribe("msg_slowwalk_ok")
-	msg.unsubscribe("msg_slowwalk_fail")
-	msg.unsubscribe("msg_slowwalk_stop")
-]]--
+
 	msg.broadcast("msg_bei_exit")
 end
 

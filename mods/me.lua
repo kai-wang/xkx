@@ -140,10 +140,13 @@ end
 me.ssf = function(f_done)
 	if(me["in_ssf"] == nil or (not me["in_ssf"])) then print("没中生死符") call(f_done) return end
 	
+	busy_test(function() Execute("fly wm;e;s;w;qukuan 15 gold") end)
+	busy_test(function() Execute("fly wm;e;s;w;qukuan 15 gold") end)
+	
 	wait.make(function()
-		Execute("fly wm;e;s;w;qukuan 15 gold")
-		wait.time(5)
-		Execute("fly lj;s;give 15 gold to shouling")
+		busy_test(function() Execute("fly wm;e;s;w;qukuan 15 gold") end)
+		--wait.time(5)
+		busy_test(function() Execute("fly lj;s;give 15 gold to shouling") end)
 		local l, w = wait.regexp("^(> )*(这里没有这个人)|(.*你没有中生死符啊，你想中吗)|(.*你身上的生死符已解了).*$")
 		
 		if(l:match("这里没有这个人") ~= nil) then
@@ -163,7 +166,7 @@ me.ssf = function(f_done)
 end
 
 me.qudu = function(f_done)
-	if(me["in_poison"] == nil or (not me["in_poison"])) then print("没有中毒") call(f_done) return end
+	--if(me["in_poison"] == nil or (not me["in_poison"])) then print("没有中毒") call(f_done) return end
 	
 	wait.make(function()
 		Execute("fly wm;nw;er;et;yun cure")
@@ -209,9 +212,9 @@ me.jingqi = function(f_done)
 			end)
 		else
 			if(jsP < 95) then
-				local dannumber = (100-jsP)/5
+				local dannumber = math.ceil((100-jsP)/5)
 				local price = dannumber * 35
-				if(dannumber == math.ceil(dannumber)) then dannumber = math.ceil(dannumber) + 1 else dannumber = math.ceil(dannumber) end
+				--if(dannumber == math.ceil(dannumber)) then dannumber = math.ceil(dannumber) + 1 else dannumber = math.ceil(dannumber) end
 				Execute("fly wm;e;s;w;qukuan " .. price .. " silver")
 				wait.time(5)
 				Execute("e;s;e;e;n")

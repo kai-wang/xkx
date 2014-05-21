@@ -83,12 +83,14 @@ end
 attack = function(cmd)
 	--ts.disable("fight")
 	wait.make(function()
+	--[[
 		repeat
 			Execute("touxi")
 			local l, w = wait.regexp("^(> )*(你的动作还没有完成，不能偷袭。)|(你想偷袭谁？)$")
-			if(l:match("不能偷袭")) then wait.time(0.3) end
+			if(l:match("不能偷袭")) then wait.time(0.5) end
 		until(l:match("你想偷袭谁") ~= nil)
-		
+	--]]
+		wait.time(0.5)
 		perform_attack(cmd)
 			
 		context.action = fight.perform_busy

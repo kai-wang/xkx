@@ -92,3 +92,20 @@ function check(line, name, wildcards)
 		Execute("hp")
 	end
 end
+
+
+module ("research", package.seeall)
+
+local cxt = {}
+
+function start(f_done)
+	if(var.research_num == nil) then var.research_num = 1
+	else var.research_num = tonumber(var.research_num) % #me.profile.research_list end
+	
+	local skill = me.profile.research_list[tonumber(var.research_num)]
+	study.start(function()
+		Execute("fly wm;e;s;s;s;w;w;u;u;gamble big skill " .. skill .. " 2000")
+		busy_test(function() Execute("fly wm") call(f_done) end )
+	end)
+	
+end

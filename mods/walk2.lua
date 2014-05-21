@@ -493,7 +493,7 @@ handlers = {
 	["circle"] = function()
 		wait.make(function()
 			Execute("circle wan")
-			local l, w = wait.regexp("^(> )*(你将碗旋开)|(很快碗又搬回了原位).*$")
+			local l, w = wait.regexp("^.*(你将碗旋开)|(很快碗又搬回了原位).*$")
 			print(l)
 			if(l:match("搬回了原位") ~= nil) then Execute("circle wan") end
 			handlers.done()
@@ -735,7 +735,9 @@ function walkaround(dp, dir, f_ok, f_fail, f_stop)
 		findexit(roomAll[v.to], room.id, deepth+1)
 		local stepback = find_path(roomAll, v.to, room.id)
 		if(stepback) then
-			local path = table.concat(stepback, ";")
+			local path = stepback[1]
+			if(#stepback > 1) then path = "set brief;" .. table.concat(stepback, ";", 1, #stepback - 1) .. ";unset brief;" .. stepback[#stepback] end
+			--local path = table.concat(stepback, ";")
 			table.insert(tbl, {["from"]=v.to, ["to"]=room.id, ["path"]=path})
 		else
 			table.insert(tbl, {["from"]=v.to, ["to"]=room.id, ["path"]="set brief;" .. roomAll[room.id].path .. ";unset brief;look"})

@@ -241,6 +241,43 @@ halt = function()
 	busy_test(function() call(cxt.f_done) end)
 end
 
+
+module ("tuna", package.seeall)
+
+local cxt = {}
+
+start = function(f_done)
+	print("¿ªÊ¼ÍÂÄÉ")
+	EnableTriggerGroup("tuna", true)
+	cxt.done_flag = false
+	cxt.f_done = f_done
+	Execute("et;tuna 1000")
+end
+
+continue = function()
+	if(not cxt.done_flag) then
+		Execute("et;tuna 1000")
+	else
+		EnableTriggerGroup("tuna", false)
+		busy_test(function() dazuo.start(function() tuna.start() end) end)
+	end
+end
+
+done = function()
+	--dazuo.start(function() tuna.start() end)
+	cxt.done_flag = true
+	wait.make(function()
+		wait.time(10)
+		Execute("et")
+		continue()
+	end)
+end
+
+halt = function()
+	Execute("halt;er")
+	EnableTriggerGroup("tuna", false)
+	busy_test(function() call(cxt.f_done) end)
+end
 ------------------------------------------------------------------------------
 --                 dazuo
 ------------------------------------------------------------------------------

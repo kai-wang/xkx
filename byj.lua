@@ -41,43 +41,43 @@ profile = {
 	
 	busy_list = {
 		[1] = {	i = 6, action = "wield " .. var.weapon .. ";enable parry sun-finger;perform parry.qiankun" 	},
-		[2] = {	i = 5, action = "wield " .. var.weapon .. ";enable sword quanzhen-jian;perform sword.ding" 	}--,
-		--[3] = { i = 7, action = "unwield all;perform finger.sandie;wield " .. var.weapon}
-		--[2] = {	i = 5, action = "wield " .. var.weapon .. ";enable sword quanzhen-jian;perform sword.ding" 	}
+		[2] = {	i = 5, action = "wield " .. var.weapon .. ";enable sword quanzhen-jian;perform sword.ding" 	}
 	},
 	
 	attack_list1 = {
 		[1] = {	i = 3, action = "enable sword quanzhen-jian;enable dodge qixing-bufa;wield jian;perform dodge.qixing"},
 		[2] = {	i = 8, action = "enable sword jinshe-jian;unwield all;wield jian;perform sword.wandao"},
-		[3] = {	i = 9, action = "enable sword miaojia-jianfa;unwield all;wield jian;perform sword.duoming"},
-		[4] = {	i = 1, action = "enable sword quanzhen-jian;wield jian;perform sword.sanqing"},
-		--[5] = { i = 2, action = "enable parry jinshe-zhang;wield jian;perform parry.fugu"},
-		[5] = { i = 7, action = "unwield all;perform finger.sandie;wield " .. var.weapon}
+		[3] = {	i = 1, action = "enable sword quanzhen-jian;wield jian;perform sword.sanqing"},
+		[4] = { i = 7, action = "unwield all;perform finger.sandie;wield " .. var.weapon}
 	},
 	
 	attack_list2 = {
 		[1] = { i = 3, action = "enable sword quanzhen-jian;enable dodge qixing-bufa;unwield all;perform strike.sanhua;wield ".. var.weapon .. ";perform sword.jianyi;perform dodge.qixing" },
 		[2] = {	i = 1, action = "enable sword quanzhen-jian;unwield all;perform strike.sanhua;wield ".. var.weapon .. ";perform sword.jianyi;perform sword.sanqing"},
-		[3] = {	i = 9, action = "enable sword miaojia-jianfa;unwield all;wield jian;perform sword.duoming"},
-		[4] = {	i = 8, action = "enable sword jinshe-jian;unwield all;wield " .. var.weapon .. ";perform sword.wandao"},
-		[5] = {	i = 4, action = "unwield all;hubo"},
-		[6] = { i = 7, action = "unwield all;perform finger.sandie;wield " .. var.weapon}
+		[3] = {	i = 8, action = "enable sword jinshe-jian;unwield all;wield " .. var.weapon .. ";perform sword.wandao"},
+		[4] = {	i = 4, action = "unwield all;hubo"},
+		[5] = { i = 7, action = "unwield all;perform finger.sandie;wield " .. var.weapon}
 	},
 	
 	attack_list3 = {
 		[1] = {	i = 4, action = "unwield all;enable strike haotian-zhang;bei haotian-zhang;hubo"},
 		[2] = { i = 7, action = "unwield all;perform finger.sandie"}
-		--[3] = { i = 2, action = "unwield all;enable parry jinshe-zhang;perform parry.fugu"}
 	},
 	
 	study_list = {
-		{ loc = "fly wm;e;n;e;e;n;n", cmd = "yanjiu force 1000;yun regenerate"}
+		{ loc = "fly wm;e;n;e;e;n;n", cmd = "yanjiu dodge 1000;yun regenerate"}
 	--[[
 		[1] = { loc = "wcy", cmd = "xue wang xiantian-qigong 40;yun regenerate" },
 		[2] = { loc = "fly wm;e;s;s;e;n;", cmd = "xue zhu literate 40;yun regenerate" },
 		[3] = { loc = "wcy", cmd = "xue wang strike 40;yun regenerate" },
 		[4] = { loc = "wcy", cmd = "xue wang parry 40;yun regenerate" }
 	]]--
+	},
+	
+	research_list = {
+		--{ skill = "xiantian-qigong"},
+		{ skill = "force" },
+		{ skill = "dodge" }
 	},
 	
 	powerup = function()
@@ -114,7 +114,7 @@ profile = {
 	int_wear = function(f_done)
 		wait.make(function()
 			Execute("tuo all;unwield all")
-			Execute("wear muxi yi;wield jingtan jian;wear liupan xue;wear dongmei hushou;wear tianwei mao;wear xunzhang")
+			Execute("wear muxi yi;wield yumen jian;wear liupan xue;wear dongmei hushou;wear tianwei mao;wear xunzhang")
 			wait.time(1)
 			call(f_done)
 		end)
@@ -122,7 +122,7 @@ profile = {
 	
 	fight_wear = function(f_done)
 		wait.make(function()
-			Execute("tuo all;give qingwei hushou to byj;give shenying jian to byj;give tianwei mao to byj;give zihe yi to byj;give yinling xue to byj")
+			Execute("tuo all;give qingwei hushou to byj;give yumen jian to byj;give tianwei mao to byj;give zihe yi to byj;give yinling xue to byj")
 			Execute("wear all;wield jian")
 			busy_test(function() call(f_done) end)
 		end)
