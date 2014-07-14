@@ -114,3 +114,20 @@ getitemnum = function(str)
 	return num
 end
 
+getseconds = function(str)
+	local minute, second = 0, 0
+	local re = rex.new("(((零|一|二|三|四|五|六|七|八|九|十|百|千|万)*)(分)){0,1}(((零|一|二|三|四|五|六|七|八|九|十|百|千|万)*)(秒)){0,1}(.*)")
+	local a, b, matchs = re:match(str)
+	
+	if(matchs ~= nil) then
+		if(matchs[2] ~= false) then
+			minute = chs2num(matchs[2])
+		end
+		
+		if(matchs[6] ~= false) then
+			second = chs2num(matchs[6])
+		end
+	end
+	
+	return (minute*60 + second)
+end

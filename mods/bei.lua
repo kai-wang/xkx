@@ -19,52 +19,37 @@ exit = function()
 	fight.stop()
 	EnableTriggerGroup("bei", false)
 	EnableTriggerGroup("bei_task1", false)
-
-	msg.broadcast("msg_bei_exit")
-end
-
-available = function(t)
-	if(t == nil or t == 0) then msg.broadcast("msg_bei_available")
-	else
-		wait.make(function()
-			wait.time(t)
-			msg.broadcast("msg_bei_available")
-		end)
-	end
 end
 
 
 done = function()
 	var.task_status = "done"
+	var.task_end_time = os.time()
+	if(var.double_bonus == "true") then var.task_available_time = os.time() end
 	exit()
-	
-	if(var.double_bonus ~= "true") then
-		local elapse = os.time() - tonumber(var.bei_start_time)
-		local remaining = 240 - elapse
-		if(remaining <= 0) then available() else available(remaining) end
-	else
-		available()
-	end
 end
 
 fail = function()
 	var.task_status = "fail"
 	exit()
-	--先暂时间隔5分钟，应该要计算出来的
-	available(300)
 	Execute("halt;fly wm")
 end
 
+available = function()
+	if(var.task_available_time == "") then return true end
+	if(os.time() >= tonumber(var.task_available_time)) then return true else return false end
+end
+
+--[[
 retry = function()
 	var.task_status = "retry"
 	if(tonumber(var.task_retry_times) >= tonumber(var.task_retry_max)) then fail() return end
 	
 	exit()
-	--15秒后重新做
-	available(15)
-	var.task_retry_times = tonumber(var.task_retry_times) + 1
 	Execute("halt;fly wm")
 end
+]]--
+
 
 reloc = function()
 	wait.make(function()
@@ -82,10 +67,17 @@ start = function(name, line, wildcards)
 	var.task_found = false
 	var.task_retry_times = 0
 	var.task_status = "start"
-	var.task_start_time = os.time()
+	--var.task_start_time = os.time()
 	var.task_escape_dir = ""
 	
 	parseAndLoc()
+end
+
+logtime = function(name, line, wildcards)
+	local st = os.time()
+	var.task_start_time = st
+	var.task_available_time = st + 120	-- 非双倍情况下，2分钟一个task
+	var.task_end_time = st + getseconds(wildcards[2])
 end
 
 resume = function()
@@ -117,7 +109,6 @@ parseAndLoc = function()
 			else
 				var.task_city = city
 				Execute("loc " .. var.task_id)
-				--Execute("fly wm;u;loc " .. me.id .. "'s task")
 			end
 		end
 	end)
@@ -126,27 +117,21 @@ end
 location = function(name, line, wildcards)
 	var.task_loc = wildcards[3]
 	print(var.task_city .. " " .. var.task_loc .. " " .. var.task_npc)
-	--go()
 	
 	local busy_list = me.profile.busy_list
 	local attack_list = me.profile.attack_list2
 	fight.prepare(busy_list, attack_list)
 	
 	--如果slowwalk走完还没有stop，说明没找到
-	--msg.subscribe("msg_slowalk_stop", bei.notfound)
 	walk.sl(var.task_city, var.task_loc, bei.notfound, bei.fail, bei.foundnpc)
 end
 
 go = function()
 	fight.prepare(busy_list, attack_list)
-	--walk.sl(var.task_city, var.task_loc, bei.notfound, bei.fail)
 	walk.sl(var.task_city, var.task_loc)
 end
 
 faint = function()
-	--fight.stop()
-	--walk.abort()
-	
 	me.profile.reset_cd_status()
 	cleanup()
 end
@@ -157,9 +142,8 @@ notfound = function()
 	fight.stop()
 	Execute("halt")
 	--如果walkaround走完还没找到，就retry吧
-	--msg.subscribe("msg_slowwalk_ok", bei.retry)
 	print("走完还没找到")
-	walk.walkaround(5, nil, bei.retry, bei.fail, bei.foundnpc)
+	walk.walkaround(5, nil, bei.fail, bei.fail, bei.foundnpc)
 end
 
 foundnpc = function()
@@ -170,21 +154,6 @@ foundnpc = function()
 		Execute("ask " .. var.task_id .. " about fight")
 	end
 end
-
---[[
-foundnpc = function(name, line, wildcards)
-	msg.subscribe("msg_slowwalk_stop", function()
-		var.task_found = true
-		if(var.task_auto_kill == "true") then
-			startFight()
-		else
-			Execute("tuna 10")
-		end
-	end)
-	
-	walk.stop()
-end
-]]--
 
 startFight = function()
 	local busy_list = me.profile.busy_list
@@ -197,32 +166,19 @@ end
 search = function(name, line, wildcards)
 	print("task 往【" .. wildcards[3] .. "】跑了")
 	local dir = wildcards[3]
-	dir = dir:gsub("边","")
-	dir = dir:gsub("面", "")
+	dir = dir:gsub("边",""):gsub("面", ""):gsub("方向", ""):gsub("方", "")
 	var.task_escape_dir = dir
 	
-	--walk.abort()
 	if(walk.stopped()) then searchTask() end
-	--searchTask()
 end
 
 searchTask = function()
 	busy_test(function()
 		print("从 " .. var.task_escape_dir .. " 开始walkaround" )
 		if(var.task_status == "done") then return end
+		Execute("er;et;ef")
 		walk.walkaround(3, var.task_escape_dir, bei.notfound, bei.fail, bei.foundnpc)
 	end)
-	--[[
-	wait.make(function()
-		repeat
-			wait.time(1)
-			Execute("suicide")
-			local l, w = wait.regexp("^(> )*(你正忙着呢，没空自杀！)|(请用 suicide -f 确定自杀。)$")
-		until(l:match("确定自杀") ~= nil)
-		print("从 " .. var.task_escape_dir .. " 开始walkaround" )
-		walk.walkaround(3, var.task_escape_dir, bei.notfound, bei.fail, bei.foundnpc)
-	end)
-	]]--
 end
 
 ----看到npc死了，把东西捡起来------------------------------------
@@ -245,52 +201,8 @@ end
 
 ----task结束后的善后工作，疗伤学习打坐----------------------------
 cleanup = function()
-	Execute("set brief;fly wm;jiali 0;er;et")
+	Execute("set brief;halt;fly wm;jiali 0;er;et;ef")
 	me.cleanup(function() bei.main() end)
-	--[[
-	me.full(function()
-		me.useqn(function()
-			wait.make(function()
-				me.updateHP(function()
-					if(tonumber(me["nl"]) > tonumber(me["nl_max"]) * 1.2) then 
-						Execute("er;et;fly wm")
-						bei.done() 
-					else
-						wait.time(1)
-						Execute("halt;fly wm;u")
-						dazuo.start(function()
-							Execute("er;et;d")
-							bei.done()
-						end)
-					end
-				end)
-			end)
-		end)
-	end)
-	]]--
---[[
-	Execute("fly wm;jiali 0;er;et")
-	me.updateHP(function()
-		me.full(function()
-			msg.subscribe("msg_study_done", function()
-				wait.make(function()
-					if(tonumber(me["nl"]) > tonumber(me["nl_max"]) * 1.2) then 
-						Execute("er;et;fly wm")
-						bei.done() 
-					else
-						wait.time(1)
-						Execute("halt;fly wm;u")
-						dazuo.start(function()
-							Execute("er;et;d")
-							bei.done()
-						end)
-					end
-				end)
-			end)
-			me.useqn()
-		end)
-	end)
-]]--
 end
 
 -----------------------------------------------------------------------------------------------------------------------------
@@ -315,15 +227,6 @@ function log_task1(name, line, wildcards, style)
 
 	table.insert(bei_info.matrix, str)
 end
-
---[[
-function task1_end()
-	EnableTriggerGroup("bei_task1",false)
-	if(bei_info.matrix == {}) then
-		fail()
-	end
-end
-]]--
 
 function parse()
 	if(bei_info.matrix == {}) then return end
@@ -387,23 +290,6 @@ function checkSimilarity(v1)
 		print(city)
 		return city
 	end
-	--[[
-		local city, maxMatchNum = nil, 0
-		for j = 1, #words do
-			for i, v in ipairs(task1) do
-				if(#v.city == #name) then
-					local m = 0
-					if(string.find(v.city, words[j]) ~= nil) then m = m + 1 end
-					if(m > maxMatchNum) then
-						city = v.city
-						maxMatchNum = m
-					end
-				end
-			end
-		end
-
-		return city
-	end]]--
 end
 
 

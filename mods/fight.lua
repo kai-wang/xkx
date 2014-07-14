@@ -94,18 +94,18 @@ attack = function(cmd)
 		perform_attack(cmd)
 			
 		context.action = fight.perform_busy
-		ts.reset("fight", 1.5)
+		ts.reset("fight", 1)
 	end)
 end
 
 attack2 = function()
 	fight.perform_attack()
 	context.action = fight.perform_busy
-	ts.reset("fight", 1.5)
+	ts.reset("fight", 1)
 end
 
 recover = function()
-	context.action = function() Execute("yun recover") end
+	context.action = function() Execute("yun recover;yun regenerate") end
 	ts.reset("fight", 0.6)
 end
 

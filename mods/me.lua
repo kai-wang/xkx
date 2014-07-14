@@ -29,7 +29,7 @@ end
 on_hp2_update = function(name, line, wildcards)
 	me["qx"]			= tonumber(wildcards[1])
 	me["qx_max"]		= tonumber(wildcards[2])
-	me["qx%"]		= tonumber(wildcards[3])
+	me["qx%"]			= tonumber(wildcards[3])
 	me["nl"]			= tonumber(wildcards[4])
 	me["nl_max"]		= tonumber(wildcards[5])
 	--tprint(me)
@@ -171,8 +171,8 @@ me.qudu = function(f_done)
 	wait.make(function()
 		Execute("fly wm;nw;er;et;yun cure")
 		repeat
-			local l, w = wait.regexp("^(> )*(你.*消褪了！)|(你并未中毒。)$", 10)
-		until((l == nil) or (l:match("你并未中毒") ~= nil))
+			local l, w = wait.regexp("^(> )*(你.*消褪了！)|(你并未中毒。)|(你现在精不够.*)$", 10)
+		until((l == nil) or (l:match("你并未中毒") ~= nil) or (l:match("你现在精不够") ~= nil))
 		Execute("halt")
 		print("驱毒完毕")
 		me["in_poison"] = false
@@ -221,7 +221,7 @@ me.jingqi = function(f_done)
 				for i = 1, dannumber do Execute("buy yangjing dan") end
 				busy_test(function()
 					Execute("fly wm;nw")
-					for i = 1, dannumber do Execute("eat yangjing dan") wait.time(5) end
+					for i = 1, dannumber do Execute("et;eat yangjing dan") wait.time(3) end
 					print("疗精完毕")
 					Execute("er;et;yun heal")
 					local l, w = wait.regexp("^(> )*(你并没有受伤！)|(你运功完毕).*$")
@@ -269,16 +269,16 @@ me.useqn = function(f_done)
 		local st = me.profile.study_list[index]
 		
 		wait.make(function()
-			--msg.subscribe("msg_study_done", function() call(f_done) end)
-			
+			var.study_loc = st.loc
+			Execute(var.study_loc)
+			research.start(f_done)
+			--[[
 			var.study_loc = st.loc
 			var.lll = st.cmd
-			--var.study_cmd = st.cmd
-			--AddAlias("lll", "lll", st.cmd, 1025, "")
-			--SetAliasOption("lll", "send_to", 10)
 			Execute(var.study_loc)
 			study.start(f_done)
 			var.study_seq = (index + 1)%(#me.profile.study_list)
+			]]--
 		end)
 	else
 		--msg.broadcast("msg_study_done")
@@ -299,7 +299,7 @@ me.check_money = function(f_done)
 		local l, w = wait.regexp("^(> )*设定环境变数：check = \"money\"$")
 		EnableTriggerGroup("check_money", false)
 		local cmd = ""
-		if(tonumber(var.me_silver) > 500 or tonumber(var.me_gold) > 30 or tonumber(var.me_goldbar) > 1) then
+		if(tonumber(var.me_silver) > 800 or tonumber(var.me_silver) < 50 or tonumber(var.me_gold) < 15 or tonumber(var.me_gold) > 30 or tonumber(var.me_goldbar) > 1) then
 			cmd = cmd .. "cunkuan " .. tonumber(var.me_silver) .. " silver;"
 			cmd = cmd .. "cunkuan " .. tonumber(var.me_gold) .. " gold;"
 			cmd = cmd .. "cunkuan " .. tonumber(var.me_goldbar) .. " gold-bar"
@@ -310,7 +310,7 @@ me.check_money = function(f_done)
 			Execute(cmd)
 			Execute("qukuan 99 silver;qukuan 19 gold")
 			wait.time(5)
-			Execute("fly wm")
+			Execute("halt;fly wm")
 			var.me_goldbar = 0
 		end
 		

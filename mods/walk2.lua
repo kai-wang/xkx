@@ -82,6 +82,7 @@ blocker_npcs["Öñ½£"] = {id = "zhu jian"}
 blocker_npcs["¾Õ½£"] = {id = "ju jian"}
 blocker_npcs["Ğ»ÑÌ¿Í"] = {id = "xie yanke", pfm = true}
 blocker_npcs["°ÍÒÀ"] = {id = "bayi"}
+blocker_npcs["¶¨ÒİÊ¦Ì«"] = {id = "dingyi shitai", pfm = true}
 ---------------------------------------------------------- ÌØÊâÃüÁî-------------------------------------------------------------------
 
 local run_cxt = {}
@@ -354,7 +355,7 @@ handlers = {
 	
 	startFight = function()
 		local busy_list = me.profile.busy_list
-		local attack_list = me.profile.attack_list1
+		local attack_list = me.profile.attack_list3
 		fight.prepare(busy_list, attack_list)
 		
 		fight.start("kill " .. var.walk_blocker_id)

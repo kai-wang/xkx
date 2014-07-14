@@ -60,12 +60,12 @@ profile = {
 	},
 	
 	attack_list3 = {
-		[1] = {	i = 4, action = "unwield all;enable strike haotian-zhang;bei haotian-zhang;hubo"},
+		[1] = {	i = 4, action = "unwield all;hubo"},
 		[2] = { i = 7, action = "unwield all;perform finger.sandie"}
 	},
 	
 	study_list = {
-		{ loc = "fly wm;e;n;e;e;n;n", cmd = "yanjiu dodge 1000;yun regenerate"}
+		{ loc = "fly wm;e;n;e;e;n;n", cmd = "yanjiu parry 1000;yun regenerate"}
 	--[[
 		[1] = { loc = "wcy", cmd = "xue wang xiantian-qigong 40;yun regenerate" },
 		[2] = { loc = "fly wm;e;s;s;e;n;", cmd = "xue zhu literate 40;yun regenerate" },
@@ -75,9 +75,9 @@ profile = {
 	},
 	
 	research_list = {
-		--{ skill = "xiantian-qigong"},
-		{ skill = "force" },
-		{ skill = "dodge" }
+		{ skill = "xiantian-qigong"}
+		--{ skill = "force" },
+		--{ skill = "dodge" }
 	},
 	
 	powerup = function()
@@ -88,7 +88,7 @@ profile = {
 	init = function()
 		local flag = bit.bor(trigger_flag.KeepEvaluating, trigger_flag.RegularExpression, trigger_flag.Replace)--, trigger_flag.Temporary)
 		AddTrigger("fight_busy_success",
-			"^(> )*(.*气拔千钧的一击，竟不知如何招架！|结果.*被你攻了个措手不及!|结果一指点中).*$",
+			"^(> )*(.*气拔千钧的一击，竟不知如何招架！|结果.*被你攻了个措手不及!|结果一指点中|.*目前正自顾不暇，放胆攻击吧！).*$",
 			"", flag, -1, 0, "", "fight.on_busy_success")
 		
 		SetTriggerOption("fight_busy_success", "group", "fight")

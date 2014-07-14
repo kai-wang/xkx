@@ -7,7 +7,7 @@ module ("item", package.seeall)
 local sell_list, store_list, drop_list, item_list = {}, {}, {}, {}
 local eat_items = {"何首乌","人参","老山参","新鲜蛇胆","熊胆"}
 local jicun_items = {"九转银丹","九转金丹"}
-local store_items = {"菩提子","美容丸","仙丹","神力丸","玛瑙","翡翠","珠宝","琥珀","灰玉","水晶"}
+local store_items = {"菩提子","美容丸","仙丹","神力丸"}--,"玛瑙","翡翠","珠宝","琥珀","灰玉","水晶"}
 local keep_items = {"白银","黄金","金条","银票","赏善铜牌","火折","雄黄","腰牌","少林英雄令","重阳令","高昌迷宫地图"}
 
 function lookandget(f_done)
@@ -79,9 +79,10 @@ end
 function sort(item, id, style)
 	local color = getColourName(style, item)
 	--白的，蓝的，黄的装备卖掉
-	if(color == "white" or color == "blue" or color == "yellow") then
+	if(color == "white" or color == "blue" or color == "yellow" or color == "red") then
 		addtolist("sell", id)
-	elseif(color == "red" or color == "magenta") then
+		--color == "red" or 
+	elseif(color == "magenta") then
 	--红的，紫的留着
 		addtolist("store", id)
 	else
@@ -94,7 +95,7 @@ end
 function addtolist(action, id)
 	if(action == "sell") then
 		if(var.item_sell_list == nil) then var.item_sell_list = "" end
-		var.item_sell_list = var.item_sell_list .. "give " .. id .. " to ouye zi;"
+		var.item_sell_list = var.item_sell_list .. "give " .. id .. " to ouye zi;drop " .. id .. ";"
 	elseif(action == "store") then 
 		if(var.item_store_list == nil) then var.item_store_list = "" end
 		var.item_store_list = var.item_store_list .. "give " .. id .. " to byj;"-- .. var.dami_equip .. ";"
