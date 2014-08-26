@@ -48,9 +48,30 @@ function on_system_fainted()
 end
 
 
-function busytest(callback, ...)
-	msg.subscribe("busy",callback, ...)
-	Execute("suicide -a")
+function queue(cmd)
+	Execute(cmd)
+end
+
+
+
+function busy_test(f_done, interval)
+	DeleteTemporaryTriggers()
+	var.system_magic_number = GetUniqueNumber()
+	local i = tonumber(interval) or 1
+	local n = tonumber(var.system_magic_number)
+	wait.make(function()
+		repeat
+			Execute("suicide")
+			local l, w = wait.regexp("^(> )*(你正忙着呢，没空自杀！)|(请用 suicide -f 确定自杀。)$")
+			if(l:match("你正忙着呢，没空自杀") ~= nil) then wait.time(i) end
+			if(n ~= tonumber(var.system_magic_number)) then return end
+		until(l:match("确定自杀") ~= nil)
+		call(f_done)
+	end)
+end
+
+function abort_busytest()
+	var.system_magic_number = GetUniqueNumber()
 end
 
 chs2num = function (s)----------------数字转换

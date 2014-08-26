@@ -12,90 +12,31 @@ prepare = function(busy_list, attack_list)
 	context.attack_list = attack_list--me.profile.attack_list1
 	me.profile.powerup()
 	context.infight = false
-	initBusyTimer()
-	initRecoverTimer()
-	--initEatyaoTimer()
-	initEscapeTimer()
-	initHaltTimer()
+	context.action = fight.busy
+	ts.new("fight", "fight", 1.5, "fight.action\(\)")
 end
 
+action = function()
+	--print("tick")
+	call(context.action)
+end
+
+
 start = function(cmd)
-	
 	if(context.infight) then print("已经在战斗中") return end
 	
 	EnableTriggerGroup("fight", true)
 	context.infight = true
+	ts.tick("fight")
 	busy(cmd)
 end
 
 stop = function()
 	context.infight = false
-	stopTimer("busy")
-	stopTimer("recover")
-	stopTimer("eatyao")
-	stopTimer("escape")
-	stopTimer("halt")
+	ts.stop("fight")
 	
 	EnableTriggerGroup("fight", false)
-	Execute("set fight end")
-end
-
-startTimer = function(name)
-	if(context.infight) then
-		--print("开启" .. name .. " timer")
-		EnableTimer(name, true)
-		ResetTimer(name)
-	else
-		--print("??????????????????")
-	end
-end
-
-stopTimer = function(name)
-	--print("关闭" .. name .. " timer")
-	EnableTimer(name, false)
-end
-
-startTimerAfter = function(name, interval)
-	if(interval ~= nil and tonumber(interval) > 0) then
-		wait.make(function()
-			wait.time(tonumber(interval))
-			startTimer(name)
-		end)
-	end
-end
-
-initBusyTimer = function()
-	if(IsTimer("busy") ~= eOK) then
-		AddTimer("busy", 0, 0, 2, "fight.perform_busy\(\)", timer_flag.Replace + timer_flag.Temporary, "")
-		SetTimerOption("busy", "send_to", 12)
-	end
-end
-
-initRecoverTimer = function()
-	if(IsTimer("recover") ~= eOK) then
-		AddTimer("recover", 0, 0, 1, 
-		"SetTriggerOption(\"fight_recover\", \"enabled\", \"y\") Execute(\"yun recover\")", 
-		timer_flag.Replace + timer_flag.Temporary, "")
-		SetTimerOption("recover", "send_to", 12)
-	end	
-end
-			
-initEscapeTimer = function()
-	if(IsTimer("escape") ~= eOK) then
-		AddTimer("escape", 0, 0, 1, 
-		"SetTriggerOption(\"fight_escape\", \"enabled\", \"y\") Execute(\"#2(halt);fly wm;nw\")", 
-		timer_flag.Replace + timer_flag.Temporary, "")
-		SetTimerOption("escape", "send_to", 12)
-	end	
-end
-
-initHaltTimer = function()
-	if(IsTimer("halt") ~= eOK) then
-		AddTimer("halt", 0, 0, 1, 
-		"SetTriggerOption(\"fight_halt\", \"enabled\", \"y\") Execute(\"#2(halt)\")", 
-		timer_flag.Replace + timer_flag.Temporary, "")
-		SetTimerOption("halt", "send_to", 12)
-	end	
+	--Execute("set fight end")
 end
 
 perform_busy = function(cmd)
@@ -133,37 +74,47 @@ perform_attack = function(cmd)
 end
 
 busy = function(cmd)
-	startTimer("busy")
+	--startTimer("busy")
+	context.action = fight.perform_busy
+	ts.reset("fight", 1.5)
 	perform_busy(cmd)
 end
 
 attack = function(cmd)
-	stopTimer("busy")
-	perform_attack(cmd)
-	startTimerAfter("busy", 1.5)
+	--ts.disable("fight")
+	wait.make(function()
+	--[[
+		repeat
+			Execute("touxi")
+			local l, w = wait.regexp("^(> )*(你的动作还没有完成，不能偷袭。)|(你想偷袭谁？)$")
+			if(l:match("不能偷袭")) then wait.time(0.5) end
+		until(l:match("你想偷袭谁") ~= nil)
+	--]]
+		wait.time(0.5)
+		perform_attack(cmd)
+			
+		context.action = fight.perform_busy
+		ts.reset("fight", 1)
+	end)
 end
 
-isTimerNotOpen = function(name)
-	return (GetTimerOption(name, "enabled") ~= "y")
+attack2 = function()
+	fight.perform_attack()
+	context.action = fight.perform_busy
+	ts.reset("fight", 1)
 end
 
 recover = function()
-	stopTimer("busy")
-	startTimer("recover")
+	context.action = function() Execute("yun recover;yun regenerate") end
+	ts.reset("fight", 0.6)
 end
 
 escape = function()
-	stopTimer("busy")
-	stopTimer("recover")
-	stopTimer("eatyao")
-	stopTimer("halt")
-	startTimer("escape")
+	context.action = function() Execute("halt;fly wm") end
+	ts.reset("fight", 0.5)
 end
 
 eatyao = function()
-	stopTimer("busy")
-	stopTimer("recover")
-	startTimer("eatyao")
 end
 
 faint = function()
@@ -175,16 +126,7 @@ end
 
 on_busy_success = function()
 	--stopTimer("busy")
-	wait.make(function()
-		wait.time(1)
-		attack()
-	end)
-	--stopBusyTimer()
-	--attack()
-end
-
-infight = function()
-	return context.infight ~= nil and context.infight == true
+	attack()
 end
 
 on_perform_cd_ok = function(name, line, wildcards)
@@ -195,4 +137,8 @@ end
 on_perform = function(name, line, wildcards)
 	--print("调息 "..wildcards[2])
 	me.profile.set_cd_status(wildcards[2], true)
+end
+
+infight = function()
+	return context.infight ~= nil and context.infight == true
 end

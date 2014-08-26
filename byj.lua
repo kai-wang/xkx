@@ -41,6 +41,7 @@ profile = {
 	
 	busy_list = {
 		[1] = {	i = 6, action = "wield " .. var.weapon .. ";enable parry sun-finger;perform parry.qiankun" 	},
+		--[2] = { i = 7, action = "unwield all;perform finger.sandie;wield " .. var.weapon},
 		[2] = {	i = 5, action = "wield " .. var.weapon .. ";enable sword quanzhen-jian;perform sword.ding" 	}
 	},
 	

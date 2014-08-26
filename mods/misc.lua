@@ -162,21 +162,6 @@ function get_heimuling(f_ok, f_fail)
 	end)
 end
 
-function busy_test(f_done, interval)
-	DeleteTemporaryTriggers()
-	local i = 1
-	wait.make(function()
-		repeat
-			if(interval == nil) then i = 1 else i = interval end
-			Execute("suicide")
-			local l, w = wait.regexp("^(> )*(你正忙着呢，没空自杀！)|(请用 suicide -f 确定自杀。)$")
-			if(l:match("你正忙着呢，没空自杀") ~= nil) then wait.time(i) end
-		until(l:match("确定自杀") ~= nil)
-		call(f_done)
-	end)
-end
-
-
 module ("ts", package.seeall)
 
 new = function(name, group, interval, handler)

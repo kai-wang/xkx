@@ -12,13 +12,6 @@ prepare = function(busy_list, attack_list)
 	context.attack_list = attack_list--me.profile.attack_list1
 	me.profile.powerup()
 	context.infight = false
-	context.action = fight.busy
-	ts.new("fight", "fight", 1.5, "fight.action\(\)")
-end
-
-action = function()
-	--print("tick")
-	call(context.action)
 end
 
 
@@ -27,8 +20,7 @@ start = function(cmd)
 	
 	EnableTriggerGroup("fight", true)
 	context.infight = true
-	ts.tick("fight")
-	busy(cmd)
+	busy_test(function() perform_busy(cmd) end, 1)
 end
 
 stop = function()
@@ -73,45 +65,26 @@ perform_attack = function(cmd)
 	end
 end
 
-busy = function(cmd)
-	--startTimer("busy")
-	context.action = fight.perform_busy
-	ts.reset("fight", 1.5)
-	perform_busy(cmd)
-end
 
 attack = function(cmd)
-	--ts.disable("fight")
-	wait.make(function()
-	--[[
-		repeat
-			Execute("touxi")
-			local l, w = wait.regexp("^(> )*(你的动作还没有完成，不能偷袭。)|(你想偷袭谁？)$")
-			if(l:match("不能偷袭")) then wait.time(0.5) end
-		until(l:match("你想偷袭谁") ~= nil)
-	--]]
-		wait.time(0.5)
+	busy_test(function()
 		perform_attack(cmd)
-			
-		context.action = fight.perform_busy
-		ts.reset("fight", 1)
-	end)
+		busy_test(function()
+			perform_busy()
+		end,1)
+	end, 0.5)
 end
 
 attack2 = function()
-	fight.perform_attack()
-	context.action = fight.perform_busy
-	ts.reset("fight", 1)
+	attack()
 end
 
 recover = function()
-	context.action = function() Execute("yun recover;yun regenerate") end
-	ts.reset("fight", 0.6)
+	busy_test(function() Execute("er;et;ef") end, 0.5)
 end
 
 escape = function()
-	context.action = function() Execute("halt;fly wm") end
-	ts.reset("fight", 0.5)
+	busy_test(function() Execute("halt;fly wm") end, 0.5)
 end
 
 eatyao = function()

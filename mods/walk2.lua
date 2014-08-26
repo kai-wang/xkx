@@ -83,6 +83,24 @@ blocker_npcs["菊剑"] = {id = "ju jian"}
 blocker_npcs["谢烟客"] = {id = "xie yanke", pfm = true}
 blocker_npcs["巴依"] = {id = "bayi"}
 blocker_npcs["定逸师太"] = {id = "dingyi shitai", pfm = true}
+
+-- lht npcs -------------------------------------------------
+blocker_npcs["安健刚"] = {id = "an jiangang", pfm = false}
+blocker_npcs["孟健雄"] = {id = "meng jianxiong", pfm = false}
+blocker_npcs["周绮"] = {id = "zhou yi", pfm = false}
+blocker_npcs["心砚"] = {id = "xin yan", pfm = false}
+blocker_npcs["蒋四根"] = {id = "jiang sigen", pfm = false}
+blocker_npcs["石双英"] = {id = "shi shuangying", pfm = false}
+blocker_npcs["卫春华"] = {id = "wei chunhua", pfm = false}
+blocker_npcs["杨成协"] = {id = "yang chengxie", pfm = false}
+blocker_npcs["徐天宏"] = {id = "xu tianhong", pfm = false}
+blocker_npcs["常伯志"] = {id = "chang bozhi", pfm = true}
+blocker_npcs["常赫志"] = {id = "chang hezhi", pfm = true}
+blocker_npcs["赵半山"] = {id = "zhao banshan", pfm = true}
+blocker_npcs["周仲英"] = {id = "zhou zhongying", pfm = true}
+blocker_npcs["陆菲青"] = {id = "lu feiqing", pfm = true}
+blocker_npcs["无尘道长"] = {id = "wuchen daozhang", pfm = true}
+
 ---------------------------------------------------------- 特殊命令-------------------------------------------------------------------
 
 local run_cxt = {}
@@ -127,7 +145,8 @@ function run(path, f_ok, f_fail, f_stop)
 		local p = c.iter()
 		--执行到最后设置"set run ok"----------
 		if(p == nil) then
-			Execute("set run ok")
+			--Execute("set run ok")
+			queue("set run ok")
 			--从trigger里调用run_ok------------------
 			--run_ok()
 		else -- 继续下一条命令----------------
@@ -170,7 +189,8 @@ function run_cmd(cmd, f_ok, f_fail, f_stop)
 		local c = cmd:sub(1,1)
 		if(c == ";") then cmd = cmd:sub(2) end
 		if(c ~= "!") then 
-			Execute(cmd) 
+			--Execute(cmd) 
+			queue(cmd)
 			call(f_ok)
 		else
 			-- aw:3:flatter 星宿老仙
@@ -252,6 +272,8 @@ handlers = {
 			if(not c.block) then 
 				print("no blocker") 
 				EnableTriggerGroup("walk_special", false)
+				EnableTriggerGroup("walk_special_lht", false)
+				EnableTriggerGroup("walk_special_dead", false)
 				DeleteTemporaryTriggers()
 				call(c.f_ok)
 			else 
@@ -287,6 +309,8 @@ handlers = {
 			if(not c.block) then 
 				print("k1 no blocker") 
 				EnableTriggerGroup("walk_special", false)
+				EnableTriggerGroup("walk_special_lht", false)
+				EnableTriggerGroup("walk_special_dead", false)
 				DeleteTemporaryTriggers()
 				call(c.f_ok)
 			end
@@ -310,6 +334,16 @@ handlers = {
 	end,
 	
 	["k1"] = function(name)
+		EnableTriggerGroup("walk_special_dead", true)
+		EnableTriggerGroup("walk_special", true)
+		EnableTriggerGroup("walk_special_lht", false)
+		handlers.done2()
+	end,
+	
+	["lht"] = function(name)
+		EnableTriggerGroup("walk_special_lht", true)
+		EnableTriggerGroup("walk_special_dead", true)
+		EnableTriggerGroup("walk_special", false)
 		handlers.done2()
 	end,
 	
@@ -354,11 +388,12 @@ handlers = {
 	end,
 	
 	startFight = function()
-		local busy_list = me.profile.busy_list
+		local busy_list = nil--me.profile.busy_list
 		local attack_list = me.profile.attack_list3
 		fight.prepare(busy_list, attack_list)
 		
-		fight.start("kill " .. var.walk_blocker_id)
+		Execute("kill " .. var.walk_blocker_id)
+		fight.start()
 	end,
 	
 	blocker_dead = function(line, name, wildcards)
@@ -645,7 +680,10 @@ function step_by_step(path, f_ok, f_fail, f_stop)
 end
 
 function step(cmd, f_ok, f_fail, f_stop)
-	run(cmd, f_ok, f_fail, f_stop)
+	wait.make(function()
+		wait.time(0.3)
+		run(cmd, f_ok, f_fail, f_stop)
+	end)
 end
 
 

@@ -2,6 +2,7 @@ require "wait"
 require "tprint"
 require "var"
 require "bit"
+require "socket"
 
 module ("bei", package.seeall)
 
@@ -98,11 +99,10 @@ parseAndLoc = function()
 		if(l and string.match(l, "你现在没有任何使命")) then
 			done()
 		else
-			local t1 = os.time()
+			local t1 = socket.gettime() * 1000
 			local city = parse()
-			local t2 = os.time()
-			
-			print("解析时间 .. " .. (t2-t1) .. " ms")
+			local t2 = socket.gettime() * 1000
+			print("解析时间 .. " .. math.floor(t2-t1) .. " ms")
 			if(city == nil) then
 				print("找不到匹配的城市")
 				fail()
@@ -156,6 +156,7 @@ foundnpc = function()
 end
 
 startFight = function()
+	abort_busytest()
 	local busy_list = me.profile.busy_list
 	local attack_list = me.profile.attack_list2
 	fight.prepare(busy_list, attack_list)
@@ -201,8 +202,20 @@ end
 
 ----task结束后的善后工作，疗伤学习打坐----------------------------
 cleanup = function()
-	Execute("set brief;halt;fly wm;jiali 0;er;et;ef")
-	me.cleanup(function() bei.main() end)
+	Execute("set brief;halt;fly wm;nw;er;et;ef")
+	me.cleanup(
+		function() 
+			local diff = os.time() - tonumber(var.task_start_time)
+			if(diff < 10) then
+				wait.make(function()
+					print("休息一会: " .. diff)
+					wait.time(diff)
+					bei.main()
+				end)
+			else
+				bei.main() 
+			end
+		end)
 end
 
 -----------------------------------------------------------------------------------------------------------------------------
