@@ -1,33 +1,34 @@
 require "tprint"
 
-module ("cure", package.seeall)
 
-module ("capture", package.seeall)
-
-local cxt = {}
-start = function(group, cmd, f_done)
-	cxt.f_done = f_done
-	cxt.group = group
-	EnableTriggerGroup(group)
-	Execute(cmd)
-	Execute("set capture " .. group)
+capture = function(group, cmd, f_done)
+	wait.make(function()
+		EnableTriggerGroup(group)
+		EnableTriggerGroup("capture")
+		Execute(cmd)
+		Execute("set capture " .. group)
+		local l, w = wait.regexp("^(> )*Éè¶¨»·¾³±äÊı£ºcapture = .*$")
+		call(f_done)
+	end)
 end
 
-done = function()
-	EnableTriggerGroup(cxt.group)
-	call(cxt.f_done)
+--module ("bank", package.seeall)
+local bank = {}
+bank.cunqu = function(cmd, f_done, f_fail)
+	wait.make(function()
+		Execute("fly wm;e;s;w")
+		Execute(cmd)
+		busy_test(function() call(f_done) end)
+	end)
 end
 
 
 updateHP = function(f_done)
-	return function() capture.start("HP", "hp", f_done) end
+	return function() capture("HP", "hp", f_done) end
 end
 
-
 fullme = function(f_done)
-	call(
-		updateHP(cure_ssf(cure_poison(cure_jing(cure_qi(foodwater())))))
-	)
+	call(updateHP(heal_ssf(heal_poison(heal_jing(heal_qi(foodwater(f_done)))))))
 end
 
 me.cleanup = function(f_done)
@@ -36,16 +37,16 @@ me.cleanup = function(f_done)
 		me.useqn(function()
 			wait.make(function()
 				me.updateHP(function()
-					if(tonumber(me["nl"]) > tonumber(me["nl_max"]) * 1.2) then 
+					if(tonumber(me["nl"]) > tonumber(me["nl_max"]) * 1.2) then
 						Execute("er;et;fly wm;set check full")
-						local l, w = wait.regexp("^(> )*è®¾å®šç¯å¢ƒå˜æ•°ï¼šcheck = \"full\"$")
+						local l, w = wait.regexp("^(> )*Éè¶¨»·¾³±äÊı£ºcheck = \"full\"$")
 						call(f_done)
 					else
 						busy_test(function()
 							Execute("fly wm;u")
 							dazuo.start(function()
 								Execute("er;ef;d;set check full")
-								local l, w = wait.regexp("^(> )*è®¾å®šç¯å¢ƒå˜æ•°ï¼šcheck = \"full\"$")
+								local l, w = wait.regexp("^(> )*Éè¶¨»·¾³±äÊı£ºcheck = \"full\"$")
 								call(f_done)
 							end)
 						end)
@@ -59,16 +60,17 @@ end
 
 heal_ssf = function(f_done, f_fail)
 	return function()
-		if(var.me_status_ssf == "" or var.me_status_ssf == "false") then print("æ²¡ä¸­ç”Ÿæ­»ç¬¦") call(f_done) return end
-		
+		if(var.me_status_ssf == "" or var.me_status_ssf == "false") then print("Ã»ÖĞÉúËÀ·û") call(f_done) return end
+
 		wait.make(function()
-			qukuan("15 gold", function()
-				local l, w = wait.regexp("^(> )*(è¿™é‡Œæ²¡æœ‰è¿™ä¸ªäºº)|(.*ä½ æ²¡æœ‰ä¸­ç”Ÿæ­»ç¬¦å•Šï¼Œä½ æƒ³ä¸­å—)|(.*ä½ èº«ä¸Šçš„ç”Ÿæ­»ç¬¦å·²è§£äº†).*$")
-				if(l:match("è¿™é‡Œæ²¡æœ‰è¿™ä¸ªäºº") ~= nil) then call(f_fail) return end
-				
+			bank.cunqu("qukuan 15 gold", function()
+				Execute("fly lj;s;give 15 gold to shouling")
+				local l, w = wait.regexp("^(> )*(ÕâÀïÃ»ÓĞÕâ¸öÈË)|(Òª½â·ûÒ²Òª.*)|(.*ÄãÃ»ÓĞÖĞÉúËÀ·û°¡£¬ÄãÏëÖĞÂğ)|(.*ÄãÉíÉÏµÄÉúËÀ·ûÒÑ½âÁË).*$")
+				if(l:match("ÕâÀïÃ»ÓĞÕâ¸öÈË") ~= nil or l:match("Òª½â·ûÒ²Òª") ~= nil) then callfail(f_done, f_fail) return end
+
 				wait.time(5)
 				var.me_status_ssf = false
-				print("ç”Ÿæ­»ç¬¦å¥½äº†")
+				print("ÉúËÀ·ûºÃÁË")
 				call(f_done)
 			end)
 		end)
@@ -78,14 +80,14 @@ end
 heal_poison = function(f_done, f_fail)
 	return function()
 		wait.make(function()
-			Execute("fly wm;nw;er;et;yun cure")		
+			Execute("fly wm;nw;er;et;yun cure")
 			repeat
-				local l, w = wait.regexp("^(> )*(ä½ .*æ¶ˆè¤ªäº†ï¼)|(ä½ å¹¶æœªä¸­æ¯’ã€‚)|(ä½ ç°åœ¨ç²¾ä¸å¤Ÿ.*)$", 8)
-				if(l:match("ä½ ç°åœ¨ç²¾ä¸å¤Ÿ")) then call(f_fail) return end
-			until((l == nil) or (l:match("ä½ å¹¶æœªä¸­æ¯’") ~= nil))
-			
+				local l, w = wait.regexp("^(> )*(Äã.*ÏûÍÊÁË£¡)|(Äã²¢Î´ÖĞ¶¾¡£)|(ÄãÏÖÔÚ¾«²»¹».*)$", 8)
+				if(l:match("ÄãÏÖÔÚ¾«²»¹»")) then callfail(f_done, f_fail) return end
+			until((l == nil) or (l:match("Äã²¢Î´ÖĞ¶¾") ~= nil))
+
 			Execute("halt")
-			print("é©±æ¯’å®Œæ¯•")
+			print("Çı¶¾Íê±Ï")
 			var.me_status_poison = false
 			call(f_done)
 		end)
@@ -94,37 +96,33 @@ end
 
 heal_poison_fail = function(f_done)
 	return function()
-		wait.make(function()
-			qukuan("100 gold",function()
-				busy_test(function()
-					Execute("e;s;e;e;n;buy chan;eat chan")
-					call(f_done)
-				end)
-			end)
+		qukuan("100 gold", function()
+			Execute("e;s;e;e;n;buy chan;eat chan")
+			call(f_done)
 		end)
 	end
 end
 
+can_eat_wuchang = function()
+	if(var.last_wuchang == nil or var.last_wuchang == "") then return true end
+	local now, old = tonumber(os.time()), tonumber(var.last_wuchang)
+	--20·ÖÖÓ¼ä¸ô¿ÉÒÔ³Ôwuchag
+	return (now - old > 1200)
+end
 
-me.eatWuchange = function(f_done, f_fail)
+
+eat_wuchang = function(f_done, f_fail)
 	return function()
-		if(var.last_wuchang == nil or var.last_wuchang == "") then call(f_fail) return end
-	
-		local now = tonumber(os.time())
-		local old = tonumber(var.last_wuchang)
-	
-		--25åˆ†é’Ÿé—´éš”å¯ä»¥åƒwuchag
-		if(now - old >= 1500) then call(f_fail) return end
+		if(not can_eat_wuchang()) then call(f_fail) return end
 		
 		wait.make(function()
-			Execute("fly wm;e;s;w;qukuan 5 gold")
-			busy_test(function()
+			bank.cunqu("qukuan 5 gold", function()
 				Execute("e;s;e;e;n;buy wuchang dan")
 				busy_test(function()
 					Execute("fly wm;nw;eat wuchang dan")
 					var.last_wuchang = os.time()
-					print("æ— å¸¸ä¸¹å¥½åƒå•Š")
 					wait.time(5)
+					print("ÎŞ³£µ¤ºÃ³Ô°¡")
 					call(f_done)
 				end)
 			end)
@@ -133,132 +131,108 @@ me.eatWuchange = function(f_done, f_fail)
 end
 
 
-me.jingqi = function(f_done)
-	local jsP = tonumber(me["js%"])
-	local qxP = tonumber(me["qx%"])
-	print(jsP, qxP)
-	if(jsP >= 95 and qxP >= 95) then print("ä¸ç”¨ç–—ä¼¤") call(f_done) return end
-	
-	wait.make(function()
-		if((jsP < 60 or qxP < 30) and me.canEatWuchang()) then
-			Execute("fly wm;e;s;w;qukuan 5 gold")
-			wait.time(5)
-			Execute("e;s;e;e;n;buy wuchang dan")
-			busy_test(function()
-				Execute("fly wm;nw;eat wuchang dan")
-				var.last_wuchang = os.time()
-				print("æ— å¸¸ä¸¹å¥½åƒå•Š")
-				wait.time(5)
-				call(f_done)
-			end)
-		else
-			if(jsP < 95) then
+heal_jing = function(f_done, f_fail)
+	return function()
+		local jsP = tonumber(var.hp_jsP)
+		print("¾«Éñ%: " .. jsP)
+
+		if(jsP >= 95) then print("²»ÓÃÁÆ¾«") call(f_done) return end
+
+		wait.make(function()
+			local f = function()
 				local dannumber = math.ceil((100-jsP)/5)
 				local price = dannumber * 35
-				--if(dannumber == math.ceil(dannumber)) then dannumber = math.ceil(dannumber) + 1 else dannumber = math.ceil(dannumber) end
-				Execute("fly wm;e;s;w;qukuan " .. price .. " silver")
-				wait.time(5)
-				Execute("e;s;e;e;n")
-				for i = 1, dannumber do Execute("buy yangjing dan") end
-				busy_test(function()
-					Execute("fly wm;nw")
-					for i = 1, dannumber do Execute("et;eat yangjing dan") wait.time(3) end
-					print("ç–—ç²¾å®Œæ¯•")
-					Execute("er;et;yun heal")
-					local l, w = wait.regexp("^(> )*(ä½ å¹¶æ²¡æœ‰å—ä¼¤ï¼)|(ä½ è¿åŠŸå®Œæ¯•).*$")
-					print("ç–—æ°”å®Œæ¯•")
-					call(f_done)
+				bank.cunqu("qukuan " .. price .. " silver", function()
+					Execute("e;s;e;e;n")
+					for i = 1, dannumber do Execute("buy yangjing dan") end
+					busy_test(function()
+						Execute("fly wm;nw")
+						for i = 1, dannumber do Execute("et;eat yangjing dan") wait.time(3) end
+						print("ÁÆ¾«Íê±Ï")
+						call(f_done)
+					end)
 				end)
-			elseif(qxP < 90) then
-				busy_test(function()
-					Execute("er;et;yun heal")
-					local l, w = wait.regexp("^(> )*(ä½ å¹¶æ²¡æœ‰å—ä¼¤ï¼)|(ä½ è¿åŠŸå®Œæ¯•).*$")
-					print("ç–—æ°”å®Œæ¯•")
-					call(f_done)
-				end)
-			else
-				call(f_done)
 			end
-		end
-	end)
+			
+			if(jsP < 60) then eat_wuchang(f_done, f) elseif(jsP < 95) then call(f) end
+		end)
+	end
 end
 
+heal_qi = function(f_done, f_fail)
+	return function()
+		local qxP = tonumber(var.hp_qxP)
 
-me.foodwater = function(f_done)
-	if(tonumber(me["water"]) > tonumber(me["water_max"]) and tonumber(me["food"]) > tonumber(me["food_max"])) then print("ä¸éœ€è¦åƒå–") call(f_done) return end
-	wait.make(function()
-		Execute("set brief;fly jx;buy zongzi;")
-		wait.time(2)
-		Execute("fly xx;su;s;ed;nw;w;buy shuinang;")
-		wait.time(2)
-		Execute("eat zongzi;#8 (drink shuinang);drop zongzi;drop zong ye;")
-		wait.time(2)
-		Execute("#8 (drink shuinang);drop shuinang;unset brief;fly wm")
-		--wait.regexp("^(> )*è®¾å®šç¯å¢ƒå˜æ•°ï¼šfoodwater = \"YES\"$")
-		print("é…’è¶³é¥­é¥±äº†")
-		call(f_done)
-	end)
+		if(qxP >= 95) then print("²»ÓÃÁÆÆø") call(f_done) return end
+
+		wait.make(function()
+			if(qxP < 30) then
+				eat_wuchang(f_done, f_fail)
+			elseif(qxP < 95) then
+				Execute("er;et;yun heal")
+				local l, w = wait.regexp("^(> )*(Äã²¢Ã»ÓĞÊÜÉË£¡)|(ÄãÔË¹¦Íê±Ï).*$")
+				print("ÁÆÆøÍê±Ï")
+				call(f_done)
+			end
+		end)
+	end
+end
+
+foodwater = function(f_done)
+	return function()
+		if(tonumber(var.hp_water) > tonumber(var.hp_water_max) and tonumber(var.hp_food) > tonumber(var.hp_food_max)) then print("²»ĞèÒª³ÔºÈ") call(f_done) return end
+
+		wait.make(function()
+			Execute("set brief;fly jx;buy zongzi")
+			wait.time(2)
+			Execute("fly xx;su;s;ed;nw;w;buy shuinang;")
+			wait.time(2)
+			Execute("eat zongzi;#4 (drink shuinang);drop zongzi;drop zong ye;")
+			wait.time(2)
+			Execute("#4 (drink shuinang);drop shuinang;unset brief;fly wm")
+			--wait.regexp("^(> )*Éè¶¨»·¾³±äÊı£ºfoodwater = \"YES\"$")
+			print("¾Æ×ã·¹±¥ÁË")
+			call(f_done)
+		end)
+	end
 end --function
 
 
-me.useqn = function(f_done)
-	if(tonumber(me["qn"]) >= tonumber(me["qn_max"])) then
-		if(var.study_seq == nil or var.study_seq == "") then var.study_seq = 1 end
-		local index = tonumber(var.study_seq)%(#me.profile.study_list)
-		if(index == 0) then index = #me.profile.study_list end
-		
-		local st = me.profile.study_list[index]
-		
-		wait.make(function()
-			var.study_loc = st.loc
-			Execute(var.study_loc)
-			research.start(f_done)
-			--[[
-			var.study_loc = st.loc
-			var.lll = st.cmd
-			Execute(var.study_loc)
-			study.start(f_done)
-			var.study_seq = (index + 1)%(#me.profile.study_list)
-			]]--
-		end)
-	else
-		--msg.broadcast("msg_study_done")
-		call(f_done)
-		print("ä¸éœ€è¦èŠ±qn")
-	end
-	
-end
-
-me.check_money = function(f_done)
+check_money = function(f_done)
+	return function()
 	wait.make(function()
 		var.me_silver = 1
 		var.me_gold = 1
 		var.me_goldbar = 1
-		
-		EnableTriggerGroup("check_money", true)
-		Execute("look silver;look gold;look gold-bar;set check money")
-		local l, w = wait.regexp("^(> )*è®¾å®šç¯å¢ƒå˜æ•°ï¼šcheck = \"money\"$")
-		EnableTriggerGroup("check_money", false)
-		local cmd = ""
-		if(tonumber(var.me_silver) > 800 or tonumber(var.me_silver) < 50 or tonumber(var.me_gold) < 16 or tonumber(var.me_gold) > 30 or tonumber(var.me_goldbar) > 1) then
-			cmd = cmd .. "cunkuan " .. tonumber(var.me_silver) .. " silver;"
-			cmd = cmd .. "cunkuan " .. tonumber(var.me_gold) .. " gold;"
-			cmd = cmd .. "cunkuan " .. tonumber(var.me_goldbar) .. " gold-bar"
-		end
-		
-		if(cmd ~= "") then
-			Execute("fly wm;e;s;w")
-			Execute(cmd)
-			Execute("qukuan 99 silver;qukuan 19 gold")
-			wait.time(5)
-			Execute("halt;fly wm")
-			var.me_goldbar = 0
-		end
-		
-		call(f_done)
+
+		capture("check_money", "look silver;look gold;look gold-bar", function()
+			local cmd = ""
+			if(tonumber(var.me_silver) > 800 or tonumber(var.me_silver) < 50 or tonumber(var.me_gold) < 16 or tonumber(var.me_gold) > 30 or tonumber(var.me_goldbar) > 1) then
+				cmd = cmd .. "cunkuan " .. tonumber(var.me_silver) .. " silver;"
+				cmd = cmd .. "cunkuan " .. tonumber(var.me_gold) .. " gold;"
+				cmd = cmd .. "cunkuan " .. tonumber(var.me_goldbar) .. " gold-bar"
+			end
+
+			if(cmd ~= "") then
+				bank.cunqu(cmd .. ";qukuan 99 silver; qukuan 19 gold", function() var.me_goldbar = 0 call(f_done) end)
+				Execute("fly wm;e;s;w")
+				Execute(cmd)
+				Execute("qukuan 99 silver;qukuan 19 gold")
+				wait.time(5)
+				Execute("halt;fly wm")
+				var.me_goldbar = 0
+			end
+
+			call(f_done)
+		end)
 	end)
+	end
 end
 
 function call(f)
 	if(f ~= nil) then f() end
+end
+
+function callfail(f_done, f_fail)
+	if(not f_fail) then call(f_fail) else call(f_done) end
 end

@@ -11,11 +11,18 @@ me = {}
 	精力最大值：jl_max
 ]]--
 on_hp1_update = function(name, line, wildcards)
+	var.hp_js 		= tonumber(wildcards[1])
+	var.hp_js_max 	= tonumber(wildcards[2])
+	var.hp_jsP		= tonumber(wildcards[3])
+	var.hp_jl 		= tonumber(wildcards[4])
+	var.hp_jl_max 	= tonumber(wildcards[5])
+	--[[
 	me["js"] 		= tonumber(wildcards[1])
 	me["js_max"] 	= tonumber(wildcards[2])
 	me["js%"]		= tonumber(wildcards[3])
 	me["jl"] 		= tonumber(wildcards[4])
 	me["jl_max"] 	= tonumber(wildcards[5])
+	]]--
 	--tprint(me)
 end
 
@@ -27,11 +34,18 @@ end
 	内力最大值：nl_max
 ]]--
 on_hp2_update = function(name, line, wildcards)
+	var.hp_qx			= tonumber(wildcards[1])
+	var.hp_qx_max		= tonumber(wildcards[2])
+	var.hp_qxP			= tonumber(wildcards[3])
+	var.hp_nl			= tonumber(wildcards[4])
+	var.hp_nl_max		= tonumber(wildcards[5])
+--[[
 	me["qx"]			= tonumber(wildcards[1])
 	me["qx_max"]		= tonumber(wildcards[2])
 	me["qx%"]			= tonumber(wildcards[3])
 	me["nl"]			= tonumber(wildcards[4])
 	me["nl_max"]		= tonumber(wildcards[5])
+]]--
 	--tprint(me)
 end
 
@@ -41,8 +55,12 @@ end
 	阅历: 		yl
 ]]--
 on_hp3_update = function(name, line, wildcards)
+	var.hp_zq 		= tonumber(wildcards[1])
+	var.hp_yl		= tonumber(wildcards[2])
+	--[[
 	me["zq"] 		= tonumber(wildcards[1])
 	me["yl"]		= tonumber(wildcards[2])
+	]]--
 end
 
 
@@ -53,10 +71,16 @@ end
 	潜能最大值：qn_max
 ]]--
 on_hp4_update = function(name, line, wildcards)
+	var.hp_food		= tonumber(wildcards[1])
+	var.hp_food_max	= tonumber(wildcards[2])
+	var.hp_qn		= tonumber(wildcards[3])
+	var.hp_qn_max	= tonumber(wildcards[4])
+--[[
 	me["food"]		= tonumber(wildcards[1])
 	me["food_max"]	= tonumber(wildcards[2])
 	me["qn"]		= tonumber(wildcards[3])
 	me["qn_max"]	= tonumber(wildcards[4])
+]]--
 end
 
 
@@ -66,9 +90,14 @@ end
 	经验值：	exp
 ]]--
 on_hp5_update = function(name, line, wildcards)
+	var.hp_water		= tonumber(wildcards[1])
+	var.hp_water_max	= tonumber(wildcards[2])
+	var.hp_exp			= tonumber(wildcards[3])
+--[[
 	me["water"]		= tonumber(wildcards[1])
 	me["water_max"]	= tonumber(wildcards[2])
 	me["exp"]		= tonumber(wildcards[3])
+]]--
 end
 
 
@@ -78,9 +107,14 @@ end
 	修为: 		xw
 ]]--
 on_hp6_update = function(name, line, wildcards)
+	var.hp_dt			= tonumber(wildcards[1])
+	var.hp_dt_max		= tonumber(wildcards[2])
+	var.hp_xw			= tonumber(wildcards[3])
+--[[
 	me["dt"]			= tonumber(wildcards[1])
 	me["dt_max"]		= tonumber(wildcards[2])
 	me["xw"]			= tonumber(wildcards[3])
+]]--
 end
 
 

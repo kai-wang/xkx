@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE muclient>
-<!-- Saved on Saturday, August 23, 2014, 11:02 PM -->
+<!-- Saved on Tuesday, September 02, 2014, 10:13 PM -->
 <!-- MuClient version 4.84 -->
 <!-- Written by Nick Gammon -->
 <!-- Home Page: http://www.mushclient.com/ -->
@@ -8,7 +8,7 @@
 <world
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-08-23 23:02:04"
+   date_saved="2014-09-02 22:13:15"
 
    auto_say_override_prefix="-"
    auto_say_string="say "
@@ -116,7 +116,7 @@
 <triggers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-08-23 23:02:04"
+   date_saved="2014-09-02 22:13:15"
   >
   <trigger
    custom_colour="16"
@@ -212,7 +212,6 @@
   >
   </trigger>
   <trigger
-   enabled="y"
    group="walk_special"
    keep_evaluating="y"
    match="^(&gt; )*(.*)(À¹×¡ÁËÄãµÄÈ¥Â·|ºÈµÀ£º¡°Íþ¡­¡­Îä¡­¡­¡£¡±|À¹×¡Äã£¬ËµµÀ|ÉÏÇ°µ²×¡Äã|À¹×¡ÄãËµ|ºÈµÀ£º¡°µ½Ä½ÈÝÉ½×¯²»ÒªÂÒ´³|ºÈµÀ£º.*ÐÝ×ß|°ÑÊÖÒ»À¹|ÏòÄãºÈµÀ|²ÙÆðÈ­Í·|µ²×¡ÁËÄã|µ²×¡ÄãµÄÈ¥Â·|À¹×¡ÁËÄã|Ò»ÑÔ²»·¢£¬ÉÁÉíÀ¹ÔÚÄãÃæÇ°¡£|Ëµ: ÎÒ°Ñ°¢·²Ìá¹ØÔÚÎÒµÄ¿ÍÌüÀïÁË|ËµµÀ£ºÄã·ÇÃÜ×ÚµÜ×Ó|°ÑÊÖÒ»À¹£ºÄãÃ»ÓÐ).*$"
@@ -227,7 +226,6 @@ SetVariable("walk_blocker_name", name)
 walk.handlers.k_blocker()</send>
   </trigger>
   <trigger
-   enabled="y"
    group="walk_special"
    keep_evaluating="y"
    match="^(&gt; )*(.*)ºÈµÀ£º´ËÄËÌúÕÆ°ï½ûµØ.*$"
@@ -239,7 +237,6 @@ walk.handlers.k_blocker()</send>
 walk.handlers.k_blocker()</send>
   </trigger>
   <trigger
-   enabled="y"
    group="walk_special"
    keep_evaluating="y"
    match="^(&gt; )*(.*)ËµµÀ: Äã·ÇÃÜ×ÚµÜ×Ó.*$"
@@ -263,22 +260,22 @@ walk.handlers.k_blocker()</send>
   </trigger>
   <trigger
    expand_variables="y"
-   group="dazuo"
-   keep_evaluating="y"
-   match="^(&gt; )*(@!dazuo_end_desc)$"
-   regexp="y"
-   script="dazuo.continue"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
-   expand_variables="y"
    group="study"
    keep_evaluating="y"
    match="^(&gt; )*(@!dazuo_end_desc)$"
    omit_from_output="y"
    regexp="y"
    script="study.continue"
+   sequence="100"
+  >
+  </trigger>
+  <trigger
+   expand_variables="y"
+   group="dazuo"
+   keep_evaluating="y"
+   match="^(&gt; )*(@!dazuo_end_desc)$"
+   regexp="y"
+   script="dazuo.continue"
    sequence="100"
   >
   </trigger>
@@ -451,7 +448,6 @@ SetVariable("walk_blocker_name", name)
 walk.handlers.k_blocker()</send>
   </trigger>
   <trigger
-   enabled="y"
    group="walk_special"
    keep_evaluating="y"
    match="^(&gt; )*(µêÐ¡¶þÒ»ÏÂµ²ÔÚÂ¥ÌÝÇ°)|(ÔõÃ´×Å£¬Ïë°××¡°¡).*$"
@@ -546,7 +542,6 @@ walk.handlers.k_blocker()</send>
   >
   </trigger>
   <trigger
-   enabled="y"
    group="walk_special"
    keep_evaluating="y"
    match="^(&gt; )*(ÎÞ¸ùµÀ³¤|¸ß¸ùÃ÷|Ê©´÷×Ó|ÕÅËÉÏª)ºÈµÀ£º.*$"
@@ -567,7 +562,6 @@ walk.handlers.k_blocker()</send>
   >
   </trigger>
   <trigger
-   enabled="y"
    group="walk_special"
    keep_evaluating="y"
    match="^(&gt; )*(Ò»Ò¶±âÖÛ»º»ºµØÊ»ÁË¹ýÀ´£¬ô¹¹«½«Ò»¿éÌ¤½Å°å´îÉÏµÌ°¶.*)|(°¶±ßÒ»Ö»Ð¡ÖÛÉÏµÄÀÏô¹¹«ËµµÀ£ºÕýµÈ×ÅÄãÄØ£¬ÉÏÀ´°É¡£)$"
@@ -596,7 +590,6 @@ walk.handlers.k_blocker()</send>
   >
   </trigger>
   <trigger
-   enabled="y"
    group="walk_special"
    keep_evaluating="y"
    match="^(&gt; )*(ô¹¹«Ëµ¡°µ½À²£¬ÉÏ°¶°É¡±)|(ÖÕÓÚµ½ÁËÐ¡µº±ß)|(ÖÕÓÚµ½ÁË°¶±ß)|(Õ½´¬ÔÚÒ»ÕóÕó·çÀËÉùÖÐ¿¿ÉÏÁËÂëÍ·¡£)|(´ó´¬ÖÕÓÚÍ£ÔÚÁËÒ»¸öÐ¡µº±ß)|(Ð¡´¬ÔÚºÉ»¨äçÖÐ»º»º¶øÐÐ£¬²»Ò»»áÄã±ã¿´µ½).*$"
@@ -733,7 +726,6 @@ bei.fail()</send>
   >
   </trigger>
   <trigger
-   enabled="y"
    group="walk_special"
    keep_evaluating="y"
    match="^(&gt; )*µêÐ¡¶þÅÜµ½ÃÅ±ßÀ¹×¡£º¿Í¹ÙÒÑ¾­¸¶ÁËÒø×Ó.*$"
@@ -743,7 +735,6 @@ bei.fail()</send>
   >
   </trigger>
   <trigger
-   enabled="y"
    group="walk_special"
    keep_evaluating="y"
    match="^(&gt; )*¶¨ÒÝÊ¦Ì«À¹×¡Äã£º·ÇºãÉ½µÜ×Ó£¬Çëµ½´ËÖ¹²½£¡$"
@@ -755,7 +746,6 @@ bei.fail()</send>
 walk.handlers.k_blocker()</send>
   </trigger>
   <trigger
-   enabled="y"
    group="walk_special"
    keep_evaluating="y"
    match="^(&gt; )*·òÈË·Ô¸ÀÃ»ÓÐÖØÒªµÄÊÂÇé²»Òª´òÈÅÐ¡½ãÐÝÏ¢¡£$"
@@ -870,7 +860,6 @@ walk.handlers.k_blocker()</send>
   >
   </trigger>
   <trigger
-   enabled="y"
    group="walk_special"
    keep_evaluating="y"
    match="^(&gt; )*Äã°Ñ¾ÞÊ¯ÍÆµ½Ò»±ß£¬Â¶³öÒ»¸ö¶´¿Ú£¬ÀïÃæÓÄÓÄµÄÓÐÐ©¹âÁÁ¡£$"
@@ -994,7 +983,6 @@ walk.handlers.k_blocker()</send>
   >
   </trigger>
   <trigger
-   enabled="y"
    group="walk_special"
    keep_evaluating="y"
    match="^(&gt; )*ÄãÉíÉÏ¶«Î÷Ì«¶àÁË£¬´¬µÄ¸ºµ£Ì«´óÁË£¡$"
@@ -1096,7 +1084,6 @@ fight.busy()</send>
   >
   </trigger>
   <trigger
-   enabled="y"
    group="walk_special"
    keep_evaluating="y"
    match="^(&gt; )*Ë®Á÷Ò»ÕóÓ¿¶¯£¬¾ÞÊ¯ºäÂ¡Ò»Éù¹ö»ØÁËÔ­´¦£¬¶´¿ÚÓÖ±»·â×¡ÁË¡£$"
@@ -1126,7 +1113,6 @@ fight.busy()</send>
   >
   </trigger>
   <trigger
-   enabled="y"
    group="walk_special"
    keep_evaluating="y"
    match="^(&gt; )*ÎÀÊ¿¶ÔÄã´óºðÒ»Éù.*$"
@@ -1213,7 +1199,6 @@ walk.handlers.k_blocker()</send>
   >
   </trigger>
   <trigger
-   enabled="y"
    group="walk_special"
    keep_evaluating="y"
    match="^(&gt; )*Ö»ÌýµÃ.*´«À´£º¡°±ð¼±Âï£¬Õâ¶ùÕýÃ¦×ÅÄÅ¡­¡­¡±$"
@@ -1224,7 +1209,6 @@ walk.handlers.k_blocker()</send>
   <send>DoAfterSpecial(2, "yell boat", 10)</send>
   </trigger>
   <trigger
-   enabled="y"
    group="walk_special"
    keep_evaluating="y"
    match="^(&gt; )*Öì¹Ú¾ÞòþÒ»Ô¾À¹×¡ÄãµÄÈ¥Â·¡£$"
@@ -1245,6 +1229,7 @@ walk.handlers.k_blocker()</send>
   <send>Note("hihi")</send>
   </trigger>
   <trigger
+   enabled="y"
    group="HP"
    match="^[&gt; ]*¡¾ µ¤ Ìï ¡¿\s+(\d+)\/\s+(\d+)\s+¡¾ ÐÞ Îª ¡¿\s+(\d+)$"
    regexp="y"
@@ -1253,6 +1238,7 @@ walk.handlers.k_blocker()</send>
   >
   </trigger>
   <trigger
+   enabled="y"
    group="HP"
    match="^[&gt; ]*¡¾ ¾« Éñ ¡¿\s+(\d+)\/\s+(\d+)\s+\(\s*(\d+)%\)\s+¡¾ ¾« Á¦ ¡¿\s+(\d+)\s\/\s(\d+).*$"
    regexp="y"
@@ -1261,6 +1247,7 @@ walk.handlers.k_blocker()</send>
   >
   </trigger>
   <trigger
+   enabled="y"
    group="HP"
    match="^[&gt; ]*¡¾ Æø Ñª ¡¿\s+(\d+)\/\s+(\d+)\s+\(\s*(\d+)%\)\s+¡¾ ÄÚ Á¦ ¡¿\s+(\d+)\s\/\s(\d+).*$"
    regexp="y"
@@ -1280,6 +1267,7 @@ walk.handlers.k_blocker()</send>
 </send>
   </trigger>
   <trigger
+   enabled="y"
    group="HP"
    match="^[&gt; ]*¡¾ Ê³ Îï ¡¿\s+(\d+)\/\s+(\d+)\s+¡¾ Ç± ÄÜ ¡¿\s+(\d+)\s+\/\s+(\d+)$"
    regexp="y"
@@ -1288,6 +1276,7 @@ walk.handlers.k_blocker()</send>
   >
   </trigger>
   <trigger
+   enabled="y"
    group="HP"
    match="^[&gt; ]*¡¾ Òû Ë® ¡¿\s+(\d+)\/\s+(\d+)\s+¡¾ ¾­ Ñé ¡¿\s+(\d+)$"
    regexp="y"
@@ -1296,6 +1285,7 @@ walk.handlers.k_blocker()</send>
   >
   </trigger>
   <trigger
+   enabled="y"
    group="HP"
    match="^[&gt; ]*¡¾ Õý Æø ¡¿\s+(\d+)\s+¡¾ ÔÄ Àú ¡¿\s+(\d+)$"
    regexp="y"
@@ -1382,7 +1372,7 @@ walk.stop()</send>
 <aliases
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-08-23 23:02:04"
+   date_saved="2014-09-02 22:13:15"
   >
   <alias
    match="^show (.*)$"
@@ -2180,7 +2170,7 @@ leitai</send>
 <timers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-08-23 23:02:04"
+   date_saved="2014-09-02 22:13:15"
   >
   <timer name="idle" enabled="y" second="59.00" offset_second="0.00" >
   <send>hi</send>
@@ -2193,7 +2183,7 @@ leitai</send>
 <macros
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-08-23 23:02:04"
+   date_saved="2014-09-02 22:13:15"
   >
 
   <macro name="up" type="send_now" >
@@ -2287,7 +2277,7 @@ leitai</send>
 <variables
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-08-23 23:02:04"
+   date_saved="2014-09-02 22:13:15"
   >
   <variable name="bag_dummy_id">hsly</variable>
   <variable name="baobiao_exp">142</variable>
@@ -2302,7 +2292,7 @@ leitai</send>
   <variable name="double_bonus">false</variable>
   <variable name="event_loc">ÎÞÁ¿É½</variable>
   <variable name="event_room">2680</variable>
-  <variable name="event_start_time">1408796206</variable>
+  <variable name="event_start_time">1409142510</variable>
   <variable name="faint">0</variable>
   <variable name="fz_coin">2321</variable>
   <variable name="gf_city">´óÀí¹ú</variable>
@@ -2314,12 +2304,34 @@ leitai</send>
   <variable name="gf_option"></variable>
   <variable name="gf_status">fail</variable>
   <variable name="heal_dummy_id">hqly</variable>
+  <variable name="hp_dt">0</variable>
+  <variable name="hp_dt_max">12000</variable>
+  <variable name="hp_exp">38807982</variable>
+  <variable name="hp_food">513</variable>
+  <variable name="hp_food_max">396</variable>
+  <variable name="hp_jl">1699</variable>
+  <variable name="hp_jl_max">1699</variable>
+  <variable name="hp_js">1167</variable>
+  <variable name="hp_jsP">100</variable>
+  <variable name="hp_js_max">1167</variable>
+  <variable name="hp_nl">29122</variable>
+  <variable name="hp_nl_max">13344</variable>
+  <variable name="hp_qn">65</variable>
+  <variable name="hp_qn_max">17970</variable>
+  <variable name="hp_qx">8859</variable>
+  <variable name="hp_qxP">100</variable>
+  <variable name="hp_qx_max">8859</variable>
+  <variable name="hp_water">594</variable>
+  <variable name="hp_water_max">396</variable>
+  <variable name="hp_xw">10707</variable>
+  <variable name="hp_yl">1017076</variable>
+  <variable name="hp_zq">77883068</variable>
   <variable name="item_drop_list"></variable>
   <variable name="item_eat_list"></variable>
   <variable name="item_jicun_list"></variable>
   <variable name="item_sell_list"></variable>
   <variable name="item_store_list"></variable>
-  <variable name="last_wuchang">1406724399</variable>
+  <variable name="last_wuchang">1409139443</variable>
   <variable name="lll">yanjiu xiantian-qigong 1000;et</variable>
   <variable name="login_drop">drop dao pao;drop ma xie</variable>
   <variable name="login_wear">give yinling xue to byj;give songluan hushou to byj;give cangyan mao to byj;give yuquan yi to byj;give chunjiang jian to byj;wear all;wield jian</variable>
@@ -2330,6 +2342,8 @@ leitai</send>
   <variable name="me_menpai">È«Õæ</variable>
   <variable name="me_name">°×Óñ¾©</variable>
   <variable name="me_silver">123</variable>
+  <variable name="me_status_poison">false</variable>
+  <variable name="me_status_ssf">false</variable>
   <variable name="me_xunzhang">true</variable>
   <variable name="quqing_loc">Îä¹¦</variable>
   <variable name="research_num">1</variable>
@@ -2344,7 +2358,7 @@ leitai</send>
   <variable name="study_cmd">xue wang xiantian-qigong 40;yun regenerate</variable>
   <variable name="study_loc">fly wm;e;n;e;e;n;n</variable>
   <variable name="study_seq">0</variable>
-  <variable name="system_magic_number">510</variable>
+  <variable name="system_magic_number">545</variable>
   <variable name="system_walk_delay">100</variable>
   <variable name="task_auto_kill">true</variable>
   <variable name="task_available_time">1408194443</variable>
@@ -2382,7 +2396,7 @@ leitai</send>
 <colours
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-08-23 23:02:04"
+   date_saved="2014-09-02 22:13:15"
   >
 
 <ansi>
@@ -2439,7 +2453,7 @@ leitai</send>
 <keypad
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-08-23 23:02:04"
+   date_saved="2014-09-02 22:13:15"
   >
 
   <key name="0" >
@@ -2553,7 +2567,7 @@ leitai</send>
 <printing
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2014-08-23 23:02:04"
+   date_saved="2014-09-02 22:13:15"
   >
 
 <ansi>

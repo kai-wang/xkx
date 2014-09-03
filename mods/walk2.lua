@@ -812,3 +812,8 @@ function walkaround(dp, dir, f_ok, f_fail, f_stop)
 
 	step_by_step(tbl, f_ok, f_fail, f_stop)
 end
+
+to = function(room, f_done, f_fail, f_stop)
+	if(tonumber(room) > #roomAll) then call(f_fail) end
+	walk.run(roomAll[tonumber(room)].path, f_done, f_fail, f_stop)
+end
