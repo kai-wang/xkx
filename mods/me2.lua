@@ -1,6 +1,5 @@
 require "tprint"
 
-
 capture = function(group, cmd, f_done)
 	wait.make(function()
 		EnableTriggerGroup(group)
@@ -11,17 +10,6 @@ capture = function(group, cmd, f_done)
 		call(f_done)
 	end)
 end
-
---module ("bank", package.seeall)
-local bank = {}
-bank.cunqu = function(cmd, f_done, f_fail)
-	wait.make(function()
-		Execute("fly wm;e;s;w")
-		Execute(cmd)
-		busy_test(function() call(f_done) end)
-	end)
-end
-
 
 updateHP = function(f_done)
 	return function() capture("HP", "hp", f_done) end
@@ -200,32 +188,32 @@ end --function
 
 check_money = function(f_done)
 	return function()
-	wait.make(function()
-		var.me_silver = 1
-		var.me_gold = 1
-		var.me_goldbar = 1
+		wait.make(function()
+			var.me_silver = 1
+			var.me_gold = 1
+			var.me_goldbar = 1
 
-		capture("check_money", "look silver;look gold;look gold-bar", function()
-			local cmd = ""
-			if(tonumber(var.me_silver) > 800 or tonumber(var.me_silver) < 50 or tonumber(var.me_gold) < 16 or tonumber(var.me_gold) > 30 or tonumber(var.me_goldbar) > 1) then
-				cmd = cmd .. "cunkuan " .. tonumber(var.me_silver) .. " silver;"
-				cmd = cmd .. "cunkuan " .. tonumber(var.me_gold) .. " gold;"
-				cmd = cmd .. "cunkuan " .. tonumber(var.me_goldbar) .. " gold-bar"
-			end
+			capture("check_money", "look silver;look gold;look gold-bar", function()
+				local cmd = ""
+				if(tonumber(var.me_silver) > 800 or tonumber(var.me_silver) < 50 or tonumber(var.me_gold) < 16 or tonumber(var.me_gold) > 30 or tonumber(var.me_goldbar) > 1) then
+					cmd = cmd .. "cunkuan " .. tonumber(var.me_silver) .. " silver;"
+					cmd = cmd .. "cunkuan " .. tonumber(var.me_gold) .. " gold;"
+					cmd = cmd .. "cunkuan " .. tonumber(var.me_goldbar) .. " gold-bar"
+				end
 
-			if(cmd ~= "") then
-				bank.cunqu(cmd .. ";qukuan 99 silver; qukuan 19 gold", function() var.me_goldbar = 0 call(f_done) end)
-				Execute("fly wm;e;s;w")
-				Execute(cmd)
-				Execute("qukuan 99 silver;qukuan 19 gold")
-				wait.time(5)
-				Execute("halt;fly wm")
-				var.me_goldbar = 0
-			end
+				if(cmd ~= "") then
+					bank.cunqu(cmd .. ";qukuan 99 silver; qukuan 19 gold", function() var.me_goldbar = 0 call(f_done) end)
+					Execute("fly wm;e;s;w")
+					Execute(cmd)
+					Execute("qukuan 99 silver;qukuan 19 gold")
+					wait.time(5)
+					Execute("halt;fly wm")
+					var.me_goldbar = 0
+				end
 
-			call(f_done)
+				call(f_done)
+			end)
 		end)
-	end)
 	end
 end
 

@@ -5,12 +5,12 @@ var.dazuo_desc = "你坐下来运气用功，一股内息开始在体内流动。"
 var.dazuo_end_desc = "(你将头上白雾吸尽，睁开双眼，缓缓站起。)|(你运功完毕，深深吸了口气，站了起来。)"
 var.dazuo_halt_desc = "你把正在运行的真气强行压回丹田，站了起来。"
 var.dazuo_full_desc = "你的内力修为似乎已经达到了瓶颈，无法再靠打坐来提升了。"
-var.me_id = "byj"
-var.me_name = "白玉京"
-var.me_menpai = "逍遥"
-var.me_family = "逍遥"
-var.task_id = "byj's task"
-var.ttask_id = "byj's ttask"
+var.me_id = "nohead"
+var.me_name = "没头脑"
+var.me_menpai = "灵鹫"
+var.me_family = "灵鹫"
+var.task_id = "nohead's task"
+var.ttask_id = "nohead's ttask"
 var.heal_dummy_id = "hqly"
 var.bag_dummy_id = "hsly"
 
@@ -31,7 +31,8 @@ profile = {
 		[10]= {name="凌波微步",			desc="你提起真气，依照先天伏羲六十四卦",cd=false},
 		[11]= {name="长相思",			desc="你凌波飞渡似的舞步",				cd=false},
 		[12]= {name="月光如影",			desc="你照着月光的映射",				cd=false},
-		[13]= {name="六阳融雪",			desc="你使出天山六阳掌之绝技『六阳融雪』",			cd=false}
+		[13]= {name="六阳融雪",			desc="你使出天山六阳掌之绝技『六阳融雪』",			cd=false},
+		[14]= {name="天山月影",			desc="你使出月影舞步的绝技", 			cd=false}
 	},
 	
 	set_cd_status = function(l, flag)
@@ -47,33 +48,20 @@ profile = {
 	end,
 	
 	busy_list = {
-		[1] = {	i = 6, action = "wield " .. var.weapon .. ";enable sword sun-finger;perform sword.qiankun" 	},
-		[2] = { i = 12, action = "perform move.yueguangruying" },
-		[3] = { i = 9, action = "wield " .. var.weapon .. ";enable parry tianyu-qijian;perform parry.san" }
-		--[2] = { i = 7, action = "unwield all;perform finger.sandie;wield " .. var.weapon},
-		--[2] = {	i = 5, action = "wield " .. var.weapon .. ";enable sword quanzhen-jian;perform sword.ding" 	}
+		[1] = { i = 12, action = "perform move.yueguangruying" },
+		[2] = { i = 9, action = "wield " .. var.weapon .. ";enable parry tianyu-qijian;perform parry.san" }
 	},
-	
+	--杀官府的技能
 	attack_list1 = {
-		--[1] = {	i = 3, action = "enable sword quanzhen-jian;enable dodge qixing-bufa;wield jian;perform dodge.qixing"},
-		---[1] = { i = 11,action = "enable sword chixin-qingchang-jian;perform sword.xiangsi"},
-		---[2] = { i = 8, action = "enable sword sun-finger;enable parry tianyu-qijian;perform parry.kuangwu"},
-		--[2] = {	i = 8, action = "enable sword jinshe-jian;unwield all;wield jian;perform sword.wandao"},
 		[1] = {	i = 1, action = "enable sword quanzhen-jian;wield jian;perform sword.sanqing"},
 		[2] = { i = 7, action = "unwield all;perform finger.sandie;wield " .. var.weapon}
 	},
-	
+	--杀task的技能
 	attack_list2 = {
-		--[1] = { i = 3, action = "enable sword quanzhen-jian;enable dodge qixing-bufa;unwield all;perform strike.sanhua;wield ".. var.weapon .. ";perform sword.jianyi;perform dodge.qixing" },
-		[2] = { i = 9, action = "wield " .. var.weapon .. ";enable parry tianyu-qijian;perform parry.san" },
-		[1] = { i = 13,action = "unwield all;enable strike haotian-zhang;perform strike.sanhua;enable strike liuyang-zhang;perform strike.rongxue;wield " .. var.weapon},
-		---[2] = { i = 8, action = "enable sword quanzhen-jian;unwield all;perform strike.sanhua;wield ".. var.weapon .. ";perform sword.jianyi;enable parry tianyu-qijian;perform parry.kuangwu"},
-		[3] = {	i = 1, action = "wield " .. var.weapon .. ";enable sword quanzhen-jian;unwield all;perform strike.sanhua;wield ".. var.weapon .. ";perform sword.jianyi;perform sword.sanqing"},
-		[4] = { i = 8, action = "enable sword quanzhen-jian;unwield all;perform strike.sanhua;wield ".. var.weapon .. ";perform sword.jianyi;enable parry tianyu-qijian;perform parry.kuangwu"},
-		--[2] = {	i = 8, action = "enable sword jinshe-jian;unwield all;wield " .. var.weapon .. ";perform sword.wandao"},
-		--[4] = { i = 9, action = "wield " .. var.weapon .. "enable parry tianyu-qijian;perform parry.san" },
-		[5] = {	i = 4, action = "unwield all;hubo"},
-		[6] = { i = 7, action = "unwield all;perform finger.sandie;wield " .. var.weapon}
+		[1] = { i = 13,action = "unwield all;enable strike liuyang-zhang;perform strike.rongxue " .. var.task_id .. ";wield " .. var.weapon},
+		[2] = { i = 9, action = "wield " .. var.weapon .. ";enable parry tianyu-qijian;perform parry.san " .. var.task_id },
+		[3] = { i = 8, action = "wield ".. var.weapon .. ";enable parry tianyu-qijian;perform parry.kuangwu " .. var.task_id },
+		[4] = { i = 14,action= "wield " .. var.weapon .. ";perform move.yueying " .. var.task_id}
 	},
 	
 	attack_list3 = {
@@ -83,23 +71,14 @@ profile = {
 	
 	study_list = {
 		{ loc = "fly wm;e;n;e;e;n;n", cmd = "yanjiu parry 1000;yun regenerate"}
-	--[[
-		[1] = { loc = "wcy", cmd = "xue wang xiantian-qigong 40;yun regenerate" },
-		[2] = { loc = "fly wm;e;s;s;e;n;", cmd = "xue zhu literate 40;yun regenerate" },
-		[3] = { loc = "wcy", cmd = "xue wang strike 40;yun regenerate" },
-		[4] = { loc = "wcy", cmd = "xue wang parry 40;yun regenerate" }
-	]]--
 	},
 	
 	research_list = {
-		{ skill = "xiantian-qigong"}
-		--{ skill = "force" },
-		--{ skill = "dodge" }
+		{ skill = "bahuang-gong"}
 	},
 	
 	powerup = function()
-		Execute("enable sword sun-finger;enable force bahuang-gong;")
-		Execute("yun bahuang;enable force xiantian-qigong;yun powerup")
+		Execute("enable force wuzheng-xinfa;yun bingxin;yun powerup;enable force bahuang-gong;yun bahuang")
 	end,
 	
 	init = function()
@@ -130,8 +109,9 @@ profile = {
 	
 	int_wear = function(f_done)
 		wait.make(function()
-			Execute("tuo all;unwield all")
-			Execute("wear dizhu yi;wield diyu jian;wear chixia xue;wear jiangmo hushou;wear tianwei mao;wear xunzhang")
+			--Execute("tuo all;unwield all")
+			--Execute("wear dizhu yi;wield diyu jian;wear chixia xue;wear jiangmo hushou;wear tianwei mao;wear xunzhang")
+			Execute("wear all")
 			wait.time(1)
 			call(f_done)
 		end)
@@ -139,8 +119,8 @@ profile = {
 	
 	fight_wear = function(f_done)
 		wait.make(function()
-			Execute("tuo all;give qingwei hushou to byj;give yumen jian to byj;give tianwei mao to byj;give zihe yi to byj;give yinling xue to byj")
-			Execute("wear all;wield jian")
+			Execute("tuo all;give juanyun hushou to nohead;give duanyu qin to nohead;give xiaowei mao to nohead;give huanfeng yi to nohead;give helan xue to nohead")
+			Execute("wear all;wield " .. var.weapon)
 			busy_test(function() call(f_done) end)
 		end)
 		--Execute(var.login_wear)

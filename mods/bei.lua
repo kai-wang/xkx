@@ -6,11 +6,15 @@ require "socket"
 
 module ("bei", package.seeall)
 
-local bei_info = {}
+local cxt = {}
 local task1 = dofile("worlds\\xkx\\mods\\task1.lua")
 local task1_array = {}
 
-main = function()
+main = function(f_ok, f_fail)
+	cxt = {}
+	cxt.f_ok = f_ok
+	cxt.f_fail = f_fail
+	
 	EnableTriggerGroup("bei", true)
 	Execute("set brief;fly wm;e;n;e;e;e;task;fly wm")
 end
@@ -185,7 +189,7 @@ end
 ----看到npc死了，把东西捡起来------------------------------------
 npcdie = function(name, line, wildcards)
 	wait.make(function()
-		walk.stop()
+		walk.abort()
 		fight.stop()
 		var.task_status = "done"
 		local l, w  = wait.regexp("^(> )*" .. var.task_npc .. "扑在地上挣扎了几下，口中喷出几口鲜血，死了！$", 5)
@@ -224,8 +228,8 @@ end
 function task1_init(name, line, wildcards)
 	var.task_npc = wildcards[2]
 	print(var.task_npc)
-	bei_info.start = true
-	bei_info.matrix = {}
+	cxt.start = true
+	cxt.matrix = {}
 end
 
 function log_task1(name, line, wildcards, style)
@@ -238,12 +242,12 @@ function log_task1(name, line, wildcards, style)
 		end
 	end
 
-	table.insert(bei_info.matrix, str)
+	table.insert(cxt.matrix, str)
 end
 
 function parse()
-	if(bei_info.matrix == {}) then return end
-	local str = table.concat(bei_info.matrix, "\n")
+	if(cxt.matrix == {}) then return end
+	local str = table.concat(cxt.matrix, "\n")
 	local array = stringToArray(str)
 
 	if(array ~= nil) then
@@ -460,7 +464,7 @@ end
 ---------手动保存一下task1的内容--------------------------
 function save(name)
 	var.task_city = name
-	table.insert(task1, {["city"]=name, ["desc"]=table.concat(bei_info.matrix, "\n")})
+	table.insert(task1, {["city"]=name, ["desc"]=table.concat(cxt.matrix, "\n")})
 	local content = serialize.save("task1", task1)
 	local file = io.open("worlds\\xkx\\mods\\task1.lua", "w")
 	file:write("local " .. content)

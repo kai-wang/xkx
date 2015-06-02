@@ -1,8 +1,10 @@
-require "var"
-
---导入所有模块
+--[[
+导入所有模块
+]]--
 
 local modPath = string.match(GetInfo(35),"^.*\\")
+--local myid = string.match(GetInfo(54),"^.*\\(.*)\.MCL$")
+local myid = "nohead"
 
 include=function(fileName)
 	dofile(modPath..fileName)
@@ -32,8 +34,14 @@ loadmod("bei.lua")
 loadmod("item.lua")
 loadmod("study.lua")
 
-map.loadall()
+--include(myid .. ".lua")
 
--- 可能需要第一次手动设置一下me_id，然后重新导入脚本
-me.profile = dofile(modPath .. var.me_id .. ".lua")
+map.loadall()
+me.profile = dofile(modPath .. myid .. ".lua")
+--me.init()
+
+if configcmd~=nil then
+	print("????")
+	configcmd()
+end
 

@@ -1,8 +1,24 @@
 require "wait"
 require "tprint"
 
-function test()
-	print("fadfadfa")
+function call(f)
+	if(f ~= nil) then f() end
+end
+
+function suck()
+	busy_test(function()
+		Execute("yun maxsuck")
+		call(suck)
+	end)
+end
+
+function qukuan(amount, f_ok, f_fail)
+	wait.make(function()
+		Execute("fly wm;e;s;w;qukuan " .. amount)
+		local l, w = wait.regexp("^(> )*你从银号里取出.*$", 5)
+		if(not l or l:match("你从银号") == nil) then print("取款失败了") call(f_fail) return end
+		busy_test(f_ok)
+	end)
 end
 
 function get_xionghuang(f_ok)
@@ -162,6 +178,33 @@ function get_heimuling(f_ok, f_fail)
 	end)
 end
 
+function get_jiedao(f_ok, f_fail)
+	get_sling(function()
+		Execute("look jie dao");
+		local l, w = wait.regexp("^(> )*(你要看什么)|(戒刀).*$")
+		if(l:match("戒刀") ~= nil) then
+			Execute("fly sl;knock gate;n;n;nu;n;w")
+		else
+			Execute("fly sl;knock gate;n;n;nu;n;w;unwield all;kill seng bing")
+			l, w = wait.regexp("^(> )*(这里没有这个人)|(守寺僧兵扑在地上挣扎了几下).*$", 10)
+			if((l == nil) or (l:match("这里没有这个人") ~= nil)) then
+				Execute("get jie dao");
+				l, w = wait.regexp("^(> )*(你附近没有这样东西)|(你捡起一把戒刀).*$", 2)
+				if(l == nil or l:match("你附近没有这样东西") ~= nil) then return call(f_fail) end
+			else
+				wait.time(2)
+				Execute("get jie dao from corpse")
+				l, w = wait.regexp("^(> )*(你附近没有这样东西)|(你从守寺僧兵的尸体身上搜出一把戒刀).*$", 5)
+				if(l == nil or l:match("你附近没有这样东西")) then return call(f_fail) end
+			end
+		end
+		
+		print("戒刀准备好了")
+		call(f_ok)
+	end,
+	f_fail)
+end
+
 module ("ts", package.seeall)
 
 new = function(name, group, interval, handler)
@@ -203,21 +246,33 @@ start = function(f_done)
 	print("开始打坐")
 	EnableTriggerGroup("dazuo", true)
 	cxt.done_flag = false
+	cxt.full_flag = false
 	cxt.f_done = f_done
-	Execute("et;dazuo max")
+	cxt.value = "dazuo 3000"
+	Execute("et;" .. cxt.value)
 end
 
 continue = function()
-	if(not cxt.done_flag) then
-		Execute("er;ef;dazuo max")
-	else
+	if(cxt.full_flag ~= true or cxt.done_flag) then
 		EnableTriggerGroup("dazuo", false)
 		busy_test(function() call(cxt.f_done) end)
+	elseif(not cxt.done_flag) then
+		Execute("er;ef;" .. cxt.value)
 	end
 end
 
 done = function()
 	cxt.done_flag = true
+end
+
+full = function(f_done)
+	print("开始打坐")
+	EnableTriggerGroup("dazuo", true)
+	cxt.done_flag = false
+	cxt.full_flag = true
+	cxt.f_done = f_done
+	cxt.value = "dazuo max"
+	Execute("et;" .. cxt.value)
 end
 
 halt = function()
@@ -311,4 +366,14 @@ go = function(f_done)
 		local room = tonumber(var.event_room)
 		walk.run(roomAll[room].path, f_ok, f_fail, f_fail)
 	end
+end
+
+
+module ("bank", package.seeall)
+bank.cunqu = function(cmd, f_done, f_fail)
+	wait.make(function()
+		Execute("fly wm;e;s;w")
+		Execute(cmd)
+		busy_test(function() call(f_done) end)
+	end)
 end

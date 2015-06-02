@@ -48,6 +48,7 @@ blocker_npcs["一品堂武士"] = {id = "wu shi"}
 blocker_npcs["卫士"] = {id = "wei shi"}
 blocker_npcs["崔员外"] = {id = "cui yuanwai"}
 blocker_npcs["校尉"] = {id = "xiao wei"}
+blocker_npcs["武将"] = {id = "jiang"}
 blocker_npcs["官兵"] = {id = "bing"}
 blocker_npcs["江百胜"] = {id = "jiang baisheng"}
 blocker_npcs["女管家"] = {id = "guan jia"}
@@ -83,6 +84,8 @@ blocker_npcs["菊剑"] = {id = "ju jian"}
 blocker_npcs["谢烟客"] = {id = "xie yanke", pfm = true}
 blocker_npcs["巴依"] = {id = "bayi"}
 blocker_npcs["定逸师太"] = {id = "dingyi shitai", pfm = true}
+blocker_npcs["丘处机"] = {id = "qiu chuji", pfm = true}
+blocker_npcs["刘处玄"] = {id = "liu chuxuan", pfm = true}
 
 -- lht npcs -------------------------------------------------
 blocker_npcs["安健刚"] = {id = "an jiangang", pfm = false}
@@ -114,90 +117,70 @@ function run(path, f_ok, f_fail, f_stop)
 	
 	EnableTriggerGroup("walk", true)
 	
-	run_cxt = {}
+	run_cxt.stop = false
+	run_cxt.fail = false
 	
-	local tbl = utils.split(path, "|")
-	local c = run_cxt
+	run_cxt.run_ok = f_ok
+	run_cxt.run_fail = f_fail
+	run_cxt.run_stop = f_stop
 	
-	c.stop = false
-	c.fail = false
+	local tbl, i, run_next, iterator = utils.split(path, "|"), 0, nil, nil
 	
-	--iterator---------------------------------
-	local iterator = function(tbl)
-		local i, n = 0, #tbl
-		return function() i = i + 1 if(i <= n) then return tbl[i] end end
-	end
-	
-	c.iter = iterator(tbl)
-	local p = c.iter()
-	
-	-- path 为空-------------------------------
-	if(p == nil) then print("path 为空") run_end(f_fail) return end	--run_fail() return end
-	
-	c.run_fail = function() run_end(f_fail) end
-	c.run_stop = function() run_end(f_stop) end
-	c.run_ok = function() run_end(f_ok) end
-	
-	c.run_next = function()
-		if(c.fail) then print("run fail") run_fail() return end
-		if(c.stop) then print("run stop") run_stop() return end
-		
-		local p = c.iter()
-		--执行到最后设置"set run ok"----------
-		if(p == nil) then
-			--Execute("set run ok")
-			queue("set run ok")
-			--从trigger里调用run_ok------------------
-			--run_ok()
-		else -- 继续下一条命令----------------
-			run_cmd(p, c.run_next, run_fail, run_stop)
+	run_next = function(cmd, f_ok, f_fail, f_stop)		
+		-- 用 !来区别是特殊命令还是一般命令-------
+		if(cmd == "") then 
+			call(f_ok)
+		else
+			local c = cmd:sub(1,1)
+			if(c == ";") then cmd = cmd:sub(2) end
+			if(c ~= "!") then 
+				--print("cmd " .. cmd)
+				Execute(cmd)
+				call(f_ok)
+			else
+				-- aw:3:flatter 星宿老仙
+				print("special cmd: " .. cmd:sub(2))
+				run_special(cmd:sub(2), f_ok, f_fail, f_stop)
+			end
 		end
 	end
 	
-	run_cmd(p, c.run_next, run_fail, run_stop)
+	iterator = function()
+		return function()
+			-- run next command
+			if(run_cxt.fail) then print("run fail") end--call(run_cxt.run_fail) end
+			if(run_cxt.stop) then print("run stop") end--call(run_cxt.run_stop) end
+			
+			i = i + 1
+			if(i <= #tbl) then 
+				run_next(tbl[i], iterator(), run_cxt.run_fail, run_cxt.run_stop)
+			else
+				Execute("set run ok")
+			end
+		end
+	end
+	
+	call(iterator())
 end
-
-function run_end(f)
-	EnableTriggerGroup("walk_special", false)
-	EnableTriggerGroup("walk", false)
-	call(f)
-end
-
 
 function run_ok()
-	local c = run_cxt
-	call(c.run_ok)
+	EnableTriggerGroup("walk_special", false)
+	EnableTriggerGroup("walk", false)
+	call(run_cxt.run_ok)
 end
 
 function run_fail()
-	local c = run_cxt
-	call(c.run_fail)
+	EnableTriggerGroup("walk_special", false)
+	EnableTriggerGroup("walk", false)
+	run_cxt.fail = true
+	call(run_cxt.run_fail)
 end
 
 function run_stop()
-	local c = run_cxt
-	call(c.run_stop)
-end
-
-function run_cmd(cmd, f_ok, f_fail, f_stop)
-	--if(walk_cxt.run_stop) then return end
-	
-	-- 用 !来区别是特殊命令还是一般命令-------
-	if(cmd == "") then 
-		call(f_ok)
-	else
-		local c = cmd:sub(1,1)
-		if(c == ";") then cmd = cmd:sub(2) end
-		if(c ~= "!") then 
-			--Execute(cmd) 
-			queue(cmd)
-			call(f_ok)
-		else
-			-- aw:3:flatter 星宿老仙
-			print("special cmd: " .. cmd:sub(2))
-			run_special(cmd:sub(2), f_ok, f_fail, f_stop)
-		end
-	end
+	EnableTriggerGroup("walk_special", false)
+	EnableTriggerGroup("walk", false)
+	run_cxt.stop = true
+	call(run_cxt.run_stop)
 end
 
 --执行特殊命令：例如 aw:3:flatter 星宿老仙:nw--
@@ -549,6 +532,10 @@ handlers = {
 			get_fire(handlers.done, handlers.fail)
 		elseif(item == "hmling") then
 			get_heimuling(handlers.done, handlers.fail)
+		elseif(item == "ditu") then
+			get_ditu(handlers.done, handlers.fail)
+		elseif(item == "jiedao") then
+			get_jiedao(handlers.done, handlers.fail)
 		end
 	end
 }
@@ -593,7 +580,8 @@ function findpath(regionName, roomName)
 		
 		for i, v in ipairs(region.rooms) do
 			if(v.name == roomName and v.attr ~= "danger") then
-				if(prevRoom ==  nil) then
+				--print(roomAll[prevRoom].zone .. "   " .. v.zone)
+				if(prevRoom == nil) then
 					path = "set brief;" .. v.path .. ";unset brief;look"
 				else
 					local temp = find_path(roomAll, prevRoom, v.id)
@@ -627,81 +615,43 @@ function sl(regionName, roomName, f_ok, f_fail, f_stop)
 	step_by_step(path, f_ok, f_fail, f_stop)
 end
 
-function step_by_step(path, f_ok, f_fail, f_stop)
+function step_by_step(tbl, f_ok, f_fail, f_stop)
 	
-	walk_cxt = {}
-	local c = walk_cxt
-	c.stop = false
-	c.fail = false
-	c.abort = false
+	if(tbl == nil or #tbl == 0) then return call(f_fail) end
 	
-	if(path == nil or #path == 0) then call(f_fail) return end
+	walk_cxt.stop = false
+	walk_cxt.fail = false
+	walk_cxt.abort = false
 	
-	--iterator---------------------------------
-	local iterator = function(tbl)
-		local i, n = 0, #tbl
-		return function() i = i + 1 if(i <= n) then return tbl[i] end end
+	walk_cxt.walk_ok = f_ok
+	walk_cxt.walk_fail = f_fail
+	walk_cxt.walk_stop = f_stop
+	
+	local i, step, iterator = 0, nil, nil
+	
+	step = function(cmd, f_ok, f_fail, f_stop)
+		--wait.make(function()
+		--wait.time(0.3)
+		run(cmd, f_ok, f_fail, f_stop)
+		--end)
 	end
-	
-	c.iter = iterator(path)
-	local p = c.iter()
-	local roomId = p.to
-	
-	--应该肯定不会为空了----------------------
-	assert(p ~= nil)
-	
-	c.walk_fail = function() walk_end(f_fail) end
-	c.walk_stop = function() walk_end(f_stop) end
-	c.walk_ok = function() walk_end(f_ok) end
-	
-	c.walk_next = function()
-		if(c.fail) then walk_fail() return end
-		
-		print("当前房间: " .. roomId)
-		walk_cxt.currentId = roomId
-		
-		if(c.abort) then return end
-		if(c.stop) then walk_stop() return end
-		
-		p = c.iter()
-		--执行到最后设置"set run ok"----------
-		if(p == nil) then
-			--Execute("set slowwalk ok")
-			--print("run ok")
-			--在这里调用f_ok------------------
-			walk_ok()
-		else -- 继续下一条命令----------------
-			roomId = p.to
-			step(p.path, c.walk_next, walk_fail, walk_stop)
+
+	iterator = function()
+		return function()
+			if(walk_cxt.fail or walk_cxt.stop or walk_cxt.abort) then return end
+			i = i + 1
+			
+			if(i <= #tbl) then
+				walk_cxt.currentId = tbl[i].to
+				print("当前房间: " .. i .. " " .. walk_cxt.currentId)
+				step(tbl[i].path, iterator(), walk_cxt.walk_fail, walk_cxt.walk_stop)
+			else
+				walk_ok()
+			end
 		end
 	end
-	
-	step(p.path, c.walk_next, walk_fail, walk_stop)
-end
 
-function step(cmd, f_ok, f_fail, f_stop)
-	wait.make(function()
-		wait.time(0.3)
-		run(cmd, f_ok, f_fail, f_stop)
-	end)
-end
-
-
-function stop()
-	local w, r = walk_cxt, run_cxt
-	w.stop = true
-	r.stop = true
-end
-
-function fail()
-	local w, r = walk_cxt, run_cxt
-	w.fail = true
-	r.fail = true
-end
-
-function abort()
-	local w = walk_cxt
-	w.abort = true
+	call(iterator())
 end
 
 --暂时不需要resume吧----------------------------------------------------------------
@@ -721,22 +671,29 @@ function resume()
 	end
 end
 
-function walk_end(f)
-	EnableTriggerGroup("walk_special", false)
-	EnableTriggerGroup("walk", false)
-	call(f)
-end
-
 function walk_fail()
 	print("slow walk fail")
-	local c = walk_cxt
-	call(c.walk_fail)
+	walk_cxt.fail = true
+	run_fail()
 end
 
 function walk_stop()
 	print("slow walk stop")
-	local c = walk_cxt
-	call(c.walk_stop)
+	walk_cxt.stop = true
+	run_stop()
+end
+
+function stop()
+	walk_stop()
+end
+
+function fail()
+	walk_fail()
+end
+
+function abort()
+	local w = walk_cxt
+	walk_cxt.abort = true
 end
 
 function stopped()
@@ -747,10 +704,9 @@ end
 
 function walk_ok()
 	print("slow walk end")
-	local c = walk_cxt
 	-- add stop flag here --------
-	c.stop = true
-	call(c.walk_ok)
+	walk_cxt.stop = true
+	call(walk_cxt.walk_ok)
 end
 
 function walkaround(dp, dir, f_ok, f_fail, f_stop)
@@ -815,5 +771,6 @@ end
 
 to = function(room, f_done, f_fail, f_stop)
 	if(tonumber(room) > #roomAll) then call(f_fail) end
-	walk.run(roomAll[tonumber(room)].path, f_done, f_fail, f_stop)
+	walk_cxt.currentId = tonumber(room)
+	walk.run(roomAll[walk_cxt.currentId].path, f_done, f_fail, f_stop)
 end
