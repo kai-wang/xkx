@@ -57,6 +57,13 @@ profile = {
 		[2] = { i = 7, action = "unwield all;perform finger.sandie;wield " .. var.weapon}
 	},
 	--É±taskµÄ¼¼ÄÜ
+	attack_list2xxx = {
+		[1] = { i = 13,action = "unwield all;enable strike liuyang-zhang;perform strike.rongxue;wield " .. var.weapon},
+		--[2] = { i = 9, action = "wield " .. var.weapon .. ";enable parry tianyu-qijian;perform parry.san"},
+		[2] = { i = 8, action = "wield ".. var.weapon .. ";enable parry tianyu-qijian;perform parry.kuangwu" },
+		[3] = { i = 14,action= "wield " .. var.weapon .. ";perform move.yueying"}
+	},
+	
 	attack_list2 = {
 		[1] = { i = 13,action = "unwield all;enable strike liuyang-zhang;perform strike.rongxue " .. var.task_id .. ";wield " .. var.weapon},
 		[2] = { i = 9, action = "wield " .. var.weapon .. ";enable parry tianyu-qijian;perform parry.san " .. var.task_id },

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE muclient>
-<!-- Saved on Monday, June 01, 2015, 11:05 PM -->
+<!-- Saved on Monday, June 08, 2015, 12:54 AM -->
 <!-- MuClient version 4.84 -->
 <!-- Written by Nick Gammon -->
 <!-- Home Page: http://www.mushclient.com/ -->
@@ -8,7 +8,7 @@
 <world
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2015-06-01 23:05:18"
+   date_saved="2015-06-08 00:54:12"
 
    auto_say_override_prefix="-"
    auto_say_string="say "
@@ -114,7 +114,7 @@
 <triggers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2015-06-01 23:05:18"
+   date_saved="2015-06-08 00:54:12"
   >
   <trigger
    custom_colour="16"
@@ -260,22 +260,22 @@ walk.handlers.k_blocker()</send>
   </trigger>
   <trigger
    expand_variables="y"
-   group="dazuo"
-   keep_evaluating="y"
-   match="^(&gt; )*(@!dazuo_end_desc)$"
-   regexp="y"
-   script="dazuo.continue"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
-   expand_variables="y"
    group="study"
    keep_evaluating="y"
    match="^(&gt; )*(@!dazuo_end_desc)$"
    omit_from_output="y"
    regexp="y"
    script="study.continue"
+   sequence="100"
+  >
+  </trigger>
+  <trigger
+   expand_variables="y"
+   group="dazuo"
+   keep_evaluating="y"
+   match="^(&gt; )*(@!dazuo_end_desc)$"
+   regexp="y"
+   script="dazuo.continue"
    sequence="100"
   >
   </trigger>
@@ -1178,20 +1178,20 @@ walk.handlers.k_blocker()</send>
   <send>fight.stop()</send>
   </trigger>
   <trigger
-   group="shan"
-   keep_evaluating="y"
-   match="^(&gt; )*ÕâÀïÃ»ÓÐÕâ¸öÈË¡£$"
-   regexp="y"
-   script="shan.fail"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
    group="wei"
    keep_evaluating="y"
    match="^(&gt; )*ÕâÀïÃ»ÓÐÕâ¸öÈË¡£$"
    regexp="y"
    script="wei.kill_done"
+   sequence="100"
+  >
+  </trigger>
+  <trigger
+   group="shan"
+   keep_evaluating="y"
+   match="^(&gt; )*ÕâÀïÃ»ÓÐÕâ¸öÈË¡£$"
+   regexp="y"
+   script="shan.fail"
    sequence="100"
   >
   </trigger>
@@ -1210,10 +1210,12 @@ walk.handlers.k_blocker()</send>
    keep_evaluating="y"
    match="^(&gt; )*Ö»ÌýµÃ.*´«À´£º¡°±ð¼±Âï£¬Õâ¶ùÕýÃ¦×ÅÄÅ¡­¡­¡±$"
    regexp="y"
-   send_to="12"
+   script="walk.handlers.yellboat"
+   send_to="10"
    sequence="100"
   >
-  <send>DoAfterSpecial(2, "yell boat", 10)</send>
+  <send>
+</send>
   </trigger>
   <trigger
    group="walk_special"
@@ -1252,6 +1254,14 @@ walk.handlers.k_blocker()</send>
   >
   </trigger>
   <trigger
+   group="HP"
+   match="^[&gt; ]*¡¾ Æø Ñª ¡¿\s+(\d+)\/\s+(\d+)\s+\(\s*(\d+)%\)\s+¡¾ ÄÚ Á¦ ¡¿\s+(\d+)\s\/\s(\d+).*$"
+   regexp="y"
+   script="on_hp2_update"
+   sequence="100"
+  >
+  </trigger>
+  <trigger
    group="study_check"
    keep_evaluating="y"
    match="^[&gt; ]*¡¾ Æø Ñª ¡¿\s+(\d+)\/\s+(\d+)\s+\(\s*(\d+)%\)\s+¡¾ ÄÚ Á¦ ¡¿\s+(\d+)\s\/\s(\d+).*$"
@@ -1261,14 +1271,6 @@ walk.handlers.k_blocker()</send>
   >
   <send>
 </send>
-  </trigger>
-  <trigger
-   group="HP"
-   match="^[&gt; ]*¡¾ Æø Ñª ¡¿\s+(\d+)\/\s+(\d+)\s+\(\s*(\d+)%\)\s+¡¾ ÄÚ Á¦ ¡¿\s+(\d+)\s\/\s(\d+).*$"
-   regexp="y"
-   script="on_hp2_update"
-   sequence="100"
-  >
   </trigger>
   <trigger
    group="HP"
@@ -1375,7 +1377,7 @@ walk.stop()</send>
 <aliases
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2015-06-01 23:05:18"
+   date_saved="2015-06-08 00:54:12"
   >
   <alias
    match="^show (.*)$"
@@ -2173,7 +2175,7 @@ leitai</send>
 <timers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2015-06-01 23:05:18"
+   date_saved="2015-06-08 00:54:12"
   >
   <timer name="idle" enabled="y" second="59.00" offset_second="0.00" >
   <send>hi</send>
@@ -2186,7 +2188,7 @@ leitai</send>
 <macros
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2015-06-01 23:05:18"
+   date_saved="2015-06-08 00:54:12"
   >
 
   <macro name="up" type="send_now" >
@@ -2280,7 +2282,7 @@ leitai</send>
 <variables
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2015-06-01 23:05:18"
+   date_saved="2015-06-08 00:54:12"
   >
   <variable name="bag_dummy_id">hsly</variable>
   <variable name="baobiao_exp">142</variable>
@@ -2292,10 +2294,10 @@ leitai</send>
   <variable name="dazuo_end_desc">(Äã½«Í·ÉÏ°×ÎíÎü¾¡£¬Õö¿ªË«ÑÛ£¬»º»ºÕ¾Æð¡£)|(ÄãÔË¹¦Íê±Ï£¬ÉîÉîÎüÁË¿ÚÆø£¬Õ¾ÁËÆðÀ´¡£)</variable>
   <variable name="dazuo_full_desc">ÄãµÄÄÚÁ¦ÐÞÎªËÆºõÒÑ¾­´ïµ½ÁËÆ¿¾±£¬ÎÞ·¨ÔÙ¿¿´ò×øÀ´ÌáÉýÁË¡£</variable>
   <variable name="dazuo_halt_desc">Äã°ÑÕýÔÚÔËÐÐµÄÕæÆøÇ¿ÐÐÑ¹»Øµ¤Ìï£¬Õ¾ÁËÆðÀ´¡£</variable>
-  <variable name="double_bonus">true</variable>
-  <variable name="event_loc">³¤°×É½</variable>
-  <variable name="event_room">1602</variable>
-  <variable name="event_start_time">1432820383</variable>
+  <variable name="double_bonus">false</variable>
+  <variable name="event_loc">ºâÉ½</variable>
+  <variable name="event_room">1312</variable>
+  <variable name="event_start_time">1433673359</variable>
   <variable name="faint">0</variable>
   <variable name="fz_coin">2321</variable>
   <variable name="gf_city">ËÕÖÝ</variable>
@@ -2309,42 +2311,42 @@ leitai</send>
   <variable name="heal_dummy_id">hqly</variable>
   <variable name="hp_dt">0</variable>
   <variable name="hp_dt_max">12000</variable>
-  <variable name="hp_exp">46378140</variable>
-  <variable name="hp_food">2008</variable>
+  <variable name="hp_exp">46574420</variable>
+  <variable name="hp_food">1804</variable>
   <variable name="hp_food_max">396</variable>
   <variable name="hp_jl">1753</variable>
   <variable name="hp_jl_max">1753</variable>
-  <variable name="hp_js">3945</variable>
+  <variable name="hp_js">3882</variable>
   <variable name="hp_jsP">100</variable>
-  <variable name="hp_js_max">3945</variable>
-  <variable name="hp_nl">26546</variable>
-  <variable name="hp_nl_max">22485</variable>
-  <variable name="hp_qn">4836</variable>
-  <variable name="hp_qn_max">19350</variable>
-  <variable name="hp_qx">16715</variable>
-  <variable name="hp_qxP">95</variable>
-  <variable name="hp_qx_max">16715</variable>
-  <variable name="hp_water">1518</variable>
+  <variable name="hp_js_max">3882</variable>
+  <variable name="hp_nl">26699</variable>
+  <variable name="hp_nl_max">22512</variable>
+  <variable name="hp_qn">14889</variable>
+  <variable name="hp_qn_max">19361</variable>
+  <variable name="hp_qx">17017</variable>
+  <variable name="hp_qxP">98</variable>
+  <variable name="hp_qx_max">17017</variable>
+  <variable name="hp_water">1314</variable>
   <variable name="hp_water_max">396</variable>
-  <variable name="hp_xw">12149</variable>
-  <variable name="hp_yl">1205374</variable>
-  <variable name="hp_zq">52553269</variable>
+  <variable name="hp_xw">12187</variable>
+  <variable name="hp_yl">1210231</variable>
+  <variable name="hp_zq">54305456</variable>
   <variable name="item_drop_list"></variable>
   <variable name="item_eat_list"></variable>
   <variable name="item_jicun_list"></variable>
-  <variable name="item_sell_list">give feixing yi to ouye zi;drop feixing yi;give canxing mao to ouye zi;drop canxing mao;give jingdian qin to ouye zi;drop jingdian qin;</variable>
+  <variable name="item_sell_list">give duanyu qin to ouye zi;drop duanyu qin;give zhaixing yi to ouye zi;drop zhaixing yi;</variable>
   <variable name="item_store_list"></variable>
   <variable name="last_wuchang">1409139443</variable>
   <variable name="lll">yanjiu wuzheng-xinfa 1000;et</variable>
   <variable name="login_drop">drop dao pao;drop ma xie</variable>
   <variable name="login_wear">give yinling xue to byj;give songluan hushou to byj;give cangyan mao to byj;give yuquan yi to byj;give chunjiang jian to byj;wear all;wield jian</variable>
   <variable name="me_family">ÁéðÕ</variable>
-  <variable name="me_gold">18</variable>
+  <variable name="me_gold">27</variable>
   <variable name="me_goldbar">1</variable>
   <variable name="me_id">nohead</variable>
   <variable name="me_menpai">ÁéðÕ</variable>
   <variable name="me_name">Ã»Í·ÄÔ</variable>
-  <variable name="me_silver">591</variable>
+  <variable name="me_silver">474</variable>
   <variable name="me_status_poison">false</variable>
   <variable name="me_status_ssf">false</variable>
   <variable name="me_xunzhang">true</variable>
@@ -2361,28 +2363,28 @@ leitai</send>
   <variable name="study_cmd">xue wang xiantian-qigong 40;yun regenerate</variable>
   <variable name="study_loc">fly wm;e;n;e;e;n;n</variable>
   <variable name="study_seq">0</variable>
-  <variable name="system_magic_number">6219</variable>
+  <variable name="system_magic_number">19313</variable>
   <variable name="system_walk_delay">100</variable>
   <variable name="task_auto_kill">true</variable>
-  <variable name="task_available_time">1433163975</variable>
-  <variable name="task_city">¸ß²ýÃÔ¹¬</variable>
+  <variable name="task_available_time">1433423664</variable>
+  <variable name="task_city">ÐÇËÞº£</variable>
   <variable name="task_done_time">1402232931</variable>
-  <variable name="task_end_time">1433164655</variable>
+  <variable name="task_end_time">1433424344</variable>
   <variable name="task_escape_dir"></variable>
-  <variable name="task_found">false</variable>
+  <variable name="task_found">true</variable>
   <variable name="task_fullname">Nohead's task</variable>
   <variable name="task_id">nohead's task</variable>
-  <variable name="task_loc">¸ß²ýÃÔ¹¬</variable>
-  <variable name="task_npc">Ê©Ê®Ò¯</variable>
+  <variable name="task_loc">´óµÀ</variable>
+  <variable name="task_npc">ñ¼°ËÒ¯</variable>
   <variable name="task_retry_max">3</variable>
   <variable name="task_retry_times">0</variable>
   <variable name="task_search">false</variable>
-  <variable name="task_start_time">1433163855</variable>
+  <variable name="task_start_time">1433423544</variable>
   <variable name="task_status">fail</variable>
   <variable name="ttask_id">nohead's ttask</variable>
   <variable name="walk_blocker">¹Ù±ø</variable>
-  <variable name="walk_blocker_id">bing</variable>
-  <variable name="walk_blocker_name">¹Ù±ø</variable>
+  <variable name="walk_blocker_id">liu chuxuan</variable>
+  <variable name="walk_blocker_name">Áõ´¦Ðþ</variable>
   <variable name="walk_deepth">5</variable>
   <variable name="weapon">qin</variable>
   <variable name="wei_cancel_amt">60</variable>
@@ -2399,7 +2401,7 @@ leitai</send>
 <colours
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2015-06-01 23:05:18"
+   date_saved="2015-06-08 00:54:12"
   >
 
 <ansi>
@@ -2456,7 +2458,7 @@ leitai</send>
 <keypad
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2015-06-01 23:05:18"
+   date_saved="2015-06-08 00:54:12"
   >
 
   <key name="0" >
@@ -2570,7 +2572,7 @@ leitai</send>
 <printing
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2015-06-01 23:05:18"
+   date_saved="2015-06-08 00:54:12"
   >
 
 <ansi>

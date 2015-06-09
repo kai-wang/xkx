@@ -12,6 +12,11 @@ function suck()
 	end)
 end
 
+function double()
+	Execute("u;ask jin about Ë«±¶½±Àø")
+	var.double_bonus = true
+end
+
 function qukuan(amount, f_ok, f_fail)
 	wait.make(function()
 		Execute("fly wm;e;s;w;qukuan " .. amount)

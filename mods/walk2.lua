@@ -255,6 +255,7 @@ handlers = {
 			if(not c.block) then 
 				print("no blocker") 
 				EnableTriggerGroup("walk_special", false)
+				EnableTriggerGroup("walk_special_boat", true)
 				EnableTriggerGroup("walk_special_lht", false)
 				EnableTriggerGroup("walk_special_dead", false)
 				DeleteTemporaryTriggers()
@@ -292,6 +293,7 @@ handlers = {
 			if(not c.block) then 
 				print("k1 no blocker") 
 				EnableTriggerGroup("walk_special", false)
+				EnableTriggerGroup("walk_special_boat", false)
 				EnableTriggerGroup("walk_special_lht", false)
 				EnableTriggerGroup("walk_special_dead", false)
 				DeleteTemporaryTriggers()
@@ -314,6 +316,15 @@ handlers = {
 		Execute(action)
 		--tri里调用handlers.done()
 		--handlers.done()
+	end,
+	
+	["yellboat"] = function()
+		wait.make(function()
+			EnableTriggerGroup("walk_special", false)
+			wait.time(2)
+			Execute("yell boat")
+			EnableTriggerGroup("walk_special", true)
+		end)
 	end,
 	
 	["k1"] = function(name)
@@ -416,8 +427,12 @@ handlers = {
 	end,
 	
 	["punk"] = function()
-		Execute("sw;se;se;s;s;w;nw;ask punk about 王小二;se;e;n;n;nw;nw;ne")
-		handlers.done()
+		wait.make(function()
+			Execute("sw;se;se;s;s;w;nw;ask punk about 王小二")
+			wait.time(2)
+			Execute("se;e;n;n;nw;nw;ne")
+			handlers.done()
+		end)
 	end,
 	
 	["thmz"] = function(dir)
@@ -579,7 +594,8 @@ function findpath(regionName, roomName)
 		local prevRoom = nil
 		
 		for i, v in ipairs(region.rooms) do
-			if(v.name == roomName and v.attr ~= "danger") then
+			--if(v.name == roomName and v.attr ~= "danger") then
+			if(v.name == roomName) then
 				--print(roomAll[prevRoom].zone .. "   " .. v.zone)
 				if(prevRoom == nil) then
 					path = "set brief;" .. v.path .. ";unset brief;look"
@@ -643,7 +659,8 @@ function step_by_step(tbl, f_ok, f_fail, f_stop)
 			
 			if(i <= #tbl) then
 				walk_cxt.currentId = tbl[i].to
-				print("当前房间: " .. i .. " " .. walk_cxt.currentId)
+				print("当前房间: ".. walk_cxt.currentId)
+				if(tbl[i].from ~= nil and roomAll[tbl[i].from].npckill == true) then tbl[i].path = "halt;" .. tbl[i].path end
 				step(tbl[i].path, iterator(), walk_cxt.walk_fail, walk_cxt.walk_stop)
 			else
 				walk_ok()
@@ -734,8 +751,9 @@ function walkaround(dp, dir, f_ok, f_fail, f_stop)
 			if(#stepback > 1) then path = "set brief;" .. table.concat(stepback, ";", 1, #stepback - 1) .. ";unset brief;" .. stepback[#stepback] end
 			--local path = table.concat(stepback, ";")
 			table.insert(tbl, {["from"]=v.to, ["to"]=room.id, ["path"]=path})
-		else
-			table.insert(tbl, {["from"]=v.to, ["to"]=room.id, ["path"]="set brief;" .. roomAll[room.id].path .. ";unset brief;look"})
+		--else
+			-- 没有直连的回去的方向
+		--	table.insert(tbl, {["from"]=v.to, ["to"]=room.id, ["path"]="set brief;" .. roomAll[room.id].path .. ";unset brief;look"})
 		end
 	end
 	
@@ -746,7 +764,8 @@ function walkaround(dp, dir, f_ok, f_fail, f_stop)
 		-------------------优先找符合dir的房间的路径------------------------------------------------------
 		if(deepth == 1 and dir ~= nil) then
 			for i, v in pairs(room.links) do
-				if(not walked[v.to] and roomAll[v.to].attr ~= "danger" and v.block ~= "y" and directions[i] == dir) then
+				--if(not walked[v.to] and roomAll[v.to].attr ~= "danger" and v.block ~= "y" and directions[i] == dir) then
+				if(not walked[v.to] and v.block ~= "y" and directions[i] == dir) then
 					enqueue(i, v, room, deepth)
 				end
 			end
@@ -755,7 +774,8 @@ function walkaround(dp, dir, f_ok, f_fail, f_stop)
 		for i, v in pairs(room.links) do
 			--tprint(room.links)
 			--if(v.attr ~= "" and v.attr ~= nil) then print("attr: " .. v.attr) else print("attr null") end
-			if(not walked[v.to] and roomAll[v.to].attr ~= "danger" and v.block ~= "y") then
+			--if(not walked[v.to] and roomAll[v.to].attr ~= "danger" and v.block ~= "y") then
+			if(not walked[v.to] and v.block ~= "y") then
 				enqueue(i, v, room, deepth)
 			end
 		end

@@ -9,6 +9,7 @@ module ("bei", package.seeall)
 local cxt = {}
 local task1 = dofile("worlds\\xkx\\mods\\task1.lua")
 local task1_array = {}
+retry_list = {10, 10, 10, 15, 15, 15, 20, 20, 20, 30}
 
 main = function(f_ok, f_fail)
 	cxt = {}
@@ -24,37 +25,42 @@ exit = function()
 	fight.stop()
 	EnableTriggerGroup("bei", false)
 	EnableTriggerGroup("bei_task1", false)
+	
+	Execute("halt;fly wm");
 end
 
 
 done = function()
+	print("bei done")
 	var.task_status = "done"
 	var.task_end_time = os.time()
 	if(var.double_bonus == "true") then var.task_available_time = os.time() end
 	exit()
+	call(cxt.f_ok)
 end
 
 fail = function()
+	print("bei done")
 	var.task_status = "fail"
+	retry()
 	exit()
-	Execute("halt;fly wm")
+	call(cxt.f_fail)
+end
+
+retry = function()
+	local t = tonumber(var.task_retry_times)
+	if(t > #retry_list) then 
+		var.task_available_time = var.task_end_time 
+	else
+		var.task_available_time = os.time() + retry_list[t]
+		var.task_retry_times = t + 1
+	end
 end
 
 available = function()
-	if(var.task_available_time == "") then return true end
-	if(os.time() >= tonumber(var.task_available_time)) then return true else return false end
+	return (var.task_available_time == "") 
+	or (os.time() >= tonumber(var.task_available_time))
 end
-
---[[
-retry = function()
-	var.task_status = "retry"
-	if(tonumber(var.task_retry_times) >= tonumber(var.task_retry_max)) then fail() return end
-	
-	exit()
-	Execute("halt;fly wm")
-end
-]]--
-
 
 reloc = function()
 	wait.make(function()
@@ -70,9 +76,8 @@ start = function(name, line, wildcards)
 	--var.task_id = me.id .. "'s task"
 	var.task_fullname = (var.task_id):gsub("^%l", string.upper)
 	var.task_found = false
-	var.task_retry_times = 0
+	var.task_retry_times = 1
 	var.task_status = "start"
-	--var.task_start_time = os.time()
 	var.task_escape_dir = ""
 	
 	parseAndLoc()
@@ -87,7 +92,6 @@ end
 
 resume = function()
 	var.task_found = false
-	var.task_retry_times = 0
 	var.task_status = "start"
 	var.task_escape_dir = ""
 	
@@ -130,11 +134,6 @@ location = function(name, line, wildcards)
 	walk.sl(var.task_city, var.task_loc, bei.notfound, bei.fail, bei.foundnpc)
 end
 
-go = function()
-	fight.prepare(busy_list, attack_list)
-	walk.sl(var.task_city, var.task_loc)
-end
-
 faint = function()
 	me.profile.reset_cd_status()
 	cleanup()
@@ -147,16 +146,14 @@ notfound = function()
 	Execute("halt")
 	--如果walkaround走完还没找到，就retry吧
 	print("走完还没找到")
-	walk.walkaround(5, nil, bei.fail, bei.fail, bei.foundnpc)
+	busy_test(function()
+		walk.walkaround(5, nil, bei.fail, bei.fail, bei.foundnpc)
+	end)
 end
 
 foundnpc = function()
 	var.task_found = true
-	if(var.task_auto_kill == "true") then
-		startFight()
-	else
-		Execute("ask " .. var.task_id .. " about fight")
-	end
+	startFight()
 end
 
 startFight = function()
@@ -206,6 +203,11 @@ end
 
 ----task结束后的善后工作，疗伤学习打坐----------------------------
 cleanup = function()
+	busy_test(function()
+		Execute("halt;fly wm;nw;er;et;ef")
+		me.cleanup(done)
+	end)
+	--[[
 	Execute("set brief;halt;fly wm;nw;er;et;ef")
 	me.cleanup(
 		function() 
@@ -220,6 +222,23 @@ cleanup = function()
 				bei.main() 
 			end
 		end)
+	]]--
+end
+
+guaji = function()
+	--wait.make(function()
+		local f = nil
+		f = function()
+			local t = tonumber(var.task_available_time) - os.time()
+			print("重启等待ms: " .. t)
+			wait.make(function()
+				if(t > 0) then wait.time(t) end
+				main(f, f)
+			end)
+		end
+		
+		main(f, f)
+	--end)
 end
 
 -----------------------------------------------------------------------------------------------------------------------------
