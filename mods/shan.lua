@@ -39,7 +39,7 @@ local shan_list = {
 	["李莫愁"] = {room = 198, name = "li mochou"},
 	["红娘"] = {room = 215, name = "hong niang"},
 	["李可秀"] = {room = 218, name = "li kexiu"},
-	["张召重"] = {room = 221, name = "zhang zhaozhong"},
+	["张召重"] = {room = 221, name = "zhang zhaozhong", exp=3000000},
 	["红花会众"] = {room = 236, name = "hong hua"},
 	["褚圆"] = {room = 241, name = "chu yuan"},
 	["龙骏"] = {room = 259, name = "long jun"},
@@ -273,7 +273,7 @@ local shan_list = {
 	["进喜儿"] = {room = 1651, name = "jin xier"},
 	["云中鹤"] = {room = 1651, name = "yun zhonghe"},
 	["钟灵"] = {room = 1652, name = "zhong ling"},
-	["段延庆"] = {room = 1653, name = "duan yanqing"},
+	["段延庆"] = {room = 1653, name = "duan yanqing", exp=3000000},
 	["方碧琳"] = {room = 1667, name = "fang bilin"},
 	["进香客"] = {room = 1674, name = "jinxiang ke"},
 	["女弟子"] = {room = 1675, name = "dizi"},
@@ -288,12 +288,12 @@ local shan_list = {
 	["店小二"] = {room = 1768, name = "xiao er"},
 	["谷虚道长"] = {room = 1792, name = "guxu daozhang"},
 	["道童"] = {room = 1798, name = "dao tong"},
-	["彭莹玉"] = {room = 1835, name = "peng yingyu"},
-	["说不得"] = {room = 1835, name = "shuo bude"},
-	["张中"] = {room = 1835, name = "zhang zhong"},
-	["周颠"] = {room = 1835, name = "zhou dian"},
+	["彭莹玉"] = {room = 1835, name = "peng yingyu", exp=3000000},
+	["说不得"] = {room = 1835, name = "shuo bude", exp=3000000},
+	["张中"] = {room = 1835, name = "zhang zhong", exp=3000000},
+	["周颠"] = {room = 1835, name = "zhou dian", exp=3000000},
 	["殷无福"] = {room = 1838, name = "yin wufu"},
-	["殷野王"] = {room = 1838, name = "yin yewang"},
+	["殷野王"] = {room = 1838, name = "yin yewang", exp=3000000},
 	["李天垣"] = {room = 1839, name = "li tianyuan"},
 	["殷无禄"] = {room = 1839, name = "yin wulu"},
 	["殷无寿"] = {room = 1840, name = "yin wushou"},
@@ -350,7 +350,7 @@ local shan_list = {
 	["九翼道人"] = {room = 2060, name = "jiuyi"},
 	["李嫂"] = {room = 2067, name = "li sao"},
 	["菊剑"] = {room = 2077, name = "ju jian"},
-	["乌老大"] = {room = 2078, name = "wu laoda"},
+	["乌老大"] = {room = 2078, name = "wu laoda", exp=3000000},
 	["竹剑"] = {room = 2080, name = "zhu jian"},
 	["符敏仪"] = {room = 2087, name = "fu minyi"},
 	["石嫂"] = {room = 2090, name = "shi sao"},
@@ -452,20 +452,20 @@ local shan_list = {
 	["公平子"] = {room = 2679, name = "gongping zi"},
 	["小猴"] = {room = 2681, name = "little monkey"},
 	["劳德诺"] = {room = 2682, name = "lao denuo"},
-	["成不忧"] = {room = 2698, name = "cheng buyou"},
-	["丛不弃"] = {room = 2700, name = "cong buqi"},
-	["封不平"] = {room = 2702, name = "feng buping"},
+	["成不忧"] = {room = 2698, name = "cheng buyou", exp=3000000},
+	["丛不弃"] = {room = 2700, name = "cong buqi", exp=3000000},
+	["封不平"] = {room = 2702, name = "feng buping", exp=3000000},
 	["施令威"] = {room = 2705, name = "shi lingwei"},
 	["护院"] = {room = 2707, name = "hu yuan"},
-	["丹青生"] = {room = 2709, name = "danqing sheng"},
-	["秃笔翁"] = {room = 2710, name = "tubi weng"},
-	["黑白子"] = {room = 2713, name = "heibai zi"},
+	["丹青生"] = {room = 2709, name = "danqing sheng", exp=5000000},
+	["秃笔翁"] = {room = 2710, name = "tubi weng", exp=5000000},
+	["黑白子"] = {room = 2713, name = "heibai zi", exp=5000000},
 	["丁坚"] = {room = 2728, name = "ding jian"},
 	["苟读"] = {room = 2743, name = "gou du"},
 	["康广陵"] = {room = 2751, name = "kang guangling"},
 	["冯阿三"] = {room = 2755, name = "feng asan"},
 	["丁当"] = {room = 2898, name = "ding dang"},
-	["谢烟客"] = {room = 2900, name = "xie yanke"},
+	["谢烟客"] = {room = 2900, name = "xie yanke", exp=3000000},
 	["石中玉"] = {room = 2901, name = "shi zhongyu"},
 	["老者"] = {room = 2908, name = "lao zhe"},
 	["桑三娘"] = {room = 2910, name = "sang sanniang"},
@@ -479,52 +479,63 @@ local shan_list = {
 }
 
 
---[[
-	保镖所有状态响应
-]]--
+local context = {}
 
-main = function()
+main = function(f_done, f_fail)
 	EnableTriggerGroup("shan", true)
-	walk.run("set brief;fly es;|!k1:江百胜:nu|", function() Execute("quest") end, shan.fail, shan.fail)
+	
+	context.f_done = f_done
+	context.f_fail = f_fail
+	walk.run("set brief;fly es;|!k1:江百胜:nu|", function() Execute("quest") end, fail, fail)
 end
 
 
-exit = function()
+init = function()
 	EnableTriggerGroup("shan", false)
-	msg.broadcast("msg_shan_exit")
 end
 
 done = function()
 	var.shan_fail_times = 0
 	fight.stop()
 	busy_test(function()
-		Execute("halt;fly wm")
-		exit()
+		safeback("halt;fly wm", function()
+			var.shan_available_time = os.time() + 60
+			EnableTriggerGroup("shan", false)
+			me.cleanup(context.f_done)
+		end)
 	end)
-	exit()
 end
 
 fail = function()
 	busy_test(function()
-		Execute("halt;fly wm")
-		exit()
+		safeback("halt;fly wm", function()
+		--	var.shan_available_time = os.time() + 120
+			EnableTriggerGroup("shan", false)
+			me.cleanup(context.f_fail)
+		end)
 	end)
 end
 
 start = function(name, line, wildcards)
-	var.shan_npc_name = wildcards[2]
+	var.shan_available_time = os.time() + getseconds(wildcards[2])
+	print("time: " .. getseconds(wildcards[2]))
+	var.shan_npc_name = wildcards[3]
 	local t = shan_list[var.shan_npc_name]
-	if(t == nil) then fail() return end
+	if(t == nil or (t.exp ~= nil and tonumber(var.hp_exp) < t.exp)) then return fail() end
 	
 	var.shan_npc_id = t.name
 	print(var.shan_npc_name .. " id【" .. var.shan_npc_id .. "】  room【" .. t.room .. "】")
-	busy_test(function() walk.run(roomAll[t.room].path, shan.killnpc, shan.fail, shan.fail) end)
+	busy_test(function() 
+		walk.run(roomAll[t.room].path, killnpc, fail, fail) 
+	end)
 end
 
 killnpc = function()
 	local busy_list = me.profile.busy_list
 	local attack_list = me.profile.attack_list1
+	EnableTriggerGroup("shan_kill", true)
 	fight.prepare(busy_list, attack_list)
-	
 	fight.start("kill " .. var.shan_npc_id)
 end
+
+init()

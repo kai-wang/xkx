@@ -7,42 +7,46 @@ module ("study", package.seeall)
 
 local cxt = {}
 
---[[
-function main()
-	EnableTriggerGroup("study", true)
-	EnableTriggerGroup("study_check", true)
-	EnableTriggerGroup("HP", false)
-	me.profile.int_wear(study.start)
-	--start()
+function main(f)
+	if(var.study_seq == nil or var.study_seq == "0" or tonumber(var.study_seq) > #(me.profile.study_list)) then 
+		var.study_seq = 1 
+	end
+	
+	local learnlist = me.profile.study_list[tonumber(var.study_seq)]
+	cxt.learnlist = learnlist
+	var.lll = learnlist.cmd
+	
+	wait.make(function()
+		var.study_seq = tonumber(var.study_seq) + 1
+		walk.run(learnlist.loc, function() start(function() me.cleanup(f) end) end, f, f)
+	end)
 end
-]]--
+
+function init()
+	EnableTriggerGroup("study", false)
+	EnableTriggerGroup("study_check", false)
+end
 
 function done()
 	EnableTriggerGroup("study", false)
 	EnableTriggerGroup("study_check", false)
+	Execute(cxt.learnlist.post_action)
 	me.profile.fight_wear(cxt.f_done)
-	--[[
-	busy_test(function() me.profile.fight_wear() end)
-	busy_test(function() call(cxt.f_done) end)
-	]]--
 end
 
 function start(f_done)
 	EnableTriggerGroup("study", true)
 	EnableTriggerGroup("study_check", true)
 	EnableTriggerGroup("HP", false)
-	--me.profile.int_wear(study.start)
 	cxt.f_done = f_done
 	
 	wait.make(function()
-		if(var.study_loc == nil or var.study_loc == "") then 
-			done()
-		else
-			me.profile.int_wear(function()
-				Execute(var.lll)
-				Execute("hp")
-			end)
-		end
+		me.profile.int_wear(function()
+			Execute(cxt.learnlist.pre_action)
+			wait.time(1)
+			Execute(var.lll)
+			Execute("hp")
+		end)
 	end)
 end
 
@@ -50,7 +54,7 @@ function continue()
 	EnableTriggerGroup("study_check", true)
 	Execute("er;et")
 	Execute(var.lll)
-	Execute("hp;hp")
+	Execute("hp")
 end
 
 function givemoney()
@@ -73,26 +77,23 @@ function waitandtry()
 		EnableTriggerGroup("study_check", false)
 		wait.time(10)
 		EnableTriggerGroup("study_check", true)
-		Execute("er;et;dazuo max")
+		Execute("er;et;" .. var.me_dazuo)
 	end)
 end
 
 function check(line, name, wildcards)
 	local nl, nl_max = wildcards[4], wildcards[5]
---	print(nl, nl_max)
-	if(tonumber(nl) < tonumber(nl_max)*0.3) then
+	if(tonumber(nl) < tonumber(nl_max)*0.5) then
 		EnableTriggerGroup("study_check", false)
 		busy_test(function()
-			Execute("er;et;dazuo max")
+			Execute("er;et;" .. var.me_dazuo)
 		end)
 	else
-		--Execute("lll")
 		Execute(var.lll)
 		EnableTriggerGroup("study_check", true)
 		Execute("hp")
 	end
 end
-
 
 module ("research", package.seeall)
 

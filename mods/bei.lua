@@ -23,6 +23,7 @@ end
 exit = function()
 	walk.abort()
 	fight.stop()
+	ts.stop("task_walk")
 	EnableTriggerGroup("bei", false)
 	EnableTriggerGroup("bei_task1", false)
 	
@@ -126,9 +127,9 @@ location = function(name, line, wildcards)
 	var.task_loc = wildcards[3]
 	print(var.task_city .. " " .. var.task_loc .. " " .. var.task_npc)
 	
-	local busy_list = me.profile.busy_list
-	local attack_list = me.profile.attack_list2
-	fight.prepare(busy_list, attack_list)
+	local busy_list = me.profile.task_busy_list
+	local attack_list = me.profile.task_attack_list
+	fight.prepare(busy_list, attack_list, escape)
 	
 	--如果slowwalk走完还没有stop，说明没找到
 	walk.sl(var.task_city, var.task_loc, bei.notfound, bei.fail, bei.foundnpc)
@@ -153,15 +154,34 @@ end
 
 foundnpc = function()
 	var.task_found = true
-	startFight()
+	if(var.task_auto_kill == "0") then
+		walktask()
+	else
+		startFight()
+	end
+end
+
+walktask = function()
+	ts.new("task_walk", "task_walk", 1.5, "bei.searchTask1\(\)")
+	ts.reset("task_walk",1.5)
+	ts.tick("task_walk")
+	Execute("ask " .. var.task_id .. " about rumors")
 end
 
 startFight = function()
 	abort_busytest()
-	local busy_list = me.profile.busy_list
-	local attack_list = me.profile.attack_list2
-	fight.prepare(busy_list, attack_list)
-	fight.start("kill " .. var.task_id)
+	ts.stop("task_walk")
+	local busy_list = me.profile.task_busy_list
+	local attack_list = me.profile.task_attack_list
+	fight.prepare(busy_list, attack_list, escape)
+	fight.start()
+end
+
+escape = function()
+	wait.make(function()
+		wait.time(2)
+		me.cleanup(fail)
+	end)
 end
 
 -------- task 跑了，在原地范围内进行深度为5的遍历-----------------------------------
@@ -170,7 +190,7 @@ search = function(name, line, wildcards)
 	local dir = wildcards[3]
 	dir = dir:gsub("边",""):gsub("面", ""):gsub("方向", ""):gsub("方", "")
 	var.task_escape_dir = dir
-	
+	ts.stop("task_walk")
 	if(walk.stopped()) then searchTask() end
 end
 
@@ -180,6 +200,14 @@ searchTask = function()
 		if(var.task_status == "done") then return end
 		Execute("er;et;ef")
 		walk.walkaround(3, var.task_escape_dir, bei.notfound, bei.fail, bei.foundnpc)
+	end)
+end
+
+searchTask1 = function()
+	busy_test(function()
+		if(var.task_status == "done" or fight.infight()) then return end
+		Execute("er;et;ef")
+		walk.walkaround(2, nil, bei.notfound, bei.fail, bei.foundnpc)
 	end)
 end
 
@@ -207,22 +235,6 @@ cleanup = function()
 		Execute("halt;fly wm;nw;er;et;ef")
 		me.cleanup(done)
 	end)
-	--[[
-	Execute("set brief;halt;fly wm;nw;er;et;ef")
-	me.cleanup(
-		function() 
-			local diff = os.time() - tonumber(var.task_start_time)
-			if(diff < 10) then
-				wait.make(function()
-					print("休息一会: " .. diff)
-					wait.time(diff)
-					bei.main()
-				end)
-			else
-				bei.main() 
-			end
-		end)
-	]]--
 end
 
 guaji = function()
@@ -233,11 +245,11 @@ guaji = function()
 			print("重启等待ms: " .. t)
 			wait.make(function()
 				if(t > 0) then wait.time(t) end
-				main(f, f)
+				me.useqn(function() main(f, f) end)
 			end)
 		end
 		
-		main(f, f)
+		me.useqn(function() main(f, f) end)
 	--end)
 end
 

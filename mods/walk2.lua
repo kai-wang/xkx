@@ -60,7 +60,7 @@ blocker_npcs["黄衣卫士"] = {id = "wei shi"}
 blocker_npcs["山贼头"] = {id = "tou"}
 blocker_npcs["静心师太"] = {id = "jingxin shitai"}
 blocker_npcs["摘星子"] = {id = "zhaixing zi"}
-blocker_npcs["出尘子"] = {id = "chuchen zi"}
+blocker_npcs["出尘子"] = {id = "chuchen zi", pfm = true}
 blocker_npcs["采花子"] = {id = "caihua zi"}
 blocker_npcs["管家"] = {id = "guan jia"}
 blocker_npcs["家丁"] = {id = "jia ding"}
@@ -70,8 +70,8 @@ blocker_npcs["皇宫卫士"] = {id = "wei shi"}
 blocker_npcs["蟒蛇"] = {id = "mang she"}
 blocker_npcs["阿碧"] = {id = "a bi"}
 blocker_npcs["蒙面女郎"] = {id = "nv lang", pfm = true}
-blocker_npcs["张松溪"] = {id = "zhang songxi", pfm = true}
-blocker_npcs["莫声谷"] = {id = "mo shenggu", pfm = true}
+blocker_npcs["张松溪"] = {id = "zhang songxi", pfm = true, exp=3000000}
+blocker_npcs["莫声谷"] = {id = "mo shenggu", pfm = true, exp=3000000}
 blocker_npcs["赤冠巨蟒"] = {id = "ju man"}
 blocker_npcs["无根道长"] = {id = "wugen daozhang", pfm = true}
 blocker_npcs["麻衣长老"] = {id = "mayi zhanglao"}
@@ -83,9 +83,9 @@ blocker_npcs["竹剑"] = {id = "zhu jian"}
 blocker_npcs["菊剑"] = {id = "ju jian"}
 blocker_npcs["谢烟客"] = {id = "xie yanke", pfm = true}
 blocker_npcs["巴依"] = {id = "bayi"}
-blocker_npcs["定逸师太"] = {id = "dingyi shitai", pfm = true}
-blocker_npcs["丘处机"] = {id = "qiu chuji", pfm = true}
-blocker_npcs["刘处玄"] = {id = "liu chuxuan", pfm = true}
+blocker_npcs["定逸师太"] = {id = "dingyi shitai", pfm = true, exp=5000000}
+blocker_npcs["丘处机"] = {id = "qiu chuji", pfm = true, exp=5000000}
+blocker_npcs["刘处玄"] = {id = "liu chuxuan", pfm = true, exp=3000000}
 
 -- lht npcs -------------------------------------------------
 blocker_npcs["安健刚"] = {id = "an jiangang", pfm = false}
@@ -335,10 +335,14 @@ handlers = {
 	end,
 	
 	["lht"] = function(name)
-		EnableTriggerGroup("walk_special_lht", true)
-		EnableTriggerGroup("walk_special_dead", true)
-		EnableTriggerGroup("walk_special", false)
-		handlers.done2()
+		if(tonumber(var.hp_exp) < 5000000) then 
+			handlers.fail()
+		else
+			EnableTriggerGroup("walk_special_lht", true)
+			EnableTriggerGroup("walk_special_dead", true)
+			EnableTriggerGroup("walk_special", false)
+			handlers.done2()
+		end
 	end,
 	
 	["ylj"] = function()
@@ -358,7 +362,11 @@ handlers = {
 		--移到trigger里了
 		--var.walk_blocker_name = wildcards[2]
 		local bl = blocker_npcs[var.walk_blocker_name]
-		if(bl == nil) then print("没有blocker id") handlers.fail() return end
+		if(bl == nil or (bl.exp ~= nil and tonumber(var.hp_exp) < bl.exp)) then 
+			print("没有blocker id或者经验不足") 
+			handlers.fail() 
+			return 
+		end
 		
 		var.walk_blocker_id = blocker_npcs[var.walk_blocker_name].id
 		print("blocker: " .. var.walk_blocker_name .. " " .. var.walk_blocker_id)
@@ -382,8 +390,8 @@ handlers = {
 	end,
 	
 	startFight = function()
-		local busy_list = nil--me.profile.busy_list
-		local attack_list = me.profile.attack_list3
+		local busy_list = me.profile.busy_list
+		local attack_list = me.profile.attack_list1
 		fight.prepare(busy_list, attack_list)
 		
 		Execute("kill " .. var.walk_blocker_id)
@@ -552,6 +560,16 @@ handlers = {
 		elseif(item == "jiedao") then
 			get_jiedao(handlers.done, handlers.fail)
 		end
+	end,
+	
+	["pushstone"] = function()
+		wait.make(function()
+			Execute("push stone")
+			local l, w = wait.regexp("^(> )*(水流一阵涌动)|(你把巨石推到一边).*$", 5)
+			if(l == nil) then handlers.fail() return end
+			if(l:match("水流一阵涌动") ~= nil) then Execute("push stone") end
+			handlers.done2()
+		end)
 	end
 }
 
@@ -592,11 +610,9 @@ function findpath(regionName, roomName)
 	for j = 1, #regions do
 		local region = regions[j]
 		local prevRoom = nil
-		
 		for i, v in ipairs(region.rooms) do
 			--if(v.name == roomName and v.attr ~= "danger") then
-			if(v.name == roomName) then
-				--print(roomAll[prevRoom].zone .. "   " .. v.zone)
+			if(v.name == roomName and (tonumber(var.hp_exp) > 10000000 or v.attr ~= "danger")) then
 				if(prevRoom == nil) then
 					path = "set brief;" .. v.path .. ";unset brief;look"
 				else
@@ -765,7 +781,7 @@ function walkaround(dp, dir, f_ok, f_fail, f_stop)
 		if(deepth == 1 and dir ~= nil) then
 			for i, v in pairs(room.links) do
 				--if(not walked[v.to] and roomAll[v.to].attr ~= "danger" and v.block ~= "y" and directions[i] == dir) then
-				if(not walked[v.to] and v.block ~= "y" and directions[i] == dir) then
+				if(not walked[v.to] and v.block ~= "y" and directions[i] == dir and (tonumber(var.hp_exp) > 10000000 or roomAll[v.to].attr ~= "danger")) then
 					enqueue(i, v, room, deepth)
 				end
 			end
@@ -775,7 +791,7 @@ function walkaround(dp, dir, f_ok, f_fail, f_stop)
 			--tprint(room.links)
 			--if(v.attr ~= "" and v.attr ~= nil) then print("attr: " .. v.attr) else print("attr null") end
 			--if(not walked[v.to] and roomAll[v.to].attr ~= "danger" and v.block ~= "y") then
-			if(not walked[v.to] and v.block ~= "y") then
+			if(not walked[v.to] and v.block ~= "y" and (tonumber(var.hp_exp) > 10000000 or roomAll[v.to].attr ~= "danger")) then
 				enqueue(i, v, room, deepth)
 			end
 		end

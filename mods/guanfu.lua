@@ -5,52 +5,67 @@ require "var"
 
 module ("guanfu", package.seeall)
 
+local context = {}
 
-main = function()
+
+main = function(f_done, f_fail)
+	context.f_done = f_done
+	context.f_fail = f_fail
+	
 	EnableTriggerGroup("guanfu", true)
-	--[[
-	msg.subscribe("msg_slowwalk_ok", guanfu.notfound)
-	msg.subscribe("msg_slowwalk_fail", guanfu.fail)
-	]]--
 	Execute("set brief;fly wm;e;s;s;w;s;s;e;jie wenshu;fly wm;kan wenshu")
 end
 
 
-exit = function()
+init = function()
 	walk.abort()
 	fight.stop()
 	EnableTriggerGroup("guanfu", false)
-	--[[
-	msg.unsubscribe("msg_slowwalk_ok")
-	msg.unsubscribe("msg_slowwalk_fail")
-	msg.unsubscribe("msg_slowwalk_stop")
-	]]--
-	msg.broadcast("msg_guanfu_exit")
 end
 
 
-available = function(t)
-	if(t == nil or t == 0) then msg.broadcast("msg_guanfu_available")
-	else
-		wait.make(function()
-			wait.time(t)
-			msg.broadcast("msg_guanfu_available")
-		end)
-	end
+available = function()
+	return tonumber(var.gf_available_time) < os.time()
 end
 
 done = function()
-	var.gf_status = "done"
-	exit()
-	available()
+	busy_test(function()
+		init()
+		safeback("halt;fly wm", function() 
+			Execute("er;et;ef")
+			var.gf_available_time = os.time()
+			clean(context.f_done)
+		end)
+		--Execute("halt;fly wm;nw;er;et;ef")
+		--var.gf_available_time = os.time()
+		--clean(context.f_done)
+		--me.cleanup(context.f_done)
+	end)
 end
 
 fail = function()
-	var.gf_status = "fail"
-	fight.stop()
-	walk.stop()
-	exit()
-	Execute("halt;fly wm")
+	busy_test(function()
+		init()
+		safeback("halt;fly wm", function() 
+			Execute("er;et;ef")
+			clean(context.f_fail)
+		end)
+		--Execute("halt;fly wm;nw;er;et;ef")
+		--clean(context.f_fail)
+		--me.cleanup(context.f_fail)
+	end)
+end
+
+clean = function(f)
+	if(var.gf_money == "yes") then
+		me.full(function()
+			me.check_money(function()
+				me.recover(f)
+			end)
+		end)
+	else
+		me.cleanup(f)
+	end
 end
 
 
@@ -64,8 +79,9 @@ start = function(name, line, wildcards)
 	print(city .. " " .. loc .. " " .. npc)
 	var.gf_found = false
 	var.gf_status = "start"
+	var.gf_available_time = os.time() + 600 -- 官府失败，10分钟后重试
 	
-	local busy_list = {}--me.profile.busy_list
+	local busy_list = me.profile.busy_list
 	local attack_list = me.profile.attack_list1
 	fight.prepare(busy_list, attack_list)
 	
@@ -89,21 +105,9 @@ foundnpc = function()
 	startFight()
 end
 
---[[
-foundnpc = function(name, line, wildcards)
-	if(wildcards[4] ~= nil and wildcards[4] ~= "") then var.gf_id = string.lower(wildcards[4]) end
-	msg.subscribe("msg_slowwalk_stop", function()
-		var.gf_found = true
-		startFight()
-	end)
-	
-	walk.stop()
-end
-]]--
-
 
 startFight = function()
-	local busy_list = {}--me.profile.busy_list
+	local busy_list = me.profile.busy_list
 	local attack_list = me.profile.attack_list1
 	fight.prepare(busy_list, attack_list)
 	
@@ -129,16 +133,6 @@ searchTask = function()
 		if(var.gf_status == "done") then return end
 		walk.walkaround(3, var.gf_escape_dir, guanfu.fail, guanfu.fail, guanfu.foundnpc)
 	end)
-	--[[
-	wait.make(function()
-		repeat
-			wait.time(1)
-			Execute("suicide")
-			local l, w = wait.regexp("^(> )*(你正忙着呢，没空自杀！)|(请用 suicide -f 确定自杀。)$")
-		until(l:match("确定自杀") ~= nil)
-		walk.walkaround(3, var.gf_escape_dir, guanfu.fail, guanfu.fail, guanfu.foundnpc)
-	end)
-	]]--
 end
 
 ----看到npc死了，把东西捡起来------------------------------------
@@ -148,70 +142,21 @@ npcdie = function(name, line, wildcards)
 		walk.stop()
 		fight.stop()
 		Execute("wancheng corpse")
-		wait.time(3)
-		item.lookandget(guanfu.cleanup)
-	end)
-end
-
-
-----task结束后的善后工作，疗伤学习打坐----------------------------
-cleanup = function()
-	Execute("fly wm;jiali 0;er;et")
-	me.cleanup(function() guanfu.main() end)
-	--[[
-	me.full(function()
-		me.useqn(function()
-			wait.make(function()
-				me.updateHP(function()
-					if(tonumber(me["nl"]) > tonumber(me["nl_max"]) * 1.2) then 
-						Execute("er;et;fly wm")
-						guanfu.done() 
-					else
-						wait.time(1)
-						Execute("halt;fly wm;u")
-						dazuo.start(function()
-							Execute("er;et;d")
-							guanfu.done()
-						end)
-					end
-				end)
-			end)
+		--wait.time(3)
+		busy_test(function()
+			item.lookandget(done)
 		end)
 	end)
-	]]--
---[[
-	Execute("fly wm;jiali 0;er;et")
-	me.updateHP(function()
-		me.full(function()
-			msg.subscribe("msg_study_done", me.updateHP(function()
-				wait.make(function()
-					if(tonumber(me["nl"]) > tonumber(me["nl_max"]) * 1.2) then 
-						Execute("er;et;fly wm")
-						guanfu.done() 
-					else
-						wait.time(1)
-						Execute("halt;fly wm;u")
-						dazuo.start(function()
-							Execute("er;et;d")
-							guanfu.done()
-						end)
-					end
-				end)
-			end))
-			me.useqn()
-		end)
-	end)
-]]--
 end
-
 
 yesno = function(name, line, wildcards)
 	if(var.gf_money == "yes") then
 		wait.make(function()
 			Execute("yes")
-			EnableTriggerGroup("guanfu", false)
 			wait.time(1)
-			fail()
+			busy_test(function()
+				item.lookandget(fail)
+			end)
 		end)
 	end
 end
@@ -239,7 +184,8 @@ flee = function(name, line, wildcards)
 		Execute("yun recover")
 		wait.time(1)
 		Execute("halt")
-		--msg.subscribe("msg_slowalk_stop", guanfu.notfound)
-		walk.sl(var.gf_city, var.gf_loc, guanfu.notfound, guanfu.fail, guanfu.foundnpc)
+		walk.sl(var.gf_city, var.gf_loc, notfound, fail, foundnpc)
 	end)
 end
+
+init()

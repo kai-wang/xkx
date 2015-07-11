@@ -311,6 +311,7 @@ local region = {}
         region.rooms[19].links.e = {}
           region.rooms[19].links.e.to = 210
           region.rooms[19].links.e.con = "pushstone:"
+		  region.rooms[19].links.e.block = "y"
         region.rooms[19].links.u = {}
           region.rooms[19].links.u.to = 206
           region.rooms[19].links.u.con = ""

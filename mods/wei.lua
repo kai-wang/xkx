@@ -9,7 +9,7 @@ module ("wei", package.seeall)
 ---------------------------------------------------------------------------------------------------------------
 
 --[1] name, [2] path, [3] id
-wei_buy_items = {
+local wei_buy_items = {
 	["冰糖葫芦"] = {"bj;s;buy hulu", "hulu"},
 	["百果油包"] = {"hz;w;#3 n;e;buy youbao", "youbao"},
 	["冬不拉"] = {"xy;w;#2 nw;w;buy dongbula", "dongbula"},
@@ -141,7 +141,7 @@ wei_buy_items = {
 
 
 --[1] name, [2] id, [3] npc, [4] path
-wei_kill_items = {
+local wei_kill_items = {
 	["青布长衫"] = {"chang shan",	"贾人达",	"fz;#5 w;k1 jia renda"},	
 	["黑色长衫"] = {"chang shan",	"刘好弈",	"sz;w;s;s;s;s;e;e;se;s;k1 liu haoyi"},	
 	["十八木偶"] = {"18 niou",	"大悲老人",	"d;w;n;n;n;w;gyz;n;n;k1 dabei laoren"},	
@@ -278,7 +278,7 @@ wei_kill_items = {
 
 
 --[1] name, [2] path, [3] id
-wei_get_items = {
+local wei_get_items = {
 	["正气吟"] = {"ws;n;n;n;w;s;get zhengqi_book", "zhengqi_book"},
 	["小树枝"] = {"fs;n;#5 e;ne;ne;get shu zhi", "shu zhi"},
 	["鹅卵石"] = {"sz;w;#4 n;sw;get 1 eluan shi", "eluan shi"},
@@ -382,35 +382,50 @@ wei_get_items = {
 -----------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------
 
-main = function()
+local context = {}
+
+main = function(f_done, f_fail)
+	context.f_done = f_done
+	context.f_fail = f_fail
+	
 	EnableTriggerGroup("wei", true)
+	EnableTriggerGroup("wei_ask", true)
+	EnableTriggerGroup("wei_kill", false)
 	Execute("set brief;fly wm;e;s;s;s;e;u;quest")
 end
 
-exit = function()
+init = function()
 	EnableTriggerGroup("wei", false)
-	msg.broadcast("msg_wei_exit")
+	EnableTriggerGroup("wei_ask", false)
+	EnableTriggerGroup("wei_kill", false)
 end
 
 done = function()
 	var.wei_fail_times = 0
-	Execute("halt;fly wm")
-	exit()
+	busy_test(function()
+		var.wei_available_time = os.time() + 15
+		Execute("halt;fly wm")
+		init()
+		me.cleanup(context.f_done)
+	end)
 end
 
 fail = function()
 	busy_test(function()
+		var.wei_available_time = os.time() + 30
 		Execute("halt;fly wm")
-		exit()
+		init()
+		me.cleanup(context.f_done)
 	end)
 end
 
 start = function(name, line, wildcards)
 	var.wei_item_name = wildcards[2]
+	var.wei_start_time = os.time()
 	local t = var.wei_item_name
-	print(wei.wei_buy_items[t])
-	print(wei.wei_kill_items[t])
-	print(wei.wei_get_items[t])
+	print(wei_buy_items[t])
+	print(wei_kill_items[t])
+	print(wei_get_items[t])
 	if(wei_buy_items[t] ~= nil) then 
 		buy(wei_buy_items[t])
 	elseif(wei_kill_items[t] ~= nil) then 
@@ -424,7 +439,11 @@ end
 
 
 finish = function()
-	Execute("halt;fly wm;e;s;s;s;e;u;give " .. var.wei_item_id .. " to wei xiaobao")
+	safeback("halt;fly wm", function()
+		EnableTriggerGroup("wei_kill", false)
+		EnableTriggerGroup("wei_ask", true)
+		Execute("e;s;s;s;e;u;give " .. var.wei_item_id .. " to wei xiaobao")
+	end)
 end
 
 cancel = function()
@@ -435,26 +454,21 @@ cancel = function()
 	end
 	
 	local amount = math.floor(tonumber(var.wei_fail_times)/3) * 10 + 50
-	var.wei_cancel_amt = amount
-	Execute("give " .. amount .. " silver to wei xiaobao")
-end
-
-qukuan = function()
-	wait.make(function()
-		Execute("fly wm;e;s;w;qukuan " .. var.wei_cancel_amt .. " silver")
-		wait.time(5)
-		Execute("halt;e;s;s;e;u;give " .. var.wei_cancel_amt .. " silver to wei xiaobao")
-	end)
+	if(amount > 100) then var.wei_cancel_amt = "1 gold" else var.wei_cancel_amt = amount .. " silver" end
+	
+	qukuan(var.wei_cancel_amt, 
+		function() 
+			Execute("halt;e;s;s;e;u;give " .. var.wei_cancel_amt .. " to wei xiaobao") 
+		end, 
+		fail)
 end
 
 buy = function(t)
 	var.wei_item_id = t[2]
 	var.wei_item_path = t[1]
 	
-	wait.make(function()
-		walk.run(var.wei_item_path)
-		wait.time(2)
-		wei.finish()
+	walk.run(var.wei_item_path, function()
+		busy_test(function() finish() end)
 	end)
 end
 
@@ -462,15 +476,18 @@ kill = function(t)
 	var.wei_item_id = t[1]
 	var.wei_npc_name = t[2]
 	var.wei_item_path = t[3]
-	
+	EnableTriggerGroup("wei_kill", true)
+	EnableTriggerGroup("wei_ask", false)
 	walk.run(var.wei_item_path)
 end
 
 kill_done = function()
 	fight.stop()
 	busy_test(function()
+		EnableTriggerGroup("wei_kill", false)
+		EnableTriggerGroup("wei_ask", true)
 		Execute("get ".. var.wei_item_id .. " from corpse")
-		wei.finish()
+		finish()
 	end)
 end
 
@@ -478,9 +495,10 @@ get = function(t)
 	var.wei_item_path = t[1]
 	var.wei_item_id = t[2]
 	
-	wait.make(function()
-		walk.run(var.wei_item_path)
-		wait.time(2)
-		wei.finish()
+	walk.run(var.wei_item_path, function()
+		busy_test(function() finish() end)
 	end)
 end
+
+
+init()

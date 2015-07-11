@@ -74,6 +74,17 @@ function abort_busytest()
 	var.system_magic_number = GetUniqueNumber()
 end
 
+function safeback(cmd, f_done)
+	wait.make(function()
+		repeat
+			Execute(cmd)
+			local l, w = wait.regexp("^(> )*(只见你消失在一团烟雾之中)|(你现在很忙)|(你正忙着)|(战斗中无法飞行).*$", 10)
+			if(l == nil or l:match("只见你消失") == nil) then wait.time(1) end
+		until(l:match("只见你消失") ~= nil)
+		call(f_done)
+	end)
+end
+
 chs2num = function (s)----------------数字转换
    local cur = 0
    local yi = 0

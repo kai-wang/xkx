@@ -7,11 +7,13 @@ module ("fight", package.seeall)
 
 local context = {}
 
-prepare = function(busy_list, attack_list)
-	context.busy_list = busy_list--me.profile.busy_list
-	context.attack_list = attack_list--me.profile.attack_list1
+prepare = function(busy_list, attack_list, f_escape)
+	context.busy_list = busy_list
+	context.attack_list = attack_list
+	context.f_escape = f_escape
 	me.profile.powerup()
 	context.infight = false
+	context.escape = false
 	context.action = fight.busy
 	ts.new("fight", "fight", 1.5, "fight.action\(\)")
 end
@@ -27,14 +29,16 @@ start = function(cmd)
 	
 	EnableTriggerGroup("fight", true)
 	context.infight = true
+	context.escape = false
 	ts.tick("fight")
 	busy(cmd)
 end
 
 stop = function()
 	context.infight = false
+	context.escape = false
 	ts.stop("fight")
-	
+	print("fight stopped............")
 	EnableTriggerGroup("fight", false)
 	--Execute("set fight end")
 end
@@ -59,37 +63,36 @@ perform_busy = function(cmd)
 end
 
 perform_attack = function(cmd)
+	reset_flag()
 	for i, v in ipairs(context.attack_list) do
-		--print(#context.attack_list, v.action, profile.pfm[v.i].cd)
-		if(not profile.pfm[v.i].cd) then 
+		local pfm = profile.pfm[v.i]
+		if(pfm.cd_time ~= nil and (os.time() - tonumber(pfm.cd_time) > 30)) then pfm.cd = false end
+		
+		if(not pfm.cd) then 
 			if(cmd ~= nil) then
-				--print(cmd .. ";" .. v.action)
 				Execute(cmd .. ";" .. v.action)
 			else
 				Execute(v.action)
 			end
-			return
+			pfm.inuse = true
 		end
 	end
 end
 
+reset_flag = function()
+	for i, v in ipairs(context.attack_list) do
+		profile.pfm[v.i].inuse = false
+	end
+end
+
 busy = function(cmd)
-	--startTimer("busy")
 	context.action = fight.perform_busy
 	ts.reset("fight", 1.5)
 	perform_busy(cmd)
 end
 
 attack = function(cmd)
-	--ts.disable("fight")
 	wait.make(function()
-	--[[
-		repeat
-			Execute("touxi")
-			local l, w = wait.regexp("^(> )*(你的动作还没有完成，不能偷袭。)|(你想偷袭谁？)$")
-			if(l:match("不能偷袭")) then wait.time(0.5) end
-		until(l:match("你想偷袭谁") ~= nil)
-	--]]
 		wait.time(0.5)
 		perform_attack(cmd)
 			
@@ -110,11 +113,12 @@ recover = function()
 end
 
 escape = function()
-	context.action = function() Execute("halt;fly wm") end
+	context.action = function()
+		if(context.escape == true) then return end
+		context.escape = true 
+		safeback("halt;fly wm", context.f_escape)
+	end
 	ts.reset("fight", 0.5)
-end
-
-eatyao = function()
 end
 
 faint = function()
@@ -123,10 +127,20 @@ faint = function()
 	msg.broadcast("msg_fight_faint")
 end
 
+eatyao = function()
+
+end
 
 on_busy_success = function()
-	--stopTimer("busy")
 	attack()
+end
+
+on_escape_success = function()
+	if(context.escape == true) then
+		call(context.f_escape)
+	end
+	
+	fight.stop()
 end
 
 on_perform_cd_ok = function(name, line, wildcards)

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE muclient>
-<!-- Saved on Monday, June 08, 2015, 12:54 AM -->
+<!-- Saved on Tuesday, June 30, 2015, 7:32 AM -->
 <!-- MuClient version 4.84 -->
 <!-- Written by Nick Gammon -->
 <!-- Home Page: http://www.mushclient.com/ -->
@@ -8,13 +8,13 @@
 <world
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2015-06-08 00:54:12"
+   date_saved="2015-06-30 07:32:41"
 
    auto_say_override_prefix="-"
    auto_say_string="say "
    chat_name="Name-not-set"
    command_stack_character=";"
-   id="1cd7edb2f608269169058bdf"
+   id="4621ac41d56591bcf764d000"
    input_font_name="Fixedsys"
    mapping_failure="Alas, you cannot go that way."
    name="XKX"
@@ -114,7 +114,7 @@
 <triggers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2015-06-08 00:54:12"
+   date_saved="2015-06-30 07:32:41"
   >
   <trigger
    custom_colour="16"
@@ -260,22 +260,22 @@ walk.handlers.k_blocker()</send>
   </trigger>
   <trigger
    expand_variables="y"
+   group="dazuo"
+   keep_evaluating="y"
+   match="^(&gt; )*(@!dazuo_end_desc)$"
+   regexp="y"
+   script="dazuo.continue"
+   sequence="100"
+  >
+  </trigger>
+  <trigger
+   expand_variables="y"
    group="study"
    keep_evaluating="y"
    match="^(&gt; )*(@!dazuo_end_desc)$"
    omit_from_output="y"
    regexp="y"
    script="study.continue"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
-   expand_variables="y"
-   group="dazuo"
-   keep_evaluating="y"
-   match="^(&gt; )*(@!dazuo_end_desc)$"
-   regexp="y"
-   script="dazuo.continue"
    sequence="100"
   >
   </trigger>
@@ -1063,19 +1063,19 @@ fight.busy()</send>
   >
   </trigger>
   <trigger
+   group="fight"
+   match="^(&gt; )*ÄãÖ»¾õµÃÍ·»èÄÔÕÍ£¬ÑÛÇ°Ò»ºÚ£¬½Ó×ÅÊ²Ã´Ò²²»ÖªµÀÁË¡­¡­$"
+   regexp="y"
+   script="fight.faint"
+   sequence="100"
+  >
+  </trigger>
+  <trigger
    group="bei"
    keep_evaluating="y"
    match="^(&gt; )*ÄãÖ»¾õµÃÍ·»èÄÔÕÍ£¬ÑÛÇ°Ò»ºÚ£¬½Ó×ÅÊ²Ã´Ò²²»ÖªµÀÁË¡­¡­$"
    regexp="y"
    script="bei.faint"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
-   group="fight"
-   match="^(&gt; )*ÄãÖ»¾õµÃÍ·»èÄÔÕÍ£¬ÑÛÇ°Ò»ºÚ£¬½Ó×ÅÊ²Ã´Ò²²»ÖªµÀÁË¡­¡­$"
-   regexp="y"
-   script="fight.faint"
    sequence="100"
   >
   </trigger>
@@ -1178,20 +1178,20 @@ walk.handlers.k_blocker()</send>
   <send>fight.stop()</send>
   </trigger>
   <trigger
-   group="wei"
-   keep_evaluating="y"
-   match="^(&gt; )*ÕâÀïÃ»ÓÐÕâ¸öÈË¡£$"
-   regexp="y"
-   script="wei.kill_done"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
    group="shan"
    keep_evaluating="y"
    match="^(&gt; )*ÕâÀïÃ»ÓÐÕâ¸öÈË¡£$"
    regexp="y"
    script="shan.fail"
+   sequence="100"
+  >
+  </trigger>
+  <trigger
+   group="wei"
+   keep_evaluating="y"
+   match="^(&gt; )*ÕâÀïÃ»ÓÐÕâ¸öÈË¡£$"
+   regexp="y"
+   script="wei.kill_done"
    sequence="100"
   >
   </trigger>
@@ -1377,7 +1377,7 @@ walk.stop()</send>
 <aliases
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2015-06-08 00:54:12"
+   date_saved="2015-06-30 07:32:41"
   >
   <alias
    match="^show (.*)$"
@@ -2175,7 +2175,7 @@ leitai</send>
 <timers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2015-06-08 00:54:12"
+   date_saved="2015-06-30 07:32:41"
   >
   <timer name="idle" enabled="y" second="59.00" offset_second="0.00" >
   <send>hi</send>
@@ -2188,7 +2188,7 @@ leitai</send>
 <macros
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2015-06-08 00:54:12"
+   date_saved="2015-06-30 07:32:41"
   >
 
   <macro name="up" type="send_now" >
@@ -2282,7 +2282,7 @@ leitai</send>
 <variables
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2015-06-08 00:54:12"
+   date_saved="2015-06-30 07:32:41"
   >
   <variable name="bag_dummy_id">hsly</variable>
   <variable name="baobiao_exp">142</variable>
@@ -2297,7 +2297,7 @@ leitai</send>
   <variable name="double_bonus">false</variable>
   <variable name="event_loc">ºâÉ½</variable>
   <variable name="event_room">1312</variable>
-  <variable name="event_start_time">1433673359</variable>
+  <variable name="event_start_time">1434881101</variable>
   <variable name="faint">0</variable>
   <variable name="fz_coin">2321</variable>
   <variable name="gf_city">ËÕÖÝ</variable>
@@ -2401,7 +2401,7 @@ leitai</send>
 <colours
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2015-06-08 00:54:12"
+   date_saved="2015-06-30 07:32:41"
   >
 
 <ansi>
@@ -2458,7 +2458,7 @@ leitai</send>
 <keypad
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2015-06-08 00:54:12"
+   date_saved="2015-06-30 07:32:41"
   >
 
   <key name="0" >
@@ -2572,7 +2572,7 @@ leitai</send>
 <printing
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2015-06-08 00:54:12"
+   date_saved="2015-06-30 07:32:41"
   >
 
 <ansi>

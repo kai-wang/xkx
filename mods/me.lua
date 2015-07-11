@@ -1,5 +1,32 @@
 require "tprint"
 
+
+local starMappings = {
+	["white"] 	= "shan",
+	["lime"] 	= "bb",
+	["yellow"] 	= "guanfu",
+	["magenta"] = "wei",
+	["blue"] 	= "sx",
+	["red"] 	= "task",
+	["cyan"] 	= "guo"
+}
+
+on_star_update = function(name, line, wildcards, styles)
+	EnableTriggerGroup("HP_star", false)
+	for i, v in pairs(starMappings) do
+		SetVariable("hp_star_" .. v, 0)
+	end
+	
+	for i = 1, #styles do
+		if(styles[i].text == "★") then
+			local t = starMappings[RGBColourToName(styles[i].textcolour)]
+			if(t ~= nil) then
+				SetVariable("hp_star_" .. t, 1)
+			end
+		end
+	end
+end
+
 --[[
 	精神:		js
 	精神最大值: js_max
@@ -82,11 +109,12 @@ module ("me", package.seeall)
 
 updateHP = function(f_done)
 	wait.make(function()
+		EnableTriggerGroup("HP_star", true)
 		EnableTriggerGroup("HP", true)
 		Execute("hp;set check hp")
 		local l, w = wait.regexp("^(> )*设定环境变数：check = \"hp\"$")
 		EnableTriggerGroup("HP", false)
-		
+		EnableTriggerGroup("HP_star", false)
 		call(f_done)
 	end)
 end
@@ -112,9 +140,11 @@ cleanup = function(f_done)
 
 	full(function()
 		check_money(function()
-			useqn(function()
-				recover(f_done)
-			end)
+			--useqn(function()
+				recover(function()
+					get_xionghuang(f_done,f_done)
+				end)
+			--end)
 		end)
 	end)
 
@@ -123,7 +153,7 @@ end
 recover = function(f_done, f_fail)
 	wait.make(function()
 		updateHP(function()
-			if(tonumber(var.hp_nl) > tonumber(var.hp_nl_max) * 1) then 
+			if(tonumber(var.hp_nl) > tonumber(var.hp_nl_max) * 1.2) then 
 				Execute("er;et;fly wm;set check full")
 				local l, w = wait.regexp("^(> )*设定环境变数：check = \"full\"$")
 				call(f_done)
@@ -144,25 +174,31 @@ end
 
 healssf = function(f_done, f_fail)
 	if(var.me_status_ssf == nil or (var.me_status_ssf == "false")) then print("没中生死符") return call(f_done) end
+	local retry, retrytimes = nil, 0
 	
-	qukuan("15 gold", 
-	function()
-		wait.make(function()
-			Execute("fly lj;s;give 15 gold to shouling")
-			local l, w = wait.regexp("^(> )*(这里没有这个人)|(.*你没有中生死符啊，你想中吗)|(.*你身上的生死符已解了).*$")
-		
-			if(l:match("这里没有这个人") ~= nil) then
-				return call(f_fail)
-			end
-			
-			busy_test(function()
-				var.me_status_ssf = false
-				print("生死符好了")
-				call(f_done)
+	retry = function()
+		if(retrytimes > 5) then return call(f_fail) else retrytimes = retrytimes + 1 end
+		qukuan("15 gold", 
+		function()
+			wait.make(function()
+				Execute("fly lj;s;give 15 gold to shouling")
+				local l, w = wait.regexp("^(> )*(这里没有这个人)|(.*你没有中生死符啊，你想中吗)|(.*你身上的生死符已解了).*$", 5)
+				
+				if(l == nil or l:match("这里没有这个人") ~= nil) then
+					retry()
+				else
+					busy_test(function()
+						var.me_status_ssf = false
+						print("生死符好了")
+						call(f_done)
+					end)
+				end
 			end)
-		end)
-	end,
-	f_fail)
+		end,
+		retry)		
+	end
+
+	retry()
 end
 
 qudu = function(f_done)
@@ -199,6 +235,12 @@ jingqi = function(f_done)
 	wait.make(function()
 		if(var.me_menpai == "逍遥") then
 			Execute("fly xyl;n;n;ask xue about 疗伤;fly wm")
+			local l, w = wait.regexp("^(> )*(大约过了一盅茶的时份)|(这里没有这个人).*$", 5)
+			if((l ~= nil) and l:match("大约过了一盅茶的时份") ~= nil) then return call(f_done) end
+		end
+		
+		if(var.me_menpai == "明教") then
+			Execute("fly mj;s;sd;s;sd;#3(sd);enter;ask hu about 疗伤;fly wm")
 			local l, w = wait.regexp("^(> )*(大约过了一盅茶的时份)|(这里没有这个人).*$", 5)
 			if((l ~= nil) and l:match("大约过了一盅茶的时份") ~= nil) then return call(f_done) end
 		end
@@ -259,9 +301,9 @@ foodwater = function(f_done)
 		wait.time(2)
 		Execute("fly xx;su;s;ed;nw;w;buy shuinang;")
 		wait.time(2)
-		Execute("eat zongzi;#8 (drink shuinang);drop zongzi;drop zong ye;")
+		Execute("eat zongzi;#5 (drink shuinang);drop zongzi;drop zong ye;")
 		wait.time(2)
-		Execute("#8 (drink shuinang);drop shuinang;unset brief;fly wm")
+		Execute("#5 (drink shuinang);drop shuinang;unset brief;fly wm")
 		print("酒足饭饱了")
 		call(f_done)
 	end)
@@ -270,17 +312,7 @@ end --function
 
 useqn = function(f_done)
 	if(tonumber(var.hp_qn) >= tonumber(var.hp_qn_max)) then
-		if(var.study_seq == nil or var.study_seq == "") then var.study_seq = 1 end
-		local index = tonumber(var.study_seq)%(#me.profile.study_list)
-		if(index == 0) then index = #me.profile.study_list end
-		
-		local st = me.profile.study_list[index]
-		
-		wait.make(function()
-			var.study_loc = st.loc
-			Execute(var.study_loc)
-			research.start(f_done)
-		end)
+		study.main(f_done)
 	else
 		call(f_done)
 		print("不需要花qn")
@@ -307,7 +339,8 @@ check_money = function(f_done)
 		if(cmd ~= "") then
 			Execute("fly wm;e;s;w")
 			Execute(cmd)
-			Execute("qukuan 99 silver;qukuan 19 gold")
+			if(var.me_qukuan == nil or var.me_qukuan == "") then var.me_qukuan = "qukuan 99 silver;qukuan 19 gold" end
+			Execute(var.me_qukuan)
 			wait.time(5)
 			Execute("halt;fly wm")
 			var.me_goldbar = 0

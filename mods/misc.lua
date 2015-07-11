@@ -5,6 +5,12 @@ function call(f)
 	if(f ~= nil) then f() end
 end
 
+function wrapper(f)
+	wait.make(function()
+		call(f)
+	end)
+end
+
 function suck()
 	busy_test(function()
 		Execute("yun maxsuck")
@@ -12,9 +18,12 @@ function suck()
 	end)
 end
 
-function double()
-	Execute("u;ask jin about 双倍奖励")
-	var.double_bonus = true
+function double(f)
+	wrapper(function()
+		Execute("u;ask jin about 双倍奖励")
+		var.double_bonus = true;
+		call(f)
+	end)
 end
 
 function qukuan(amount, f_ok, f_fail)
@@ -26,7 +35,7 @@ function qukuan(amount, f_ok, f_fail)
 	end)
 end
 
-function get_xionghuang(f_ok)
+function get_xionghuang(f_ok, f_fail)
 	wait.make(function()
 		Execute("set brief;fly wm;nw;give xionghuang to " .. var.me_id)
 		local l, w = wait.regexp("^(> )*(你身上没有这样东西)|(.*给你一包雄黄).*$")
@@ -210,6 +219,9 @@ function get_jiedao(f_ok, f_fail)
 	f_fail)
 end
 
+function ask_naogui(f_ok, f_fail)
+end
+
 module ("ts", package.seeall)
 
 new = function(name, group, interval, handler)
@@ -253,7 +265,7 @@ start = function(f_done)
 	cxt.done_flag = false
 	cxt.full_flag = false
 	cxt.f_done = f_done
-	cxt.value = "dazuo 3000"
+	cxt.value = var.me_dazuo
 	Execute("et;" .. cxt.value)
 end
 

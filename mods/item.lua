@@ -79,10 +79,11 @@ end
 function sort(item, id, style)
 	local color = getColourName(style, item)
 	--白的，蓝的，黄的装备卖掉
-	if(color == "white" or color == "blue" or color == "yellow" or color == "red") then
+	--or color == "yellow" or color == "red"
+	if(color == "white" or color == "blue" or color == "yellow") then
 		addtolist("sell", id)
 		--color == "red" or 
-	elseif(color == "magenta") then
+	elseif(color == "magenta" or color == "red") then
 	--红的，紫的留着
 		addtolist("store", id)
 	else
