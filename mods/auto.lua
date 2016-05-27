@@ -26,7 +26,7 @@ local tasks = {
 			if(var.task_available_time ~= nil and tonumber(var.task_available_time) - os.time() > 30) then
 				return 9
 			else
-				return 19
+				return 18
 			end
 		end
 	},
@@ -146,7 +146,7 @@ local tasks = {
 		priority = function()
 			if(var.shan_amount ~= nil and var.shan_amount_limit ~= nil and tonumber(var.shan_amount) > tonumber(var.shan_amount_limit)) then
 				print("单正任务超过上限了")
-				if(var.hp_star_shan ~= "1") then return 10 else return -1 end
+				if(var.hp_star_shan ~= "1") then return 10 else return 2 end
 			else
 				if(var.hp_star_shan ~= "1") then return 10 else return 5 end
 			end
@@ -178,6 +178,26 @@ local tasks = {
 		end
 	},
 	
+	["event"] = {
+		name = "event",
+		main = function(f_next)
+			anti_idle(600)
+			event.main(f_next, f_next)
+		end,
+		
+		clear = function()
+			event.init()
+		end,
+		
+		wait = function()
+			if(var.event_flag == "true") then return 0 else return os.time() + 1800 end
+		end,
+		
+		priority = function()
+			if(var.event_flag == "true") then return 30 else return -1 end
+		end
+	},
+	
 	["study"] = {
 		name = "study",
 		main = function(f_next)
@@ -190,11 +210,60 @@ local tasks = {
 		end,
 		
 		wait = function()
-			if(tonumber(var.hp_qn) > tonumber(var.hp_qn_max)) then return 0 else return os.time() + 1800 end
+			if(tonumber(var.hp_qn) >= tonumber(var.hp_qn_max)) then return 0 else return os.time() + 1800 end
 		end,
 		
 		priority = function()
-			if(tonumber(var.hp_qn) > tonumber(var.hp_qn_max)) then return 20 else return 1 end
+			if(tonumber(var.hp_qn) >= tonumber(var.hp_qn_max)) then return 20 else return 1 end
+		end
+	},
+	
+	["double"] = {
+		name = "double",
+		main = function(f_next)
+			anti_idle(30)
+			double(f_next)
+		end,
+		
+		clear = function()
+			---var.double_bonus = false
+		end,
+		
+		wait = function()
+			local auto_list = me.profile.auto_list
+			local ct = os.time()
+			
+			if(var.double_available_time == nil) then var.double_available_time = ct end
+			
+			return tonumber(var.double_available_time)
+		end,
+		
+		priority = function()
+			return 19
+		end
+	},
+	
+	["reconnect"] = {
+		name = "reconnect",
+		main = function(f_next)
+			anti_idle(30)
+			reconn(f_next)
+		end,
+		
+		clear = function()
+			---var.double_bonus = false
+		end,
+		
+		wait = function()	
+			if(var.reconnect_required == "1") then
+				return os.time() 
+			else
+				return os.time() + 900
+			end
+		end,
+		
+		priority = function()
+			return 20
 		end
 	}
 }
@@ -214,7 +283,7 @@ function getnexttask(tbl)
 			if(tasks[tbl[i]].priority() > priority) then
 				t = tasks[tbl[i]]
 				priority = t.priority()
-				print("priority " .. priority)
+				print("【任务】" .. t.name .. " 【优先级】 " .. priority)
 			end
 		end
 	end
@@ -229,12 +298,6 @@ function nexttask(tbl)
 		if(t == nil) then
 			print("----------下个任务在 >>>>>>" .. w .. "<<<<<< 秒后开始----------")
 			anti_idle(w)
-			--[[wait.make(function()
-				--local fn = nexttask(tbl)
-				print("----------下个任务在 >>>>>>" .. w .. "<<<<<< 秒后开始----------")
-				wait.time(w)
-				call(nexttask(tbl))
-			end)]]--
 		else
 			wait.make(function()
 				wait.time(1)
@@ -248,23 +311,22 @@ end
 -- bei + guanfu ------
 function start()
 	local auto_list = me.profile.auto_list
-	ts.new("auto", "auto", 59, "auto.restart\(\)")
-	ts.reset("auto", 59)
-	ts.tick("auto")
+	timer.create("auto", "auto", 59, function() auto.restart() end)
+	timer.tick("auto", 59, function() auto.restart() end)
 	call(nexttask(auto_list))
 end
 
 function stop()
-	ts.stop("auto")
+	timer.stop("auto")
 end
 
 function anti_idle(tick)
 	print("wait .. " .. tick)
-	ts.reset("auto", tick)
-	ts.tick("auto")
+	timer.tick("auto", tick, function() auto.restart() end)
 end
 
 function restart()
+	print("restart")
 	stop()
 	for i = 1, #tasks do
 		tasks[i].clear()
@@ -273,4 +335,9 @@ function restart()
 	call(start)
 end
 
-stop()
+function init()
+	stop()
+	timer.delete("auto")
+end
+
+init()
