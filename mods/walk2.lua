@@ -612,7 +612,7 @@ function findpath(regionName, roomName)
 		local prevRoom = nil
 		for i, v in ipairs(region.rooms) do
 			--if(v.name == roomName and v.attr ~= "danger") then
-			if(v.name == roomName and (tonumber(var.hp_exp) > 10000000 or v.attr ~= "danger")) then
+			if(v.name == roomName and (v.danger == nil or (var.walk_danger_level ~= nil and tonumber(var.walk_danger_level) >= v.danger))) then
 				if(prevRoom == nil) then
 					path = "set brief;" .. v.path .. ";unset brief;look"
 				else
@@ -676,7 +676,7 @@ function step_by_step(tbl, f_ok, f_fail, f_stop)
 			if(i <= #tbl) then
 				walk_cxt.currentId = tbl[i].to
 				print("当前房间: ".. walk_cxt.currentId)
-				if(tbl[i].from ~= nil and roomAll[tbl[i].from].npckill == true) then tbl[i].path = "halt;" .. tbl[i].path end
+				if(tbl[i].from ~= nil and roomAll[tbl[i].from].danger ~= nil) then tbl[i].path = "halt;" .. tbl[i].path end
 				step(tbl[i].path, iterator(), walk_cxt.walk_fail, walk_cxt.walk_stop)
 			else
 				walk_ok()
@@ -781,7 +781,7 @@ function walkaround(dp, dir, f_ok, f_fail, f_stop)
 		if(deepth == 1 and dir ~= nil) then
 			for i, v in pairs(room.links) do
 				--if(not walked[v.to] and roomAll[v.to].attr ~= "danger" and v.block ~= "y" and directions[i] == dir) then
-				if(not walked[v.to] and v.block ~= "y" and directions[i] == dir and (tonumber(var.hp_exp) > 10000000 or roomAll[v.to].attr ~= "danger")) then
+				if(not walked[v.to] and v.block ~= "y" and directions[i] == dir and (roomAll[v.to].danger == nil or (var.walk_danger_level ~= nil and tonumber(var.walk_danger_level) >= roomAll[v.to].danger))) then
 					enqueue(i, v, room, deepth)
 				end
 			end
@@ -791,7 +791,7 @@ function walkaround(dp, dir, f_ok, f_fail, f_stop)
 			--tprint(room.links)
 			--if(v.attr ~= "" and v.attr ~= nil) then print("attr: " .. v.attr) else print("attr null") end
 			--if(not walked[v.to] and roomAll[v.to].attr ~= "danger" and v.block ~= "y") then
-			if(not walked[v.to] and v.block ~= "y" and (tonumber(var.hp_exp) > 10000000 or roomAll[v.to].attr ~= "danger")) then
+			if(not walked[v.to] and v.block ~= "y" and (roomAll[v.to].danger == nil or (var.walk_danger_level ~= nil and tonumber(var.walk_danger_level) >= roomAll[v.to].danger))) then
 				enqueue(i, v, room, deepth)
 			end
 		end

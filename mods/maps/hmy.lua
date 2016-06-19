@@ -190,6 +190,7 @@ local region = {}
       region.rooms[14].name = "秘道"
       region.rooms[14].zone = "黑木崖"
       region.rooms[14].id = 2955
+      region.rooms[14].danger = 4
       region.rooms[14].desc = "    走在里面，你不觉想到这似乎在每个角落都藏着无限杀机，你感到近了近了，越来越近了。"
       region.rooms[14].exits = "south|north|east|west"
       region.rooms[14].links = {}

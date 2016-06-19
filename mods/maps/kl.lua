@@ -298,6 +298,7 @@ local region = {}
       region.rooms[20].name = "¡ÈÈ·π¨"
       region.rooms[20].zone = "¿•¬ÿ…Ω"
       region.rooms[20].id = 1945
+	  region.rooms[20].danger = 3
       region.rooms[20].links = {}
         region.rooms[20].links.s = {}
           region.rooms[20].links.s.to = 1944

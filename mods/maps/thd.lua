@@ -77,6 +77,7 @@ local region = {}
       region.rooms[6].path = "fly thd;s;e"
       region.rooms[6].name = "Àºπ˝ “"
       region.rooms[6].zone = "Ã“ª®µ∫"
+	  region.rooms[6].danger = 3
       region.rooms[6].id = 2389
       region.rooms[6].links = {}
         region.rooms[6].links.w = {}

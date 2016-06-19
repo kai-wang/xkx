@@ -5,15 +5,14 @@ var.dazuo_end_desc = "(你将头上白雾吸尽，睁开双眼，缓缓站起。)|(你运功完毕，深深
 var.dazuo_halt_desc = "你把正在运行的真气强行压回丹田，站了起来。"
 var.dazuo_full_desc = "你的内力修为似乎已经达到了瓶颈，无法再靠打坐来提升了。"
 var.me_id = "lby"
-var.me_name = "李布衣"
+var.me_name = "礼拜一"
 var.me_menpai = "全真"
 var.me_family = "全真"
 var.me_dazuo = "dazuo 1000"
 var.gf_money = "yes"
 var.task_id = "lby's task"
 var.ttask_id = "lby's ttask"
-var.heal_dummy_id = "hqly"
-var.bag_dummy_id = "hsly"
+var.dig_dummy = "lbt"
 
 
 profile = {

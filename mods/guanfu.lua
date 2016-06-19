@@ -2,61 +2,53 @@ require "wait"
 require "tprint"
 require "utils"
 require "var"
+require("worlds\\xkx\\mods\\core")
 
 module ("guanfu", package.seeall)
 
 local context = {}
 
 
-main = function(f_done, f_fail)
+function main(f_done, f_fail)
 	context.f_done = f_done
 	context.f_fail = f_fail
-	
-	EnableTriggerGroup("guanfu", true)
+	var.walk_danger_level = 4
+
+	EnableTriggerGroup("guanfu_ask", true)
 	Execute("set brief;fly wm;e;s;s;w;s;s;e;jie wenshu;fly wm;kan wenshu")
 end
 
 
-init = function()
+function init()
 	walk.abort()
 	fight.stop()
 	EnableTriggerGroup("guanfu", false)
+	EnableTriggerGroup("guanfu_fight", false)
+	EnableTriggerGroup("guanfu_ask", false)
 end
 
-
-available = function()
+function available()
 	return tonumber(var.gf_available_time) < os.time()
 end
 
-done = function()
-	busy_test(function()
-		init()
-		safeback("halt;fly wm", function() 
-			Execute("er;et;ef")
-			var.gf_available_time = os.time()
-			clean(context.f_done)
-		end)
-		--Execute("halt;fly wm;nw;er;et;ef")
-		--var.gf_available_time = os.time()
-		--clean(context.f_done)
-		--me.cleanup(context.f_done)
-	end)
+function done()
+	init()
+	core.safeback(function()
+		Execute("er;et;ef")
+		var.gf_available_time = os.time()
+		clean(context.f_done)
+	end, 1)
 end
 
-fail = function()
-	busy_test(function()
-		init()
-		safeback("halt;fly wm", function() 
-			Execute("er;et;ef")
-			clean(context.f_fail)
-		end)
-		--Execute("halt;fly wm;nw;er;et;ef")
-		--clean(context.f_fail)
-		--me.cleanup(context.f_fail)
-	end)
+function fail()
+	init()
+	core.safeback(function()
+		Execute("er;et;ef")
+		clean(context.f_fail)
+	end, 1)
 end
 
-clean = function(f)
+function clean(f)
 	if(var.gf_money == "yes") then
 		me.full(function()
 			me.check_money(function()
@@ -69,99 +61,93 @@ clean = function(f)
 end
 
 
-start = function(name, line, wildcards)
+function start(name, line, wildcards)
 	local npc, city, loc = wildcards[2], wildcards[3], wildcards[4]
-	
+
 	var.gf_npc = npc
 	var.gf_city = city
 	var.gf_loc = loc
-	
+
 	print(city .. " " .. loc .. " " .. npc)
 	var.gf_found = false
 	var.gf_status = "start"
 	var.gf_available_time = os.time() + 600 -- 官府失败，10分钟后重试
-	
-	local busy_list = me.profile.busy_list
-	local attack_list = me.profile.attack_list1
-	fight.prepare(busy_list, attack_list)
-	
+
+	config.powerup()
+
 	--如果slowwalk走完还没有stop，说明没找到
 	--msg.subscribe("msg_slowalk_stop", guanfu.notfound)
+	EnableTriggerGroup("guanfu_ask", false)
+	EnableTriggerGroup("guanfu", true)
+	EnableTriggerGroup("guanfu_fight", true)
 	walk.sl(var.gf_city, var.gf_loc, guanfu.notfound, guanfu.fail, guanfu.foundnpc)
 end
 
-notfound = function()
+function notfound()
 	var.gf_found = false
 	fight.stop()
 	Execute("halt")
 	--如果walkaround走完还没找到，就retry吧
 	--msg.subscribe("msg_slowwalk_ok", guanfu.fail)
+	EnableTriggerGroup("guanfu_fight", true)
 	walk.walkaround(5, nil, guanfu.fail, guanfu.fail, guanfu.foundnpc)
 end
 
 
-foundnpc = function()
+function foundnpc()
 	var.gf_found = true
 	startFight()
 end
 
-
-startFight = function()
-	local busy_list = me.profile.busy_list
-	local attack_list = me.profile.attack_list1
-	fight.prepare(busy_list, attack_list)
-	
-	fight.start("kill " .. var.gf_id)
+function startFight()	
+	fight.prepare(config.gf_busy_test, config.gf_attack_list)
+	fight.startnobuff("kill " .. var.gf_id)
 end
 
 
 -------- task 跑了，在原地范围内进行深度为5的遍历-----------------------------------
-search = function(name, line, wildcards)
+function search(name, line, wildcards)
 	print("guanfu 往【" .. wildcards[3] .. "】跑了")
 	local dir = wildcards[3]
 	dir = dir:gsub("边","")
 	dir = dir:gsub("面", "")
 	var.gf_escape_dir = dir
-	
+
 	--walk.stop()
 	if(walk.stopped()) then searchTask() end
 	--searchTask()
 end
 
-searchTask = function()
-	busy_test(function()
+function searchTask()
+	core.busytest(function()
 		if(var.gf_status == "done") then return end
+		EnableTriggerGroup("guanfu_fight", true)
+		config.powerup()
 		walk.walkaround(3, var.gf_escape_dir, guanfu.fail, guanfu.fail, guanfu.foundnpc)
 	end)
 end
 
 ----看到npc死了，把东西捡起来------------------------------------
-npcdie = function(name, line, wildcards)
-	wait.make(function()
-		var.gf_status = "done"
-		walk.stop()
-		fight.stop()
-		Execute("wancheng corpse")
-		--wait.time(3)
-		busy_test(function()
-			item.lookandget(done)
-		end)
+function npcdie(name, line, wildcards)
+	var.gf_status = "done"
+	walk.stop()
+	fight.stop()
+	Execute("wancheng corpse")
+
+	core.busytest(function()
+		item.lookandget(done)
 	end)
 end
 
-yesno = function(name, line, wildcards)
+function yesno(name, line, wildcards)
 	if(var.gf_money == "yes") then
-		wait.make(function()
-			Execute("yes")
-			wait.time(1)
-			busy_test(function()
-				item.lookandget(fail)
-			end)
+		core.busytest(function()
+			item.lookandget(fail)
 		end)
 	end
 end
 
-flee = function(name, line, wildcards)
+function flee(name, line, wildcards)
 	--msg.unsubscribe("msg_slowwalk_stop")
 	fight.stop()
 	walk.abort()
@@ -179,13 +165,10 @@ flee = function(name, line, wildcards)
 	print(city .. " " .. loc)
 	var.gf_found = false
 
-	wait.make(function()
-		wait.time(2)
-		Execute("yun recover")
-		wait.time(1)
-		Execute("halt")
+	core.safeback(function()
+		Execute("er;et")
 		walk.sl(var.gf_city, var.gf_loc, notfound, fail, foundnpc)
-	end)
+	end, 1)
 end
 
 init()

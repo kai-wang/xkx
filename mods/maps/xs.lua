@@ -25,6 +25,7 @@ local region = {}
       region.rooms[2].name = "雪山别院"
       region.rooms[2].zone = "北京|雪山寺"
       region.rooms[2].id = 1090
+      region.rooms[2].danger = 4
       region.rooms[2].links = {}
         region.rooms[2].links.e = {}
           region.rooms[2].links.e.to = 1089

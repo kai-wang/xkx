@@ -387,6 +387,7 @@ local region = {}
       region.rooms[27].name = "林间小道"
       region.rooms[27].zone = "黑木崖1"
       region.rooms[27].id = 2923
+	  region.rooms[27].danger = 3
       region.rooms[27].links = {}
         region.rooms[27].links.n = {}
           region.rooms[27].links.n.to = 2931

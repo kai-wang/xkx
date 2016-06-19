@@ -1,6 +1,5 @@
 require "tprint"
 
-
 local starMappings = {
 	["white"] 	= "shan",
 	["lime"] 	= "bb",
@@ -16,7 +15,7 @@ on_star_update = function(name, line, wildcards, styles)
 	for i, v in pairs(starMappings) do
 		SetVariable("hp_star_" .. v, 0)
 	end
-	
+
 	for i = 1, #styles do
 		if(styles[i].text == "★") then
 			local t = starMappings[RGBColourToName(styles[i].textcolour)]
@@ -119,20 +118,32 @@ updateHP = function(f_done)
 	end)
 end
 
+-- qfull for sstask etc
+qfull = function(f_done)
+	updateHP(function()
+		qudu(function()
+			foodwater(function()
+				jingqi(function()
+					recover2(f_done)
+				end)
+			end)
+		end)
+	end)
+end
 
 full = function(f_done)
 	--call(updateHP(healssf(qudu(foodwater(jingqi(f_done))))))
-	
-	updateHP(function() 
+
+	updateHP(function()
 		healssf(function()
 			qudu(function()
-				foodwater(function() 
-					jingqi(f_done) 
+				foodwater(function()
+					jingqi(f_done)
 				end)
-			end) 
+			end)
 		end)
 	end)
-	
+
 end
 
 cleanup = function(f_done)
@@ -151,43 +162,69 @@ cleanup = function(f_done)
 end
 
 recover = function(f_done, f_fail)
-	wait.make(function()
-		updateHP(function()
-			if(tonumber(var.hp_nl) > tonumber(var.hp_nl_max) * 1.2) then 
+	updateHP(function()
+		if(tonumber(var.hp_nl) > tonumber(var.hp_nl_max) * 0.8) then
+			wait.make(function()
 				Execute("er;et;fly wm;set check full")
 				local l, w = wait.regexp("^(> )*设定环境变数：check = \"full\"$")
 				call(f_done)
-			else
-				busy_test(function()
-				--Execute("fly wm;u")
-					Execute("set brief;fly lj;n;e;e;n;n;w;w;climb ice;e")
-					dazuo.start(function()
+			end)
+		else
+			core.busytest(function()
+			--Execute("fly wm;u")
+				Execute("set brief;fly lj;n;e;e;n;n;w;w;climb ice;e")
+				dazuo.start(function()
+					wait.make(function()
 						Execute("er;ef;d;set check full")
 						local l, w = wait.regexp("^(> )*设定环境变数：check = \"full\"$")
 						call(f_done)
 					end)
 				end)
-			end
-		end)
+			end)
+		end
+	end)
+end
+
+recover2 = function(f_done, f_fail)
+	updateHP(function()
+		if(tonumber(var.hp_nl) > tonumber(var.hp_nl_max)) then
+			wait.make(function()
+				Execute("er;et;set check full")
+				local l, w = wait.regexp("^(> )*设定环境变数：check = \"full\"$")
+				call(f_done)
+			end)
+		else
+			core.busytest(function()
+				--Execute("fly wm;u")
+				Execute("set brief;fly lj;n;e;e;n;n;w;w;climb ice;e")
+				dazuo.start(function()
+					wait.make(function()
+						Execute("er;ef;d;set check full")
+						local l, w = wait.regexp("^(> )*设定环境变数：check = \"full\"$")
+						call(f_done)
+					end)
+				end)
+			end)
+		end
 	end)
 end
 
 healssf = function(f_done, f_fail)
 	if(var.me_status_ssf == nil or (var.me_status_ssf == "false")) then print("没中生死符") return call(f_done) end
 	local retry, retrytimes = nil, 0
-	
+
 	retry = function()
 		if(retrytimes > 5) then return call(f_fail) else retrytimes = retrytimes + 1 end
-		qukuan("15 gold", 
+		qukuan("15 gold",
 		function()
 			wait.make(function()
-				Execute("fly lj;s;give 15 gold to shouling")
+				Execute("fly lj;s;give 15 gold to lingjiu shouling")
 				local l, w = wait.regexp("^(> )*(这里没有这个人)|(.*你没有中生死符啊，你想中吗)|(.*你身上的生死符已解了).*$", 5)
-				
+
 				if(l == nil or l:match("这里没有这个人") ~= nil) then
 					retry()
 				else
-					busy_test(function()
+					core.busytest(function()
 						var.me_status_ssf = false
 						print("生死符好了")
 						call(f_done)
@@ -195,31 +232,46 @@ healssf = function(f_done, f_fail)
 				end
 			end)
 		end,
-		retry)		
+		retry)
 	end
 
 	retry()
 end
 
 qudu = function(f_done)
-	wait.make(function()
-		Execute("fly wm;nw;er;et;yun cure")
-		repeat
+	if(var.me_status_poison == "true" and (tonumber(var.hp_nl) < 200 or tonumber(var.hp_jsP) < 60)) then
+		qukuan("10 gold", function()
+			Execute("e;s;e;e;n;buy yao")
+			core.busytest(function()
+				wait.make(function()
+					Execute("fly wm;nw;eat yao")
+					print("冰蟾好吃啊")
+					wait.time(5)
+					var.me_status_poison = false
+					call(f_done)
+				end)
+			end)
+		end)
+	else
+		wait.make(function()
+			Execute("fly wm;nw;er;et;yun cure")
+			repeat
 			local l, w = wait.regexp("^(> )*(你.*消褪了！)|(你并未中毒。)|(你现在精不够.*)$", 10)
-		until((l == nil) or (l:match("你并未中毒") ~= nil) or (l:match("你现在精不够") ~= nil))
-		Execute("halt")
-		print("驱毒完毕")
-		var.me_status_poison = false
-		call(f_done)
-	end)
+			until((l == nil) or (l:match("你并未中毒") ~= nil) or (l:match("你现在精不够") ~= nil))
+			Execute("halt")
+			print("驱毒完毕")
+			var.me_status_poison = false
+			call(f_done)
+		end)
+	end
 end
 
 canEatWuchang = function()
 	if(var.last_wuchang == nil or var.last_wuchang == "") then return true end
-	
+
 	local now = tonumber(os.time())
 	local old = tonumber(var.last_wuchang)
-	
+
 	--25分钟间隔可以吃wuchag
 	if(now - old >= 1500) then return true end
 	return false
@@ -231,30 +283,32 @@ jingqi = function(f_done)
 	local qxP = tonumber(var.hp_qxP)
 	print(jsP, qxP)
 	if(jsP >= 95 and qxP >= 95) then print("不用疗伤") return call(f_done) end
-	
+
 	wait.make(function()
 		if(var.me_menpai == "逍遥") then
 			Execute("fly xyl;n;n;ask xue about 疗伤;fly wm")
 			local l, w = wait.regexp("^(> )*(大约过了一盅茶的时份)|(这里没有这个人).*$", 5)
 			if((l ~= nil) and l:match("大约过了一盅茶的时份") ~= nil) then return call(f_done) end
 		end
-		
+
 		if(var.me_menpai == "明教") then
 			Execute("fly mj;s;sd;s;sd;#3(sd);enter;ask hu about 疗伤;fly wm")
 			local l, w = wait.regexp("^(> )*(大约过了一盅茶的时份)|(这里没有这个人).*$", 5)
 			if((l ~= nil) and l:match("大约过了一盅茶的时份") ~= nil) then return call(f_done) end
 		end
-		
-		if((jsP < 60 or qxP < 30) and canEatWuchang()) 
+
+		if((jsP < 60 or qxP < 30) and canEatWuchang())
 		then
 			qukuan("5 gold", function()
 				Execute("e;s;e;e;n;buy wuchang dan")
-				busy_test(function()
-					Execute("fly wm;nw;eat wuchang dan")
-					var.last_wuchang = os.time()
-					print("无常丹好吃啊")
-					wait.time(5)
-					call(f_done)
+					core.busytest(function()
+					wait.make(function()
+						Execute("fly wm;nw;eat wuchang dan")
+						var.last_wuchang = os.time()
+						print("无常丹好吃啊")
+						wait.time(5)
+						call(f_done)
+					end)
 				end)
 			end)
 		else
@@ -265,22 +319,26 @@ jingqi = function(f_done)
 				qukuan("" .. price .. " silver", function()
 					Execute("e;s;e;e;n")
 					for i = 1, dannumber do Execute("buy yangjing dan") end
-					busy_test(function()
-						Execute("fly wm;nw")
-						for i = 1, dannumber do Execute("et;eat yangjing dan") wait.time(3) end
-						print("疗精完毕")
+					core.busytest(function()
+						wait.make(function()
+							Execute("fly wm;nw")
+							for i = 1, dannumber do Execute("et;eat yangjing dan") wait.time(3) end
+							print("疗精完毕")
+							Execute("er;et;yun heal")
+							local l, w = wait.regexp("^(> )*(你并没有受伤！)|(你运功完毕).*$")
+							print("疗气完毕")
+							call(f_done)
+						end)
+					end)
+				end)
+			elseif(qxP < 90) then
+				core.busytest(function()
+					wait.make(function()
 						Execute("er;et;yun heal")
 						local l, w = wait.regexp("^(> )*(你并没有受伤！)|(你运功完毕).*$")
 						print("疗气完毕")
 						call(f_done)
 					end)
-				end)
-			elseif(qxP < 90) then
-				busy_test(function()
-					Execute("er;et;yun heal")
-					local l, w = wait.regexp("^(> )*(你并没有受伤！)|(你运功完毕).*$")
-					print("疗气完毕")
-					call(f_done)
 				end)
 			else
 				call(f_done)
@@ -291,11 +349,11 @@ end
 
 
 foodwater = function(f_done)
-	if(tonumber(var.hp_water) > tonumber(var.hp_water_max) and tonumber(var.hp_food) > tonumber(var.hp_food_max)) then 
-		print("不需要吃喝") 
+	if(tonumber(var.hp_water) > tonumber(var.hp_water_max) and tonumber(var.hp_food) > tonumber(var.hp_food_max)) then
+		print("不需要吃喝")
 		return call(f_done)
 	end
-	
+
 	wait.make(function()
 		Execute("set brief;fly jx;buy zongzi;")
 		wait.time(2)
@@ -324,7 +382,7 @@ check_money = function(f_done)
 		var.me_silver = 1
 		var.me_gold = 1
 		var.me_goldbar = 1
-		
+
 		EnableTriggerGroup("check_money", true)
 		Execute("look silver;look gold;look gold-bar;set check money")
 		local l, w = wait.regexp("^(> )*设定环境变数：check = \"money\"$")
@@ -335,7 +393,7 @@ check_money = function(f_done)
 			cmd = cmd .. "cunkuan " .. tonumber(var.me_gold) .. " gold;"
 			cmd = cmd .. "cunkuan " .. tonumber(var.me_goldbar) .. " gold-bar"
 		end
-		
+
 		if(cmd ~= "") then
 			Execute("fly wm;e;s;w")
 			Execute(cmd)
@@ -345,7 +403,7 @@ check_money = function(f_done)
 			Execute("halt;fly wm")
 			var.me_goldbar = 0
 		end
-		
+
 		call(f_done)
 	end)
 end

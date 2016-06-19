@@ -1227,6 +1227,7 @@ local region = {}
       region.rooms[86].path = "fly dl;s;w;n;e;eu;n"
       region.rooms[86].name = "茶花山"
       region.rooms[86].zone = "大理"
+	  region.rooms[86].danger = 3
       region.rooms[86].id = 547
       region.rooms[86].links = {}
         region.rooms[86].links.s = {}

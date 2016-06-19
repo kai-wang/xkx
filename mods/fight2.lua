@@ -7,135 +7,153 @@ module ("fight", package.seeall)
 
 local context = {}
 
-prepare = function(busy_list, attack_list, f_escape)
+function init()
+	EnableTriggerGroup("fight", false)
+	EnableTriggerGroup("fight_busy", false)
+	timer.delete("fight")
+end
+
+function prepare(busy_list, attack_list, f_escape, menpai)
 	context.busy_list = busy_list
 	context.attack_list = attack_list
 	context.f_escape = f_escape
-	me.profile.powerup()
+	--config.powerup()
 	context.infight = false
 	context.escape = false
-	context.action = fight.busy
-	ts.new("fight", "fight", 1.5, "fight.action\(\)")
+	context.halt = false
+	context.menpai = menpai
+	timer.create("fight", "fight", 0.5, function() perform_busy() end)
 end
 
-action = function()
-	--print("tick")
-	call(context.action)
-end
-
-
-start = function(cmd)
+function start(cmd)
 	if(context.infight) then print("已经在战斗中") return end
 	
 	EnableTriggerGroup("fight", true)
 	context.infight = true
 	context.escape = false
-	ts.tick("fight")
-	busy(cmd)
+	context.halt = false
+	--config.powerup()
+	Execute(cmd)
+	if(config.buff ~= nil) then config.buff(context.menpai) end
+	busy()
 end
 
-stop = function()
+function startnobuff(cmd)
+	if(context.infight) then print("已经在战斗中") return end
+	
+	EnableTriggerGroup("fight", true)
+	context.infight = true
+	context.escape = false
+	context.halt = false
+	--config.powerup()
+	--if(config.buff ~= nil) then config.buff() end
+	Execute(cmd)
+	busy()
+end
+
+function stop()
 	context.infight = false
 	context.escape = false
-	ts.stop("fight")
+	context.halt = false
+	timer.stop("fight")
 	print("fight stopped............")
 	EnableTriggerGroup("fight", false)
-	--Execute("set fight end")
 end
 
-perform_busy = function(cmd)
-	if(context.busy_list == nil) then attack(cmd) return end
-	
+function perform_busy()
+	if(context.busy_list == nil) then attack() return end
+
 	for i, v in ipairs(context.busy_list) do
-		if(not profile.pfm[v.i].cd) then
-			if(cmd ~= nil) then
-				--print(cmd .. ";" .. v.action)
-				Execute(cmd .. ";" .. v.action)
-			else
-				Execute(v.action)
-			end
+		local busy = config.busy_list[v]
+		local pfm = config.pfm[busy.i]
+		if(pfm.cd_time ~= nil and (os.time() - tonumber(pfm.cd_time) > 30)) then pfm.cd = false end
+		
+		if(not pfm.cd) then
+			busy.action()
+			pfm.inuse = true
 			return
 		end
 	end
 
 	--print("没有busy")
-	attack(cmd)
+	attack()
 end
 
-perform_attack = function(cmd)
-	reset_flag()
+function perform_attack()
+
 	for i, v in ipairs(context.attack_list) do
-		local pfm = profile.pfm[v.i]
+		local attack = config.attack_list[v]
+		local pfm = config.pfm[attack.i]
 		if(pfm.cd_time ~= nil and (os.time() - tonumber(pfm.cd_time) > 30)) then pfm.cd = false end
 		
 		if(not pfm.cd) then 
-			if(cmd ~= nil) then
-				Execute(cmd .. ";" .. v.action)
-			else
-				Execute(v.action)
-			end
+			attack.action()
 			pfm.inuse = true
+			return
 		end
 	end
 end
 
-reset_flag = function()
-	for i, v in ipairs(context.attack_list) do
-		profile.pfm[v.i].inuse = false
-	end
+function busy()
+	perform_busy()
+	timer.tick("fight", 1, function() perform_busy() end)
 end
 
-busy = function(cmd)
-	context.action = fight.perform_busy
-	ts.reset("fight", 1.5)
-	perform_busy(cmd)
+function recover()
+	timer.tick("fight", 0.6, function() Execute("er;et;ef") end)
 end
 
-attack = function(cmd)
-	wait.make(function()
-		wait.time(0.5)
-		perform_attack(cmd)
-			
-		context.action = fight.perform_busy
-		ts.reset("fight", 1)
-	end)
-end
-
-attack2 = function()
-	fight.perform_attack()
-	context.action = fight.perform_busy
-	ts.reset("fight", 1)
-end
-
-recover = function()
-	context.action = function() Execute("yun recover;yun regenerate") end
-	ts.reset("fight", 0.6)
-end
-
-escape = function()
-	context.action = function()
+function escape()
+	context.escape = true
+	core.safeback(context.f_escape)
+--[[
+	timer.tick("fight", 0.1, function()
 		if(context.escape == true) then return end
 		context.escape = true 
 		safeback("halt;fly wm", context.f_escape)
-	end
-	ts.reset("fight", 0.5)
+	end)
+]]--
 end
 
-faint = function()
+function halt(f_done)
+	context.halt = true
+	core.safehalt(f_done)
+
+--[[
+	--if(not context.halt) then context.halt = true end
+	timer.tick("fight", 0.1, function()
+		if(context.halt == true) then return end
+		context.halt = true
+		safehalt(f_done)
+	end)
+]]--
+end
+
+function faint()
 	fight.stop()
-	me.profile.reset_cd_status()
+	config.reset_cd_status()
 	msg.broadcast("msg_fight_faint")
 end
 
-eatyao = function()
+function eatyao()
 
 end
 
-on_busy_success = function()
-	attack()
+function attack()
+	perform_attack()
+	timer.tick("fight", 1, function() perform_busy() end)
 end
 
-on_escape_success = function()
+function on_busy_success()
+	timer.tick("fight", 0.3, attack)
+end
+
+function on_busy_success_long()
+	timer.tick("fight", 0.3, attack)
+	EnableTriggerGroup("fight_busy", true)
+end
+
+function on_escape_success()
 	if(context.escape == true) then
 		call(context.f_escape)
 	end
@@ -143,16 +161,18 @@ on_escape_success = function()
 	fight.stop()
 end
 
-on_perform_cd_ok = function(name, line, wildcards)
+function on_perform_cd_ok(name, line, wildcards)
 	--print("调息完毕 "..wildcards[2])
-	me.profile.set_cd_status(wildcards[2], false)
+	config.set_cd_status(wildcards[2], false)
 end
 
-on_perform = function(name, line, wildcards)
+function on_perform(name, line, wildcards)
 	--print("调息 "..wildcards[2])
-	me.profile.set_cd_status(wildcards[2], true)
+	config.set_cd_status(wildcards[2], true)
 end
 
-infight = function()
+function infight()
 	return context.infight ~= nil and context.infight == true
 end
+
+init()

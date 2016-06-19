@@ -59,6 +59,16 @@ main = function(f_done, f_fail)
 	Execute("fly wm;u;s;ask chai about job")
 end
 
+fail = function()
+	var.sx_available_time = os.time() + 60
+	init()
+end
+
+done = function()
+	var.sx_available_time = os.time() + 120
+	init()
+end
+
 init = function()
 	context = {}
 	EnableTriggerGroup("songxin", false)
@@ -69,11 +79,14 @@ start = function(name, line, wildcards)
 	local npc = wildcards[3]
 	local list = sx_list[npc]
 	
+	print("npc")
+
 	if(list == nil) then 
 		goto_place1()
 	else
 		var.sx_npc_id = list.id
 		var.sx_npc_loc = list.loc
+		print("npc: " .. npc .. " room: " .. list.loc)
 		walk.run(roomAll[tonumber(list.loc)].path, 
 		goto_place1
 		--function()
@@ -105,6 +118,7 @@ end
 
 
 killer_die = function(name, line, wildcards)
+	print(wildcards[2])
 	local killer_name = wildcards[2]
 	if(name == var.sx_killer2_name) then
 		busy_test(function()
@@ -113,6 +127,5 @@ killer_die = function(name, line, wildcards)
 		end)
 	end
 end
-
 
 init()

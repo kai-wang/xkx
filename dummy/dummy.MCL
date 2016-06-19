@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE muclient>
-<!-- Saved on Monday, June 08, 2015, 7:14 PM -->
+<!-- Saved on Tuesday, June 23, 2015, 12:32 PM -->
 <!-- MuClient version 4.84 -->
 <!-- Written by Nick Gammon -->
 <!-- Home Page: http://www.mushclient.com/ -->
@@ -8,7 +8,7 @@
 <world
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2015-06-08 19:14:14"
+   date_saved="2015-06-23 12:32:55"
 
    auto_say_override_prefix="-"
    auto_say_string="say "
@@ -19,11 +19,10 @@
    mapping_failure="Alas, you cannot go that way."
    name="XKX"
    new_activity_sound="(No sound)"
-   on_world_connect="test"
    output_font_name="ËÎÌå"
    script_editor="notepad"
    script_editor_argument="%file"
-   script_filename="D:\Apps\MUSHclient\worlds\xkx\dummy.lua"
+   script_filename=".\worlds\xkx\dummy\dummy.lua"
    script_language="Lua"
    script_prefix="."
    site="112.124.8.59"
@@ -114,7 +113,7 @@
 <triggers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2015-06-08 19:14:14"
+   date_saved="2015-06-23 12:32:55"
   >
   <trigger
    enabled="y"
@@ -493,6 +492,13 @@ walk.handlers.k_blocker()</send>
    sequence="100"
   >
   </trigger>
+  <trigger
+   enabled="y"
+   match="^¡¡¡¡¡¡(\S+)\((.*)\).*$"
+   regexp="y"
+   sequence="100"
+  >
+  </trigger>
 </triggers>
 
 <!-- aliases -->
@@ -500,7 +506,7 @@ walk.handlers.k_blocker()</send>
 <aliases
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2015-06-08 19:14:14"
+   date_saved="2015-06-23 12:32:55"
   >
   <alias
    match="^show (.*)$"
@@ -1288,9 +1294,9 @@ EnableTriggerGroup("study_check", false)</send>
 <timers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2015-06-08 19:14:14"
+   date_saved="2015-06-23 12:32:55"
   >
-  <timer name="idle" second="30.00" offset_second="0.00" >
+  <timer name="idle" enabled="y" second="59.00" offset_second="0.00" >
   <send>hi</send>
 
   </timer>
@@ -1301,7 +1307,7 @@ EnableTriggerGroup("study_check", false)</send>
 <macros
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2015-06-08 19:14:14"
+   date_saved="2015-06-23 12:32:55"
   >
 
   <macro name="up" type="send_now" >
@@ -1395,7 +1401,7 @@ EnableTriggerGroup("study_check", false)</send>
 <variables
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2015-06-08 19:14:14"
+   date_saved="2015-06-23 12:32:55"
   >
   <variable name="bag_dummy_id">hsly</variable>
   <variable name="baobiao_exp">142</variable>
@@ -1484,7 +1490,7 @@ EnableTriggerGroup("study_check", false)</send>
 <colours
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2015-06-08 19:14:14"
+   date_saved="2015-06-23 12:32:55"
   >
 
 <ansi>
@@ -1541,7 +1547,7 @@ EnableTriggerGroup("study_check", false)</send>
 <keypad
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2015-06-08 19:14:14"
+   date_saved="2015-06-23 12:32:55"
   >
 
   <key name="0" >
@@ -1655,7 +1661,7 @@ EnableTriggerGroup("study_check", false)</send>
 <printing
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2015-06-08 19:14:14"
+   date_saved="2015-06-23 12:32:55"
   >
 
 <ansi>

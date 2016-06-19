@@ -5,14 +5,10 @@ require "var"
 导入所有模块
 ]]--
 
-local modPath = string.match(GetInfo(35),"^.*\\")
-
-include=function(fileName)
-	dofile(modPath..fileName)
-end
+local modPath, folder, myId = string.match(GetInfo(54),"^(.*)\\(.*)\\([^\.]*).*")
 
 loadmod=function(fileName)
-	include("mods\\"..fileName)
+	dofile(modPath .. "\\mods\\" .. fileName)
 end
 
 print("导入模块")

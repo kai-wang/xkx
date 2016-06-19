@@ -1,9 +1,9 @@
 require "wait"
 require "tprint"
 require "utils"
+require("worlds\\xkx\\mods\\core")
 
 module ("guo", package.seeall)
-
 
 local guo_list = {
 	["宋兵"] = {id = "song bing", loc = "fly xi;w;w;#3 n;#2 e;n;w"},
@@ -34,7 +34,10 @@ local guo_list = {
 test = function()
 	wait.make(function()
 		for i,v in pairs(guo_list) do
-			walk.run(v.loc, function() print(i) Execute("ask " .. v.id .. " about 保护费") end)
+			walk.run(v.loc, 
+					function() 
+						print(i) Execute("ask " .. v.id .. " about 保护费") 
+					end)
 			wait.time(5)
 		end
 	end)
@@ -42,81 +45,77 @@ end
 
 local context = {}
 
-main = function(f_done, f_fail)
+function main(f_done, f_fail)
 	EnableTriggerGroup("guo", true)
 	EnableTriggerGroup("guo_kill", false)
-	
+
 	context.f_done = f_done
 	context.f_fail = f_fail
 	Execute("fly xi;w;n;n;n;ask guo about job")
 end
 
-init = function()
+function init()
 	EnableTriggerGroup("guo", false)
 	EnableTriggerGroup("guo_kill", false)
 end
 
-done = function()
+function done()
 	init()
 	me.cleanup(context.f_done)
 end
 
-fail = function()
+function fail()
 	init()
 	var.guo_available_time = os.time() + 60
 	me.cleanup(context.f_fail)
 end
 
-fangqi = function()
-	busy_test(function()
-		safeback("halt;fly xi", function()
-			init()
-			Execute("w;n;n;n;ask guo about fangqi")
-			fail()
-		end)
-	end)
+function fangqi()
+	core.safehalt(function()
+		init()
+		Execute("fly xi;w;n;n;n;ask guo about fangqi")
+		fail()
+	end, 1)
 end
 
-start = function(name, line, wildcards)
+function start(name, line, wildcards)
 	var.guo_npc_name = wildcards[2]
 	go()
 end
 
-go = function()
+function go()
 	local target = guo_list[var.guo_npc_name]
-	
+
 	if(target == nil) then return fail() end
 	var.guo_available_time = os.time() + 240
-	walk.run(target.loc, 
-			function() 
+	walk.run(target.loc,
+			function()
 				Execute("ask " .. target.id .. " about 保护费")
-				me.profile.powerup()
-			end, 
-	fangqi)
+				config.powerup()
+			end,
+			fangqi)
 end
 
-waitnpc = function()
-	local busy_list = me.profile.busy_list
-	local attack_list = me.profile.attack_list2
+function waitnpc()
 	EnableTriggerGroup("guo_kill", true)
-	fight.prepare(busy_list, attack_list)
+	var.pfm_target = ""
+	fight.prepare(config.busy_list, config.attack_list2)
 	fight.start()
 end
 
-killnpc = function()
-	busy_test(function()
+function killnpc()
+	core.busytest(function()
 		Execute("get heiyi ren")
 		Execute(var.guo_kill_place)
 		Execute("drop heiyi ren;kill heiyi ren")
 	end)
 end
 
-finish = function()
+function finish()
 	fight.stop()
-	busy_test(function()
+	core.busytest(function()
 		Execute("get corpse")
-		Execute("fly xi;w;n;n;n;give corpse to guo;drop corpse")
-		--done()
+		Execute("fly xi;w;n;n;n;give corpse to guo jing;drop corpse")
 	end)
 end
 

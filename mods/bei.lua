@@ -3,103 +3,61 @@ require "tprint"
 require "var"
 require "bit"
 require "socket"
+require("worlds\\xkx\\mods\\core")
 
 module ("bei", package.seeall)
 
 local cxt = {}
 local task1 = dofile("worlds\\xkx\\mods\\task1.lua")
+local emitter = require("worlds\\xkx\\mods\\emitter"):new()
+--local core = require("worlds\\xkx\\mods\\core")
 local task1_array = {}
-retry_list = {10, 10, 10, 15, 15, 15, 20, 20, 20, 30}
+retry_list = {10, 10, 15, 15, 20, 20, 30, 30}
 
-main = function(f_ok, f_fail)
-	cxt = {}
-	cxt.f_ok = f_ok
-	cxt.f_fail = f_fail
-	
-	EnableTriggerGroup("bei", true)
+
+function ask()
+	-- bei_ask_end
+	-- error code: new / notask / resume
+	emitter:once("bei_ask_end", function(err, taskname)
+		EnableTriggerGroup("bei_ask", false)
+		timer.stop("action")
+		if err == "new" then
+			var.task_npc = taskname
+			--直接放到id.lua文件里去了
+			--var.task_id = me.id .. "'s task"
+			var.task_fullname = (var.task_id):gsub("^%l", string.upper)
+			var.task_found = false
+			var.task_retry_times = 1
+			var.task_status = "start"
+			var.task_escape_dir = ""
+			parseAndLoc()
+		elseif err == "resume" then
+			var.task_found = false
+			var.task_status = "start"
+			var.task_escape_dir = ""
+			if((tonumber(var.task_retry_times) % 2) > 0) then
+				-- 省点钱，偶数次直接按照上次loc的去找
+				parseAndLoc()
+			else
+				gofortask()
+			end
+		elseif err == "notask" then
+			done()
+		else
+			fail()
+		end
+	end)
+
+	-- timeout
+	timer.tickonce("action", 10, function()
+		fail()
+	end)
+
+	EnableTriggerGroup("bei_ask", true)
 	Execute("set brief;fly wm;e;n;e;e;e;task;fly wm")
 end
 
-exit = function()
-	walk.abort()
-	fight.stop()
-	ts.stop("task_walk")
-	EnableTriggerGroup("bei", false)
-	EnableTriggerGroup("bei_task1", false)
-	
-	Execute("halt;fly wm");
-end
-
-
-done = function()
-	print("bei done")
-	var.task_status = "done"
-	var.task_end_time = os.time()
-	if(var.double_bonus == "true") then var.task_available_time = os.time() end
-	exit()
-	call(cxt.f_ok)
-end
-
-fail = function()
-	print("bei done")
-	var.task_status = "fail"
-	retry()
-	exit()
-	call(cxt.f_fail)
-end
-
-retry = function()
-	local t = tonumber(var.task_retry_times)
-	if(t > #retry_list) then 
-		var.task_available_time = var.task_end_time 
-	else
-		var.task_available_time = os.time() + retry_list[t]
-		var.task_retry_times = t + 1
-	end
-end
-
-available = function()
-	return (var.task_available_time == "") 
-	or (os.time() >= tonumber(var.task_available_time))
-end
-
-reloc = function()
-	wait.make(function()
-		Execute("fly wm")
-		wait.time(10)
-		Execute("u;loc " .. var.task_id)
-	end)
-end
-
-start = function(name, line, wildcards)
-	var.task_npc = wildcards[2]
-	--直接放到id.lua文件里去了
-	--var.task_id = me.id .. "'s task"
-	var.task_fullname = (var.task_id):gsub("^%l", string.upper)
-	var.task_found = false
-	var.task_retry_times = 1
-	var.task_status = "start"
-	var.task_escape_dir = ""
-	
-	parseAndLoc()
-end
-
-logtime = function(name, line, wildcards)
-	local st = os.time()
-	var.task_start_time = st
-	var.task_available_time = st + 120	-- 非双倍情况下，2分钟一个task
-	var.task_end_time = st + getseconds(wildcards[2])
-end
-
-resume = function()
-	var.task_found = false
-	var.task_status = "start"
-	var.task_escape_dir = ""
-	
-	parseAndLoc()
-end
-
-parseAndLoc = function()
+function parseAndLoc()
 	wait.make(function()
 		EnableTriggerGroup("bei_task1", true)
 		Execute("u;task1;set task1")
@@ -117,42 +75,136 @@ parseAndLoc = function()
 				fail()
 			else
 				var.task_city = city
-				Execute("loc " .. var.task_id)
+				loc()
 			end
 		end
 	end)
 end
 
-location = function(name, line, wildcards)
-	var.task_loc = wildcards[3]
-	print(var.task_city .. " " .. var.task_loc .. " " .. var.task_npc)
-	
+function loc()
+	-- loc end
+	-- error code: success / done / retry
+	emitter:once("bei_loc_end", function(err, location)
+
+		EnableTriggerGroup("bei_loc", false)
+		timer.stop("action")
+
+		if err == 'success' then
+			var.task_loc = location
+			print(var.task_city .. " " .. var.task_loc .. " " .. var.task_npc)
+			gofortask()
+		elseif err == "retry" then
+			timer.tickonce("action", 10, function()
+				loc()
+			end)
+		else
+			fail()
+		end
+	end)
+
+	-- timeout 10s
+	timer.tick("action", 10, function()
+		fail()
+	end)
+
+	EnableTriggerGroup("bei_loc")
+	Execute("fly wm;u;loc " .. var.task_id)
+end
+
+function fail()
+	exit()
+	emitter:emit("bei_end", "fail")
+end
+
+function done()
+	print("bei done")
+	var.task_status = "done"
+	var.task_end_time = os.time()
+	if(var.double_bonus == "true") then var.task_available_time = os.time() end
+	exit()
+	emitter:emit("bei_end", "success")
+end
+
+function exit()
+	walk.abort()
+	fight.stop()
+	ts.stop("task_walk")
+	EnableTriggerGroup("bei", false)
+	EnableTriggerGroup("bei_ask", false)
+	EnableTriggerGroup("bei_loc", false)
+	EnableTriggerGroup("bei_task1", false)
+
+	Execute("halt;fly wm");
+end
+
+function retry()
+	local t = tonumber(var.task_retry_times)
+	if(t > #retry_list) then
+		var.task_available_time = var.task_end_time
+	else
+		var.task_available_time = os.time() + retry_list[t]
+		var.task_retry_times = t + 1
+	end
+end
+
+main = function(f_ok, f_fail)
+	cxt = {}
+	cxt.f_ok = f_ok
+	cxt.f_fail = f_fail
+
+	var.walk_danger_level = 2
+	EnableTriggerGroup("bei", true)
+	ask()
+	--Execute("set brief;fly wm;e;n;e;e;e;task;fly wm")
+end
+
+function emit(event, ...)
+	emitter:emit(event, ...)
+end
+
+function available()
+	return (var.task_available_time == "")
+	or (os.time() >= tonumber(var.task_available_time))
+end
+
+function logtime(name, line, wildcards)
+	local st = os.time()
+	var.task_start_time = st
+	var.task_available_time = st + 120	-- 非双倍情况下，2分钟一个task
+	var.task_end_time = st + getseconds(wildcards[2])
+end
+
+
+function gofortask()
 	local busy_list = me.profile.task_busy_list
 	local attack_list = me.profile.task_attack_list
-	fight.prepare(busy_list, attack_list, escape)
-	
+	local long_attack_list = me.profile.task_long_attack_list
+	fight.prepare(busy_list, attack_list, escape, var.task_menpai)
+	me.profile.powerup()
 	--如果slowwalk走完还没有stop，说明没找到
 	walk.sl(var.task_city, var.task_loc, bei.notfound, bei.fail, bei.foundnpc)
 end
 
-faint = function()
+function faint()
+	var.faint_flag = true
 	me.profile.reset_cd_status()
-	cleanup()
+	if(var.me_status_ssf == "true" or var.me_status_poison == "true") then
+		timer.reconnect(90, function() cleanup() end)
+	end
 end
 
 -- 走完都没找到
-notfound = function()
+function notfound()
 	var.task_found = false
 	fight.stop()
-	Execute("halt")
 	--如果walkaround走完还没找到，就retry吧
 	print("走完还没找到")
-	busy_test(function()
+	core.safehalt(function()
 		walk.walkaround(5, nil, bei.fail, bei.fail, bei.foundnpc)
 	end)
 end
 
-foundnpc = function()
+function foundnpc()
 	var.task_found = true
 	if(var.task_auto_kill == "0") then
 		walktask()
@@ -161,41 +213,47 @@ foundnpc = function()
 	end
 end
 
-walktask = function()
-	ts.new("task_walk", "task_walk", 1.5, "bei.searchTask1\(\)")
-	ts.reset("task_walk",1.5)
-	ts.tick("task_walk")
+function walktask()
 	Execute("ask " .. var.task_id .. " about rumors")
+
+	timer.tickonce("action", 1.5, function()
+		if(var.task_status == "done" or fight.infight()) then return end
+
+		core.safehalt(function()
+			Execute("er;et;ef")
+			walk.walkaround(2, nil, bei.notfound, bei.fail, bei.foundnpc)
+		end, 0.5)
+	end)
 end
 
-startFight = function()
-	abort_busytest()
-	ts.stop("task_walk")
+function startFight()
+	timer.stop("action")
 	local busy_list = me.profile.task_busy_list
 	local attack_list = me.profile.task_attack_list
-	fight.prepare(busy_list, attack_list, escape)
-	fight.start()
+	local long_attack_list = me.profile.task_long_attack_list
+	fight.prepare(busy_list, attack_list, escape, var.task_menpai)
+	fight.start("kill " .. var.task_id)
 end
 
-escape = function()
-	wait.make(function()
-		wait.time(2)
+function escape()
+	timer.tickonce("action", 2, function()
+		retry()
 		me.cleanup(fail)
 	end)
 end
 
 -------- task 跑了，在原地范围内进行深度为5的遍历-----------------------------------
-search = function(name, line, wildcards)
+function search(name, line, wildcards)
 	print("task 往【" .. wildcards[3] .. "】跑了")
 	local dir = wildcards[3]
 	dir = dir:gsub("边",""):gsub("面", ""):gsub("方向", ""):gsub("方", "")
 	var.task_escape_dir = dir
-	ts.stop("task_walk")
+	timer.stop("action")
 	if(walk.stopped()) then searchTask() end
 end
 
-searchTask = function()
-	busy_test(function()
+function searchTask()
+	core.busytest(function()
 		print("从 " .. var.task_escape_dir .. " 开始walkaround" )
 		if(var.task_status == "done") then return end
 		Execute("er;et;ef")
@@ -203,16 +261,8 @@ searchTask = function()
 	end)
 end
 
-searchTask1 = function()
-	busy_test(function()
-		if(var.task_status == "done" or fight.infight()) then return end
-		Execute("er;et;ef")
-		walk.walkaround(2, nil, bei.notfound, bei.fail, bei.foundnpc)
-	end)
-end
-
 ----看到npc死了，把东西捡起来------------------------------------
-npcdie = function(name, line, wildcards)
+function npcdie(name, line, wildcards)
 	wait.make(function()
 		walk.abort()
 		fight.stop()
@@ -221,7 +271,7 @@ npcdie = function(name, line, wildcards)
 		if(l == nil) then
 			cleanup()
 		else
-			busy_test(function()
+			core.busytest(function()
 				item.lookandget(bei.cleanup)
 			end)
 		end
@@ -230,9 +280,9 @@ end
 
 
 ----task结束后的善后工作，疗伤学习打坐----------------------------
-cleanup = function()
-	busy_test(function()
-		Execute("halt;fly wm;nw;er;et;ef")
+function cleanup()
+	core.safehalt(function()
+		Execute("fly wm;nw;er;et;ef")
 		me.cleanup(done)
 	end)
 end
@@ -248,7 +298,7 @@ guaji = function()
 				me.useqn(function() main(f, f) end)
 			end)
 		end
-		
+
 		me.useqn(function() main(f, f) end)
 	--end)
 end
@@ -346,7 +396,7 @@ function test(name)
 	for i = 1, #name do
 		table.insert(words, name:sub(i*2-1, i*2))
 	end
-	
+
 	local name = table.concat(words, "")
 	print("最匹配的字： "..name)
 	if(task1[name] ~= nil) then
@@ -358,12 +408,12 @@ function test(name)
 				local lastmatch, m = 0, 0
 				for j = 1, #words do
 					if(v.city:sub(j*2-1, j*2) == words[j]) then
-						if(j == 1) then 
+						if(j == 1) then
 							m = m + 1.2
-						elseif(lastmatch == 1) then 
-							m = m + 1.5 
+						elseif(lastmatch == 1) then
+							m = m + 1.5
 						else
-							m = m + 1 
+							m = m + 1
 						end
 						lastmatch = 1
 						if(m > score) then score = m city = v.city end
@@ -486,7 +536,7 @@ function stringToArray(text)
 			table.insert(array[2], bit.shl(bit.tonumber(tbl[i]:sub(18,33), 2),1))
 			table.insert(array[3], bit.shl(bit.tonumber(tbl[i]:sub(34,49), 2),1))
 			table.insert(array[4], bit.shl(bit.tonumber(tbl[i]:sub(50,67), 2),1))
-		end	
+		end
 	end
 
 	return array
@@ -501,7 +551,7 @@ function save(name)
 	file:write("local " .. content)
 	file:write("\r\nreturn task1")
 	file:close()
-	
+
 	parse_array()
 end
 
@@ -517,5 +567,3 @@ end
 
 
 parse_array()
-
-

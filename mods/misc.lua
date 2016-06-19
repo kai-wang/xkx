@@ -1,29 +1,35 @@
 require "wait"
 require "tprint"
+require("worlds\\xkx\\mods\\core")
 
-function call(f)
-	if(f ~= nil) then f() end
-end
-
-function wrapper(f)
-	wait.make(function()
-		call(f)
-	end)
+function call(f, ...)
+	if(f ~= nil) then f(...) end
 end
 
 function suck()
-	busy_test(function()
+	core.busytest(function()
 		Execute("yun maxsuck")
 		call(suck)
 	end)
 end
 
 function double(f)
-	wrapper(function()
-		Execute("u;ask jin about 双倍奖励")
-		var.double_bonus = true;
+	if(var.double_available_time ~= "" and var.double_available_time ~= nil and tonumber(var.double_available_time) > os.time()) then
 		call(f)
-	end)
+	else
+		wait.make(function()
+			Execute("fly wm;u;ask jin about 双倍奖励;d")
+			local l, w = wait.regexp("^(> )*(你领取了半小时双倍时间)|(你.*用完了).*$", 5)
+			if(l ~= nil and l:match("你领取了半小时双倍时间")) then
+				var.double_bonus = true
+				var.double_available_time = os.time() + 1800
+			elseif(l ~= nil and l:match("用完了")) then
+				var.double_bonus = false
+				var.double_available_time = os.time() + 1800
+			end
+			call(f)
+		end)
+	end
 end
 
 function qukuan(amount, f_ok, f_fail)
@@ -31,7 +37,7 @@ function qukuan(amount, f_ok, f_fail)
 		Execute("fly wm;e;s;w;qukuan " .. amount)
 		local l, w = wait.regexp("^(> )*你从银号里取出.*$", 5)
 		if(not l or l:match("你从银号") == nil) then print("取款失败了") call(f_fail) return end
-		busy_test(f_ok)
+		core.busytest(f_ok)
 	end)
 end
 
@@ -101,7 +107,7 @@ end
 
 function get_sling(f_ok, f_fail)
 	if(var.me_menpai == "少林") then call(f_ok) return end
-	
+
 	wait.make(function()
 		Execute("set brief;fly wm;nw;get yingxiong ling;look yingxiong ling")
 		local l, w = wait.regexp("^(> )*(你要看什么)|(少林英雄令).*")
@@ -119,7 +125,7 @@ end
 
 function get_qling(f_ok, f_fail)
 	if(var.me_menpai == "全真") then call(f_ok) return end
-	
+
 	wait.make(function()
 		Execute("set brief;fly wm;nw;get chongyang ling;look chongyang ling")
 		local l, w = wait.regexp("^(> )*(你要看什么)|(重阳令).*")
@@ -179,7 +185,7 @@ function get_heimuling(f_ok, f_fail)
 	wait.make(function()
 		Execute("set brief;fly wm;nw;look heimu ling")
 		local l, w = wait.regexp("^(> )*(黑木令)|(你要看什么).*$")
-		if(l:match("你要看什么") ~= nil) then 
+		if(l:match("你要看什么") ~= nil) then
 			Execute("fly qz;w;n;n;e;s;ask ren about 比剑")
 			Execute("er;et;start")
 			wait.time(3)
@@ -212,45 +218,32 @@ function get_jiedao(f_ok, f_fail)
 				if(l == nil or l:match("你附近没有这样东西")) then return call(f_fail) end
 			end
 		end
-		
+
 		print("戒刀准备好了")
 		call(f_ok)
 	end,
 	f_fail)
 end
 
-function ask_naogui(f_ok, f_fail)
+function reconn(f_ok, f_fail)
+	wait.make(function()
+		Execute("equip callback weapon")
+		Execute("fly wm;e;s;s;s;s;tuo xunzhang;give seng xunzhang")
+		for i = 1, #me.profile.weapon_list do
+			Execute("give seng " .. me.profile.weapon_list[i])
+		end
+		
+		core.safeback(function()
+			Execute("nw")
+			capture("kickbye", function()
+				timer.reconnect(1, function()
+					var.reconnect_required = 0
+					me.profile.fight_wear(f_ok)
+				end)
+		end)
+		end, 1)
+	end)
 end
-
-module ("ts", package.seeall)
-
-new = function(name, group, interval, handler)
-	if(IsTimer(name) ~= 0) then
-		AddTimer(name, 0, 0, interval, handler, timer_flag.Replace + timer_flag.Temporary, "")
-		SetTimerOption(name, "send_to", 12)
-		SetTimerOption(name, "group", group)
-	end
-end
-
-tick = function(name)
-	EnableTimer(name, true)
-end
-
-reset = function(name, interval)
-	if(IsTimer(name) == 0) then
-		EnableTimer(name, true)
-		local second = interval%60
-		local minute = (interval - second)/60
-		SetTimerOption(name, "minute", minute)
-		SetTimerOption(name, "second", second)
-		ResetTimer(name)
-	end
-end
-
-stop = function(name)
-	EnableTimer(name, false)
-end
-
 
 ------------------------------------------------------------------------------
 --                 dazuo
@@ -258,44 +251,55 @@ end
 module ("dazuo", package.seeall)
 
 local cxt = {}
+local emitter = require("worlds\\xkx\\mods\\emitter"):new()
 
-start = function(f_done)
+function start(f_done)
 	print("开始打坐")
-	EnableTriggerGroup("dazuo", true)
-	cxt.done_flag = false
-	cxt.full_flag = false
-	cxt.f_done = f_done
-	cxt.value = var.me_dazuo
-	Execute("et;" .. cxt.value)
-end
 
-continue = function()
-	if(cxt.full_flag ~= true or cxt.done_flag) then
+	emitter:once("dazuo_end", function(err)
 		EnableTriggerGroup("dazuo", false)
-		busy_test(function() call(cxt.f_done) end)
-	elseif(not cxt.done_flag) then
-		Execute("er;ef;" .. cxt.value)
-	end
-end
 
-done = function()
-	cxt.done_flag = true
-end
+		core.safehalt(function()
+			Execute("er;et")
+			call(f_done)
+		end, 1)
 
-full = function(f_done)
-	print("开始打坐")
+	end)
+
 	EnableTriggerGroup("dazuo", true)
-	cxt.done_flag = false
-	cxt.full_flag = true
-	cxt.f_done = f_done
-	cxt.value = "dazuo max"
-	Execute("et;" .. cxt.value)
+	Execute("et;" .. var.me_dazuo)
 end
 
-halt = function()
-	Execute("halt;er")
+function emit(event, ...)
+	emitter:emit(event, ...)
+end
+
+function full(f_done)
+	print("开始打坐")
+	emitter:once("dazuo_end", function(err)
+		EnableTriggerGroup("dazuo", false)
+
+		if err == "continue" then
+			dazuo.full(f_done)
+		else
+			core.safehalt(function()
+				Execute("er;et")
+				call(f_done)
+			end, 1)
+		end
+	end)
+
+	EnableTriggerGroup("dazuo", true)
+	Execute("er;et;dazuo max")
+end
+
+function halt()
+	emitter:emit("dazuo_end", "halt")
+end
+
+function abort(f_done)
 	EnableTriggerGroup("dazuo", false)
-	busy_test(function() call(cxt.f_done) end)
+	core.safehalt(f_done, 1)
 end
 
 
@@ -340,49 +344,64 @@ end
 ------------------------------------------------------------------------------
 module ("event", package.seeall)
 
+local event_cxt = {}
+
+main = function(f_done)
+	event_cxt.f_done = f_done
+	go()
+end
+
 start = function(name, line, wildcards)
 	local l = wildcards[2]
 	var.event_start_time = os.time()
-	if(l:match("长白山")) then 
-		var.event_loc = "长白山" 
+	if(l:match("长白山")) then
+		var.event_loc = "长白山"
 		var.event_room = 1602
-	elseif(l:match("衡山")) then 
+	elseif(l:match("衡山")) then
 		var.event_loc = "衡山"
 		var.event_room = 1312
-	elseif(l:match("峨嵋")) then 
+	elseif(l:match("峨嵋")) then
 		var.event_loc = "峨嵋"
 		var.event_room = 1714
-	elseif(l:match("无量山")) then 
+	elseif(l:match("无量山")) then
 		var.event_loc = "无量山"
 		var.event_room = 2680
 	end
-	
-	msg.broadcast("msg_event_start")
+
+	var.event_flag = true
 end
 
-go = function(f_done)
+function go()
+	if(var.event_flag ~= "true") then print("没有奇观") return done() end
+
 	local diff = os.time() - tonumber(var.event_start_time)
-	--超过3分钟就不要去做了
-	if(diff > 180) then 
-		print("开始时间超过3分钟了")
-		call(f_done)
+	--超过3分半钟就不要去做了
+	if(diff > 210) then
+		print("开始时间超过3.5分钟了")
+		done()
 	else
-		local f_fail = function() 
+		local f_fail = function()
+			var.event_flag = false
 			Execute("halt")
-			busy_test(function() call(f_done) end)
+			busy_test(function() done() end)
 		end
-		
+
 		local f_ok = function()
 			wait.make(function()
 				--5分钟还不来就走吧
 				wait.regexp("^(> )*(【自然奇观】)|(你心中连叹)|(你不禁叹息道)|(你心中大感失望).*$", 300)
-				busy_test(function() call(f_done) end)
+				busy_test(function() done() end)
 			end)
 		end
-		
+
 		local room = tonumber(var.event_room)
 		walk.run(roomAll[room].path, f_ok, f_fail, f_fail)
 	end
+end
+
+done = function()
+	var.event_flag = false
+	call(event_cxt.f_done)
 end
 
 

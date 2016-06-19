@@ -63,7 +63,7 @@ search = function(desc)
 			--	有个别房间有,.-这些符号，比如庄府大厅，苏州铁岭关，描述里面没有，所以这里去掉
 			local desc = v.desc:gsub(seperator, "")
 			--	危险的房间不去，比如食人鱼
-			if(string.match(desc, x) ~= nil and v.attr ~= "danger" and v.nodig ~= true) then
+			if(string.match(desc, x) ~= nil and (v.danger == nil or (var.walk_danger_level ~= nil and tonumber(var.walk_danger_level) > v.danger)) and v.nodig ~= true) then
 				print("匹配的房间id: "..v.id .." 名称:"..v.name)
 				table.insert(tbl, v.path)
 			end
@@ -146,17 +146,30 @@ end
 done = function()
 	safeback("halt;fly wm", 
 		function()
-			Execute("e;e;give bao wu to qu")
-			safeback("halt;fly wm", 
-			function()
-				Execute("give dan to " .. var.dig_dummy .. ";give yulu to " .. var.dig_dummy .. ";give renshen to " .. var.dig_dummy .. ";give heshouwu to " .. var.dig_dummy .. ";give wan to " .. var.dig_dummy)
-				var.dig_available_time = os.time() + 60
-				EnableTriggerGroup("dig", true)
-				me.updateHP()
-				call(context.f_done)
-				print("曲清任务结束。。")
+			wait.make(function()
+				Execute("e;e;give bao wu to qu")
+				if(var.dig_ever == "1") then
+					wait.time(3)
+					Execute("fly xi;w;n;n;n")
+					for i = 1, 10 do
+						Execute("ask guo about job;ask guo about fangqi")
+						wait.time(0.2)
+					end
+					wait.time(2)
+				end
+				
+				busy_test( 
+				function()
+					Execute("halt;fly wm;nw;give dan to " .. var.dig_dummy .. ";give yulu to " .. var.dig_dummy .. ";give renshen to " .. var.dig_dummy .. ";give heshouwu to " .. var.dig_dummy .. ";give wan to " .. var.dig_dummy)
+					var.dig_available_time = os.time() + 60
+					EnableTriggerGroup("dig", true)
+					me.updateHP()
+					call(context.f_done)
+					print("曲清任务结束。。")
+				end)
 			end)
-		end
+		end,
+		1
 	)
 end
 

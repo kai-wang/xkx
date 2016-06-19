@@ -2,14 +2,10 @@ require "var"
 
 --导入所有模块
 
-local modPath = string.match(GetInfo(35),"^.*\\")
-
-include=function(fileName)
-	dofile(modPath..fileName)
-end
+local modPath, folder, myId = string.match(GetInfo(54),"^(.*)\\(.*)\\([^\.]*).*")
 
 loadmod=function(fileName)
-	include("mods\\"..fileName)
+	dofile(modPath .. "\\mods\\" .. fileName)
 end
 
 
@@ -19,21 +15,24 @@ loadmod("me.lua")
 loadmod("misc.lua")
 loadmod("msg.lua")
 loadmod("system.lua")
+loadmod("roominfo.lua")
+loadmod("maps.lua")
+loadmod("timer.lua")
+loadmod("walk2.lua")
+loadmod("fight2.lua")
+loadmod("dig.lua")
+loadmod("guanfu.lua")
+loadmod("bei.lua")
 loadmod("baobiao.lua")
 loadmod("wei.lua")
 loadmod("shan.lua")
-loadmod("roominfo.lua")
-loadmod("maps.lua")
-loadmod("walk2.lua")
-loadmod("dig.lua")
-loadmod("guanfu.lua")
-loadmod("fight2.lua")
-loadmod("bei.lua")
 loadmod("item.lua")
 loadmod("study.lua")
+loadmod("guo.lua")
+loadmod("auto.lua")
+loadmod("songxin.lua")
 
 map.loadall()
 
 -- 可能需要第一次手动设置一下me_id，然后重新导入脚本
-me.profile = dofile(modPath .. var.me_id .. ".lua")
-
+me.profile = dofile(modPath .. "\\" .. folder .. "\\" .. myId .. ".lua")

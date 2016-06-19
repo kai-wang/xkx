@@ -1,172 +1,261 @@
 require "var"
+module ("config", package.seeall)
 
 var.dazuo_desc = "你坐下来运气用功，一股内息开始在体内流动。"
-var.dazuo_end_desc = "(你将头上白雾吸尽，睁开双眼，缓缓站起。)|(你运功完毕，深深吸了口气，站了起来。)"
-var.dazuo_halt_desc = "你把正在运行的真气强行压回丹田，站了起来。"
+var.dazuo_end_desc = "(你将头上白雾吸尽，睁开双眼，缓缓站起。)|(你运功完毕，深深吸了口气，站了起来。)|(你吸气入丹田，真气运转渐缓，慢慢收功，双手抬起，站了起来。)"
+var.dazuo_halt_desc = "(你把正在运行的真气强行压回丹田，站了起来。)|(你面色一沉，迅速收气，站了起来。)"
 var.dazuo_full_desc = "你的内力修为似乎已经达到了瓶颈，无法再靠打坐来提升了。"
 var.me_id = "byj"
 var.me_name = "白玉京"
 var.me_menpai = "明教"
 var.me_family = "明教"
-var.me_dazuo = "dazuo max"
+var.me_dazuo = "dazuo 9000;dazuo max"
 var.gf_money = "no"
 var.task_id = "byj's task"
 var.ttask_id = "byj's ttask"
 var.dig_dummy = "lbt"
 var.weapon = "jian"
+var.weapon2 = "dao"
 var.study_seq = 1
 var.guo_kill_place = "fly mj"
 
 
-profile = {
-	pfm = {
-		[1] = {name="一剑化三清", 		desc="你大喝一声，剑招突变", 			cd=false},
-		[2] = {name="附骨缠身", 		desc="你大喝一声，缠身而上", 			cd=false},
-		[3] = {name="璀璨七星", 		desc="你倒踩七星步法", 					cd=false},
-		[4] = {name="双手互博之术", 	desc="你平心静气", 						cd=false},
-		[5] = {name="定阳针", 			desc="你脚下左弓右箭", 					cd=false},
-		[6] = {name="一指乾坤", 		desc="你使出一阳指绝技", 				cd=false},
-		[7] = {name="阳关三叠", 		desc="你凝气于指，一式", 				cd=false},
-		[8] = {name="天羽狂舞",			desc="你使出天羽奇剑中的绝招",			cd=false},
-		--[8] = {name="金蛇万道",		desc="你大喝一声，猛攻数招", 			cd=false},
-		--[9] = {name="连环夺命诀",		desc="你使出苗家剑法之「连环夺命诀」", 	cd=false},
-		[9] = {name="天女散花",			desc="你凝神息气，手腕疾抖", 			cd=false},
-		[10]= {name="凌波微步",			desc="你提起真气，依照先天伏羲六十四卦",cd=false},
-		[11]= {name="长相思",			desc="你凌波飞渡似的舞步",				cd=false},
-		[12]= {name="月光如影",			desc="你照着月光的映射",				cd=false},
-		[13]= {name="六阳融雪",			desc="你使出天山六阳掌之绝技『六阳融雪』",			cd=false},
-		[14]= {name="熊熊圣火",			desc="你盘膝而坐，双手十指张开",		cd=false},
-		[15]= {name="如影如幻",			desc="你长空而起，化作一只青蝠",		cd=false},
-		[16]= {name="金蛇万道",			desc="你大喝一声，猛攻数招", 			cd=false},
-		[17]= {name="吸焰", 			desc="你使出圣火令法「吸焰」令", 		cd=false},
-		[18]= {name="牧野鹰扬",			desc="你使出搜骨鹰爪功绝技", 			cd=false},
-		[19]= {name="阴风刀",			desc="你悄悄使出阴风刀",				cd=false},
-		[20]= {name="透骨针",			desc="你悄悄运起透骨针",				cd=false},
-		[21]= {name="精失诀",			desc="你凝神定气，使出七伤拳总诀中的「精失诀」", cd=false},
-		[22]= {name="七拳七伤",			desc="你仰天怒吼，激起全身力量使出七伤拳终极绝技", cd=false},
-		[23]= {name="意恍惚诀",			desc="你凝神定气，使出七伤拳总诀中的「意恍惚诀」", cd=false}
-	},
-	
-	set_cd_status = function(l, flag, color)
-		--print(color)
-		for i, v in ipairs(profile.pfm) do
-			if((v.desc == l or v.name == l) and (v.inuse == true)) then v.cd = flag v.cd_time = os.time() return end
-		end
-	end,
-	
-	reset_cd_status = function()
-		for i, v in ipairs(profile.pfm) do
-			v.cd = false
-		end
-	end,
-	
-	busy_list = {
-		[1] = { i = 17, action = "enable sword shenghuo-ling;wield " .. var.weapon .. ";perform sword.xiyanling"},
-		[2] = { i = 23, action = "unwield all;perform cuff.yihuanghu;wield " .. var.weapon},
-		[3] = {	i = 15, action = "perform move.ruyingruhuan" },
-		[4] = { i = 18, action = "unwield all;perform claw.muyeyingyang" }
-	},
-	
-	gf_busy_list = {
-		[1] = { i = 17, action = "enable sword shenghuo-ling;wield " .. var.weapon .. ";perform sword.xiyanling"},
-		[2] = { i = 23, action = "unwield all;perform cuff.yihuanghu;wield " .. var.weapon},
-		[3] = {	i = 15, action = "perform move.ruyingruhuan" },
-		[4] = { i = 18, action = "unwield all;perform claw.muyeyingyang" }
-	},
-	
-	gf_attack_list = {
-		[1] = {	i = 16, action = "enable sword jinshe-jian;wield " .. var.weapon .. ";perform sword.wandao"},
-		[2] = { i = 2, action = "enable parry jinshe-zhang;perform parry.fugu"},
-		[3] = {	i = 14, action = "enable sword shenghuo-ling;wield " .. var.weapon .. ";perform sword.shenghuo"},
-		[4] = {	i = 4, action = "unwield all;hubo"}
-	},
-	
-	attack_list1 = {
-		[1] = {	i = 16, action = "enable sword jinshe-jian;wield " .. var.weapon .. ";perform sword.wandao"},
-		[2] = { i = 2, action = "enable parry jinshe-zhang;perform parry.fugu"},
-		[3] = {	i = 14, action = "enable sword shenghuo-ling;wield " .. var.weapon .. ";perform sword.shenghuo"},
-		[4] = {	i = 22, action = "unwield all;perform cuff.qishang;wield " .. var.weapon},
-		[5] = {	i = 4, action = "unwield all;hubo"}
-	},
-	
-	attack_list2 = {
-		[1] = {	i = 22, action = "unwield all;perform cuff.qishang;wield " .. var.weapon},
-		[2] = {	i = 16, action = "enable sword jinshe-jian;wield " .. var.weapon .. ";perform sword.wandao"},
-		[3] = {	i = 14, action = "enable sword shenghuo-ling;wield " .. var.weapon .. ";perform sword.shenghuo"},
-		[4] = {	i = 4, action = "unwield all;hubo"},
-		[5] = { i = 2, action = "enable parry jinshe-zhang;perform parry.fugu;enable parry qiankun-danuoyi"}
-		--[3] = { i = 19, action = "enable sword shenghuo-ling;wield " .. var.weapon .. ";perform sword.yinfeng"},
-		--[4] = { i = 20, action = "enable sword shenghuo-ling;wield " .. var.weapon .. ";perform sword.tougu"},
-		--[4] = {	i = 14, action = "enable sword shenghuo-ling;wield " .. var.weapon .. ";perform sword.shenghuo"}
-	},
-	
-	attack_list3 = {
-		[1] = {	i = 4, action = "unwield all;hubo"}
-	},
-	
-	study_list = {
-		{ loc = "fly wm;e;s;s;e;n", cmd = "xue zhu literate 50;et"},
-		{ loc = "fly mj", cmd = "xue zhang jiuyang-shengong 50;et",pre_action="bai zhang wuji", post_action="bai xie xun"},
-		{ loc = "fly mj", cmd = "xue zhang sword 50;et",pre_action="bai zhang wuji", post_action="bai xie xun"}
-	},
-	
-	research_list = {
-		{ skill = "xiantian-qigong"}
+auto_list = {"wei","shan","baobiao", "guanfu","guo","task","event","study","reconnect"}
 
-	},
-	
-	powerup = function()
-		Execute("yun powerup;yun shield;enable parry qiankun-danuoyi")
-	end,
-	
-	init = function()
-		local flag = bit.bor(trigger_flag.KeepEvaluating, trigger_flag.RegularExpression, trigger_flag.Replace)--, trigger_flag.Temporary)
-		AddTrigger("fight_busy_success",
-			"^(> )*(.*气拔千钧的一击，竟不知如何招架！|结果.*被你攻了个措手不及|结果一指点中|.*目前正自顾不暇，放胆攻击吧！|.*只觉一股热流穿心而过|结果.*被你围着转得头晕|结果.*被你绕得不知所措|结果.*被你攻了个措手不及|结果.*被你点中要穴|.*正在奇怪间，已被你的真气制住，神情恍恍忽忽的).*$",
-			"", flag, -1, 0, "", "fight.on_busy_success")
-		
-		SetTriggerOption("fight_busy_success", "group", "fight")
-		
-		local desc = "("
-		for i = 1, #profile.pfm do 
-			desc = desc .. profile.pfm[i] .desc
-			if(i == #profile.pfm) then desc = desc .. ")" else desc = desc .. "|" end
-		end
-	
-		AddTrigger("fight_perform_cd", 
-			"^(> )*" .. desc .. ".*$", --(你脚下左弓右箭|你使出一阳指绝技|你大喝一声，剑招突变|你大喝一声，缠身而上|你倒踩七星步法|你平心静气，灵台空明|你凝气于指，一式|你大喝一声，猛攻数招).*$",
-			"", flag, -1, 0, "", "fight.on_perform")
-			
-		SetTriggerOption("fight_perform_cd", "group", "fight")
-	end,
-	
-	login = function()
-		Execute(var.login_drop)
-		Execute(var.login_wear)
-	end,
-	
-	int_wear = function(f_done)
-		wait.make(function()
-			Execute("unwield all")
-			Execute("wear ziyang yi;wield xuanliu jian;wear baihe mao;wear xunzhang;wear bianfu xue")
-			wait.time(1)
-			call(f_done)
-		end)
-	end,
-	
-	fight_wear = function(f_done)
-		wait.make(function()
-			--Execute("tuo all;give qingwei hushou to byj;give yumen jian to byj;give tianwei mao to byj;give zihe yi to byj;give yinling xue to byj")
-			Execute("wear all;wield " .. var.weapon)
-			busy_test(function() call(f_done) end)
-		end)
-		--Execute(var.login_wear)
-	end,
+weapon_list = {"juwei jian", "kunlun dao", "guangcheng jian", "zhaixing jian", "qiankun dao", "shenyuan jian"}
 
-	auto_list = {"wei","shan","baobiao", "guanfu","guo","study"}
+pfm = {
+	[1] = {name="一剑化三清", 		desc="你大喝一声，剑招突变", 			cd=false},
+	[2] = {name="附骨缠身", 		desc="你大喝一声，缠身而上", 			cd=false},
+	[3] = {name="璀璨七星", 		desc="你倒踩七星步法", 					cd=false},
+	[4] = {name="双手互博之术", 	desc="你平心静气", 						cd=false},
+	[5] = {name="定阳针", 			desc="你脚下左弓右箭", 					cd=false},
+	[6] = {name="一指乾坤", 		desc="你使出一阳指绝技", 				cd=false},
+	[7] = {name="阳关三叠", 		desc="你凝气于指，一式", 				cd=false},
+	[8] = {name="天羽狂舞",			desc="你使出天羽奇剑中的绝招",			cd=false},
+	--[8] = {name="金蛇万道",		desc="你大喝一声，猛攻数招", 			cd=false},
+	--[9] = {name="连环夺命诀",		desc="你使出苗家剑法之「连环夺命诀」", 	cd=false},
+	[9] = {name="天女散花",			desc="你凝神息气，手腕疾抖", 			cd=false},
+	[10]= {name="凌波微步",			desc="你提起真气，依照先天伏羲六十四卦",cd=false},
+	[11]= {name="长相思",			desc="你凌波飞渡似的舞步",				cd=false},
+	[12]= {name="月光如影",			desc="你照着月光的映射",				cd=false},
+	[13]= {name="六阳融雪",			desc="你使出天山六阳掌之绝技『六阳融雪』",			cd=false},
+	[14]= {name="熊熊圣火",			desc="你盘膝而坐，双手十指张开",		cd=false},
+	[15]= {name="如影如幻",			desc="你长空而起，化作一只青蝠",		cd=false},
+	[16]= {name="金蛇万道",			desc="你大喝一声，猛攻数招", 			cd=false},
+	[17]= {name="吸焰", 			desc="你使出圣火令法「吸焰」令", 		cd=false},
+	[18]= {name="牧野鹰扬",			desc="你使出搜骨鹰爪功绝技", 			cd=false},
+	[19]= {name="阴风刀",			desc="你悄悄使出阴风刀",				cd=false},
+	[20]= {name="透骨针",			desc="你悄悄运起透骨针",				cd=false},
+	[21]= {name="精失诀",			desc="你凝神定气，使出七伤拳总诀中的「精失诀」", cd=false},
+	[22]= {name="七拳七伤",			desc="你仰天怒吼，激起全身力量使出七伤拳终极绝技", cd=false},
+	[23]= {name="意恍惚诀",			desc="你凝神定气，使出七伤拳总诀中的「意恍惚诀」", cd=false},
+	[24]= {name="连环夺命诀",		desc="你使出苗家剑法之「连环夺命诀」", 			cd=false},
+	[25]= {name="绝命刺", 			desc="你突然运足内力，只听手中的", cd=false},
+	[26]= {name="三焦齐逆诀",		desc="你凝神定气，企图使出七伤拳总诀中的「三焦齐逆诀」", cd=false},
+	[27]= {name="伤肺诀",			desc="你凝神定气，使出七伤拳总诀中的「伤肺诀」", 	cd=false},
+	[28]= {name="损心诀",			desc="你凝神定气，使出七伤拳总诀中的「损心诀」",	cd=false},
+	[29]= {name="藏离诀",			desc="你凝神定气，使出七伤拳总诀中的「藏离诀」",	cd=false},
+	[30]= {name="摧肝肠诀",			desc="你凝神定气，使出七伤拳总诀中的「摧肝肠诀」",	cd=false},
+	[31]= {name="雷霆一击",			desc="你默运混天气功，施展出「雷霆一击」", 			cd=false},
+	[32]= {name="亢龙三悔",			desc="你深吸一口气，将浑天真气提于胸前，大喝一声说道",cd=false},
+	[33]= {name="沧海一笑",			desc="你强提真气，身法突变得迷离，有如纵横之式",	cd=false},
+	[34]= {name="幻影",			desc="你前后游走，身形闪动，手中钢刀越使越快，幻起无数刀光化出数个身形", cd=false},
+	[35]= {name="刀刀相连", 		desc="在一片刀光中，一刀劈了过来", cd=false},
+	[36]= {name="无色无相", desc="你使出小无相绝技「无色无相」，招式变幻莫测", cd=false}
+}
+
+function set_cd_status(l, flag, color)
+	--print(color)
+	for i, v in ipairs(profile.pfm) do
+		if((v.desc == l or v.name == l) and (v.inuse == true or flag == false)) then
+			v.cd = flag
+			v.cd_time = os.time()
+			v.inuse = flag
+		end
+	end
+end
+
+function reset_cd_status()
+	for i, v in ipairs(profile.pfm) do
+		v.cd = false
+	end
+end
+
+--
+-- busy perform
+--
+busy_list = {
+	[1] = { i = 10,
+			action = function()
+				Execute("perform dodge.lingbo" .. var.pfm_target)
+			end
+	},
+
+	[2] = { i = 34,
+			action = function()
+				local wp = choose_blade()
+				Execute("unwield all;enable blade hujia-daofa;wield " .. wp .. ";perform blade.huanying" .. var.pfm_target)
+			end
+	},
+
+	[3] = { i = 12,
+			action = function()
+				Execute("enable move yueying-wubu;perform move.yueguangruying" .. var.pfm_target)
+			end
+	},
+
+	[4] = { i = 33,
+			action = function()
+				Execute("enable move xiaoyaoyou;perform move.canghaiyixiao" .. var.pfm_target)
+			end
+	}
+}
+
+--
+-- attack perform
+--
+attack_list = {
+	[1] = { i = 32,
+			action = function()
+				local wp = choose_blade()
+				Execute("wield " .. wp .. ";enable blade xue-dao;enable force xiaowuxiang;jiali max;yun wuxiang" .. var.pfm_target .. ";jiali 0")
+			end
+	},
+
+	[2] = { i = 35,
+			action = function()
+				local wp = choose_blade()
+				Execute("unwield all;enable blade xue-dao;wield " .. wp .. ";jiali max;perform parry.lian" .. var.pfm_target .. ";jiali 0")
+			end
+	},
+
+	[3] = { i = 22,
+			action = function()
+				Execute("unwield all;bei none;bei qishang-quan;perform cuff.qishang" .. var.pfm_target)
+			end
+	},
+
+	[4] = { i = 4,
+			action = function()
+				Execute("bei none;bei sun-finger;unwield all;hubo" .. var.pfm_target)
+			end
+	},
+
+	[5] = { i = 31,
+			action = function()
+				Execute("unwield all;perform strike.leiting" .. var.pfm_target)
+			end
+	},
+
+	[6] = { i = 4,
+			action = function()
+				Execute("unwield all;hubo")
+			end
+	},
+
+	[7] = { i = 35,
+			action = function()
+				local wp = choose_blade()
+				Execute("unwield all;wield " .. wp .. ";enable blade hujia-daofa;perform blade.lian")
+			end
+	}
+}
+
+task_busy_list = { 1, 2, 3, 4 }
+task_attack_list = { 1, 2, 3, 4 }
+
+gf_busy_list = { 1, 3 }
+gf_attack_list = { 6, 7 }
+
+ttask_busy_list = { 1, 2, 3, 4 }
+ttask_attack_list = { 1, 2, 3, 4 }
+
+busy_list1 = { 1, 2, 3, 4 }
+attack_list2 = { 1, 2, 3, 4 }
+
+study_list = {
+	--{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu finger 10000;et;set study done", post_action="fly wm;e;s;s;s;w;w;u;gamble big skill finger 2000"}
+	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu beiming-shengong 1000"}
+		--{ loc = "fly mj", cmd = "xue wei strike 100;et",pre_action="bai wei yixiao", post_action="bai xie xun"}
 }
 
 
-profile.init()
+function choose_blade()
+	return "dao"
+end
 
-return profile
+function choose_sword()
+	return "jian"
+end
+
+function powerup()
+	Execute("enable force beiming-shengong;yun beiming;yun shield;enable force huntian-qigong;yun powerup")
+end
+
+function buff(menpai)
+	if(menpai ~= nil) then
+		local re = rex.new("(桃花|星宿|峨眉|梅庄|慕容)")
+		local r1,r2,r3 = re:match(menpai)
+		if(r3 ~= nil) then
+			print("换金系内功了.......")
+			Execute("unwield all;enable force huntian-qigong;yun shengang;perform strike.xianglong;enable force xiaowuxiang;")
+			return
+		end
+	end
+
+	print("换水系内功了.......")
+	Execute("unwield all;enable force huntian-qigong;yun shengang;perform strike.xianglong")
+end
+
+
+function anti_touxi()
+
+end
+
+function init()
+	local flag = bit.bor(trigger_flag.KeepEvaluating, trigger_flag.RegularExpression, trigger_flag.Replace)--, trigger_flag.Temporary)
+
+	AddTrigger("fight_busy_success",
+		"^(> )*(结果.*被你攻了个措手不及)|(结果一指点中)|(结果.*被你点中要穴)|(.*正在奇怪间，已被你的真气制住，神情恍恍忽忽的)|(.*被此胡家刀法之「无形幻影」所迷惑，手足无措，不知哪个你是真)|(.*气拔千钧的一击，竟不知如何招架！)|(.*只觉一股热流穿心而过)|(结果.*被你围着转得头晕)|(结果.*被你绕得不知所措).*$",
+		"", flag, -1, 0, "", "fight.on_busy_success") -----.*目前正自顾不暇，放胆攻击吧 | .*已经很忙了！
+
+	SetTriggerOption("fight_busy_success", "group", "fight")
+
+	local desc = "("
+	for i = 1, #profile.pfm do
+		desc = desc .. profile.pfm[i] .desc
+		if(i == #profile.pfm) then desc = desc .. ")" else desc = desc .. "|" end
+	end
+
+	AddTrigger("fight_perform_cd",
+		"^(> )*" .. desc .. ".*$", --(你脚下左弓右箭|你使出一阳指绝技|你大喝一声，剑招突变|你大喝一声，缠身而上|你倒踩七星步法|你平心静气，灵台空明|你凝气于指，一式|你大喝一声，猛攻数招).*$",
+		"", flag, -1, 0, "", "fight.on_perform")
+
+	SetTriggerOption("fight_perform_cd", "group", "fight")
+end
+
+function login()
+		Execute(var.login_drop)
+		Execute(var.login_wear)
+end
+
+function int_wear(f_done)
+	wait.make(function()
+		Execute("unwield all;tuo all")
+		Execute("wield qiankun dao;wear yuhuang yi;wear shenshui mao;wear xunzhang;wear yaohou xue;wear jiulong hushou;wear haoqi ring")
+		wait.time(1)
+		call(f_done)
+	end)
+end
+
+function fight_wear(f_done)
+	wait.make(function()
+		Execute("tuo all;give xiaocui xue to byj;give juwei jian to byj;give shenshui mao to byj;give shenyu yi to byj;give jiulong hushou to byj;give qiankun dao to byj;give yecha ring to byj")
+		Execute("wear all;wield " .. var.weapon)
+		core.busytest(function() call(f_done) end)
+	end)
+end
+
+
+init()

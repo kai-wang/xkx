@@ -2,6 +2,7 @@ require "wait"
 require "tprint"
 require "utils"
 require "var"
+require("worlds\\xkx\\mods\\core")
 
 module ("baobiao", package.seeall)
 
@@ -20,35 +21,35 @@ local bb_list = {
 
 local cxt = {}
 
-init = function()
+function init()
 	EnableTriggerGroup("baobiao", false)
 	EnableTriggerGroup("baobiao1", false)
 end
 
-main = function(f_ok, f_fail)
+function main(f_ok, f_fail)
 	cxt.f_done = f_ok
 	cxt.f_fail = f_fail
-	
+
 	EnableTriggerGroup("baobiao", true)
 	walk.run("set brief;fly xi;e;e;n;e;ask guo about ±£ïÚ", nil, fail)
 end
 
-ask = function()
+function ask()
 	EnableTriggerGroup("baobiao1", true)
 end
 
-songbiao = function(n, l, w)
+function songbiao(n, l, w)
 	EnableTriggerGroup("baobiao1", false)
 	var.baobiao_loc = w[2]
 
-	Execute("halt;fly wm")	
+	core.safeback(nil, 1)
 end
 
-songbiao2 = function()
+function songbiao2()
 	if(var.baobiao_loc ~= nil) then
 		local path = bb_list[var.baobiao_loc]
 		print("±£ïÚÂ·¾¶£º" .. path)
-		busy_test(function()
+		core.busytest(function()
 			walk.run("halt;" .. path .. "finish", nil, fail)
 		end)
 	else
@@ -56,39 +57,26 @@ songbiao2 = function()
 	end
 end
 
-done = function()
-	busy_test(function()
-		Execute("halt;fly wm")
+function done()
+	core.safeback(function()
 		EnableTriggerGroup("baobiao", false)
 		EnableTriggerGroup("baobiao1", false)
 		var.bb_available_time = os.time() + 90
-		wait.time(1)
-		--call(cxt.f_done)
-		clean(cxt.f_done)
-	end)
+		me.updateHP(cxt.f_done)
+	end, 1)
 end
 
-fail = function()
-	busy_test(function()
-		Execute("halt;fly wm")
+function fail()
+	core.safeback(function()
 		EnableTriggerGroup("baobiao", false)
 		EnableTriggerGroup("baobiao1", false)
 		var.bb_available_time = os.time() + 30
-		wait.time(1)
 		call(cxt.f_fail)
-	end)
+	end, 1)
 end
 
-clean = function(f)
-	if(var.gf_money == "yes") then
-		me.full(function()
-			me.check_money(function()
-				me.recover(f)
-			end)
-		end)
-	else
-		me.cleanup(f)
-	end
+function clean(f)
+	me.cleanup(f)
 end
 
 init()

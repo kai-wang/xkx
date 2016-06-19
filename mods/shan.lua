@@ -1,7 +1,7 @@
 require "wait"
 require "tprint"
 require "utils"
-
+require("worlds\\xkx\\mods\\core")
 module ("shan", package.seeall)
 
 
@@ -475,67 +475,102 @@ local shan_list = {
 	["上官云"] = {room = 2938, name = "shangguan"},
 	["采花子"] = {room = 2966, name = "caihua zi"},
 	["老鸨婆"] = {room = 2997, name = "laobao po"},
-	["「平通镖局」镖头"] = {room = 552, name = "biao tou"}
+	["「平通镖局」镖头"] = {room = 552, name = "biao tou"},
+	["静虚"] = {room = 3, name = "jingxu's waxwork", exp=20000000, hubo=true},
+	["笑天"] = {room = 3, name = "cutes's waxwork", exp=20000000, hubo=true},
+	["一阵风"] = {room = 3, name = "lhh's waxwork", exp=20000000, hubo=true},
+	["螃蟹"] = {room = 3, name = "carb's waxwork", exp=20000000, hubo=true},
+	["小鱼"] = {room = 3, name = "bullet's waxwork", exp=20000000, hubo=true},
+	["张卫健"] = {room = 3, name = "zhangweijian's waxwork", exp=20000000, hubo=true},
+	["玩玩"] = {room = 3, name = "wbz's waxwork", exp=20000000, hubo=true},
+	["天外天"] = {room = 3, name = "masaki's waxwork", exp=20000000, hubo=true},
+	["静菁"] = {room = 3, name = "duke's waxwork", exp=20000000, hubo=true},
+	["明平"] = {room = 3, name = "ginko's waxwork", exp=20000000, hubo=true},
+	["三叉戟"] = {room = 3, name = "xxx's waxwork", exp=20000000, hubo=true},
+	["蓉蓉"] = {room = 3, name = "rong's waxwork", exp=20000000, hubo=true},
+	["易水寒"] = {room = 3, name = "lot's waxwork", exp=20000000, hubo=true},
+	["小虎"] = {room = 3, name = "sch's waxwork", exp=20000000, hubo=true},
+	["萧然山"] = {room = 3, name = "hong's waxwork", exp=20000000, hubo=true},
+	["凝蕾"] = {room = 3, name = "waitye's waxwork", exp=20000000, hubo=true},
+	["丁香"] = {room = 3, name = "violet's waxwork", exp=20000000, hubo=true},
+	["楚山孤"] = {room = 3, name = "lonely's waxwork", exp=20000000, hubo=true},
+	["笑痴"] = {room = 5, name = "seven's waxwork", exp=20000000, hubo=true},
+	["火舞"] = {room = 5, name = "salas's waxwork", exp=20000000, hubo=true},
+	["胡铁花"] = {room = 5, name = "eight's waxwork", exp=20000000, hubo=true},
+	["渡你下地狱"] = {room = 5, name = "frank's waxwork", exp=20000000, hubo=true},
+	["世外高人"] = {room = 67, name = "robin's waxwork", exp=20000000},
+	["大熊掌"] = {room = 67, name = "frank's waxwork", exp=20000000},
+	["老肥肥"] = {room = 67, name = "fat's waxwork", exp=20000000},
+	["老鱼头"] = {room = 67, name = "foxer's waxwork", exp=20000000},
+	["佐少"] = {room = 67, name = "zuosao's waxwork", exp=20000000},
+	["流云"] = {room = 67, name = "sieg's waxwork", exp=20000000}
 }
 
 
 local context = {}
 
-main = function(f_done, f_fail)
+function main(f_done, f_fail)
 	EnableTriggerGroup("shan", true)
-	
+
 	context.f_done = f_done
 	context.f_fail = f_fail
 	walk.run("set brief;fly es;|!k1:江百胜:nu|", function() Execute("quest") end, fail, fail)
+
+	timer.tickonce("action", 15, fail)
 end
 
 
-init = function()
+function init()
 	EnableTriggerGroup("shan", false)
 end
 
-done = function()
+function done()
 	var.shan_fail_times = 0
 	fight.stop()
-	busy_test(function()
-		safeback("halt;fly wm", function()
-			var.shan_available_time = os.time() + 60
-			EnableTriggerGroup("shan", false)
-			me.cleanup(context.f_done)
-		end)
-	end)
+	core.safeback(function()
+		var.shan_available_time = os.time() + 60
+		EnableTriggerGroup("shan", false)
+		me.cleanup(context.f_done)
+	end, 1)
 end
 
-fail = function()
-	busy_test(function()
-		safeback("halt;fly wm", function()
-		--	var.shan_available_time = os.time() + 120
-			EnableTriggerGroup("shan", false)
-			me.cleanup(context.f_fail)
-		end)
-	end)
+function fail()
+	core.safeback(function()
+		--	var.shan_available_time = os.time() + 240
+		EnableTriggerGroup("shan", false)
+		me.cleanup(context.f_fail)
+	end, 1)
 end
 
-start = function(name, line, wildcards)
+function start(name, line, wildcards)
+	timer.stop("action")
 	var.shan_available_time = os.time() + getseconds(wildcards[2])
 	print("time: " .. getseconds(wildcards[2]))
 	var.shan_npc_name = wildcards[3]
 	local t = shan_list[var.shan_npc_name]
 	if(t == nil or (t.exp ~= nil and tonumber(var.hp_exp) < t.exp)) then return fail() end
-	
+	context.hubo_flag = t.hubo
+
 	var.shan_npc_id = t.name
 	print(var.shan_npc_name .. " id【" .. var.shan_npc_id .. "】  room【" .. t.room .. "】")
-	busy_test(function() 
-		walk.run(roomAll[t.room].path, killnpc, fail, fail) 
+	core.busytest(function()
+		walk.run(roomAll[t.room].path, killnpc, fail, fail)
 	end)
 end
 
-killnpc = function()
-	local busy_list = me.profile.busy_list
-	local attack_list = me.profile.attack_list1
-	EnableTriggerGroup("shan_kill", true)
-	fight.prepare(busy_list, attack_list)
-	fight.start("kill " .. var.shan_npc_id)
+function killnpc()
+	if(context.hubo_flag ~= true) then
+		local busy_list = me.profile.busy_list
+		local attack_list = me.profile.attack_list1
+		EnableTriggerGroup("shan_kill", true)
+		fight.prepare(busy_list, attack_list)
+		fight.start("kill " .. var.shan_npc_id)
+	else
+		local attack_list = me.profile.attack_list4
+		EnableTriggerGroup("shan_kill", true)
+		fight.prepare(nil, attack_list)
+		fight.start("kill " .. var.shan_npc_id)
+	end
 end
 
 init()

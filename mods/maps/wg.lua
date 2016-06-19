@@ -205,6 +205,7 @@ local region = {}
       region.rooms[14].name = "富家侧门"
       region.rooms[14].zone = "武功"
       region.rooms[14].id = 866
+      region.rooms[14].danger = 3
       region.rooms[14].desc = "    这里是一道小门，可能是由于怕进出不方便而修建的。门虽然小，但还修饰得人模人样，门上嵌着两个大铜环。几条大狼狗懒洋洋躺在门边，一看见有人进来就‘汪汪’地乱吠。出了门就是武功镇的南街了，进门后是富家的小院。"
       region.rooms[14].exits = "east|northwest"
       region.rooms[14].links = {}

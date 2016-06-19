@@ -52,8 +52,94 @@ function queue(cmd)
 	Execute(cmd)
 end
 
+function capture(cmd, f_done, f_fail)
+	DeleteTemporaryTriggers()
+	
+	wait.make(function()
+		local t = GetUniqueNumber()
+		Execute(cmd .. ";set capture " .. t)
+		local l, w = wait.regexp("^(> )*设定环境变数：capture = (\\d+)$", 10)
+		print(t)
+		print(w[2])
+		if(l ~= nil and tonumber(w[2]) == t) then call(f_done) else call(f_fail) end
+	end)
+end
 
+function busy_test(f_done, interval)
+	DeleteTemporaryTriggers()
+	local i = tonumber(interval) or 1
+	local f = nil
+	f = function()
+		wait.make(function()
+			Execute("suicide")
+			local l, w = wait.regexp("^(> )*(你正忙着呢，没空自杀！)|(请用 suicide -f 确定自杀。)$")
+			if(l ~= nil and l:match("确定自杀") ~= nil) then
+				call(f_done)
+			else
+				timer.tickonce("action", i, f) 
+			end
+		end)
+	end
+	
+	f()
+end
 
+function abort_busytest()
+end
+
+local safeback_cxt = {}
+
+function safeback(cmd, f_done, interval)
+	--if(safeback_cxt.f_done ~= nil) then safeback_cxt.f_done = f_done return end
+	
+	var.faint_flag = false
+	safeback_cxt.f_done = f_done
+	local i = tonumber(interval) or 0.1
+	local f = nil
+	f = function()
+		wait.make(function()
+			if(var.faint_flag == "true") then safeback_cxt = {} return end
+			Execute(cmd)
+			local l, w = wait.regexp("^(> )*(只见你消失在一团烟雾之中)|(你现在很忙)|(你正忙着)|(战斗中无法飞行).*$", 10)
+			if(l ~= nil and l:match("只见你消失") ~= nil) then 
+				call(safeback_cxt.f_done)
+				safeback_cxt = {}
+			else
+				timer.tickonce("action", i, f) 
+			end
+		end)
+	end
+	
+	f()
+end
+
+local safehalt_cxt = {}
+function safehalt(f_done, interval)
+	--if(safehalt_cxt.f_done ~= nil) then safehalt_cxt.f_done = f_done return end
+
+	var.faint_flag = false
+	safehalt_cxt.f_done = f_done
+	local i = tonumber(interval) or 0.1
+	local f = nil
+	f = function()
+		wait.make(function()
+			if(var.faint_flag == "true") then safehalt_cxt = {} return end
+			Execute("halt")
+			local l, w = wait.regexp("^(> )*(你身行向后一跃，跳出战圈不打了)|(你现在很忙)|(你正忙着)|(你现在不忙).*$", 10)
+			if(l ~= nil and (l:match("跳出战圈不打了") ~= nil or l:match("你现在不忙") ~= nil)) then 
+				local f = safehalt_cxt.f_done
+				call(f)
+				safehalt_cxt = {}
+			else
+				timer.tickonce("action", i, f) 
+			end
+		end)
+	end
+	
+	f()
+end
+
+--[[
 function busy_test(f_done, interval)
 	DeleteTemporaryTriggers()
 	var.system_magic_number = GetUniqueNumber()
@@ -70,20 +156,25 @@ function busy_test(f_done, interval)
 	end)
 end
 
+
 function abort_busytest()
 	var.system_magic_number = GetUniqueNumber()
 end
 
+
 function safeback(cmd, f_done)
+	var.faint_flag = false
 	wait.make(function()
 		repeat
+			if(var.faint_flag == "true") then return end
 			Execute(cmd)
 			local l, w = wait.regexp("^(> )*(只见你消失在一团烟雾之中)|(你现在很忙)|(你正忙着)|(战斗中无法飞行).*$", 10)
-			if(l == nil or l:match("只见你消失") == nil) then wait.time(1) end
-		until(l:match("只见你消失") ~= nil)
+			if(l == nil or l:match("只见你消失") == nil) then wait.time(0.3) end
+		until(l ~= nil and l:match("只见你消失") ~= nil)
 		call(f_done)
 	end)
 end
+]]--
 
 chs2num = function (s)----------------数字转换
    local cur = 0
