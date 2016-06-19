@@ -130,6 +130,18 @@ cancel = function()
 end
 
 fail = function()
+
+	core.safeback(function()
+		Execute("e;e;ask qu about cancel")
+		core.safehalt(function()
+			var.dig_available_time = os.time() + 120
+			EnableTriggerGroup("dig", true)
+			call(context.f_fail)
+			print("曲清任务结束。。")			
+		end)
+	end,
+	1)
+--[[
 	safeback("halt;fly wm", 
 		function()
 			Execute("e;e;ask qu about cancel")
@@ -141,9 +153,34 @@ fail = function()
 				print("曲清任务结束。。")
 			end)
 		end)
+]]--
 end
 
 done = function()
+	core.safeback(function()
+		wait.make(function()
+			Execute("e;e;give bao wu to qu")
+			if(var.dig_ever == "1") then
+				wait.time(3)
+				Execute("fly xi;w;n;n;n")
+				for i = 1, 10 do
+					Execute("ask guo about job;ask guo about fangqi")
+					wait.time(0.2)
+				end
+				wait.time(2)
+			end
+			core.busytest(function()
+				Execute("halt;fly wm;nw;give dan to " .. var.dig_dummy .. ";give yulu to " .. var.dig_dummy .. ";give renshen to " .. var.dig_dummy .. ";give heshouwu to " .. var.dig_dummy .. ";give wan to " .. var.dig_dummy)
+				var.dig_available_time = os.time() + 60
+				EnableTriggerGroup("dig", true)
+				me.updateHP()
+				call(context.f_done)
+				print("曲清任务结束。。")
+			end, 1)
+		end)
+	end,
+	1)
+	--[[
 	safeback("halt;fly wm", 
 		function()
 			wait.make(function()
@@ -171,6 +208,7 @@ done = function()
 		end,
 		1
 	)
+	]]--
 end
 
 

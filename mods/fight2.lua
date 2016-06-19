@@ -104,8 +104,9 @@ function recover()
 end
 
 function escape()
+	timer.stop("fight")
 	context.escape = true
-	core.safeback(context.f_escape)
+	core.safeback(context.f_escape£¬ 0.3)
 --[[
 	timer.tick("fight", 0.1, function()
 		if(context.escape == true) then return end
@@ -116,8 +117,9 @@ function escape()
 end
 
 function halt(f_done)
+	timer.stop("fight")
 	context.halt = true
-	core.safehalt(f_done)
+	core.safehalt(f_done£¬ 0.3)
 
 --[[
 	--if(not context.halt) then context.halt = true end
