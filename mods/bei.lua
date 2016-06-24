@@ -10,7 +10,7 @@ module ("bei", package.seeall)
 local cxt = {}
 local task1 = dofile("worlds\\xkx\\mods\\task1.lua")
 local emitter = require("worlds\\xkx\\mods\\emitter"):new()
---local core = require("worlds\\xkx\\mods\\core")
+
 local task1_array = {}
 retry_list = {10, 10, 15, 15, 20, 20, 30, 30}
 
@@ -176,18 +176,18 @@ end
 
 
 function gofortask()
-	local busy_list = me.profile.task_busy_list
-	local attack_list = me.profile.task_attack_list
-	local long_attack_list = me.profile.task_long_attack_list
+	local busy_list = config.task_busy_list
+	local attack_list = config.task_attack_list
+	local long_attack_list = config.task_long_attack_list
 	fight.prepare(busy_list, attack_list, escape, var.task_menpai)
-	me.profile.powerup()
+	config.powerup()
 	--如果slowwalk走完还没有stop，说明没找到
 	walk.sl(var.task_city, var.task_loc, bei.notfound, bei.fail, bei.foundnpc)
 end
 
 function faint()
 	var.faint_flag = true
-	me.profile.reset_cd_status()
+	config.reset_cd_status()
 	if(var.me_status_ssf == "true" or var.me_status_poison == "true") then
 		timer.reconnect(90, function() cleanup() end)
 	end
@@ -228,9 +228,9 @@ end
 
 function startFight()
 	timer.stop("action")
-	local busy_list = me.profile.task_busy_list
-	local attack_list = me.profile.task_attack_list
-	local long_attack_list = me.profile.task_long_attack_list
+	local busy_list = config.task_busy_list
+	local attack_list = config.task_attack_list
+	local long_attack_list = config.task_long_attack_list
 	fight.prepare(busy_list, attack_list, escape, var.task_menpai)
 	fight.start("kill " .. var.task_id)
 end

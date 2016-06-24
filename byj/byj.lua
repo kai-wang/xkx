@@ -66,7 +66,7 @@ pfm = {
 
 function set_cd_status(l, flag, color)
 	--print(color)
-	for i, v in ipairs(profile.pfm) do
+	for i, v in ipairs(config.pfm) do
 		if((v.desc == l or v.name == l) and (v.inuse == true or flag == false)) then
 			v.cd = flag
 			v.cd_time = os.time()
@@ -76,7 +76,7 @@ function set_cd_status(l, flag, color)
 end
 
 function reset_cd_status()
-	for i, v in ipairs(profile.pfm) do
+	for i, v in ipairs(config.pfm) do
 		v.cd = false
 	end
 end
