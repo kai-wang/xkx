@@ -222,9 +222,9 @@ function init()
 	SetTriggerOption("fight_busy_success", "group", "fight")
 
 	local desc = "("
-	for i = 1, #profile.pfm do
-		desc = desc .. profile.pfm[i] .desc
-		if(i == #profile.pfm) then desc = desc .. ")" else desc = desc .. "|" end
+	for i = 1, #pfm do
+		desc = desc .. pfm[i] .desc
+		if(i == #pfm) then desc = desc .. ")" else desc = desc .. "|" end
 	end
 
 	AddTrigger("fight_perform_cd",
