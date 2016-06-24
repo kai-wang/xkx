@@ -103,7 +103,7 @@ function loc()
 	end)
 
 	-- timeout 10s
-	timer.tick("action", 10, function()
+	timer.tickonce("action", 10, function()
 		fail()
 	end)
 

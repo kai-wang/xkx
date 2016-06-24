@@ -19,7 +19,6 @@ var.weapon2 = "dao"
 var.study_seq = 1
 var.guo_kill_place = "fly mj"
 
-
 auto_list = {"wei","shan","baobiao", "guanfu","guo","task","event","study","reconnect"}
 
 weapon_list = {"juwei jian", "kunlun dao", "guangcheng jian", "zhaixing jian", "qiankun dao", "shenyuan jian"}
@@ -235,9 +234,13 @@ function init()
 	SetTriggerOption("fight_perform_cd", "group", "fight")
 end
 
-function login()
+function login(f_done)
+	wait.make(function()
 		Execute(var.login_drop)
 		Execute(var.login_wear)
+		wait.time(5)
+		call(f_done)
+	end)
 end
 
 function int_wear(f_done)
