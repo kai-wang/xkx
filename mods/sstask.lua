@@ -166,8 +166,8 @@ end
 startFight = function()
 	abort_busytest()
 	timer.stop("action")
-	local busy_list = me.profile.busy_list
-	local attack_list = me.profile.attack_list5
+	local busy_list = config.busy_list
+	local attack_list = config.attack_list5
 	fight.prepare(busy_list, attack_list, nil, var.ss_menpai)
 	fight.start()
 end

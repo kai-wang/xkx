@@ -107,8 +107,8 @@ end
 function startFight()
 	timer.stop("action")
 	listen()
-	local busy_list = me.profile.busy_list
-	local attack_list = me.profile.attack_list3
+	local busy_list = config.busy_list
+	local attack_list = config.attack_list3
 	fight.prepare(busy_list, attack_list, escape)
 	fight.start("fight shashou")
 	EnableTriggerGroup("xiao_fight", true)
@@ -118,8 +118,8 @@ end
 function startKill()
 	timer.stop("action")
 	listen()
-	local busy_list = me.profile.busy_list
-	local attack_list = me.profile.attack_list2
+	local busy_list = config.busy_list
+	local attack_list = config.attack_list2
 	fight.prepare(busy_list, attack_list, escape)
 	fight.start("fight shashou")
 	EnableTriggerGroup("xiao_fight", true)
@@ -128,8 +128,8 @@ end
 function startTouxi()
 	timer.stop("action")
 	listen()
-	local busy_list = me.profile.busy_list
-	local attack_list = me.profile.attack_list2
+	local busy_list = config.busy_list
+	local attack_list = config.attack_list2
 	fight.prepare(busy_list, attack_list, escape)
 	fight.start("touxi shashou")
 	EnableTriggerGroup("xiao_fight", true)
@@ -198,8 +198,8 @@ end
 
 function kill()
 	timer.stop("action")
-	local busy_list = me.profile.busy_list
-	local attack_list = me.profile.attack_list2
+	local busy_list = config.busy_list
+	local attack_list = config.attack_list2
 	fight.prepare(busy_list, attack_list, escape)
 	fight.start("kill shashou")
 	EnableTriggerGroup("xiao_fight", true)

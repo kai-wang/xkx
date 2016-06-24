@@ -560,13 +560,13 @@ end
 
 function killnpc()
 	if(context.hubo_flag ~= true) then
-		local busy_list = me.profile.busy_list
-		local attack_list = me.profile.attack_list1
+		local busy_list = config.busy_list
+		local attack_list = config.attack_list1
 		EnableTriggerGroup("shan_kill", true)
 		fight.prepare(busy_list, attack_list)
 		fight.start("kill " .. var.shan_npc_id)
 	else
-		local attack_list = me.profile.attack_list4
+		local attack_list = config.attack_list4
 		EnableTriggerGroup("shan_kill", true)
 		fight.prepare(nil, attack_list)
 		fight.start("kill " .. var.shan_npc_id)

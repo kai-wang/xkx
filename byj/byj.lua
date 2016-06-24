@@ -17,6 +17,7 @@ var.dig_dummy = "lbt"
 var.weapon = "jian"
 var.weapon2 = "dao"
 var.study_seq = 1
+var.fast_mode = 1
 var.guo_kill_place = "fly mj"
 
 auto_list = {"wei","shan","baobiao", "guanfu","guo","task","event","study","reconnect"}

@@ -10,11 +10,11 @@ local cxt = {}
 local emitter = require("worlds\\xkx\\mods\\emitter"):new()
 
 function main(f)
-	if(var.study_seq == nil or var.study_seq == "0" or tonumber(var.study_seq) > #(me.profile.study_list)) then
+	if(var.study_seq == nil or var.study_seq == "0" or tonumber(var.study_seq) > #(config.study_list)) then
 		var.study_seq = 1
 	end
 
-	local learnlist = me.profile.study_list[tonumber(var.study_seq)]
+	local learnlist = config.study_list[tonumber(var.study_seq)]
 	cxt.learnlist = learnlist
 	var.lll = learnlist.cmd
 
@@ -34,9 +34,9 @@ function done()
 	EnableTriggerGroup("study_check", false)
 	if(cxt.learnlist ~= nil and cxt.learnlist.post_action ~= nil) then
 		Execute(cxt.learnlist.post_action)
-		busy_test(function() me.profile.fight_wear(cxt.f_done) end)
+		busy_test(function() config.fight_wear(cxt.f_done) end)
 	else
-		me.profile.fight_wear(cxt.f_done)
+		config.fight_wear(cxt.f_done)
 	end
 end
 
@@ -80,7 +80,7 @@ function start(f_done)
 	EnableTriggerGroup("HP", false)
 	cxt.f_done = f_done
 	wait.make(function()
-		me.profile.int_wear(function()
+		config.int_wear(function()
 			if(cxt.learnlist ~= nil and cxt.learnlist.pre_action ~= nil) then
 				Execute(cxt.learnlist.pre_action)
 			end
@@ -147,9 +147,9 @@ local cxt = {}
 
 function start(f_done)
 	if(var.research_num == nil or tonumber(var.research_num) == 0) then var.research_num = 1
-	else var.research_num = 1 + tonumber(tonumber(var.research_num) % #me.profile.research_list) end
+	else var.research_num = 1 + tonumber(tonumber(var.research_num) % #config.research_list) end
 
-	local skill = me.profile.research_list[tonumber(var.research_num)].skill
+	local skill = config.research_list[tonumber(var.research_num)].skill
 	study.start(function()
 		Execute("fly wm;e;s;s;s;w;w;u;u;gamble big skill " .. skill .. " 2000")
 		busy_test(function() Execute("fly wm") call(f_done) end )

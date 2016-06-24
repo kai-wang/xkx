@@ -347,7 +347,7 @@ handlers = {
 	
 	["ylj"] = function()
 		if(var.room_lz_ylj == "true") then
-			me.profile.powerup()
+			config.powerup()
 			handlers.done()
 		else
 			handlers.fail()
@@ -390,8 +390,8 @@ handlers = {
 	end,
 	
 	startFight = function()
-		local busy_list = me.profile.busy_list
-		local attack_list = me.profile.attack_list1
+		local busy_list = config.busy_list
+		local attack_list = config.attack_list1
 		fight.prepare(busy_list, attack_list)
 		
 		Execute("kill " .. var.walk_blocker_id)

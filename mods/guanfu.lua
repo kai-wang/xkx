@@ -167,7 +167,9 @@ function flee(name, line, wildcards)
 
 	core.safeback(function()
 		Execute("er;et")
-		walk.sl(var.gf_city, var.gf_loc, notfound, fail, foundnpc)
+		timer.tickonce("action", 1, function()
+			walk.sl(var.gf_city, var.gf_loc, notfound, fail, foundnpc)
+		end)
 	end, 1)
 end
 

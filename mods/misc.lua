@@ -229,8 +229,8 @@ function reconn(f_ok, f_fail)
 	wait.make(function()
 		Execute("equip callback weapon")
 		Execute("fly wm;e;s;s;s;s;tuo xunzhang;give seng xunzhang")
-		for i = 1, #me.profile.weapon_list do
-			Execute("give seng " .. me.profile.weapon_list[i])
+		for i = 1, #config.weapon_list do
+			Execute("give seng " .. config.weapon_list[i])
 		end
 		
 		core.safeback(function()
@@ -238,7 +238,7 @@ function reconn(f_ok, f_fail)
 			capture("kickbye", function()
 				timer.reconnect(1, function()
 					var.reconnect_required = 0
-					me.profile.fight_wear(f_ok)
+					config.fight_wear(f_ok)
 				end)
 		end)
 		end, 1)
