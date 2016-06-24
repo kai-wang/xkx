@@ -135,8 +135,20 @@ function run(path, f_ok, f_fail, f_stop)
 			if(c == ";") then cmd = cmd:sub(2) end
 			if(c ~= "!") then 
 				--print("cmd " .. cmd)
-				Execute(cmd)
-				call(f_ok)
+				local t = utils.split(cmd, ";")
+				if(#t > 10) then
+					wait.make(function()
+						for i, #t do
+							Execute(t[i])
+							wait.time(0.1)
+						end
+						call(f_ok)
+					end)
+				end
+				else
+					Execute(cmd)
+					call(f_ok)
+				end
 			else
 				-- aw:3:flatter –«Àﬁ¿œœ…
 				print("special cmd: " .. cmd:sub(2))
@@ -664,7 +676,11 @@ function step_by_step(tbl, f_ok, f_fail, f_stop)
 	step = function(cmd, f_ok, f_fail, f_stop)
 		--wait.make(function()
 		--wait.time(0.3)
-		run(cmd, f_ok, f_fail, f_stop)
+		if(config.fast_mode == "1") then
+			timer.tickonce("action", 0.3, function() run(cmd, f_ok, f_fail, f_stop) end)
+		else
+			run(cmd, f_ok, f_fail, f_stop)
+		end
 		--end)
 	end
 
