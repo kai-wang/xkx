@@ -338,8 +338,8 @@ walk.stop()</send>
    send_to="12"
    sequence="100"
   >
-  <send>local busy_list = me.profile.busy_list
-local attack_list = me.profile.attack_list2
+  <send>local busy_list = config.busy_list
+local attack_list = config.attack_list2
 fight.prepare(busy_list, attack_list)
 
 Execute("nuoyi " .. var.me_id)&#9;
@@ -1314,8 +1314,8 @@ bei.startFight()</send>
    send_to="12"
    sequence="100"
   >
-  <send>local busy_list = me.profile.busy_list
-local attack_list = me.profile.ttask_attack_list
+  <send>local busy_list = config.busy_list
+local attack_list = config.ttask_attack_list
 fight.prepare(busy_list, attack_list)
 
 Execute("nuoyi " .. var.me_id)&#9;
@@ -2196,8 +2196,8 @@ walk.stop()</send>
    sequence="100"
   >
   <send>local id = "%1"
---local busy_list = me.profile.busy_list
-local attack_list = me.profile.attack_list3
+--local busy_list = config.busy_list
+local attack_list = config.attack_list3
 fight.prepare(nil, attack_list)
 &#9;
 fight.start("kill " .. id)</send>
@@ -2210,8 +2210,8 @@ fight.start("kill " .. id)</send>
    sequence="100"
   >
   <send>local id = "%1"
---local busy_list = me.profile.busy_list
-local attack_list = me.profile.attack_list4
+--local busy_list = config.busy_list
+local attack_list = config.attack_list4
 fight.prepare(nil, attack_list)
 &#9;
 fight.start("kill " .. id)</send>
@@ -2304,8 +2304,8 @@ SetAliasOption("%1", "send_to", 10)</send>
    sequence="100"
   >
   <send>EnableTriggerGroup("fight", true)
-local busy_list = me.profile.busy_list
-local attack_list = me.profile.attack_list2
+local busy_list = config.busy_list
+local attack_list = config.attack_list2
 fight.prepare(busy_list, attack_list)
 fight.start()
 &#9;</send>
@@ -2548,7 +2548,7 @@ walk.run(roomAll[room].path)</send>
    send_to="12"
    sequence="100"
   >
-  <send>me.profile.powerup()
+  <send>config.powerup()
 </send>
   </alias>
   <alias
@@ -2584,8 +2584,8 @@ guanfu.startFight()</send>
    sequence="100"
   >
   <send>local id = "%1"
-local busy_list = me.profile.busy_list
-local attack_list = me.profile.attack_list5
+local busy_list = config.busy_list
+local attack_list = config.attack_list5
 fight.prepare(busy_list, attack_list)
 &#9;
 fight.start()</send>
@@ -2606,8 +2606,8 @@ fight.start()</send>
    sequence="100"
   >
   <send>local id = "%1"
-local busy_list = me.profile.busy_list
-local attack_list = me.profile.attack_list3
+local busy_list = config.busy_list
+local attack_list = config.attack_list3
 fight.prepare(busy_list, attack_list)
 &#9;
 fight.start()</send>
