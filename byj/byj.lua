@@ -116,7 +116,7 @@ busy_list = {
 -- attack perform
 --
 attack_list = {
-	[1] = { i = 32,
+	[1] = { i = 36,
 			action = function()
 				local wp = choose_blade()
 				Execute("wield " .. wp .. ";enable blade xue-dao;enable force xiaowuxiang;jiali max;yun wuxiang" .. var.pfm_target .. ";jiali 0")
@@ -159,6 +159,30 @@ attack_list = {
 				local wp = choose_blade()
 				Execute("unwield all;wield " .. wp .. ";enable blade hujia-daofa;perform blade.lian")
 			end
+	},
+
+	[8] = { i = 31,
+			action = function()
+				Execute("unwield all;perform strike.leiting")
+			end
+	},
+
+	[9] = { i = 22,
+			action = function()
+				Execute("unwield all;bei none;bei qishang-quan;perform cuff.qishang")
+			end
+	},
+
+	[10] = { i = 32,
+			action = function()
+				Execute("unwield all;enable force xiaowuxiang;yun wuxiang")
+			end
+	},
+
+	[11] = { i = 32,
+			action = function()
+				Execute("unwield all;perform strike.sanhui")
+			end
 	}
 }
 
@@ -171,8 +195,11 @@ gf_attack_list = { 6, 7 }
 ttask_busy_list = { 1, 2, 3, 4 }
 ttask_attack_list = { 1, 2, 3, 4 }
 
-busy_list1 = { 1, 2, 3, 4 }
-attack_list2 = { 1, 2, 3, 4 }
+busy_list = { 1, 2, 3, 4 }
+attack_list2 = { 9, 10, 11, 8, 6 }
+attack_list3 = { 7, 8, 6}
+attack_list4 = { 6 }
+attack_list5 = { 9, 11, 6, 7, 8 }
 
 study_list = {
 	--{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu finger 10000;et;set study done", post_action="fly wm;e;s;s;s;w;w;u;gamble big skill finger 2000"}

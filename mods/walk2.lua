@@ -138,13 +138,12 @@ function run(path, f_ok, f_fail, f_stop)
 				local t = utils.split(cmd, ";")
 				if(#t > 10) then
 					wait.make(function()
-						for i, #t do
+						for i = 1, #t do
 							Execute(t[i])
 							wait.time(0.1)
 						end
 						call(f_ok)
 					end)
-				end
 				else
 					Execute(cmd)
 					call(f_ok)
