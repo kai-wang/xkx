@@ -250,11 +250,10 @@ handlers = {
 		if(r.fail) then handlers.fail() return end
 		if(r.stop) then handlers.stop() return end
 		
-		wait.make(function()
-			local cmd = c.cmd[#c.cmd]
-
-			core.safehalt(function()
-				Execute(cmd .. ";set run special")
+		local cmd = c.cmd[#c.cmd]
+		core.safehalt(function()
+			Execute(cmd .. ";set run special")
+			wait.make(function()
 				local l, w = wait.regexp("^(> )*设定环境变数：run = \"special\"$")
 				if(not c.block) then 
 					print("no blocker") 
@@ -267,9 +266,9 @@ handlers = {
 				else 
 					handlers.run()
 				end
-			end, 
-			1)
-		end)
+			end)
+		end, 
+		1)
 	end,
 	
 	stop = function()
