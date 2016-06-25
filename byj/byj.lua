@@ -164,7 +164,7 @@ attack_perform_array = {
 
 	[8] = { i = 36,
 			action = function()
-				Execute("unwield all;bei none;bei sun-finger;enable force xiaowuxiang;yun wuxiang " .. var.pfm_target)
+				Execute("unwield all;enable force xiaowuxiang;yun wuxiang " .. var.pfm_target)
 			end
 	},
 
@@ -172,10 +172,23 @@ attack_perform_array = {
 			action = function()
 				Execute("unwield all;perform strike.sanhui " .. var.pfm_target)
 			end
-	}
+	},
+
+	[10] = { i = 32,
+			action = function()
+				Execute("unwield all;enable force huntian-qigong;perform strike.sanhui " .. var.pfm_target .. ";wield dao")
+			end
+	},
+
+	[11] = { i = 36,
+			action = function()
+				Execute("unwield all;enable force xiaowuxiang;yun wuxiang " .. var.pfm_target .. ";wield dao")
+			end
+	}	
+
 }
 
-task_busy_list = { 9, 4, 8, 3 }
+task_busy_list = { 10, 4, 11, 3 }
 task_attack_list = { 1, 2, 3, 4 }
 
 gf_busy_list = { 1, 3 }
