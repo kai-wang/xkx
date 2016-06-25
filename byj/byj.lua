@@ -85,29 +85,29 @@ end
 --
 -- busy perform
 --
-busy_list = {
+busy_perform_array = {
 	[1] = { i = 10,
 			action = function()
-				Execute("perform dodge.lingbo" .. var.pfm_target)
+				Execute("perform dodge.lingbo " .. var.pfm_target)
 			end
 	},
 
 	[2] = { i = 34,
 			action = function()
 				local wp = choose_blade()
-				Execute("unwield all;enable blade hujia-daofa;wield " .. wp .. ";perform blade.huanying" .. var.pfm_target)
+				Execute("unwield all;enable blade hujia-daofa;wield " .. wp .. ";perform blade.huanying " .. var.pfm_target)
 			end
 	},
 
 	[3] = { i = 12,
 			action = function()
-				Execute("enable move yueying-wubu;perform move.yueguangruying" .. var.pfm_target)
+				Execute("enable move yueying-wubu;perform move.yueguangruying " .. var.pfm_target)
 			end
 	},
 
 	[4] = { i = 33,
 			action = function()
-				Execute("enable move xiaoyaoyou;perform move.canghaiyixiao" .. var.pfm_target)
+				Execute("enable move xiaoyaoyou;perform move.canghaiyixiao " .. var.pfm_target)
 			end
 	}
 }
@@ -115,73 +115,62 @@ busy_list = {
 --
 -- attack perform
 --
-attack_list = {
+attack_perform_array = {
 	[1] = { i = 36,
 			action = function()
 				local wp = choose_blade()
-				Execute("wield " .. wp .. ";enable blade xue-dao;enable force xiaowuxiang;jiali max;yun wuxiang" .. var.pfm_target .. ";jiali 0")
+				Execute("wield " .. wp .. ";enable blade xue-dao;enable force xiaowuxiang;jiali max;yun wuxiang " .. var.pfm_target .. ";jiali 0")
 			end
 	},
 
 	[2] = { i = 35,
 			action = function()
 				local wp = choose_blade()
-				Execute("unwield all;enable blade xue-dao;wield " .. wp .. ";jiali max;perform parry.lian" .. var.pfm_target .. ";jiali 0")
+				Execute("unwield all;enable blade xue-dao;wield " .. wp .. ";jiali max;perform parry.lian " .. var.pfm_target .. ";jiali 0")
 			end
 	},
 
 	[3] = { i = 22,
 			action = function()
-				Execute("unwield all;bei none;bei qishang-quan;perform cuff.qishang" .. var.pfm_target)
+				Execute("unwield all;bei none;bei qishang-quan;perform cuff.qishang " .. var.pfm_target)
 			end
 	},
 
 	[4] = { i = 4,
 			action = function()
-				Execute("bei none;bei sun-finger;unwield all;hubo" .. var.pfm_target)
+				Execute("bei none;bei sun-finger;unwield all;hubo " .. var.pfm_target)
 			end
 	},
 
 	[5] = { i = 31,
 			action = function()
-				Execute("unwield all;perform strike.leiting" .. var.pfm_target)
+				Execute("unwield all;perform strike.leiting " .. var.pfm_target)
 			end
 	},
 
 	[6] = { i = 4,
 			action = function()
-				Execute("unwield all;hubo")
+				Execute("unwield all;hubo " .. var.pfm_target)
 			end
 	},
 
 	[7] = { i = 35,
 			action = function()
 				local wp = choose_blade()
-				Execute("unwield all;wield " .. wp .. ";enable blade hujia-daofa;perform blade.lian")
+				Execute("unwield all;wield " .. wp .. ";enable blade hujia-daofa;perform blade.lian " .. var.pfm_target)
 			end
 	},
 
-	[8] = { i = 31,
+
+	[8] = { i = 36,
 			action = function()
-				Execute("unwield all;perform strike.leiting")
+				Execute("unwield all;enable force xiaowuxiang;yun wuxiang " .. var.pfm_target)
 			end
 	},
 
-	[9] = { i = 22,
+	[9] = { i = 32,
 			action = function()
-				Execute("unwield all;bei none;bei qishang-quan;perform cuff.qishang")
-			end
-	},
-
-	[10] = { i = 32,
-			action = function()
-				Execute("unwield all;enable force xiaowuxiang;yun wuxiang")
-			end
-	},
-
-	[11] = { i = 32,
-			action = function()
-				Execute("unwield all;perform strike.sanhui")
+				Execute("unwield all;perform strike.sanhui " .. var.pfm_target)
 			end
 	}
 }
@@ -196,10 +185,10 @@ ttask_busy_list = { 1, 2, 3, 4 }
 ttask_attack_list = { 1, 2, 3, 4 }
 
 busy_list = { 1, 2, 3, 4 }
-attack_list2 = { 9, 10, 11, 8, 6 }
-attack_list3 = { 7, 8, 6}
+attack_list2 = { 3, 8, 9, 5, 6 }
+attack_list3 = { 7, 5, 6}
 attack_list4 = { 6 }
-attack_list5 = { 9, 11, 6, 7, 8 }
+attack_list5 = { 3, 9, 6, 7, 5 }
 
 study_list = {
 	--{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu finger 10000;et;set study done", post_action="fly wm;e;s;s;s;w;w;u;gamble big skill finger 2000"}

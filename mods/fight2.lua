@@ -13,7 +13,7 @@ function init()
 	timer.delete("fight")
 end
 
-function prepare(busy_list, attack_list, f_escape, menpai)
+function prepare(busy_list, attack_list, f_escape, menpai, target)
 	context.busy_list = busy_list
 	context.attack_list = attack_list
 	context.f_escape = f_escape
@@ -22,6 +22,7 @@ function prepare(busy_list, attack_list, f_escape, menpai)
 	context.escape = false
 	context.halt = false
 	context.menpai = menpai
+	var.pfm_target = ""
 	timer.create("fight", "fight", 0.5, function() perform_busy() end)
 end
 
@@ -64,7 +65,7 @@ function perform_busy()
 	if(context.busy_list == nil) then attack() return end
 
 	for i, v in ipairs(context.busy_list) do
-		local busy = config.busy_list[v]
+		local busy = config.busy_perform_array[v]
 		local pfm = config.pfm[busy.i]
 		if(pfm.cd_time ~= nil and (os.time() - tonumber(pfm.cd_time) > 30)) then pfm.cd = false end
 		
@@ -82,7 +83,7 @@ end
 function perform_attack()
 
 	for i, v in ipairs(context.attack_list) do
-		local attack = config.attack_list[v]
+		local attack = config.attack_perform_array[v]
 		local pfm = config.pfm[attack.i]
 		if(pfm.cd_time ~= nil and (os.time() - tonumber(pfm.cd_time) > 30)) then pfm.cd = false end
 		
