@@ -34,7 +34,8 @@ function start(cmd)
 	context.escape = false
 	context.halt = false
 	--config.powerup()
-	Execute(cmd)
+	if(cmd ~= nil) Execute(cmd) end
+	
 	if(config.buff ~= nil) then config.buff(context.menpai) end
 	busy()
 end
