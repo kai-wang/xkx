@@ -185,6 +185,7 @@ ttask_busy_list = { 1, 2, 3, 4 }
 ttask_attack_list = { 1, 2, 3, 4 }
 
 busy_list = { 1, 2, 3, 4 }
+attack_list1 = { 7, 3, 6 }
 attack_list2 = { 3, 8, 9, 5, 6 }
 attack_list3 = { 7, 5, 4}
 attack_list4 = { 6 }
