@@ -128,7 +128,6 @@ end
 function exit()
 	walk.abort()
 	fight.stop()
-	ts.stop("task_walk")
 	EnableTriggerGroup("bei", false)
 	EnableTriggerGroup("bei_ask", false)
 	EnableTriggerGroup("bei_loc", false)
