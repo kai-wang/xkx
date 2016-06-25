@@ -22,7 +22,7 @@ function prepare(busy_list, attack_list, f_escape, menpai, target)
 	context.escape = false
 	context.halt = false
 	context.menpai = menpai
-	var.pfm_target = ""
+	var.pfm_target = target or ""
 	timer.create("fight", "fight", 0.5, function() perform_busy() end)
 end
 
