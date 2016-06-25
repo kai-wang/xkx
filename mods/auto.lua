@@ -230,7 +230,7 @@ local tasks = {
 		end,
 		
 		wait = function()
-			local auto_list = me.profile.auto_list
+			local auto_list = config.auto_list
 			local ct = os.time()
 			
 			if(var.double_available_time == nil) then var.double_available_time = ct end
@@ -310,7 +310,7 @@ end
 
 -- bei + guanfu ------
 function start()
-	local auto_list = me.profile.auto_list
+	local auto_list = config.auto_list
 	timer.create("auto", "auto", 59, function() auto.restart() end)
 	timer.tick("auto", 59, function() auto.restart() end)
 	call(nexttask(auto_list))
