@@ -164,7 +164,7 @@ attack_perform_array = {
 
 	[8] = { i = 36,
 			action = function()
-				Execute("unwield all;enable force xiaowuxiang;yun wuxiang " .. var.pfm_target)
+				Execute("unwield all;bei none;bei sun-finger;enable force xiaowuxiang;yun wuxiang " .. var.pfm_target)
 			end
 	},
 
@@ -175,7 +175,7 @@ attack_perform_array = {
 	}
 }
 
-task_busy_list = { 1, 2, 3, 4 }
+task_busy_list = { 9, 4, 8, 3 }
 task_attack_list = { 1, 2, 3, 4 }
 
 gf_busy_list = { 1, 3 }
