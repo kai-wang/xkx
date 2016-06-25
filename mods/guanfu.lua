@@ -137,6 +137,7 @@ function npcdie(name, line, wildcards)
 	core.busytest(function()
 		item.lookandget(done)
 	end)
+
 end
 
 function yesno(name, line, wildcards)

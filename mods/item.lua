@@ -22,7 +22,7 @@ function lookandget(f_done)
 		Execute("look corpse;get all from corpse;set check item")
 		local l, w = wait.regexp("^(> )*设定环境变数：check = \"item\"$")
 		EnableTriggerGroup("item", false)
-		
+		wait.time(1)
 		if(var.item_eat_list ~= nil and var.item_eat_list ~= "") then Execute(var.item_eat_list) end
 		if(var.item_drop_list ~= nil and var.item_drop_list ~= "") then Execute(var.item_drop_list) end
 		if(var.item_sell_list ~= nil and var.item_sell_list ~= "") then Execute("fly wm;u;" .. var.item_sell_list) end

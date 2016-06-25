@@ -300,7 +300,7 @@ function nexttask(tbl)
 			anti_idle(w)
 		else
 			wait.make(function()
-				wait.time(1)
+				wait.time(2)
 				print("----------start to do " .. t.name .. "----------")
 				t.main(nexttask(tbl))
 			end)
