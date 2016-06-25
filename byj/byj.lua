@@ -188,8 +188,8 @@ attack_perform_array = {
 
 }
 
-task_busy_list = { 10, 4, 11, 3 }
-task_attack_list = { 1, 2, 3, 4 }
+task_busy_list = { 1, 2, 3, 4 }
+task_attack_list = { 10, 4, 11, 3 }
 
 gf_busy_list = { 1, 3 }
 gf_attack_list = { 6, 7 }
