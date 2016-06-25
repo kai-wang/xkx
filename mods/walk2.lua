@@ -136,7 +136,7 @@ function run(path, f_ok, f_fail, f_stop)
 			if(c ~= "!") then 
 				--print("cmd " .. cmd)
 				local t = utils.split(cmd, ";")
-				if(#t > 10) then
+				if(#t > 10 && var.fast_mode == "1") then
 					wait.make(function()
 						for i = 1, #t do
 							Execute(t[i])
@@ -252,28 +252,23 @@ handlers = {
 		
 		wait.make(function()
 			local cmd = c.cmd[#c.cmd]
-			repeat
-				--wait.time(1)
-				Execute("suicide")
-				local l, w = wait.regexp("^(> )*(你正忙着呢，没空自杀！)|(请用 suicide -f 确定自杀。)$")
-				if(l:match("你正忙着呢")) then wait.time(1) end
-			until(l:match("确定自杀") ~= nil)
-		
-			--Execute(cmd .. ";set run_special_handle ok")
-			--local l, w = wait.regexp("^(> )*设定环境变数：run_special_handle = \"ok\"$")
-			Execute(cmd .. ";set run special")
-			local l, w = wait.regexp("^(> )*设定环境变数：run = \"special\"$")
-			if(not c.block) then 
-				print("no blocker") 
-				EnableTriggerGroup("walk_special", false)
-				EnableTriggerGroup("walk_special_boat", true)
-				EnableTriggerGroup("walk_special_lht", false)
-				EnableTriggerGroup("walk_special_dead", false)
-				DeleteTemporaryTriggers()
-				call(c.f_ok)
-			else 
-				handlers.run()
-			end
+
+			core.safehalt(function()
+				Execute(cmd .. ";set run special")
+				local l, w = wait.regexp("^(> )*设定环境变数：run = \"special\"$")
+				if(not c.block) then 
+					print("no blocker") 
+					EnableTriggerGroup("walk_special", false)
+					EnableTriggerGroup("walk_special_boat", true)
+					EnableTriggerGroup("walk_special_lht", false)
+					EnableTriggerGroup("walk_special_dead", false)
+					DeleteTemporaryTriggers()
+					call(c.f_ok)
+				else 
+					handlers.run()
+				end
+			end, 
+			1)
 		end)
 	end,
 	
@@ -675,7 +670,7 @@ function step_by_step(tbl, f_ok, f_fail, f_stop)
 	step = function(cmd, f_ok, f_fail, f_stop)
 		--wait.make(function()
 		--wait.time(0.3)
-		if(config.fast_mode == "1") then
+		if(var.fast_mode == "1") then
 			timer.tickonce("action", 0.3, function() run(cmd, f_ok, f_fail, f_stop) end)
 		else
 			run(cmd, f_ok, f_fail, f_stop)
