@@ -136,7 +136,7 @@ function run(path, f_ok, f_fail, f_stop)
 			if(c ~= "!") then 
 				--print("cmd " .. cmd)
 				local t = utils.split(cmd, ";")
-				if(#t > 10 && var.fast_mode == "1") then
+				if(#t > 10 and var.fast_mode == "1") then
 					wait.make(function()
 						for i = 1, #t do
 							Execute(t[i])
