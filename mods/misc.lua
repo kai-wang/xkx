@@ -36,7 +36,11 @@ function qukuan(amount, f_ok, f_fail)
 	wait.make(function()
 		Execute("fly wm;e;s;w;qukuan " .. amount)
 		local l, w = wait.regexp("^(> )*你从银号里取出.*$", 5)
-		if(not l or l:match("你从银号") == nil) then print("取款失败了") call(f_fail) return end
+		if(not l or l:match("你从银号") == nil) then
+			print("取款失败了") 
+			call(f_fail) 
+			return 
+		end
 		core.busytest(f_ok)
 	end)
 end
@@ -50,6 +54,7 @@ function get_xionghuang(f_ok, f_fail)
 			wait.time(5)
 			Execute("fly wm;nw;give xionghuang to " .. var.me_id)
 			l, w = wait.regexp("^(> )*(你身上没有这样东西)|(.*给你一包雄黄).*$")
+			if(var.fast_mode == "1") then wait.time(1) end
 			if(l:match("你身上没有这样东西") ~= nil) then print("雄黄失败了") call(f_fail) return end
 		end
 		print("雄黄准备好了")
@@ -66,6 +71,7 @@ function get_fire(f_ok, f_fail)
 			wait.time(5)
 			Execute("fly wm;nw;give fire to " .. var.me_id)
 			l, w = wait.regexp("^(> )*(你身上没有这样东西)|(.*给你一支火折).*$")
+			if(var.fast_mode == "1") then wait.time(1) end
 			if(l:match("你身上没有这样东西") ~= nil) then print("火折失败了") call(f_fail) return end
 		end
 		print("火折准备好了")
@@ -82,6 +88,7 @@ function get_yaopai(f_ok, f_fail)
 			--wait.time(5)
 			Execute("fly wm;nw;look yao pai")
 			l, w = wait.regexp("^(> )*(你要看什么)|(一块银质腰牌).*$")
+			if(var.fast_mode == "1") then wait.time(1) end
 			if(l:match("你要看什么") ~= nil) then print("腰牌失败了") call(f_fail) return end
 		end
 		print("腰牌准备好了")
@@ -98,6 +105,7 @@ function get_shanpai(f_ok, f_fail)
 			--wait.time(5)
 			Execute("fly wm;nw;give shan pai to " .. var.me_id)
 			l, w = wait.regexp("^(> )*(你要看什么)|(赏善铜牌).*$")
+			if(var.fast_mode == "1") then wait.time(1) end
 			if(l:match("你要看什么") ~= nil) then print("赏善铜牌失败了") call(f_fail) return end
 		end
 		print("赏善铜牌准备好了")
@@ -116,6 +124,7 @@ function get_sling(f_ok, f_fail)
 			--wait.time(5)
 			Execute("fly wm;nw;get yingxiong ling;look yingxiong ling")
 			l, w = wait.regexp("^(> )*(你要看什么)|(少林英雄令).*")
+			if(var.fast_mode == "1") then wait.time(1) end
 			if(l:match("你要看什么") ~= nil) then print("少林英雄令失败了") call(f_fail) return end
 		end
 		print("少林英雄令准备好了 ")
@@ -134,6 +143,7 @@ function get_qling(f_ok, f_fail)
 			--wait.time(5)
 			Execute("fly wm;nw;get chongyang ling;look chongyang ling")
 			local l, w = wait.regexp("^(> )*(你要看什么)|(重阳令).*")
+			if(var.fast_mode == "1") then wait.time(1) end
 			if(l:match("你要看什么") ~= nil) then print("重阳令失败了") call(f_fail) return end
 		end
 		print("重阳令准备好了 ")
@@ -191,6 +201,7 @@ function get_heimuling(f_ok, f_fail)
 			wait.time(3)
 			Execute("fly wm;nw;er;look heimu ling")
 			l, w = wait.regexp("^(> )*(黑木令)|(你要看什么).*$")
+			if(var.fast_mode == "1") then wait.time(1) end
 			if(l:match("你要看什么") ~= nil) then print("黑木令失败了") call(f_fail) return end
 		end
 		print("黑木令准备好了")
@@ -205,6 +216,7 @@ function get_jiedao(f_ok, f_fail)
 		if(l:match("戒刀") ~= nil) then
 			Execute("fly sl;knock gate;n;n;nu;n;w")
 		else
+			if(var.fast_mode == "1") then wait.time(1) end
 			Execute("fly sl;knock gate;n;n;nu;n;w;unwield all;kill seng bing")
 			l, w = wait.regexp("^(> )*(这里没有这个人)|(守寺僧兵扑在地上挣扎了几下).*$", 10)
 			if((l == nil) or (l:match("这里没有这个人") ~= nil)) then

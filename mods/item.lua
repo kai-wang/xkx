@@ -27,6 +27,8 @@ function lookandget(f_done)
 		if(var.item_drop_list ~= nil and var.item_drop_list ~= "") then Execute(var.item_drop_list) end
 		if(var.item_sell_list ~= nil and var.item_sell_list ~= "") then Execute("fly wm;u;" .. var.item_sell_list) end
 		if(var.item_store_list ~= nil and var.item_drop_list ~= "") then Execute("fly wm;nw") Execute(var.item_store_list) end
+
+		if(var.fast_mode == "1") then wait.time(1) end
 		call(f_done)
 	end)
 end
