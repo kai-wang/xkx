@@ -119,6 +119,7 @@ function run(path, f_ok, f_fail, f_stop)
 	
 	run_cxt.stop = false
 	run_cxt.fail = false
+	run_cxt.abort = false
 	
 	run_cxt.run_ok = f_ok
 	run_cxt.run_fail = f_fail
