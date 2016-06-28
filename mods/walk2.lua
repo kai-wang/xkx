@@ -161,8 +161,8 @@ function run(path, f_ok, f_fail, f_stop)
 	iterator = function()
 		return function()
 			-- run next command
-			if(run_cxt.fail) then print("run fail") return end--call(run_cxt.run_fail) end
-			if(run_cxt.stop) then print("run stop") return end--call(run_cxt.run_stop) end
+			if(run_cxt.fail) then print("run fail") end--call(run_cxt.run_fail) end
+			if(run_cxt.stop) then print("run stop") end--call(run_cxt.run_stop) end
 			
 			i = i + 1
 			if(i <= #tbl) then 
