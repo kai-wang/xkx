@@ -19,11 +19,7 @@ function main(f)
 	var.lll = cxt.learnlist.cmd
 
 	local go_study = function()
-		walk.run(cxt.learnlist.loc, 
-			function() 
-				start(var.lll, function() done(f) end, cxt.learnlist.research) 
-			end, 
-			f, f)
+		walk.run(cxt.learnlist.loc, start(var.lll, function() done(f) end, cxt.learnlist.research), f, f)
 	end
 
 	if(cxt.learnlist.wear_int) then
@@ -35,6 +31,7 @@ function main(f)
 	end
 end
 
+
 function init()
 	EnableTriggerGroup("study", false)
 	EnableTriggerGroup("study_check", false)
@@ -45,9 +42,9 @@ function done(f)
 	EnableTriggerGroup("study_check", false)
 	if(cxt.learnlist ~= nil and cxt.learnlist.post_action ~= nil) then
 		Execute(cxt.learnlist.post_action)
-		busy_test(function() config.fight_wear(f) end)
+		core.busytest(function() config.fight_wear(function() me.cleanup(f) end) end)
 	else
-		config.fight_wear(f)
+		config.fight_wear(function() me.cleanup(f) end)
 	end
 end
 
