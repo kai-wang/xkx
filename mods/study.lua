@@ -21,7 +21,7 @@ function main(f)
 	local go_study = function()
 		walk.run(cxt.learnlist.loc, 
 			function() 
-				start(var.lll, function() me.cleanup(f) end, cxt.learnlist.research) 
+				start(var.lll, function() done(f) end, cxt.learnlist.research) 
 			end, 
 			f, f)
 	end
@@ -40,14 +40,14 @@ function init()
 	EnableTriggerGroup("study_check", false)
 end
 
-function done()
+function done(f)
 	EnableTriggerGroup("study", false)
 	EnableTriggerGroup("study_check", false)
 	if(cxt.learnlist ~= nil and cxt.learnlist.post_action ~= nil) then
 		Execute(cxt.learnlist.post_action)
-		busy_test(function() config.fight_wear(cxt.f_done) end)
+		busy_test(function() config.fight_wear(f) end)
 	else
-		config.fight_wear(cxt.f_done)
+		config.fight_wear(f)
 	end
 end
 
