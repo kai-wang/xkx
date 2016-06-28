@@ -14,14 +14,25 @@ function main(f)
 		var.study_seq = 1
 	end
 
-	local learnlist = config.study_list[tonumber(var.study_seq)]
-	cxt.learnlist = learnlist
-	var.lll = learnlist.cmd
+	cxt.learnlist = config.study_list[tonumber(var.study_seq)]
+	var.study_seq = tonumber(var.study_seq) + 1
+	var.lll = cxt.learnlist.cmd
 
-	wait.make(function()
-		var.study_seq = tonumber(var.study_seq) + 1
-		walk.run(learnlist.loc, function() start(function() me.cleanup(f) end) end, f, f)
-	end)
+	local go_study = function()
+		walk.run(cxt.learnlist.loc, 
+			function() 
+				start(var.lll, function() me.cleanup(f) end, cxt.learnlist.research) 
+			end, 
+			f, f)
+	end
+
+	if(cxt.learnlist.wear_int) then
+		config.int_wear(function()
+			go_study()
+		end)
+	else
+		go_study()
+	end
 end
 
 function init()
@@ -48,10 +59,8 @@ function stop(f_done)
 	dazuo.abort(f_done)
 end
 
-function start(f_done)
+function start(cmd, f_done, researchFlag)
 	EnableTriggerGroup("study", true)
-	--EnableTriggerGroup("study_check", true)
-	--EnableTriggerGroup("HP", false)
 
 	emitter:once("study_end", function(err)
 		timer.stop("action")
@@ -72,35 +81,12 @@ function start(f_done)
 		end
 	end)
 
-	timer.tick("action", 0.2, function() Execute(var.lll) end)
-	--[[
-
-	EnableTriggerGroup("study", true)
-	EnableTriggerGroup("study_check", true)
-	EnableTriggerGroup("HP", false)
-	cxt.f_done = f_done
-	wait.make(function()
-		config.int_wear(function()
-			if(cxt.learnlist ~= nil and cxt.learnlist.pre_action ~= nil) then
-				Execute(cxt.learnlist.pre_action)
-			end
-			wait.time(1)
-			Execute(var.lll)
-			Execute("hp")
-		end)
-	end)
-
-	]]--
+	local interval = 0.2
+	if(researchFlag) then interval = 0.8 end
+	timer.tick("action", interval, function() Execute(cmd) end)
+	
 end
 
---[[
-function continue()
-	EnableTriggerGroup("study_check", true)
-	Execute("er;et")
-	Execute(var.lll)
-	Execute("hp")
-end
-]]--
 
 function givemoney()
 	wait.make(function()
@@ -117,42 +103,3 @@ function givemoney()
 	end)
 end
 
---[[
-function waitandtry()
-	wait.make(function()
-		EnableTriggerGroup("study_check", false)
-		wait.time(10)
-		EnableTriggerGroup("study_check", true)
-		Execute("er;et;" .. var.me_dazuo)
-	end)
-end
-
-function check(line, name, wildcards)
-	local nl, nl_max = wildcards[4], wildcards[5]
-	if(tonumber(nl) < tonumber(nl_max)*0.5) then
-		EnableTriggerGroup("study_check", false)
-		busy_test(function()
-			Execute("er;et;" .. var.me_dazuo)
-		end)
-	else
-		Execute(var.lll)
-		EnableTriggerGroup("study_check", true)
-		Execute("hp")
-	end
-end
-]]--
-module ("research", package.seeall)
-
-local cxt = {}
-
-function start(f_done)
-	if(var.research_num == nil or tonumber(var.research_num) == 0) then var.research_num = 1
-	else var.research_num = 1 + tonumber(tonumber(var.research_num) % #config.research_list) end
-
-	local skill = config.research_list[tonumber(var.research_num)].skill
-	study.start(function()
-		Execute("fly wm;e;s;s;s;w;w;u;u;gamble big skill " .. skill .. " 2000")
-		busy_test(function() Execute("fly wm") call(f_done) end )
-	end)
-
-end

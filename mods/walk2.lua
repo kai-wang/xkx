@@ -139,6 +139,7 @@ function run(path, f_ok, f_fail, f_stop)
 				if(#t > 10 and var.fast_mode == "1") then
 					wait.make(function()
 						for i = 1, #t do
+							if(run_cxt.abort) then return end
 							Execute(t[i])
 							wait.time(0.1)
 						end
@@ -159,8 +160,8 @@ function run(path, f_ok, f_fail, f_stop)
 	iterator = function()
 		return function()
 			-- run next command
-			if(run_cxt.fail) then print("run fail") end--call(run_cxt.run_fail) end
-			if(run_cxt.stop) then print("run stop") end--call(run_cxt.run_stop) end
+			if(run_cxt.fail) then print("run fail") return end--call(run_cxt.run_fail) end
+			if(run_cxt.stop) then print("run stop") return end--call(run_cxt.run_stop) end
 			
 			i = i + 1
 			if(i <= #tbl) then 
@@ -192,6 +193,12 @@ function run_stop()
 	EnableTriggerGroup("walk", false)
 	run_cxt.stop = true
 	call(run_cxt.run_stop)
+end
+
+function run_abort()
+	EnableTriggerGroup("walk_special", false)
+	EnableTriggerGroup("walk", false)
+	run_cxt.abort = true
 end
 
 --执行特殊命令：例如 aw:3:flatter 星宿老仙:nw--
@@ -291,8 +298,6 @@ handlers = {
 		
 		wait.make(function()
 			local cmd = c.cmd[#c.cmd]
-			--Execute(cmd .. ";set run_special_handle ok")
-			--local l, w = wait.regexp("^(> )*设定环境变数：run_special_handle = \"ok\"$")
 			Execute(cmd .. ";set run special")
 			local l, w = wait.regexp("^(> )*设定环境变数：run = \"special\"$")
 			if(not c.block) then 
@@ -736,6 +741,7 @@ end
 function abort()
 	local w = walk_cxt
 	walk_cxt.abort = true
+	run_abort()
 end
 
 function stopped()
