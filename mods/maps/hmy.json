@@ -1,0 +1,407 @@
+{
+  "center": 2942,
+  "cmd": "fly hmy",
+  "id": "hmy",
+  "name": "黑木崖",
+  "rooms": [ {
+    "desc": "    这里是半山的一片小土坪，离崖顶还有一段路途，可到这已经没有路上去，面前是如境般的峭壁，仰头而望，但见崖顶依稀耸立着楼阁，宛如仙境。可云烟缭绕，看不清晰。从悬崖上垂下一条绳索(rope)，看上去象是悬崖上下互通消息的工具，绳索的上面似乎隐约有一个吊篮(basket)。悬崖的墙上似乎有一个匣子(xiazi) ，你似乎走入一个雾宅，真不知如何是好。",
+    "exits": "eastdown",
+    "id": 2942,
+    "links": {
+      "ed": {
+        "con": "",
+        "to": 2943
+      },
+      "hi": {
+        "con": "aw:10:give heimu ling to zhang",
+        "to": 2949
+      }
+    },
+    "name": "日月坪",
+    "path": "fly hmy",
+    "zone": "黑木崖"
+  }, {
+    "desc": "    得到一道大石门前，只见两旁刻着两行大字，右首是“文成武德”，左首是“仁义英明”，横额上刻着“日月光明”四个大红字。",
+    "exits": "westup|eastdown",
+    "id": 2943,
+    "links": {
+      "ed": {
+        "con": "",
+        "to": 2944
+      },
+      "wu": {
+        "con": "",
+        "to": 2942
+      }
+    },
+    "name": "石门",
+    "path": "fly hmy;ed",
+    "zone": "黑木崖"
+  }, {
+    "desc": "    越往上，山势越陡峭，中间的石阶越窄，仅能一人行走，从这里往上望，隐约望见一座石门。",
+    "exits": "westup|eastdown",
+    "id": 2944,
+    "links": {
+      "ed": {
+        "con": "",
+        "to": 2945
+      },
+      "wu": {
+        "con": "",
+        "to": 2943
+      }
+    },
+    "name": "石阶",
+    "path": "fly hmy;ed;ed",
+    "zone": "黑木崖"
+  }, {
+    "desc": "    山路突然陡峭，两旁山峰笔立，中间留出一条窄窄的石阶，仅能两人并肩而行。",
+    "exits": "westup|eastdown",
+    "id": 2945,
+    "links": {
+      "ed": {
+        "con": "",
+        "to": 2946
+      },
+      "wu": {
+        "con": "",
+        "to": 2944
+      }
+    },
+    "name": "石阶",
+    "path": "fly hmy;ed;ed;ed",
+    "zone": "黑木崖"
+  }, {
+    "desc": "    这一路上山，地势极险，脚下是万丈深谷，而山道极之陡峭窄小，倘若一不留神，必将命丧于此。",
+    "exits": "westup|eastdown",
+    "id": 2946,
+    "links": {
+      "ed": {
+        "con": "",
+        "to": 2947
+      },
+      "wu": {
+        "con": "",
+        "to": 2945
+      }
+    },
+    "name": "山道",
+    "path": "fly hmy;ed;ed;ed;ed",
+    "zone": "黑木崖"
+  }, {
+    "desc": "    西面是一座高山，地势极之险峻，一条窄小陡峭的山道通往山上，东边山脚是一片长滩。",
+    "exits": "westup|eastdown",
+    "id": 2947,
+    "links": {
+      "ed": {
+        "con": "",
+        "to": 2948
+      },
+      "wu": {
+        "con": "",
+        "to": 2946
+      }
+    },
+    "name": "山道",
+    "path": "fly hmy;ed;ed;ed;ed;ed",
+    "zone": "黑木崖"
+  }, {
+    "desc": "    这片长滩不时有日月教教众乘船(boat)往来，滩头插着一面日月教的旗帜，表明这里是日月教的所控制的，所以尽管江面上往来的船只很多，但是并没有船敢在这里停留，要过对岸只有靠日月教自己的船只了。",
+    "exits": "westup",
+    "id": 2948,
+    "links": {
+      "wu": {
+        "con": "",
+        "to": 2947
+      }
+    },
+    "name": "长滩",
+    "path": "fly hmy;ed;ed;ed;ed;ed;ed",
+    "zone": "黑木崖"
+  }, {
+    "desc": "    这就是日月神教教主平日发号施令的地方，殿中无窗，殿口点着明晃晃的蜡烛，大殿彼端高设一座，坐着一个英俊的中年人，自是名震江湖的东方不败的姘头杨莲亭了！ ",
+    "exits": "north|westdown",
+    "id": 2949,
+    "links": {
+      "unwield all;n": {
+        "con": "",
+        "to": 2950
+      },
+      "wd": {
+        "con": "",
+        "to": 2962
+      }
+    },
+    "name": "成德殿",
+    "path": "|!c:hmling:fly hmy|;|!aw:10:give heimu ling to zhang:hi|",
+    "zone": "黑木崖"
+  }, {
+    "desc": "    这里是日月神教的后厅。看上去满是灰尘，但中间有一个瓷碗 (wan)，似乎有古怪。",
+    "exits": "south|east|west|down",
+    "id": 2950,
+    "links": {
+      "d": {
+        "con": "circle:",
+        "to": 2953
+      },
+      "e": {
+        "con": "",
+        "to": 2952
+      },
+      "s": {
+        "con": "",
+        "to": 2949
+      },
+      "w": {
+        "con": "",
+        "to": 2951
+      }
+    },
+    "name": "成德殿后厅",
+    "path": "|!c:hmling:fly hmy|;|!aw:10:give heimu ling to zhang:hi|;unwield all;n",
+    "zone": "黑木崖"
+  }, {
+    "desc": "    这里是间休息室，里面有张大床。在这里睡觉非常舒服，没人能打扰。南面是气派的长廊。",
+    "exits": "east",
+    "id": 2951,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2950
+      }
+    },
+    "name": "休息室",
+    "path": "|!c:hmling:fly hmy|;|!aw:10:give heimu ling to zhang:hi|;unwield all;n;w",
+    "zone": "黑木崖"
+  }, {
+    "desc": "    这是一个精雅的小舍，一进门便可闻到一阵浓冽的花香。房中挂着一幅五女向凤图，图中绘着五个宫装美女，美目盼兮，艳丽脱俗。屋里还有一张茶几，几张椅子，椅子上铺着绣花锦垫，西面有一扇洞形门通向后厅。",
+    "exits": "west",
+    "id": 2952,
+    "links": {
+      "w": {
+        "con": "",
+        "to": 2950
+      }
+    },
+    "name": "内室",
+    "path": "|!c:hmling:fly hmy|;|!aw:10:give heimu ling to zhang:hi|;unwield all;n;e",
+    "zone": "黑木崖"
+  }, {
+    "desc": "    这是一条异常幽静的走廊，四周漆黑一团，你好象什么都看不见似的走在里面，你不觉想到这似乎在每个角落都藏着无限杀机，太恐怖了，四周毫无声息，好象掉下一根针都可能听到。",
+    "exits": "south|east|west",
+    "id": 2953,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2954
+      },
+      "s": {
+        "con": "",
+        "to": 2955
+      },
+      "w": {
+        "con": "",
+        "to": 2953
+      }
+    },
+    "name": "秘道",
+    "path": "|!c:hmling:fly hmy|;|!aw:10:give heimu ling to zhang:hi|;unwield all;n;|!circle::d|",
+    "zone": "黑木崖"
+  }, {
+    "desc": "    你来到了一条秘道，看样子它不太平常，若隐若显的几盏油灯，昏暗如豆但是看上去前方似有光亮，你要是觉得害怕，现在回头还是可以的，不过这异常的幽静却也极大激发了你的好奇心，大丈夫死又何足道载，真是勇气可佳。",
+    "exits": "south|west",
+    "id": 2954,
+    "links": {
+      "s": {
+        "con": "",
+        "to": 2955
+      },
+      "w": {
+        "con": "",
+        "to": 2953
+      }
+    },
+    "name": "秘道",
+    "path": "|!c:hmling:fly hmy|;|!aw:10:give heimu ling to zhang:hi|;unwield all;n;|!circle::d|;e",
+    "zone": "黑木崖"
+  }, {
+    "danger": 4,
+    "desc": "    走在里面，你不觉想到这似乎在每个角落都藏着无限杀机，你感到近了近了，越来越近了。",
+    "exits": "south|north|east|west",
+    "id": 2955,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2956
+      },
+      "n": {
+        "con": "",
+        "to": 2954
+      },
+      "s": {
+        "con": "",
+        "to": 2953
+      },
+      "w": {
+        "con": "",
+        "to": 2956
+      }
+    },
+    "name": "秘道",
+    "path": "|!c:hmling:fly hmy|;|!aw:10:give heimu ling to zhang:hi|;unwield all;n;|!circle::d|;s",
+    "zone": "黑木崖"
+  }, {
+    "desc": "    走在里面，你不觉想到这似乎在每个角落都藏着无限杀机，你感到近了近了，越来越近了。",
+    "exits": "south|north|east|west",
+    "id": 2956,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2956
+      },
+      "n": {
+        "con": "",
+        "to": 2957
+      },
+      "s": {
+        "con": "",
+        "to": 2953
+      },
+      "w": {
+        "con": "",
+        "to": 2956
+      }
+    },
+    "name": "秘道",
+    "path": "|!c:hmling:fly hmy|;|!aw:10:give heimu ling to zhang:hi|;unwield all;n;|!circle::d|;s;e",
+    "zone": "黑木崖"
+  }, {
+    "desc": "    你忽觉前方有一亮光，真是别有洞天，前方好想别有地方。",
+    "exits": "south|east|southup|west",
+    "id": 2957,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2953
+      },
+      "s": {
+        "con": "",
+        "to": 2957
+      },
+      "su": {
+        "con": "",
+        "to": 2958
+      },
+      "w": {
+        "con": "",
+        "to": 2956
+      }
+    },
+    "name": "秘道尽头",
+    "path": "|!c:hmling:fly hmy|;|!aw:10:give heimu ling to zhang:hi|;unwield all;n;|!circle::d|;s;e;n",
+    "zone": "黑木崖"
+  }, {
+    "desc": "    你忽觉前方一亮，身前真是别有洞天，前方好想有作花园。不知是什么地方。",
+    "exits": "north|northdown",
+    "id": 2958,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 2959
+      },
+      "nd": {
+        "con": "",
+        "to": 2957
+      }
+    },
+    "name": "秘道尽头",
+    "path": "|!c:hmling:fly hmy|;|!aw:10:give heimu ling to zhang:hi|;unwield all;n;|!circle::d|;s;e;n;su",
+    "zone": "黑木崖"
+  }, {
+    "desc": "    从昏暗的地道中出来，你发现自己竟是置身于一个极精致的小花园中，红梅绿竹，青松翠柏，布置得颇具匠心，往东去是一间精雅小舍。",
+    "exits": "south|enter",
+    "id": 2959,
+    "links": {
+      "enter": {
+        "con": "",
+        "to": 2960
+      },
+      "s": {
+        "con": "",
+        "to": 2958
+      }
+    },
+    "name": "小花园",
+    "path": "|!c:hmling:fly hmy|;|!aw:10:give heimu ling to zhang:hi|;unwield all;n;|!circle::d|;s;e;n;su;n",
+    "zone": "黑木崖"
+  }, {
+    "desc": "    这是一间用翠竹搭成的小舍。一进门，便闻到一阵浓烈的花香，房中挂着一幅仕女图，椅上铺了绣花锦垫，东边有一扇门，挂着绣了一丛牡丹的锦缎门帏。难道这是谁家姑娘的闺房？",
+    "exits": "east|out",
+    "id": 2960,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2961
+      },
+      "out": {
+        "con": "",
+        "to": 2959
+      }
+    },
+    "name": "小舍",
+    "path": "|!c:hmling:fly hmy|;|!aw:10:give heimu ling to zhang:hi|;unwield all;n;|!circle::d|;s;e;n;su;n;enter",
+    "zone": "黑木崖"
+  }, {
+    "desc": "    这里是小舍内室。收拾得精细异常。只是有个大柜子摆在墙角(cabinet)显得很不自然你一进去，就发现床沿坐着一个打扮妖艳的人。那人也诧异地抬头，你发现他居然是个男人，手里执着一枚绣花针！",
+    "exits": "west",
+    "id": 2961,
+    "links": {
+      "w": {
+        "con": "",
+        "to": 2960
+      }
+    },
+    "name": "小舍内室",
+    "path": "|!c:hmling:fly hmy|;|!aw:10:give heimu ling to zhang:hi|;unwield all;n;|!circle::d|;s;e;n;su;n;enter;e",
+    "zone": "黑木崖"
+  }, {
+    "desc": "    又一座陡峭的悬崖立在了你的面前。悬崖上仿佛有座白色的建筑，可云烟缭绕，看不清晰。崖上又垂下一条绳索(rope)，看上去象是悬崖上下互通消息的工具，要想办法找其他的牌子啊。绳索的上面似乎隐约有一个吊篮(basket)，悬崖的墙上似乎有一个匣子(xiazi)。",
+    "exits": "westdown",
+    "id": 2962,
+    "links": {
+      "wd": {
+        "con": "",
+        "to": 2963
+      }
+    },
+    "name": "悬崖",
+    "path": "|!c:hmling:fly hmy|;|!aw:10:give heimu ling to zhang:hi|;wd",
+    "zone": "黑木崖"
+  }, {
+    "desc": "    又一座陡峭的悬崖立在了你的面前。悬崖上仿佛有座白色的建筑，可云烟缭绕，看不清晰。崖上又垂下一条绳索(rope)，看上去象是悬崖上下互通消息的工具，要想办法找其他的牌子啊。绳索的上面似乎隐约有一个吊篮(basket)，悬崖的墙上似乎有一个匣子(xiazi)。",
+    "exits": "westdown",
+    "id": 2963,
+    "links": {
+      "wd": {
+        "con": "",
+        "to": 2964
+      }
+    },
+    "name": "悬崖",
+    "path": "|!c:hmling:fly hmy|;|!aw:10:give heimu ling to zhang:hi|;wd;wd",
+    "zone": "黑木崖"
+  }, {
+    "desc": "    又一座陡峭的悬崖立在了你的面前。悬崖上仿佛有座白色的建筑，可云烟缭绕，看不清晰。崖上又垂下一条绳索(rope)，看上去象是悬崖上下互通消息的工具。绳索的上面似乎隐约有一个吊篮(basket)，悬崖的墙上似乎有一个匣子(xiazi)。",
+    "exits": "westdown",
+    "id": 2964,
+    "links": {
+      "wd": {
+        "con": "",
+        "to": 2942
+      }
+    },
+    "name": "悬崖",
+    "path": "|!c:hmling:fly hmy|;|!aw:10:give heimu ling to zhang:hi|;wd;wd;wd",
+    "zone": "黑木崖"
+  } ]
+}

@@ -1,0 +1,810 @@
+{
+  "center": 1340,
+  "cmd": "fly ss",
+  "id": "ss",
+  "name": "衡山",
+  "rooms": [ {
+    "desc": "    这里就是衡阳县城。衡阳地处偏远，显见远不如中原繁华了。",
+    "exits": "south|north|east|west",
+    "id": 455,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 459
+      },
+      "n": {
+        "con": "",
+        "to": 457
+      },
+      "s": {
+        "con": "",
+        "to": 456
+      },
+      "w": {
+        "con": "",
+        "to": 447
+      }
+    },
+    "name": "衡阳城",
+    "path": "fly ss;sd;sd;sw;sw;se;sd;sd;se;su;sd;se;sd;s;s;s;s;s;s;s;s;s",
+    "zone": "衡阳|衡山"
+  }, {
+    "desc": "    这里是南岳大庙的第一道门，由汉白玉，花岗石打就的石牌坊。南岳衡山是祝融游息之地，道教奉为第三小洞天。在此远望衡山，山势如飞，如云雾中凌空的大鸟。",
+    "exits": "south|north",
+    "id": 457,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 458
+      },
+      "s": {
+        "con": "",
+        "to": 455
+      }
+    },
+    "name": "棂星门",
+    "path": "fly ss;sd;sd;sw;sw;se;sd;sd;se;su;sd;se;sd;s;s;s;s;s;s;s;s",
+    "zone": "衡阳|衡山"
+  }, {
+    "desc": "    奎星阁是南岳大庙的第二进。阁为一个大舞台，阁左为鼓亭，右是钟亭。乡俗年节唱戏，这里总是热闹非凡。",
+    "exits": "south|north|east",
+    "id": 458,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 1300
+      },
+      "n": {
+        "con": "",
+        "to": 1299
+      },
+      "s": {
+        "con": "",
+        "to": 457
+      }
+    },
+    "name": "奎星阁",
+    "path": "fly ss;sd;sd;sw;sw;se;sd;sd;se;su;sd;se;sd;s;s;s;s;s;s;s",
+    "zone": "衡阳|衡山"
+  }, {
+    "desc": "    正川门是南岳大庙的第三进。院内是玄德宗殿，关圣殿，观音阁等楼宇。",
+    "exits": "south|north",
+    "id": 1299,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 1301
+      },
+      "s": {
+        "con": "",
+        "to": 458
+      }
+    },
+    "name": "正川门",
+    "path": "fly ss;sd;sd;sw;sw;se;sd;sd;se;su;sd;se;sd;s;s;s;s;s;s",
+    "zone": "衡山"
+  }, {
+    "desc": "    钟亭内设铁钟一口，重九千斤。每逢山洪暴发，鸣钟镇洪，亦以示警，声闻二十里外。 ",
+    "exits": "west",
+    "id": 1300,
+    "links": {
+      "w": {
+        "con": "",
+        "to": 458
+      }
+    },
+    "name": "钟亭",
+    "path": "fly ss;sd;sd;sw;sw;se;sd;sd;se;su;sd;se;sd;s;s;s;s;s;s;s;e",
+    "zone": "衡山"
+  }, {
+    "desc": "    御碑为重修南岳庙大石碑，高数丈，石碑竖立在重三万八千斤的大石龟上，龟身雕刻细腻，极为生动。",
+    "exits": "south|north",
+    "id": 1301,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 1302
+      },
+      "s": {
+        "con": "",
+        "to": 1299
+      }
+    },
+    "name": "御碑亭",
+    "path": "fly ss;sd;sd;sw;sw;se;sd;sd;se;su;sd;se;sd;s;s;s;s;s",
+    "zone": "衡山"
+  }, {
+    "desc": "    这里是地方官迎接京师御史官来祭南岳的地方，是南岳大庙第五进门了。门上雕塑也较精细些，悬彩灯笼时时换新。",
+    "exits": "south|north",
+    "id": 1302,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 1303
+      },
+      "s": {
+        "con": "",
+        "to": 1301
+      }
+    },
+    "name": "嘉应门",
+    "path": "fly ss;sd;sd;sw;sw;se;sd;sd;se;su;sd;se;sd;s;s;s;s",
+    "zone": "衡山"
+  }, {
+    "desc": "    御书楼为南岳庙历代藏书之处，天子御赐，贤达乐捐，这里早已洋洋大观。",
+    "exits": "south|north",
+    "id": 1303,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 1304
+      },
+      "s": {
+        "con": "",
+        "to": 1302
+      }
+    },
+    "name": "御书楼",
+    "path": "fly ss;sd;sd;sw;sw;se;sd;sd;se;su;sd;se;sd;s;s;s",
+    "zone": "衡山"
+  }, {
+    "desc": "    这里是南岳大殿，供祭祀炎帝之用。大殿结构为重檐歇山顶，顶覆七彩琉璃。殿高七十二尺，正面七间，有石柱七十二根，合南岳七十二峰之数。殿中南岳圣帝宝相庄严。南岳庙之雄为衡山小四绝之一。 ",
+    "exits": "south|north",
+    "id": 1304,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 1305
+      },
+      "s": {
+        "con": "",
+        "to": 1303
+      }
+    },
+    "name": "大殿",
+    "path": "fly ss;sd;sd;sw;sw;se;sd;sd;se;su;sd;se;sd;s;s",
+    "zone": "衡山"
+  }, {
+    "desc": "    后殿是南岳大庙的第八进，也是南岳大帝的寝宫。",
+    "exits": "south|north",
+    "id": 1305,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 1306
+      },
+      "s": {
+        "con": "",
+        "to": 1304
+      }
+    },
+    "name": "后殿",
+    "path": "fly ss;sd;sd;sw;sw;se;sd;sd;se;su;sd;se;sd;s",
+    "zone": "衡山"
+  }, {
+    "desc": "    南岳大庙正北门是大庙的后门，正在衡山山麓。回望大庙，红墙黄瓦，金碧辉煌。北面是上山的六小路。",
+    "exits": "south|northup",
+    "id": 1306,
+    "links": {
+      "nu": {
+        "con": "",
+        "to": 1307
+      },
+      "s": {
+        "con": "",
+        "to": 1305
+      }
+    },
+    "name": "正北门",
+    "path": "fly ss;sd;sd;sw;sw;se;sd;sd;se;su;sd;se;sd",
+    "zone": "衡山"
+  }, {
+    "desc": "    你走在衡山山路上，四望山峰错落，林壑幽深，溪泉飞瀑，云雾缭绕，不觉心胸大快。",
+    "exits": "northwest|southdown",
+    "id": 1307,
+    "links": {
+      "nw": {
+        "con": "",
+        "to": 1308
+      },
+      "sd": {
+        "con": "",
+        "to": 1306
+      }
+    },
+    "name": "山路",
+    "path": "fly ss;sd;sd;sw;sw;se;sd;sd;se;su;sd;se",
+    "zone": "衡山"
+  }, {
+    "desc": "    你走在衡山山路上，四望山峰错落，林壑幽深，溪泉飞瀑，云雾缭绕，不觉心胸大快。",
+    "exits": "northup|southeast",
+    "id": 1308,
+    "links": {
+      "nu": {
+        "con": "",
+        "to": 1309
+      },
+      "se": {
+        "con": "",
+        "to": 1307
+      }
+    },
+    "name": "山路",
+    "path": "fly ss;sd;sd;sw;sw;se;sd;sd;se;su;sd",
+    "zone": "衡山"
+  }, {
+    "desc": "    相传祝融能 \"以火施化\" ，是黄帝的 \"火正官\" ，并主管南方的事务，死后葬于此，故名赤帝峰。",
+    "exits": "eastdown|southdown|northdown",
+    "id": 1309,
+    "links": {
+      "ed": {
+        "con": "",
+        "to": 1310
+      },
+      "nd": {
+        "con": "",
+        "to": 1313
+      },
+      "sd": {
+        "con": "",
+        "to": 1308
+      }
+    },
+    "name": "赤帝峰",
+    "path": "fly ss;sd;sd;sw;sw;se;sd;sd;se;su",
+    "zone": "衡山"
+  }, {
+    "desc": "    你走在衡山山路上，四望山峰错落，林壑幽深，溪泉飞瀑，云雾缭绕，不觉心胸大快。西边上山是赤帝峰。东边远远可以看到衡山五峰之一的紫盖峰了。",
+    "exits": "westup|east",
+    "id": 1310,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 1311
+      },
+      "wu": {
+        "con": "",
+        "to": 1309
+      }
+    },
+    "name": "山路",
+    "path": "fly ss;sd;sd;sw;sw;se;sd;sd;se;su;ed",
+    "zone": "衡山"
+  }, {
+    "desc": "    你走在衡山山路上，四望山峰错落，林壑幽深，溪泉飞瀑，云雾缭绕，不觉心胸大快。西边上山的路。东边隐隐听到水响。",
+    "exits": "eastup|west",
+    "id": 1311,
+    "links": {
+      "eu": {
+        "con": "",
+        "to": 1312
+      },
+      "w": {
+        "con": "",
+        "to": 1310
+      }
+    },
+    "name": "山路",
+    "path": "fly ss;sd;sd;sw;sw;se;sd;sd;se;su;ed;e",
+    "zone": "衡山"
+  }, {
+    "desc": "    水帘洞在紫盖峰下，在吐雾和香炉两峰之间。紫盖峰之水经山涧汇入紫盖仙洞中，深不可测，水满则溢，飞瀑高二十余丈，数叠垂帘，飘泄而下，蔚为壮观。明张居正诗曰:  \"误疑瀛海翻琼波，莫拟银河倒碧流，自是湘妃深隐处，水晶帘挂五云头。\" 以赞叹这衡山大四绝之一的 \"水帘洞之奇\" 。",
+    "exits": "westdown",
+    "id": 1312,
+    "links": {
+      "wd": {
+        "con": "",
+        "to": 1311
+      }
+    },
+    "name": "水帘洞",
+    "path": "fly ss;sd;sd;sw;sw;se;sd;sd;se;su;ed;e;eu",
+    "zone": "衡山"
+  }, {
+    "desc": "    你走在衡山山路上，四望山峰错落，林壑幽深，溪泉飞瀑，云雾缭绕，不觉心胸大快。",
+    "exits": "northwest|southup",
+    "id": 1313,
+    "links": {
+      "nw": {
+        "con": "",
+        "to": 1314
+      },
+      "su": {
+        "con": "",
+        "to": 1309
+      }
+    },
+    "name": "山路",
+    "path": "fly ss;sd;sd;sw;sw;se;sd;sd;se",
+    "zone": "衡山"
+  }, {
+    "desc": "    你走在衡山山路上，四望山峰错落，林壑幽深，溪泉飞瀑，云雾缭绕，不觉心胸大快。",
+    "exits": "northup|southeast",
+    "id": 1314,
+    "links": {
+      "nu": {
+        "con": "",
+        "to": 1315
+      },
+      "se": {
+        "con": "",
+        "to": 1313
+      }
+    },
+    "name": "山路",
+    "path": "fly ss;sd;sd;sw;sw;se;sd;sd",
+    "zone": "衡山"
+  }, {
+    "desc": "    终于到了半山亭。这里离到祝融峰无论高程还是行程，均恰好是一半之径，路边小亭显然已极古久，但仍为过往客旅遮风避雨。",
+    "exits": "northup|southdown",
+    "id": 1315,
+    "links": {
+      "nu": {
+        "con": "",
+        "to": 1316
+      },
+      "sd": {
+        "con": "",
+        "to": 1314
+      }
+    },
+    "name": "半山亭",
+    "path": "fly ss;sd;sd;sw;sw;se;sd",
+    "zone": "衡山"
+  }, {
+    "desc": "    你走在衡山山路上，四望山峰错落，林壑幽深，溪泉飞瀑，云雾缭绕，不觉心胸大快。西边有岔路通往磨镜台和天柱峰。西北方就是芙蓉峰了，祝融峰也是往这个方向。",
+    "exits": "northwest|southdown|west",
+    "id": 1316,
+    "links": {
+      "nw": {
+        "con": "",
+        "to": 1331
+      },
+      "sd": {
+        "con": "",
+        "to": 1315
+      },
+      "w": {
+        "con": "",
+        "to": 1317
+      }
+    },
+    "name": "山路",
+    "path": "fly ss;sd;sd;sw;sw;se",
+    "zone": "衡山"
+  }, {
+    "desc": "    你走在衡山山路上，四望山峰错落，林壑幽深，溪泉飞瀑，云雾缭绕，不觉心胸大快。南边山路就是磨镜台和天柱峰。",
+    "exits": "east|southdown",
+    "id": 1317,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 1316
+      },
+      "sd": {
+        "con": "",
+        "to": 1318
+      }
+    },
+    "name": "山路",
+    "path": "fly ss;sd;sd;sw;sw;se;w",
+    "zone": "衡山"
+  }, {
+    "desc": "    磨镜台位于燕子岩下，与半山亭一沟相邻。台前峰回路转，台旁古松苍翠，环境清幽。相传南宗禅宗怀让在此宣扬 \"顿悟法门\" ，坐台高僧斗法，怀让磨镜，智服北宗道一，此台因而传名。 \"磨镜台之幽\" 是衡山大四绝之一。",
+    "exits": "westup|northup|southdown",
+    "id": 1318,
+    "links": {
+      "nu": {
+        "con": "",
+        "to": 1317
+      },
+      "sd": {
+        "con": "",
+        "to": 1319
+      },
+      "wu": {
+        "con": "",
+        "to": 1325
+      }
+    },
+    "name": "磨镜台",
+    "path": "fly ss;sd;sd;sw;sw;se;w;sd",
+    "zone": "衡山"
+  }, {
+    "desc": "    你走在衡山山路上，四望山峰错落，林壑幽深，溪泉飞瀑，云雾缭绕，不觉心胸大快。南边就是福严寺。",
+    "exits": "northup|southup",
+    "id": 1319,
+    "links": {
+      "nu": {
+        "con": "",
+        "to": 1318
+      },
+      "su": {
+        "con": "",
+        "to": 1320
+      }
+    },
+    "name": "山路",
+    "path": "fly ss;sd;sd;sw;sw;se;w;sd;sd",
+    "zone": "衡山"
+  }, {
+    "desc": "    福严寺为禅宗七祖怀让的道场，怀让在此宏扬顿悟法门。山门上匾额 \"天下法院\" 正是当年写照，两边门联 \"六朝古刹\"  \"七祖道场\" 字迹剥落，颜色极古。山门墙山有古人留字(zi)，年代古远，犹历历可辩。 寺内石柱有一对联(lian)，字迹圆润回转，不露机锋。",
+    "exits": "westup|southdown|northdown",
+    "id": 1320,
+    "links": {
+      "nd": {
+        "con": "",
+        "to": 1319
+      },
+      "sd": {
+        "con": "",
+        "to": 1321
+      },
+      "wu": {
+        "con": "",
+        "to": 1323
+      }
+    },
+    "name": "福严寺",
+    "path": "fly ss;sd;sd;sw;sw;se;w;sd;sd;su",
+    "zone": "衡山"
+  }, {
+    "desc": "    你走在衡山山路上，四望山峰错落，林壑幽深，溪泉飞瀑，云雾缭绕，不觉心胸大快。南边是南台寺，北边通往福严寺。",
+    "exits": "northup|southup",
+    "id": 1321,
+    "links": {
+      "nu": {
+        "con": "",
+        "to": 1320
+      },
+      "su": {
+        "con": "",
+        "to": 1322
+      }
+    },
+    "name": "山路",
+    "path": "fly ss;sd;sd;sw;sw;se;w;sd;sd;su;sd",
+    "zone": "衡山"
+  }, {
+    "desc": "    南台寺为禅宗七祖怀让的弟子石头希迁的道场，寺下紫云峰上是石头和尚墓。寺周林荫夹道，曲径通幽，泉流叮咚，蜂蝶纷飞，山风吹过时万叶悉索，真好去处。",
+    "exits": "northdown",
+    "id": 1322,
+    "links": {
+      "nd": {
+        "con": "",
+        "to": 1321
+      }
+    },
+    "name": "南台寺",
+    "path": "fly ss;sd;sd;sw;sw;se;w;sd;sd;su;sd;su",
+    "zone": "衡山"
+  }, {
+    "desc": "    三生塔是福严寺开山禅师慧思埋骨处，据说慧思禅师的三生均埋骨这里，故称三生塔。不远处有棵银杏，据说曾受戒于慧思禅师，树龄千年，仍亭亭华盖，岁岁青苍。",
+    "exits": "eastdown|southup",
+    "id": 1323,
+    "links": {
+      "ed": {
+        "con": "",
+        "to": 1320
+      },
+      "su": {
+        "con": "",
+        "to": 1324
+      }
+    },
+    "name": "三生塔",
+    "path": "fly ss;sd;sd;sw;sw;se;w;sd;sd;su;wu",
+    "zone": "衡山"
+  }, {
+    "desc": "    这里是福严寺最高处。唐邺侯李泌手书 \"极高明\" 三个大字于此，意即佛相极高 (高无见顶相) ，佛光极明 (明不借他光) ，佛是至高无上的，故曰极高明台。",
+    "exits": "northdown",
+    "id": 1324,
+    "links": {
+      "nd": {
+        "con": "",
+        "to": 1323
+      }
+    },
+    "name": "极高明台",
+    "path": "fly ss;sd;sd;sw;sw;se;w;sd;sd;su;wu;su",
+    "zone": "衡山"
+  }, {
+    "desc": "    你走在衡山山路上，四望山峰错落，林壑幽深，溪泉飞瀑，云雾缭绕，不觉心胸大快。山路东西通向磨镜台和天柱峰。",
+    "exits": "westup|eastdown",
+    "id": 1325,
+    "links": {
+      "ed": {
+        "con": "",
+        "to": 1318
+      },
+      "wu": {
+        "con": "",
+        "to": 1326
+      }
+    },
+    "name": "山路",
+    "path": "fly ss;sd;sd;sw;sw;se;w;sd;wu",
+    "zone": "衡山"
+  }, {
+    "desc": "    你爬上衡山五峰之一的天柱峰，四望群山缥缈云雾中，每每天阴地湿时候，这里就是天柱云气的所在了。 ",
+    "exits": "eastdown|westdown",
+    "id": 1326,
+    "links": {
+      "ed": {
+        "con": "",
+        "to": 1325
+      },
+      "wd": {
+        "con": "",
+        "to": 1327
+      }
+    },
+    "name": "天柱峰",
+    "path": "fly ss;sd;sd;sw;sw;se;w;sd;wu;wu",
+    "zone": "衡山"
+  }, {
+    "desc": "    你走在衡山山路上，四望山峰错落，林壑幽深，溪泉飞瀑，云雾缭绕，不觉心胸大快。山路向西通向方广寺。东面是天柱峰。",
+    "exits": "eastup|westdown",
+    "id": 1327,
+    "links": {
+      "eu": {
+        "con": "",
+        "to": 1326
+      },
+      "wd": {
+        "con": "",
+        "to": 1328
+      }
+    },
+    "name": "山路",
+    "path": "fly ss;sd;sd;sw;sw;se;w;sd;wu;wu;wd",
+    "zone": "衡山"
+  }, {
+    "desc": "    方广寺在莲花峰下。莲花峰有八个山头，犹如金莲瓣瓣，方广寺就建在这莲花中心的一片平地上。深邃幽雅，有 \"不游方广寺，不知南岳之深\" 之说，故 \"方广寺之深\" 为衡山大四绝之一。",
+    "exits": "eastup|southdown",
+    "id": 1328,
+    "links": {
+      "eu": {
+        "con": "",
+        "to": 1327
+      },
+      "sd": {
+        "con": "",
+        "to": 1329
+      }
+    },
+    "name": "方广寺",
+    "path": "fly ss;sd;sd;sw;sw;se;w;sd;wu;wu;wd;wd",
+    "zone": "衡山"
+  }, {
+    "desc": "    顺山涧漂流而下，沿溪遍布珍稀树木，泉石，林木，花草及峰峦均极宜人。涧流至崖折叠飞泄而下，声震山谷。",
+    "exits": "northup|down",
+    "id": 1329,
+    "links": {
+      "d": {
+        "con": "",
+        "to": 1330
+      },
+      "nu": {
+        "con": "",
+        "to": 1328
+      }
+    },
+    "name": "山涧",
+    "path": "fly ss;sd;sd;sw;sw;se;w;sd;wu;wu;wd;wd;sd",
+    "zone": "衡山"
+  }, {
+    "desc": "    黑沙潭又称黑龙潭，深不见底，水色苍黑，瀑布流急，水中黑泡共白沫徜徉，幽幽可怖。石壁上 \"海南龙湫\" 四字据载为大宋徽宗赵佶所留。瘦金字体，一如往昔。",
+    "exits": "up",
+    "id": 1330,
+    "links": {
+      "u": {
+        "con": "",
+        "to": 1329
+      }
+    },
+    "name": "黑沙潭",
+    "path": "fly ss;sd;sd;sw;sw;se;w;sd;wu;wu;wd;wd;sd;d",
+    "zone": "衡山"
+  }, {
+    "desc": "    你走在衡山山路上，四望山峰错落，林壑幽深，溪泉飞瀑，云雾缭绕，不觉心胸大快。东北方就是南天门了，高高矗立在西北方的就是衡山五峰之一的芙蓉峰。",
+    "exits": "southeast|northeast",
+    "id": 1331,
+    "links": {
+      "ne": {
+        "con": "",
+        "to": 1332
+      },
+      "se": {
+        "con": "",
+        "to": 1316
+      }
+    },
+    "name": "山路",
+    "path": "fly ss;sd;sd;sw;sw",
+    "zone": "衡山"
+  }, {
+    "desc": "    到了南天门，才能望到衡山第一的祝融峰。南天门是花岗岩的石碑坊，中门镌有 \"南天门\" 三字横额，左右二门的门楣上，分别刻有 \"行云\" ， \"施雨\" 。楹联(lian)破陋，显见岁月已久。",
+    "exits": "northwest|eastup|southup|northeast|southwest",
+    "id": 1332,
+    "links": {
+      "eu": {
+        "con": "",
+        "to": 1333
+      },
+      "ne": {
+        "con": "",
+        "to": 1337
+      },
+      "nw": {
+        "con": "",
+        "to": 1334
+      },
+      "su": {
+        "con": "",
+        "to": 1338
+      },
+      "sw": {
+        "con": "",
+        "to": 1331
+      }
+    },
+    "name": "南天门",
+    "path": "fly ss;sd;sd;sw",
+    "zone": "衡山"
+  }, {
+    "desc": "    每逢雨霁，在后山深壑中升腾起来的云山雾海，涌过南天门山脊，向前山倾泻，直如银河飞泻，蔚为壮观，这就是南天门的流云奇景。",
+    "exits": "westdown",
+    "id": 1333,
+    "links": {
+      "wd": {
+        "con": "",
+        "to": 1332
+      }
+    },
+    "name": "流云坪",
+    "path": "fly ss;sd;sd;sw;eu",
+    "zone": "衡山"
+  }, {
+    "desc": "    你走在衡山山路上，四望山峰错落，林壑幽深，溪泉飞瀑，云雾缭绕，不觉心胸大快。山路转过芙蓉峰，西面远远看到藏经阁，东南方向通往南天门。",
+    "exits": "southeast|west",
+    "id": 1334,
+    "links": {
+      "se": {
+        "con": "",
+        "to": 1332
+      },
+      "w": {
+        "con": "",
+        "to": 1335
+      }
+    },
+    "name": "山路",
+    "path": "fly ss;sd;sd;sw;nw",
+    "zone": "衡山"
+  }, {
+    "desc": "    藏经殿深掩祥光峰下，因藏明太祖所赠 \"大藏经\" 故名。这里古木参天，殿宇飘翼，奇花异草，林壑幽深，景色秀丽， \"藏经殿之秀\" 是衡山大四绝之一。",
+    "exits": "south|east",
+    "id": 1335,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 1334
+      },
+      "s": {
+        "con": "",
+        "to": 1336
+      }
+    },
+    "name": "藏经殿",
+    "path": "fly ss;sd;sd;sw;nw;w",
+    "zone": "衡山"
+  }, {
+    "desc": "    藏经殿有一泓碧泉如镜，向称美容泉。相传为南陈后主妃在此避乱时，对碧水照容颜梳妆打扮的地方。殿前胜迹有灵日，昔时夜间常见飞光，或如繁星点点，或若万萤乱飞，煞是壮观。",
+    "exits": "north",
+    "id": 1336,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 1335
+      }
+    },
+    "name": "梳妆台",
+    "path": "fly ss;sd;sd;sw;nw;w;s",
+    "zone": "衡山"
+  }, {
+    "desc": "    狮子岩布满奇形怪状的岩石，细究则绝类狮子，腾跃伏吼，各肖其类。到狮子岩，祝融峰已经在望了。",
+    "exits": "northup|southwest",
+    "id": 1337,
+    "links": {
+      "nu": {
+        "con": "",
+        "to": 1339
+      },
+      "sw": {
+        "con": "",
+        "to": 1332
+      }
+    },
+    "name": "狮子岩",
+    "path": "fly ss;sd;sd",
+    "zone": "衡山"
+  }, {
+    "desc": "    这里是南天门登高望远的好去处。你站在这里，俯视诸峰，丘垤如泥丸。看湘江北去，九向九背，时隐时现。周围烟霞，碧罗，紫盖，天柱诸峰环抱，气象万千。",
+    "exits": "northdown",
+    "id": 1338,
+    "links": {
+      "nd": {
+        "con": "",
+        "to": 1332
+      }
+    },
+    "name": "登高台",
+    "path": "fly ss;sd;sd;sw;su",
+    "zone": "衡山"
+  }, {
+    "desc": "    望日台紧邻祝融殿。鸡鸣夜起，登台东望，遥见海门，云水皆赤，倏忽异彩，日轮荡漾，若沉若浮，稍之奋涌而起，光耀夺目。",
+    "exits": "northup|southdown",
+    "id": 1339,
+    "links": {
+      "nu": {
+        "con": "",
+        "to": 1340
+      },
+      "sd": {
+        "con": "",
+        "to": 1337
+      }
+    },
+    "name": "望日台",
+    "path": "fly ss;sd",
+    "zone": "衡山"
+  }, {
+    "desc": "    祝融殿，又名老圣殿，祠火神祝融。花岗石砌墙，铁瓦覆顶，殿宇凌空傲雪，巍然屹立在衡山绝顶。殿门石楹上刻有:  \"寅宾日出，峻极于天\" ，殿上有\"圣德重华\"的楣额。现在这里是衡山派掌门所在。",
+    "exits": "westup|southdown|northdown",
+    "id": 1340,
+    "links": {
+      "nd": {
+        "con": "",
+        "to": 1342
+      },
+      "sd": {
+        "con": "",
+        "to": 1339
+      },
+      "wu": {
+        "con": "",
+        "to": 1341
+      }
+    },
+    "name": "祝融殿",
+    "path": "fly ss",
+    "zone": "衡山"
+  }, {
+    "desc": "     \"祝融峰之高\" 为衡山大四绝之首。在此俯瞰群峰，尽收眼底。东望湘江，南及五岭，北瞰洞庭，西视雪山。杜甫望岳诗中有 \"祝融五峰尊，峰峰次低昂。\" 韩愈亦以 \"祝融万丈拔地起，欲见不见轻烟里\" 极言其高。",
+    "exits": "eastdown",
+    "id": 1341,
+    "links": {
+      "ed": {
+        "con": "",
+        "to": 1340
+      }
+    },
+    "name": "祝融峰",
+    "path": "fly ss;wu",
+    "zone": "衡山"
+  }, {
+    "desc": "    望月台是祝融殿后一高耸巨石。每当夜籁，皓月当空，犹如玉盘冰轮，漫洒万里清辉，清冷月色，辉映低昂的群峰。此时 \"浩然万里，举七十二峰，峰峰贮冰壶中，始信下方无此月也。\" 前人因此有诗: 人间朗魄已皆尽，此地清光犹未低。",
+    "exits": "southup",
+    "id": 1342,
+    "links": {
+      "su": {
+        "con": "",
+        "to": 1340
+      }
+    },
+    "name": "望月台",
+    "path": "fly ss;nd",
+    "zone": "衡山"
+  } ]
+}

@@ -1,0 +1,583 @@
+{
+  "center": 456,
+  "cmd": "fly hy",
+  "id": "hy",
+  "name": "衡阳",
+  "rooms": [ {
+    "desc": "    进入江西，还是不尽的山坎和密林幽谷，终日不见天光。放眼山中毒虫猛兽出没无常，行路艰辛。一到这里就闻到一股腥风扑鼻而来。",
+    "exits": "northwest|eastup",
+    "id": 342,
+    "links": {
+      "eu": {
+        "con": "",
+        "to": 341
+      },
+      "nw": {
+        "con": "",
+        "to": 460
+      }
+    },
+    "name": "闽赣古道",
+    "path": "fly hy;n;e;ne;se",
+    "zone": "福州|衡阳"
+  }, {
+    "desc": "    这里是南岭的一个山口。南面就是佛山了，北面是横亘湖南广东的五岭。这里地气炎热，百物速生快长，口音也远异中原了。",
+    "exits": "south|northup",
+    "id": 439,
+    "links": {
+      "nu": {
+        "con": "",
+        "to": 440
+      },
+      "s": {
+        "con": "",
+        "to": 424
+      }
+    },
+    "name": "南岭山口",
+    "path": "fly hy;n;w;w;w;su;sd",
+    "zone": "佛山|衡阳"
+  }, {
+    "desc": "    这里是南岭的一个山口。南面是岭南的大镇佛山，北面是湖南的地界。岭南广东富庶繁盛，颇有豪侠之士。",
+    "exits": "southdown|northdown",
+    "id": 440,
+    "links": {
+      "nd": {
+        "con": "",
+        "to": 441
+      },
+      "sd": {
+        "con": "",
+        "to": 439
+      }
+    },
+    "name": "南岭山口",
+    "path": "fly hy;n;w;w;w;su",
+    "zone": "衡阳"
+  }, {
+    "desc": "    这里是一条林间大道。这里是湖南境内。南边通向南岭的一个山口。路东隐隐可以看到一角城墙。西面是一座猛恶山林。",
+    "exits": "north|east|southup|west",
+    "id": 441,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 446
+      },
+      "n": {
+        "con": "",
+        "to": 442
+      },
+      "su": {
+        "con": "",
+        "to": 440
+      }
+    },
+    "name": "林间大道",
+    "path": "fly hy;n;w;w;w",
+    "zone": "衡阳"
+  }, {
+    "desc": "    这里是一条林间大道，在树丛中蜿蜒。这里是湖南境内。北边是湖北。路边有可供路人休息的小茶亭。",
+    "exits": "south|north|east",
+    "id": 442,
+    "links": {
+      "e;ask yuan about 胡斐": {
+        "con": "",
+        "to": 445
+      },
+      "n": {
+        "con": "",
+        "to": 443
+      },
+      "s": {
+        "con": "",
+        "to": 441
+      }
+    },
+    "name": "林间大道",
+    "path": "fly hy;n;w;w;w;n",
+    "zone": "衡阳"
+  }, {
+    "desc": "    这里是一条林间大道，在树丛中蜿蜒。这里是湖北境内。南边是湖南。",
+    "exits": "south|north",
+    "id": 443,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 444
+      },
+      "s": {
+        "con": "",
+        "to": 442
+      }
+    },
+    "name": "林间大道",
+    "path": "fly hy;n;w;w;w;n;n",
+    "zone": "衡阳"
+  }, {
+    "desc": "",
+    "exits": "south|northwest",
+    "id": 444,
+    "links": {
+      "nw": {
+        "con": "",
+        "to": 1745
+      },
+      "s": {
+        "con": "",
+        "to": 443
+      }
+    },
+    "name": "林间道",
+    "path": "fly hy;n;w;w;w;n;n;n",
+    "zone": "衡阳"
+  }, {
+    "desc": "    这是一家路边的小茶亭，赶山路的人常在此处歇歇脚。亭子里有几张桌子和几支条凳。周围是一片树林。",
+    "exits": "west",
+    "id": 445,
+    "links": {
+      "w": {
+        "con": "",
+        "to": 442
+      }
+    },
+    "name": "茶亭",
+    "path": "fly hy;n;w;w;w;n;e;ask yuan about 胡斐",
+    "zone": "衡阳"
+  }, {
+    "desc": "    你走在一条尘土飞扬的黄土路上，两旁是阴森森的树林。东面不远就是衡阳县城了。往西是另外一条大道。",
+    "exits": "east|west",
+    "id": 446,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 447
+      },
+      "w": {
+        "con": "",
+        "to": 441
+      }
+    },
+    "name": "黄土路",
+    "path": "fly hy;n;w;w",
+    "zone": "衡阳"
+  }, {
+    "desc": "    你走在碎石铺就的狭小街道上。街上时常有人持剑疾行，似乎这里出了啥事了。南边是一家小店，北面一座大宇巍峨，重檐叠瓦，门口彩灯高悬，管家家丁好象都是武林中人。",
+    "exits": "south|north|east|west",
+    "id": 447,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 455
+      },
+      "n": {
+        "con": "",
+        "to": 450
+      },
+      "s": {
+        "con": "",
+        "to": 448
+      },
+      "w": {
+        "con": "",
+        "to": 446
+      }
+    },
+    "name": "衡阳西街",
+    "path": "fly hy;n;w",
+    "zone": "衡阳"
+  }, {
+    "desc": "    这里是衡阳县城的一间小店，卖些简单的饮食，专门赚那些游客的钱。",
+    "exits": "up|north",
+    "id": 448,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 447
+      },
+      "u": {
+        "con": "",
+        "to": 449
+      }
+    },
+    "name": "小店",
+    "path": "fly hy;n;w;s",
+    "zone": "衡阳"
+  }, {
+    "desc": "    这里是衡阳回雁楼，是本地最大的酒楼。往日这时已经十分忙碌的酒楼今天却有点异样。一个年近四十的白衣汉子，正端坐自饮，桌面横放着一把快刀，旁边却坐着一个小尼姑，满脸忧急愁苦之色，容貌却十分秀丽。",
+    "exits": "down",
+    "id": 449,
+    "links": {
+      "d": {
+        "con": "",
+        "to": 448
+      }
+    },
+    "name": "回雁楼",
+    "path": "fly hy;n;w;s;u",
+    "zone": "衡阳"
+  }, {
+    "desc": "    这里是刘府大门。刘府的主人，就是衡山派中的仅次于掌门人莫大先生的第二号人物刘正风刘老爷子。今天兴许刘府有事吧，大门(gate)紧闭，管家家丁也异样紧张。只有檐下的写着 \"刘府\" 二字的大红灯笼中的烛火忽闪晃动才显出点活人气。",
+    "exits": "south",
+    "id": 450,
+    "links": {
+      "enter": {
+        "con": "aw:0:knock gate;push gate",
+        "to": 451
+      },
+      "s": {
+        "con": "",
+        "to": 447
+      }
+    },
+    "name": "刘府大门",
+    "path": "fly hy;n;w;n",
+    "zone": "衡阳"
+  }, {
+    "desc": "    刘府大院里现在挤着很多江湖豪客，原来今天是刘正风金盆洗手的好日子。刘老爷子在衡阳人缘很好，来捧场的自然不少，大院里已摆了很多张桌子，杯筷往来，很是热闹。",
+    "exits": "north|out",
+    "id": 451,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 452
+      },
+      "out": {
+        "con": "",
+        "to": 450
+      }
+    },
+    "name": "刘府大院",
+    "path": "fly hy;n;w;n;|!aw:0:knock gate;push gate:enter|",
+    "zone": "衡阳"
+  }, {
+    "desc": "",
+    "exits": "south|east|west",
+    "id": 452,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 453
+      },
+      "s": {
+        "con": "",
+        "to": 451
+      },
+      "w": {
+        "con": "",
+        "to": 454
+      }
+    },
+    "name": "刘府大厅",
+    "path": "fly hy;n;w;n;|!aw:0:knock gate;push gate:enter|;n",
+    "zone": "衡阳"
+  }, {
+    "desc": "    这儿是东厢房，这儿整理得干干净净，窗外露出点绿绿的枝叶，家具上一尘不染，地上铺着很大块的青砖，一点灰尘也不沾。",
+    "exits": "west",
+    "id": 453,
+    "links": {
+      "w": {
+        "con": "",
+        "to": 452
+      }
+    },
+    "name": "刘府东厢房",
+    "path": "fly hy;n;w;n;|!aw:0:knock gate;push gate:enter|;n;e",
+    "zone": "衡阳"
+  }, {
+    "desc": "    这儿是西厢房，这儿整理得干干净净，窗外露出点绿绿的枝叶，家具上一尘不染，地上铺着很大块的青砖，一点灰尘也不沾。刘府的小孩们不知在这里悄悄说着什么。",
+    "exits": "east",
+    "id": 454,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 452
+      }
+    },
+    "name": "刘府西厢房",
+    "path": "fly hy;n;w;n;|!aw:0:knock gate;push gate:enter|;n;w",
+    "zone": "衡阳"
+  }, {
+    "desc": "    这里就是衡阳县城。衡阳地处偏远，显见远不如中原繁华了。",
+    "exits": "south|north|east|west",
+    "id": 455,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 459
+      },
+      "n": {
+        "con": "",
+        "to": 457
+      },
+      "s": {
+        "con": "",
+        "to": 456
+      },
+      "w": {
+        "con": "",
+        "to": 447
+      }
+    },
+    "name": "衡阳城",
+    "path": "fly ss;sd;sd;sw;sw;se;sd;sd;se;su;sd;se;sd;s;s;s;s;s;s;s;s;s",
+    "zone": "衡阳|衡山"
+  }, {
+    "desc": "    你一走进来，就闻到一股茶香沁入心脾，精神为之一爽。几张八仙桌一字排开，坐满了客人，或高声谈笑，或交头接耳。你要想打听江湖掌故和谣言，这里是个好所在。",
+    "exits": "north",
+    "id": 456,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 455
+      }
+    },
+    "name": "衡阳茶馆",
+    "path": "fly hy",
+    "zone": "衡阳"
+  }, {
+    "desc": "    这里是南岳大庙的第一道门，由汉白玉，花岗石打就的石牌坊。南岳衡山是祝融游息之地，道教奉为第三小洞天。在此远望衡山，山势如飞，如云雾中凌空的大鸟。",
+    "exits": "south|north",
+    "id": 457,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 458
+      },
+      "s": {
+        "con": "",
+        "to": 455
+      }
+    },
+    "name": "棂星门",
+    "path": "fly ss;sd;sd;sw;sw;se;sd;sd;se;su;sd;se;sd;s;s;s;s;s;s;s;s",
+    "zone": "衡阳|衡山"
+  }, {
+    "desc": "    奎星阁是南岳大庙的第二进。阁为一个大舞台，阁左为鼓亭，右是钟亭。乡俗年节唱戏，这里总是热闹非凡。",
+    "exits": "south|north|east",
+    "id": 458,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 1300
+      },
+      "n": {
+        "con": "",
+        "to": 1299
+      },
+      "s": {
+        "con": "",
+        "to": 457
+      }
+    },
+    "name": "奎星阁",
+    "path": "fly ss;sd;sd;sw;sw;se;sd;sd;se;su;sd;se;sd;s;s;s;s;s;s;s",
+    "zone": "衡阳|衡山"
+  }, {
+    "desc": "    你走在一条尘土飞扬的黄土路上，两旁是阴森森的树林。西面不远就是衡阳县城了。",
+    "exits": "northeast|west",
+    "id": 459,
+    "links": {
+      "ne": {
+        "con": "",
+        "to": 460
+      },
+      "w": {
+        "con": "",
+        "to": 455
+      }
+    },
+    "name": "黄土路",
+    "path": "fly hy;n;e",
+    "zone": "衡阳"
+  }, {
+    "desc": "    你走在一条尘土飞扬的黄土路上，两旁是阴森森的树林。",
+    "exits": "northwest|southeast|southwest",
+    "id": 460,
+    "links": {
+      "nw": {
+        "con": "",
+        "to": 461
+      },
+      "se": {
+        "con": "",
+        "to": 342
+      },
+      "sw": {
+        "con": "",
+        "to": 459
+      }
+    },
+    "name": "黄土路",
+    "path": "fly hy;n;e;ne",
+    "zone": "衡阳"
+  }, {
+    "desc": "    你走在一条尘土飞扬的黄土路上，两旁是阴森森的树林。这里向北通往扬州，往南就进入湖南地界了。",
+    "exits": "southeast|northdown",
+    "id": 461,
+    "links": {
+      "nd": {
+        "con": "",
+        "to": 462
+      },
+      "se": {
+        "con": "",
+        "to": 460
+      }
+    },
+    "name": "黄土路",
+    "path": "fly hy;n;e;ne;nw",
+    "zone": "衡阳"
+  }, {
+    "desc": "    你走在一条青石大道上，四周静悄悄的。西边是一条大道，东边是好大的一片树林。往南还有一条大道，掩映在密密的树林中。",
+    "exits": "north|east|southup|west",
+    "id": 462,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 66
+      },
+      "su": {
+        "con": "",
+        "to": 461
+      },
+      "w": {
+        "con": "",
+        "to": 777
+      }
+    },
+    "name": "青石大道",
+    "path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;n;nw;e;ne;e;se;e",
+    "zone": "衡阳|武当山"
+  }, {
+    "desc": "    你走在一条黄土大道上，不时地有人挂剑跨马匆匆而过。东北通向武当。",
+    "exits": "northeast|southwest",
+    "id": 1739,
+    "links": {
+      "ne": {
+        "con": "",
+        "to": 1740
+      },
+      "sw": {
+        "con": "",
+        "to": 1738
+      }
+    },
+    "name": "大道",
+    "path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;n;nw;sw",
+    "zone": "峨眉山|武当山|衡阳"
+  }, {
+    "desc": "    这里是四川、湖北与陕西的交界，俗称三不管。小土路的两旁有疏疏落落的农舍耕田，几只牛羊正在吃草。路上行人很少，都匆匆赶路。",
+    "exits": "east|southeast|southwest",
+    "id": 1740,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 1741
+      },
+      "se": {
+        "con": "",
+        "to": 1745
+      },
+      "sw": {
+        "con": "",
+        "to": 1739
+      }
+    },
+    "name": "三不管",
+    "path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;n;nw",
+    "zone": "武当山|衡阳"
+  }, {
+    "desc": "    这里是陕西境内。一条静悄悄的黄土路，两旁有些小土屋，疏疏落落的。但路上行人很少，都行色匆匆向前赶路。",
+    "exits": "northeast|west",
+    "id": 1741,
+    "links": {
+      "ne": {
+        "con": "",
+        "to": 1742
+      },
+      "w": {
+        "con": "",
+        "to": 1740
+      }
+    },
+    "name": "小路",
+    "path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;n;nw;e",
+    "zone": "武当山|衡阳"
+  }, {
+    "desc": "    你走在一条尘土飞扬的黄土路上，两旁是阴森森的树林。这里是湖北境界，据说经常有土匪出没，不可久留。向东南去可至湖南。",
+    "exits": "south|northwest|southeast",
+    "id": 1745,
+    "links": {
+      "nw": {
+        "con": "",
+        "to": 1740
+      },
+      "s": {
+        "con": "",
+        "to": 1746
+      },
+      "se": {
+        "con": "",
+        "to": 444
+      }
+    },
+    "name": "黄土路",
+    "path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;n",
+    "zone": "武当山|衡阳"
+  }, {
+    "desc": "    你走在一条尘土飞扬的黄土路上，两旁是阴森森的树林。这里是湖北境界，据说经常有土匪出没，不可久留。南边一条小道，通向密林深处。",
+    "exits": "north|southup|west",
+    "id": 1746,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 1745
+      },
+      "su": {
+        "con": "",
+        "to": 1747
+      },
+      "w": {
+        "con": "",
+        "to": 1750
+      }
+    },
+    "name": "黄土路",
+    "path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e",
+    "zone": "武当山|衡阳"
+  }, {
+    "desc": "    你走在一条僻静的林中小路上，两旁是阴森森的树林。只见左右前后，到处都是铺天盖地的松树林。几十丈高的大松树簇在一块，密实的枝叶象一蓬蓬巨伞般伸向天空，把阳光遮得丝毫也无。据说这里经常有土匪出没，不可久留。边上有个小山洞(dong)。",
+    "exits": "south|northdown",
+    "id": 1747,
+    "links": {
+      "nd": {
+        "con": "",
+        "to": 1746
+      },
+      "s": {
+        "con": "",
+        "to": 1748
+      }
+    },
+    "name": "林中小路",
+    "path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;su",
+    "zone": "武当山|衡阳"
+  }, {
+    "desc": "    这是山脚松林中的小路，两边长满参天的红松树，只能看见一线天空。路旁有道士在奋力砍树。西边通向密林深处，东边可回大道。",
+    "exits": "east|west",
+    "id": 1750,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 1746
+      },
+      "w": {
+        "con": "",
+        "to": 1751
+      }
+    },
+    "name": "松林小路",
+    "path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e",
+    "zone": "武当山|衡阳"
+  } ]
+}

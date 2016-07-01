@@ -1,0 +1,106 @@
+{
+  "center": 2385,
+  "cmd": "fly ws1;w;w;w;w;w;s;s;s;s;s;s;se;ne;e;e;eu;su",
+  "id": "hsc1",
+  "name": "华山村1",
+  "rooms": [ {
+    "desc": "    山路越来越小，周围茂密森林里和脚下的茅草封住了路，上不见天光，后不见归路(road)，你简直绝望了。",
+    "exits": "northdown",
+    "id": 2385,
+    "links": {
+      "nd": {
+        "con": "",
+        "to": 2384
+      },
+      "use fire;zuan": {
+        "block": "y",
+        "con": "",
+        "to": 2698
+      }
+    },
+    "name": "中条山密林",
+    "path": "|!c:fire:fly ws1|;w;w;w;w;w;s;s;s;s;s;s;se;ne;e;e;eu;su",
+    "zone": "华山村|华山村1"
+  }, {
+    "desc": "    树林外，赫然站着一个汉子，在阴森森的林子边上，凭添一股煞气。西上是登山的路，东边就进入森林了。",
+    "exits": "westup|enter",
+    "id": 2698,
+    "links": {
+      "enter": {
+        "con": "",
+        "to": 2385
+      },
+      "wu": {
+        "con": "",
+        "to": 2699
+      }
+    },
+    "name": "树林外",
+    "path": "|!c:fire:fly ws1|;w;w;w;w;w;s;s;s;s;s;s;se;ne;e;e;eu;su;use fire;zuan",
+    "zone": "华山村1"
+  }, {
+    "desc": "    你走在峭壁边的小路上。一侧是密密的丛林，外侧却是极深的陡壁。山风凛冽，几乎要把你刮落崖去。",
+    "exits": "eastdown|southup",
+    "id": 2699,
+    "links": {
+      "ed": {
+        "con": "",
+        "to": 2698
+      },
+      "su": {
+        "con": "",
+        "to": 2700
+      }
+    },
+    "name": "峭壁",
+    "path": "|!c:fire:fly ws1|;w;w;w;w;w;s;s;s;s;s;s;se;ne;e;e;eu;su;use fire;zuan;wu",
+    "zone": "华山村1"
+  }, {
+    "desc": "    这里是中条山的一个隐秘山谷。四周是高可及天的山峰，云深林密，一径小溪潺潺流过，溅入坡下塘中。溪畔有一汉子舞剑正酣。不打扰的为妙。",
+    "exits": "south|northdown",
+    "id": 2700,
+    "links": {
+      "nd": {
+        "con": "",
+        "to": 2699
+      },
+      "s": {
+        "con": "",
+        "to": 2701
+      }
+    },
+    "name": "山谷",
+    "path": "|!c:fire:fly ws1|;w;w;w;w;w;s;s;s;s;s;s;se;ne;e;e;eu;su;use fire;zuan;wu;su",
+    "zone": "华山村1"
+  }, {
+    "desc": "    你走在中条山山间平地上。靠东山壁上有一小屋。传闻当年华山玉女峰剑气两宗大对决，中计败北的剑宗弟子大多隐匿中条山。难道就是这里？林中冷风轻吹门响。很失意的感觉。",
+    "exits": "east|north",
+    "id": 2701,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2702
+      },
+      "n": {
+        "con": "",
+        "to": 2700
+      }
+    },
+    "name": "山间平地",
+    "path": "|!c:fire:fly ws1|;w;w;w;w;w;s;s;s;s;s;s;se;ne;e;e;eu;su;use fire;zuan;wu;su;s",
+    "zone": "华山村1"
+  }, {
+    "desc": "    这里就是华山剑宗的的根本之地。二十五年来，剑宗弟子卧薪尝胆，只是为了夺回华山门派掌门，为此，付出了极大牺牲。    屋里陈设极为简陋。这么多年来一直没有长久隐匿的念头使得剑宗弟子能忍辱负重，只待重开生天。",
+    "exits": "west",
+    "id": 2702,
+    "links": {
+      "w": {
+        "con": "",
+        "to": 2701
+      }
+    },
+    "name": "林间小屋",
+    "path": "|!c:fire:fly ws1|;w;w;w;w;w;s;s;s;s;s;s;se;ne;e;e;eu;su;use fire;zuan;wu;su;s;e",
+    "zone": "华山村1"
+  } ]
+}

@@ -1,0 +1,271 @@
+{
+  "center": 189,
+  "cmd": "fly sz;w;s;s;s;s;s;s;s;sw",
+  "id": "yzw1",
+  "name": "燕子坞1",
+  "rooms": [ {
+    "desc": "    俗话说：上有天堂，下有苏杭。这里正是大大有名的太湖。湖面绿波上漂着一叶叶的小舟, 一阵阵悦耳的小曲儿随着湖上的轻风不时漂入你的耳中。",
+    "exits": "northwest|northeast",
+    "id": 189,
+    "links": {
+      "ne": {
+        "con": "",
+        "to": 188
+      },
+      "nw": {
+        "con": "",
+        "to": 2547
+      }
+    },
+    "name": "湖边",
+    "path": "fly sz;w;s;s;s;s;s;s;s;sw",
+    "zone": "苏州|燕子坞1"
+  }, {
+    "desc": "    俗话说：上有天堂，下有苏杭。这里正是大大有名的太湖。湖面绿波上漂着一叶叶的小舟, 一阵阵悦耳的小曲儿随着湖上的轻风不时漂入你的耳中。",
+    "exits": "southeast|southwest",
+    "id": 2547,
+    "links": {
+      "se": {
+        "con": "",
+        "to": 189
+      },
+      "sw": {
+        "con": "",
+        "to": 2548
+      }
+    },
+    "name": "湖边",
+    "path": "fly sz;w;s;s;s;s;s;s;s;sw;nw",
+    "zone": "燕子坞1"
+  }, {
+    "desc": "    俗话说：上有天堂，下有苏杭。这里正是大大有名的太湖。湖面绿波上漂着一叶叶的小舟, 一阵阵悦耳的小曲儿随着湖上的轻风不时漂入你的耳中。",
+    "exits": "southeast|northeast",
+    "id": 2548,
+    "links": {
+      "ne": {
+        "con": "",
+        "to": 2547
+      },
+      "se": {
+        "con": "",
+        "to": 2549
+      }
+    },
+    "name": "湖边",
+    "path": "fly sz;w;s;s;s;s;s;s;s;sw;nw;sw",
+    "zone": "燕子坞1"
+  }, {
+    "desc": "    这是一座小小的白石拱桥。桥下碧绿的湖水正荡着微波。远处的湖面上传来阵阵歌声，不远处两只鸳鸯在一起戏水，岸边的柳树随着湖面上吹来的微风时不时地摇摆着。",
+    "exits": "south|northwest",
+    "id": 2549,
+    "links": {
+      "nw": {
+        "con": "",
+        "to": 2548
+      },
+      "s": {
+        "con": "",
+        "to": 2550
+      }
+    },
+    "name": "小石桥",
+    "path": "fly sz;w;s;s;s;s;s;s;s;sw;nw;sw;se",
+    "zone": "燕子坞1"
+  }, {
+    "desc": "    这里是慕容家的家仆和丫鬟出入太湖的水上码头，只见人们来来往往，一个个风尘仆仆，码头边的老船夫见到你走过来，马上笑呵呵的迎了上去。价格表(sign)。",
+    "exits": "north",
+    "id": 2550,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 2549
+      },
+      "out": {
+        "con": "a:qu mr",
+        "to": 2551
+      }
+    },
+    "name": "码头",
+    "path": "fly sz;w;s;s;s;s;s;s;s;sw;nw;sw;se;s",
+    "zone": "燕子坞1"
+  }, {
+    "desc": "    你一跨上岸去, 见疏疏落落四五座房舍, 建造在一个不知名的小岛或半岛上。岛上树木葱绿，亭宇轩榭错落有秩，处处飘来一阵幽香。这里的一切无一不透出江南水秀山清，建筑小巧别致的特色。一位老艄公左在岸边(bian)。",
+    "exits": "south",
+    "id": 2551,
+    "links": {
+      "s": {
+        "con": "",
+        "to": 2552
+      }
+    },
+    "name": "小岛边",
+    "path": "fly sz;w;s;s;s;s;s;s;s;sw;nw;sw;se;s;|!a:qu mr:out|",
+    "zone": "燕子坞1"
+  }, {
+    "desc": "    这间房舍小巧玲珑, 颇为精雅。小舍匾额上写着「琴韵」两字笔致,致颇为潇洒。远处的小屋露出一檐屋角。东西两边各有一条小径不知通向哪里。",
+    "exits": "north|east|west",
+    "id": 2552,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2556
+      },
+      "n": {
+        "con": "",
+        "to": 2551
+      },
+      "unwield all;w": {
+        "con": "",
+        "to": 2553
+      }
+    },
+    "name": "小舍",
+    "path": "fly sz;w;s;s;s;s;s;s;s;sw;nw;sw;se;s;|!a:qu mr:out|;s",
+    "zone": "燕子坞1"
+  }, {
+    "desc": "    一条曲曲折折用鹅卵石铺成的小径, 路两旁绿柳成阴, 一处处山石花木点缀在其中。你走在石地上，啪嗒啪嗒的发出清脆的响声，往西面去是这条小径的延伸。",
+    "exits": "east|west",
+    "id": 2553,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2552
+      },
+      "w": {
+        "con": "",
+        "to": 2554
+      }
+    },
+    "name": "小径",
+    "path": "fly sz;w;s;s;s;s;s;s;s;sw;nw;sw;se;s;|!a:qu mr:out|;s;unwield all;w",
+    "zone": "燕子坞1"
+  }, {
+    "desc": "    一条曲曲折折用鹅卵石铺成的小径, 路两旁绿柳成阴, 一处处山石花木点缀在其中。你走在石地上，啪嗒啪嗒的发出清脆的响声，往西北面去是听雨居。",
+    "exits": "northwest|east",
+    "id": 2554,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2553
+      },
+      "nw": {
+        "con": "",
+        "to": 2555
+      }
+    },
+    "name": "小径",
+    "path": "fly sz;w;s;s;s;s;s;s;s;sw;nw;sw;se;s;|!a:qu mr:out|;s;unwield all;w;w",
+    "zone": "燕子坞1"
+  }, {
+    "desc": "    「听雨居」三面环水, 从窗中望出去, 湖上烟波尽收眼底。屋正中摆着一张大圆桌, 上面摆满了蔬果点心, 每一样都十分精致。 圆桌四周放了数把椅子。墙边的小柜上放着一把「琴」。",
+    "exits": "southeast",
+    "id": 2555,
+    "links": {
+      "se": {
+        "con": "",
+        "to": 2554
+      }
+    },
+    "name": "听雨居",
+    "path": "fly sz;w;s;s;s;s;s;s;s;sw;nw;sw;se;s;|!a:qu mr:out|;s;unwield all;w;w;nw",
+    "zone": "燕子坞1"
+  }, {
+    "desc": "    一条曲曲折折用鹅卵石铺成的小径, 路两旁绿柳成阴, 一处处山石花木点缀在其中。远处的一座小屋子映入你的眼帘，阵阵炊烟从小屋后面的烟囱中冒出。",
+    "exits": "northeast|west",
+    "id": 2556,
+    "links": {
+      "ne": {
+        "con": "",
+        "to": 2557
+      },
+      "w": {
+        "con": "",
+        "to": 2552
+      }
+    },
+    "name": "小径",
+    "path": "fly sz;w;s;s;s;s;s;s;s;sw;nw;sw;se;s;|!a:qu mr:out|;s;e",
+    "zone": "燕子坞1"
+  }, {
+    "desc": "    一条曲曲折折用鹅卵石铺成的小径, 路两旁绿柳成阴, 一处处山石花木点缀在其中。前面就是小厅了，一位美丽的少女站在厅前，你被她的容貌所吸引，如果不是亲眼所见，不可想象世上还有这等如此美貌的少女。",
+    "exits": "east|southwest",
+    "id": 2557,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2558
+      },
+      "sw": {
+        "con": "",
+        "to": 2556
+      }
+    },
+    "name": "小径",
+    "path": "fly sz;w;s;s;s;s;s;s;s;sw;nw;sw;se;s;|!a:qu mr:out|;s;e;ne",
+    "zone": "燕子坞1"
+  }, {
+    "desc": "    你走进这间小小的厅室, 看到里面放着一张紫檀木茶几和几张湘妃竹椅子，紫檀木的茶几上摆放着茶壶和几只白玉杯，专供客人饮用。你忍不住想坐在竹椅上，让疲惫的身心得到充分的休息。",
+    "exits": "south|north|east|west",
+    "id": 2558,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2561
+      },
+      "n": {
+        "con": "k1:",
+        "to": 2559
+      },
+      "s": {
+        "con": "",
+        "to": 2560
+      },
+      "w": {
+        "con": "",
+        "to": 2557
+      }
+    },
+    "name": "小厅",
+    "path": "fly sz;w;s;s;s;s;s;s;s;sw;nw;sw;se;s;|!a:qu mr:out|;s;e;ne;e",
+    "zone": "燕子坞1"
+  }, {
+    "desc": "    这是一间小厨房, 虽然不大, 但是锅碗瓢盆, 油盐酱醋, 到很奇全。灶台上堆满了新鲜瓜果蔬菜, 活鱼活虾, 不仅不脏不乱, 还十分干净整齐。",
+    "exits": "south",
+    "id": 2559,
+    "links": {
+      "s": {
+        "con": "",
+        "to": 2558
+      }
+    },
+    "name": "厨房",
+    "path": "fly sz;w;s;s;s;s;s;s;s;sw;nw;sw;se;s;|!a:qu mr:out|;s;e;ne;e;|!k1::n|",
+    "zone": "燕子坞1"
+  }, {
+    "desc": "    这里摆着一张小床，床头是一张女人用的梳妆台，上面放着许多胭脂粉盒。靠窗是一张长长的红木书桌，只要抬眼望去，太湖的万顷碧波，尽收眼底。",
+    "exits": "north",
+    "id": 2560,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 2558
+      }
+    },
+    "name": "后堂",
+    "path": "fly sz;w;s;s;s;s;s;s;s;sw;nw;sw;se;s;|!a:qu mr:out|;s;e;ne;e;s",
+    "zone": "燕子坞1"
+  }, {
+    "desc": "    这是一间厢房, 里面摆设简单, 只有一张床, 一张书桌和一把椅子。",
+    "exits": "west",
+    "id": 2561,
+    "links": {
+      "w": {
+        "con": "",
+        "to": 2558
+      }
+    },
+    "name": "厢房",
+    "path": "fly sz;w;s;s;s;s;s;s;s;sw;nw;sw;se;s;|!a:qu mr:out|;s;e;ne;e;e",
+    "zone": "燕子坞1"
+  } ]
+}

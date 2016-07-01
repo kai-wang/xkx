@@ -7,6 +7,7 @@ require "worlds\\xkx\\mods\\roominfo"
 map = {}
 regions = {}
 roomAll = {}
+local JSON = (loadfile ("worlds\\xkx\\lib\\JSON.lua"))()
 
 directions = {
 	["n"]="s",
@@ -361,12 +362,20 @@ map["save"] = function(name)
 		end
 	end
 
+    local content = JSON:encode_pretty(region)
+
+    local file = io.open("worlds\\xkx\\mods\\maps\\"..region.id..".json", "w")
+    file:write(content)
+    file:close()
+
+--[[
 	local content = serialize.save("region", region)
 	local file = io.open("worlds\\xkx\\mods\\maps\\"..region.id..".lua", "w")
 --	file:write("local region = {}\r\n")
 	file:write("local " .. content)
 	file:write("\r\nreturn region")
 	file:close()
+]]--
 end
 
 
@@ -376,6 +385,24 @@ map["room"] = function()
 end
 
 --	读取房间信息从文件中
+
+map["load"] = function(room)
+
+	local filename = "worlds\\xkx\\mods\\maps\\" .. room .. ".json"
+    local file = io.open(filename, "r")
+    local content = file:read("*all")
+    local area = JSON:decode(content)
+    file:close()
+
+    regions[area.id] = area
+    regions[area.name] = area
+
+    for i, v in ipairs(area.rooms) do
+        roomAll[v.id] = v
+    end
+end
+
+--[[
 map["load"] = function(room)
 	local path = "worlds\\xkx\\mods\\maps\\" .. room .. ".lua"
 	local area = dofile(path)
@@ -387,8 +414,37 @@ map["load"] = function(room)
 		roomAll[v.id] = v
 	end
 end
+]]--
 
 --读取所有房间
+map["loadall"] = function()
+
+	local basedir = string.match(GetInfo(54),"^(.*)\\(.*)\\([^\.]*).*")
+	local command = "dir " .. basedir .. "\\mods\\maps\\*.json /b >"
+
+    regions = {}
+    roomAll = {}
+
+	-- get a temporary file name
+	local tmpfile = os.tmpname()
+	-- execute a command
+	os.execute (command .. tmpfile)
+	
+    for filename in io.lines(tmpfile) do
+        map.load(filename)
+    end
+
+	-- remove temporary file
+	os.remove (tmpfile)
+
+    for i, v in ipairs(roomAll) do
+        if v.path == "" then
+            print("房间路径为空 id: " .. v.id .. " name: " .. v.name )
+        end
+    end
+end
+
+--[[
 map["loadall"] = function()
 	local files = {
 	"yz",
@@ -469,6 +525,7 @@ map["loadall"] = function()
 		end
 	end
 end
+]]--
 
 
 map["g_all"] = function()
@@ -639,28 +696,6 @@ function lookat(dir)
 
 	return room
 
---[[
-	local room, t, l = {}, true, 0
-	while t do
-		if(l == 0) then
-			l = 1
-			wait.make(function()
-				getroomready2("look "..dir,
-				function(rm)
-					room.name = rm.name
-					room.desc = rm.desc
-					room.exits = rm.exits
-					--tprint(room)
-					t = false
-				end)
-			end)
-		else
-			sleep(1)
-		end
-	end
-
-	return room
-	]]--
 end
 
 

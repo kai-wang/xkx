@@ -1,0 +1,660 @@
+{
+  "center": 2182,
+  "cmd": "fly bhd",
+  "id": "bhd",
+  "name": "冰火岛",
+  "rooms": [ {
+    "desc": "",
+    "exits": "north",
+    "id": 2182,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 2183
+      }
+    },
+    "name": "冰火岛海滩",
+    "path": "fly bhd",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    一条草丛中,踏出的小路.",
+    "exits": "south|east|north|west",
+    "id": 2183,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2208
+      },
+      "n": {
+        "con": "",
+        "to": 2184
+      },
+      "s": {
+        "con": "",
+        "to": 2182
+      },
+      "w": {
+        "con": "",
+        "to": 2191
+      }
+    },
+    "name": "小路",
+    "path": "fly bhd;n",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    一条草丛中,踏出的小路.",
+    "exits": "south|north",
+    "id": 2184,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 2185
+      },
+      "s": {
+        "con": "",
+        "to": 2183
+      }
+    },
+    "name": "小路",
+    "path": "fly bhd;n;n",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    一条草丛中,踏出的小路.",
+    "exits": "south|north",
+    "id": 2185,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 2186
+      },
+      "s": {
+        "con": "",
+        "to": 2184
+      }
+    },
+    "name": "小路",
+    "path": "fly bhd;n;n;n",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    一块开辟出的空地,明显是人工的.",
+    "exits": "south|north|northeast",
+    "id": 2186,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 2187
+      },
+      "ne": {
+        "con": "",
+        "to": 2190
+      },
+      "s": {
+        "con": "",
+        "to": 2185
+      }
+    },
+    "name": "空地",
+    "path": "fly bhd;n;n;n;n",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    这儿是张无忌一家住的山洞，旁边住着谢逊。",
+    "exits": "south|north|west",
+    "id": 2187,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 2188
+      },
+      "s": {
+        "con": "",
+        "to": 2186
+      },
+      "w": {
+        "con": "",
+        "to": 2189
+      }
+    },
+    "name": "山洞",
+    "path": "fly bhd;n;n;n;n;n",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    这儿是张无忌一家住的山洞,旁边住着谢逊.张翠山夫妇的卧室,有些简单的铺设.",
+    "exits": "south",
+    "id": 2188,
+    "links": {
+      "s": {
+        "con": "",
+        "to": 2187
+      }
+    },
+    "name": "山洞",
+    "path": "fly bhd;n;n;n;n;n;n",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    这儿是无忌住的地方，地上铺着草垫，草垫上垫着兽皮，很舒适。",
+    "exits": "east",
+    "id": 2189,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2187
+      }
+    },
+    "name": "山洞",
+    "path": "fly bhd;n;n;n;n;n;w",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    谢逊住在这里，边上的山洞里住着的是无忌一家！",
+    "exits": "southwest",
+    "id": 2190,
+    "links": {
+      "sw": {
+        "con": "",
+        "to": 2186
+      }
+    },
+    "name": "谢逊居",
+    "path": "fly bhd;n;n;n;n;ne",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    一条草丛中,踏出的小路.",
+    "exits": "east|west",
+    "id": 2191,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2183
+      },
+      "w": {
+        "con": "",
+        "to": 2192
+      }
+    },
+    "name": "小路",
+    "path": "fly bhd;n;w",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    一条草丛中,踏出的小路.",
+    "exits": "east|west",
+    "id": 2192,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2191
+      },
+      "w": {
+        "con": "",
+        "to": 2193
+      }
+    },
+    "name": "小路",
+    "path": "fly bhd;n;w;w",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    一条草丛中,踏出的小路.",
+    "exits": "east|north|west",
+    "id": 2193,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2192
+      },
+      "n": {
+        "con": "",
+        "to": 2194
+      },
+      "w": {
+        "con": "",
+        "to": 2201
+      }
+    },
+    "name": "小路",
+    "path": "fly bhd;n;w;w;w",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    一条草丛中,踏出的小路.",
+    "exits": "south|northwest",
+    "id": 2194,
+    "links": {
+      "nw": {
+        "con": "",
+        "to": 2195
+      },
+      "s": {
+        "con": "",
+        "to": 2193
+      }
+    },
+    "name": "小路",
+    "path": "fly bhd;n;w;w;w;n",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    一条草丛中,踏出的小路.沿着路走,地势渐高.气温也渐渐变热起来.",
+    "exits": "northwest|southeast",
+    "id": 2195,
+    "links": {
+      "nw": {
+        "con": "",
+        "to": 2196
+      },
+      "se": {
+        "con": "",
+        "to": 2194
+      }
+    },
+    "name": "小路",
+    "path": "fly bhd;n;w;w;w;n;nw",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    一条草丛中,踏出的小路.沿着路走,地势渐高.逐渐到了小山坡.坡上灌木丛生,偶有小动物,窜来窜去.",
+    "exits": "east|north|southeast|west",
+    "id": 2196,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2197
+      },
+      "n": {
+        "con": "",
+        "to": 2199
+      },
+      "se": {
+        "con": "",
+        "to": 2195
+      },
+      "w": {
+        "con": "",
+        "to": 2198
+      }
+    },
+    "name": "小路",
+    "path": "fly bhd;n;w;w;w;n;nw;nw",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    小山坡上灌木丛生(teng)，偶有小动物，窜来窜去。不知名的小花，缀生其中。",
+    "exits": "west",
+    "id": 2197,
+    "links": {
+      "w": {
+        "con": "",
+        "to": 2196
+      }
+    },
+    "name": "山坡",
+    "path": "fly bhd;n;w;w;w;n;nw;nw;e",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    小山坡上灌木丛生,偶有小动物,窜来窜去.不知名的小花,缀生其中.",
+    "exits": "east",
+    "id": 2198,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2196
+      }
+    },
+    "name": "山坡",
+    "path": "fly bhd;n;w;w;w;n;nw;nw;w",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    小山坡上灌木丛生,偶有小动物,窜来窜去.在向北山势渐陡,树木丛生.",
+    "exits": "south|northup",
+    "id": 2199,
+    "links": {
+      "nu": {
+        "con": "",
+        "to": 2200
+      },
+      "s": {
+        "con": "",
+        "to": 2196
+      }
+    },
+    "name": "山坡",
+    "path": "fly bhd;n;w;w;w;n;nw;nw;n",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    北去山势益发陡，树木(wood)丛生，去路，被阻。",
+    "exits": "southdown",
+    "id": 2200,
+    "links": {
+      "sd": {
+        "con": "",
+        "to": 2199
+      }
+    },
+    "name": "山坡",
+    "path": "fly bhd;n;w;w;w;n;nw;nw;n;nu",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    一条草丛中,踏出的小路.",
+    "exits": "east|west",
+    "id": 2201,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2193
+      },
+      "w": {
+        "con": "",
+        "to": 2202
+      }
+    },
+    "name": "小路",
+    "path": "fly bhd;n;w;w;w;w",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    一条草丛中,踏出的小路.",
+    "exits": "south|east|northwest",
+    "id": 2202,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2201
+      },
+      "nw": {
+        "con": "",
+        "to": 2204
+      },
+      "s": {
+        "con": "",
+        "to": 2203
+      }
+    },
+    "name": "小路",
+    "path": "fly bhd;n;w;w;w;w;w",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    这里是一片青草地,几只可爱的小白兔,在吃草.",
+    "exits": "north",
+    "id": 2203,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 2202
+      }
+    },
+    "name": "草地",
+    "path": "fly bhd;n;w;w;w;w;w;s",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    一条草丛中,踏出的小路.",
+    "exits": "northwest|southeast",
+    "id": 2204,
+    "links": {
+      "nw": {
+        "con": "",
+        "to": 2205
+      },
+      "se": {
+        "con": "",
+        "to": 2202
+      }
+    },
+    "name": "小路",
+    "path": "fly bhd;n;w;w;w;w;w;nw",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    一条草丛中,踏出的小路.",
+    "exits": "north|southeast",
+    "id": 2205,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 2206
+      },
+      "se": {
+        "con": "",
+        "to": 2204
+      }
+    },
+    "name": "小路",
+    "path": "fly bhd;n;w;w;w;w;w;nw;nw",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    一条草丛中,踏出的小路.",
+    "exits": "south|northup",
+    "id": 2206,
+    "links": {
+      "nu": {
+        "con": "",
+        "to": 2207
+      },
+      "s": {
+        "con": "",
+        "to": 2205
+      }
+    },
+    "name": "小路",
+    "path": "fly bhd;n;w;w;w;w;w;nw;nw;n",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    往前已经没路了，前面是火山口。",
+    "exits": "southdown",
+    "id": 2207,
+    "links": {
+      "sd": {
+        "con": "",
+        "to": 2206
+      }
+    },
+    "name": "火山口",
+    "path": "fly bhd;n;w;w;w;w;w;nw;nw;n;nu",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    一条草丛中,踏出的小路.",
+    "exits": "east|west",
+    "id": 2208,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2209
+      },
+      "w": {
+        "con": "",
+        "to": 2183
+      }
+    },
+    "name": "小路",
+    "path": "fly bhd;n;e",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    一条草丛中,踏出的小路.",
+    "exits": "east|west",
+    "id": 2209,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2210
+      },
+      "w": {
+        "con": "",
+        "to": 2208
+      }
+    },
+    "name": "小路",
+    "path": "fly bhd;n;e;e",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    一条草丛中,踏出的小路.",
+    "exits": "east|north|west",
+    "id": 2210,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2211
+      },
+      "n": {
+        "con": "",
+        "to": 2213
+      },
+      "w": {
+        "con": "",
+        "to": 2209
+      }
+    },
+    "name": "小路",
+    "path": "fly bhd;n;e;e;e",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    一条草丛中,踏出的小路.",
+    "exits": "south|west",
+    "id": 2211,
+    "links": {
+      "s": {
+        "con": "",
+        "to": 2212
+      },
+      "w": {
+        "con": "",
+        "to": 2210
+      }
+    },
+    "name": "小路",
+    "path": "fly bhd;n;e;e;e;e",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    一条草丛中，踏出的小路。",
+    "exits": "north",
+    "id": 2212,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 2211
+      }
+    },
+    "name": "小路",
+    "path": "fly bhd;n;e;e;e;e;s",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    又湿又潮的一个石洞,还散发着野兽的腥臭.",
+    "exits": "south|east|north|west",
+    "id": 2213,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2214
+      },
+      "n": {
+        "con": "",
+        "to": 2213
+      },
+      "s": {
+        "con": "",
+        "to": 2210
+      },
+      "w": {
+        "con": "",
+        "to": 2213
+      }
+    },
+    "name": "迷洞",
+    "path": "fly bhd;n;e;e;e;n",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    又湿又潮的一个石洞,还散发着野兽的腥臭.",
+    "exits": "south|east|north|west",
+    "id": 2214,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2214
+      },
+      "n": {
+        "con": "",
+        "to": 2215
+      },
+      "s": {
+        "con": "",
+        "to": 2214
+      },
+      "w": {
+        "con": "",
+        "to": 2213
+      }
+    },
+    "name": "迷洞",
+    "path": "fly bhd;n;e;e;e;n;e",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    又湿又潮的一个石洞,还散发着野兽的腥臭.",
+    "exits": "south|east|north|west",
+    "id": 2215,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2216
+      },
+      "n": {
+        "con": "",
+        "to": 2215
+      },
+      "s": {
+        "con": "",
+        "to": 2214
+      },
+      "w": {
+        "con": "",
+        "to": 2215
+      }
+    },
+    "name": "迷洞",
+    "path": "fly bhd;n;e;e;e;n;e;n",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    又湿又潮的一个石洞,还散发着野兽的腥臭.",
+    "exits": "south|east|north|west",
+    "id": 2216,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2216
+      },
+      "n": {
+        "con": "",
+        "to": 2217
+      },
+      "s": {
+        "con": "",
+        "to": 2216
+      },
+      "w": {
+        "con": "",
+        "to": 2215
+      }
+    },
+    "name": "迷洞",
+    "path": "fly bhd;n;e;e;e;n;e;n;e",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    又湿又潮的一个石洞,还散发着野兽的腥臭.",
+    "exits": "south|enter",
+    "id": 2217,
+    "links": {
+      "enter": {
+        "con": "",
+        "to": 2218
+      },
+      "s": {
+        "con": "",
+        "to": 2216
+      }
+    },
+    "name": "迷洞口",
+    "path": "fly bhd;n;e;e;e;n;e;n;e;n",
+    "zone": "冰火岛"
+  }, {
+    "desc": "    又湿又潮的一个石洞,还散发着野兽的腥臭.",
+    "exits": "out",
+    "id": 2218,
+    "links": {
+      "out": {
+        "con": "",
+        "to": 2217
+      }
+    },
+    "name": "迷洞",
+    "path": "fly bhd;n;e;e;e;n;e;n;e;n;enter",
+    "zone": "冰火岛"
+  } ]
+}

@@ -1,0 +1,435 @@
+{
+  "center": 2321,
+  "cmd": "fly xx;su;s;ed;se;e;pushaside grass;n",
+  "id": "gcmg",
+  "name": "高昌迷宫",
+  "rooms": [ {
+    "desc": "    注意：由此处向北！将进入高昌迷宫地域，不知走法和没有作好准备的游客千万要考虑清楚是否还要向北行。                    高   昌   迷   宫",
+    "exits": "south|north",
+    "id": 2321,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 2322
+      }
+    },
+    "name": "阴深小路",
+    "path": "fly xx;su;s;ed;se;e;pushaside grass;n",
+    "zone": "高昌迷宫"
+  }, {
+    "danger": 3,
+    "desc": "    这是条黑沈沈的长甬道,甬道前出现了三条岔道。迷宫之内并无足迹指引，你不知道要往哪条路走。俯身细看，见左首，右首和前方三条路上都有淡淡的足迹。",
+    "exits": "south|north|east|west",
+    "id": 2322,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2323
+      },
+      "s": {
+        "con": "",
+        "to": 2321
+      }
+    },
+    "name": "高昌迷宫",
+    "path": "fly xx;su;s;ed;se;e;pushaside grass;n;n",
+    "zone": "高昌迷宫"
+  }, {
+    "desc": "    这是条黑沈沈的长甬道,甬道前出现了三条岔道。迷宫之内并无足迹指引，你不知道要往哪条路走。俯身细看，见左首，右首和前方三条路上都有淡淡的足迹。你似乎迷失了方向，象没头苍蝇般到处乱闯。",
+    "exits": "south|north|east|west",
+    "id": 2323,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2324
+      }
+    },
+    "name": "高昌迷宫",
+    "path": "fly xx;su;s;ed;se;e;pushaside grass;n;n;e",
+    "zone": "高昌迷宫"
+  }, {
+    "desc": "    这是条黑沈沈的长甬道,甬道前出现了三条岔道。迷宫之内并无足迹指引，你不知道要往哪条路走。俯身细看，见左首，右首和前方三条路上都有淡淡的足迹。你似乎迷失了方向，象没头苍蝇般到处乱闯。",
+    "exits": "south|north|east|west",
+    "id": 2324,
+    "links": {
+      "s": {
+        "con": "",
+        "to": 2325
+      }
+    },
+    "name": "高昌迷宫",
+    "path": "fly xx;su;s;ed;se;e;pushaside grass;n;n;e;e",
+    "zone": "高昌迷宫"
+  }, {
+    "desc": "    这是条黑沈沈的长甬道,甬道前出现了三条岔道。迷宫之内并无足迹指引，你不知道要往哪条路走。俯身细看，见左首，右首和前方三条路上都有淡淡的足迹。你似乎迷失了方向，象没头苍蝇般到处乱闯。",
+    "exits": "south|north|east|west",
+    "id": 2325,
+    "links": {
+      "w": {
+        "con": "",
+        "to": 2326
+      }
+    },
+    "name": "高昌迷宫",
+    "path": "fly xx;su;s;ed;se;e;pushaside grass;n;n;e;e;s",
+    "zone": "高昌迷宫"
+  }, {
+    "desc": "    这是条黑沈沈的长甬道,甬道前出现了三条岔道。迷宫之内并无足迹指引，你不知道要往哪条路走。俯身细看，见左首，右首和前方三条路上都有淡淡的足迹。你似乎迷失了方向，象没头苍蝇般到处乱闯。",
+    "exits": "south|north|east|west",
+    "id": 2326,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 2327
+      }
+    },
+    "name": "高昌迷宫",
+    "path": "fly xx;su;s;ed;se;e;pushaside grass;n;n;e;e;s;w",
+    "zone": "高昌迷宫"
+  }, {
+    "desc": "    这是条黑沈沈的长甬道,甬道前出现了三条岔道。迷宫之内并无足迹指引，你不知道要往哪条路走。俯身细看，见左首，右首和前方三条路上都有淡淡的足迹。你似乎迷失了方向，象没头苍蝇般到处乱闯。",
+    "exits": "south|north|east|west",
+    "id": 2327,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 2328
+      }
+    },
+    "name": "高昌迷宫",
+    "path": "fly xx;su;s;ed;se;e;pushaside grass;n;n;e;e;s;w;n",
+    "zone": "高昌迷宫"
+  }, {
+    "desc": "    这是条黑沈沈的长甬道,甬道前出现了三条岔道。迷宫之内并无足迹指引，你不知道要往哪条路走。俯身细看，见左首，右首和前方三条路上都有淡淡的足迹。你似乎迷失了方向，象没头苍蝇般到处乱闯。",
+    "exits": "south|north|east|west",
+    "id": 2328,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2329
+      }
+    },
+    "name": "高昌迷宫",
+    "path": "fly xx;su;s;ed;se;e;pushaside grass;n;n;e;e;s;w;n;n",
+    "zone": "高昌迷宫"
+  }, {
+    "danger": 3,
+    "desc": "    这是条黑沈沈的长甬道,甬道前出现了三条岔道。迷宫之内并无足迹指引，你不知道要往哪条路走。俯身细看，见左首，右首和前方三条路上都有淡淡的足迹。你似乎迷失了方向，象没头苍蝇般到处乱闯。",
+    "exits": "south|north|east|west",
+    "id": 2329,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2330
+      }
+    },
+    "name": "高昌迷宫",
+    "path": "fly xx;su;s;ed;se;e;pushaside grass;n;n;e;e;s;w;n;n;e",
+    "zone": "高昌迷宫"
+  }, {
+    "desc": "    这是条黑沈沈的长甬道,甬道前出现了三条岔道。迷宫之内并无足迹指引，你不知道要往哪条路走。俯身细看，见左首，右首和前方三条路上都有淡淡的足迹。你似乎迷失了方向，象没头苍蝇般到处乱闯。",
+    "exits": "south|north|east|west",
+    "id": 2330,
+    "links": {
+      "s": {
+        "con": "",
+        "to": 2331
+      }
+    },
+    "name": "高昌迷宫",
+    "path": "fly xx;su;s;ed;se;e;pushaside grass;n;n;e;e;s;w;n;n;e;e",
+    "zone": "高昌迷宫"
+  }, {
+    "desc": "    突然之间，眼前豁然开朗，出现一大片空地，尽头处又有两扇铁门，嵌在大山岩中。",
+    "exits": "east|north",
+    "id": 2331,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2332
+      },
+      "n": {
+        "con": "",
+        "to": 2330
+      }
+    },
+    "name": "空地",
+    "path": "fly xx;su;s;ed;se;e;pushaside grass;n;n;e;e;s;w;n;n;e;e;s",
+    "zone": "高昌迷宫"
+  }, {
+    "desc": "    眼前遽然出现一大片松林。松林长得极密，石阶上铺满了厚厚的朽黄的松针。踩在脚下，发出察察的响声。一只小松鼠吱地在眼前闪过，消失在林海里。",
+    "exits": "northup|west",
+    "id": 2332,
+    "links": {
+      "nu": {
+        "con": "",
+        "to": 2333
+      },
+      "w": {
+        "con": "",
+        "to": 2331
+      }
+    },
+    "name": "石阶",
+    "path": "fly xx;su;s;ed;se;e;pushaside grass;n;n;e;e;s;w;n;n;e;e;s;e",
+    "zone": "高昌迷宫"
+  }, {
+    "desc": "    眼前遽然出现一大片松林。松林长得极密，石阶上铺满了厚厚的朽黄的松针。踩在脚下，发出察察的响声。一只小松鼠吱地在眼前闪过，消失在林海里。",
+    "exits": "northup|southdown",
+    "id": 2333,
+    "links": {
+      "nu": {
+        "con": "",
+        "to": 2334
+      },
+      "sd": {
+        "con": "",
+        "to": 2332
+      }
+    },
+    "name": "石阶",
+    "path": "fly xx;su;s;ed;se;e;pushaside grass;n;n;e;e;s;w;n;n;e;e;s;e;nu",
+    "zone": "高昌迷宫"
+  }, {
+    "desc": "    眼前遽然出现一大片松林。松林长得极密，石阶上铺满了厚厚的朽黄的松针。踩在脚下，发出察察的响声。一只小松鼠吱地在眼前闪过，消失在林海里。",
+    "exits": "northup|southdown",
+    "id": 2334,
+    "links": {
+      "nu": {
+        "con": "",
+        "to": 2335
+      },
+      "sd": {
+        "con": "",
+        "to": 2333
+      }
+    },
+    "name": "石阶",
+    "path": "fly xx;su;s;ed;se;e;pushaside grass;n;n;e;e;s;w;n;n;e;e;s;e;nu;nu",
+    "zone": "高昌迷宫"
+  }, {
+    "desc": "    转过了一排树木，只见一座石山上嵌著两扇铁铸的大门,大门看样子重逾千钧，据说是古代高昌国王为了抵御强敌而设计的。门上铁锈斑驳，显是历时已久的旧物。但是门上的门环(huan)似乎可以扭(niu).门上写着：               ****************               *              *               *  高 昌 大 殿 *               *              *               ****************",
+    "exits": "southdown",
+    "id": 2335,
+    "links": {
+      "#2 (niu huan left);#5 (niu huan right);d": {
+        "con": "",
+        "to": 2336
+      },
+      "sd": {
+        "con": "",
+        "to": 2334
+      }
+    },
+    "name": "高昌大门",
+    "path": "fly xx;su;s;ed;se;e;pushaside grass;n;n;e;e;s;w;n;n;e;e;s;e;nu;nu;nu",
+    "zone": "高昌迷宫"
+  }, {
+    "desc": "    这里就是传说中埋藏着无数宝藏高昌迷宫的大殿，四壁供的都是泥塑木雕的佛像.大殿之上有一个大大的龙椅，大堂之上透着一股威严，有一块大匾，上书：                ****************                *              *                 *   文成武德   *                *              *                ****************东西两面都是殿堂。",
+    "exits": "up|east|west",
+    "id": 2336,
+    "links": {
+      "climb up": {
+        "con": "",
+        "to": 2335
+      },
+      "e": {
+        "con": "",
+        "to": 2337
+      },
+      "w": {
+        "con": "",
+        "to": 2347
+      }
+    },
+    "name": "高昌大殿",
+    "path": "fly xx;su;s;ed;se;e;pushaside grass;n;n;e;e;s;w;n;n;e;e;s;e;nu;nu;nu;|!aw:1:hi:|;#2 (niu huan left);#5 (niu huan right);d",
+    "zone": "高昌迷宫"
+  }, {
+    "desc": "    每一间房中大都供有佛像。偶然在壁上见到几个汉文，写的是「高昌国国王」，「文泰」，「大唐贞观十三年」等等字样。有一座殿堂中供的都是汉人塑像，匾上写的是「大成至圣先师孔子位」，左右各有数十人，写著「颜回」、「子路」、「子贡」、「子夏」、「子张」等名字。",
+    "exits": "north|west",
+    "id": 2337,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 2338
+      },
+      "w": {
+        "con": "",
+        "to": 2336
+      }
+    },
+    "name": "东大殿",
+    "path": "fly xx;su;s;ed;se;e;pushaside grass;n;n;e;e;s;w;n;n;e;e;s;e;nu;nu;nu;|!aw:1:hi:|;#2 (niu huan left);#5 (niu huan right);d;e",
+    "zone": "高昌迷宫"
+  }, {
+    "desc": "    每一间房中大都供有佛像。偶然在壁上见到几个汉文，写的是「高昌国国王」，「文泰」，「大唐贞观十三年」等等字样。有一座殿堂中供的都是汉人塑像，匾上写的是「大成至圣先师孔子位」，左右各有数十人，写著「颜回」、「子路」、「子贡」、「子夏」、「子张」等名字。",
+    "exits": "south|north",
+    "id": 2338,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 2339
+      },
+      "s": {
+        "con": "",
+        "to": 2337
+      }
+    },
+    "name": "东大殿",
+    "path": "fly xx;su;s;ed;se;e;pushaside grass;n;n;e;e;s;w;n;n;e;e;s;e;nu;nu;nu;|!aw:1:hi:|;#2 (niu huan left);#5 (niu huan right);d;e;n",
+    "zone": "高昌迷宫"
+  }, {
+    "desc": "    每一间房中大都供有佛像。偶然在壁上见到几个汉文，写的是「高昌国国王」，「文泰」，「大唐贞观十三年」等等字样。有一座殿堂中供的都是汉人塑像，匾上写的是「大成至圣先师孔子位」，左右各有数十人，写著「颜回」、「子路」、「子贡」、「子夏」、「子张」等名字。",
+    "exits": "south|northeast",
+    "id": 2339,
+    "links": {
+      "ne": {
+        "con": "",
+        "to": 2340
+      },
+      "s": {
+        "con": "",
+        "to": 2338
+      }
+    },
+    "name": "东大殿",
+    "path": "fly xx;su;s;ed;se;e;pushaside grass;n;n;e;e;s;w;n;n;e;e;s;e;nu;nu;nu;|!aw:1:hi:|;#2 (niu huan left);#5 (niu huan right);d;e;n;n",
+    "zone": "高昌迷宫"
+  }, {
+    "desc": "    这里是后殿走廊。房顶一侧支在南面的高墙上，另一侧则与北边般若堂的屋顶相连。彩梁画栋，连顶棚也用彩漆绘满了各种飞天的图形，每幅画似乎都在诉说一个娓娓动人的佛经故事。南边墙上题着一个字(writing)。",
+    "exits": "northwest|southwest",
+    "id": 2340,
+    "links": {
+      "nw": {
+        "con": "",
+        "to": 2341
+      },
+      "sw": {
+        "con": "",
+        "to": 2339
+      }
+    },
+    "name": "东走廊",
+    "path": "fly xx;su;s;ed;se;e;pushaside grass;n;n;e;e;s;w;n;n;e;e;s;e;nu;nu;nu;|!aw:1:hi:|;#2 (niu huan left);#5 (niu huan right);d;e;n;n;ne",
+    "zone": "高昌迷宫"
+  }, {
+    "desc": "    这里是殿堂走廊。房顶一侧支在南面的高墙上，另一侧则与北边殿堂的屋顶相连。彩梁画栋，连顶棚也用彩漆绘满了各种飞天的图形，每幅画似乎都在诉说一个娓娓动人的故事。",
+    "exits": "north|southeast|southwest",
+    "id": 2341,
+    "links": {
+      "n": {
+        "con": "gcdt:",
+        "to": 2342
+      },
+      "se": {
+        "con": "",
+        "to": 2340
+      },
+      "sw": {
+        "con": "",
+        "to": 2344
+      }
+    },
+    "name": "北走廊",
+    "path": "fly xx;su;s;ed;se;e;pushaside grass;n;n;e;e;s;w;n;n;e;e;s;e;nu;nu;nu;|!aw:1:hi:|;#2 (niu huan left);#5 (niu huan right);d;e;n;n;ne;nw",
+    "zone": "高昌迷宫"
+  }, {
+    "desc": "    大厅里有几具白骨骷髅 只见大半宫室已然毁圯，殿堂中堆满了黄沙;往北边似乎还有路，在阴暗处站有一人正好挡住了去路。",
+    "exits": "south|north",
+    "id": 2342,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 2343
+      },
+      "s": {
+        "con": "",
+        "to": 2341
+      }
+    },
+    "name": "高昌后殿",
+    "path": "|!c:ditu:hi|;fly xx;su;s;ed;se;e;pushaside grass;n;n;e;e;s;w;n;n;e;e;s;e;nu;nu;nu;|!aw:1:hi:|;#2 (niu huan left);#5 (niu huan right);d;e;n;n;ne;nw;|!gcdt::n|",
+    "zone": "高昌迷宫"
+  }, {
+    "desc": "    这里是宫殿底下的地下密室。密室虽小，却也五脏俱全，石桌石椅，石几石床，连室内放的几件器皿，也都是石制的。看来似乎很久以前有人在这里住过。正中的石桌(table)上平放着一块薄薄的石板，上面好象刻着些什么。",
+    "exits": "south",
+    "id": 2343,
+    "links": {
+      "s": {
+        "con": "",
+        "to": 2342
+      }
+    },
+    "name": "地下室",
+    "path": "|!c:ditu:hi|;fly xx;su;s;ed;se;e;pushaside grass;n;n;e;e;s;w;n;n;e;e;s;e;nu;nu;nu;|!aw:1:hi:|;#2 (niu huan left);#5 (niu huan right);d;e;n;n;ne;nw;|!gcdt::n|;n",
+    "zone": "高昌迷宫"
+  }, {
+    "desc": "    这里是殿堂走廊。房顶一侧支在南面的高墙上，另一侧则与北边殿堂的屋顶相连。彩梁画栋，连顶棚也用彩漆绘满了各种飞天的图形，每幅画似乎都在诉说一个娓娓动人的佛经故事。南边墙上题着一个字(writing)。",
+    "exits": "southeast|northeast",
+    "id": 2344,
+    "links": {
+      "ne": {
+        "con": "",
+        "to": 2341
+      },
+      "se": {
+        "con": "",
+        "to": 2345
+      }
+    },
+    "name": "西走廊",
+    "path": "fly xx;su;s;ed;se;e;pushaside grass;n;n;e;e;s;w;n;n;e;e;s;e;nu;nu;nu;|!aw:1:hi:|;#2 (niu huan left);#5 (niu huan right);d;w;n;n;nw",
+    "zone": "高昌迷宫"
+  }, {
+    "desc": "    每一间房中大都供有佛像。偶然在壁上见到几个汉文，写的是「高昌国国王」，「文泰」，「大唐贞观十三年」等等字样。有一座殿堂中供的都是汉人塑像，匾上写的是「大成至圣先师孔子位」，左右各有数十人，写著「颜回」、「子路」、「子贡」、「子夏」、「子张」等名字。",
+    "exits": "south|northwest",
+    "id": 2345,
+    "links": {
+      "nw": {
+        "con": "",
+        "to": 2344
+      },
+      "s": {
+        "to": 2346
+      }
+    },
+    "name": "西大殿",
+    "path": "fly xx;su;s;ed;se;e;pushaside grass;n;n;e;e;s;w;n;n;e;e;s;e;nu;nu;nu;|!aw:1:hi:|;#2 (niu huan left);#5 (niu huan right);d;w;n;n",
+    "zone": "高昌迷宫"
+  }, {
+    "desc": "    每一间房中大都供有佛像。偶然在壁上见到几个汉文，写的是「高昌国国王」，「文泰」，「大唐贞观十三年」等等字样。有一座殿堂中供的都是汉人塑像，匾上写的是「大成至圣先师孔子位」，左右各有数十人，写著「颜回」、「子路」、「子贡」、「子夏」、「子张」等名字。",
+    "exits": "south|north",
+    "id": 2346,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 2345
+      },
+      "s": {
+        "con": "",
+        "to": 2347
+      }
+    },
+    "name": "西大殿",
+    "path": "fly xx;su;s;ed;se;e;pushaside grass;n;n;e;e;s;w;n;n;e;e;s;e;nu;nu;nu;|!aw:1:hi:|;#2 (niu huan left);#5 (niu huan right);d;w;n",
+    "zone": "高昌迷宫"
+  }, {
+    "desc": "    每一间房中大都供有佛像。偶然在壁上见到几个汉文，写的是「高昌国国王」，「文泰」，「大唐贞观十三年」等等字样。有一座殿堂中供的都是汉人塑像，匾上写的是「大成至圣先师孔子位」，左右各有数十人，写著「颜回」、「子路」、「子贡」、「子夏」、「子张」等名字。",
+    "exits": "north|east",
+    "id": 2347,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2336
+      },
+      "n": {
+        "con": "",
+        "to": 2346
+      }
+    },
+    "name": "西大殿",
+    "path": "fly xx;su;s;ed;se;e;pushaside grass;n;n;e;e;s;w;n;n;e;e;s;e;nu;nu;nu;|!aw:1:hi:|;#2 (niu huan left);#5 (niu huan right);d;w",
+    "zone": "高昌迷宫"
+  } ]
+}

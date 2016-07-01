@@ -1,0 +1,983 @@
+{
+  "center": 2285,
+  "cmd": "fly xx",
+  "id": "xx",
+  "name": "星宿海",
+  "rooms": [ {
+    "desc": "    这里便是长安城的中心，四条大街交汇于此。一座巍峨高大的钟楼耸立于前，很是有些气势。每到清晨，响亮的钟声便会伴着淡淡雾气传向长安城的大街小巷。路口车水马龙，来往人潮不断。",
+    "exits": "south|east|north|west",
+    "id": 839,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 838
+      },
+      "n": {
+        "con": "",
+        "to": 844
+      },
+      "s": {
+        "con": "",
+        "to": 840
+      },
+      "w": {
+        "con": "",
+        "to": 841
+      }
+    },
+    "name": "十字街头",
+    "path": "fly ca",
+    "zone": "长安|星宿海"
+  }, {
+    "desc": "    这里是长安城的西门。东面就到了城中，远望人山人海，往来行人车流不绝。西面一条大路通向远方。城门下有一些执勤的兵士。时下虽已天下太平，但一干兵将还是英姿勃勃，警惕的盯着往来人士。",
+    "exits": "east|west",
+    "id": 841,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 839
+      },
+      "w": {
+        "con": "",
+        "to": 842
+      }
+    },
+    "name": "长安城西门",
+    "path": "fly ca;w",
+    "zone": "长安|星宿海"
+  }, {
+    "desc": "    你走在一条青石大道上，尘土飞扬。东面是一座大城池，看城墙上旗帜飘扬，好象就是长安了。西面望去一片黄土和荒野。",
+    "exits": "east|west",
+    "id": 842,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 841
+      },
+      "w": {
+        "con": "",
+        "to": 843
+      }
+    },
+    "name": "大道",
+    "path": "fly ca;w;w",
+    "zone": "长安|星宿海"
+  }, {
+    "desc": "    这是一条青石大道。东面隐约可以看到长安城的城墙。北面有座小山丘。",
+    "exits": "east|northup",
+    "id": 843,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 842
+      },
+      "nu": {
+        "con": "",
+        "to": 2317
+      }
+    },
+    "name": "大道",
+    "path": "fly ca;w;w;w",
+    "zone": "长安|星宿海"
+  }, {
+    "desc": "    这里是雪山脚下的一片草原。北面是起伏的群山，山顶上积着终年不化的雪。西边有一条土路。",
+    "exits": "northeast|west",
+    "id": 2151,
+    "links": {
+      "ne": {
+        "con": "",
+        "to": 2312
+      },
+      "w": {
+        "con": "",
+        "to": 2150
+      }
+    },
+    "name": "草原",
+    "path": "fly xx;su;s;ed;se;sw",
+    "zone": "血刀门|星宿海"
+  }, {
+    "desc": "    这里是星宿海边。说是海，其实是片湖泊和沼泽，地形十分险恶。东面石壁上一道裂缝通到一个山洞。南面有一条捷径可通往白驼山。",
+    "exits": "westup|south|north|southup",
+    "id": 2285,
+    "links": {
+      "n": {
+        "con": "k1:摘星子",
+        "to": 2286
+      },
+      "su": {
+        "con": "",
+        "to": 2303
+      },
+      "wu": {
+        "con": "k1:摘星子",
+        "to": 2298
+      }
+    },
+    "name": "星宿海",
+    "path": "fly xx",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这里是星宿海边。说是海，其实是片湖泊和沼泽，地形十分险恶。这里左右两厢通向星宿海深处，北边通向星宿派总舵──日月洞。洞口立着一个牌子(paizi)。",
+    "exits": "south|northwest|north|northeast",
+    "id": 2286,
+    "links": {
+      "n": {
+        "con": "aw:3:flatter 星宿老仙",
+        "to": 2287
+      },
+      "ne": {
+        "con": "aw:3:flatter 星宿老仙",
+        "to": 2296
+      },
+      "nw": {
+        "con": "aw:3:flatter 星宿老仙",
+        "to": 2288
+      },
+      "s": {
+        "con": "",
+        "to": 2285
+      }
+    },
+    "name": "星宿海",
+    "path": "fly xx;|!k1:摘星子:n|",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这里是星宿派总舵所在地日月洞。洞内灯火通明，正中一把虎皮椅上端坐着星宿派掌门人丁春秋。洞壁上装饰着虎皮、鹿头、雕羽，及一些字画(zihua)。洞两侧竖立兵器架，上面排列的大多是各种棍棒。",
+    "exits": "south",
+    "id": 2287,
+    "links": {
+      "s": {
+        "con": "",
+        "to": 2286
+      }
+    },
+    "name": "日月洞",
+    "path": "fly xx;|!k1:摘星子:n|;|!aw:3:flatter 星宿老仙:n|",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这里是星宿海边。说是海，其实是片湖泊和沼泽，地形十分险恶。这里通向星宿海的深处。西面有一条新铺的石头路。",
+    "exits": "northwest|southeast|northeast|west",
+    "id": 2288,
+    "links": {
+      "ne": {
+        "con": "",
+        "to": 2297
+      },
+      "nw": {
+        "con": "",
+        "to": 2295
+      },
+      "se": {
+        "con": "",
+        "to": 2286
+      },
+      "w": {
+        "con": "",
+        "to": 2966
+      }
+    },
+    "name": "星宿海",
+    "path": "fly xx;|!k1:摘星子:n|;|!aw:3:flatter 星宿老仙:nw|",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这是一个粗糙的石洞，里面铺了几张臭哄哄的草垫子。垫子旁边是一些破酒罐子。洞壁(wall)上有些字迹。",
+    "exits": "out",
+    "id": 2289,
+    "links": {
+      "out": {
+        "con": "",
+        "to": 2966
+      }
+    },
+    "name": "逍遥洞",
+    "path": "fly xx;|!k1:摘星子:n|;|!aw:3:flatter 星宿老仙:nw|;w;|!k1:采花子:enter|",
+    "zone": "星宿海"
+  }, {
+    "desc": "    你走在一条在山壁上人工开凿出来崎岖的小路上，这里，寒风凛冽，西面是望不见底的深涧。",
+    "exits": "northup|southeast",
+    "id": 2290,
+    "links": {
+      "nu": {
+        "con": "",
+        "to": 2291
+      },
+      "se": {
+        "con": "",
+        "to": 2966
+      }
+    },
+    "name": "小路",
+    "path": "fly xx;|!k1:摘星子:n|;|!aw:3:flatter 星宿老仙:nw|;w;nw",
+    "zone": "星宿海"
+  }, {
+    "danger": 3,
+    "desc": "    山势在这里渐渐变得平缓，你已经可以听见西边山涧底的水声。东面有一个山洞。",
+    "exits": "north|enter|southdown",
+    "id": 2291,
+    "links": {
+      "enter": {
+        "con": "",
+        "to": 2292
+      },
+      "n": {
+        "con": "",
+        "to": 2293
+      },
+      "sd": {
+        "con": "",
+        "to": 2290
+      }
+    },
+    "name": "小路",
+    "path": "fly xx;|!k1:摘星子:n|;|!aw:3:flatter 星宿老仙:nw|;w;nw;nu",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这里原来是一个长在山壁上的天然溶洞，因为地点隐密而且洞中空气十分干燥，星宿派把这里改造成了一个仓库。",
+    "exits": "out",
+    "id": 2292,
+    "links": {
+      "out": {
+        "con": "",
+        "to": 2291
+      }
+    },
+    "name": "星宿派储藏室",
+    "path": "fly xx;|!k1:摘星子:n|;|!aw:3:flatter 星宿老仙:nw|;w;nw;nu;enter",
+    "zone": "星宿海"
+  }, {
+    "desc": "    山间平地，地上是嫩绿的小草，周围布了几棵桦树，山边有一眼清泉。草地上树着几个毒僵尸，显是星宿弟子练功所用。",
+    "exits": "south|southeast",
+    "id": 2293,
+    "links": {
+      "s": {
+        "con": "",
+        "to": 2291
+      }
+    },
+    "name": "山间平地",
+    "path": "fly xx;|!k1:摘星子:n|;|!aw:3:flatter 星宿老仙:nw|;nw;nu;nw",
+    "zone": "星宿海"
+  }, {
+    "desc": "    你走在一条崎岖的小路上，这里荒无人烟，寒风凛冽。",
+    "exits": "northwest|southdown|northeast",
+    "id": 2294,
+    "links": {
+      "ne": {
+        "con": "",
+        "to": 2286
+      },
+      "nw": {
+        "con": "",
+        "to": 2293
+      },
+      "sd": {
+        "con": "",
+        "to": 2295
+      }
+    },
+    "name": "小路",
+    "path": "fly xx;|!k1:摘星子:n|;|!aw:3:flatter 星宿老仙:nw|;nw;nu",
+    "zone": "星宿海"
+  }, {
+    "desc": "    你走在一条崎岖的小路上，这里荒无人烟，寒风凛冽。",
+    "exits": "southeast|northup",
+    "id": 2295,
+    "links": {
+      "nu": {
+        "con": "",
+        "to": 2294
+      },
+      "se": {
+        "con": "",
+        "to": 2288
+      }
+    },
+    "name": "小路",
+    "path": "fly xx;|!k1:摘星子:n|;|!aw:3:flatter 星宿老仙:nw|;nw",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这里是星宿海边。说是海，其实是片湖泊和沼泽，地形十分险恶。这里通向星宿海的深处。",
+    "exits": "northwest|southwest",
+    "id": 2296,
+    "links": {
+      "nw": {
+        "con": "",
+        "to": 2297
+      },
+      "sw": {
+        "con": "",
+        "to": 2286
+      }
+    },
+    "name": "星宿海",
+    "path": "fly xx;|!k1:摘星子:n|;|!aw:3:flatter 星宿老仙:ne|",
+    "zone": "星宿海"
+  }, {
+    "desc": "",
+    "exits": "southeast|southwest",
+    "id": 2297,
+    "links": {
+      "se": {
+        "con": "",
+        "to": 2296
+      },
+      "sw": {
+        "con": "",
+        "to": 2288
+      }
+    },
+    "name": "星宿海",
+    "path": "fly xx;|!k1:摘星子:n|;|!aw:3:flatter 星宿老仙:ne|;nw",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这里是天山东麓，山风从山上吹来，你冷得瑟瑟发抖。路边是一片草原。西面一条深涧(valley)挡住了上山的路。",
+    "exits": "eastdown",
+    "id": 2298,
+    "links": {
+      "ed": {
+        "con": "",
+        "to": 2285
+      },
+      "hi": {
+        "con": "aw:3:jump valley",
+        "to": 2299
+      }
+    },
+    "name": "天山山路",
+    "path": "fly xx;|!k1:摘星子:wu|",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这里是天山东麓，山风从山上吹来，你冷得瑟瑟发抖。路边是一片针叶林。石壁上盛开着一朵洁白的天山雪莲，一个采药人正在采药。东面一条深涧(valley)挡住了下山的路。",
+    "exits": "westup",
+    "id": 2299,
+    "links": {
+      "jump valley": {
+        "con": "",
+        "to": 2298
+      },
+      "wu": {
+        "con": "",
+        "to": 2300
+      }
+    },
+    "name": "天山山路",
+    "path": "fly xx;|!k1:摘星子:wu|;|!aw:3:jump valley:hi|",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这里是天山东麓，山风从山上吹来，你冷得瑟瑟发抖。路边是一片针叶林。西边望去，顶峰遥遥可见。南边有个黑黢黢的山洞(cave)。",
+    "exits": "westup|enter|eastdown",
+    "id": 2300,
+    "links": {
+      "ed": {
+        "con": "",
+        "to": 2299
+      },
+      "enter": {
+        "con": "",
+        "to": 2301
+      },
+      "wu": {
+        "con": "",
+        "to": 2302
+      }
+    },
+    "name": "天山山路",
+    "path": "fly xx;|!k1:摘星子:wu|;|!aw:3:jump valley:hi|;wu",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这个山洞里伸手不见五指，只有出口处透进一丝光线。",
+    "exits": "out",
+    "id": 2301,
+    "links": {
+      "out": {
+        "con": "",
+        "to": 2300
+      }
+    },
+    "name": "山洞",
+    "path": "fly xx;|!k1:摘星子:wu|;|!aw:3:jump valley:hi|;wu;enter",
+    "zone": "星宿海"
+  }, {
+    "danger": 3,
+    "desc": "    这里是天山顶峰。从这里向周围望去，帕米尔高原的风光尽收眼底。东面一条小路可以下山。山风(wind)凛冽，极为强劲，几乎无法站立。",
+    "exits": "eastdown",
+    "id": 2302,
+    "links": {
+      "ed": {
+        "con": "",
+        "to": 2300
+      }
+    },
+    "name": "天山顶峰",
+    "path": "fly xx;|!k1:摘星子:wu|;|!aw:3:jump valley:hi|;wu;wu",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这里是天山东麓，山风从山上吹来，你冷得瑟瑟发抖。路边是一片草原。路尽头松林下一位壮汉正在长啸练功。北上就是人人害怕的灵鹫宫了.",
+    "exits": "south|northup|northdown",
+    "id": 2303,
+    "links": {
+      "nd": {
+        "con": "",
+        "to": 2285
+      },
+      "nu": {
+        "con": "",
+        "to": 2060
+      },
+      "s": {
+        "con": "",
+        "to": 2304
+      }
+    },
+    "name": "天山山路",
+    "path": "fly xx;su",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这里是天山东麓，山风从山上吹来，你冷得瑟瑟发抖。路边是一片草原。草原上一位牧羊人赶着一群羊。这里向东可以下山。北边传来阵阵猛兽的啸声。",
+    "exits": "north|eastdown",
+    "id": 2304,
+    "links": {
+      "ed": {
+        "con": "",
+        "to": 2305
+      },
+      "n": {
+        "con": "",
+        "to": 2303
+      }
+    },
+    "name": "天山山路",
+    "path": "fly xx;su;s",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这里是天山脚下，西面是高耸入云的天山。天晴的时候可以看到山顶上的冰川。一道天山将西域分为两半。北疆是西域各族的聚居区，南疆是无边的塔克拉马干大沙漠。",
+    "exits": "westup|northwest|southeast|southwest",
+    "id": 2305,
+    "links": {
+      "nw": {
+        "con": "",
+        "to": 2306
+      },
+      "se": {
+        "con": "",
+        "to": 2312
+      },
+      "sw": {
+        "con": "",
+        "to": 2967
+      },
+      "wu": {
+        "con": "",
+        "to": 2304
+      }
+    },
+    "name": "天山脚下",
+    "path": "fly xx;su;s;ed",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这里是一座维吾尔族聚居的小镇。镇上人来人往，十分热闹。只是他们说的话你听不懂。镇西有家小店铺，西北边人声鼎沸，好像在举行什么比赛。东面有家院落，院门口有棵大树。北边是一家马厩。",
+    "exits": "northwest|north|east|southeast|west",
+    "id": 2306,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2308
+      },
+      "n": {
+        "con": "",
+        "to": 2310
+      },
+      "nw": {
+        "con": "",
+        "to": 2311
+      },
+      "se": {
+        "con": "",
+        "to": 2305
+      },
+      "w": {
+        "con": "",
+        "to": 2307
+      }
+    },
+    "name": "伊犁",
+    "path": "fly xx;su;s;ed;nw",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这是一个杂货铺。房屋内铺着地毯。店老板坐在地毯上，旁边堆着他的货。墙上有个牌子，是个价目表(sign)。",
+    "exits": "east",
+    "id": 2307,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2306
+      }
+    },
+    "name": "杂货铺",
+    "path": "fly xx;su;s;ed;nw;w",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这是一个巴依家的庭院。门口大树的树荫投到院子里，让人觉得很凉快。院子东面是巴依的客厅，西边就是小镇大街。",
+    "exits": "east|west",
+    "id": 2308,
+    "links": {
+      "e": {
+        "con": "k1:",
+        "to": 2309
+      },
+      "w": {
+        "con": "",
+        "to": 2306
+      }
+    },
+    "name": "巴依家院",
+    "path": "fly xx;su;s;ed;nw;e",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这是巴依家的客厅。地上铺着波斯地毯，木架上摆这中原的瓷器。看得出这家的主人一定很有钱。",
+    "exits": "west",
+    "id": 2309,
+    "links": {
+      "w": {
+        "con": "",
+        "to": 2308
+      }
+    },
+    "name": "巴依家客厅",
+    "path": "fly xx;su;s;ed;nw;e;|!k1::e|",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这是北疆小镇的马厩，常年供应新鲜草料。这里地处会疆，边民古朴而好客，把所有远方来宾均作兄弟看待。马夫们会把马牵到马厩好生照看，将它们喂饱饮足，再梳理得清清爽爽，一直伺候到客人上路。马厩旧木柱上钉着一块破木牌(paizi)。        马厩中堆放著几堆草料，正中有一口泔槽。",
+    "exits": "south",
+    "id": 2310,
+    "links": {
+      "s": {
+        "con": "",
+        "to": 2306
+      }
+    },
+    "name": "马厩",
+    "path": "fly xx;su;s;ed;nw;n",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这里是小镇的赛马场。场上正在举行维吾尔族的「姑娘追」表演。一个小伙子可以找一个姑娘并骑慢驰到一处折返点。去的路上小伙子可以对姑娘随便挑逗。回来时姑娘则可以用鞭子抽打小伙子。当然，如果姑娘喜欢这个小伙子，落鞭就会轻些。否则的话，有小伙子好受的。",
+    "exits": "southeast",
+    "id": 2311,
+    "links": {
+      "se": {
+        "con": "",
+        "to": 2306
+      }
+    },
+    "name": "赛马场",
+    "path": "fly xx;su;s;ed;nw;nw",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这是一条中原和西域之间的商道。西面是一望无际的大沙漠，传说那里常有盗匪出没。西北则通向一片连绵的山脉，东面就是通向中原的路。路边有一块石碑(shibei)。",
+    "exits": "northwest|east|west|southwest",
+    "id": 2312,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2313
+      },
+      "nw": {
+        "con": "",
+        "to": 2305
+      },
+      "sw": {
+        "con": "",
+        "to": 2151
+      },
+      "w": {
+        "con": "",
+        "to": 2975
+      }
+    },
+    "name": "丝绸之路",
+    "path": "fly xx;su;s;ed;se",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这是一条中原和西域之间的商道。南面连绵的祁连山脉在阳光的照射下好像是一条玉带。东边是中原，西面则通往西域。西南有一座黄沙堆积形成的山(mount)。这里的茅草(grass)似乎很密很厚。",
+    "exits": "southeast|west",
+    "id": 2313,
+    "links": {
+      "climb mount": {
+        "con": "",
+        "to": 2318
+      },
+      "se": {
+        "con": "",
+        "to": 2314
+      },
+      "w": {
+        "con": "",
+        "to": 2312
+      }
+    },
+    "name": "丝绸之路",
+    "path": "fly xx;su;s;ed;se;e",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这是一条中原和西域之间的商道。南面连绵的祁连山脉在阳光的照射下好像是一条玉带。东边是中原，西面则通往西域。",
+    "exits": "northwest|east|west",
+    "id": 2314,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2315
+      },
+      "nw": {
+        "con": "",
+        "to": 2313
+      }
+    },
+    "name": "丝绸之路",
+    "path": "fly xx;su;s;ed;se;e;se",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这是一条中原和西域之间的商道。东边有一座雄伟的关隘，西面则通往西域。",
+    "exits": "east|west",
+    "id": 2315,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2316
+      },
+      "w": {
+        "con": "",
+        "to": 2314
+      }
+    },
+    "name": "丝绸之路",
+    "path": "fly xx;su;s;ed;se;e;se;e",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这是长城最西的关隘。岁月沧桑，仍掩不住它的风采。群山环抱之下，更显它的雄浑。由于西域安定，久无战事，边关守军已大为减少。一条大道向东延伸通向中原。出关向西，便是著名的“丝绸之路”。",
+    "exits": "eastup|west",
+    "id": 2316,
+    "links": {
+      "eu": {
+        "con": "",
+        "to": 2317
+      },
+      "w": {
+        "con": "",
+        "to": 2315
+      }
+    },
+    "name": "嘉峪关",
+    "path": "fly xx;su;s;ed;se;e;se;e;e",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这是一座不太高的小山。山顶望去，瓦蓝的天空(sky)飘着几朵淡淡的白云。一群大雁发出「嘎嘎」的叫声，从头上飞过。西面山下长城的残垣断壁依稀可辨。长城的尽头是一座雄伟的关隘。路旁有一处悬崖之上刻着首词(poem)。",
+    "exits": "southdown|westdown",
+    "id": 2317,
+    "links": {
+      "sd": {
+        "con": "",
+        "to": 843
+      },
+      "wd": {
+        "con": "",
+        "to": 2316
+      }
+    },
+    "name": "六盘山",
+    "path": "fly xx;su;s;ed;se;e;se;e;e;eu",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这是一座黄沙堆积形成的山。微风吹动，沙山发出嗡嗡的响声。故而当地人称之为鸣沙山。沙土中似乎有一种虫子在蠕动。",
+    "exits": "northeast|west",
+    "id": 2318,
+    "links": {
+      "ne": {
+        "con": "",
+        "to": 2313
+      },
+      "w": {
+        "con": "",
+        "to": 2319
+      }
+    },
+    "name": "鸣沙山",
+    "path": "fly xx;su;s;ed;se;e;climb mount",
+    "zone": "星宿海"
+  }, {
+    "desc": "    出乎你的意料之外，在沙漠中竟然有泉水。一泓清澈的泉水形成一个月牙的形状，因而得名月儿泉。南面是一片峭壁(cliff)，东边传来嗡嗡的声响。",
+    "exits": "east",
+    "id": 2319,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2318
+      },
+      "enter hole": {
+        "con": "",
+        "to": 2320
+      }
+    },
+    "name": "月儿泉",
+    "path": "fly xx;su;s;ed;se;e;climb mount;w",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这里墙壁上绘制着与佛教相关的画面，有仙女飞天，还有反弹琵琶。洞中还有很多佛像和经书。你被这些瑰丽的文化之宝惊呆了。",
+    "exits": "north",
+    "id": 2320,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 2319
+      }
+    },
+    "name": "莫高窟",
+    "path": "fly xx;su;s;ed;se;e;climb mount;w;enter hole",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这是星宿海边有人用石头铺成的一条小道，周围弥漫着沼泽的瘴气和一种说不出来的香味。路边有个石洞。",
+    "exits": "northwest|east|enter",
+    "id": 2966,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2288
+      },
+      "enter": {
+        "con": "k1:采花子",
+        "to": 2289
+      },
+      "nw": {
+        "con": "",
+        "to": 2290
+      }
+    },
+    "name": "石道",
+    "path": "fly xx;|!k1:摘星子:n|;|!aw:3:flatter 星宿老仙:nw|;w",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这就是浩瀚的塔克拉马干大沙漠，一走进来，你仿佛迷失了方向。你感到口内十分焦渴，还是快些离开吧。",
+    "exits": "north|southwest|southeast|south|northwest|east|northeast|west",
+    "id": 2967,
+    "links": {
+      "ne": {
+        "con": "",
+        "to": 2305
+      },
+      "nw": {
+        "con": "",
+        "to": 2968
+      }
+    },
+    "name": "南疆沙漠",
+    "path": "fly xx;su;s;ed;sw",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这就是浩瀚的塔克拉马干大沙漠，一走进来，你仿佛迷失了方向。你感到口内十分焦渴，还是快些离开吧。",
+    "exits": "north|southwest|southeast|south|northwest|east|northeast|west",
+    "id": 2968,
+    "links": {
+      "sw": {
+        "con": "",
+        "to": 2969
+      }
+    },
+    "name": "南疆沙漠",
+    "path": "fly xx;su;s;ed;sw;nw",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这就是浩瀚的塔克拉马干大沙漠，一走进来，你仿佛迷失了方向。你感到口内十分焦渴，还是快些离开吧。",
+    "exits": "north|southwest|southeast|south|northwest|east|northeast|west",
+    "id": 2969,
+    "links": {
+      "se": {
+        "con": "",
+        "to": 2970
+      },
+      "w": {
+        "con": "",
+        "to": 2972
+      }
+    },
+    "name": "南疆沙漠",
+    "path": "fly xx;su;s;ed;sw;nw;sw",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这就是浩瀚的塔克拉马干大沙漠，一走进来，你仿佛迷失了方向。你感到口内十分焦渴，还是快些离开吧。",
+    "exits": "north|southwest|southeast|south|northwest|east|northeast|west",
+    "id": 2970,
+    "links": {
+      "ne": {
+        "con": "",
+        "to": 2971
+      }
+    },
+    "name": "南疆沙漠",
+    "path": "fly xx;su;s;ed;sw;nw;sw;se",
+    "zone": "星宿海"
+  }, {
+    "desc": "    在沙漠的尽头出现了一个绿洲。灌木丛中有一眼坎儿井。井台上有一个木杯专供口渴的行人喝水。井边是一块瓜地。",
+    "exits": "northeast|southwest",
+    "id": 2971,
+    "links": {
+      "ne": {
+        "con": "",
+        "to": 2305
+      },
+      "sw": {
+        "con": "",
+        "to": 2970
+      }
+    },
+    "name": "沙漠绿洲",
+    "path": "fly xx;su;s;ed;sw;nw;sw;se;ne",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这里是沙漠中不多的一块绿洲，向南不远隐约可以看见一座黑黑的山洞。随风传来一些叮叮当当的打铁的声音。也不知是谁在打造什么。",
+    "exits": "south|east",
+    "id": 2972,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2969
+      },
+      "s": {
+        "con": "",
+        "to": 2973
+      }
+    },
+    "name": "沙漠绿洲",
+    "path": "fly xx;su;s;ed;sw;nw;sw;w",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这里是玄兵古洞洞口，里面传来阵阵的捶打声。似乎在锻造着什么。隐隐的透着一股萧杀的气息。",
+    "exits": "enter|east",
+    "id": 2973,
+    "links": {
+      "enter": {
+        "con": "",
+        "to": 2974
+      },
+      "n": {
+        "con": "",
+        "to": 2972
+      }
+    },
+    "name": "玄兵古洞",
+    "path": "fly xx;su;s;ed;sw;nw;sw;w;s",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这里是玄兵古洞，四面洞壁之上结满了石英的柱状结晶体，显得十分漂亮。前方一个巨大的炉子前站着一位长髯老者正看着炉火想着什么心事，旁边几个彪形大汉正挥舞着锤头敲打着一块似乎总也烧不红的什么金属。旁边仔细的放着几把刚刚出炉的兵器。那种骇人的杀气竟是从这些兵器上散发出来的。",
+    "exits": "out",
+    "id": 2974,
+    "links": {
+      "out": {
+        "con": "",
+        "to": 2973
+      }
+    },
+    "name": "玄兵古洞",
+    "path": "fly xx;su;s;ed;sw;nw;sw;w;s;enter",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这是一片一望无际的大沙漠。你一进来就迷失了方向。看来要走出这块沙漠并非易事。",
+    "exits": "south|north|east|west",
+    "id": 2975,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2312
+      },
+      "n": {
+        "con": "",
+        "to": 2976
+      },
+      "s": {
+        "con": "",
+        "to": 2975
+      },
+      "w": {
+        "con": "",
+        "to": 2975
+      }
+    },
+    "name": "大沙漠",
+    "path": "fly xx;su;s;ed;se;w",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这是一片一望无际的大沙漠。你一进来就迷失了方向。看来要走出这块沙漠并非易事。",
+    "exits": "south|north|east|west",
+    "id": 2976,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2976
+      },
+      "n": {
+        "con": "",
+        "to": 2976
+      },
+      "s": {
+        "con": "",
+        "to": 2977
+      },
+      "w": {
+        "con": "",
+        "to": 2976
+      }
+    },
+    "name": "大沙漠",
+    "path": "fly xx;su;s;ed;se;w;n",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这是一片一望无际的大沙漠。你一进来就迷失了方向。看来要走出这块沙漠并非易事。",
+    "exits": "south|north|east|west",
+    "id": 2977,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2978
+      },
+      "n": {
+        "con": "",
+        "to": 2976
+      },
+      "s": {
+        "con": "",
+        "to": 2976
+      },
+      "w": {
+        "con": "",
+        "to": 2049
+      }
+    },
+    "name": "大沙漠",
+    "path": "fly xx;su;s;ed;se;w;n;s",
+    "zone": "星宿海"
+  }, {
+    "desc": "    这是一片一望无际的大沙漠。你一进来就迷失了方向。看来要走出这块沙漠并非易事。",
+    "exits": "south|north|east|west",
+    "id": 2978,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2975
+      },
+      "n": {
+        "con": "",
+        "to": 2978
+      },
+      "s": {
+        "con": "",
+        "to": 2978
+      },
+      "w": {
+        "con": "",
+        "to": 2977
+      }
+    },
+    "name": "大沙漠",
+    "path": "fly xx;su;s;ed;se;w;n;s;e",
+    "zone": "星宿海"
+  } ]
+}

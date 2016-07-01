@@ -1,0 +1,54 @@
+{
+  "center": 2605,
+  "cmd": "|!c:fire:fly fz|;s;s;w;w;n;break men;n;d;use fire;zuan",
+  "id": "fz1",
+  "name": "福州1",
+  "rooms": [ {
+    "desc": "    这是水井里的一个密道。周围都是些机关，只有出口很明显在哪里。湿漉漉的墙壁上有四块石板，分别刻着１、２、３、４。旁边还有一个铁板(tieban)扔在地上。",
+    "exits": "out",
+    "id": 2605,
+    "links": {
+      "enter": {
+        "con": "press:",
+        "to": 2606
+      },
+      "out": {
+        "con": "",
+        "to": 382
+      }
+    },
+    "name": "密道",
+    "path": "|!c:fire:fly fz|;s;s;w;w;n;break men;n;d;use fire;zuan",
+    "zone": "福州"
+  }, {
+    "desc": "    这是一间黑黢黢的小房间，墙上的砖头(zhuan)已经掉渣子了，房梁(liang)也已经朽烂不堪。墙脚处有一个铁箱子，上面积满了尘土。",
+    "exits": "out",
+    "id": 2606,
+    "links": {
+      "climb xiang;jump liang": {
+        "con": "",
+        "to": 2607
+      },
+      "out": {
+        "con": "",
+        "to": 2605
+      }
+    },
+    "name": "密室",
+    "path": "|!c:fire:fly fz|;s;s;w;w;n;break men;n;d;use fire;zuan;|!press::enter|",
+    "zone": "福州"
+  }, {
+    "desc": "    你现在在密室的房梁上四下观瞧，周围都是些烂木头破砖瓦。突然你瞟见犄角旮旯处有一件袈裟。",
+    "exits": "down",
+    "id": 2607,
+    "links": {
+      "d": {
+        "con": "",
+        "to": 2606
+      }
+    },
+    "name": "密室房梁",
+    "path": "|!c:fire:fly fz|;s;s;w;w;n;break men;n;d;use fire;zuan;|!press::enter|;climb xiang;jump liang",
+    "zone": "福州"
+  } ]
+}

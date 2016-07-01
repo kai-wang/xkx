@@ -1,0 +1,555 @@
+{
+  "center": 2110,
+  "cmd": "fly xs",
+  "id": "xdm",
+  "name": "血刀门",
+  "rooms": [ {
+    "desc": "    这里是大轮寺的山门，门前是络绎不绝的进香朝圣的信徒，有的甚至来自乌丝藏西南的波丝。山门(gate)前站了个手持法器的葛伦布在维持秩序，东方是一条青石板铺成的山路。",
+    "exits": "north|eastdown",
+    "id": 2110,
+    "links": {
+      "ed": {
+        "con": "",
+        "to": 2134
+      },
+      "n": {
+        "con": "",
+        "to": 2111
+      }
+    },
+    "name": "雪山寺山门",
+    "path": "fly xs",
+    "zone": "雪山寺|血刀门"
+  }, {
+    "desc": "    大雪山北麓的地势不是甚高，周围还有一些小山丘。西面有一座寺院依山而建。显得异常高大。寺院呈平顶梯型，多由大石砌成，墙体厚实，窗口窄小。",
+    "exits": "westup|north",
+    "id": 2134,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 2135
+      },
+      "wu": {
+        "con": "",
+        "to": 2110
+      }
+    },
+    "name": "大雪山山路",
+    "path": "fly xs;ed",
+    "zone": "血刀门"
+  }, {
+    "desc": "    这里山势比大雪山东面稍缓，也不是十分的严寒。山道两旁长得有稀稀拉拉的一些野草。四下毫无人迹，只有几只秃鹰在高处盘旋，俯视着茫茫雪山。",
+    "exits": "south|eastdown",
+    "id": 2135,
+    "links": {
+      "ed": {
+        "con": "",
+        "to": 2136
+      },
+      "s": {
+        "con": "",
+        "to": 2134
+      }
+    },
+    "name": "大雪山北麓",
+    "path": "fly xs;ed;n",
+    "zone": "血刀门"
+  }, {
+    "desc": "    你走在一山路上，四周有一座座小山丘。能遥望见西南方大雪山的北麓。山前隐隐约约象是有一座寺院。",
+    "exits": "westup|eastdown",
+    "id": 2136,
+    "links": {
+      "ed": {
+        "con": "",
+        "to": 2137
+      },
+      "wu": {
+        "con": "",
+        "to": 2135
+      }
+    },
+    "name": "山路",
+    "path": "fly xs;ed;n;ed",
+    "zone": "血刀门"
+  }, {
+    "desc": "    山路越走越窄，能隐隐望见前方又分出了几条叉路。",
+    "exits": "westup|northdown|southup",
+    "id": 2137,
+    "links": {
+      "nd": {
+        "con": "",
+        "to": 2138
+      },
+      "su": {
+        "con": "",
+        "to": 2152
+      },
+      "wu": {
+        "con": "",
+        "to": 2136
+      }
+    },
+    "name": "山路",
+    "path": "fly xs;ed;n;ed;ed",
+    "zone": "血刀门"
+  }, {
+    "desc": "    这是一条崎岖的山路，马队到了这里就不能在上去了。山路两旁杂草从生，路开始越来越难走。",
+    "exits": "southup|northdown",
+    "id": 2138,
+    "links": {
+      "nd": {
+        "con": "",
+        "to": 2139
+      },
+      "su": {
+        "con": "",
+        "to": 2137
+      }
+    },
+    "name": "山路",
+    "path": "fly xs;ed;n;ed;ed;nd",
+    "zone": "血刀门"
+  }, {
+    "desc": "    你走在一山路上，四周有一座座小山丘。远处可以看见终年积雪的山尖。周围的树草已经很难看得到了。",
+    "exits": "north|southup",
+    "id": 2139,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 2140
+      },
+      "su": {
+        "con": "",
+        "to": 2138
+      }
+    },
+    "name": "山路",
+    "path": "fly xs;ed;n;ed;ed;nd;nd",
+    "zone": "血刀门"
+  }, {
+    "desc": "    你走在一山路上，四周有一座座小山丘。",
+    "exits": "south|eastdown",
+    "id": 2140,
+    "links": {
+      "ed": {
+        "con": "",
+        "to": 2141
+      },
+      "s": {
+        "con": "",
+        "to": 2139
+      }
+    },
+    "name": "山路",
+    "path": "fly xs;ed;n;ed;ed;nd;nd;n",
+    "zone": "血刀门"
+  }, {
+    "desc": "    这里是山脚下的一片平地，山上不远处，皑皑白雪映照下的一大片红墙金瓦处，就是远近闻名的雪山寺。",
+    "exits": "south|westup",
+    "id": 2141,
+    "links": {
+      "s": {
+        "con": "",
+        "to": 2142
+      },
+      "wu": {
+        "con": "",
+        "to": 2140
+      }
+    },
+    "name": "山脚",
+    "path": "fly xs;ed;n;ed;ed;nd;nd;n;ed",
+    "zone": "血刀门"
+  }, {
+    "desc": "    这是圣湖边的小路。路侧长草没足, 青绿可喜。",
+    "exits": "south|north",
+    "id": 2142,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 2141
+      },
+      "s": {
+        "con": "",
+        "to": 2143
+      }
+    },
+    "name": "湖边小路",
+    "path": "fly xs;ed;n;ed;ed;nd;nd;n;ed;s",
+    "zone": "血刀门"
+  }, {
+    "desc": "    这是圣湖边的小路。天兰兰的，白白的云朵在湖里漂移，波光潋滟。湖边生长着一些绿绿青青的不知名的矮树。",
+    "exits": "north|southwest",
+    "id": 2143,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 2142
+      },
+      "sw": {
+        "con": "",
+        "to": 2144
+      }
+    },
+    "name": "湖边小路",
+    "path": "fly xs;ed;n;ed;ed;nd;nd;n;ed;s;s",
+    "zone": "血刀门"
+  }, {
+    "desc": "    这是圣湖边的小路。长草越径，虫鸣阵阵，偶尔有白色水禽掠湖点水，激起圈圈涟漪。",
+    "exits": "northeast|west",
+    "id": 2144,
+    "links": {
+      "ne": {
+        "con": "",
+        "to": 2143
+      },
+      "w": {
+        "con": "",
+        "to": 2145
+      }
+    },
+    "name": "湖边小路",
+    "path": "fly xs;ed;n;ed;ed;nd;nd;n;ed;s;s;sw",
+    "zone": "血刀门"
+  }, {
+    "desc": "    这是圣湖边的小路。路侧的湖水极为清澈。阳光下映着白顶雪山显出一片蓝幽幽的宁静。",
+    "exits": "east|west",
+    "id": 2145,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2144
+      },
+      "w": {
+        "con": "",
+        "to": 2146
+      }
+    },
+    "name": "湖边小路",
+    "path": "fly xs;ed;n;ed;ed;nd;nd;n;ed;s;s;sw;w",
+    "zone": "血刀门"
+  }, {
+    "desc": "    眼前就是著名的圣湖，碧蓝的湖面倒影着蓝天和白云，浩淼的水面让人心旷神怡。远处金碧辉煌的雪山寺清晰可见，再远处是几座延绵的大雪山，其中最高大的是神山，相传山中有神仙居住。雪山中融化的雪水都汇入湖中。",
+    "exits": "south|east",
+    "id": 2146,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2145
+      },
+      "s": {
+        "con": "",
+        "to": 2147
+      }
+    },
+    "name": "圣湖",
+    "path": "fly xs;ed;n;ed;ed;nd;nd;n;ed;s;s;sw;w;w",
+    "zone": "血刀门"
+  }, {
+    "desc": "    这是一条不起眼的土路。尘埃泛起的远方，北边波光潋滟的一大片幽蓝水光处，就是著名的圣湖。",
+    "exits": "south|north",
+    "id": 2147,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 2146
+      },
+      "s": {
+        "con": "",
+        "to": 2148
+      }
+    },
+    "name": "土路",
+    "path": "fly xs;ed;n;ed;ed;nd;nd;n;ed;s;s;sw;w;w;s",
+    "zone": "血刀门"
+  }, {
+    "desc": "    这是一条不起眼的土路，却是连接雪山寺与中原的必经之路。西边点点的炊烟依稀可见。往北可以通往声震西域的雪山寺。",
+    "exits": "north|east|west",
+    "id": 2148,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2150
+      },
+      "n": {
+        "con": "",
+        "to": 2147
+      },
+      "w": {
+        "con": "",
+        "to": 2149
+      }
+    },
+    "name": "土路",
+    "path": "fly xs;ed;n;ed;ed;nd;nd;n;ed;s;s;sw;w;w;s;s",
+    "zone": "血刀门"
+  }, {
+    "desc": "    这里是一个路边的小客店。来往的行人都在这里稍事休息。往东的路可以到达中原。",
+    "exits": "east",
+    "id": 2149,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2148
+      }
+    },
+    "name": "客店",
+    "path": "fly xs;ed;n;ed;ed;nd;nd;n;ed;s;s;sw;w;w;s;s;w",
+    "zone": "血刀门"
+  }, {
+    "desc": "    这是一条不起眼的土路，不宽却也不窄，松散的浮尘显露出来往行商的频繁。它是连接雪山寺与中原的必经之路。",
+    "exits": "east|west",
+    "id": 2150,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2151
+      },
+      "w": {
+        "con": "",
+        "to": 2148
+      }
+    },
+    "name": "土路",
+    "path": "fly xs;ed;n;ed;ed;nd;nd;n;ed;s;s;sw;w;w;s;s;e",
+    "zone": "血刀门"
+  }, {
+    "desc": "    这里是雪山脚下的一片草原。北面是起伏的群山，山顶上积着终年不化的雪。西边有一条土路。",
+    "exits": "northeast|west",
+    "id": 2151,
+    "links": {
+      "ne": {
+        "con": "",
+        "to": 2312
+      },
+      "w": {
+        "con": "",
+        "to": 2150
+      }
+    },
+    "name": "草原",
+    "path": "fly wm;e;s;s;enter dong;say 天堂有路你不走呀;d;4;w;w;out;sw",
+    "zone": "血刀门|星宿海"
+  }, {
+    "desc": "    这里是靠近川西的崇山峻岭，怪石嶙峋。再往东去就是川西边缘了。往西有一座雪山高耸入云。路边上有一个大雪坑(hollow)。",
+    "exits": "westup|eastdown|northdown",
+    "id": 2152,
+    "links": {
+      "ed": {
+        "con": "",
+        "to": 2164
+      },
+      "jump hollow": {
+        "con": "",
+        "to": 2153
+      },
+      "nd": {
+        "con": "",
+        "to": 2137
+      },
+      "wu": {
+        "con": "",
+        "to": 2154
+      }
+    },
+    "name": "山路",
+    "path": "fly xs;ed;n;ed;ed;su",
+    "zone": "血刀门"
+  }, {
+    "desc": "    这是大雪山脚下的一个雪坑。丢满了各种杂物， 还有丐帮弟子收集的破铜烂铁等。坑边上有一个小洞(dong)。",
+    "exits": "up",
+    "id": 2153,
+    "links": {
+      "u": {
+        "con": "",
+        "to": 2152
+      }
+    },
+    "name": "雪坑",
+    "path": "fly xs;ed;n;ed;ed;su;jump hollow",
+    "zone": "血刀门"
+  }, {
+    "desc": "    这里已经到了藏边，大雪山的山口。大雪山又叫岷山，位于川藏之间，由于山势高峻，山顶有终年不化的积雪，故而得名。四下毫无人迹，只有几只秃鹰在高处盘旋，俯视着茫茫雪山。",
+    "exits": "westup|eastdown",
+    "id": 2154,
+    "links": {
+      "ed": {
+        "con": "",
+        "to": 2152
+      },
+      "wu": {
+        "con": "",
+        "to": 2155
+      }
+    },
+    "name": "大雪山口",
+    "path": "fly xs;ed;n;ed;ed;su;wu",
+    "zone": "血刀门"
+  }, {
+    "desc": "    这儿遍地冰雪，你眼前白皑皑的一片。从东边爬上来的，心跳开始加速。",
+    "exits": "eastdown|southup",
+    "id": 2155,
+    "links": {
+      "ed": {
+        "con": "",
+        "to": 2154
+      },
+      "su": {
+        "con": "",
+        "to": 2156
+      }
+    },
+    "name": "大雪山",
+    "path": "fly xs;ed;n;ed;ed;su;wu;wu",
+    "zone": "血刀门"
+  }, {
+    "desc": "    冰天雪地，寒风刺骨。不是内力高深的人，已然经受不住了。",
+    "exits": "westup|northdown",
+    "id": 2156,
+    "links": {
+      "nd": {
+        "con": "",
+        "to": 2155
+      },
+      "wu": {
+        "con": "",
+        "to": 2157
+      }
+    },
+    "name": "大雪山口",
+    "path": "fly xs;ed;n;ed;ed;su;wu;wu;su",
+    "zone": "血刀门"
+  }, {
+    "desc": "    群山环绕，四周积雪终年不化。南边不远处有一个山谷。",
+    "exits": "eastdown|southup",
+    "id": 2157,
+    "links": {
+      "ed": {
+        "con": "",
+        "to": 2156
+      },
+      "su": {
+        "con": "",
+        "to": 2158
+      }
+    },
+    "name": "大雪山口",
+    "path": "fly xs;ed;n;ed;ed;su;wu;wu;su;wu",
+    "zone": "血刀门"
+  }, {
+    "desc": "    一个宽大山谷, 群山环绕, 山顶上全是白闪闪的积雪, 山谷南方有两个山洞。",
+    "exits": "north|enter|northdown",
+    "id": 2158,
+    "links": {
+      "enter": {
+        "con": "",
+        "to": 2159
+      },
+      "n": {
+        "con": "",
+        "to": 2160
+      },
+      "nd": {
+        "con": "",
+        "to": 2157
+      }
+    },
+    "name": "大雪山山谷",
+    "path": "fly xs;ed;n;ed;ed;su;wu;wu;su;wu;su",
+    "zone": "血刀门"
+  }, {
+    "desc": "    空空荡荡一个山洞，倒也还算干净，尽头摆了一张石床。",
+    "exits": "out",
+    "id": 2159,
+    "links": {
+      "out": {
+        "con": "",
+        "to": 2158
+      }
+    },
+    "name": "山洞",
+    "path": "fly xs;ed;n;ed;ed;su;wu;wu;su;wu;su;enter",
+    "zone": "血刀门"
+  }, {
+    "desc": "    这里乃是大轮寺外一处僻静所在，四下绝无人迹。前前後後，大大小小几百座佛塔，被白得耀眼的雪被披盖着。银白色的山野、雪地里闪耀着红色和蓝色的光带，五彩缤纷，迷宫一样的琼楼仙阁在你眼前出现。南面一条小径不知通往何处。",
+    "exits": "south|southup",
+    "id": 2160,
+    "links": {
+      "s": {
+        "con": "",
+        "to": 2158
+      },
+      "su": {
+        "con": "",
+        "to": 2161
+      }
+    },
+    "name": "忘忧谷",
+    "path": "fly xs;ed;n;ed;ed;su;wu;wu;su;wu;su;n",
+    "zone": "血刀门"
+  }, {
+    "desc": "    山谷里遍地积雪，四周都是峭壁。只北面有一个出口，东面似乎有个山洞。",
+    "exits": "east|northdown",
+    "id": 2161,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 2162
+      },
+      "nd": {
+        "con": "",
+        "to": 2160
+      }
+    },
+    "name": "大雪山山谷",
+    "path": "fly xs;ed;n;ed;ed;su;wu;wu;su;wu;su;n;su",
+    "zone": "血刀门"
+  }, {
+    "desc": "    山谷里积雪被拢成几个雪堆，这里时常有人扫除积雪。你前面的峭壁下隐隐约约有一个山洞。",
+    "exits": "enter|west",
+    "id": 2162,
+    "links": {
+      "enter": {
+        "con": "",
+        "to": 2163
+      },
+      "w": {
+        "con": "",
+        "to": 2161
+      }
+    },
+    "name": "洞口",
+    "path": "fly xs;ed;n;ed;ed;su;wu;wu;su;wu;su;n;su;e",
+    "zone": "血刀门"
+  }, {
+    "desc": "    这是一个小小的山洞，血刀老祖的藏身之地。由於此地比较隐秘，仇家很难寻到这来。洞底有一张供桌，上面供了什麽东西，你看不清。壁上画了一些模糊不清的文字图案，也不知道是些什么。",
+    "exits": "out",
+    "id": 2163,
+    "links": {
+      "out": {
+        "con": "",
+        "to": 2162
+      }
+    },
+    "name": "山洞",
+    "path": "fly xs;ed;n;ed;ed;su;wu;wu;su;wu;su;n;su;e;enter",
+    "zone": "血刀门"
+  }, {
+    "desc": "    一条山路蜿蜒在山间。向西望去，可以见到大雪山的银色的雪顶在熠熠生辉。",
+    "exits": "westup|eastdown",
+    "id": 2164,
+    "links": {
+      "ed": {
+        "con": "",
+        "to": 698
+      },
+      "wu": {
+        "con": "",
+        "to": 2152
+      }
+    },
+    "name": "山路",
+    "path": "fly xs;ed;n;ed;ed;su;ed",
+    "zone": "血刀门"
+  } ]
+}

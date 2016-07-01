@@ -1,0 +1,333 @@
+{
+  "center": 3019,
+  "cmd": "fly mj;s;sd;s;sd;sd;sd;sd;out;sd;sd;sd;sd;w;w;enter;break men;enter",
+  "id": "mj1",
+  "name": "明教1",
+  "rooms": [ {
+    "desc": "    这是一条小小的甬道，周围都是石壁，极为坚硬，看来不是什么武功能打破的。向外的石门早已悄然合上，你只有鼓勇向前。",
+    "exits": "north",
+    "id": 3019,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 3020
+      }
+    },
+    "name": "甬道",
+    "path": "fly mj;s;sd;s;sd;sd;sd;sd;out;sd;sd;sd;sd;w;w;enter;break men;enter",
+    "zone": "明教1"
+  }, {
+    "desc": "    这是一条小小的甬道，周围都是石壁，极为坚硬，看来不是什么武功能打破的。石室里伸手不见无指，顺着石壁你摸索着好象周围有石门。",
+    "exits": "south",
+    "id": 3020,
+    "links": {
+      "open east;e": {
+        "con": "",
+        "to": 3021
+      },
+      "open north;n": {
+        "con": "",
+        "to": 3024
+      },
+      "open west;w": {
+        "con": "",
+        "to": 3023
+      },
+      "s": {
+        "con": "",
+        "to": 3019
+      }
+    },
+    "name": "石室",
+    "path": "fly mj;s;sd;s;sd;sd;sd;sd;out;sd;sd;sd;sd;w;w;enter;break men;enter;n",
+    "zone": "明教1"
+  }, {
+    "desc": "    这是一条小小的甬道，周围都是石壁，极为坚硬，看来不是什么武功能打破的。石室里伸手不见无指，顺着石壁你摸索着好象周围有石门。",
+    "exits": "west",
+    "id": 3021,
+    "links": {
+      "open east;e": {
+        "con": "",
+        "to": 3022
+      },
+      "open north;n": {
+        "con": "",
+        "to": 3025
+      },
+      "open south;s": {
+        "con": "",
+        "to": 3029
+      },
+      "open west;w": {
+        "con": "",
+        "to": 3020
+      }
+    },
+    "name": "石室",
+    "path": "fly mj;s;sd;s;sd;sd;sd;sd;out;sd;sd;sd;sd;w;w;enter;break men;enter;n;open east;e",
+    "zone": "明教1"
+  }, {
+    "desc": "    这是一条小小的甬道，周围都是石壁，极为坚硬，看来不是什么武功能打破的。石室里伸手不见无指，顺着石壁你摸索着好象周围有石门。",
+    "exits": "west",
+    "id": 3022,
+    "links": {
+      "open east;e": {
+        "con": "",
+        "to": 3023
+      },
+      "open north;n": {
+        "con": "",
+        "to": 3026
+      },
+      "open south;s": {
+        "con": "",
+        "to": 3030
+      },
+      "open west;w": {
+        "con": "",
+        "to": 3021
+      }
+    },
+    "name": "石室",
+    "path": "fly mj;s;sd;s;sd;sd;sd;sd;out;sd;sd;sd;sd;w;w;enter;break men;enter;n;open west;w;open west;w",
+    "zone": "明教1"
+  }, {
+    "desc": "    这是一条小小的甬道，周围都是石壁，极为坚硬，看来不是什么武功能打破的。石室里伸手不见无指，顺着石壁你摸索着好象周围有石门。",
+    "exits": "west",
+    "id": 3023,
+    "links": {
+      "open east;e": {
+        "con": "",
+        "to": 3020
+      },
+      "open north;n": {
+        "con": "",
+        "to": 3027
+      },
+      "open south;s": {
+        "con": "",
+        "to": 3031
+      },
+      "open west;w": {
+        "con": "",
+        "to": 3022
+      }
+    },
+    "name": "石室",
+    "path": "fly mj;s;sd;s;sd;sd;sd;sd;out;sd;sd;sd;sd;w;w;enter;break men;enter;n;open west;w",
+    "zone": "明教1"
+  }, {
+    "desc": "    这是一条小小的甬道，周围都是石壁，极为坚硬，看来不是什么武功能打破的。石室里伸手不见无指，顺着石壁你摸索着好象周围有石门。",
+    "exits": "south",
+    "id": 3024,
+    "links": {
+      "open east;e": {
+        "con": "",
+        "to": 3025
+      },
+      "open north;n": {
+        "con": "",
+        "to": 3028
+      },
+      "open south;s": {
+        "con": "",
+        "to": 3020
+      },
+      "open west;w": {
+        "con": "",
+        "to": 3027
+      }
+    },
+    "name": "石室",
+    "path": "fly mj;s;sd;s;sd;sd;sd;sd;out;sd;sd;sd;sd;w;w;enter;break men;enter;n;open north;n",
+    "zone": "明教1"
+  }, {
+    "desc": "    这是一条小小的甬道，周围都是石壁，极为坚硬，看来不是什么武功能打破的。石室里伸手不见无指，顺着石壁你摸索着好象周围有石门。",
+    "exits": "west",
+    "id": 3025,
+    "links": {
+      "open east;e": {
+        "con": "",
+        "to": 3026
+      },
+      "open north;n": {
+        "con": "",
+        "to": 3029
+      },
+      "open south;s": {
+        "con": "",
+        "to": 3021
+      },
+      "open west;w": {
+        "con": "",
+        "to": 3024
+      }
+    },
+    "name": "石室",
+    "path": "fly mj;s;sd;s;sd;sd;sd;sd;out;sd;sd;sd;sd;w;w;enter;break men;enter;n;open north;n;open east;e",
+    "zone": "明教1"
+  }, {
+    "desc": "    这是一条小小的甬道，周围都是石壁，极为坚硬，看来不是什么武功能打破的。石室里伸手不见无指，顺着石壁你摸索着好象周围有石门。",
+    "exits": "west",
+    "id": 3026,
+    "links": {
+      "open east;e": {
+        "con": "",
+        "to": 3027
+      },
+      "open north;n": {
+        "con": "",
+        "to": 3030
+      },
+      "open south;s": {
+        "con": "",
+        "to": 3022
+      },
+      "open west;w": {
+        "con": "",
+        "to": 3025
+      }
+    },
+    "name": "石室",
+    "path": "fly mj;s;sd;s;sd;sd;sd;sd;out;sd;sd;sd;sd;w;w;enter;break men;enter;n;open west;w;open west;w;open north;n",
+    "zone": "明教1"
+  }, {
+    "desc": "    这是一条小小的甬道，周围都是石壁，极为坚硬，看来不是什么武功能打破的。石室里伸手不见无指，顺着石壁你摸索着好象周围有石门。",
+    "exits": "west",
+    "id": 3027,
+    "links": {
+      "open east;e": {
+        "con": "",
+        "to": 3024
+      },
+      "open north;n": {
+        "con": "",
+        "to": 3031
+      },
+      "open south;s": {
+        "con": "",
+        "to": 3023
+      },
+      "open west;w": {
+        "con": "",
+        "to": 3026
+      }
+    },
+    "name": "石室",
+    "path": "fly mj;s;sd;s;sd;sd;sd;sd;out;sd;sd;sd;sd;w;w;enter;break men;enter;n;open west;w;open north;n",
+    "zone": "明教1"
+  }, {
+    "desc": "    这是一条小小的甬道，周围都是石壁，极为坚硬，看来不是什么武功能打破的。石室里伸手不见无指，顺着石壁你摸索着好象周围有石门。",
+    "exits": "south",
+    "id": 3028,
+    "links": {
+      "open east;e": {
+        "con": "",
+        "to": 3029
+      },
+      "open north;n": {
+        "con": "",
+        "to": 3032
+      },
+      "open south;s": {
+        "con": "",
+        "to": 3024
+      },
+      "open west;w": {
+        "con": "",
+        "to": 3031
+      }
+    },
+    "name": "石室",
+    "path": "fly mj;s;sd;s;sd;sd;sd;sd;out;sd;sd;sd;sd;w;w;enter;break men;enter;n;open north;n;open north;n",
+    "zone": "明教1"
+  }, {
+    "desc": "    这是一条小小的甬道，周围都是石壁，极为坚硬，看来不是什么武功能打破的。石室里伸手不见无指，顺着石壁你摸索着好象周围有石门。",
+    "exits": "west",
+    "id": 3029,
+    "links": {
+      "open east;e": {
+        "con": "",
+        "to": 3030
+      },
+      "open north;n": {
+        "con": "",
+        "to": 3021
+      },
+      "open south;s": {
+        "con": "",
+        "to": 3025
+      },
+      "open west;w": {
+        "con": "",
+        "to": 3028
+      }
+    },
+    "name": "石室",
+    "path": "fly mj;s;sd;s;sd;sd;sd;sd;out;sd;sd;sd;sd;w;w;enter;break men;enter;n;open east;e;open south;s",
+    "zone": "明教1"
+  }, {
+    "desc": "    这是一条小小的甬道，周围都是石壁，极为坚硬，看来不是什么武功能打破的。石室里伸手不见无指，顺着石壁你摸索着好象周围有石门。",
+    "exits": "west",
+    "id": 3030,
+    "links": {
+      "open east;e": {
+        "con": "",
+        "to": 3031
+      },
+      "open north;n": {
+        "con": "",
+        "to": 3022
+      },
+      "open south;s": {
+        "con": "",
+        "to": 3026
+      },
+      "open west;w": {
+        "con": "",
+        "to": 3029
+      }
+    },
+    "name": "石室",
+    "path": "fly mj;s;sd;s;sd;sd;sd;sd;out;sd;sd;sd;sd;w;w;enter;break men;enter;n;open west;w;open west;w;open south;s",
+    "zone": "明教1"
+  }, {
+    "desc": "    这是一条小小的甬道，周围都是石壁，极为坚硬，看来不是什么武功能打破的。石室里伸手不见无指，顺着石壁你摸索着好象周围有石门。",
+    "exits": "west",
+    "id": 3031,
+    "links": {
+      "open east;e": {
+        "con": "",
+        "to": 3028
+      },
+      "open north;n": {
+        "con": "",
+        "to": 3023
+      },
+      "open south;s": {
+        "con": "",
+        "to": 3027
+      },
+      "open west;w": {
+        "con": "",
+        "to": 3030
+      }
+    },
+    "name": "石室",
+    "path": "fly mj;s;sd;s;sd;sd;sd;sd;out;sd;sd;sd;sd;w;w;enter;break men;enter;n;open west;w;open south;s",
+    "zone": "明教1"
+  }, {
+    "desc": "    这间石室极大，顶上垂下钟乳，显是天然的石洞。走了几步，突见地下倒着两具骷髅。骷髅身上衣服尚未烂尽，着得出是一男一女。走近两具骷髅，只见那女子右手抓着一柄晶光闪亮的匕首，插在她自己胸口。",
+    "exits": "south|up",
+    "id": 3032,
+    "links": {
+      "open south;s": {
+        "con": "",
+        "to": 3028
+      }
+    },
+    "name": "石室",
+    "path": "fly mj;s;sd;s;sd;sd;sd;sd;out;sd;sd;sd;sd;w;w;enter;break men;enter;n;open north;n;open north;n;open north;n",
+    "zone": "明教1"
+  } ]
+}

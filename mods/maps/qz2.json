@@ -1,0 +1,70 @@
+{
+  "center": 3045,
+  "cmd": "fly qz",
+  "id": "qz2",
+  "name": "泉州2",
+  "rooms": [ {
+    "desc": "    此地为台湾府驻所。台湾开化未久，国姓爷东征，收复此城，围困红毛鬼达两年之久，终致金瓯无缺。",
+    "exits": "south|eastup|north",
+    "id": 3045,
+    "links": {
+      "eu": {
+        "con": "",
+        "to": 3046
+      },
+      "n": {
+        "con": "",
+        "to": 3047
+      },
+      "s": {
+        "con": "",
+        "to": 3048
+      }
+    },
+    "name": "赤嵌城",
+    "path": "fly qz;|!a:enter chuan:|;|!a:enter zhou:|",
+    "zone": "泉州"
+  }, {
+    "danger": 5,
+    "desc": "    翠峰环抱，湖水澄碧的日月潭，潭北形如日轮，潭南弯曲如月，为台湾避暑胜地。",
+    "exits": "westdown",
+    "id": 3046,
+    "links": {
+      "wd": {
+        "con": "",
+        "to": 3045
+      }
+    },
+    "name": "日月潭",
+    "path": "fly qz;|!a:enter chuan:|;|!a:enter zhou:|;eu",
+    "zone": "泉州"
+  }, {
+    "danger": 5,
+    "desc": "    鸡笼为台湾北部良港。群山环抱的港口腹地广大，人烟稠密，有“台湾诸葛亮”之称的陈永华先生在此垦田养桑，修养生息，遗爱甚长。",
+    "exits": "south",
+    "id": 3047,
+    "links": {
+      "s": {
+        "con": "",
+        "to": 3045
+      }
+    },
+    "name": "鸡笼港",
+    "path": "fly qz;|!a:enter chuan:|;|!a:enter zhou:|;n",
+    "zone": "泉州"
+  }, {
+    "danger": 5,
+    "desc": "    打狗港位于台湾南部，港域口小腹大，外有岛链环抱，内具曲折峡湾，诚全台第一良港。",
+    "exits": "north",
+    "id": 3048,
+    "links": {
+      "n": {
+        "con": "",
+        "to": 3045
+      }
+    },
+    "name": "打狗港",
+    "path": "fly qz;|!a:enter chuan:|;|!a:enter zhou:|;s",
+    "zone": "泉州"
+  } ]
+}
