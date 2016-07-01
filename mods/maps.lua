@@ -388,7 +388,7 @@ end
 --	读取房间信息从文件中
 
 map["load"] = function(room)
-
+	print("room .. " .. room )
 	local filename = basedir .. "\\mods\\maps\\" .. room .. ".json"
     local file = io.open(filename, "r")
     local content = file:read("*all")
