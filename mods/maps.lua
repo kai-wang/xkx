@@ -8,6 +8,7 @@ map = {}
 regions = {}
 roomAll = {}
 local JSON = (loadfile ("worlds\\xkx\\lib\\JSON.lua"))()
+local basedir = string.match(GetInfo(54),"^(.*)\\(.*)\\([^\.]*).*")
 
 directions = {
 	["n"]="s",
@@ -364,7 +365,7 @@ map["save"] = function(name)
 
     local content = JSON:encode_pretty(region)
 
-    local file = io.open("worlds\\xkx\\mods\\maps\\"..region.id..".json", "w")
+    local file = io.open(basedir .. "\\mods\\maps\\"..region.id..".json", "w")
     file:write(content)
     file:close()
 
@@ -388,7 +389,7 @@ end
 
 map["load"] = function(room)
 
-	local filename = "worlds\\xkx\\mods\\maps\\" .. room .. ".json"
+	local filename = basedir .. "\\mods\\maps\\" .. room .. ".json"
     local file = io.open(filename, "r")
     local content = file:read("*all")
     local area = JSON:decode(content)
@@ -419,7 +420,6 @@ end
 --读取所有房间
 map["loadall"] = function()
 
-	local basedir = string.match(GetInfo(54),"^(.*)\\(.*)\\([^\.]*).*")
 	local command = "dir " .. basedir .. "\\mods\\maps\\*.json /b >"
 
     regions = {}
