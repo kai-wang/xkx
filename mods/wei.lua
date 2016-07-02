@@ -440,7 +440,7 @@ end
 function finish()
 	EnableTriggerGroup("wei_kill", false)
 	EnableTriggerGroup("wei_ask", true)
-	timer.tickonce("action", 2, function()
+	timer.tickonce("action", 1, function()
 		core.safeback(function()
 			Execute("e;s;s;s;e;u;give " .. var.wei_item_id .. " to wei xiaobao")
 		end, 1)
@@ -457,10 +457,10 @@ function cancel()
 	local amount = math.floor(tonumber(var.wei_fail_times)/3) * 10 + 50
 	if(amount > 100) then var.wei_cancel_amt = "1 gold" else var.wei_cancel_amt = amount .. " silver" end
 
-	timer.tickonce("action", 2, function()
+	timer.tickonce("action", 1, function()
 		qukuan(var.wei_cancel_amt,
 			function()
-				Execute("halt;e;s;s;e;u;give " .. var.wei_cancel_amt .. " to wei xiaobao")
+				Execute("e;s;s;e;u;give " .. var.wei_cancel_amt .. " to wei xiaobao")
 			end,
 			fail)
 	end)
