@@ -457,11 +457,13 @@ function cancel()
 	local amount = math.floor(tonumber(var.wei_fail_times)/3) * 10 + 50
 	if(amount > 100) then var.wei_cancel_amt = "1 gold" else var.wei_cancel_amt = amount .. " silver" end
 
-	qukuan(var.wei_cancel_amt,
-		function()
-			Execute("halt;e;s;s;e;u;give " .. var.wei_cancel_amt .. " to wei xiaobao")
-		end,
-		fail)
+	timer.tickonce("action", 2, function()
+		qukuan(var.wei_cancel_amt,
+			function()
+				Execute("halt;e;s;s;e;u;give " .. var.wei_cancel_amt .. " to wei xiaobao")
+			end,
+			fail)
+	end)
 end
 
 buy = function(t)
