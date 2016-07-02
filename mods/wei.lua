@@ -440,9 +440,11 @@ end
 function finish()
 	EnableTriggerGroup("wei_kill", false)
 	EnableTriggerGroup("wei_ask", true)
-	core.safeback(function()
-		Execute("e;s;s;s;e;u;give " .. var.wei_item_id .. " to wei xiaobao")
-	end, 1)
+	timer.tickonce("action", 2, function()
+		core.safeback(function()
+			Execute("e;s;s;s;e;u;give " .. var.wei_item_id .. " to wei xiaobao")
+		end, 1)
+	end)
 end
 
 function cancel()
