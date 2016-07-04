@@ -191,7 +191,7 @@ function heal(f_done)
 		dazuo.start(function()
 			Execute("halt;er;ef;et")
 			cxt.heal = false
-			timer.tickcone("action", 1, function()
+			timer.tickonce("action", 1, function()
 				call(f_done)
 			end)
 		end)
