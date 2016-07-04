@@ -194,7 +194,7 @@ function heal(f_done)
 			local endTime = os.time()
 			cxt.heal = false
 			if(endTime - startTime < 2) then
-				timer.tickonce("action", 4, function()
+				timer.tickonce("action", 5, function()
 					call(f_done)
 				end)
 			else
