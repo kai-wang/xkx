@@ -188,12 +188,18 @@ end
 
 function heal(f_done)
 	core.busytest(function()
+		local startTime = os.time()
 		dazuo.start(function()
-			Execute("halt;er;ef;et")
+		--	Execute("halt;er;ef;et")
+			local endTime = os.time()
 			cxt.heal = false
-			timer.tickonce("action", 1, function()
+			if(endTime - startTime < 2) then
+				timer.tickonce("action", 4, function()
+					call(f_done)
+				end)
+			else
 				call(f_done)
-			end)
+			end
 		end)
 	end)
 end
