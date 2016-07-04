@@ -295,7 +295,7 @@ function full(f_done)
 			dazuo.full(f_done)
 		else
 			core.safehalt(function()
-				Execute("er;et")
+				Execute("er;et;ef")
 				call(f_done)
 			end, 1)
 		end
