@@ -116,17 +116,17 @@ busy_perform_array = {
 -- attack perform
 --
 attack_perform_array = {
-	[1] = { i = 36,
+	[2] = { i = 36,
 			action = function()
 				local wp = choose_blade()
 				Execute("wield " .. wp .. ";enable blade xue-dao;enable force xiaowuxiang;jiali max;yun wuxiang " .. var.pfm_target .. ";jiali 0")
 			end
 	},
 
-	[2] = { i = 35,
+	[1] = { i = 35,
 			action = function()
 				local wp = choose_blade()
-				Execute("unwield all;enable blade xue-dao;wield " .. wp .. ";jiali max;perform parry.lian " .. var.pfm_target .. ";jiali 0")
+				Execute("unwield all;enable blade xue-dao;enable force huntian-qigong;wield " .. wp .. ";jiali max;perform parry.lian " .. var.pfm_target .. ";jiali 0")
 			end
 	},
 
@@ -189,7 +189,7 @@ attack_perform_array = {
 }
 
 task_busy_list = { 1, 2, 3, 4 }
-task_attack_list = { 10, 4, 11, 3 }
+task_attack_list = { 1, 2, 3, 4 }
 
 gf_busy_list = { 1, 3 }
 gf_attack_list = { 6, 7 }
