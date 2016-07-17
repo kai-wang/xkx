@@ -187,12 +187,19 @@ end
 function combine(book)
 	if string.find(book, "·ÉºüÍâ´«") ~= nil then
 		Execute("combine fhwz")
-	else if string.find(book, "Ñ©É½·Éºü") ~= nil then
+		done()
+	elseif string.find(book, "Ñ©É½·Éºü") ~= nil then
 		Execute("combine xsfh")
+		done()
 	else
 		local t = ss_map[book]
 		if(t and t.npc and npc_loc[t.npc]) then
-			walk.run(npc_loc[t.npc], function() Execute("give " .. t.id .. " to " .. npc_loc[t.npc].id) end, done, done)
+			walk.run(npc_loc[t.npc].loc, 
+					function() 
+						Execute("give " .. t.id .. " to " .. npc_loc[t.npc].id) 
+					end, done, done)
+		else
+			done()
 		end
 	end
 end
