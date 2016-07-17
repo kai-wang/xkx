@@ -343,8 +343,7 @@ end
 
 function anti_idle(tick)
 	print("wait .. " .. tick)
-	timer.tick("auto", 
-				tick, 
+	timer.tick("auto", tick, 
 				function() 
 					core.safeback(function() auto.restart() end, 1) 
 				end)
