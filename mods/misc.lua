@@ -263,14 +263,14 @@ function jicun(f_done)
 		wait.time(1)
 		repeat
 			Execute("jicun yin dan")
-			local l, w = wait.regexp("^(> )*你要寄存什么.*$")
+			local l, w = wait.regexp("^(> )*(你要寄存什么)|(你将一颗九转银丹存了起来).*$", 1)
 			wait.time(0.2)
-		until(l:match("你要寄存什么"))
+		until(l == nil or l:match("你要寄存什么"))
 		repeat
 			Execute("jicun jin dan")
-			local l, w = wait.regexp("^(> )*你要寄存什么.*$")
+			local l, w = wait.regexp("^(> )*(你要寄存什么)|(你将一颗九转金丹存了起来).*$", 1)
 			wait.time(0.2)
-		until(l:match("你要寄存什么"))
+		until(l == nil or l:match("你要寄存什么"))
 		call(f_done)
 	end)
 end
