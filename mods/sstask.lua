@@ -192,7 +192,7 @@ function combine(book)
 	else
 		local t = ss_map[book]
 		if(t and t.npc and npc_loc[t.npc]) then
-			walk.run(npc_loc[t.npc], function() Execute("give " .. t.id .. " to " .. npc_loc[t.npc].id), done, done)
+			walk.run(npc_loc[t.npc], function() Execute("give " .. t.id .. " to " .. npc_loc[t.npc].id) end, done, done)
 		end
 	end
 end
