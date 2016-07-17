@@ -7,6 +7,7 @@ module ("ss", package.seeall)
 
 
 local ss_list = {}
+local ss_map = {}
 local context = {}
 local mappings = {
 	["大雪山"] = "血刀门",
@@ -26,6 +27,20 @@ local mappings = {
 	["皇宫大内"] = "紫禁城"
 }
 
+local npc_loc = {
+	["郭靖"] = { loc="fly wm;e", id="guo jing" },
+	["金庸"] = { loc="fly wm;u", id="jin yong" },
+	["杨过"] = { loc="fly gm", id="yang guo" },
+	["石破天"] = { loc="fly wm;e;n;e;e;e;e", id="shi potian" },
+	["张无忌"] = { loc="fly mj", id="zhang wuji" },
+	["段誉"] = { loc="fly lz;s;w", id="duan yu" },
+	["萧峰"] = { loc="fly lz;s;w", id="xiao feng" },
+	["虚竹"] = { loc="fly lj", id="xu zhu" },
+	["韦小宝"] = { loc="fly wm;e;s;s;s;e;u", id="wei xiaobao" },
+	["李文秀"] = { loc="fly xx;su;s;ed", id="li wenxiu" },
+	["令狐冲"] = { loc="fly ws;sd;su;su;enter", id="linghu chong"}
+}
+
 function init() 
 	EnableTriggerGroup("ss_update", false)
 	EnableTriggerGroup("ss_search", false)
@@ -35,7 +50,12 @@ end
 function main(f_ok, f_fail)
 	context.f_done = f_ok
 	context.f_fail = f_fail
-	start()
+
+	if(#ss_list == 0 or context.index > #ss_list) then
+		start()
+	else
+		search()
+	end
 end
 
 function start()
@@ -51,11 +71,14 @@ end
 
 function update(name, line, wildcards)
 	local npc, name, id, finished = wildcards[1], wildcards[2], wildcards[3], wildcards[4]
+
 	if(finished == nil or finished == "") then
 		table.insert(ss_list, {id=id, name=name, npc=npc, finished=false})
 	else
 		table.insert(ss_list, {id=id, name=name, npc=npc, finished=true})
 	end
+
+	ss_map[name] = {id=id, npc=npc}
 end
 
 function update_done()
@@ -115,9 +138,7 @@ function location(name, line, wildcards)
 	if(mappings[var.ss_city] ~= nil) then var.ss_city = mappings[var.ss_city] end
 	if(var.ss_city == "血刀门" and var.ss_city_1 == "雪山寺") then var.ss_city = "雪山寺" end
 
-	print(var.ss_city .. " ... " .. var.ss_loc)
-	--EnableTrigger("ss_search", false)
-	
+	print(var.ss_city .. " ... " .. var.ss_loc)	
 	core.busytest(function() 
 		EnableTriggerGroup("ss_task", true)
 		walk.sl(var.ss_city, var.ss_loc, notfound, searchbook, foundnpc) 
@@ -156,15 +177,24 @@ function getbook()
 	core.busytest(function() 
 		Execute("get all from corpse")
 		wait.make(function()
-			local l, w = wait.regexp("^(> )*你从.*的尸体身上搜出一本(.*)。$", 5)
-			if(l) then combine(w[2]) end
+			local l, w = wait.regexp("^(> )*你从.*的尸体身上搜出一本(.*)。$", 2)
+			if(l) then combine(w[2]) else done() end
 		end)
-		done()
+		--done()
 	end, 1)
 end
 
 function combine(book)
-	print(book)
+	if string.find(book, "飞狐外传") ~= nil then
+		Execute("combine fhwz")
+	else if string.find(book, "雪山飞狐") ~= nil then
+		Execute("combine xsfh")
+	else
+		local t = ss_map[book]
+		if(t and t.npc and npc_loc[t.npc]) then
+			walk.run(npc_loc[t.npc], function() Execute("give " .. t.id .. " to " .. npc_loc[t.npc].id), done, done)
+		end
+	end
 end
 
 -------- sstask 跑了，在原地范围内进行深度为5的遍历-----------------------------------
@@ -220,6 +250,21 @@ end
 
 function clean(f)
 	me.qfull(f)
+end
+
+
+function auto()
+	local f = nil
+	f = function()			
+		local t = tonumber(var.ss_available_time) - os.time()
+		print("重启等待ms: " .. t)
+		wait.make(function()
+			if(t > 0) then wait.time(t) else wait.time(2) end
+			main(f, f)
+		end)
+	end
+
+	main(f, f)
 end
 
 init()
