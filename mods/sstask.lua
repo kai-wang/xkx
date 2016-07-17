@@ -250,7 +250,7 @@ function fail()
 	init()
 	core.safeback(function()
 		Execute("er;et;ef")
-		var.ss_available_time = os.time() + 3600
+		var.ss_available_time = os.time() + 1800
 		clean(context.f_fail)
 	end, 1)
 end
