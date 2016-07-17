@@ -177,6 +177,27 @@ local tasks = {
 			end
 		end
 	},
+
+	["sstask"] = {
+		name = "sstask",
+		main = function(f_next)
+			anti_idle(180)
+			ss.main(f_next, f_next)
+		end,
+		
+		clear = function()
+			ss.init()
+		end,
+		
+		wait = function()
+			if(var.ss_available_time == nil) then return os.time() else return tonumber(var.ss_available_time) end
+		end,
+		
+		priority = function()
+			-- exceed the limit
+			return 15
+		end
+	},
 	
 	["event"] = {
 		name = "event",
