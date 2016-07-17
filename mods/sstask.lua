@@ -162,6 +162,7 @@ function foundnpc()
 		timer.tickonce("action", 1.5, function()
 			if(var.ss_task_status == "done" or fight.infight()) then return end
 			core.safehalt(function()
+				var.ss_kill = 0
 				walk.walkaround(2, nil, searchbook, searchbook, foundnpc)
 			end, 1)
 		end)
@@ -175,7 +176,7 @@ function getbook()
 	var.ss_kill = 0
 	var.ss_task_status = "done"
 	core.busytest(function() 
-		Execute("get all from corpse")
+		Execute("get all from corpse;drop gold;get 19 gold")
 		wait.make(function()
 			local l, w = wait.regexp("^(> )*你从.*的尸体身上搜出一本(.*)。$", 2)
 			if(l) then combine(w[2]) else done() end
@@ -251,7 +252,7 @@ function fail()
 	core.safeback(function()
 		Execute("er;et;ef")
 		var.ss_available_time = os.time() + 1800
-		clean(context.f_fail)
+		clean(function() jicun(context.f_fail) end)
 	end, 1)
 end
 

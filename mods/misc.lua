@@ -257,6 +257,24 @@ function reconn(f_ok, f_fail)
 	end)
 end
 
+function jicun(f_done)
+	wait.make(function()
+		Execute("fly wm;e;s;s;s;e;u")
+		wait.time(1)
+		repeat
+			Execute("jicun yin dan")
+			local l, w = wait.regexp("^(> )*你要寄存什么.*$")
+			wait.time(0.2)
+		until(l:match("你要寄存什么"))
+		repeat
+			Execute("jicun jin dan")
+			local l, w = wait.regexp("^(> )*你要寄存什么.*$")
+			wait.time(0.2)
+		until(l:match("你要寄存什么"))
+		call(f_done)
+	end)
+end
+
 ------------------------------------------------------------------------------
 --                 dazuo
 ------------------------------------------------------------------------------
