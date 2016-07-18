@@ -10,7 +10,7 @@ function suck()
 	core.busytest(function()
 		Execute("yun maxsuck")
 		call(suck)
-	end)
+	end, 1)
 end
 
 function double(f)
