@@ -224,6 +224,10 @@ function searchTask()
 		if(var.ss_task_status == "done") then return end
 		Execute("er;et;ef")
 		walk.walkaround(3, var.ss_escape_dir, searchbook, searchbook, foundnpc)
+		wait.make(function()
+			wait.time(2)
+			fight.start()
+		end)
 	end, 1)
 end
 
