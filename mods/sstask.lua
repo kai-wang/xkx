@@ -175,7 +175,7 @@ end
 function getbook()
 	var.ss_kill = 0
 	var.ss_task_status = "done"
-	core.busytest(function() 
+	core.safehalt(function() 
 		Execute("get all from corpse;drop gold;get 19 gold")
 		wait.make(function()
 			local l, w = wait.regexp("^(> )*你从.*的尸体身上搜出一本(.*)。$", 2)
@@ -212,7 +212,10 @@ function followTask(name, line, wildcards)
 	dir = dir:gsub("边",""):gsub("面", ""):gsub("方向", ""):gsub("方", "")
 	var.ss_escape_dir = dir
 	timer.stop("action")
-	if(walk.stopped()) then searchTask() end
+	if(walk.stopped()) then 
+		timer.tickonce("action", 1, function() searchTask() end)
+		--searchTask() 
+	end
 end
 
 function searchTask()
