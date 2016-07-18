@@ -7,10 +7,12 @@ function call(f, ...)
 end
 
 function suck()
-	core.busytest(function()
-		Execute("yun maxsuck")
-		call(suck)
-	end, 1)
+	wait.make(function()
+		while true do
+			Execute("yun maxsuck")
+			wait.time(2)
+		end
+	end)
 end
 
 function double(f)
