@@ -211,11 +211,11 @@ function followTask(name, line, wildcards)
 	local dir = wildcards[3]
 	dir = dir:gsub("边",""):gsub("面", ""):gsub("方向", ""):gsub("方", "")
 	var.ss_escape_dir = dir
-	timer.stop("action")
-	if(walk.stopped()) then 
+	--timer.stop("action")
+	--if(walk.stopped()) then 
 		timer.tickonce("action", 1, function() searchTask() end)
 		--searchTask() 
-	end
+	--end
 end
 
 function searchTask()
