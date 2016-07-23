@@ -104,7 +104,7 @@ function notfound()
 	print("走完还没找到")
 	core.safehalt(function()
 		walk.walkaround(5, nil, rewalk, rewalk, foundnpc)
-	end)
+	end, 1)
 end
 
 function startFight()
@@ -244,7 +244,7 @@ function searchKiller()
 		print("从 " .. var.xiao_escape_dir .. " 开始walkaround" )
 		Execute("er;et;ef")
 		walk.walkaround(3, var.xiao_escape_dir, notfound, rewalk, foundnpc)
-	end)
+	end, 1)
 end
 
 function finish()
