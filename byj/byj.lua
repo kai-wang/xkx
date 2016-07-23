@@ -21,7 +21,7 @@ var.fast_mode = 1
 var.xiao_full = 0
 var.guo_kill_place = "fly mj"
 
-auto_list = {"wei","shan","baobiao", "guanfu","guo","event","study","reconnect", "sstask", "xiao"}
+auto_list = {"wei","shan","baobiao", "guanfu","guo","event","study","reconnect", "sstask", "xiao", "double"}
 
 weapon_list = {"juwei jian", "kunlun dao", "guangcheng jian", "zhaixing jian", "qiankun dao", "shenyuan jian"}
 
