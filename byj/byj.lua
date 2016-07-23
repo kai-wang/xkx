@@ -221,7 +221,7 @@ function choose_sword()
 end
 
 function powerup()
-	Execute("enable force beiming-shengong;yun beiming;yun shield;enable force huntian-qigong;yun powerup")
+	Execute("enable force huntian-qigong;yun powerup;enable force beiming-shengong;yun shield;yun beiming")
 end
 
 function buff(menpai)
