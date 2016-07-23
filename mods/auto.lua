@@ -178,11 +178,33 @@ local tasks = {
 		end
 	},
 
+	["xiao"] = {
+		name = "xiao",
+		main = function(f_next)
+			anti_idle(180)
+			xiao.main(f_next, f_next)
+		end,
+		
+		clear = function()
+			xiao.init()
+		end,
+		
+		wait = function()
+			if(var.xiao_full == "1") then return os.time() + 1800 end
+			if(var.xiao_available_time == nil) then return os.time() else return tonumber(var.xiao_available_time) end
+		end,
+		
+		priority = function()
+			-- exceed the limit
+			return 19
+		end
+	},
+
 	["sstask"] = {
 		name = "sstask",
 		main = function(f_next)
 			anti_idle(180)
-			ss.main(f_next, f_next)
+			double(function() ss.main(f_next, f_next) end)
 		end,
 		
 		clear = function()
@@ -235,14 +257,14 @@ local tasks = {
 		end,
 		
 		priority = function()
-			if(tonumber(var.hp_qn) >= tonumber(var.hp_qn_max)) then return 20 else return 1 end
+			if(tonumber(var.hp_qn) >= tonumber(var.hp_qn_max)) then return 25 else return 1 end
 		end
 	},
 	
 	["double"] = {
 		name = "double",
 		main = function(f_next)
-			anti_idle(30)
+			anti_idle(10)
 			double(f_next)
 		end,
 		
@@ -250,17 +272,12 @@ local tasks = {
 			---var.double_bonus = false
 		end,
 		
-		wait = function()
-			local auto_list = config.auto_list
-			local ct = os.time()
-			
-			if(var.double_available_time == nil) then var.double_available_time = ct end
-			
-			return tonumber(var.double_available_time)
+		wait = function()			
+			if(var.double_available_time == nil) then return os.time() else return tonumber(var.double_available_time) end
 		end,
 		
 		priority = function()
-			return 19
+			return 20
 		end
 	},
 	
@@ -284,7 +301,7 @@ local tasks = {
 		end,
 		
 		priority = function()
-			return 20
+			return 22
 		end
 	}
 }

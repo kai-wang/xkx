@@ -48,8 +48,11 @@ end
 
 function fail()
 	core.busytest(function()
-		Execute("fly lz;s;w;ask xiao about fail;fly wm")
-		var.xiao_available_time = os.time() + 125
+		if(var.xiao_full ~= "1") then 
+			Execute("fly lz;s;w;ask xiao about fail;fly wm")
+			var.xiao_available_time = os.time() + 125
+		end
+		
 		exit()
 		me.cleanup(function() call(cxt.f_fail) end)
 	end)
@@ -236,8 +239,8 @@ end
 function searchKiller()
 	--DeleteTemporaryTriggers()
 	timer.stop("action")
-	Execute("halt")
-	core.busytest(function()
+	--Execute("halt")
+	core.safehalt(function()
 		print("´Ó " .. var.xiao_escape_dir .. " ¿ªÊ¼walkaround" )
 		Execute("er;et;ef")
 		walk.walkaround(3, var.xiao_escape_dir, notfound, rewalk, foundnpc)

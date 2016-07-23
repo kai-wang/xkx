@@ -18,9 +18,10 @@ var.weapon = "jian"
 var.weapon2 = "dao"
 var.study_seq = 1
 var.fast_mode = 1
+var.xiao_full = 0
 var.guo_kill_place = "fly mj"
 
-auto_list = {"wei","shan","baobiao", "guanfu","guo","event","study","reconnect", "sstask"}
+auto_list = {"wei","shan","baobiao", "guanfu","guo","event","study","reconnect", "sstask", "xiao"}
 
 weapon_list = {"juwei jian", "kunlun dao", "guangcheng jian", "zhaixing jian", "qiankun dao", "shenyuan jian"}
 
@@ -235,7 +236,7 @@ function buff(menpai)
 	end
 
 	print("换水系内功了.......")
-	Execute("unwield all;enable force huntian-qigong;yun shengang;perform strike.xianglong")
+	Execute("unwield all;enable force huntian-qigong;yun shengang;enable force beiming-shengong;yun beiming;perform strike.xianglong")
 end
 
 

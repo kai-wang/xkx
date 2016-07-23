@@ -21,13 +21,13 @@ function double(f)
 	else
 		wait.make(function()
 			Execute("fly wm;u;ask jin about 双倍奖励;d")
-			local l, w = wait.regexp("^(> )*(你领取了半小时双倍时间)|(你.*用完了).*$", 5)
+			local l, w = wait.regexp("^(> )*(你领取了半小时双倍时间)|(你.*用完了).*$", 3)
 			if(l ~= nil and l:match("你领取了半小时双倍时间")) then
 				var.double_bonus = true
 				var.double_available_time = os.time() + 1800
 			elseif(l ~= nil and l:match("用完了")) then
 				var.double_bonus = false
-				var.double_available_time = os.time() + 1800
+				var.double_available_time = os.time() + 3600
 			end
 			call(f)
 		end)
