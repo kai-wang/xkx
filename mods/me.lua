@@ -194,7 +194,7 @@ recover2 = function(f_done, f_fail)
 				call(f_done)
 			end)
 		else
-			Execute("eat yin dan")
+			--Execute("eat yin dan")
 			updateHP(function()
 				core.busytest(function()
 					--Execute("fly wm;u")
