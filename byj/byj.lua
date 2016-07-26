@@ -46,7 +46,7 @@ pfm = {
 	[16]= {name="金蛇万道",			desc="你大喝一声，猛攻数招", 			cd=false},
 	[17]= {name="吸焰", 			desc="你使出圣火令法「吸焰」令", 		cd=false},
 	[18]= {name="牧野鹰扬",			desc="你使出搜骨鹰爪功绝技", 			cd=false},
-	[19]= {name="阴风刀",			desc="你悄悄使出阴风刀",				cd=false},
+	[19]= {name="天山月影",			desc="你使出月影舞步的绝技「天山月影」",				cd=false},
 	[20]= {name="透骨针",			desc="你悄悄运起透骨针",				cd=false},
 	[21]= {name="精失诀",			desc="你凝神定气，使出七伤拳总诀中的「精失诀」", cd=false},
 	[22]= {name="七拳七伤",			desc="你仰天怒吼，激起全身力量使出七伤拳终极绝技", cd=false},
@@ -106,7 +106,7 @@ busy_perform_array = {
 			end
 	},
 
-	[4] = { i = 33,
+	[4] = { i = 12,
 			action = function()
 				Execute("enable move xiaoyaoyou;perform move.canghaiyixiao " .. var.pfm_target)
 			end
@@ -248,7 +248,7 @@ function init()
 	local flag = bit.bor(trigger_flag.KeepEvaluating, trigger_flag.RegularExpression, trigger_flag.Replace)--, trigger_flag.Temporary)
 
 	AddTrigger("fight_busy_success",
-		"^(> )*(结果.*被你攻了个措手不及)|(结果一指点中)|(结果.*被你点中要穴)|(.*正在奇怪间，已被你的真气制住，神情恍恍忽忽的)|(.*被此胡家刀法之「无形幻影」所迷惑，手足无措，不知哪个你是真)|(.*气拔千钧的一击，竟不知如何招架！)|(.*只觉一股热流穿心而过)|(结果.*被你围着转得头晕)|(结果.*被你绕得不知所措).*$",
+		"^(> )*(结果.*被你攻了个措手不及)|(结果一指点中)|(结果.*被你点中要穴)|(.*正在奇怪间，已被你的真气制住，神情恍恍忽忽的)|(.*被此胡家刀法之「无形幻影」所迷惑，手足无措，不知哪个你是真)|(.*气拔千钧的一击，竟不知如何招架！)|(.*只觉一股热流穿心而过)|(结果.*被你围着转得头晕)|(结果.*被你绕得不知所措)|(结果.*被你围着转得头晕眼花).*$",
 		"", flag, -1, 0, "", "fight.on_busy_success") -----.*目前正自顾不暇，放胆攻击吧 | .*已经很忙了！
 
 	SetTriggerOption("fight_busy_success", "group", "fight")
