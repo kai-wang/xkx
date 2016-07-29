@@ -195,7 +195,7 @@ attack_perform_array = {
 
 	[13] = { i = 19,
 			action = function()
-				Execute("enable move yueying-wubu;perform move.yueying")
+				Execute("enable move yueying-wubu;bei none;bei sun-finger;perform move.yueying")
 			end
 	}
 }
