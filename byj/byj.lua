@@ -185,12 +185,18 @@ attack_perform_array = {
 			action = function()
 				Execute("unwield all;enable force xiaowuxiang;yun wuxiang " .. var.pfm_target .. ";wield dao")
 			end
-	}	
+	},
+
+	[12] = { i = 36,
+			action = function()
+				Execute("unwield all;enable force xiaowuxiang;bei none;bei sun-finger;yun wuxiang " .. var.pfm_target)
+			end
+	}
 
 }
 
 task_busy_list = { 1, 2, 3, 4 }
-task_attack_list = { 1, 2, 3, 4 }
+task_attack_list = { 9, 4, 12, 3 }
 
 gf_busy_list = { 1, 3 }
 gf_attack_list = { 6, 7 }
