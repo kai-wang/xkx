@@ -112,9 +112,26 @@ function loc()
 end
 
 function fail()
+	print("bei done")
+	var.task_status = "fail"
+	retry()
 	exit()
-	emitter:emit("bei_end", "fail")
+	core.safeback(function()
+		call(cxt.f_fail)
+	end, 1)
+	--emitter:emit("bei_end", "fail")
 end
+
+--[[
+function fail2()
+	print("bei done")
+	var.task_status = "fail"
+	exit()
+	core.safeback(function()
+		call(cxt.f_fail)
+	end, 1)
+end
+]]--
 
 function done()
 	print("bei done")
@@ -122,7 +139,10 @@ function done()
 	var.task_end_time = os.time()
 	if(var.double_bonus == "true") then var.task_available_time = os.time() end
 	exit()
-	emitter:emit("bei_end", "success")
+	core.safeback(function()
+		call(cxt.f_ok)
+	end, 1)
+	--emitter:emit("bei_end", "success")
 end
 
 function exit()
@@ -132,8 +152,7 @@ function exit()
 	EnableTriggerGroup("bei_ask", false)
 	EnableTriggerGroup("bei_loc", false)
 	EnableTriggerGroup("bei_task1", false)
-
-	Execute("halt;fly wm");
+	--Execute("halt;fly wm");
 end
 
 function retry()
@@ -236,7 +255,7 @@ end
 
 function escape()
 	timer.tickonce("action", 2, function()
-		retry()
+		--retry()
 		me.cleanup(fail)
 	end)
 end

@@ -191,8 +191,13 @@ attack_perform_array = {
 			action = function()
 				Execute("unwield all;enable force xiaowuxiang;bei none;bei sun-finger;yun wuxiang " .. var.pfm_target)
 			end
-	}
+	},
 
+	[13] = { i = 19,
+			action = function()
+				Execute("enable move yueying-wubu;perform move.yueying")
+			end
+	}
 }
 
 task_busy_list = { 1, 2, 3, 4 }
@@ -207,7 +212,7 @@ ttask_attack_list = { 1, 2, 3, 4 }
 busy_list = { 1, 2, 3, 4 }
 attack_list1 = { 7, 3, 6 }
 attack_list2 = { 3, 8, 9, 5, 6 }
-attack_list3 = { 7, 5, 4}
+attack_list3 = { 7, 5, 13}
 attack_list4 = { 6 }
 attack_list5 = { 3, 9, 6, 7, 5 }
 
