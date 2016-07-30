@@ -22,6 +22,7 @@ function ask()
 		EnableTriggerGroup("bei_ask", false)
 		timer.stop("action")
 		if err == "new" then
+			EnableTriggerGroup("bei_ask", true)
 			var.task_npc = taskname
 			--直接放到id.lua文件里去了
 			--var.task_id = me.id .. "'s task"
@@ -165,7 +166,7 @@ function retry()
 	end
 end
 
-main = function(f_ok, f_fail)
+function main(f_ok, f_fail)
 	cxt = {}
 	cxt.f_ok = f_ok
 	cxt.f_fail = f_fail
@@ -186,6 +187,7 @@ function available()
 end
 
 function logtime(name, line, wildcards)
+	EnableTriggerGroup("bei_ask", false)
 	local st = os.time()
 	var.task_start_time = st
 	var.task_available_time = st + 120	-- 非双倍情况下，2分钟一个task
@@ -305,7 +307,7 @@ function cleanup()
 	end)
 end
 
-guaji = function()
+function auto()
 	--wait.make(function()
 		local f = nil
 		f = function()
