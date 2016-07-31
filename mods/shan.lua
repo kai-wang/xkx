@@ -527,17 +527,17 @@ end
 function done()
 	var.shan_fail_times = 0
 	fight.stop()
+	var.shan_available_time = os.time() + 60
+	EnableTriggerGroup("shan", false)
 	core.safeback(function()
-		var.shan_available_time = os.time() + 60
-		EnableTriggerGroup("shan", false)
 		me.cleanup(context.f_done)
 	end, 1)
 end
 
 function fail()
+	--	var.shan_available_time = os.time() + 240
+	EnableTriggerGroup("shan", false)
 	core.safeback(function()
-		--	var.shan_available_time = os.time() + 240
-		EnableTriggerGroup("shan", false)
 		me.cleanup(context.f_fail)
 	end, 1)
 end

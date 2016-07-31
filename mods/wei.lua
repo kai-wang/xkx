@@ -426,17 +426,15 @@ function start(name, line, wildcards)
 	print(wei_kill_items[t])
 	print(wei_get_items[t])
 
-	timer.tickonce("action", 1, function()
-		if(wei_buy_items[t] ~= nil) then
-			buy(wei_buy_items[t])
-		elseif(wei_kill_items[t] ~= nil) then
-			kill(wei_kill_items[t])
-		elseif(wei_get_items[t] ~= nil) then
-			get(wei_get_items[t])
-		else
-			cancel()
-		end
-	end)
+	if(wei_buy_items[t] ~= nil) then
+		buy(wei_buy_items[t])
+	elseif(wei_kill_items[t] ~= nil) then
+		kill(wei_kill_items[t])
+	elseif(wei_get_items[t] ~= nil) then
+		get(wei_get_items[t])
+	else
+		cancel()
+	end
 end
 
 
@@ -460,18 +458,22 @@ function cancel()
 	local amount = math.floor(tonumber(var.wei_fail_times)/3) * 10 + 50
 	if(amount > 100) then var.wei_cancel_amt = "1 gold" else var.wei_cancel_amt = amount .. " silver" end
 
-	qukuan(var.wei_cancel_amt,
-		function()
-			Execute("e;s;s;e;u;give " .. var.wei_cancel_amt .. " to wei xiaobao")
-		end,
-		fail)
+	timer.tickonce("action", 1, function()
+		qukuan(var.wei_cancel_amt,
+			function()
+				Execute("e;s;s;e;u;give " .. var.wei_cancel_amt .. " to wei xiaobao")
+			end,
+			fail)
+	end)
 end
 
 buy = function(t)
 	var.wei_item_id = t[2]
 	var.wei_item_path = t[1]
 
-	walk.run(var.wei_item_path, finish, finish)
+	timer.tickonce("action", 1, function()
+		walk.run(var.wei_item_path, finish, finish)
+	end)
 end
 
 kill = function(t)
@@ -480,7 +482,9 @@ kill = function(t)
 	var.wei_item_path = t[3]
 	EnableTriggerGroup("wei_kill", true)
 	EnableTriggerGroup("wei_ask", false)
-	walk.run(var.wei_item_path, function() fight.start() end, finish)
+	timer.tickonce("action", 1, function()
+		walk.run(var.wei_item_path, function() fight.start() end, finish)
+	end)
 end
 
 kill_done = function()
@@ -499,7 +503,9 @@ get = function(t)
 	var.wei_item_path = t[1]
 	var.wei_item_id = t[2]
 
-	walk.run(var.wei_item_path, finish, finish)
+	timer.tickonce("action", 1, function()
+		walk.run(var.wei_item_path, finish, finish)
+	end)
 end
 
 
