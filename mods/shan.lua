@@ -554,9 +554,11 @@ function start(name, line, wildcards)
 	var.shan_npc_id = t.name
 	print(var.shan_npc_name .. " id¡¾" .. var.shan_npc_id .. "¡¿  room¡¾" .. t.room .. "¡¿")
 
-	core.busytest(function()
-		walk.run(roomAll[t.room].path, killnpc, fail, fail)
-	end, 1)
+	timer.tickonce("action", 1, function()
+		core.busytest(function()
+			walk.run(roomAll[t.room].path, killnpc, fail, fail)
+		end, 1)
+	end)
 end
 
 function killnpc()

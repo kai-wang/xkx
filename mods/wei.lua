@@ -425,15 +425,18 @@ function start(name, line, wildcards)
 	print(wei_buy_items[t])
 	print(wei_kill_items[t])
 	print(wei_get_items[t])
-	if(wei_buy_items[t] ~= nil) then
-		buy(wei_buy_items[t])
-	elseif(wei_kill_items[t] ~= nil) then
-		kill(wei_kill_items[t])
-	elseif(wei_get_items[t] ~= nil) then
-		get(wei_get_items[t])
-	else
-		cancel()
-	end
+
+	timer.tickonce("action", 1, function()
+		if(wei_buy_items[t] ~= nil) then
+			buy(wei_buy_items[t])
+		elseif(wei_kill_items[t] ~= nil) then
+			kill(wei_kill_items[t])
+		elseif(wei_get_items[t] ~= nil) then
+			get(wei_get_items[t])
+		else
+			cancel()
+		end
+	end)
 end
 
 
@@ -457,13 +460,11 @@ function cancel()
 	local amount = math.floor(tonumber(var.wei_fail_times)/3) * 10 + 50
 	if(amount > 100) then var.wei_cancel_amt = "1 gold" else var.wei_cancel_amt = amount .. " silver" end
 
-	timer.tickonce("action", 1, function()
-		qukuan(var.wei_cancel_amt,
-			function()
-				Execute("e;s;s;e;u;give " .. var.wei_cancel_amt .. " to wei xiaobao")
-			end,
-			fail)
-	end)
+	qukuan(var.wei_cancel_amt,
+		function()
+			Execute("e;s;s;e;u;give " .. var.wei_cancel_amt .. " to wei xiaobao")
+		end,
+		fail)
 end
 
 buy = function(t)
