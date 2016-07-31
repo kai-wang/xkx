@@ -553,24 +553,27 @@ function start(name, line, wildcards)
 
 	var.shan_npc_id = t.name
 	print(var.shan_npc_name .. " id¡¾" .. var.shan_npc_id .. "¡¿  room¡¾" .. t.room .. "¡¿")
+
 	core.busytest(function()
 		walk.run(roomAll[t.room].path, killnpc, fail, fail)
-	end)
+	end, 1)
 end
 
 function killnpc()
-	if(context.hubo_flag ~= true) then
-		local busy_list = config.busy_list
-		local attack_list = config.attack_list1
-		EnableTriggerGroup("shan_kill", true)
-		fight.prepare(busy_list, attack_list)
-		fight.start("kill " .. var.shan_npc_id)
-	else
-		local attack_list = config.attack_list4
-		EnableTriggerGroup("shan_kill", true)
-		fight.prepare(nil, attack_list)
-		fight.start("kill " .. var.shan_npc_id)
-	end
+	timer.tickonce("action", 1, function()
+		if(context.hubo_flag ~= true) then
+			local busy_list = config.busy_list
+			local attack_list = config.attack_list1
+			EnableTriggerGroup("shan_kill", true)
+			fight.prepare(busy_list, attack_list)
+			fight.start("kill " .. var.shan_npc_id)
+		else
+			local attack_list = config.attack_list4
+			EnableTriggerGroup("shan_kill", true)
+			fight.prepare(nil, attack_list)
+			fight.start("kill " .. var.shan_npc_id)
+		end
+	end)
 end
 
 init()

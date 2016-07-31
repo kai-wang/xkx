@@ -223,7 +223,7 @@ local wei_kill_items = {
 	["Í­îà"] = {"tong bo",	"ĞÇËŞÅÉîàÊÖ",	"xx;k2 boshou"},
 	["Í­ºÅ"] = {"tong hao",	"ĞÇËŞÅÉºÅÊÖ",	"xx;k2 haoshou"},
 	["Í­¹Ä"] = {"tong gu",	"ĞÇËŞÅÉ¹ÄÊÖ",	"xx;k2 gushou"},
-	["»Æ²¼ôÂôÄ"] = {"jia sha",	"Ğé*",	"sl;s;#3 (sd);wd;k1 xu"},
+	["»Æ²¼ôÂôÄ"] = {"jia sha",	"Ğé",	"sl;s;#3 (sd);wd;k1 xu"},
 	["°×É«µÀÅÛ"] = {"dao pao",	"ÓÎ·½µÀÈË",	"hz;w;#4 n;w;sw;k1 daoren"},
 	["Ì¨ÒÄ¶ÌÈ¹"] = {"duan qun",	"Ì¨ÒÄÉÌ··",	"dl;s;w;#9 s;e;k1 shang"},
 	["´óµ¶"] = {"da dao",	"ÃÅÎÀ",	"bt;sd;s;k2 wei"},
@@ -287,7 +287,7 @@ local wei_get_items = {
 	["·ÄÉ´»ú"] = {"bd;get fangsha ji", "fangsha ji"},
 	["·÷³¾"] = {"em2;s;enter;|!k1::s|;e;#3 s;get fu chen", "fu chen"},
 	["ÌìÏãÌÃÁîÅÆ"] = {"qz;w;n;n;e;ask xiang about É±¶«·½²»°Ü", "card4"},
-	["°×»¢ÌÃÁîÅÆ"] = {"hmy1;w;n;n;s;w;w;s;s;s;w;ask ren about Áîºü³å;ws;sd;#2 su;enter;give linghu xin", "card2"},
+	["°×»¢ÌÃÁîÅÆ"] = {"hmy1;w;n;n;s;w;w;s;s;s;w;ask ren about Áîºü³å;ws;sd;#2 (su);enter;give linghu xin", "card2"},
 	["Æ¤ÊÖÌ×"] = {"xi;w;w;s;s;s;se;ask wu about Æ¤ÊÖÌ×", "shoutao"},
 	["ÌúÖ¸Ì×"] = {"xi;w;w;s;s;s;se;ask wu about ÌúÖ¸Ì×", "zhitao"},
 	["Ìú»¤Ñü"] = {"xi;w;w;s;s;s;se;ask wu about Ìú»¤Ñü", "huyao"},
@@ -316,13 +316,13 @@ local wei_get_items = {
 	["ÊÖÅÁ"] = {"hy;n;#5 w;ask ding about Ê¯ÖĞÓñ", "pa"},
 	["³¤±Ş"] = {"tzf;e;n;get bian", "bian"},
 	["¸ßÁ»Ã×·¹"] = {"xi;w;w;s;s;s;s;serve;drop wan", "fan"},
-	["Ş¥À¼»¨"] = {"qz;#4 w;get flower;#3 sw;get flower", "flower"},
+	["Ş¥À¼»¨"] = {"qz;#4 w;get flower;#3 (sw);get flower", "flower"},
 	["´ó¾ÆÌ³"] = {"zjc;e;get tan", "tan"},
 	["·¨ÂÖ"] = {"xs;n;#3 w;get fa lun", "fa lun"},
 	["Ã»Ò©"] = {"d;w;n;#2 w;give daoren 1 gold;halt;qzj;knock gate;#3 e;#2 n;wu;eu;wu;dian candle", "moyao"},
 	["¡¸¾ÅÒõÕæ¾­¡¹ÉÏ²á"] = {"gm;s;tang coffin", "zhenjing1"},
 	["¡¸¾ÅÒõÕæ¾­¡¹ÏÂ²á"] = {"gm;s;tang coffin", "zhenjing2"},
-	["Ï¸Ìú¸Ë"] = {"wjg;s;enter;s;#2 out;e;su;eu;ed;nd;ed;pull tiegan", "xi tiegan"},
+	["Ï¸Ìú¸Ë"] = {"wjg;s;enter;s;#2 (out);e;su;eu;ed;nd;ed;pull tiegan", "xi tiegan"},
 	["°×Æå×Ó"] = {"wm;get 1 baiqi zi from xiang", "baiqi zi"},
 	["ºÚÆå×Ó"] = {"wm;get 1 heiqi zi from xiang;we", "heiqi zi"},
 	["ÉÍÉÆÍ­ÅÆ"] = {"sz;#2 w;get shan pai from xiang", "shan pai"},
@@ -484,11 +484,13 @@ end
 
 kill_done = function()
 	fight.stop()
-	core.busytest(function()
-		EnableTriggerGroup("wei_kill", false)
-		EnableTriggerGroup("wei_ask", true)
-		Execute("get ".. var.wei_item_id .. " from corpse")
-		finish()
+	timer.tickonce("action", 1, function()
+		core.safehalt(function()
+			EnableTriggerGroup("wei_kill", false)
+			EnableTriggerGroup("wei_ask", true)
+			Execute("get ".. var.wei_item_id .. " from corpse")
+			finish()
+		end, 1)
 	end)
 end
 
