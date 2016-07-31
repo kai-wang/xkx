@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE muclient>
-<!-- Saved on Sunday, May 01, 2016, 4:53 AM -->
+<!-- Saved on ÐÇÆÚËÄ, ÆßÔÂ 28, 2016, 7:17 ÏÂÎç -->
 <!-- MuClient version 4.84 -->
 <!-- Written by Nick Gammon -->
 <!-- Home Page: http://www.mushclient.com/ -->
@@ -8,7 +8,7 @@
 <world
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-05-01 04:53:15"
+   date_saved="2016-07-28 19:17:35"
 
    auto_say_override_prefix="-"
    auto_say_string="say "
@@ -114,7 +114,7 @@
 <triggers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-05-01 04:53:15"
+   date_saved="2016-07-28 19:17:35"
   >
   <trigger
    expand_variables="y"
@@ -1577,17 +1577,13 @@ fight.busy()</send>
   >
   </trigger>
   <trigger
-   group="fight"
+   group="study"
+   keep_evaluating="y"
    match="^(&gt; )*ÄãÒ»´ÎÊäÈëÌ«¶àÃüÁîÁË¡£$"
-   send_to="12"
+   regexp="y"
+   script="study.waitandtry"
    sequence="100"
   >
-  <send>fight.stop()
-
-wait.make(function()
-wait.time(8)
-fight.start()
-end)</send>
   </trigger>
   <trigger
    enabled="y"
@@ -1603,13 +1599,17 @@ walk.abort()
 timer.tickonce("action", 15, function() safeback("halt;fly wm") end)</send>
   </trigger>
   <trigger
-   group="study"
-   keep_evaluating="y"
+   group="fight"
    match="^(&gt; )*ÄãÒ»´ÎÊäÈëÌ«¶àÃüÁîÁË¡£$"
-   regexp="y"
-   script="study.waitandtry"
+   send_to="12"
    sequence="100"
   >
+  <send>fight.stop()
+
+wait.make(function()
+wait.time(8)
+fight.start()
+end)</send>
   </trigger>
   <trigger
    enabled="y"
@@ -1777,20 +1777,20 @@ bei.cleanup()</send>
   <send>Execute("out;d;e;s;sw")</send>
   </trigger>
   <trigger
-   group="shan"
-   keep_evaluating="y"
-   match="^(&gt; )*ÕâÀïÃ»ÓÐÕâ¸öÈË¡£$"
-   regexp="y"
-   script="shan.fail"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
    group="wei_kill"
    keep_evaluating="y"
    match="^(&gt; )*ÕâÀïÃ»ÓÐÕâ¸öÈË¡£$"
    regexp="y"
    script="wei.kill_done"
+   sequence="100"
+  >
+  </trigger>
+  <trigger
+   group="shan"
+   keep_evaluating="y"
+   match="^(&gt; )*ÕâÀïÃ»ÓÐÕâ¸öÈË¡£$"
+   regexp="y"
+   script="shan.fail"
    sequence="100"
   >
   </trigger>
@@ -1984,7 +1984,7 @@ walk.stop()</send>
 <aliases
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-05-01 04:53:15"
+   date_saved="2016-07-28 19:17:35"
   >
   <alias
    match="^k1 (.+)"
@@ -2946,20 +2946,20 @@ leitai</send>
 <timers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-05-01 04:53:15"
+   date_saved="2016-07-28 19:17:35"
   >
   <timer name="action" second="1.50" offset_second="0.00"    send_to="12"
 group="action" >
   <send>timer.fire("action")</send>
 
   </timer>
-  <timer enabled="y" second="59.00" offset_second="0.00" >
-  <send>hi</send>
-
-  </timer>
   <timer name="reconnect" minute="1" second="30.00" offset_second="0.00"    send_to="12"
 group="reconnect" >
   <send>timer.fire("reconnect")</send>
+
+  </timer>
+  <timer enabled="y" second="59.00" offset_second="0.00" >
+  <send>hi</send>
 
   </timer>
   <timer name="idle" minute="5" second="0.00" offset_second="0.00"    send_to="12"
@@ -2974,7 +2974,7 @@ group="idle" >
 <macros
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-05-01 04:53:15"
+   date_saved="2016-07-28 19:17:35"
   >
 
   <macro name="up" type="send_now" >
@@ -3068,7 +3068,7 @@ group="idle" >
 <variables
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-05-01 04:53:15"
+   date_saved="2016-07-28 19:17:35"
   >
   <variable name="bag_dummy_id">hsly</variable>
   <variable name="baobiao_exp">142</variable>
@@ -3245,7 +3245,7 @@ group="idle" >
 <colours
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-05-01 04:53:15"
+   date_saved="2016-07-28 19:17:35"
   >
 
 <ansi>
@@ -3302,7 +3302,7 @@ group="idle" >
 <keypad
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-05-01 04:53:15"
+   date_saved="2016-07-28 19:17:35"
   >
 
   <key name="0" >
@@ -3416,7 +3416,7 @@ group="idle" >
 <printing
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-05-01 04:53:15"
+   date_saved="2016-07-28 19:17:35"
   >
 
 <ansi>
@@ -3441,5 +3441,5 @@ group="idle" >
 </printing>
 
 <!-- plugins -->
-<include name="C:\MUSHclient\worlds\plugins\color_chat.xml" plugin="y" />
+<include name="color_chat.xml" plugin="y" />
 </muclient>
