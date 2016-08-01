@@ -313,10 +313,19 @@ function auto()
 		f = function()
 			local t = tonumber(var.task_available_time) - os.time()
 			print("ÖØÆôµÈ´ýms: " .. t)
+			me.useqn(function()
+				wait.make(function()
+					if(t > 0) then wait.time(t) end
+					main(f, f)
+				end)
+			end)
+			--[[
 			wait.make(function()
 				if(t > 0) then wait.time(t) end
-				me.useqn(function() main(f, f) end)
+				me.useqn(function()
+				 main(f, f) end)
 			end)
+			]]--
 		end
 		me.useqn(function() main(f, f) end)
 	--end)
