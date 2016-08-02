@@ -171,7 +171,8 @@ local tasks = {
 		priority = function()
 			if(var.guo_amount ~= nil and var.guo_amount_limit ~= nil and tonumber(var.guo_amount) > tonumber(var.guo_amount_limit)) then
 				print("郭靖任务超过上限了")
-				if(var.hp_star_guo ~= "1") then return 10 else return -1 end
+				--if(var.hp_star_guo ~= "1") then return 10 else return -1 end
+				if(var.hp_star_guo ~= "1") then return 10 else return 1 end
 			else
 				if(var.hp_star_guo ~= "1") then return 10 else return 5 end
 			end
