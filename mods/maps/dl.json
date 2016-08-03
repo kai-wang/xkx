@@ -3522,5 +3522,103 @@
     "name": "宏圣寺塔",
     "path": "fly tls;n;n;n;n",
     "zone": "大理|天龙寺"
+  }, {
+    "desc": "    这里是大理国皇宫的前殿，红砖绿瓦建得十分精巧，大理历代国主勤政爱民，万几宸函，都在此殿。因此大理虽偏处西南的小国，百姓对当朝君臣的爱戴均出自肺腑，十分真诚。往北就到了御花园, 往南是皇宫大门。",
+    "exits": "south|north",
+    "id": 3049,
+    "links": {
+      "s": {
+        "con": "",
+        "to": 514
+      },
+      "n": {
+        "con": "",
+        "to": 3050
+      }
+    },
+    "name": "前殿",
+    "path": "fly dl;s;w;w;n;ask fu about join;n",
+    "zone": "大理"
+  }, {
+    "desc": "    这里是大理国皇宫的御花园，两旁的花开得争奇斗艳，边上有一个小水池，山上流下来的泉水就会集在那里，几只仙鹤在水边抓鱼，一副旁若无人的样子，往北是花廊，往南是前殿。",
+    "exits": "south|north",
+    "id": 3050,
+    "links": {
+      "s": {
+        "con": "",
+        "to": 3049
+      },
+      "n": {
+        "con": "",
+        "to": 3051
+      }
+    },
+    "name": "御花园",
+    "path": "fly dl;s;w;w;n;ask fu about join;n;n",
+    "zone": "大理"
+  }, {
+    "desc": "    这里是大理国皇宫的花廊，走廊下到处是奇花异草，往北是正殿，往南是御花园，往西是御膳房，往东是偏殿。",
+    "exits": "south|north|east|west",
+    "id": 3051,
+    "links": {
+      "s": {
+        "con": "",
+        "to": 3050
+      },
+      "n": {
+        "con": "",
+        "to": 3052
+      },
+      "e": {
+        "con": "",
+        "to": 3053
+      },
+      "w": {
+        "con": "",
+        "to": 3054
+      }
+    },
+    "name": "花廊",
+    "path": "fly dl;s;w;w;n;ask fu about join;n;n;n",
+    "zone": "大理"
+  }, {
+    "desc": "    这里是大理国皇宫的正殿，大理国当今保定帝通常都在这里处理国事，往南是长廊。",
+    "exits": "south",
+    "id": 3052,
+    "links": {
+      "s": {
+        "con": "",
+        "to": 3051
+      }
+    },
+    "name": "正殿",
+    "path": "fly dl;s;w;w;n;ask fu about join;n;n;n;n",
+    "zone": "大理"
+  }, {
+    "desc": "    这里是大理国皇宫的御膳坊，这里的厨具都是金银做成的。皇帝不在这里也就息火了，往东是长廊。",
+    "exits": "east",
+    "id": 3053,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 3051
+      }
+    },
+    "name": "御膳坊",
+    "path": "fly dl;s;w;w;n;ask fu about join;n;n;w",
+    "zone": "大理"
+  }, {
+    "desc": "    这里是大理国皇宫的偏殿，大理皇帝常在这里接见心腹大臣，但现在显得空空荡荡的，往西是长廊。",
+    "exits": "west",
+    "id": 3054,
+    "links": {
+      "w": {
+        "con": "",
+        "to": 3051
+      }
+    },
+    "name": "偏殿",
+    "path": "fly dl;s;w;w;n;ask fu about join;n;n;n;e",
+    "zone": "大理"
   } ]
 }
