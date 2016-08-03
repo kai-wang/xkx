@@ -3569,11 +3569,11 @@
         "con": "",
         "to": 3052
       },
-      "e": {
+      "w": {
         "con": "",
         "to": 3053
       },
-      "w": {
+      "e": {
         "con": "",
         "to": 3054
       }
@@ -3605,7 +3605,7 @@
       }
     },
     "name": "御膳坊",
-    "path": "fly dl;s;w;w;n;ask fu about join;n;n;w",
+    "path": "fly dl;s;w;w;n;ask fu about join;n;n;n;w",
     "zone": "大理"
   }, {
     "desc": "    这里是大理国皇宫的偏殿，大理皇帝常在这里接见心腹大臣，但现在显得空空荡荡的，往西是长廊。",
