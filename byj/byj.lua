@@ -38,7 +38,7 @@ pfm = {
 	--[9] = {name="连环夺命诀",		desc="你使出苗家剑法之「连环夺命诀」", 	cd=false},
 	[9] = {name="天女散花",			desc="你凝神息气，手腕疾抖", 			cd=false},
 	[10]= {name="凌波微步",			desc="你提起真气，依照先天伏羲六十四卦",cd=false},
-	[11]= {name="长相思",			desc="你使出痴心情长剑之绝舞『长相思",				cd=false},
+	[11]= {name="长相思",			desc="你使出痴心情长剑之绝舞",				cd=false},
 	[12]= {name="月光如影",			desc="你照着月光的映射",				cd=false},
 	[13]= {name="六阳融雪",			desc="你使出天山六阳掌之绝技『六阳融雪』",			cd=false},
 	[14]= {name="熊熊圣火",			desc="你盘膝而坐，双手十指张开",		cd=false},
@@ -220,7 +220,7 @@ attack_list1 = { 7, 3, 6 }
 attack_list2 = { 3, 8, 9, 5, 6 }
 attack_list3 = { 7, 5, 13}
 attack_list4 = { 6 }
-attack_list5 = { 3, 14, 6, 7, 5 }
+attack_list5 = { 3, 14, 6, 7, 5}
 
 study_list = {
 	--{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu finger 10000;et;set study done", post_action="fly wm;e;s;s;s;w;w;u;gamble big skill finger 2000"}
