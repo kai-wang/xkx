@@ -201,7 +201,7 @@ attack_perform_array = {
 
 	[14] = { i = 11,
 			action = function()
-				Execute("wield jian;enable sword chixin-qingchang-jian;perform sword.xiangsi")
+				Execute("unwield all;wield jian;enable sword chixin-qingchang-jian;perform sword.xiangsi")
 			end
 	}
 }
