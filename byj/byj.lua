@@ -220,7 +220,7 @@ attack_list1 = { 7, 3, 6 }
 attack_list2 = { 3, 8, 9, 5, 6 }
 attack_list3 = { 7, 5, 13}
 attack_list4 = { 6 }
-attack_list5 = { 3, 14, 6, 7, 5}
+attack_list5 = { 3, 14, 6, 7, 5 }
 
 study_list = {
 	--{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu finger 10000;et;set study done", post_action="fly wm;e;s;s;s;w;w;u;gamble big skill finger 2000"}
