@@ -19,7 +19,7 @@ function main(f)
 	var.lll = cxt.learnlist.cmd
 
 	local go_study = function()
-		walk.run(cxt.learnlist.loc, start(var.lll, function() done(f) end, cxt.learnlist.research), f, f)
+		walk.run(cxt.learnlist.loc, start(function() done(f) end, cxt.learnlist.research), f, f)
 	end
 
 	if(cxt.learnlist.wear_int) then
@@ -56,7 +56,7 @@ function stop(f_done)
 	dazuo.abort(f_done)
 end
 
-function start(cmd, f_done, researchFlag)
+function start(f_done, researchFlag)
 	EnableTriggerGroup("study", true)
 
 	emitter:once("study_end", function(err)
@@ -80,7 +80,7 @@ function start(cmd, f_done, researchFlag)
 
 	local interval = 0.2
 	if(researchFlag) then interval = 0.8 end
-	timer.tick("action", interval, function() Execute(cmd) end)
+	timer.tick("action", interval, function() Execute(var.lll) end)
 	
 end
 
