@@ -203,11 +203,18 @@ attack_perform_array = {
 			action = function()
 				Execute("unwield all;wield jian;enable sword chixin-qingchang-jian;perform sword.xiangsi")
 			end
+	},
+
+	[15] = { i = 35,
+			action = function()
+				local wp = choose_blade()
+				Execute("enable blade xue-dao;wield " .. wp .. ";jiali max;enable move yueying-wubu;perform move.yueying " .. var.pfm_target .. ";jiali 0")
+			end
 	}
 }
 
 task_busy_list = { 1, 2, 3, 4 }
-task_attack_list = { 9, 4, 12, 3 }
+task_attack_list = { 1, 2, 15, 3 }
 
 gf_busy_list = { 1, 3 }
 gf_attack_list = { 6, 7 }
