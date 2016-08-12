@@ -263,13 +263,13 @@ function buff(menpai)
 		local r1,r2,r3 = re:match(menpai)
 		if(r3 ~= nil) then
 			print("换金系内功了.......")
-			Execute("enable force xiaowuxiang;")
+			Execute("enable force xiaowuxiang;perform dodge.mengyulingbo")
 			return
 		end
 	end
 
 	print("换水系内功了.......")
-	Execute("enable force beiming-shengong;yun beiming")
+	Execute("enable force beiming-shengong;yun beiming;perform dodge.mengyulingbo")
 end
 
 
