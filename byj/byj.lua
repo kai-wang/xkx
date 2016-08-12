@@ -26,7 +26,7 @@ auto_list = {"wei","shan","baobiao", "guanfu","guo","event","study","reconnect",
 weapon_list = {"juwei jian", "kunlun dao", "guangcheng jian", "zhaixing jian", "qiankun dao", "shenyuan jian"}
 
 pfm = {
-	--[1] = {name="一剑化三清", 		desc="你大喝一声，剑招突变", 			cd=false},
+	[1] = {name="一剑化三清", 		desc="你大喝一声，剑招突变", 			cd=false},
 	--[2] = {name="附骨缠身", 		desc="你大喝一声，缠身而上", 			cd=false},
 	[3] = {name="璀璨七星", 		desc="你倒踩七星步法", 					cd=false},
 	[4] = {name="双手互博之术", 	desc="你平心静气", 						cd=false},
@@ -91,7 +91,7 @@ end
 busy_perform_array = {
 	[1] = { i = 10,
 			action = function()
-				Execute("perform dodge.lingbo " .. var.pfm_target)
+				Execute("enable dodge lingboweibu;perform dodge.lingbo " .. var.pfm_target)
 			end
 	},
 
