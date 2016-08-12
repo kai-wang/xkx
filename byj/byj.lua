@@ -320,7 +320,9 @@ end
 function fight_wear(f_done)
 	wait.make(function()
 		Execute("tuo all;give xiaocui xue to byj;give juwei jian to byj;give shenshui mao to byj;give shenyu yi to byj;give jiulong hushou to byj;give qiankun dao to byj;give yecha ring to byj")
-		Execute("wear all;tuo xunzhang;wield " .. var.weapon)
+		Execute("wear all")
+		wait.time(1.5)
+		Execute("tuo xunzhang;wield " .. var.weapon)
 		core.busytest(function() call(f_done) end)
 	end)
 end
