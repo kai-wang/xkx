@@ -250,7 +250,9 @@ function done()
 	init()
 	core.safeback(function()
 		Execute("er;et;ef")
-		var.ss_available_time = os.time()
+		if(var.ss_stop ~= "1") then
+			var.ss_available_time = os.time()
+		end
 		clean(context.f_done)
 	end, 1)
 end

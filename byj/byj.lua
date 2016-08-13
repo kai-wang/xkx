@@ -240,7 +240,7 @@ attack_list5 = { 3, 14, 6, 7, 16 }
 
 study_list = {
 	--{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu finger 10000;et;set study done", post_action="fly wm;e;s;s;s;w;w;u;gamble big skill finger 2000"}
-	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu xiaowuxiang 1000", wear_int = true, research = true }
+	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu beiming-shengong 1000", wear_int = true, research = true }
 		--{ loc = "fly mj", cmd = "xue wei strike 100;et",pre_action="bai wei yixiao", post_action="bai xie xun"}
 }
 
@@ -319,10 +319,8 @@ end
 
 function fight_wear(f_done)
 	wait.make(function()
-		Execute("tuo all;give xiaocui xue to byj;give juwei jian to byj;give shenshui mao to byj;give shenyu yi to byj;give jiulong hushou to byj;give qiankun dao to byj;give yecha ring to byj")
-		Execute("wear all")
-		wait.time(1.5)
-		Execute("tuo xunzhang;wield " .. var.weapon)
+		Execute("tuo all;wear xiaocui xue;wear juwei jian;wear shenshui mao;wear shenyu yi;wear jiulong hushou;wear qiankun dao;wear yecha ring")
+		wait.time(1)
 		core.busytest(function() call(f_done) end)
 	end)
 end
