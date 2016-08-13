@@ -21,7 +21,7 @@ var.fast_mode = 1
 var.xiao_full = 0
 var.guo_kill_place = "fly mj"
 
-auto_list = {"wei","shan","baobiao", "guanfu","guo","event","study","reconnect", "sstask", "xiao", "double"}
+auto_list = {"wei", "guanfu","guo","event","study","reconnect", "sstask", "xiao", "double"}
 
 weapon_list = {"juwei jian", "kunlun dao", "guangcheng jian", "zhaixing jian", "qiankun dao", "shenyuan jian"}
 
@@ -51,7 +51,7 @@ pfm = {
 	[21]= {name="精失诀",			desc="你凝神定气，使出七伤拳总诀中的「精失诀」", cd=false},
 	[22]= {name="七拳七伤",			desc="你仰天怒吼，激起全身力量使出七伤拳终极绝技", cd=false},
 	[23]= {name="意恍惚诀",			desc="你凝神定气，使出七伤拳总诀中的「意恍惚诀」", cd=false},
-	[24]= {name="连环夺命诀",		desc="你使出苗家剑法之「连环夺命诀」", 			cd=false},
+	[24]= {name="修罗焰",			desc="突然你双掌搓了几搓，只听得嗤嗤声响", 			cd=false},
 	[25]= {name="绝命刺", 			desc="你突然运足内力，只听手中的", cd=false},
 	[26]= {name="三焦齐逆诀",		desc="你凝神定气，企图使出七伤拳总诀中的「三焦齐逆诀」", cd=false},
 	[27]= {name="伤肺诀",			desc="你凝神定气，使出七伤拳总诀中的「伤肺诀」", 	cd=false},
@@ -171,9 +171,9 @@ attack_perform_array = {
 			end
 	},
 
-	[9] = { i = 32,
+	[9] = { i = 24,
 			action = function()
-				Execute("unwield all;perform strike.sanhui " .. var.pfm_target)
+				Execute("unwield all;bei none;bei huoyan-dao;perform strike.xiuluo " .. var.pfm_target)
 			end
 	},
 
@@ -236,7 +236,7 @@ attack_list1 = { 7, 3, 6 }
 attack_list2 = { 3, 8, 14, 6, 7 }
 attack_list3 = { 7, 16, 13}
 attack_list4 = { 6 }
-attack_list5 = { 3, 14, 6, 7, 16 }
+attack_list5 = { 3, 9, 14, 4, 7 }
 
 study_list = {
 	--{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu finger 10000;et;set study done", post_action="fly wm;e;s;s;s;w;w;u;gamble big skill finger 2000"}
