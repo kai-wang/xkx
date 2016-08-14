@@ -52,7 +52,7 @@ pfm = {
 	[22]= {name="七拳七伤",			desc="你仰天怒吼，激起全身力量使出七伤拳终极绝技", cd=false},
 	[23]= {name="意恍惚诀",			desc="你凝神定气，使出七伤拳总诀中的「意恍惚诀」", cd=false},
 	[24]= {name="修罗焰",			desc="突然你双掌搓了几搓，只听得嗤嗤声响", 			cd=false},
-	[25]= {name="绝命刺", 			desc="你突然运足内力，只听手中的", cd=false},
+	[25]= {name="血祭狂刀", 		desc="你手中的刀，血光一闪！你只觉眼前一红", cd=false},
 	[26]= {name="三焦齐逆诀",		desc="你凝神定气，企图使出七伤拳总诀中的「三焦齐逆诀」", cd=false},
 	[27]= {name="伤肺诀",			desc="你凝神定气，使出七伤拳总诀中的「伤肺诀」", 	cd=false},
 	[28]= {name="损心诀",			desc="你凝神定气，使出七伤拳总诀中的「损心诀」",	cd=false},
@@ -145,9 +145,10 @@ attack_perform_array = {
 			end
 	},
 
-	[5] = { i = 31,
+	[5] = { i = 25,
 			action = function()
-				Execute("unwield all;perform strike.leiting " .. var.pfm_target)
+				local wp = choose_blade()
+				Execute("wield " .. wp .. ";enable blade xue-dao;jiali max;perform blade.kuangdao " .. var.pfm_target .. ";jiali 0")
 			end
 	},
 
@@ -222,7 +223,7 @@ attack_perform_array = {
 }
 
 task_busy_list = { 1, 2, 3, 4 }
-task_attack_list = { 1, 2, 15, 3 }
+task_attack_list = { 5, 1, 2, 15 }
 
 gf_busy_list = { 1, 3 }
 gf_attack_list = { 6, 7 }
