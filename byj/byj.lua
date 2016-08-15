@@ -148,7 +148,7 @@ attack_perform_array = {
 	[5] = { i = 20,
 			action = function()
 				local wp = choose_sword()
-				Execute("wield " .. wp .. ";enable sword yuxiao-jian;perform sword.tianwai " .. var.pfm_target)
+				Execute("unwield all;wield " .. wp .. ";enable sword yuxiao-jian;perform sword.tianwai " .. var.pfm_target)
 			end
 	},
 
