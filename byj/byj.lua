@@ -21,7 +21,7 @@ var.fast_mode = 1
 var.xiao_full = 0
 var.guo_kill_place = "fly mj"
 
-auto_list = {"wei", "guanfu","guo","event","study","reconnect", "sstask", "xiao", "double"}
+auto_list = {"wei", "guanfu","guo","event","study","reconnect", "sstask", "xiao", "double", "baobiao", "shan"}
 
 weapon_list = {"juwei jian", "kunlun dao", "guangcheng jian", "zhaixing jian", "qiankun dao", "shenyuan jian"}
 
@@ -237,7 +237,7 @@ attack_list1 = { 7, 3, 6 }
 attack_list2 = { 3, 8, 14, 6, 7 }
 attack_list3 = { 7, 16, 13}
 attack_list4 = { 6 }
-attack_list5 = { 3, 9, 14, 4, 7 }
+attack_list5 = { 3, 14, 4, 16, 7 }
 
 study_list = {
 	--{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu finger 10000;et;set study done", post_action="fly wm;e;s;s;s;w;w;u;gamble big skill finger 2000"}
