@@ -47,7 +47,7 @@ pfm = {
 	[17]= {name="吸焰", 			desc="你使出圣火令法「吸焰」令", 		cd=false},
 	[18]= {name="牧野鹰扬",			desc="你使出搜骨鹰爪功绝技", 			cd=false},
 	[19]= {name="天山月影",			desc="你使出月影舞步的绝技「天山月影」",				cd=false},
-	[20]= {name="透骨针",			desc="你悄悄运起透骨针",				cd=false},
+	[20]= {name="天外清音",			desc="你一声清啸，剑发琴音，深吸一口气",				cd=false},
 	[21]= {name="精失诀",			desc="你凝神定气，使出七伤拳总诀中的「精失诀」", cd=false},
 	[22]= {name="七拳七伤",			desc="你仰天怒吼，激起全身力量使出七伤拳终极绝技", cd=false},
 	[23]= {name="意恍惚诀",			desc="你凝神定气，使出七伤拳总诀中的「意恍惚诀」", cd=false},
@@ -65,7 +65,7 @@ pfm = {
 	[35]= {name="刀刀相连", 		desc="在一片刀光中，一刀劈了过来", cd=false},
 	[36]= {name="无色无相", desc="你使出小无相绝技「无色无相」，招式变幻莫测", cd=false},
 	[37]= {name="天马行空", desc="你使出身空行，身形回转，如天马跃空而行", cd=false},
-	[38]= {name="神功震敌", desc="你默运神功，使出猴拳「震」字诀", cd=false}
+	[38]= {name="灵犀一指", desc="你双手一前一后，缓缓伸出", cd=false}
 }
 
 function set_cd_status(l, flag, color)
@@ -145,10 +145,10 @@ attack_perform_array = {
 			end
 	},
 
-	[5] = { i = 25,
+	[5] = { i = 20,
 			action = function()
-				local wp = choose_blade()
-				Execute("wield " .. wp .. ";enable blade xue-dao;jiali max;perform blade.kuangdao " .. var.pfm_target .. ";jiali 0")
+				local wp = choose_sword()
+				Execute("wield " .. wp .. ";enable sword yuxiao-jian;perform sword.tianwai " .. var.pfm_target)
 			end
 	},
 
@@ -217,7 +217,7 @@ attack_perform_array = {
 
 	[16] = { i = 38,
 			action = function()
-				Execute("enable cuff houquan;unwield all;perform cuff.zhen")
+				Execute("enable finger taizhi-shentong;unwield all;perform finger.lingxi")
 			end
 	}
 }
