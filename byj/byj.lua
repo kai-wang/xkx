@@ -122,14 +122,14 @@ attack_perform_array = {
 	[2] = { i = 36,
 			action = function()
 				local wp = choose_blade()
-				Execute("wield " .. wp .. ";enable blade xue-dao;enable force xiaowuxiang;jiali max;yun wuxiang " .. var.pfm_target .. ";jiali 0")
+				Execute("unwield all;wield " .. wp .. ";enable blade xue-dao;enable force xiaowuxiang;jiali max;yun wuxiang " .. var.pfm_target .. ";jiali 0")
 			end
 	},
 
 	[1] = { i = 35,
 			action = function()
 				local wp = choose_blade()
-				Execute("enable blade xue-dao;wield " .. wp .. ";jiali max;perform parry.lian " .. var.pfm_target .. ";jiali 0")
+				Execute("unwield all;enable blade xue-dao;wield " .. wp .. ";jiali max;perform parry.lian " .. var.pfm_target .. ";jiali 0")
 			end
 	},
 
