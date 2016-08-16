@@ -129,7 +129,7 @@ attack_perform_array = {
 	[1] = { i = 35,
 			action = function()
 				local wp = choose_blade()
-				Execute("unwield all;enable blade xue-dao;wield " .. wp .. ";jiali max;perform parry.lian " .. var.pfm_target .. ";jiali 0")
+				Execute("unwield all;enable blade xue-dao;enable parry hujia-daofa;wield " .. wp .. ";jiali max;perform parry.lian " .. var.pfm_target .. ";jiali 0")
 			end
 	},
 
