@@ -23,7 +23,7 @@ var.guo_kill_place = "fly mj"
 
 auto_list = {"wei", "guanfu","guo","event","study","reconnect", "sstask", "xiao", "double", "baobiao", "shan"}
 
-weapon_list = {"juwei jian", "kunlun dao", "guangcheng jian", "zhaixing jian", "qiankun dao", "shenyuan jian"}
+weapon_list = {"kunlun qin", "kunlun dao", "haoqi qin", "zhaixing jian", "qiankun dao", "lianyu qin"}
 
 pfm = {
 	[1] = {name="一剑化三清", 		desc="你大喝一声，剑招突变", 			cd=false},
@@ -141,7 +141,7 @@ attack_perform_array = {
 
 	[4] = { i = 4,
 			action = function()
-				Execute("bei none;bei sun-finger;unwield all;hubo " .. var.pfm_target)
+				Execute("bei none;enable finger sun-finger;bei sun-finger;unwield all;hubo " .. var.pfm_target)
 			end
 	},
 
@@ -168,7 +168,7 @@ attack_perform_array = {
 
 	[8] = { i = 36,
 			action = function()
-				Execute("unwield all;enable force xiaowuxiang;bei none;bei sun-finger;yun wuxiang " .. var.pfm_target)
+				Execute("unwield all;enable force xiaowuxiang;bei none;enable finger sun-finger;bei sun-finger;yun wuxiang " .. var.pfm_target)
 			end
 	},
 
