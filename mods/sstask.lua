@@ -235,7 +235,7 @@ end
 function startFight()
 	walk.abort()
 	timer.stop("action")
-	local busy_list = config.busy_list
+	local busy_list = config.busy_list2
 	local attack_list = config.attack_list5
 	fight.prepare(busy_list, attack_list, nil, var.ss_menpai)
 	fight.start()

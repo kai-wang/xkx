@@ -41,7 +41,7 @@ pfm = {
 	[11]= {name="长相思",			desc="你使出痴心情长剑之绝舞",				cd=false},
 	[12]= {name="月光如影",			desc="你照着月光的映射",				cd=false},
 	[13]= {name="六阳融雪",			desc="你使出天山六阳掌之绝技『六阳融雪』",			cd=false},
-	[14]= {name="熊熊圣火",			desc="你盘膝而坐，双手十指张开",		cd=false},
+	[14]= {name="醉剑",			desc="你连人带剑扑了上来",		cd=false},
 	[15]= {name="如影如幻",			desc="你长空而起，化作一只青蝠",		cd=false},
 	[16]= {name="金蛇万道",			desc="你大喝一声，猛攻数招", 			cd=false},
 	[17]= {name="吸焰", 			desc="你使出圣火令法「吸焰」令", 		cd=false},
@@ -168,7 +168,7 @@ attack_perform_array = {
 
 	[8] = { i = 36,
 			action = function()
-				Execute("unwield all;enable force xiaowuxiang;yun wuxiang " .. var.pfm_target)
+				Execute("unwield all;enable force xiaowuxiang;bei none;bei sun-finger;yun wuxiang " .. var.pfm_target)
 			end
 	},
 
@@ -204,7 +204,8 @@ attack_perform_array = {
 
 	[14] = { i = 11,
 			action = function()
-				Execute("unwield all;wield jian;enable sword chixin-qingchang-jian;perform sword.xiangsi")
+				local wp = choose_sword()
+				Execute("unwield all;wield " .. wp .. ";enable sword chixin-qingchang-jian;perform sword.xiangsi")
 			end
 	},
 
@@ -219,11 +220,32 @@ attack_perform_array = {
 			action = function()
 				Execute("enable finger taizhi-shentong;unwield all;perform finger.lingxi")
 			end
+	},
+
+	[17] = { i = 14,
+			action = function()
+				local wp = choose_sword()
+				Execute("enable parry pomo-jianfa;enable sword wuyun-jianfa;unwield all;wield " .. wp .. ";perform parry.zuijian " .. var.pfm_target)
+			end
+	},
+
+	[18] = { i = 8,
+			action = function()
+				local wp = choose_sword()
+				Execute("enable parry tianyu-qijian;enable sword wuyun-jianfa;unwield all;wield " .. wp .. ";perform parry.kuangwu " .. var.pfm_target)
+			end
+	},
+
+	[19] = { i = 9,
+			action = function()
+				local wp = choose_sword()
+				Execute("enable parry tianyu-qijian;unwield all;wield " .. wp .. ";perform parry.san " .. var.pfm_target)
+			end
 	}
 }
 
 task_busy_list = { 1, 2, 3, 4 }
-task_attack_list = { 5, 1, 2, 15 }
+task_attack_list = { 17, 1, 2, 18, 15 }
 
 gf_busy_list = { 1, 3 }
 gf_attack_list = { 6, 7 }
@@ -232,12 +254,13 @@ ttask_busy_list = { 1, 2, 3, 4 }
 ttask_attack_list = { 1, 2, 3, 4 }
 
 busy_list = { 1, 2, 3, 4 }
+busy_list2 = { 1, 3, 4, 2 }
 attack_list1 = { 7, 3, 6 }
 --attack_list2 = { 3, 8, 9, 5, 6 }
-attack_list2 = { 3, 8, 14, 6, 7 }
-attack_list3 = { 7, 16, 13}
+attack_list2 = { 3, 8, 14, 4, 7 }
+attack_list3 = { 7, 19, 13}
 attack_list4 = { 6 }
-attack_list5 = { 3, 14, 4, 16, 7 }
+attack_list5 = { 3, 14, 4, 8, 7 }
 
 study_list = {
 	--{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu finger 10000;et;set study done", post_action="fly wm;e;s;s;s;w;w;u;gamble big skill finger 2000"}
@@ -251,7 +274,7 @@ function choose_blade()
 end
 
 function choose_sword()
-	return "jian"
+	return "qin"
 end
 
 function powerup()
