@@ -343,7 +343,7 @@ end
 
 function fight_wear(f_done)
 	wait.make(function()
-		Execute("tuo all;wear xiaocui xue;wear juwei jian;wear shenshui mao;wear shenyu yi;wear jiulong hushou;wear qiankun dao;wear yecha ring")
+		Execute("tuo all;wear xiaocui xue;wear juwei jian;wear shenshui mao;wear shenyu yi;wear jiulong hushou;wear qiankun dao;wear yecha ring;give byj kunlun qin")
 		wait.time(1)
 		core.busytest(function() call(f_done) end)
 	end)
