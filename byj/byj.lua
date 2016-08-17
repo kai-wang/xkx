@@ -192,7 +192,7 @@ attack_perform_array = {
 
 	[12] = { i = 36,
 			action = function()
-				Execute("unwield all;enable force xiaowuxiang;bei none;bei sun-finger;yun wuxiang " .. var.pfm_target)
+				Execute("unwield all;enable force xiaowuxiang;bei none;enable finger tanzhi-shentong;bei lanhua-shou;bei tanzhi-shentong;enable finger sun-finger;yun wuxiang " .. var.pfm_target)
 			end
 	},
 
@@ -245,7 +245,7 @@ attack_perform_array = {
 }
 
 task_busy_list = { 1, 2, 3, 4 }
-task_attack_list = { 17, 1, 2, 18, 15 }
+task_attack_list = { 17, 12, 6, 18, 19 }
 
 gf_busy_list = { 1, 3 }
 gf_attack_list = { 6, 7 }
