@@ -14,7 +14,7 @@ var.gf_money = "no"
 var.task_id = "byj's task"
 var.ttask_id = "byj's ttask"
 var.dig_dummy = "lbt"
-var.weapon = "jian"
+var.weapon = "qin"
 var.weapon2 = "dao"
 var.study_seq = 1
 var.fast_mode = 1
@@ -264,7 +264,7 @@ attack_list5 = { 3, 14, 4, 8, 7 }
 
 study_list = {
 	--{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu finger 10000;et;set study done", post_action="fly wm;e;s;s;s;w;w;u;gamble big skill finger 2000"}
-	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu beiming-shengong 1000", wear_int = true, research = true }
+	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu xiaowuxiang 1000", wear_int = true, research = true }
 		--{ loc = "fly mj", cmd = "xue wei strike 100;et",pre_action="bai wei yixiao", post_action="bai xie xun"}
 }
 

@@ -501,7 +501,7 @@ handlers = {
 	
 	["hsbreak"] = function()
 		if(var.me_xunzhang == "true") then
-			Execute("wear xunzhang;unwield all;wield jian;break wall;tuo xunzhang")
+			Execute("wear xunzhang;unwield all;wield " .. var.weapon .. ";break wall;tuo xunzhang")
 			handlers.done()
 		else
 			handlers.fail()
