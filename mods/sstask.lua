@@ -61,7 +61,7 @@ end
 function start()
 	EnableTriggerGroup("ss_update", true)
 	context.index = 0
-	var.walk_danger_level = 5
+	var.walk_danger_level = var.ss_walk_danger_level
 	var.ss_city_1 = nil
 	ss_list = {}
 	core.safeback(function() 

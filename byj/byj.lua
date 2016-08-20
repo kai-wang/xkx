@@ -20,6 +20,10 @@ var.study_seq = 1
 var.fast_mode = 1
 var.xiao_full = 0
 var.guo_kill_place = "fly mj"
+var.task_walk_danger_level = 2
+var.gf_walk_danger_level = 5
+var.ss_walk_danger_level = 5
+var.xiao_walk_danger_level = 4
 
 auto_list = {"wei", "guanfu","guo","event","study","reconnect", "sstask", "xiao", "double", "baobiao", "shan", "wine", "task"}
 

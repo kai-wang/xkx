@@ -36,12 +36,14 @@ function ask()
 			var.task_found = false
 			var.task_status = "start"
 			var.task_escape_dir = ""
-			if((tonumber(var.task_retry_times) % 2) > 0) then
+			--if((tonumber(var.task_retry_times) % 2) > 0) then
 				-- 省点钱，偶数次直接按照上次loc的去找
 				parseAndLoc()
+			--[[
 			else
 				gofortask()
 			end
+			]]--
 		elseif err == "notask" then
 			done()
 		else
@@ -113,7 +115,7 @@ function loc()
 end
 
 function fail()
-	print("bei done")
+	print("bei fail")
 	var.task_status = "fail"
 	retry()
 	exit()
@@ -123,16 +125,14 @@ function fail()
 	--emitter:emit("bei_end", "fail")
 end
 
---[[
 function fail2()
-	print("bei done")
+	print("bei fail")
 	var.task_status = "fail"
 	exit()
 	core.safeback(function()
 		call(cxt.f_fail)
 	end, 1)
 end
-]]--
 
 function done()
 	print("bei done")
@@ -171,7 +171,7 @@ function main(f_ok, f_fail)
 	cxt.f_ok = f_ok
 	cxt.f_fail = f_fail
 
-	var.walk_danger_level = 2
+	var.walk_danger_level = var.task_walk_danger_level
 	EnableTriggerGroup("bei", true)
 	ask()
 	--Execute("set brief;fly wm;e;n;e;e;e;task;fly wm")
@@ -257,8 +257,8 @@ end
 
 function escape()
 	timer.tickonce("action", 2, function()
-		--retry()
-		me.cleanup(fail)
+		retry()
+		me.cleanup(fail2)
 	end)
 end
 
@@ -301,10 +301,11 @@ end
 
 ----task结束后的善后工作，疗伤学习打坐----------------------------
 function cleanup()
-	core.safehalt(function()
-		Execute("fly wm;nw;er;et;ef")
+	core.safeback(function()
+		Execute("er;et;ef")
 		me.cleanup(done)
-	end)
+	end, 1)
+
 end
 
 function auto()

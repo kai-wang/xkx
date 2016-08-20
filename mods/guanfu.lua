@@ -12,7 +12,7 @@ local context = {}
 function main(f_done, f_fail)
 	context.f_done = f_done
 	context.f_fail = f_fail
-	var.walk_danger_level = 5
+	var.walk_danger_level = var.gf_walk_danger_level
 
 	EnableTriggerGroup("guanfu_ask", true)
 	Execute("set brief;fly wm;e;s;s;w;s;s;e;jie wenshu;fly wm;kan wenshu")

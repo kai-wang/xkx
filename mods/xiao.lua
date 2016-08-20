@@ -26,7 +26,7 @@ function main(f_ok, f_fail)
 	var.xiao_action = ""
 	var.xiao_level = 1
 	var.xiao_rewalk_times = 0
-	var.walk_danger_level = 4
+	var.walk_danger_level = var.xiao_walk_danger_level
 
 	EnableTriggerGroup("xiao_ask", true)
 	EnableTriggerGroup("xiao", false)
