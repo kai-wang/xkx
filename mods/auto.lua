@@ -34,7 +34,7 @@ local tasks = {
 	["guanfu"] = {
 		name = "guanfu",
 		main = function(f_next)
-			anti_idle(300)
+			anti_idle(180)
 			guanfu.main(f_next, f_next)
 		end,
 		
