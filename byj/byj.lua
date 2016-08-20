@@ -21,7 +21,7 @@ var.fast_mode = 1
 var.xiao_full = 0
 var.guo_kill_place = "fly mj"
 
-auto_list = {"wei", "guanfu","guo","event","study","reconnect", "sstask", "xiao", "double", "baobiao", "shan"}
+auto_list = {"wei", "guanfu","guo","event","study","reconnect", "sstask", "xiao", "double", "baobiao", "shan", "wine"}
 
 weapon_list = {"kunlun qin", "kunlun dao", "haoqi qin", "zhaixing jian", "qiankun dao", "lianyu qin"}
 
@@ -122,6 +122,7 @@ attack_perform_array = {
 	[2] = { i = 36,
 			action = function()
 				local wp = choose_blade()
+				choose_force()
 				Execute("unwield all;wield " .. wp .. ";enable blade xue-dao;enable force xiaowuxiang;jiali max;yun wuxiang " .. var.pfm_target .. ";jiali 0")
 			end
 	},
@@ -129,18 +130,21 @@ attack_perform_array = {
 	[1] = { i = 35,
 			action = function()
 				local wp = choose_blade()
+				choose_force()
 				Execute("unwield all;enable blade xue-dao;enable parry hujia-daofa;wield " .. wp .. ";jiali max;perform parry.lian " .. var.pfm_target .. ";jiali 0")
 			end
 	},
 
 	[3] = { i = 22,
 			action = function()
+				choose_force()
 				Execute("unwield all;enable cuff qishang-quan;bei none;bei qishang-quan;perform cuff.qishang " .. var.pfm_target)
 			end
 	},
 
 	[4] = { i = 4,
 			action = function()
+				choose_force()
 				Execute("bei none;enable finger sun-finger;bei sun-finger;unwield all;hubo " .. var.pfm_target)
 			end
 	},
@@ -154,6 +158,7 @@ attack_perform_array = {
 
 	[6] = { i = 4,
 			action = function()
+				choose_force()
 				Execute("unwield all;hubo " .. var.pfm_target)
 			end
 	},
@@ -161,6 +166,7 @@ attack_perform_array = {
 	[7] = { i = 35,
 			action = function()
 				local wp = choose_blade()
+				choose_force()
 				Execute("unwield all;wield " .. wp .. ";enable blade hujia-daofa;perform blade.lian " .. var.pfm_target)
 			end
 	},
@@ -168,6 +174,7 @@ attack_perform_array = {
 
 	[8] = { i = 36,
 			action = function()
+				choose_force()
 				Execute("unwield all;enable force xiaowuxiang;bei none;enable finger sun-finger;bei sun-finger;yun wuxiang " .. var.pfm_target)
 			end
 	},
@@ -205,6 +212,7 @@ attack_perform_array = {
 	[14] = { i = 11,
 			action = function()
 				local wp = choose_sword()
+				choose_force()
 				Execute("unwield all;wield " .. wp .. ";enable sword chixin-qingchang-jian;perform sword.xiangsi")
 			end
 	},
@@ -225,6 +233,7 @@ attack_perform_array = {
 	[17] = { i = 14,
 			action = function()
 				local wp = choose_sword()
+				choose_force()
 				Execute("enable parry pomo-jianfa;enable sword wuyun-jianfa;unwield all;wield " .. wp .. ";perform parry.zuijian " .. var.pfm_target)
 			end
 	},
@@ -232,6 +241,7 @@ attack_perform_array = {
 	[18] = { i = 8,
 			action = function()
 				local wp = choose_sword()
+				choose_force()
 				Execute("enable parry tianyu-qijian;enable sword wuyun-jianfa;unwield all;wield " .. wp .. ";perform parry.kuangwu " .. var.pfm_target)
 			end
 	},
@@ -239,6 +249,7 @@ attack_perform_array = {
 	[19] = { i = 9,
 			action = function()
 				local wp = choose_sword()
+				choose_force()
 				Execute("enable parry tianyu-qijian;unwield all;wield " .. wp .. ";perform parry.san " .. var.pfm_target)
 			end
 	}
@@ -277,6 +288,12 @@ function choose_sword()
 	return "qin"
 end
 
+function choose_force()
+	if(var.choose_force ~= nil and var.choose_force ~= "") then
+		Execute("enable force " .. var.choose_force)
+	end
+end
+
 function powerup()
 	Execute("enable force xiaowuxiang;yun powerup;enable force beiming-shengong;yun shield;yun beiming")
 end
@@ -287,12 +304,32 @@ function buff(menpai)
 		local r1,r2,r3 = re:match(menpai)
 		if(r3 ~= nil) then
 			print("换金系内功了.......")
-			Execute("enable force xiaowuxiang;perform dodge.mengyulingbo")
+			var.choose_force = "xiaowuxiang"
+			Execute("perform dodge.mengyulingbo")
+			return
+		end
+
+		re = rex.new("(明教|大理|神龙|江湖|云龙)")
+		r1,r2,r3 = re:match(menpai)
+		if(r3 ~= nil) then
+			print("换水系内功了.......")
+			var.choose_force = "beiming-shengong"
+			Execute("perform dodge.mengyulingbo")
+			return
+		end
+
+		re = rex.new("(少林|全真|古墓|神雕)")
+		r1,r2,r3 = re:match(menpai)
+		if(r3 ~= nil) then
+			print("换木系内功了.......")
+			var.choose_force = "xiaowuxiang"
+			Execute("perform dodge.mengyulingbo")
 			return
 		end
 	end
 
-	print("换水系内功了.......")
+	print("默认换成水系内功了.......")
+	var.change_force = nil
 	Execute("enable force beiming-shengong;yun beiming;perform dodge.mengyulingbo")
 end
 

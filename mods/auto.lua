@@ -221,6 +221,26 @@ local tasks = {
 			return 15
 		end
 	},
+
+	["wine"] = {
+		name = "wine",
+		main = function(f_next)
+			anti_idle(15)
+			drink_wine(f_next)
+		end,
+		
+		clear = function()
+		end,
+		
+		wait = function()
+			if(var.drink_wine == "1") then return os.time() else return os.time() + 1800 end
+		end,
+		
+		priority = function()
+			-- exceed the limit
+			if(var.drink_wine == "1") then return 29 else return -1 end
+		end
+	},
 	
 	["event"] = {
 		name = "event",

@@ -277,6 +277,20 @@ function jicun(f_done)
 	end)
 end
 
+function drink_wine(f_done)
+	wait.make(function()
+		Execute("fly bj;n;n;n;e;get jiu tan")
+		wait.time(0.5)
+		Execute("fly bj;s;w;sell jiu tan;buy jiu tan")
+		wait.time(2)
+		Execute("#5 (drink jiu tan);sell jiu tan")
+		var.drink_wine = 0
+		core.safeback(function()
+			call(f_done)
+		end, 1)
+	end)
+end
+
 ------------------------------------------------------------------------------
 --                 dazuo
 ------------------------------------------------------------------------------
