@@ -26,7 +26,7 @@ local tasks = {
 			if(var.task_available_time ~= nil and tonumber(var.task_available_time) - os.time() > 30) then
 				return 9
 			else
-				return 18
+				return 14
 			end
 		end
 	},

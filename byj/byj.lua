@@ -21,7 +21,7 @@ var.fast_mode = 1
 var.xiao_full = 0
 var.guo_kill_place = "fly mj"
 
-auto_list = {"wei", "guanfu","guo","event","study","reconnect", "sstask", "xiao", "double", "baobiao", "shan", "wine"}
+auto_list = {"wei", "guanfu","guo","event","study","reconnect", "sstask", "xiao", "double", "baobiao", "shan", "wine", "task"}
 
 weapon_list = {"kunlun qin", "kunlun dao", "haoqi qin", "zhaixing jian", "qiankun dao", "lianyu qin"}
 
@@ -300,7 +300,7 @@ end
 
 function buff(menpai)
 	if(menpai ~= nil) then
-		local re = rex.new("(ÌÒ»¨|ĞÇËŞ|¶ëÃ¼|Ã·×¯|Ä½Èİ)")
+		local re = rex.new("(ÌÒ»¨|ĞÇËŞ|¶ëáÒ|Ã·×¯|Ä½Èİ|¶ëÃ¼)")
 		local r1,r2,r3 = re:match(menpai)
 		if(r3 ~= nil) then
 			print("»»½ğÏµÄÚ¹¦ÁË.......")
