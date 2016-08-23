@@ -275,7 +275,7 @@ attack_list1 = { 7, 3, 6 }
 attack_list2 = { 3, 8, 17, 4, 7 }
 attack_list3 = { 7, 19, 13}
 attack_list4 = { 6 }
-attack_list5 = { 3, 12, 6, 17, 7 }
+attack_list5 = { 3, 12, 17, 6, 7 }
 
 study_list = {
 	--{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu finger 10000;et;set study done", post_action="fly wm;e;s;s;s;w;w;u;gamble big skill finger 2000"}
@@ -304,7 +304,7 @@ end
 
 function buff(menpai)
 	if(menpai ~= nil) then
-		local re = rex.new("(桃花|星宿|峨嵋|梅庄|慕容|峨眉)")
+		local re = rex.new("(桃花|星宿|峨嵋|梅庄|慕容|峨眉|灵鹫|铁掌|华山|白驼|雪山|密宗|独孤)")
 		local r1,r2,r3 = re:match(menpai)
 		if(r3 ~= nil) then
 			print("换金系内功了.......")
@@ -322,7 +322,7 @@ function buff(menpai)
 			return
 		end
 
-		re = rex.new("(少林|全真|古墓|神雕)")
+		re = rex.new("(少林|全真)")
 		r1,r2,r3 = re:match(menpai)
 		if(r3 ~= nil) then
 			print("换木系内功了.......")
