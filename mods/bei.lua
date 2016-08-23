@@ -14,7 +14,6 @@ local emitter = require("worlds\\xkx\\mods\\emitter"):new()
 local task1_array = {}
 retry_list = {10, 10, 15, 15, 20, 20, 30, 30}
 
-
 function ask()
 	-- bei_ask_end
 	-- error code: new / notask / resume
