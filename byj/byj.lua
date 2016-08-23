@@ -272,10 +272,10 @@ busy_list = { 1, 2, 3, 4 }
 busy_list2 = { 1, 3, 4, 2 }
 attack_list1 = { 7, 3, 6 }
 --attack_list2 = { 3, 8, 9, 5, 6 }
-attack_list2 = { 3, 8, 14, 4, 7 }
+attack_list2 = { 3, 8, 17, 4, 7 }
 attack_list3 = { 7, 19, 13}
 attack_list4 = { 6 }
-attack_list5 = { 3, 14, 4, 8, 7 }
+attack_list5 = { 3, 12, 6, 17, 7 }
 
 study_list = {
 	--{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu finger 10000;et;set study done", post_action="fly wm;e;s;s;s;w;w;u;gamble big skill finger 2000"}
@@ -326,14 +326,14 @@ function buff(menpai)
 		r1,r2,r3 = re:match(menpai)
 		if(r3 ~= nil) then
 			print("换木系内功了.......")
-			var.choose_force = "xiaowuxiang"
+			var.choose_force = "wuzheng-xinfa"
 			Execute("perform dodge.mengyulingbo")
 			return
 		end
 	end
 
 	print("默认换成水系内功了.......")
-	var.change_force = nil
+	var.choose_force = nil
 	Execute("enable force beiming-shengong;yun beiming;perform dodge.mengyulingbo")
 end
 
