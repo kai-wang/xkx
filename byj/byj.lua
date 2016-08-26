@@ -27,13 +27,13 @@ var.xiao_walk_danger_level = 4
 
 auto_list = {"wei", "guanfu","guo","event","study","reconnect", "sstask", "xiao", "double", "baobiao", "shan", "wine", "task"}
 
-weapon_list = {"kunlun qin", "kunlun dao", "haoqi qin", "zhaixing jian", "qiankun dao", "lianyu qin"}
+weapon_list = {"kunlun qin", "kunlun dao", "haoqi qin", "tiandi dao", "qiankun dao", "lianyu qin"}
 
 pfm = {
 	[1] = {name="一剑化三清", 		desc="你大喝一声，剑招突变", 			cd=false},
 	[2] = {name="附骨缠身", 		desc="你大喝一声，缠身而上", 			cd=false},
 	[3] = {name="璀璨七星", 		desc="你倒踩七星步法", 					cd=false},
-	[4] = {name="双手互博之术", 	desc="你平心静气", 						cd=false},
+	[4] = {name="双手互博之术", 		desc="你平心静气", 						cd=false},
 	[5] = {name="定阳针", 			desc="你脚下左弓右箭", 					cd=false},
 	[6] = {name="一指乾坤", 		desc="你使出一阳指绝技", 				cd=false},
 	[7] = {name="阳关三叠", 		desc="你凝气于指，一式", 				cd=false},
@@ -66,10 +66,10 @@ pfm = {
 	[32]= {name="亢龙三悔",			desc="你深吸一口气，将浑天真气提于胸前，大喝一声说道",cd=false},
 	[33]= {name="沧海一笑",			desc="你强提真气，身法突变得迷离，有如纵横之式",	cd=false},
 	[34]= {name="幻影",			desc="你前后游走，身形闪动，手中钢刀越使越快，幻起无数刀光化出数个身形", cd=false},
-	[35]= {name="刀刀相连", 		desc="在一片刀光中，一刀劈了过来", cd=false},
-	[36]= {name="无色无相", desc="你使出小无相绝技「无色无相」，招式变幻莫测", cd=false},
-	[37]= {name="天马行空", desc="你使出身空行，身形回转，如天马跃空而行", cd=false},
-	[38]= {name="灵犀一指", desc="你双手一前一后，缓缓伸出", cd=false}
+	[35]= {name="刀刀相连", 	desc="在一片刀光中，一刀劈了过来", cd=false},
+	[36]= {name="无色无相", 	desc="你使出小无相绝技「无色无相」，招式变幻莫测", cd=false},
+	[37]= {name="天马行空", 	desc="你使出身空行，身形回转，如天马跃空而行", cd=false},
+	[38]= {name="灵犀一指", 	desc="你双手一前一后，缓缓伸出", cd=false}
 }
 
 function set_cd_status(l, flag, color)
@@ -333,7 +333,7 @@ function buff(menpai)
 	end
 
 	print("默认换成水系内功了.......")
-	var.choose_force = nil
+	var.choose_force = "beiming-shengong"
 	Execute("enable force beiming-shengong;yun beiming;perform dodge.mengyulingbo")
 end
 
@@ -376,7 +376,7 @@ end
 function int_wear(f_done)
 	wait.make(function()
 		Execute("unwield all;tuo all")
-		Execute("wield qiankun dao;wear yuhuang yi;wear shenshui mao;wear xunzhang;wear yaohou xue;wear jiulong hushou;wear haoqi ring")
+		Execute("wield qiankun dao;wear tianlong yi;wear shenshui mao;wear xunzhang;wear yaohou xue;wear jiulong hushou;wear haoqi ring")
 		wait.time(1)
 		call(f_done)
 	end)
@@ -384,7 +384,7 @@ end
 
 function fight_wear(f_done)
 	wait.make(function()
-		Execute("tuo all;wear xiaocui xue;wear juwei jian;wear shenshui mao;wear shenyu yi;wear jiulong hushou;wear qiankun dao;wear yecha ring;give byj kunlun qin")
+		Execute("tuo all;wear kunlun xue;wear xiaocui xue;wear juwei jian;wear shenshui mao;wear lianyu yi;wear tianlong yi;wear lianyu hushou;wear qiankun dao;wear yecha ring;give byj kunlun qin")
 		wait.time(1)
 		core.busytest(function() call(f_done) end)
 	end)
