@@ -512,8 +512,8 @@ handlers = {
 		if(var.me_xunzhang == "true") then
 			wait.make(function()
 				Execute("wear xunzhang;ask su about 秘密地道;tuo xunzhang")
-				local l, w = wait.regexp("^(> )*(这里没有这个人)|(苏星河说道：想要知道密道就得加入逍遥派)|(苏星河把你送到石室的门口).*$")
-				if(l:match("苏星河把你送到石室的门口") == nil) then handlers.fail() else handlers.done() end
+				local l, w = wait.regexp("^(> )*(这里没有这个人)|(苏星河说道：想要知道密道就得加入逍遥派)|(苏星河把你送到石室的门口).*$", 5)
+				if(l and l:match("苏星河把你送到石室的门口") ~= nil) then handlers.done() else handlers.fail() end
 			end)
 		else
 			handlers.fail()

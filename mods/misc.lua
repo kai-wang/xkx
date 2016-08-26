@@ -278,18 +278,26 @@ function jicun(f_done)
 end
 
 function drink_wine(f_done)
-	wait.make(function()
-		Execute("fly bj;n;n;n;e;get jiu tan")
-		wait.time(0.5)
-		Execute("fly bj;s;w;sell jiu tan")
-		wait.time(1.5)
-		Execute("buy jiu tan")
-		wait.time(1.5)
-		Execute("#5 (drink jiu tan);sell jiu tan")
-		var.drink_wine = 0
-		core.safeback(function()
-			call(f_done)
-		end, 1)
+	me.updateHP(function()
+		wait.make(function()
+			if(tonumber(var.hp_water) > tonumber(var.hp_water_max) * 3) then
+				Execute("fly xx;su;s;ed;se;w;w;fly bj")
+				wait.time(1)
+				Execute("n;n;n;e;get jiu tan")
+			else
+				Execute("fly bj;n;n;n;e;get jiu tan")
+			end
+			wait.time(0.5)
+			Execute("fly bj;s;w;sell jiu tan")
+			wait.time(1.5)
+			Execute("buy jiu tan")
+			wait.time(1.5)
+			Execute("#5 (drink jiu tan);sell jiu tan")
+			var.drink_wine = 0
+			core.safeback(function()
+				call(f_done)
+			end, 1)
+		end)
 	end)
 end
 
