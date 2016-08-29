@@ -33,6 +33,7 @@ loadmod("auto")
 loadmod("songxin")
 loadmod("xiao")
 loadmod("sstask")
+loadmod("maze")
 
 map.loadall()
 
