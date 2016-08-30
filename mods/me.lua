@@ -402,8 +402,16 @@ check_money = function(f_done)
 			Execute(cmd)
 			if(var.me_qukuan == nil or var.me_qukuan == "") then var.me_qukuan = "qukuan 99 silver;qukuan 19 gold" end
 			Execute(var.me_qukuan)
-			wait.time(5)
-			Execute("halt;fly wm")
+			local l, w = wait.regexp("^(> )*ÄúÔÚ±×ºÅÖ»ÄÜ´æ.*$", 5)
+			if(l ~= nil) then
+				wait.time(5)
+				Execute("fly mj;s;sd;e;drop gold;drop gold-bar;get 19 gold")
+				wait.time(1)
+				Execute("fly wm")
+			else
+			--wait.time(5)
+				Execute("halt;fly wm")
+			end
 			var.me_goldbar = 0
 		end
 
