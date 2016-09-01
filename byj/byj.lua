@@ -102,7 +102,7 @@ busy_perform_array = {
 	[2] = { i = 34,
 			action = function()
 				local wp = choose_blade()
-				Execute("unwield all;enable blade hujia-daofa;wield " .. wp .. ";perform blade.huanying " .. var.pfm_target)
+				Execute("unwield all;enable blade hujia-daofa;wield " .. wp .. ";perform blade.huanying " .. var.pfm_target .. ";unwield all")
 			end
 	},
 
@@ -239,6 +239,7 @@ attack_perform_array = {
 				local wp = choose_sword()
 				choose_force()
 				Execute("enable parry pomo-jianfa;enable sword wuyun-jianfa;unwield all;wield " .. wp .. ";perform parry.zuijian " .. var.pfm_target)
+				Execute("unwield all")
 			end
 	},
 
@@ -247,6 +248,7 @@ attack_perform_array = {
 				local wp = choose_sword()
 				choose_force()
 				Execute("enable parry tianyu-qijian;enable sword wuyun-jianfa;unwield all;wield " .. wp .. ";perform parry.kuangwu " .. var.pfm_target)
+				Execute("unwield all")
 			end
 	},
 
@@ -254,7 +256,7 @@ attack_perform_array = {
 			action = function()
 				local wp = choose_sword()
 				choose_force()
-				Execute("enable parry tianyu-qijian;unwield all;wield " .. wp .. ";perform parry.san " .. var.pfm_target)
+				Execute("enable parry tianyu-qijian;unwield all;wield " .. wp .. ";perform parry.san " .. var.pfm_target .. ";unwield all")
 			end
 	}
 }
