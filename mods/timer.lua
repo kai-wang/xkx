@@ -89,8 +89,8 @@ function init()
 end
 
 function reconnect(interval,f_done)
-	DeleteTemporaryTimers()
 	Disconnect()
+	DeleteTemporaryTimers()
 	wait.make(function()
 		if(interval ~= nil) then
 			wait.time(interval)
