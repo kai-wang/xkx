@@ -483,7 +483,7 @@ kill = function(t)
 	EnableTriggerGroup("wei_kill", true)
 	EnableTriggerGroup("wei_ask", false)
 	timer.tickonce("action", 1, function()
-		walk.run(var.wei_item_path, function() fight.start() end, finish)
+		walk.run(var.wei_item_path, function() Execute("kick") end, finish)
 	end)
 end
 

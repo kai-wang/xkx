@@ -107,7 +107,7 @@ local tasks = {
 	["wei"] = {
 		name = "wei",
 		main = function(f_next)
-			anti_idle(120)
+			anti_idle(60)
 			wei.main(f_next, f_next)
 		end,
 		
@@ -132,7 +132,7 @@ local tasks = {
 	["shan"] = {
 		name = "shan",
 		main = function(f_next)
-			anti_idle(120)
+			anti_idle(60)
 			shan.main(f_next, f_next)
 		end,
 		

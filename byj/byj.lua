@@ -6,6 +6,7 @@ var.dazuo_end_desc = "(你将头上白雾吸尽，睁开双眼，缓缓站起。)|(你运功完毕，深深
 var.dazuo_halt_desc = "(你把正在运行的真气强行压回丹田，站了起来。)|(你面色一沉，迅速收气，站了起来。)"
 var.dazuo_full_desc = "你的内力修为似乎已经达到了瓶颈，无法再靠打坐来提升了。"
 var.me_id = "byj"
+var.me_pwd = "Flying1"
 var.me_name = "白玉京"
 var.me_menpai = "明教"
 var.me_family = "明教"
@@ -272,12 +273,11 @@ ttask_attack_list = { 1, 2, 3, 4 }
 
 busy_list = { 1, 2, 3, 4 }
 busy_list2 = { 1, 3, 4, 2 }
-attack_list1 = { 7, 3, 6 }
---attack_list2 = { 3, 8, 9, 5, 6 }
-attack_list2 = { 3, 8, 17, 4, 7 }
-attack_list3 = { 7, 19, 13}
-attack_list4 = { 6 }
-attack_list5 = { 3, 12, 17, 6, 7 }
+attack_list1 = { 7, 3, 6 } 			-- shan / blocker
+attack_list2 = { 3, 8, 17, 4, 7 }	-- xiao
+attack_list3 = { 7, 19, 13}			-- wei / xiao
+attack_list4 = { 6 }				-- shan / wei
+attack_list5 = { 3, 12, 17, 6, 7 }	-- xiao
 
 study_list = {
 	--{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu finger 10000;et;set study done", post_action="fly wm;e;s;s;s;w;w;u;gamble big skill finger 2000"}
