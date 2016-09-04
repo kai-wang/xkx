@@ -56,9 +56,15 @@ function get_xionghuang(f_ok, f_fail)
 			wait.time(5)
 			Execute("fly wm;nw;give xionghuang to " .. var.me_id)
 			l, w = wait.regexp("^(> )*(你身上没有这样东西)|(.*给你一包雄黄).*$")
-			if(var.fast_mode == "1") then wait.time(1) end
-			if(l:match("你身上没有这样东西") ~= nil) then print("雄黄失败了") call(f_fail) return end
+			--if(var.fast_mode == "1") then wait.time(1) end
+			if(l:match("你身上没有这样东西") ~= nil) then
+				if(var.fast_mode == "1") then wait.time(1) end
+				print("雄黄失败了") 
+				call(f_fail) 
+				return 
+			end
 		end
+		if(var.fast_mode == "1") then wait.time(1) end
 		print("雄黄准备好了")
 		call(f_ok)
 	end)
@@ -73,9 +79,15 @@ function get_fire(f_ok, f_fail)
 			wait.time(5)
 			Execute("fly wm;nw;give fire to " .. var.me_id)
 			l, w = wait.regexp("^(> )*(你身上没有这样东西)|(.*给你一支火折).*$")
-			if(var.fast_mode == "1") then wait.time(1) end
-			if(l:match("你身上没有这样东西") ~= nil) then print("火折失败了") call(f_fail) return end
+			--if(var.fast_mode == "1") then wait.time(1) end
+			if(l:match("你身上没有这样东西") ~= nil) then 
+				if(var.fast_mode == "1") then wait.time(1) end
+				print("火折失败了") 
+				call(f_fail) 
+				return 
+			end
 		end
+		if(var.fast_mode == "1") then wait.time(1) end
 		print("火折准备好了")
 		call(f_ok)
 	end)
@@ -90,9 +102,15 @@ function get_yaopai(f_ok, f_fail)
 			--wait.time(5)
 			Execute("fly wm;nw;look yao pai")
 			l, w = wait.regexp("^(> )*(你要看什么)|(一块银质腰牌).*$")
-			if(var.fast_mode == "1") then wait.time(1) end
-			if(l:match("你要看什么") ~= nil) then print("腰牌失败了") call(f_fail) return end
+			--if(var.fast_mode == "1") then wait.time(1) end
+			if(l:match("你要看什么") ~= nil) then 
+				if(var.fast_mode == "1") then wait.time(1) end
+				print("腰牌失败了") 
+				call(f_fail) 
+				return 
+			end
 		end
+		if(var.fast_mode == "1") then wait.time(1) end
 		print("腰牌准备好了")
 		call(f_ok)
 	end)
@@ -107,9 +125,15 @@ function get_shanpai(f_ok, f_fail)
 			--wait.time(5)
 			Execute("fly wm;nw;give shan pai to " .. var.me_id)
 			l, w = wait.regexp("^(> )*(你要看什么)|(赏善铜牌).*$")
-			if(var.fast_mode == "1") then wait.time(1) end
-			if(l:match("你要看什么") ~= nil) then print("赏善铜牌失败了") call(f_fail) return end
+			--if(var.fast_mode == "1") then wait.time(1) end
+			if(l:match("你要看什么") ~= nil) then 
+				if(var.fast_mode == "1") then wait.time(1) end
+				print("赏善铜牌失败了") 
+				call(f_fail) 
+				return 
+			end
 		end
+		if(var.fast_mode == "1") then wait.time(1) end
 		print("赏善铜牌准备好了")
 		call(f_ok)
 	end)
@@ -126,9 +150,15 @@ function get_sling(f_ok, f_fail)
 			--wait.time(5)
 			Execute("fly wm;nw;get yingxiong ling;look yingxiong ling")
 			l, w = wait.regexp("^(> )*(你要看什么)|(少林英雄令).*")
-			if(var.fast_mode == "1") then wait.time(1) end
-			if(l:match("你要看什么") ~= nil) then print("少林英雄令失败了") call(f_fail) return end
+			--if(var.fast_mode == "1") then wait.time(1) end
+			if(l:match("你要看什么") ~= nil) then
+				if(var.fast_mode == "1") then wait.time(1) end
+				print("少林英雄令失败了") 
+				call(f_fail) 
+				return 
+			end
 		end
+		if(var.fast_mode == "1") then wait.time(1) end
 		print("少林英雄令准备好了 ")
 		call(f_ok)
 	end)
@@ -145,9 +175,15 @@ function get_qling(f_ok, f_fail)
 			--wait.time(5)
 			Execute("fly wm;nw;get chongyang ling;look chongyang ling")
 			local l, w = wait.regexp("^(> )*(你要看什么)|(重阳令).*")
-			if(var.fast_mode == "1") then wait.time(1) end
-			if(l:match("你要看什么") ~= nil) then print("重阳令失败了") call(f_fail) return end
+			--if(var.fast_mode == "1") then wait.time(1) end
+			if(l:match("你要看什么") ~= nil) then 
+				if(var.fast_mode == "1") then wait.time(1) end
+				print("重阳令失败了") 
+				call(f_fail) 
+				return 
+			end
 		end
+		if(var.fast_mode == "1") then wait.time(1) end
 		print("重阳令准备好了 ")
 		call(f_ok)
 	end)
