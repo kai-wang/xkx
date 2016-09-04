@@ -56,15 +56,9 @@ function get_xionghuang(f_ok, f_fail)
 			wait.time(5)
 			Execute("fly wm;nw;give xionghuang to " .. var.me_id)
 			l, w = wait.regexp("^(> )*(你身上没有这样东西)|(.*给你一包雄黄).*$")
-			--if(var.fast_mode == "1") then wait.time(1) end
-			if(l:match("你身上没有这样东西") ~= nil) then
-				if(var.fast_mode == "1") then wait.time(1) end
-				print("雄黄失败了") 
-				call(f_fail) 
-				return 
-			end
+			if(var.fast_mode == "1") then wait.time(1) end
+			if(l:match("你身上没有这样东西") ~= nil) then print("雄黄失败了") call(f_fail) return end
 		end
-		if(var.fast_mode == "1") then wait.time(1) end
 		print("雄黄准备好了")
 		call(f_ok)
 	end)
