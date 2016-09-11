@@ -301,7 +301,7 @@ function choose_force()
 end
 
 function powerup()
-	Execute("enable force wuzheng-xinfa;yun bingxin;yun powerup;enable force beiming-shengong;yun shield;yun beiming")
+	Execute("enable force wuzheng-xinfa;yun bingxin;yun powerup;enable force beiming-shengong;yun beiming")
 end
 
 function buff(menpai)
