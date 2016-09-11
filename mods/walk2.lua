@@ -535,6 +535,8 @@ handlers = {
 				Execute("take cao")
 				local l, w = wait.regexp("^(> )*(你从悬崖上摔了下来)|(你在悬崖前站定).*$")
 			until(l:match("你从悬崖上摔了下来"))
+			wait.time(0.2)
+			Execute("look oldman")
 			handlers.done()
 		end)
 	end,
