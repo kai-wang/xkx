@@ -531,6 +531,7 @@ handlers = {
 	["cao"] = function()
 		wait.make(function()
 			repeat
+				wait.time(0.1)
 				Execute("take cao")
 				local l, w = wait.regexp("^(> )*(你从悬崖上摔了下来)|(你在悬崖前站定).*$")
 			until(l:match("你从悬崖上摔了下来"))

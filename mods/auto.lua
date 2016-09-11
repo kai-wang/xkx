@@ -370,12 +370,14 @@ end
 -- bei + guanfu ------
 function start()
 	local auto_list = config.auto_list
+	var.auto_stop = 0
 	timer.create("auto", "auto", 59, function() auto.restart() end)
 	timer.tick("auto", 59, function() auto.restart() end)
 	call(nexttask(auto_list))
 end
 
 function stop()
+	var.auto_stop = 1
 	timer.stop("auto")
 end
 

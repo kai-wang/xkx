@@ -13,7 +13,7 @@
       }
     },
     "name": "暗道",
-    "path": "|!c:jiedao:e|;e;enter;unwield all;wield jie dao;open brick;unwield jie dao;d",
+    "path": "|!c:jiedao:e|;e;enter;unwield all;wield jie dao;open brick;drop jie dao;d",
     "zone": "少林寺2"
   }, {
     "desc": "    这是便是八卦阵，四壁全由粗糙的片岩垒垛而成。巨石狰狞，缺口及合缝处犬牙交错，如洪荒怪兽，其势似欲择人而噬。壁上刻着一行小篆：“八卦通天地，金刚泣鬼神”。四周灰尘厚积，蛛网密布，看来已久无人行。地上似乎躺着几具尸体，早已腐烂化灰，脚步经过，连尸首身上的衣物也随风飘散。",
@@ -54,7 +54,7 @@
       }
     },
     "name": "八卦阵",
-    "path": "|!c:jiedao:e|;e;enter;unwield all;wield jie dao;open brick;unwield jie dao;d;enter",
+    "path": "|!c:jiedao:e|;e;enter;unwield all;wield jie dao;open brick;drop jie dao;d;enter",
     "zone": "少林寺2"
   }, {
     "desc": "    这是便是八卦阵，四壁全由粗糙的片岩垒垛而成。巨石狰狞，缺口及合缝处犬牙交错，如洪荒怪兽，其势似欲择人而噬。壁上刻着一行小篆：“八卦通天地，金刚泣鬼神”。四周灰尘厚积，蛛网密布，看来已久无人行。地上似乎躺着几具尸体，早已腐烂化灰，脚步经过，连尸首身上的衣物也随风飘散。",
@@ -95,7 +95,7 @@
       }
     },
     "name": "八卦阵",
-    "path": "|!c:jiedao:e|;e;enter;unwield all;wield jie dao;open brick;unwield jie dao;d;enter;震",
+    "path": "|!c:jiedao:e|;e;enter;unwield all;wield jie dao;open brick;drop jie dao;d;enter;震",
     "zone": "少林寺2"
   }, {
     "desc": "    这是便是八卦阵，四壁全由粗糙的片岩垒垛而成。巨石狰狞，缺口及合缝处犬牙交错，如洪荒怪兽，其势似欲择人而噬。壁上刻着一行小篆：“八卦通天地，金刚泣鬼神”。四周灰尘厚积，蛛网密布，看来已久无人行。地上似乎躺着几具尸体，早已腐烂化灰，脚步经过，连尸首身上的衣物也随风飘散。",
@@ -136,7 +136,7 @@
       }
     },
     "name": "八卦阵",
-    "path": "|!c:jiedao:e|;e;enter;unwield all;wield jie dao;open brick;unwield jie dao;d;enter;坎",
+    "path": "|!c:jiedao:e|;e;enter;unwield all;wield jie dao;open brick;drop jie dao;d;enter;坎",
     "zone": "少林寺2"
   }, {
     "desc": "    这是便是八卦阵，四壁全由粗糙的片岩垒垛而成。巨石狰狞，缺口及合缝处犬牙交错，如洪荒怪兽，其势似欲择人而噬。壁上刻着一行小篆：“八卦通天地，金刚泣鬼神”。四周灰尘厚积，蛛网密布，看来已久无人行。地上似乎躺着几具尸体，早已腐烂化灰，脚步经过，连尸首身上的衣物也随风飘散。",
@@ -177,7 +177,7 @@
       }
     },
     "name": "八卦阵",
-    "path": "|!c:jiedao:e|;e;enter;unwield all;wield jie dao;open brick;unwield jie dao;d;enter;兑",
+    "path": "|!c:jiedao:e|;e;enter;unwield all;wield jie dao;open brick;drop jie dao;d;enter;兑",
     "zone": "少林寺2"
   }, {
     "desc": "    这是便是八卦阵，四壁全由粗糙的片岩垒垛而成。巨石狰狞，缺口及合缝处犬牙交错，如洪荒怪兽，其势似欲择人而噬。壁上刻着一行小篆：“八卦通天地，金刚泣鬼神”。四周灰尘厚积，蛛网密布，看来已久无人行。地上似乎躺着几具尸体，早已腐烂化灰，脚步经过，连尸首身上的衣物也随风飘散。",
@@ -218,7 +218,7 @@
       }
     },
     "name": "八卦阵",
-    "path": "|!c:jiedao:e|;e;enter;unwield all;wield jie dao;open brick;unwield jie dao;d;enter;艮",
+    "path": "|!c:jiedao:e|;e;enter;unwield all;wield jie dao;open brick;drop jie dao;d;enter;艮",
     "zone": "少林寺2"
   }, {
     "desc": "    这是便是八卦阵，四壁全由粗糙的片岩垒垛而成。巨石狰狞，缺口及合缝处犬牙交错，如洪荒怪兽，其势似欲择人而噬。壁上刻着一行小篆：“八卦通天地，金刚泣鬼神”。四周灰尘厚积，蛛网密布，看来已久无人行。地上似乎躺着几具尸体，早已腐烂化灰，脚步经过，连尸首身上的衣物也随风飘散。",
@@ -259,7 +259,7 @@
       }
     },
     "name": "八卦阵",
-    "path": "|!c:jiedao:e|;e;enter;unwield all;wield jie dao;open brick;unwield jie dao;d;enter;离",
+    "path": "|!c:jiedao:e|;e;enter;unwield all;wield jie dao;open brick;drop jie dao;d;enter;离",
     "zone": "少林寺2"
   }, {
     "desc": "    这是便是八卦阵，四壁全由粗糙的片岩垒垛而成。巨石狰狞，缺口及合缝处犬牙交错，如洪荒怪兽，其势似欲择人而噬。壁上刻着一行小篆：“八卦通天地，金刚泣鬼神”。四周灰尘厚积，蛛网密布，看来已久无人行。地上似乎躺着几具尸体，早已腐烂化灰，脚步经过，连尸首身上的衣物也随风飘散。",
@@ -300,7 +300,7 @@
       }
     },
     "name": "八卦阵",
-    "path": "|!c:jiedao:e|;e;enter;unwield all;wield jie dao;open brick;unwield jie dao;d;enter;巽",
+    "path": "|!c:jiedao:e|;e;enter;unwield all;wield jie dao;open brick;drop jie dao;d;enter;巽",
     "zone": "少林寺2"
   }, {
     "desc": "    这是便是八卦阵，四壁全由粗糙的片岩垒垛而成。巨石狰狞，缺口及合缝处犬牙交错，如洪荒怪兽，其势似欲择人而噬。壁上刻着一行小篆：“八卦通天地，金刚泣鬼神”。四周灰尘厚积，蛛网密布，看来已久无人行。地上似乎躺着几具尸体，早已腐烂化灰，脚步经过，连尸首身上的衣物也随风飘散。",
@@ -341,7 +341,7 @@
       }
     },
     "name": "八卦阵",
-    "path": "|!c:jiedao:e|;e;enter;unwield all;wield jie dao;open brick;unwield jie dao;d;enter;乾",
+    "path": "|!c:jiedao:e|;e;enter;unwield all;wield jie dao;open brick;drop jie dao;d;enter;乾",
     "zone": "少林寺2"
   } ]
 }

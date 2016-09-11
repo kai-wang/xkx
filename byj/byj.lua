@@ -281,7 +281,7 @@ attack_list5 = { 3, 12, 17, 6, 7 }	-- xiao
 
 study_list = {
 	--{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu finger 10000;et;set study done", post_action="fly wm;e;s;s;s;w;w;u;gamble big skill finger 2000"}
-	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu wuzheng-xinfa 1000", wear_int = true, research = true }
+	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu beiming-shengong 1000", wear_int = true, research = true }
 		--{ loc = "fly mj", cmd = "xue wei strike 100;et",pre_action="bai wei yixiao", post_action="bai xie xun"}
 }
 
@@ -301,7 +301,7 @@ function choose_force()
 end
 
 function powerup()
-	Execute("enable force xiaowuxiang;yun powerup;enable force beiming-shengong;yun shield;yun beiming")
+	Execute("enable force wuzheng-xinfa;yun bingxin;yun powerup;enable force beiming-shengong;yun shield;yun beiming")
 end
 
 function buff(menpai)
