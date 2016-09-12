@@ -289,6 +289,18 @@ function reconn(f_ok, f_fail)
 	end)
 end
 
+function reconn2(f_ok)
+	core.safeback(function()
+		Execute("nw")
+		capture("kickbye", function()
+			timer.reconnect(1, function()
+				var.reconnect_required = 0
+				config.fight_wear(f_ok)
+			end)
+		end)
+	end, 1)
+end
+
 function jicun(f_done)
 	wait.make(function()
 		Execute("fly wm;e;s;s;s;e;u")

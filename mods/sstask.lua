@@ -263,8 +263,8 @@ function fail()
 	core.safeback(function()
 		Execute("er;et;ef")
 		var.ss_available_time = os.time() + 1200
-		var.reconnect_required = 1
-		clean(function() jicun(context.f_fail) end)
+		--var.reconnect_required = 1
+		clean(function() jicun(function() reconn2(context.f_fail) end) end)
 	end, 1)
 end
 
