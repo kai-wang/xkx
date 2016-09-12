@@ -98,7 +98,9 @@ end
 function addtolist(action, id)
 	if(action == "sell") then
 		if(var.item_sell_list == nil) then var.item_sell_list = "" end
-		var.item_sell_list = var.item_sell_list .. "give " .. id .. " to ouye zi;drop " .. id .. ";"
+		--var.item_sell_list = var.item_sell_list .. "give " .. id .. " to ouye zi;drop " .. id .. ";"
+		-- just drop, not give
+		var.item_sell_list = var.item_sell_list .. "drop " .. id .. ";"
 	elseif(action == "store") then 
 		if(var.item_store_list == nil) then var.item_store_list = "" end
 		var.item_store_list = var.item_store_list .. "give " .. id .. " to byj;"-- .. var.dami_equip .. ";"
