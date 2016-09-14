@@ -263,7 +263,7 @@ attack_perform_array = {
 }
 
 task_busy_list = { 1, 2, 3, 4 }
-task_attack_list = { 17, 12, 6, 18, 19 }
+task_attack_list = { 17, 12, 6, 3, 18 }
 
 gf_busy_list = { 1, 3 }
 gf_attack_list = { 6, 7 }
