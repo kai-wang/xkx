@@ -378,7 +378,7 @@ end
 function int_wear(f_done)
 	wait.make(function()
 		Execute("unwield all;tuo all")
-		Execute("wield qiankun dao;wear taiji yi;wear shenshui mao;wear xunzhang;wear yaohou xue;wear jiulong hushou;wear haoqi ring")
+		Execute("wield qiankun dao;wear taiji yi;wear shenshui mao;wear xunzhang;wear yaohou xue;wear jiulong hushou;wear sanqing ring")
 		wait.time(1)
 		call(f_done)
 	end)
