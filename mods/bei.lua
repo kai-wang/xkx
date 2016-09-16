@@ -238,7 +238,9 @@ function walktask()
 	timer.tickonce("action", 1.5, function()
 		if(var.task_status == "done" or fight.infight()) then return end
 
+		cxt.start_search = true
 		core.safehalt(function()
+			cxt.start_search = nil
 			Execute("er;et;ef")
 			walk.walkaround(2, nil, bei.notfound, bei.fail, bei.foundnpc)
 		end, 0.5)
@@ -267,8 +269,10 @@ function search(name, line, wildcards)
 	local dir = wildcards[3]
 	dir = dir:gsub("边",""):gsub("面", ""):gsub("方向", ""):gsub("方", "")
 	var.task_escape_dir = dir
-	timer.stop("action")
-	if(walk.stopped()) then searchTask() end
+	if(not cxt.start_search) then
+		timer.stop("action")
+		if(walk.stopped()) then searchTask() end
+	end
 end
 
 function searchTask()
