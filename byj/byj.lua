@@ -25,6 +25,7 @@ var.task_walk_danger_level = 3
 var.gf_walk_danger_level = 5
 var.ss_walk_danger_level = 5
 var.xiao_walk_danger_level = 4
+var.ss_shuffle = 1
 
 auto_list = {"wei", "guanfu","guo","event","study","reconnect", "sstask", "xiao", "double", "baobiao", "shan", "wine", "task"}
 

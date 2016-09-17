@@ -83,19 +83,28 @@ end
 
 function update_done()
 	EnableTriggerGroup("ss_update", false)
+	if(var.ss_shuffle == "1") then
+		shuffle(ss_list)
+	end
+
 	core.busytest(function() search() end, 1)
+end
+
+function shuffle(t)
+	math.randomseed(os.time())
+	local rand = math.random
+	local iterations = #t
+	local j
+
+	for i = iterations, 2, -1 do
+		j = rand(i)
+		t[i], t[j] = t[j], t[i]
+	end
 end
 
 function display()
 	tprint(ss_list)
 end
-
---[[
-function search()
-	--context.index = context.index + 1
-	search_next()
-end
-]]--
 
 function search()
 	context.index = context.index + 1
