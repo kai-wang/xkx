@@ -242,7 +242,11 @@ function walktask()
 		core.safehalt(function()
 			cxt.start_search = nil
 			Execute("er;et;ef")
-			walk.walkaround(2, nil, bei.notfound, bei.fail, bei.foundnpc)
+			walk.walkaround(2, nil, 
+				function() cxt.start_search = nil bei.notfound() end, 
+				function() cxt.start_search = nil bei.fail() end, 
+				function() cxt.start_search = nil bei.foundnpc() end
+				)
 		end, 0.5)
 	end)
 end
