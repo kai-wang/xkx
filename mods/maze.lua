@@ -33,24 +33,29 @@ end
 
 function findexits()
 	local exits = {}
-	Execute("look")
-	local l, w = wait.regexp("^    这里明显的出口是(.*)。$", 1)
-	if l then
-		for w in string.gmatch(l, "%a+") do
-			table.insert(exits, trans_map[w])
+	
+		Execute("look")
+	
+	local l, w = wait.regexp("^    这里.*出口是(.*)。$", 1)
+	if w ~= nil and w[1] ~= nil then
+		for dir in string.gmatch(w[1], "%a+") do
+			--print(dir)
+			table.insert(exits, trans_map[dir])
 		end
 	end
+
 	return exits
 end
 
 function nextexit(from, tbl)
 	local calculate_dir = function(dir)
 		local magic_table = {
-			["e"] = {"d", "s", "e", "n", "w"},
-			["w"] = {"d", "n", "w", "s", "e"},
-			["s"] = {"d", "w", "s", "e", "n"},
-			["n"] = {"d", "e", "n", "w", "s"},
+			["e"] = {"n", "e", "s", "w"},
+			["w"] = {"s", "w", "n", "e"},
+			["s"] = {"e", "s", "w", "n"},
+			["n"] = {"w", "n", "e", "s"}
 		}
+
 		if(magic_table[dir] == nil) then 
 			return {} 
 		else
@@ -59,25 +64,47 @@ function nextexit(from, tbl)
 	end
 
 	local exits = calculate_dir(from)
+
 	for k, v in ipairs(exits) do
 		for m, n in ipairs(tbl) do
-			if v == n then return v end
+			if v == n then 
+				print("found direction : " .. v)
+				return v 
+			end
 		end
 	end
 
-	return ""
+	return tbl[1]
 end
 
 function walk()
 	if(last_step == "") then
 		Execute("look")
+		print("look ")
 	end
 
-	last_step = nextexit(last_step, findexits())
+	local exits_tbl = findexits()
+	--tprint(exits_tbl)
+	--print("from " .. last_step)
+	last_step = nextexit(last_step, exits_tbl)
+	--print("to " .. last_step)
 	if(last_step ~= "" and not context.stop) then
 		Execute(last_step)
-		print("walk to : " .. last_step)
-		wait.time(0.5)
+		--print("walk to : " .. last_step)
+		wait.time(0.3)
+		Execute("set maze walk")
+		local l, w = wait.regexp("^(> )*设定环境变数：maze = \"walk\".*$")
+		if(l ~= nil) then
+			if(var.maze_block ~= "1") then
+ 				walk()
+			else
+				core.salfehalt(function()
+					walk()
+				end, 1)
+			end
+		end
+	else
+		local l, w = wait.regexp("^(> )*设定环境变数：maze = \"resume\".*$")
 		walk()
 	end
 end
@@ -88,7 +115,7 @@ end
 
 function resume()
 	context.stop = false
-	walk()
+	Execute("set maze resume")
 end
 
 init()
