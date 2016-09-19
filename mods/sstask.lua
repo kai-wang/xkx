@@ -45,6 +45,7 @@ function init()
 	EnableTriggerGroup("ss_update", false)
 	EnableTriggerGroup("ss_search", false)
 	EnableTriggerGroup("ss_task", false)
+	var.ss_city_1 = nil
 end
 
 function main(f_ok, f_fail)
