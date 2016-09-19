@@ -33,7 +33,7 @@ local processor = {
 }
 
 function react(requester, cmd)
-  if((not var.chatter_blacklist) or (not string.match(var.chatter_blacklist, string.lower(requester))) then
+  if((not var.chatter_blacklist) or (not string.match(var.chatter_blacklist, string.lower(requester)))) then
     if(cmd == "ss stop" 
     or cmd == "ss start" 
     or (var.chatter_whitelist ~= nil and string.match(var.chatter_whitelist, string.lower(requester) .. ";") ~= nil)) then
