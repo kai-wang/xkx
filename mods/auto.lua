@@ -351,6 +351,7 @@ function getnexttask(tbl)
 end
 
 function nexttask(tbl)
+	if(var.auto_stop ~= "1") then
 	return function()
 		local t, w = getnexttask(tbl)
 		
@@ -364,6 +365,7 @@ function nexttask(tbl)
 				t.main(nexttask(tbl))
 			end)
 		end
+	end
 	end
 end
 

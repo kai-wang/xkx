@@ -21,14 +21,14 @@ local processor = {
   end,
 
   ["auto stop"] = function()
-    Execute("reply auto 停止了")
+   -- Execute("reply auto 停止了")
     auto.stop()
   end,
 
   ["auto start"] = function()
     auto.stop()
     auto.start()
-    Execute("reply auto 重启了")
+   -- Execute("reply auto 重启了")
   end
 }
 
