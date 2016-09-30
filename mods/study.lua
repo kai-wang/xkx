@@ -56,7 +56,7 @@ function stop(f_done)
 	dazuo.abort(f_done)
 end
 
-function start(f_done, researchFlag)
+function start(f_done, t_interval)
 	EnableTriggerGroup("study", true)
 
 	emitter:once("study_end", function(err)
@@ -78,8 +78,8 @@ function start(f_done, researchFlag)
 		end
 	end)
 
-	local interval = 0.2
-	if(researchFlag) then interval = 0.8 end
+	local interval = t_interval
+	if(not interval) then interval = 0.2 end
 	timer.tick("action", interval, function() Execute(var.lll) end)
 	
 end
