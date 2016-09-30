@@ -19,7 +19,7 @@ function main(f)
 	var.lll = cxt.learnlist.cmd
 
 	local go_study = function()
-		walk.run(cxt.learnlist.loc, start(function() done(f) end, cxt.learnlist.research), f, f)
+		walk.run(cxt.learnlist.loc, start(function() done(f) end, cxt.learnlist.interval), f, f)
 	end
 
 	if(cxt.learnlist.wear_int) then
