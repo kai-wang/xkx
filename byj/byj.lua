@@ -381,7 +381,7 @@ end
 function int_wear(f_done)
 	wait.make(function()
 		Execute("unwield all;tuo all")
-		Execute("wield qiankun dao;wear taiji yi;wear shenshui mao;wear xunzhang;wear yaohou xue;wear jiulong hushou;wear sanqing ring")
+		Execute("wield qiankun dao;wear haoqi yi;wear shenshui mao;wear xunzhang;wear yaohou xue;wear jiulong hushou;wear sanqing ring")
 		wait.time(1)
 		call(f_done)
 	end)
@@ -389,7 +389,7 @@ end
 
 function fight_wear(f_done)
 	wait.make(function()
-		Execute("tuo all;wear shentong xue;wear bagua xue;wear shenshui mao;wear haoqi yi;wear tianlong yi;wear lianyu hushou;wear yecha ring;give byj kunlun qin")
+		Execute("tuo all;wear shentong xue;wear bagua xue;wear shenshui mao;wear taiji yi;wear haoqi yi;wear lianyu hushou;wear yecha ring;give byj kunlun qin")
 		wait.time(1)
 		core.busytest(function() call(f_done) end)
 	end)
