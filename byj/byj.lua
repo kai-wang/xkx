@@ -28,8 +28,9 @@ var.gf_walk_danger_level = 5
 var.ss_walk_danger_level = 5
 var.xiao_walk_danger_level = 4
 var.ss_shuffle = 1
+var.study_threshold = 10000
 
-auto_list = {"wei", "guanfu","guo","event","study","reconnect", "sstask", "xiao", "double", "baobiao", "shan", "wine", "task"}
+auto_list = {"wei", "guanfu","guo","event","gamble_study","reconnect", "sstask", "xiao", "double", "baobiao", "shan", "wine", "task"}
 
 weapon_list = {"kunlun qin", "kunlun dao", "haoqi qin", "tiandi dao", "qiankun dao", "lianyu qin"}
 

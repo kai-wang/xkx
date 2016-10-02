@@ -281,6 +281,26 @@ local tasks = {
 			if(tonumber(var.hp_qn) >= tonumber(var.hp_qn_max)) then return 25 else return 1 end
 		end
 	},
+
+	["gamble_study"] = {
+		name = "gamble_study",
+		main = function(f_next)
+			anti_idle(600)
+			study.main(f_next, f_next)
+		end,
+		
+		clear = function()
+			study.init()
+		end,
+		
+		wait = function()
+			if(tonumber(var.hp_qn) >= tonumber(var.study_threshold)) then return 0 else return os.time() + 1800 end
+		end,
+		
+		priority = function()
+			if(tonumber(var.hp_qn) >= tonumber(var.study_threshold)) then return 25 else return 1 end
+		end
+	},
 	
 	["double"] = {
 		name = "double",
