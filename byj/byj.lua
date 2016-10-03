@@ -336,6 +336,15 @@ function buff(menpai)
 			Execute("perform dodge.mengyulingbo")
 			return
 		end
+
+		re = rex.new("(武当|日月|逍遥|昆仑)")
+		r1,r2,r3 = re:match(menpai)
+		if(r3 ~= nil) then
+			print("换土系内功了.......")
+			var.choose_force = "xixing-dafa"
+			Execute("perform dodge.mengyulingbo")
+			return
+		end
 	end
 
 	print("默认换成水系内功了.......")
@@ -390,7 +399,7 @@ end
 
 function fight_wear(f_done)
 	wait.make(function()
-		Execute("tuo all;wear shentong xue;wear bagua xue;wear shenshui mao;wear taiji yi;wear haoqi yi;wear lianyu hushou;wear yecha ring;give byj kunlun qin")
+		Execute("tuo all;wear shentong xue;wear bagua xue;wear shenshui mao;wear taiji yi;wear xuanyuan yi;wear lianyu hushou;wear yecha ring;give byj kunlun qin")
 		wait.time(1)
 		core.busytest(function() call(f_done) end)
 	end)
