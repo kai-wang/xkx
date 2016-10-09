@@ -163,7 +163,7 @@ end
 
 recover = function(f_done, f_fail)
 	updateHP(function()
-		if(tonumber(var.hp_nl) > tonumber(var.hp_nl_max) * 0.8) then
+		if(tonumber(var.hp_nl) > tonumber(var.hp_nl_max) * tonumber(var.me_dazuo_factor)) then
 			wait.make(function()
 				Execute("er;et;fly wm;set check full")
 				local l, w = wait.regexp("^(> )*设定环境变数：check = \"full\"$")

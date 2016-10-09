@@ -10,7 +10,8 @@ var.me_pwd = "Flying1"
 var.me_name = "白玉京"
 var.me_menpai = "明教"
 var.me_family = "明教"
-var.me_dazuo = "dazuo 15000;dazuo max"
+var.me_dazuo = "dazuo max"
+var.me_dazuo_factor = 1.2
 var.gf_money = "no"
 var.task_id = "byj's task"
 var.ttask_id = "byj's ttask"
@@ -23,12 +24,13 @@ var.study_seq = 1
 var.fast_mode = 1
 var.xiao_full = 0
 var.guo_kill_place = "fly mj"
-var.task_walk_danger_level = 3
+var.task_walk_danger_level = 4
 var.gf_walk_danger_level = 5
 var.ss_walk_danger_level = 5
 var.xiao_walk_danger_level = 4
 var.ss_shuffle = 1
 var.study_threshold = 10000
+var.kantou_flag = true
 
 auto_list = {"wei", "guanfu","guo","event","reconnect", "sstask", "xiao", "double", "baobiao", "shan", "wine", "task"}
 
@@ -267,7 +269,7 @@ attack_perform_array = {
 }
 
 task_busy_list = { 1, 2, 3, 4 }
-task_attack_list = { 17, 12, 1, 2, 6, 3, 18 }
+task_attack_list = { 1, 2, 17, 6, 3, 18 }
 
 gf_busy_list = { 1, 3 }
 gf_attack_list = { 6, 7 }

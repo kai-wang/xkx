@@ -300,7 +300,7 @@ function npcdie(name, line, wildcards)
 			cleanup()
 		else
 			core.busytest(function()
-				item.lookandget(function() kantou(bei.cleanup) end)
+				kantou(function() item.lookandget(bei.cleanup) end)
 			end)
 		end
 	end)

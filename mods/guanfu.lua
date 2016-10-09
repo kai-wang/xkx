@@ -135,7 +135,7 @@ function npcdie(name, line, wildcards)
 	Execute("wancheng corpse")
 
 	core.busytest(function()
-		item.lookandget(done)
+		kantou(function() item.lookandget(done) end)
 	end)
 
 end

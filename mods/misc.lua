@@ -16,11 +16,15 @@ function suck()
 end
 
 function kantou(f)
-	wait.make(function()
-		local blade = config.choose_xuedao(0)
-		Execute("unwield all;wield " .. blade .. ";enable blade xue-dao;kantou corpse;drop head")
+	if(not var.kantou_flag) then 
 		call(f)
-	end)
+	else
+		wait.make(function()
+			local blade = config.choose_xuedao(0)
+			Execute("unwield all;wield " .. blade .. ";enable blade xue-dao;kantou corpse;drop head")
+			call(f)
+		end)
+	end
 end
 
 function double(f)

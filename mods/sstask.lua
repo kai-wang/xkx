@@ -185,14 +185,16 @@ end
 function getbook()
 	var.ss_kill = 0
 	var.ss_task_status = "done"
-	core.safehalt(function() 
-		--Execute("get all from corpse;drop gold;get 19 gold")
-		Execute("get all from corpse")
-		wait.make(function()
-			local l, w = wait.regexp("^(> )*你从.*的尸体身上搜出一本(.*)。$", 2)
-			if(l) then combine(w[2]) else done() end
+	core.safehalt(function()
+		kantou(function()
+			--Execute("get all from corpse;drop gold;get 19 gold")
+			Execute("get all from corpse")
+			wait.make(function()
+				local l, w = wait.regexp("^(> )*你从.*的尸体身上搜出一本(.*)。$", 2)
+				if(l) then combine(w[2]) else done() end
+			end)
+			--done()
 		end)
-		--done()
 	end, 1)
 end
 
