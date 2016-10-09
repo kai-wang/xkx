@@ -114,8 +114,10 @@ end
 function finish()
 	fight.stop()
 	core.busytest(function()
-		Execute("get corpse")
-		Execute("fly xi;w;n;n;n;give corpse to guo jing;drop corpse")
+		kantou(function()
+			Execute("get corpse")
+			Execute("fly xi;w;n;n;n;give corpse to guo jing;drop corpse")
+		end)
 	end)
 end
 
