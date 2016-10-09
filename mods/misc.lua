@@ -18,7 +18,7 @@ end
 function kantou(f)
 	wait.make(function()
 		local blade = config.choose_xuedao(0)
-		Execute("unwield all;wield " .. blade .. "enable blade xue-dao;kantou corpse;drop head")
+		Execute("unwield all;wield " .. blade .. ";enable blade xue-dao;kantou corpse;drop head")
 		call(f)
 	end)
 end
