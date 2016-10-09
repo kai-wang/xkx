@@ -132,7 +132,7 @@ busy_perform_array = {
 attack_perform_array = {
 	[2] = { i = 36,
 			action = function()
-				local wp = choose_xuedao(1)
+				local wp = choose_xuedao()
 				choose_force()
 				Execute("unwield all;wield " .. wp .. ";enable blade xue-dao;enable force xiaowuxiang;jiali max;yun wuxiang " .. var.pfm_target .. ";jiali 0;")
 			end
@@ -140,7 +140,7 @@ attack_perform_array = {
 
 	[1] = { i = 35,
 			action = function()
-				local wp = choose_xuedao(1)
+				local wp = choose_xuedao()
 				choose_force()
 				Execute("unwield all;enable blade xue-dao;enable parry hujia-daofa;wield " .. wp .. ";jiali max;perform parry.lian " .. var.pfm_target .. ";jiali 0;unwield all")
 			end
@@ -292,7 +292,7 @@ study_list = {
 }
 
 function choose_xuedao(p)
-	if(p == 0) then Execute("give dao 2 to " .. var.me_id) end
+	if(p ~= nil) then Execute("give dao 2 to " .. var.me_id) end
 	return "dao"
 end
 
