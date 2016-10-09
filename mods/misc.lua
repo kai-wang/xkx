@@ -15,6 +15,14 @@ function suck()
 	end)
 end
 
+function kantou(f)
+	wait.make(function()
+		local blade = config.choose_xuedao(0)
+		Execute("unwield all;wield " .. blade .. "enable blade xue-dao;kantou corpse;drop head")
+		call(f)
+	end)
+end
+
 function double(f)
 	if(var.double_available_time ~= "" and var.double_available_time ~= nil and tonumber(var.double_available_time) > os.time()) then
 		call(f)

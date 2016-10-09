@@ -198,6 +198,7 @@ function gofortask()
 	local busy_list = config.task_busy_list
 	local attack_list = config.task_attack_list
 	local long_attack_list = config.task_long_attack_list
+
 	fight.prepare(busy_list, attack_list, escape, var.task_menpai, var.task_id)
 	config.powerup()
 	--如果slowwalk走完还没有stop，说明没找到
@@ -299,7 +300,7 @@ function npcdie(name, line, wildcards)
 			cleanup()
 		else
 			core.busytest(function()
-				item.lookandget(bei.cleanup)
+				item.lookandget(function() kantou(bei.cleanup) end)
 			end)
 		end
 	end)

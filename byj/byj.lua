@@ -30,7 +30,7 @@ var.xiao_walk_danger_level = 4
 var.ss_shuffle = 1
 var.study_threshold = 10000
 
-auto_list = {"wei", "guanfu","guo","event","gamble_study","reconnect", "sstask", "xiao", "double", "baobiao", "shan", "wine", "task"}
+auto_list = {"wei", "guanfu","guo","event","reconnect", "sstask", "xiao", "double", "baobiao", "shan", "wine", "task"}
 
 weapon_list = {"kunlun qin", "kunlun dao", "haoqi qin", "tiandi dao", "qiankun dao", "lianyu qin"}
 
@@ -130,17 +130,17 @@ busy_perform_array = {
 attack_perform_array = {
 	[2] = { i = 36,
 			action = function()
-				local wp = choose_blade()
+				local wp = choose_xuedao(1)
 				choose_force()
-				Execute("unwield all;wield " .. wp .. ";enable blade xue-dao;enable force xiaowuxiang;jiali max;yun wuxiang " .. var.pfm_target .. ";jiali 0")
+				Execute("unwield all;wield " .. wp .. ";enable blade xue-dao;enable force xiaowuxiang;jiali max;yun wuxiang " .. var.pfm_target .. ";jiali 0;")
 			end
 	},
 
 	[1] = { i = 35,
 			action = function()
-				local wp = choose_blade()
+				local wp = choose_xuedao(1)
 				choose_force()
-				Execute("unwield all;enable blade xue-dao;enable parry hujia-daofa;wield " .. wp .. ";jiali max;perform parry.lian " .. var.pfm_target .. ";jiali 0")
+				Execute("unwield all;enable blade xue-dao;enable parry hujia-daofa;wield " .. wp .. ";jiali max;perform parry.lian " .. var.pfm_target .. ";jiali 0;unwield all")
 			end
 	},
 
@@ -267,7 +267,7 @@ attack_perform_array = {
 }
 
 task_busy_list = { 1, 2, 3, 4 }
-task_attack_list = { 17, 12, 6, 3, 18 }
+task_attack_list = { 17, 12, 1, 2, 6, 3, 18 }
 
 gf_busy_list = { 1, 3 }
 gf_attack_list = { 6, 7 }
@@ -289,6 +289,9 @@ study_list = {
 		--{ loc = "fly mj", cmd = "xue wei strike 100;et",pre_action="bai wei yixiao", post_action="bai xie xun"}
 }
 
+function choose_xuedao()
+	return "dao"
+end
 
 function choose_blade()
 	return "dao"
