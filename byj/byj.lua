@@ -291,7 +291,8 @@ study_list = {
 	--{ loc = "fly mj", cmd = "xue wei strike 100;et",pre_action="bai wei yixiao", post_action="bai xie xun"}
 }
 
-function choose_xuedao()
+function choose_xuedao(p)
+	if(p == 0) then Execute("give dao 2 to " .. var.me_id) end
 	return "dao"
 end
 
