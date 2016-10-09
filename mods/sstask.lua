@@ -190,7 +190,7 @@ function getbook()
 			--Execute("get all from corpse;drop gold;get 19 gold")
 			Execute("get all from corpse")
 			wait.make(function()
-				local l, w = wait.regexp("^(> )*你从.*的尸体身上搜出一本(.*)。$", 2)
+				local l, w = wait.regexp("^(> )*你从.*的.*尸体身上搜出一本(.*)。$", 2)
 				if(l) then combine(w[2]) else done() end
 			end)
 			--done()
