@@ -269,7 +269,7 @@ attack_perform_array = {
 }
 
 task_busy_list = { 1, 2, 3, 4 }
-task_attack_list = { 1, 2, 17, 6, 3, 18 }
+task_attack_list = { 1, 2, 17, 4, 3, 18 }
 
 gf_busy_list = { 1, 3 }
 gf_attack_list = { 6, 7 }
@@ -397,7 +397,7 @@ end
 function int_wear(f_done)
 	wait.make(function()
 		Execute("unwield all;tuo all")
-		Execute("wield qiankun dao;wear haoqi yi;wear shenshui mao;wear xunzhang;wear yaohou xue;wear jiulong hushou;wear sanqing ring")
+		Execute("wield qiankun dao;wear haoqi yi;wear shentong mao;;wear shenshui mao;wear xunzhang;wear yaohou xue;wear jiulong hushou;wear sanqing ring")
 		wait.time(1)
 		call(f_done)
 	end)
@@ -405,7 +405,7 @@ end
 
 function fight_wear(f_done)
 	wait.make(function()
-		Execute("tuo all;wear shentong xue;wear bagua xue;wear shenshui mao;wear taiji yi;wear xuanyuan yi;wear lianyu hushou;wear yecha ring;give byj kunlun qin")
+		Execute("tuo all;wear shentong xue;wear bagua xue;wear shentong mao;wear shenshui mao;wear taiji yi;wear xuanyuan yi;wear lianyu hushou;wear yecha ring;give byj qiankun dao")
 		wait.time(1)
 		core.busytest(function() call(f_done) end)
 	end)
