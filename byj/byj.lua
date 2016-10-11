@@ -95,7 +95,7 @@ pfm = {
 function set_complete_status()
 	--print(color)
 	for i, v in ipairs(config.pfm) do
-		if((v.complete ~= nil) then
+		if(v.complete ~= nil) then
 			v.cd = false
 			v.cd_time = os.time()
 			v.inuse = false
