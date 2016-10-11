@@ -1,8 +1,8 @@
 require "var"
 module ("config", package.seeall)
 
-var.dazuo_desc = "你坐下来运气用功，一股内息开始在体内流动。"
-var.dazuo_end_desc = "(你盘膝入定，凝聚体内真气，摧动内息将腹中一丝丝游气慢慢增厚。)|(你运功完毕，深深吸了口气，站了起来。)|(你吸气入丹田，真气运转渐缓，慢慢收功，双手抬起，站了起来。)"
+var.dazuo_desc = "(你坐下来运气用功，一股内息开始在体内流动。)|(你盘膝入定，凝聚体内真气，摧动内息将腹中一丝丝游气慢慢增厚。)"
+var.dazuo_end_desc = "(你一周天行将下来，顿时浑身发暖，感到腹中内劲又增加一分。)|(你运功完毕，深深吸了口气，站了起来。)|(你吸气入丹田，真气运转渐缓，慢慢收功，双手抬起，站了起来。)"
 var.dazuo_halt_desc = "(你把正在运行的真气强行压回丹田，站了起来。)|(你面色一沉，迅速收气，站了起来。)|(你突然双手向胸前一合，压住腹中内息，凌空跃起。)"
 var.dazuo_full_desc = "你的内力修为似乎已经达到了瓶颈，无法再靠打坐来提升了。"
 var.me_id = "byj"
@@ -46,7 +46,7 @@ pfm = {
 	[7]= {	name="刀刀相连", desc="在一片刀光中，一刀劈了过来", cd=false },
 	[8]= {	name="天马行空", desc="你使出身空行，身形回转，如天马跃空而行", cd=false },
 	[9]= {	name="焚心以火", desc="你聚气于掌，使出一招「焚心以火」", cd=false },
-	[10]={	name="飞杖降魔", desc="你大喝一声将手中急转着的.*脱手掷出，在空中高低左右回旋！", cd=false },
+	[10]={	name="飞杖降魔", desc="你大喝一声将手中急转着的", cd=false },
 	[11]={	name="千年玄冰", desc="你使出玄天指绝技「千年玄冰」", cd=false }
 	--[[
 	[1] = {name="一剑化三清", 		desc="你大喝一声，剑招突变", 			cd=false},
@@ -94,6 +94,10 @@ pfm = {
 
 function set_cd_status(l, flag, color)
 	--print(color)
+	print("pfm : " .. l)
+	if(flag ~= nil) then
+	print("flag: " .. flag)
+	end
 	for i, v in ipairs(config.pfm) do
 		if((v.desc == l or v.name == l) and (v.inuse == true or flag == false)) then
 			v.cd = flag
