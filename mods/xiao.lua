@@ -257,7 +257,7 @@ function finish()
 		end)
 	elseif(var.xiao_action == "³ýµô") then
 		core.safehalt(function()
-			Execute("wield dao;enable blade xue-dao;kantou corpse;fly lz;s;w;give xiao head")
+			Execute("wield dao;enable blade xue-dao;kantou corpse;unwield all;fly lz;s;w;give xiao head")
 			done()
 		end, 1)
 	else
