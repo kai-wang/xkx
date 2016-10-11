@@ -221,7 +221,7 @@ attack_perform_array = {
 }
 
 task_busy_list = { 1, 2, 3}
-task_attack_list = { 1, 2, 10, 4, 3, 8, 5 }
+task_attack_list = { 2, 10, 4, 3, 8, 5 }
 
 gf_busy_list = { 1, 3 }
 gf_attack_list = { 6, 7 }
@@ -232,10 +232,10 @@ ttask_attack_list = { 1, 2, 3, 4 }
 busy_list = { 1, 2, 3}
 busy_list2 = { 1, 3, 4, 2 }
 attack_list1 = { 7, 6, 8 } 			-- shan / blocker
-attack_list2 = { 1, 4, 10, 5, 8, 7 }	-- xiao
+attack_list2 = { 4, 10, 5, 1, 8, 7 }	-- xiao
 attack_list3 = { 7, 11, 6}			-- wei / xiao
 attack_list4 = { 6 }				-- shan / wei
-attack_list5 = { 1, 4, 5, 8, 10 }	-- xiao
+attack_list5 = { 4, 5, 8, 1, 10 }	-- xiao
 
 study_list = {
 	--{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu finger 10000;et;set study done", post_action="fly wm;e;s;s;s;w;w;u;gamble big skill finger 2000"}
@@ -273,7 +273,7 @@ function buff(menpai)
 		if(r3 ~= nil) then
 			print("换金系内功了.......")
 			var.choose_force = "longxiang"
-			Execute("unwield all;jiali min;perform strike.honglian;jiali 0")
+			Execute("unwield all;jiali min;perform strike.honglian;jiali 0;wield staff;perfrom staff.feizhang")
 			return
 		end
 --[[
@@ -291,7 +291,7 @@ function buff(menpai)
 		if(r3 ~= nil) then
 			print("换木系内功了.......")
 			var.choose_force = "wuzheng-xinfa"
-			Execute("unwield all;jiali min;perform strike.honglian;jiali 0")
+			Execute("unwield all;jiali min;perform strike.honglian;jiali 0;wield staff;perfrom staff.feizhang")
 			return
 		end
 
@@ -300,14 +300,14 @@ function buff(menpai)
 		if(r3 ~= nil) then
 			print("换金系内功了.......")
 			var.choose_force = "longxiang"
-			Execute("unwield all;jiali min;perform strike.honglian;jiali 0")
+			Execute("unwield all;jiali min;perform strike.honglian;jiali 0;wield staff;perfrom staff.feizhang")
 			return
 		end
 	end
 
 	print("默认换成木系内功了.......")
 	var.choose_force = "wuzheng-xinfa"
-	Execute("enable force wuzheng-xinfa;yun bingxin")
+	Execute("enable force wuzheng-xinfa;unwield all;jiali min;perform strike.honglian;jiali 0;wield staff;perfrom staff.feizhang")
 end
 
 
