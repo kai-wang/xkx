@@ -273,7 +273,7 @@ function buff(menpai)
 		if(r3 ~= nil) then
 			print("换金系内功了.......")
 			var.choose_force = "longxiang"
-			Execute("unwield all;jiali min;perform strike.honglian;jiali 0;wield staff;perfrom staff.feizhang")
+			Execute("unwield all;jiali min;perform strike.honglian;jiali 0;wield staff;perform staff.feizhang")
 			return
 		end
 --[[
@@ -291,7 +291,7 @@ function buff(menpai)
 		if(r3 ~= nil) then
 			print("换木系内功了.......")
 			var.choose_force = "wuzheng-xinfa"
-			Execute("unwield all;jiali min;perform strike.honglian;jiali 0;wield staff;perfrom staff.feizhang")
+			Execute("unwield all;jiali min;perform strike.honglian;jiali 0;wield staff;perform staff.feizhang")
 			return
 		end
 
@@ -300,14 +300,14 @@ function buff(menpai)
 		if(r3 ~= nil) then
 			print("换金系内功了.......")
 			var.choose_force = "longxiang"
-			Execute("unwield all;jiali min;perform strike.honglian;jiali 0;wield staff;perfrom staff.feizhang")
+			Execute("unwield all;jiali min;perform strike.honglian;jiali 0;wield staff;perform staff.feizhang")
 			return
 		end
 	end
 
 	print("默认换成木系内功了.......")
 	var.choose_force = "wuzheng-xinfa"
-	Execute("enable force wuzheng-xinfa;unwield all;jiali min;perform strike.honglian;jiali 0;wield staff;perfrom staff.feizhang")
+	Execute("enable force wuzheng-xinfa;unwield all;jiali min;perform strike.honglian;jiali 0;wield staff;perform staff.feizhang")
 end
 
 
