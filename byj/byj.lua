@@ -46,7 +46,7 @@ pfm = {
 	[7]= {	name="刀刀相连", desc="在一片刀光中，一刀劈了过来", cd=false },
 	[8]= {	name="天马行空", desc="你使出身空行，身形回转，如天马跃空而行", cd=false },
 	[9]= {	name="焚心以火", desc="你聚气于掌，使出一招「焚心以火」", cd=false },
-	[10]={	name="飞杖降魔", desc="你大喝一声将手中急转着的", cd=false },
+	[10]={	name="飞杖降魔", desc="你大喝一声将手中急转着的", cd=false, complete=true },
 	[11]={	name="千年玄冰", desc="你使出玄天指绝技「千年玄冰」", cd=false }
 	--[[
 	[1] = {name="一剑化三清", 		desc="你大喝一声，剑招突变", 			cd=false},
@@ -92,14 +92,23 @@ pfm = {
 	]]--
 }
 
+function set_complete_status()
+	--print(color)
+	for i, v in ipairs(config.pfm) do
+		if((v.complete ~= nil) then
+			v.cd = false
+			v.cd_time = os.time()
+			v.inuse = false
+		end
+	end
+end
+
 function set_cd_status(l, flag, color)
 	--print(color)
-	print("pfm : " .. l)
-	if(flag ~= nil) then
-	print("flag: " .. flag)
-	end
 	for i, v in ipairs(config.pfm) do
 		if((v.desc == l or v.name == l) and (v.inuse == true or flag == false)) then
+			if(flag == false and v.comlete ~= nil) then return end
+			if(flag == true and v.complete ~= nil) then v.complete = false end
 			v.cd = flag
 			v.cd_time = os.time()
 			v.inuse = flag
@@ -225,7 +234,7 @@ attack_perform_array = {
 }
 
 task_busy_list = { 1, 2, 3}
-task_attack_list = { 2, 10, 4, 3, 8, 5 }
+task_attack_list = {1, 2, 3, 10, 4, 5, 8 }
 
 gf_busy_list = { 1, 3 }
 gf_attack_list = { 6, 7 }
@@ -236,10 +245,10 @@ ttask_attack_list = { 1, 2, 3, 4 }
 busy_list = { 1, 2, 3}
 busy_list2 = { 1, 3, 4, 2 }
 attack_list1 = { 7, 6, 8 } 			-- shan / blocker
-attack_list2 = { 4, 10, 5, 1, 8, 7 }	-- xiao
+attack_list2 = { 1, 4, 10, 5, 8, 7 }	-- xiao
 attack_list3 = { 7, 11, 6}			-- wei / xiao
 attack_list4 = { 6 }				-- shan / wei
-attack_list5 = { 4, 5, 8, 1, 10 }	-- xiao
+attack_list5 = { 1, 4, 5, 8, 10 }	-- xiao
 
 study_list = {
 	--{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu finger 10000;et;set study done", post_action="fly wm;e;s;s;s;w;w;u;gamble big skill finger 2000"}
@@ -277,7 +286,7 @@ function buff(menpai)
 		if(r3 ~= nil) then
 			print("换金系内功了.......")
 			var.choose_force = "longxiang"
-			Execute("unwield all;jiali min;perform strike.honglian;jiali 0;wield staff;perform staff.feizhang")
+			Execute("unwield all;jiali min;perform strike.honglian;jiali 0")
 			return
 		end
 --[[
@@ -295,7 +304,7 @@ function buff(menpai)
 		if(r3 ~= nil) then
 			print("换木系内功了.......")
 			var.choose_force = "wuzheng-xinfa"
-			Execute("unwield all;jiali min;perform strike.honglian;jiali 0;wield staff;perform staff.feizhang")
+			Execute("unwield all;jiali min;perform strike.honglian;jiali 0")
 			return
 		end
 
@@ -304,14 +313,14 @@ function buff(menpai)
 		if(r3 ~= nil) then
 			print("换金系内功了.......")
 			var.choose_force = "longxiang"
-			Execute("unwield all;jiali min;perform strike.honglian;jiali 0;wield staff;perform staff.feizhang")
+			Execute("unwield all;jiali min;perform strike.honglian;jiali 0")
 			return
 		end
 	end
 
 	print("默认换成木系内功了.......")
 	var.choose_force = "wuzheng-xinfa"
-	Execute("enable force wuzheng-xinfa;unwield all;jiali min;perform strike.honglian;jiali 0;wield staff;perform staff.feizhang")
+	Execute("enable force wuzheng-xinfa;unwield all;jiali min;perform strike.honglian;jiali 0")
 end
 
 
@@ -339,6 +348,12 @@ function init()
 		"", flag, -1, 0, "", "fight.on_perform")
 
 	SetTriggerOption("fight_perform_cd", "group", "fight")
+
+	AddTrigger("fight_perform_cd",
+		"^(> )*你纵身上前，将飞旋的.*收回。.$",
+		"", flag, -1, 0, "", "config.set_complete_status")
+
+	SetTriggerOption("fight_perform_complete", "group", "fight")
 end
 
 function login(f_done)
