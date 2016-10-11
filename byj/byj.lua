@@ -126,7 +126,7 @@ busy_perform_array = {
 			end
 	},
 
-	[3] = { i = 37,
+	[3] = { i = 8,
 			action = function()
 				Execute("enable move shenkong-xing;perform move.tianmaxingkong " .. var.pfm_target)
 			end
