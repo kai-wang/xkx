@@ -355,11 +355,11 @@ function init()
 
 	SetTriggerOption("fight_perform_cd", "group", "fight")
 
-	AddTrigger("fight_perform_complete",
+	AddTrigger("set_fz_status",
 		"^(> )*你纵身上前，将飞旋的.*收回。.*$",
-		"", flag, -1, 0, "", "config.set_complete_status")
+		"", flag, -1, 0, "", "config.set_fz_status")
 
-	SetTriggerOption("fight_perform_complete", "group", "fight")
+	SetTriggerOption("set_fz_status", "group", "fight")
 end
 
 function login(f_done)
