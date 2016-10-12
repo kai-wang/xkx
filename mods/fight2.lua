@@ -145,15 +145,15 @@ end
 
 function attack()
 	perform_attack()
-	timer.tick("fight", 1, function() perform_busy() end)
+	timer.tick("fight", 0.8, function() perform_busy() end)
 end
 
 function on_busy_success()
-	timer.tick("fight", 0.3, attack)
+	timer.tick("fight", 0.2, attack)
 end
 
 function on_busy_success_long()
-	timer.tick("fight", 0.3, attack)
+	timer.tick("fight", 0.2, attack)
 	EnableTriggerGroup("fight_busy", true)
 end
 
