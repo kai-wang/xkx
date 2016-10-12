@@ -19,7 +19,7 @@ var.dig_dummy = "lbt"
 var.chatter_whitelist = "byj;lbt;happy;"
 var.chatter_blacklist = ""
 var.weapon = "dao"
-var.weapon2 = "xiao"
+var.weapon2 = "qin"
 var.study_seq = 1
 var.fast_mode = 1
 var.xiao_full = 0
@@ -34,7 +34,7 @@ var.kantou_flag = true
 
 auto_list = {"wei", "guanfu","guo","event","reconnect", "sstask", "xiao", "double", "wine", "task", "study"}
 
-weapon_list = {"haoqi xiao", "kunlun dao", "lanhong xiao", "shentong zhang", "qiankun dao", "bagua zhang"}
+weapon_list = {"haoqi qin", "kunlun dao", "kunlun qin", "shentong zhang", "qiankun dao", "bagua zhang"}
 
 pfm = {
 	[1]= {	name="双手互博之术", desc="你平心静气", cd=false },
@@ -46,7 +46,7 @@ pfm = {
 	[7]= {	name="刀刀相连", desc="在一片刀光中，一刀劈了过来", cd=false },
 	[8]= {	name="天马行空", desc="你使出身空行，身形回转，如天马跃空而行", cd=false },
 	[9]= {	name="焚心以火", desc="你聚气于掌，使出一招「焚心以火」", cd=false },
-	[10]={	name="飞杖降魔", desc="你大喝一声将手中急转着的", cd=false, fz_status=-1 },
+	[10]={	name="飞杖降魔", desc="你大喝一声将手中急转着的", cd=false, tx_finish=true, fz_back=true },
 	[11]={	name="千年玄冰", desc="你使出玄天指绝技「千年玄冰」", cd=false }
 	--[[
 	[1] = {name="一剑化三清", 		desc="你大喝一声，剑招突变", 			cd=false},
@@ -95,14 +95,12 @@ pfm = {
 function set_fz_status()
 	--print(color)
 	for i, v in ipairs(config.pfm) do
-		if(v.fz_status ~= nil and v.fz_status == -1) then
-			v.status = 0
-			return
-		elseif(v.fz_status ~= nil and v.status == 0) then
+		-- 飞杖回来而且调息结束
+		if(v.fz_back ~= nil and v.tx_finish == true) then 
+			v.fz_back = true
 			v.cd = false
 			v.cd_time = os.time()
 			v.inuse = false
-			v.status = -1
 			return
 		end
 	end
@@ -113,8 +111,13 @@ function set_cd_status(l, flag, color)
 
 	for i, v in ipairs(config.pfm) do
 		if((v.desc == l or v.name == l) and (v.inuse == true or flag == false)) then
-			if(flag == false and v.fz_status ~= nil and v.fz_status == -1) then v.fz_status = 0 return end
-			if(v.fz_status ~= nil and v.fz_status >= 0 ) then v.fz_status = -1 end
+			-- 飞杖: tx_finish 记录是否调息结束，fz_back 记录是否飞杖回来
+			if(v.fz_back ~= nil) then 
+				v.tx_finish = not flag 
+				-- 飞杖没回来但调息以结束
+				if(flag == false) then return end
+			end
+
 			v.cd = flag
 			v.cd_time = os.time()
 			v.inuse = flag
@@ -204,7 +207,7 @@ attack_perform_array = {
 			action = function()
 				local wp = choose_blade()
 				choose_force()
-				Execute("unwield all;wield " .. wp .. ";enable blade hujia-daofa;perform blade.lian " .. var.pfm_target)
+				Execute("unwield all;wield " .. wp .. ";enable blade hujia-daofa;perform blade.lian " .. var.pfm_target .. ";unwield all")
 			end
 	},
 
@@ -218,7 +221,7 @@ attack_perform_array = {
 			action = function()
 				local wp = choose_sword()
 				choose_force()
-				Execute("enable parry pomo-jianfa;enable sword wuyun-jianfa;unwield all;wield " .. wp .. ";perform parry.zuijian " .. var.pfm_target)
+				Execute("enable parry pomo-jianfa;enable sword wuyun-jianfa;unwield all;wield " .. wp .. ";perform parry.zuijian " .. var.pfm_target .. ";unwield all")
 				Execute("unwield all")
 			end
 	},
@@ -227,7 +230,7 @@ attack_perform_array = {
 			action = function()
 				local wp = choose_sword()
 				choose_force()
-				Execute("enable parry pomo-jianfa;enable sword yuxiao-jian;unwield all;wield " .. wp .. ";perform parry.zuijian " .. var.pfm_target)
+				Execute("enable parry pomo-jianfa;enable sword yuxiao-jian;unwield all;wield " .. wp .. ";perform parry.zuijian " .. var.pfm_target .. ";unwield all")
 				Execute("unwield all")
 			end
 	},
@@ -240,7 +243,7 @@ attack_perform_array = {
 }
 
 task_busy_list = { 1, 2, 3}
-task_attack_list = {2, 3, 1, 10, 5, 4, 8}
+task_attack_list = {2, 3, 1, 9, 5, 4, 8}
 
 gf_busy_list = { 1, 3 }
 gf_attack_list = { 6, 7 }
@@ -251,10 +254,10 @@ ttask_attack_list = { 1, 2, 3, 4 }
 busy_list = { 1, 2, 3}
 busy_list2 = { 1, 2, 3 }
 attack_list1 = { 7, 6, 8 } 			-- shan / blocker
-attack_list2 = { 1, 4, 10, 5, 8, 7 }	-- xiao
+attack_list2 = { 1, 4, 9, 5, 8, 7 }	-- xiao
 attack_list3 = { 7, 11, 5}			-- wei / xiao
 attack_list4 = { 6 }				-- shan / wei
-attack_list5 = { 4, 5, 10, 8, 1 }	-- xiao
+attack_list5 = { 4, 5, 9, 8, 1 }	-- xiao
 
 study_list = {
 	--{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu finger 10000;et;set study done", post_action="fly wm;e;s;s;s;w;w;u;gamble big skill finger 2000"}
@@ -272,7 +275,7 @@ function choose_blade()
 end
 
 function choose_sword()
-	return "xiao"
+	return "qin"
 end
 
 function choose_force()

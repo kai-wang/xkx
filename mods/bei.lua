@@ -149,6 +149,7 @@ function exit()
 	walk.abort()
 	fight.stop()
 	EnableTriggerGroup("bei", false)
+	EnableTriggerGroup("bei_search", false)
 	EnableTriggerGroup("bei_ask", false)
 	EnableTriggerGroup("bei_loc", false)
 	EnableTriggerGroup("bei_task1", false)
@@ -172,6 +173,7 @@ function main(f_ok, f_fail)
 
 	var.walk_danger_level = var.task_walk_danger_level
 	EnableTriggerGroup("bei", true)
+	EnableTriggerGroup("bei_search", true)
 	ask()
 	--Execute("set brief;fly wm;e;n;e;e;e;task;fly wm")
 end
@@ -239,14 +241,13 @@ function walktask()
 	timer.tickonce("action", 1.5, function()
 		if(var.task_status == "done" or fight.infight()) then return end
 
-		cxt.start_search = true
+		EnableTriggerGroup("bei_search", false)
 		core.safehalt(function()
-			cxt.start_search = nil
 			Execute("er;et;ef")
 			walk.walkaround(2, nil, 
-				function() cxt.start_search = nil bei.notfound() end, 
-				function() cxt.start_search = nil bei.fail() end, 
-				function() cxt.start_search = nil bei.foundnpc() end
+				function() EnableTriggerGroup("bei_search", true) bei.notfound() end, 
+				function() EnableTriggerGroup("bei_search", true) bei.fail() end, 
+				function() EnableTriggerGroup("bei_search", true) bei.foundnpc() end
 				)
 		end, 0.5)
 	end)
@@ -274,10 +275,9 @@ function search(name, line, wildcards)
 	local dir = wildcards[3]
 	dir = dir:gsub("边",""):gsub("面", ""):gsub("方向", ""):gsub("方", "")
 	var.task_escape_dir = dir
-	if(not cxt.start_search) then
-		timer.stop("action")
-		if(walk.stopped()) then searchTask() end
-	end
+
+	timer.stop("action")
+	if(walk.stopped()) then searchTask() end
 end
 
 function searchTask()
