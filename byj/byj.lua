@@ -95,10 +95,10 @@ pfm = {
 function set_fz_status()
 	--print(color)
 	for i, v in ipairs(config.pfm) do
-		if(v.fz_status == -1) then
+		if(v.fz_status ~= nil and v.fz_status == -1) then
 			v.status = 0
 			return
-		elseif(v.status == 0) then
+		elseif(v.fz_status ~= nil and v.status == 0) then
 			v.cd = false
 			v.cd_time = os.time()
 			v.inuse = false
@@ -113,8 +113,8 @@ function set_cd_status(l, flag, color)
 
 	for i, v in ipairs(config.pfm) do
 		if((v.desc == l or v.name == l) and (v.inuse == true or flag == false)) then
-			if(flag == false and v.fz_status == -1) then v.fz_status = 0 return end
-			if(v.fz_status >= 0 ) then v.fz_status = -1 end
+			if(flag == false and v.fz_status ~= nil and v.fz_status == -1) then v.fz_status = 0 return end
+			if(v.fz_status ~= nil and v.fz_status >= 0 ) then v.fz_status = -1 end
 			v.cd = flag
 			v.cd_time = os.time()
 			v.inuse = flag
