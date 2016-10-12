@@ -86,7 +86,7 @@ function perform_attack()
 	for i, v in ipairs(context.attack_list) do
 		local attack = config.attack_perform_array[v]
 		local pfm = config.pfm[attack.i]
-		if(pfm.cd_time ~= nil and (os.time() - tonumber(pfm.cd_time) > 30) and (pfm.complete == nil)) then pfm.cd = false end
+		if(pfm.cd_time ~= nil and (os.time() - tonumber(pfm.cd_time) > 30)) then pfm.cd = false end
 		
 		if(not pfm.cd) then 
 			attack.action()

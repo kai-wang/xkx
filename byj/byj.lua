@@ -6,7 +6,7 @@ var.dazuo_end_desc = "(你一周天行将下来，顿时浑身发暖，感到腹中内劲又增加一分。)
 var.dazuo_halt_desc = "(你把正在运行的真气强行压回丹田，站了起来。)|(你面色一沉，迅速收气，站了起来。)|(你突然双手向胸前一合，压住腹中内息，凌空跃起。)"
 var.dazuo_full_desc = "你的内力修为似乎已经达到了瓶颈，无法再靠打坐来提升了。"
 var.me_id = "byj"
-var.me_pwd = "Flying1"
+var.me_pwd = "Flying1a"
 var.me_name = "白玉京"
 var.me_menpai = "明教"
 var.me_family = "明教"
@@ -32,7 +32,7 @@ var.ss_shuffle = 1
 var.study_threshold = 10000
 var.kantou_flag = true
 
-auto_list = {"wei", "guanfu","guo","event","reconnect", "sstask", "xiao", "double", "wine", "task"}
+auto_list = {"wei", "guanfu","guo","event","reconnect", "sstask", "xiao", "double", "wine", "task", "study"}
 
 weapon_list = {"haoqi xiao", "kunlun dao", "lanhong xiao", "shentong zhang", "qiankun dao", "bagua zhang"}
 
@@ -99,15 +99,17 @@ function set_complete_status()
 			v.cd = false
 			v.cd_time = os.time()
 			v.inuse = false
+			v.complete = true
 		end
 	end
 end
 
 function set_cd_status(l, flag, color)
 	--print(color)
+
 	for i, v in ipairs(config.pfm) do
 		if((v.desc == l or v.name == l) and (v.inuse == true or flag == false)) then
-			if(flag == false and v.comlete ~= nil) then return end
+			if(flag == false and v.complete == false) then return end
 			if(flag == true and v.complete ~= nil) then v.complete = false end
 			v.cd = flag
 			v.cd_time = os.time()
@@ -243,16 +245,16 @@ ttask_busy_list = { 1, 2, 3, 4 }
 ttask_attack_list = { 1, 2, 3, 4 }
 
 busy_list = { 1, 2, 3}
-busy_list2 = { 1, 3, 4, 2 }
+busy_list2 = { 1, 2, 3 }
 attack_list1 = { 7, 6, 8 } 			-- shan / blocker
 attack_list2 = { 1, 4, 10, 5, 8, 7 }	-- xiao
-attack_list3 = { 7, 11, 6}			-- wei / xiao
+attack_list3 = { 7, 11, 5}			-- wei / xiao
 attack_list4 = { 6 }				-- shan / wei
 attack_list5 = { 1, 4, 5, 8, 10 }	-- xiao
 
 study_list = {
 	--{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu finger 10000;et;set study done", post_action="fly wm;e;s;s;s;w;w;u;gamble big skill finger 2000"}
-	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu longxiang 10000", wear_int = true, interval = 0.8 }
+	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu longxiang 1000", wear_int = true, interval = 0.8 }
 	--{ loc = "fly mj", cmd = "xue wei strike 100;et",pre_action="bai wei yixiao", post_action="bai xie xun"}
 }
 
@@ -349,8 +351,8 @@ function init()
 
 	SetTriggerOption("fight_perform_cd", "group", "fight")
 
-	AddTrigger("fight_perform_cd",
-		"^(> )*你纵身上前，将飞旋的.*收回。.$",
+	AddTrigger("fight_perform_complete",
+		"^(> )*你纵身上前，将飞旋的.*收回。.*$",
 		"", flag, -1, 0, "", "config.set_complete_status")
 
 	SetTriggerOption("fight_perform_complete", "group", "fight")
