@@ -254,7 +254,7 @@ attack_list1 = { 7, 6, 8 } 			-- shan / blocker
 attack_list2 = { 1, 4, 10, 5, 8, 7 }	-- xiao
 attack_list3 = { 7, 11, 5}			-- wei / xiao
 attack_list4 = { 6 }				-- shan / wei
-attack_list5 = { 4, 5, 10£¬8£¬1 }	-- xiao
+attack_list5 = { 4, 5, 10, 8, 1 }	-- xiao
 
 study_list = {
 	--{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu finger 10000;et;set study done", post_action="fly wm;e;s;s;s;w;w;u;gamble big skill finger 2000"}
