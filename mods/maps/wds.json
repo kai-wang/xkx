@@ -39,7 +39,8 @@
       }
     },
     "name": "青石大道",
-    "path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;n;nw;e;ne;e;se;e;n",
+    "__path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;n;nw;e;ne;e;se;e;n",
+    "path": "fly hy;n;e;ne;nw;nd;n",
     "zone": "扬州|武当山"
   }, {
     "desc": "    你走在一条青石大道上，四周静悄悄的。西边是一条大道，东边是好大的一片树林。往南还有一条大道，掩映在密密的树林中。",
@@ -60,7 +61,8 @@
       }
     },
     "name": "青石大道",
-    "path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;n;nw;e;ne;e;se;e",
+    "__path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;n;nw;e;ne;e;se;e",
+    "path": "fly hy;n;e;ne;nw;nd",
     "zone": "衡阳|武当山"
   }, {
     "desc": "    你走在一条青石大道上，四周静悄悄的。四周是浓密的树林，阴森森的十分怕人。西北方就是陕鄂边界了。北边却是一片草地。",
@@ -85,7 +87,8 @@
       }
     },
     "name": "青石大道",
-    "path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;n;nw;e;ne;e;se",
+    "__path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;n;nw;e;ne;e;se",
+    "path": "fly hy;n;e;ne;nw;nd;w",
     "zone": "襄阳|武当山"
   }, {
     "desc": "    你走在一条黄土大道上，不时地有人挂剑跨马匆匆而过。东北通向武当。",
@@ -102,7 +105,8 @@
       }
     },
     "name": "大道",
-    "path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;n;nw;sw",
+    "__path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;n;nw;sw",
+    "path": "fly hy;n;w;w;w;n;n;n;nw;nw;sw",
     "zone": "峨眉山|武当山"
   }, {
     "desc": "    这里是四川、湖北与陕西的交界，俗称三不管。小土路的两旁有疏疏落落的农舍耕田，几只牛羊正在吃草。路上行人很少，都匆匆赶路。",
@@ -123,7 +127,8 @@
       }
     },
     "name": "三不管",
-    "path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;n;nw",
+    "__path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;n;nw",
+    "path": "fly hy;n;w;w;w;n;n;n;nw;nw",
     "zone": "武当山"
   }, {
     "desc": "    这里是陕西境内。一条静悄悄的黄土路，两旁有些小土屋，疏疏落落的。但路上行人很少，都行色匆匆向前赶路。",
@@ -140,7 +145,8 @@
       }
     },
     "name": "小路",
-    "path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;n;nw;e",
+    "__path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;n;nw;e",
+    "path": "fly hy;n;e;ne;nw;nd;w;nw;w;sw",
     "zone": "武当山"
   }, {
     "desc": "    这里一条静悄悄的黄土路，两旁有些小土屋，疏疏落落的。路上行人很少，都行色匆匆向前赶路。",
@@ -157,7 +163,8 @@
       }
     },
     "name": "小路",
-    "path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;n;nw;e;ne",
+    "__path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;n;nw;e;ne",
+    "path": "fly hy;n;e;ne;nw;nd;w;nw;w",
     "zone": "武当山"
   }, {
     "desc": "    这里是陕西境内的一条静悄悄的黄土路，两旁有些小土屋，疏疏落落的。路上行人很少，都行色匆匆地向前赶路。",
@@ -178,7 +185,8 @@
       }
     },
     "name": "小路",
-    "path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;n;nw;e;ne;e",
+    "__path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;n;nw;e;ne;e",
+    "path": "fly hy;n;e;ne;nw;nd;w;nw",
     "zone": "武当山"
   }, {
     "desc": "    这是一间小土屋，看样子是一户农家的房子。屋里简单地摆着些家具，墙角里堆着些农具。炕上坐着一个老婆婆和一个小孩，见有人冲进来，都神色紧张地望着你。",
@@ -191,7 +199,8 @@
       }
     },
     "name": "小土屋",
-    "path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;n;nw;e;ne;e;s",
+    "__path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;n;nw;e;ne;e;s",
+    "path": "fly hy;n;e;ne;nw;nd;w;nw;s",
     "zone": "武当山"
   }, {
     "desc": "    你走在一条尘土飞扬的黄土路上，两旁是阴森森的树林。这里是湖北境界，据说经常有土匪出没，不可久留。向东南去可至湖南。",
@@ -208,7 +217,8 @@
       }
     },
     "name": "黄土路",
-    "path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;n",
+    "__path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;n",
+    "path": "fly hy;n;w;w;w;n;n;n;nw",
     "zone": "武当山"
   }, {
     "danger": 3,
@@ -230,7 +240,8 @@
       }
     },
     "name": "黄土路",
-    "path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e",
+    "__path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e",
+    "path": "fly hy;n;w;w;w;n;n;n;nw;s",
     "zone": "武当山"
   }, {
     "danger": 3,
@@ -248,7 +259,8 @@
       }
     },
     "name": "林中小路",
-    "path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;su",
+    "__path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;su",
+    "path": "fly hy;n;w;w;w;n;n;n;nw;s;su",
     "zone": "武当山"
   }, {
     "danger": 3,
@@ -266,7 +278,8 @@
       }
     },
     "name": "林中小路",
-    "path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;su;s",
+    "__path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;su;s",
+    "path": "fly hy;n;w;w;w;n;n;n;nw;s;su;s",
     "zone": "武当山"
   }, {
     "danger": 3,
@@ -280,7 +293,8 @@
       }
     },
     "name": "林中小路",
-    "path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;su;s;e",
+    "__path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;su;s;e",
+    "path": "fly hy;n;w;w;w;n;n;n;nw;s;su;s;e",
     "zone": "武当山"
   }, {
     "desc": "    这是山脚松林中的小路，两边长满参天的红松树，只能看见一线天空。路旁有道士在奋力砍树。西边通向密林深处，东边可回大道。",
@@ -297,7 +311,8 @@
       }
     },
     "name": "松林小路",
-    "path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e",
+    "__path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e",
+    "path": "fly hy;n;w;w;w;n;n;n;nw;s;w",
     "zone": "武当山"
   }, {
     "desc": "    这是山脚松林中的小路，两边长满参天的红松树，只能看见一线天空。路旁有道士在奋力砍树。东边可回大道。    路边有个石碑(shibei)，很多游客在围那里。原来西边上去就是名镇天下的解剑岩了，",
@@ -322,7 +337,8 @@
       }
     },
     "name": "松林小路",
-    "path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed",
+    "__path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed",
+    "path": "fly hy;n;w;w;w;n;n;n;nw;s;w;w",
     "zone": "武当山"
   }, {
     "desc": "    这是松林深处，暗无天日，朦胧中只感觉到左右前后到处都是树影。地上有一两个死人骷髅，发着绿荧荧的磷光。你惊骇之间，一脚踩在钢针般的松针上！",
@@ -339,7 +355,8 @@
       }
     },
     "name": "松林",
-    "path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;n",
+    "__path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;n",
+    "path": "fly hy;n;w;w;w;n;n;n;nw;s;w;w;n",
     "zone": "武当山"
   }, {
     "desc": "    这是松林深处，暗无天日，朦胧中只感觉到左右前后到处都是树影。地上有一两个死人骷髅，发着绿荧荧的磷光。你惊骇之间，一脚踩在钢针般的松针上！",
@@ -352,7 +369,8 @@
       }
     },
     "name": "松林",
-    "path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;n;n",
+    "__path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;n;n",
+    "path": "fly hy;n;w;w;w;n;n;n;nw;s;w;w;n;n",
     "zone": "武当山"
   }, {
     "desc": "    这是松林深处，暗无天日，朦胧中只感觉到左右前后到处都是树影。地上有一两个死人骷髅，发着绿荧荧的磷光。你惊骇之间，一脚踩在钢针般的松针上！",
@@ -369,7 +387,8 @@
       }
     },
     "name": "松林",
-    "path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;s",
+    "__path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;s",
+    "path": "fly hy;n;w;w;w;n;n;n;nw;s;w;w;s",
     "zone": "武当山"
   }, {
     "desc": "    这是松林深处，暗无天日，朦胧中只感觉到左右前后到处都是树影。地上有一两个死人骷髅，发着绿荧荧的磷光。你惊骇之间，一脚踩在钢针般的松针上！",
@@ -382,7 +401,8 @@
       }
     },
     "name": "松林",
-    "path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;s;s",
+    "__path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;s;s",
+    "path": "fly hy;n;w;w;w;n;n;n;nw;s;w;w;s;s",
     "zone": "武当山"
   }, {
     "desc": "    这是武林中极负盛名的武当解剑岩，岩下解剑池水明澈照人。武林人士经此都自觉解剑，以示对武当派的尊敬。千百年来，概无例外。",
@@ -1850,7 +1870,8 @@
       }
     },
     "name": "荆州郊外",
-    "path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;n;nw;e;ne;e;se;s",
+    "__path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;n;nw;e;ne;e;se;s",
+    "path": "fly hy;n;e;ne;nw;nd;w;s",
     "zone": "武当山|襄阳"
   }, {
     "desc": "    荆州废园离万家不远。当日丁典逝世、杀周圻、杀耿天霸、杀马大鸣，都是在这废园之中，但此时，只见荒草如故，遍地瓦砾如故。院子里那株老梅之旁，一个土堆上也长满了荒草，如果不是旁边立着的石板刻着“义兄丁典、义嫂凌霜华之墓 狄云立”，任谁也想不到这就是丁典和凌小姐的衣冠冢之所在。",
@@ -1863,7 +1884,8 @@
       }
     },
     "name": "废园",
-    "path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;n;nw;e;ne;e;se;s;se",
+    "__path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;n;nw;e;ne;e;se;s;se",
+    "path": "fly hy;n;e;ne;nw;nd;w;s;se",
     "zone": "武当山|襄阳"
   } ]
 }
