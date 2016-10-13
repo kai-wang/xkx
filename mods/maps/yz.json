@@ -1184,7 +1184,8 @@
       }
     },
     "name": "青石大道",
-    "path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;n;nw;e;ne;e;se;e;n",
+    "__path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e;e;n;nw;e;ne;e;se;e;n",
+    "path": "fly hy;n;e;ne;nw;nd;n",
     "zone": "扬州|武当山"
   }, {
     "desc": "    你现在正攀附在一株大榕树的树干上，从这里可以很清楚地望见全城的景致，树杈上还铺着些稻草，夏天在这里乘凉倒是不错！",
