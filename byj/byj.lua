@@ -362,7 +362,7 @@ function init()
 		"^(> )*你纵身上前，将飞旋的.*收回。.*$",
 		"", flag, -1, 0, "", "config.set_fz_status")
 
-	SetTriggerOption("set_fz_status", "group", "fight")
+	SetTriggerOption("set_fz_status", "group", "system")
 end
 
 function login(f_done)
