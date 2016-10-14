@@ -173,6 +173,7 @@ function foundnpc()
 			if(var.ss_task_status == "done" or fight.infight()) then return end
 			core.safehalt(function()
 				var.ss_kill = 0
+				EnableTriggerGroup("ss_search", true)
 				walk.walkaround(2, nil, searchbook, searchbook, foundnpc)
 			end, 1)
 		end)
