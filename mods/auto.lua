@@ -218,7 +218,7 @@ local tasks = {
 		
 		priority = function()
 			-- exceed the limit
-			if(var.double_bonus == ¡°true¡±) then return 13 else return 15 end
+			if(var.double_bonus == "true") then return 13 else return 15 end
 			--return 15
 		end
 	},
