@@ -233,6 +233,7 @@ function followTask(name, line, wildcards)
 end
 
 function searchTask()
+	EnableTriggerGroup("ss_search", true)
 	core.safehalt(function()
 		print("´Ó " .. var.ss_escape_dir .. " ¿ªÊ¼walkaround" )
 		if(var.ss_task_status == "done") then return end

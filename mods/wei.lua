@@ -393,6 +393,8 @@ function main(f_done, f_fail)
 	EnableTriggerGroup("wei_ask", true)
 	EnableTriggerGroup("wei_kill", false)
 	Execute("set brief;fly wm;e;s;s;s;e;u;quest")
+
+	timer.tickonce("action", 5, fail)
 end
 
 function init()
@@ -419,6 +421,8 @@ function fail()
 end
 
 function start(name, line, wildcards)
+	timer.stop("action")
+	
 	var.wei_item_name = wildcards[2]
 	var.wei_start_time = os.time()
 	local t = var.wei_item_name
