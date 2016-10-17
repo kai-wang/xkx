@@ -31,8 +31,8 @@ local tasks = {
 		end
 	},
 
-	["wait_10"] = {
-		name = "task 10秒内开始",	
+	["wait_for_task"] = {
+		name = "等待task开始",	
 		main = function(f_next)	
 			anti_idle(30)
 			local diff = tonumber(var.task_available_time) - os.time()
@@ -49,7 +49,7 @@ local tasks = {
 		
 		priority = function()
 			local diff = tonumber(var.task_available_time) - os.time()
-			if(var.double_bonus ~= "true" and diff > 0 and diff < 10) then
+			if(var.double_bonus ~= "true" and diff > 0 and diff < 15) then
 				return 16
 			else
 				return -1
