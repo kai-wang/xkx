@@ -35,9 +35,11 @@ local tasks = {
 		name = "µÈ´ýtask¿ªÊ¼",	
 		main = function(f_next)	
 			anti_idle(30)
-			local diff = tonumber(var.task_available_time) - os.time()
-			if(diff > 0) then wait.time(diff) end
-			call(f_next)
+			wait.make(function()
+				local diff = tonumber(var.task_available_time) - os.time()
+				if(diff > 0) then wait.time(diff) end
+				call(f_next)
+			end)
 		end,
 		
 		wait = function()
