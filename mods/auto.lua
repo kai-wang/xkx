@@ -26,7 +26,33 @@ local tasks = {
 			if(var.task_available_time ~= nil and tonumber(var.task_available_time) - os.time() > 30) then
 				return 9
 			else
+				return 17
+			end
+		end
+	},
+
+	["wait_10"] = {
+		name = "task 10秒内开始",	
+		main = function(f_next)	
+			anti_idle(30)
+			local diff = tonumber(var.task_available_time) - os.time()
+			if(diff > 0) then wait.time(diff) end
+			call(f_next)
+		end,
+		
+		wait = function()
+			return os.time()
+		end,
+		
+		clear = function()
+		end,
+		
+		priority = function()
+			local diff = tonumber(var.task_available_time) - os.time()
+			if(var.double_bonus ~= "true" and and diff > 0 and diff < 10) then
 				return 16
+			else
+				return -1
 			end
 		end
 	},
@@ -377,7 +403,7 @@ function nexttask(tbl)
 		local t, w = getnexttask(tbl)
 		
 		if(t == nil) then
-			print("----------下个任务在 >>>>>>" .. w .. "<<<<<< 秒后开始----------")
+			print("----------下个任务【" .. t.name .. "】>>>>>>" .. w .. "<<<<<< 秒后开始----------")
 			anti_idle(w)
 		else
 			wait.make(function()
