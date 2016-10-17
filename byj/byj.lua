@@ -34,7 +34,7 @@ var.kantou_flag = true
 
 auto_list = {"wei", "guanfu","guo","event","reconnect", "sstask", "xiao", "double", "wine", "task", "study", "wait_for_task"}
 
-weapon_list = {"haoqi qin", "kunlun dao", "kunlun qin", "shentong zhang", "qiankun dao", "bagua zhang"}
+weapon_list = {"haoqi qin", "kunlun dao", "kunlun qin", "shentong zhang", "qiankun dao", "kunlun zhang"}
 
 pfm = {
 	[1]= {	name="双手互博之术", desc="你平心静气", cd=false },
@@ -386,7 +386,7 @@ end
 
 function fight_wear(f_done)
 	wait.make(function()
-		Execute("tuo all;wear shentong xue;wear bagua xue;wear shentong mao;wear shenshui mao;wear taiji yi;wear xuanyuan yi;wear lianyu hushou;wear yecha ring;give byj qiankun dao")
+		Execute("tuo all;wear shentong xue;wear bagua xue;wear shentong mao;wear shenshui mao;wear taiji yi;wear xuanyuan yi;wear xuanyuan hushou;wear yecha ring;give byj qiankun dao")
 		wait.time(1)
 		core.busytest(function() call(f_done) end)
 	end)
