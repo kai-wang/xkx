@@ -35,14 +35,12 @@ local tasks = {
 		name = "等待task开始",	
 		main = function(f_next)	
 			anti_idle(30)
-			wait.make(function()
-				local diff = tonumber(var.task_available_time) - os.time()
-				if(diff > 0) then 
-					print("等待task 开始: " .. diff)
-					wait.time(diff) 
-				end
-				call(f_next)
-			end)
+			local diff = tonumber(var.task_available_time) - os.time()
+			if(diff > 0) then 
+				print("等待task 开始: " .. diff)
+				wait.time(diff) 
+			end
+			call(f_next)
 		end,
 		
 		wait = function()
