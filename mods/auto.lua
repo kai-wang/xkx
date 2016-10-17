@@ -49,7 +49,7 @@ local tasks = {
 		
 		priority = function()
 			local diff = tonumber(var.task_available_time) - os.time()
-			if(var.double_bonus ~= "true" and and diff > 0 and diff < 10) then
+			if(var.double_bonus ~= "true" and diff > 0 and diff < 10) then
 				return 16
 			else
 				return -1
