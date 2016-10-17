@@ -32,7 +32,7 @@ var.ss_shuffle = 1
 var.study_threshold = 10000
 var.kantou_flag = true
 
-auto_list = {"wei", "guanfu","guo","event","reconnect", "sstask", "xiao", "double", "wine", "task", "study"}
+auto_list = {"wei", "guanfu","guo","event","reconnect", "sstask", "xiao", "double", "wine", "task", "study", "wait_for_task"}
 
 weapon_list = {"haoqi qin", "kunlun dao", "kunlun qin", "shentong zhang", "qiankun dao", "bagua zhang"}
 

@@ -37,25 +37,24 @@ local tasks = {
 			anti_idle(30)
 			wait.make(function()
 				local diff = tonumber(var.task_available_time) - os.time()
-				if(diff > 0) then wait.time(diff) end
+				if(diff > 0) then 
+					print("等待task 开始: " .. diff)
+					wait.time(diff) 
+				end
 				call(f_next)
 			end)
 		end,
 		
 		wait = function()
-			return os.time()
+			local diff = tonumber(var.task_available_time) - os.time()
+			if(var.double_bonus ~= "true" and diff > 0 and diff < 15) then return 0 else return os.time() + 180 end
 		end,
 		
 		clear = function()
 		end,
 		
 		priority = function()
-			local diff = tonumber(var.task_available_time) - os.time()
-			if(var.double_bonus ~= "true" and diff > 0 and diff < 15) then
-				return 16
-			else
-				return -1
-			end
+			return 16
 		end
 	},
 
@@ -405,7 +404,7 @@ function nexttask(tbl)
 		local t, w = getnexttask(tbl)
 		
 		if(t == nil) then
-			print("----------下个任务【" .. t.name .. "】>>>>>>" .. w .. "<<<<<< 秒后开始----------")
+			print("----------下个任务在 >>>>>>" .. w .. "<<<<<< 秒后开始----------")
 			anti_idle(w)
 		else
 			wait.make(function()
