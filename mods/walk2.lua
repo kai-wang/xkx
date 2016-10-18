@@ -589,13 +589,13 @@ handlers = {
 			Execute("fly mz;n;n;n;e;s;s;w;sw;e")
 			local count, l, w = 0, nil, nil
 			repeat
-				Execute("n")
+				Execute("halt;n")
 				count = count + 1
 				l, w = wait.regexp("^(> )*你只觉得天旋地转，呼吸也开始困难起来.*$", 2)
-			until(l and l:match("你只觉得天旋地转") or (count > 4))
+			until(l and l:match("你只觉得天旋地转") or (count > 5))
 
 			if(not l) then 
-				handles.fail()
+				handlers.fail()
 			else
 				l, w = wait.regexp("^(> )*家丁们把你一把抓住，捆了个结实，扔进了监狱.*$", 15)
 				if(l) then handlers.done() else handlers.fail() end
