@@ -983,5 +983,22 @@
     "name": "大沙漠",
     "path": "fly xx;su;s;ed;se;w;n;s;e",
     "zone": "星宿海"
+  }, {
+    "desc": "    这是个山庄的后门。这里有捷径可以通向星宿海。",
+    "exits": "south|north",
+    "id": 2014,
+    "links": {
+      "s": {
+        "con": "k1:门卫",
+        "to": 2013
+      },
+      "n": {
+        "con": "",
+        "to": 2285
+      }
+    },
+    "name": "后门",
+    "path": "fly bt;n;n;n;n;ne;n",
+    "zone": "星宿海|白驼山"
   } ]
 }
