@@ -579,5 +579,30 @@
     "name": "松林小路",
     "path": "fly wds;n;nd;nd;nd;nd;nu;nd;nu;nd;nd;nd;nd;e;ed;ed;e",
     "zone": "武当山|衡阳"
+  }, {
+    "desc": "    这里是茂密的森林。四周都是数不清的长草，一股阴森恐怖的气氛。远处不时传来野兽的嚎叫，你实在不想在这里多留。",
+    "exits": "south|north|east|west",
+    "id": 2896,
+    "links": {
+      "e": {
+        "con": "",
+        "to": 441
+      },
+      "n": {
+        "con": "",
+        "to": 2896
+      },
+      "s": {
+        "con": "",
+        "to": 2897
+      },
+      "w": {
+        "con": "",
+        "to": 2898
+      }
+    },
+    "name": "树林",
+    "path": "fly hy;n;w;w;w;w",
+    "zone": "衡阳|侠客岛"
   } ]
 }
