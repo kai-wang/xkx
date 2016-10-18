@@ -27,8 +27,8 @@ local guo_list = {
 	["佐将"] = {id = "zuo jiang", loc = "fly xi;w;w;#3 n;#2 e;n;w"},
 	["烧饭师傅"] = {id = "shaofan shifu", loc = "fly xi;w;w;#4 s"},
 	["耶律齐"] = {id = "yelv qi", loc = "fly xi;w;n"},
-	["高丽商"] = {id = "gaoli shang", loc = "fly xi;w;w;#3 n;e;n"},
-	["穷汉"] = {id = "poor man", loc = "fly xi;w"}
+	["高丽商"] = {id = "gaoli shang", loc = "fly xi;w;w;#3 n;e;n"}--,
+	--["穷汉"] = {id = "poor man", loc = "fly xi;w"}
 }
 
 test = function()
@@ -61,13 +61,17 @@ end
 
 function done()
 	init()
-	me.cleanup(context.f_done)
+	timer.tickonce("action", 1, function()
+		me.cleanup(context.f_done)
+	end)
 end
 
 function fail()
 	init()
 	var.guo_available_time = os.time() + 60
-	me.cleanup(context.f_fail)
+	timer.tickonce("action", 1, function()
+		me.cleanup(context.f_fail)
+	end)
 end
 
 function fangqi()
