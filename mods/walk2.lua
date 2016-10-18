@@ -582,6 +582,21 @@ handlers = {
 			if(l:match("水流一阵涌动") ~= nil) then Execute("push stone") end
 			handlers.done2()
 		end)
+	end,
+
+	["mzdl"] = function()
+		wait.make(function()
+			Execute("fly mz;n;n;n;e;s;s;w;sw;e")
+			local count, l, w = 0, nil, nil
+			repeat
+				Execute("n")
+				count = count + 1
+				l, w = wait.regepx("^(> )*你只觉得天旋地转，呼吸也开始困难起来.*$", 2)
+			until(not l and l:match("你只觉得天旋地转") or (count > 5))
+
+			l, w = wait.regexp("^(> )*家丁们把你一把抓住，捆了个结实，扔进了监狱.*$", 5)
+			if(l) then handlers.done() else handlers.fail() end
+		end)
 	end
 }
 
