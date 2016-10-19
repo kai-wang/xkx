@@ -17,15 +17,102 @@ local trans_map = {
 
 local context = {}
 
+local handlers = {
+	["step"] = function()
+	end
+}
 function main(f_ok, f_fail)
 end
 
-function start()
+function loop()
 	wait.make(function()
-		context.stop = false
-		walk()
+		local l, w
+		repeat
+			l, w = wait.regexp("^(> )*设定环境变数：maze = \"(.*))\".*$")
+			if(w[2] ~= "exit") then
+				invoke(w[2])
+			end
+		until (w[2] == "exit")
+		exit()
 	end)
 end
+function process(l, w, n)
+end
+
+function exit()
+	DeleteTempraryTriggers()
+end
+
+function step()
+	if(walk_stop) then return end
+
+	if(not walk_block) then 
+		walk_index = walk_index + 1
+	end
+
+	if(walk_index > #walk_tbl) then
+		walk()
+	else
+		wait.time(0.1)
+		Execute(walk_tbl[walk_index])
+		Execute("set maze step")
+	end
+end
+
+function walk()
+	walk_index = 0
+	walk_block = false
+	walk_tbl = findnextroom()
+	if(#walk_tbl >= 0) then
+		step()
+	else
+		exit()
+	end
+end
+
+function resume()
+	Execute("set maze step")
+end
+
+function stop()
+	local l, w = wait.regexp("^(> )*设定环境变数：maze = \"resume\".*$")
+	if(l) then
+		walk()
+	end
+end
+
+function resume()
+	Execute("set maze resume")
+end
+
+
+function walk()
+	local tbl = findunwalked()
+	if(not tbl or #tbl = 0) then
+		print("no unwalked rooms")
+		return
+	end
+
+	local step, i = nil, 1
+	step = function()
+		if(i > #tbl) then
+			walk()
+		else
+			Execute(tbl[i].path)
+			Execute("set maze step")
+			local l, w = wait.regexp("^(> )*设定环境变数：maze = \"step\".*$")
+			if(l and not context.block) then
+				i = i + 1
+				context.current_room = tbl[i].id
+				wait.time(0.2)
+			end
+			return step()
+		end
+	end
+
+	step()
+end
+
 
 function init()
 	context = {}
