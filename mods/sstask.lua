@@ -167,7 +167,8 @@ end
 
 function foundnpc()
 	EnableTriggerGroup("ss_search", false)
-	Execute("maoli")
+	--Execute("maoli")
+	config.set_menpai(var.ss_menpai)
 	if(var.ss_kill == "1") then
 		timer.tickonce("action", 1.5, function()
 			if(var.ss_task_status == "done" or fight.infight()) then return end

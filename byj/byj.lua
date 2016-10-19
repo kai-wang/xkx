@@ -290,7 +290,7 @@ function powerup()
 	Execute("enable force longxiang;yun powerup;enable force wuzheng-xinfa;yun bingxin;yun powerup")
 end
 
-function set_enermy_menpai(menpai)
+function set_menpai(menpai)
 	if(menpai ~= nil) then
 		local re = rex.new("(ÌÒ»¨|ĞÇËŞ|¶ëáÒ|Ã·×¯|Ä½Èİ|¶ëÃ¼|ÁéğÕ|ÌúÕÆ|»ªÉ½|°×ÍÕ|Ñ©É½|ÃÜ×Ú|¶À¹Â|²É»¨)")
 		local r1,r2,r3 = re:match(menpai)

@@ -228,6 +228,7 @@ end
 
 function foundnpc()
 	var.task_found = true
+	config.set_menpai(var.task_menpai)
 	if(var.task_auto_kill == "0") then
 		walktask()
 	else

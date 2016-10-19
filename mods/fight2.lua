@@ -23,7 +23,7 @@ function prepare(busy_list, attack_list, f_escape, menpai, target)
 	context.halt = false
 	context.menpai = menpai
 	var.pfm_target = target or ""
-	config.set_enermy_menpai(menpai)
+	config.set_menpai(menpai)
 	timer.create("fight", "fight", 0.5, function() perform_busy() end)
 end
 
