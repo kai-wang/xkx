@@ -458,10 +458,15 @@ handlers = {
 		wait.make(function()
 			repeat
 				Execute(dir)
-				local l, w = wait.regexp("^(> )*(你走出了桃花迷阵。)|(突然一阵桃花瓣象雨点般疾射你！)$")
+				local l, w = wait.regexp("^(> )*(你走了半天，终于走出了桃花迷阵)|(突然一阵桃花瓣象雨点般疾射你).*$", 2)
 				wait.time(2)
-			until(l:match("你走出了"))
-			handlers.done()
+			until(not l or (l and l:match("终于走出了桃花迷阵")))
+
+			if(l:match("终于走出了桃花迷阵")) then
+				handlers.done()
+			elseif(not l) then
+				handlers.fail()
+			end
 		end)
 	end,
 	
