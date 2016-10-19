@@ -26,7 +26,7 @@ local tasks = {
 			if(var.task_available_time ~= nil and tonumber(var.task_available_time) - os.time() > 30) then
 				return 9
 			else
-				return 17
+				return 19
 			end
 		end
 	},
@@ -222,7 +222,7 @@ local tasks = {
 		
 		priority = function()
 			-- exceed the limit
-			return 19
+			return 18
 		end
 	},
 
