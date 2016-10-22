@@ -177,7 +177,7 @@ function retry()
 		heal(function()
 			var.xiao_retry_times = tonumber(var.xiao_retry_times) + 1
 			print("retry times: " .. var.xiao_retry_times)
-			local threshold = var.xiao_retry_threshold or 6;
+			local threshold = var.xiao_retry_threshold or 6
 			if(tonumber(var.xiao_retry_times) > tonumber(threshold)) then
 				return fail()
 			end
