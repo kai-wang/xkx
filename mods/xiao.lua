@@ -124,7 +124,7 @@ function startKill()
 	local busy_list = config.busy_list
 	local attack_list = config.attack_list2
 	fight.prepare(busy_list, attack_list, escape)
-	fight.start("fight shashou")
+	fight.start("touxi shashou")
 	EnableTriggerGroup("xiao_fight", true)
 end
 
@@ -177,7 +177,8 @@ function retry()
 		heal(function()
 			var.xiao_retry_times = tonumber(var.xiao_retry_times) + 1
 			print("retry times: " .. var.xiao_retry_times)
-			if(tonumber(var.xiao_retry_times) > 6) then
+			local threshold = var.xiao_retry_threshold or 6;
+			if(tonumber(var.xiao_retry_times) > tonumber(threshold)) then
 				return fail()
 			end
 			core.busytest(function()

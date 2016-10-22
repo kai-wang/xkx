@@ -23,6 +23,7 @@ var.weapon2 = "dao"
 var.study_seq = 1
 var.fast_mode = 1
 var.xiao_full = 0
+var.xiao_retry_threshold = 3
 var.guo_kill_place = "fly mj"
 var.task_walk_danger_level = 5
 var.gf_walk_danger_level = 5
