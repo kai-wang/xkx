@@ -426,7 +426,11 @@ end
 
 function stop()
 	var.auto_stop = 1
+	fight.stop()
+	walk.abort()
 	timer.stop("auto")
+	timer.stop("action")
+	DeleteTemporaryTriggers()
 end
 
 function anti_idle(tick)
