@@ -78,6 +78,7 @@ blocker_npcs["麻衣长老"] = {id = "mayi zhanglao"}
 blocker_npcs["萨木活佛"] = {id = "samu huofo", pfm = true}
 blocker_npcs["嘉木活佛"] = {id = "jiamu huofo", pfm = true}
 blocker_npcs["西华子"] = {id = "xi huazi"}
+blocker_npcs["陆大有"] = {id = "lu dayou"}
 blocker_npcs["弟子"] = {id = "di zi"}
 blocker_npcs["竹剑"] = {id = "zhu jian"}
 blocker_npcs["菊剑"] = {id = "ju jian"}
