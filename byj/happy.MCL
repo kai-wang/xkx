@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE muclient>
-<!-- Saved on ÐÇÆÚÒ», Ê®ÔÂ 10, 2016, 5:02 ÏÂÎç -->
+<!-- Saved on ÐÇÆÚËÄ, Ê®ÔÂ 20, 2016, 7:56 ÏÂÎç -->
 <!-- MuClient version 4.84 -->
 <!-- Written by Nick Gammon -->
 <!-- Home Page: http://www.mushclient.com/ -->
@@ -8,7 +8,7 @@
 <world
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-10-10 17:02:58"
+   date_saved="2016-10-20 19:56:30"
 
    auto_say_override_prefix="-"
    auto_say_string="say "
@@ -114,7 +114,7 @@
 <triggers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-10-10 17:02:58"
+   date_saved="2016-10-20 19:56:30"
   >
   <trigger
    expand_variables="y"
@@ -1577,28 +1577,6 @@ fight.busy()</send>
   >
   </trigger>
   <trigger
-   enabled="y"
-   group="system"
-   match="^(&gt; )*ÄãÒ»´ÎÊäÈëÌ«¶àÃüÁîÁË¡£$"
-   regexp="y"
-   send_to="12"
-   sequence="100"
-  >
-  <send>fight.stop()
-walk.abort()
-
-timer.tickonce("action", 15, function() safeback("halt;fly wm") end)</send>
-  </trigger>
-  <trigger
-   group="study"
-   keep_evaluating="y"
-   match="^(&gt; )*ÄãÒ»´ÎÊäÈëÌ«¶àÃüÁîÁË¡£$"
-   regexp="y"
-   script="study.waitandtry"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
    group="fight"
    match="^(&gt; )*ÄãÒ»´ÎÊäÈëÌ«¶àÃüÁîÁË¡£$"
    send_to="12"
@@ -1610,6 +1588,28 @@ wait.make(function()
 wait.time(8)
 fight.start()
 end)</send>
+  </trigger>
+  <trigger
+   group="study"
+   keep_evaluating="y"
+   match="^(&gt; )*ÄãÒ»´ÎÊäÈëÌ«¶àÃüÁîÁË¡£$"
+   regexp="y"
+   script="study.waitandtry"
+   sequence="100"
+  >
+  </trigger>
+  <trigger
+   enabled="y"
+   group="system"
+   match="^(&gt; )*ÄãÒ»´ÎÊäÈëÌ«¶àÃüÁîÁË¡£$"
+   regexp="y"
+   send_to="12"
+   sequence="100"
+  >
+  <send>fight.stop()
+walk.abort()
+
+timer.tickonce("action", 15, function() safeback("halt;fly wm") end)</send>
   </trigger>
   <trigger
    enabled="y"
@@ -1850,14 +1850,6 @@ walk.handlers.k_blocker()</send>
   >
   </trigger>
   <trigger
-   group="HP"
-   match="^[&gt; ]*¡¾ Æø Ñª ¡¿\s+(\d+)\/\s+(\d+)\s+\(\s*(\d+)%\)\s+¡¾ ÄÚ Á¦ ¡¿\s+(\d+)\s\/\s(\d+).*$"
-   regexp="y"
-   script="on_hp2_update"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
    group="study_check"
    keep_evaluating="y"
    match="^[&gt; ]*¡¾ Æø Ñª ¡¿\s+(\d+)\/\s+(\d+)\s+\(\s*(\d+)%\)\s+¡¾ ÄÚ Á¦ ¡¿\s+(\d+)\s\/\s(\d+).*$"
@@ -1867,6 +1859,14 @@ walk.handlers.k_blocker()</send>
   >
   <send>
 </send>
+  </trigger>
+  <trigger
+   group="HP"
+   match="^[&gt; ]*¡¾ Æø Ñª ¡¿\s+(\d+)\/\s+(\d+)\s+\(\s*(\d+)%\)\s+¡¾ ÄÚ Á¦ ¡¿\s+(\d+)\s\/\s(\d+).*$"
+   regexp="y"
+   script="on_hp2_update"
+   sequence="100"
+  >
   </trigger>
   <trigger
    group="HP"
@@ -1984,7 +1984,7 @@ walk.stop()</send>
 <aliases
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-10-10 17:02:58"
+   date_saved="2016-10-20 19:56:30"
   >
   <alias
    match="^k1 (.+)"
@@ -2946,7 +2946,7 @@ leitai</send>
 <timers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-10-10 17:02:58"
+   date_saved="2016-10-20 19:56:30"
   >
   <timer name="action" second="1.50" offset_second="0.00"    send_to="12"
 group="action" >
@@ -2958,13 +2958,13 @@ group="reconnect" >
   <send>timer.fire("reconnect")</send>
 
   </timer>
+  <timer enabled="y" second="59.00" offset_second="0.00" >
+  <send>hi</send>
+
+  </timer>
   <timer name="idle" minute="5" second="0.00" offset_second="0.00"    send_to="12"
 group="idle" >
   <send>timer.fire("idle")</send>
-
-  </timer>
-  <timer enabled="y" second="59.00" offset_second="0.00" >
-  <send>hi</send>
 
   </timer>
 </timers>
@@ -2974,7 +2974,7 @@ group="idle" >
 <macros
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-10-10 17:02:58"
+   date_saved="2016-10-20 19:56:30"
   >
 
   <macro name="up" type="send_now" >
@@ -3068,7 +3068,7 @@ group="idle" >
 <variables
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-10-10 17:02:58"
+   date_saved="2016-10-20 19:56:30"
   >
   <variable name="auto_stop">1</variable>
   <variable name="bag_dummy_id">hsly</variable>
@@ -3246,7 +3246,7 @@ group="idle" >
 <colours
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-10-10 17:02:58"
+   date_saved="2016-10-20 19:56:30"
   >
 
 <ansi>
@@ -3303,7 +3303,7 @@ group="idle" >
 <keypad
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-10-10 17:02:58"
+   date_saved="2016-10-20 19:56:30"
   >
 
   <key name="0" >
@@ -3417,7 +3417,7 @@ group="idle" >
 <printing
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-10-10 17:02:58"
+   date_saved="2016-10-20 19:56:30"
   >
 
 <ansi>
