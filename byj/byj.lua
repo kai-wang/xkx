@@ -29,7 +29,8 @@ var.task_walk_danger_level = 5
 var.gf_walk_danger_level = 5
 var.ss_walk_danger_level = 5
 var.xiao_walk_danger_level = 5
-var.ss_shuffle = 1
+var.ss_shuffle = 0
+var.ss_can_stop = 1
 var.study_threshold = 10000
 var.kantou_flag = true
 
@@ -376,7 +377,7 @@ end
 
 function fight_wear(f_done)
 	wait.make(function()
-		Execute("tuo all;wear shentong xue;wear bagua xue;wear shentong mao;wear shenshui mao;wear taiji yi;wear xuanyuan yi;wear xuanyuan hushou;wear yecha ring;give byj qiankun dao")
+		Execute("tuo all;wear shentong xue;wear bagua xue;wear shentong mao;wear shenshui mao;wear taiji yi;wear xuanyuan yi;wear xuanyuan hushou;wear lianyu ring;give byj qiankun dao")
 		wait.time(1)
 		core.busytest(function() call(f_done) end)
 	end)
