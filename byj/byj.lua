@@ -36,7 +36,7 @@ var.kantou_flag = true
 
 auto_list = {"wei", "guanfu","guo","event","reconnect", "sstask", "xiao", "double", "wine", "task", "study", "wait_for_task"}
 
-weapon_list = {"haoqi qin", "kunlun dao", "kunlun qin", "shentong zhang", "qiankun dao", "kunlun zhang"}
+weapon_list = {"haoqi qin", "sanqing dao", "kunlun qin", "shentong zhang", "qiankun dao", "kunlun zhang"}
 
 pfm = {
 	[1]= {	name="双手互博之术", desc="你平心静气", cd=false },
