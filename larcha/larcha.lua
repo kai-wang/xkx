@@ -48,7 +48,7 @@ pfm = {
 	[7]= {	name="刀刀相连", desc="在一片刀光中，一刀劈了过来", cd=false },
 	[8]= {	name="抽髓三掌", desc="你眼光一闪，暗运化功大法", cd=false },
 	[9]= {	name="附骨缠身", desc="你大喝一声，缠身而上", cd=false },
-	[10]={	name="huagong", desc="你一张脸突然变得惨白，右掌直出，猛地对准", cd=false, reset_time=15}
+	[10]={	name="huagong", desc="你一张脸突然变得惨白，右掌直出，猛地对准|已经内力涣散，没有必要化他内力了！", cd=false, reset_time=15}
 }
 
 function set_fz_status()
