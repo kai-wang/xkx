@@ -226,6 +226,28 @@ local tasks = {
 		end
 	},
 
+	["xiao_high"] = {
+		name = "xiao_high",
+		main = function(f_next)
+			anti_idle(180)
+			xiao.main(f_next, f_next)
+		end,
+		
+		clear = function()
+			xiao.init()
+		end,
+		
+		wait = function()
+			if(var.xiao_full == "1") then return os.time() + 1800 end
+			if(var.xiao_available_time == nil) then return os.time() else return tonumber(var.xiao_available_time) end
+		end,
+		
+		priority = function()
+			-- exceed the limit
+			return 20
+		end
+	},
+
 	["sstask"] = {
 		name = "sstask",
 		main = function(f_next)
@@ -344,7 +366,7 @@ local tasks = {
 		end,
 		
 		priority = function()
-			return 20
+			return 21
 		end
 	},
 	

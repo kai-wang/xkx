@@ -34,7 +34,7 @@ var.ss_can_stop = 1
 var.study_threshold = 10000
 var.kantou_flag = false
 
-auto_list = {"wei", "guanfu","guo","event","reconnect", "xiao", "double", "task", "study", "wait_for_task"}
+auto_list = {"wei", "guanfu","guo","event","reconnect", "xiao_high", "double", "task", "study", "wait_for_task"}
 
 weapon_list = {"wanyue zhen", "tianfeng dao"}
 
