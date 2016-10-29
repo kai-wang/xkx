@@ -70,12 +70,10 @@ function kill_jd_npc_start()
 end
 
 function kill_jd_npc_end()
-    core.safehalt(function()
+    core.busytest(function()
         var.kantou_flag = true
         kantou(function()
-            core.safehalt(function()
-                Execute("fly xx;n;n;give head to ding chunqiu")
-            end)
+            clean(function() Execute("fly xx;n;n;give ding head") end)
         end)
 	end)
 end
@@ -145,9 +143,9 @@ function dump()
     for i, v in ipairs(roomAll) do 
         local r1,r2,r3 = re:match(v.name) 
         if(r3) then
-            local val = v.id .. ", " .. v.name
+            local val = "{ id = " .. v.id .. ", name = " .. v.name .. " }"
             if(v.danger ~= nil) then val = val .. ", " .. v.danger end
-            file:write(val .. "\r\n")
+            file:write(val .. "\n")
         end 
     end
 	file:close()
