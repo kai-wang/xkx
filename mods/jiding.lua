@@ -167,7 +167,30 @@ function search()
     local roomId = jd_rooms[context.index].id
     print("go to room: " .. roomId)
     core.safehalt(function()
-        walk.run(roomAll[roomId].path, function() Execute("ji ding") end, search, search)
+        walk.run(roomAll[roomId].path, 
+            function()
+                EnableTriggerGroup("jd_kill", true)
+                Execute("ji ding") 
+            end, 
+            search, search)
+    end)
+end
+
+function jd_kill()
+    timer.stop("action")
+	timer.tickonce("action", 1, function()
+        local busy_list = config.busy_list
+		local attack_list = config.attack_list3
+		fight.prepare(busy_list, attack_list)
+		fight.start()
+	end)
+end
+
+function jd_kill_done()
+    core.safehalt(function()
+        sleep(function()
+            ask()
+        end)
     end)
 end
 
