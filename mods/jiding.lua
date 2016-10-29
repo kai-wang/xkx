@@ -138,4 +138,19 @@ function auto()
 	main(f, f)
 end
 
+function dump()
+	local file = io.open("worlds\\xkx\\mods\\jd_dump.txt", "w")
+    local re = rex.new("(草地|密林|树林|森林|草地)") 
+    for i, v in ipairs(roomAll) do 
+        local r1,r2,r3 = re:match(v.name) 
+        if(r3) then
+            local val = v.id .. ", " .. v.name
+            if(v.danger ~= nil) then val = val .. ", " .. v.danger end
+            file:write(val .. "\r\n")
+        end 
+    end
+	file:close()
+end
+
+
 init()
