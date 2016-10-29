@@ -40,7 +40,8 @@ end
 
 function check_ding(f_ok, f_fail)
 	wait.make(function()
-		local l, w = wait.regexp("^(> )*(你要看什么)|(木鼎)|(神木王鼎).*$", 10)
+		Execute("look ding")
+		local l, w = wait.regexp("^(> )*(你要看什么)|(木鼎)|(神木王鼎).*$", 5)
 		if(not l or l:match("你要看什么")) then 
 			print("没有鼎")
 			call(f_fail) 
