@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE muclient>
-<!-- Saved on ÐÇÆÚ¶þ, Ê®ÔÂ 25, 2016, 7:28 ÏÂÎç -->
+<!-- Saved on ÐÇÆÚÁù, Ê®ÔÂ 29, 2016, 7:11 ÏÂÎç -->
 <!-- MuClient version 4.84 -->
 <!-- Written by Nick Gammon -->
 <!-- Home Page: http://www.mushclient.com/ -->
@@ -8,7 +8,7 @@
 <world
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-10-25 19:28:40"
+   date_saved="2016-10-29 19:11:10"
 
    auto_say_override_prefix="-"
    auto_say_string="say "
@@ -114,7 +114,7 @@
 <triggers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-10-25 19:28:40"
+   date_saved="2016-10-29 19:11:10"
   >
   <trigger
    expand_variables="y"
@@ -478,22 +478,22 @@ songxin.goto_place2()</send>
   </trigger>
   <trigger
    expand_variables="y"
-   group="dazuo"
-   keep_evaluating="y"
-   match="^(&gt; )*(@!dazuo_end_desc)$"
-   regexp="y"
-   script="dazuo.continue"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
-   expand_variables="y"
    group="study"
    keep_evaluating="y"
    match="^(&gt; )*(@!dazuo_end_desc)$"
    omit_from_output="y"
    regexp="y"
    script="study.continue"
+   sequence="100"
+  >
+  </trigger>
+  <trigger
+   expand_variables="y"
+   group="dazuo"
+   keep_evaluating="y"
+   match="^(&gt; )*(@!dazuo_end_desc)$"
+   regexp="y"
+   script="dazuo.continue"
    sequence="100"
   >
   </trigger>
@@ -1590,6 +1590,15 @@ fight.start()
 end)</send>
   </trigger>
   <trigger
+   group="study"
+   keep_evaluating="y"
+   match="^(&gt; )*ÄãÒ»´ÎÊäÈëÌ«¶àÃüÁîÁË¡£$"
+   regexp="y"
+   script="study.waitandtry"
+   sequence="100"
+  >
+  </trigger>
+  <trigger
    enabled="y"
    group="system"
    match="^(&gt; )*ÄãÒ»´ÎÊäÈëÌ«¶àÃüÁîÁË¡£$"
@@ -1601,15 +1610,6 @@ end)</send>
 walk.abort()
 
 timer.tickonce("action", 15, function() safeback("halt;fly wm") end)</send>
-  </trigger>
-  <trigger
-   group="study"
-   keep_evaluating="y"
-   match="^(&gt; )*ÄãÒ»´ÎÊäÈëÌ«¶àÃüÁîÁË¡£$"
-   regexp="y"
-   script="study.waitandtry"
-   sequence="100"
-  >
   </trigger>
   <trigger
    enabled="y"
@@ -1624,19 +1624,19 @@ timer.tickonce("action", 15, function() safeback("halt;fly wm") end)</send>
 if(name ~= var.task_npc) then safehalt(function() Execute("er;look") end) end</send>
   </trigger>
   <trigger
+   group="fight_ob"
+   match="^(&gt; )*ÄãÖ»¾õµÃÍ·»èÄÔÕÍ£¬ÑÛÇ°Ò»ºÚ£¬½Ó×ÅÊ²Ã´Ò²²»ÖªµÀÁË¡­¡­$"
+   regexp="y"
+   script="fight.faint"
+   sequence="100"
+  >
+  </trigger>
+  <trigger
    group="bei"
    keep_evaluating="y"
    match="^(&gt; )*ÄãÖ»¾õµÃÍ·»èÄÔÕÍ£¬ÑÛÇ°Ò»ºÚ£¬½Ó×ÅÊ²Ã´Ò²²»ÖªµÀÁË¡­¡­$"
    regexp="y"
    script="bei.faint"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
-   group="fight_ob"
-   match="^(&gt; )*ÄãÖ»¾õµÃÍ·»èÄÔÕÍ£¬ÑÛÇ°Ò»ºÚ£¬½Ó×ÅÊ²Ã´Ò²²»ÖªµÀÁË¡­¡­$"
-   regexp="y"
-   script="fight.faint"
    sequence="100"
   >
   </trigger>
@@ -1777,20 +1777,20 @@ bei.cleanup()</send>
   <send>Execute("out;d;e;s;sw")</send>
   </trigger>
   <trigger
-   group="wei_kill"
-   keep_evaluating="y"
-   match="^(&gt; )*ÕâÀïÃ»ÓÐÕâ¸öÈË¡£$"
-   regexp="y"
-   script="wei.kill_done"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
    group="shan"
    keep_evaluating="y"
    match="^(&gt; )*ÕâÀïÃ»ÓÐÕâ¸öÈË¡£$"
    regexp="y"
    script="shan.fail"
+   sequence="100"
+  >
+  </trigger>
+  <trigger
+   group="wei_kill"
+   keep_evaluating="y"
+   match="^(&gt; )*ÕâÀïÃ»ÓÐÕâ¸öÈË¡£$"
+   regexp="y"
+   script="wei.kill_done"
    sequence="100"
   >
   </trigger>
@@ -1984,7 +1984,7 @@ walk.stop()</send>
 <aliases
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-10-25 19:28:40"
+   date_saved="2016-10-29 19:11:10"
   >
   <alias
    match="^k1 (.+)"
@@ -2946,7 +2946,7 @@ leitai</send>
 <timers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-10-25 19:28:40"
+   date_saved="2016-10-29 19:11:10"
   >
   <timer enabled="y" second="59.00" offset_second="0.00" >
   <send>hi</send>
@@ -2974,7 +2974,7 @@ group="idle" >
 <macros
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-10-25 19:28:40"
+   date_saved="2016-10-29 19:11:10"
   >
 
   <macro name="up" type="send_now" >
@@ -3068,7 +3068,7 @@ group="idle" >
 <variables
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-10-25 19:28:40"
+   date_saved="2016-10-29 19:11:10"
   >
   <variable name="auto_stop">1</variable>
   <variable name="bag_dummy_id">hsly</variable>
@@ -3246,7 +3246,7 @@ group="idle" >
 <colours
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-10-25 19:28:40"
+   date_saved="2016-10-29 19:11:10"
   >
 
 <ansi>
@@ -3303,7 +3303,7 @@ group="idle" >
 <keypad
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-10-25 19:28:40"
+   date_saved="2016-10-29 19:11:10"
   >
 
   <key name="0" >
@@ -3417,7 +3417,7 @@ group="idle" >
 <printing
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-10-25 19:28:40"
+   date_saved="2016-10-29 19:11:10"
   >
 
 <ansi>

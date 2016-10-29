@@ -9,6 +9,7 @@ local npc_list = dofile("worlds\\xkx\\mods\\npcs.lua")
 local jd_rooms = {}
 local context = {}
 
+
 function init()
     EnableTriggerGroup("jd_ask", false)
     EnableTriggerGroup("jd_kill", false)
