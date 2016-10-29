@@ -189,7 +189,7 @@ end
 function jd_kill_done()
     core.safehalt(function()
         sleep(function()
-            ask()
+            check_ding(search, ask)
         end)
     end)
 end
