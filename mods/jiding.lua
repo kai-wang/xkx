@@ -145,7 +145,7 @@ end
 function kill_jd_npc_start()
 	timer.tickonce("action", 1, function()
         local busy_list = config.busy_list
-		local attack_list = config.attack_list5
+		local attack_list = config.attack_list2
 		EnableTriggerGroup("jd_kill", true)
 		fight.prepare(busy_list, attack_list)
 		fight.start("kill " .. var.jd_npc_id)
@@ -180,7 +180,7 @@ function jd_kill()
     timer.stop("action")
 	timer.tickonce("action", 1, function()
         local busy_list = config.busy_list
-		local attack_list = config.attack_list3
+		local attack_list = config.attack_list2
 		fight.prepare(busy_list, attack_list)
 		fight.start()
 	end)
@@ -218,7 +218,7 @@ function kill_dcq()
     timer.stop("action")
 	timer.tickonce("action", 1, function()
         local busy_list = config.busy_list
-		local attack_list = config.attack_list3
+		local attack_list = config.attack_list2
 		EnableTriggerGroup("jd_kill_ding", true)
 		fight.prepare(busy_list, attack_list)
 		fight.start("kill ding chunqiu")
