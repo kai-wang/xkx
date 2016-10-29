@@ -173,7 +173,7 @@ function search()
                 Execute("ji ding") 
             end, 
             search, search)
-    end)
+    end, 0.2)
 end
 
 function jd_kill()
@@ -189,9 +189,9 @@ end
 function jd_kill_done()
     core.safehalt(function()
         sleep(function()
-            check_ding(search, ask)
+            done()
         end)
-    end)
+    end, 0.2)
 end
 
 function fail()
