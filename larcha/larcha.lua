@@ -208,39 +208,39 @@ function choose_force(sf)
 end
 
 function powerup()
-	Execute("enable force longxiang;yun powerup;enable force wuzheng-xinfa;yun bingxin;yun powerup")
+	Execute("enable force huagong-dafa;yun powerup;enable force kuihua-xinfa;yun kuihuawudi")
 end
 
 function set_menpai(menpai)
 	if(menpai ~= nil) then
-		local re = rex.new("(桃花|星宿|峨嵋|梅庄|慕容|峨眉|灵鹫|铁掌|华山|白驼|雪山|密宗|独孤|采花)")
+		local re = rex.new("(灵鹫|铁掌|华山|白驼|雪山|密宗|独孤|采花)")
 		local r1,r2,r3 = re:match(menpai)
 		if(r3 ~= nil) then
-			print("换金系内功了.......")
-			return choose_force("longxiang")
+			print("换水系内功了.......")
+			return choose_force("kuihua-xinfa")
 		end
 
-		re = rex.new("(明教|大理|神龙|江湖|云龙|少林|全真)")
+		re = rex.new("(明教|大理|神龙|江湖|云龙|少林|全真|桃花|星宿|峨嵋|梅庄|慕容|峨眉)")
 		r1,r2,r3 = re:match(menpai)
 		if(r3 ~= nil) then
 			print("换木系内功了.......")
-			return choose_force("wuzheng-xinfa")
+			return choose_force("huagong-dafa")
 		end
 
 		re = rex.new("(武当|日月|逍遥|昆仑|丐帮)")
 		r1,r2,r3 = re:match(menpai)
 		if(r3 ~= nil) then
-			print("换金系内功了.......")
-			return choose_force("longxiang")
+			print("换水系内功了.......")
+			return choose_force("kuihua-xinfa")
 		end
 	end
 
 	print("默认换成木系内功了.......")
-	return choose_force("wuzheng-xinfa")
+	return choose_force("kuihua-xinfa")
 end
 
 function buff(menpai)
-	Execute("unwield all;jiali max;perform strike.honglian;jiali 0")
+	Execute("perfrom strike.youming")
 end
 
 function anti_touxi()
