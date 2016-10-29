@@ -40,7 +40,7 @@ weapon_list = {"wanyue zhen", "tianfeng dao"}
 
 pfm = {
 	[1]= {	name="双手互博之术", desc="你平心静气", cd=false },
-	[2]= {	name="刺目", desc="你手中长剑一振，剑尖一点暴长", cd=false },
+	[2]= {	name="刺目", desc="你左手两指并拢，手臂暴长", cd=false },
 	[3]= {	name="三连刺", desc="你嫣然一笑，诡异之极，身法陡然加快", cd=false },
 	[4]= {	name="五遁绝杀", desc="你使出五行遁中的「五遁绝杀」", cd=false },
 	[5]= {	name="zhaohuo", desc="你用全身的内力注入地上！对着地上一指", cd=false, reset_time=15 },
@@ -107,7 +107,7 @@ busy_perform_array = {
 	[1] = { i = 2,
 			action = function()
 				local wp = choose_sword()
-				Execute("unwield all;wield " .. wp .. ";perform sword.cimu " .. var.pfm_target)
+				Execute("unwield all;perform sword.cimu " .. var.pfm_target)
 			end
 	},
 
