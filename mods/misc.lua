@@ -16,7 +16,8 @@ function suck()
 end
 
 function kantou(f)
-	if(not var.kantou_flag or var.kantou_flag == "false") then 
+	if(not var.kantou_flag or var.kantou_flag == "false") then
+		Execute("cut")
 		call(f)
 	else
 		wait.make(function()
@@ -25,6 +26,28 @@ function kantou(f)
 			call(f)
 		end)
 	end
+end
+
+function sleep(f)
+	wait.make(function()
+		local room = var.sleep_loc or "fly wm;e;n;e;e;n;n"
+		Execute(room)
+		Execute("sleep")
+		local l, w = wait.regexp("^(> )*你一觉醒来，只觉精力充沛。该活动一下了。$", 120)
+		call(f)
+	end)
+end
+
+function check_ding(f_ok, f_fail)
+	wait.make(function()
+		local l, w = wait.regexp("^(> )*(你要看什么)|(木鼎)|(神木王鼎).*$", 10)
+		if(not l or l:match("你要看什么")) then 
+			print("没有鼎")
+			call(f_fail) 
+		else
+			call(f_ok)
+		end
+	end)
 end
 
 function double(f)

@@ -208,9 +208,9 @@ ttask_attack_list = { 1, 2, 3, 4 }
 
 busy_list = { 1, 2, 3}
 busy_list2 = { 1, 2, 3 }
-attack_list1 = { 3, 6, 2 } 			-- shan / blocker
+attack_list1 = { 3, 6, 2, 1 } 			-- shan / blocker
 attack_list2 = { 1, 2, 3, 5, 4 }	-- xiao
-attack_list3 = { 3, 6, 2}			-- wei / xiao
+attack_list3 = { 3, 6, 2, 1}			-- wei / xiao
 attack_list4 = { 6 }				-- shan / wei
 attack_list5 = { 4, 5, 3, 2, 1 }	-- xiao
 
