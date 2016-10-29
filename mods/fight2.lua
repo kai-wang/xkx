@@ -69,7 +69,8 @@ function perform_busy()
 	for i, v in ipairs(context.busy_list) do
 		local busy = config.busy_perform_array[v]
 		local pfm = config.pfm[busy.i]
-		if(pfm.cd_time ~= nil and (os.time() - tonumber(pfm.cd_time) > 30)) then pfm.cd = false end
+		local reset_time = pfm.reset_time or 30
+		if(pfm.cd_time ~= nil and (os.time() - tonumber(pfm.cd_time) > tonumber(reset_time))) then pfm.cd = false end
 		
 		if(not pfm.cd) then
 			busy.action()
@@ -87,7 +88,8 @@ function perform_attack()
 	for i, v in ipairs(context.attack_list) do
 		local attack = config.attack_perform_array[v]
 		local pfm = config.pfm[attack.i]
-		if(pfm.cd_time ~= nil and (os.time() - tonumber(pfm.cd_time) > 30)) then pfm.cd = false end
+		local reset_time = pfm.reset_time or 30
+		if(pfm.cd_time ~= nil and (os.time() - tonumber(pfm.cd_time) > tonumber(reset_time))) then pfm.cd = false end
 		
 		if(not pfm.cd) then 
 			attack.action()

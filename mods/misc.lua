@@ -16,7 +16,7 @@ function suck()
 end
 
 function kantou(f)
-	if(not var.kantou_flag) then 
+	if(not var.kantou_flag or var.kantou_flag == "false") then 
 		call(f)
 	else
 		wait.make(function()

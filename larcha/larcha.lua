@@ -43,10 +43,12 @@ pfm = {
 	[2]= {	name="刺目", desc="你手中长剑一振，剑尖一点暴长", cd=false },
 	[3]= {	name="三连刺", desc="你嫣然一笑，诡异之极，身法陡然加快", cd=false },
 	[4]= {	name="五遁绝杀", desc="你使出五行遁中的「五遁绝杀」", cd=false },
-	[5]= {	name="zhaohuo", desc="你用全身的内力注入地上！对着地上一指", cd=false },
+	[5]= {	name="zhaohuo", desc="你用全身的内力注入地上！对着地上一指", cd=false, reset_time=15 },
 	[6]= {	name="幻影", desc="你前后游走，身形闪动，手中钢刀越使越快，幻起无数刀光化出数个身形", cd=false },
 	[7]= {	name="刀刀相连", desc="在一片刀光中，一刀劈了过来", cd=false },
-	[8]= {	name="抽髓三掌", desc="你眼光一闪，暗运化功大法", cd=false }
+	[8]= {	name="抽髓三掌", desc="你眼光一闪，暗运化功大法", cd=false },
+	[9]= {	name="附骨缠身", desc="你大喝一声，缠身而上", cd=false },
+	[10]={	name="huagong", desc="你一张脸突然变得惨白，右掌直出，猛地对准", cd=false, reset_time=15}
 }
 
 function set_fz_status()
@@ -110,6 +112,14 @@ busy_perform_array = {
 			action = function()
 				Execute("unwield all;enable strike chousui-zhang;perform strike.zhaohuo " .. var.pfm_target)
 			end
+	},
+
+	[5] = { i = 3,
+			action = function()
+				choose_force()
+				local wp = choose_sword()
+				Execute("unwield all;wield " .. wp .. ";perform sword.sanlianci " .. var.pfm_target .. ";unwield all")
+			end
 	}
 }
 
@@ -135,7 +145,7 @@ attack_perform_array = {
 	[3] = { i = 1,
 			action = function()
 				choose_force()
-				Execute("unwield all;enable claw youming-zhao;perform claw.youming;hubo " .. var.pfm_target)
+				Execute("unwield all;enable claw youming-zhao;perform claw.youming;bei none;bei chousui-zhang;hubo " .. var.pfm_target)
 			end
 	},
 
@@ -160,11 +170,25 @@ attack_perform_array = {
 				choose_force()
 				Execute("perform move.break " .. var.pfm_target .. ";unwield all")
 			end
+	},
+
+	[7] = { i = 9,
+			action = function()
+				choose_force()
+				local wp = choose_sword()
+				Execute("unwield all;wield " .. wp .. ";enable parry jinshe-zhang;perform parry.fugu;unwield all")
+			end
+	},
+
+	[8] = { i = 10,
+			action = function()
+				Execute("enable force huagong-dafa;yun huagong " .. var.pfm_target)
+			end
 	}
 }
 
 task_busy_list = { 1, 2, 3}
-task_attack_list = {1, 2, 3, 5, 4}
+task_attack_list = {1, 8, 2, 3, 5, 4, 7}
 
 gf_busy_list = { 1, 3 }
 gf_attack_list = { 6, 3 }
