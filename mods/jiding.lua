@@ -143,7 +143,7 @@ function dump()
     for i, v in ipairs(roomAll) do 
         local r1,r2,r3 = re:match(v.name) 
         if(r3) then
-            local val = "{ id = " .. v.id .. ", name = " .. v.name .. " }"
+            local val = "{ id = " .. v.id .. ", name = """ .. v.name .. """ }"
             if(v.danger ~= nil) then val = val .. ", " .. v.danger end
             file:write(val .. "\n")
         end 
