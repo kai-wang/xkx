@@ -853,3 +853,9 @@ to = function(room, f_done, f_fail, f_stop)
 	walk_cxt.currentId = tonumber(room)
 	walk.run(roomAll[walk_cxt.currentId].path, f_done, f_fail, f_stop)
 end
+
+tonpc = function(name, f_done, f_fail, f_stop)
+	local npc_list = dofile("worlds\\xkx\\mods\\npcs.lua")
+	if(npc_list[name] == nil) then call(f_fail) end
+	walk.run(roomAll[npc_list[name].room].path, f_done, f_fail, f_stop)
+end

@@ -192,7 +192,7 @@ attack_perform_array = {
 
 	[8] = { i = 10,
 			action = function()
-				Execute("enable force huagong-dafa;yun huagong " .. var.pfm_target)
+				Execute("unwield all;enable force huagong-dafa;yun huagong " .. var.pfm_target)
 			end
 	}
 }
