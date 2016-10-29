@@ -11,7 +11,7 @@ local jd_rooms = {
     { id = 2286, name = "星宿海" },
     { id = 2288, name = "星宿海" },
     { id = 2296, name = "星宿海" },
-    { id = 2297, name = "星宿海" }
+    { id = 2297, name = "星宿海" },
     { id = 27, name = "草地" },
     { id = 28, name = "草地" },
     { id = 29, name = "树林" },
