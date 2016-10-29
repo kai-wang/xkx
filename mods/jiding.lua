@@ -164,7 +164,8 @@ end
 function search()
     context.index = context.index + 1
     if(context.index > #jd_rooms) then return fail() end
-
+    local roomId = jd_rooms[context.index].id
+    print("go to room: " .. roomId)
     core.safehalt(function()
         walk.run(roomAll[roomId].path, function() Execute("ji ding") end, search, search)
     end)
