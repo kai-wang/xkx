@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE muclient>
-<!-- Saved on ÐÇÆÚËÄ, Ê®ÔÂ 20, 2016, 7:56 ÏÂÎç -->
+<!-- Saved on ÐÇÆÚ¶þ, Ê®ÔÂ 25, 2016, 7:28 ÏÂÎç -->
 <!-- MuClient version 4.84 -->
 <!-- Written by Nick Gammon -->
 <!-- Home Page: http://www.mushclient.com/ -->
@@ -8,7 +8,7 @@
 <world
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-10-20 19:56:30"
+   date_saved="2016-10-25 19:28:40"
 
    auto_say_override_prefix="-"
    auto_say_string="say "
@@ -114,7 +114,7 @@
 <triggers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-10-20 19:56:30"
+   date_saved="2016-10-25 19:28:40"
   >
   <trigger
    expand_variables="y"
@@ -1590,15 +1590,6 @@ fight.start()
 end)</send>
   </trigger>
   <trigger
-   group="study"
-   keep_evaluating="y"
-   match="^(&gt; )*ÄãÒ»´ÎÊäÈëÌ«¶àÃüÁîÁË¡£$"
-   regexp="y"
-   script="study.waitandtry"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
    enabled="y"
    group="system"
    match="^(&gt; )*ÄãÒ»´ÎÊäÈëÌ«¶àÃüÁîÁË¡£$"
@@ -1610,6 +1601,15 @@ end)</send>
 walk.abort()
 
 timer.tickonce("action", 15, function() safeback("halt;fly wm") end)</send>
+  </trigger>
+  <trigger
+   group="study"
+   keep_evaluating="y"
+   match="^(&gt; )*ÄãÒ»´ÎÊäÈëÌ«¶àÃüÁîÁË¡£$"
+   regexp="y"
+   script="study.waitandtry"
+   sequence="100"
+  >
   </trigger>
   <trigger
    enabled="y"
@@ -1624,19 +1624,19 @@ timer.tickonce("action", 15, function() safeback("halt;fly wm") end)</send>
 if(name ~= var.task_npc) then safehalt(function() Execute("er;look") end) end</send>
   </trigger>
   <trigger
-   group="fight_ob"
-   match="^(&gt; )*ÄãÖ»¾õµÃÍ·»èÄÔÕÍ£¬ÑÛÇ°Ò»ºÚ£¬½Ó×ÅÊ²Ã´Ò²²»ÖªµÀÁË¡­¡­$"
-   regexp="y"
-   script="fight.faint"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
    group="bei"
    keep_evaluating="y"
    match="^(&gt; )*ÄãÖ»¾õµÃÍ·»èÄÔÕÍ£¬ÑÛÇ°Ò»ºÚ£¬½Ó×ÅÊ²Ã´Ò²²»ÖªµÀÁË¡­¡­$"
    regexp="y"
    script="bei.faint"
+   sequence="100"
+  >
+  </trigger>
+  <trigger
+   group="fight_ob"
+   match="^(&gt; )*ÄãÖ»¾õµÃÍ·»èÄÔÕÍ£¬ÑÛÇ°Ò»ºÚ£¬½Ó×ÅÊ²Ã´Ò²²»ÖªµÀÁË¡­¡­$"
+   regexp="y"
+   script="fight.faint"
    sequence="100"
   >
   </trigger>
@@ -1984,7 +1984,7 @@ walk.stop()</send>
 <aliases
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-10-20 19:56:30"
+   date_saved="2016-10-25 19:28:40"
   >
   <alias
    match="^k1 (.+)"
@@ -2946,8 +2946,12 @@ leitai</send>
 <timers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-10-20 19:56:30"
+   date_saved="2016-10-25 19:28:40"
   >
+  <timer enabled="y" second="59.00" offset_second="0.00" >
+  <send>hi</send>
+
+  </timer>
   <timer name="action" second="1.50" offset_second="0.00"    send_to="12"
 group="action" >
   <send>timer.fire("action")</send>
@@ -2956,10 +2960,6 @@ group="action" >
   <timer name="reconnect" minute="1" second="30.00" offset_second="0.00"    send_to="12"
 group="reconnect" >
   <send>timer.fire("reconnect")</send>
-
-  </timer>
-  <timer enabled="y" second="59.00" offset_second="0.00" >
-  <send>hi</send>
 
   </timer>
   <timer name="idle" minute="5" second="0.00" offset_second="0.00"    send_to="12"
@@ -2974,7 +2974,7 @@ group="idle" >
 <macros
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-10-20 19:56:30"
+   date_saved="2016-10-25 19:28:40"
   >
 
   <macro name="up" type="send_now" >
@@ -3068,7 +3068,7 @@ group="idle" >
 <variables
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-10-20 19:56:30"
+   date_saved="2016-10-25 19:28:40"
   >
   <variable name="auto_stop">1</variable>
   <variable name="bag_dummy_id">hsly</variable>
@@ -3246,7 +3246,7 @@ group="idle" >
 <colours
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-10-20 19:56:30"
+   date_saved="2016-10-25 19:28:40"
   >
 
 <ansi>
@@ -3303,7 +3303,7 @@ group="idle" >
 <keypad
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-10-20 19:56:30"
+   date_saved="2016-10-25 19:28:40"
   >
 
   <key name="0" >
@@ -3417,7 +3417,7 @@ group="idle" >
 <printing
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-10-20 19:56:30"
+   date_saved="2016-10-25 19:28:40"
   >
 
 <ansi>
