@@ -99,7 +99,7 @@ function init()
     EnableTriggerGroup("jd", false)
 end
 
-function main()
+function main(f_done, f_fail)
 	context.f_done = f_done
 	context.f_fail = f_fail
 	check_ding(search, ask)
@@ -189,9 +189,7 @@ end
 
 function jd_kill_done()
     core.safehalt(function()
-        sleep(function()
-            done()
-        end)
+        done()
     end, 0.2)
 end
 
