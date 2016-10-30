@@ -13,7 +13,7 @@ function init()
 	timer.delete("fight")
 end
 
-function prepare(busy_list, attack_list, f_escape, menpai, target)
+function prepare(busy_list, attack_list, f_escape, menpai, target, noescape)
 	context.busy_list = busy_list
 	context.attack_list = attack_list
 	context.f_escape = f_escape
@@ -22,6 +22,7 @@ function prepare(busy_list, attack_list, f_escape, menpai, target)
 	context.escape = false
 	context.halt = false
 	context.menpai = menpai
+	context.noescape = noescape or false
 	var.pfm_target = target or ""
 	config.set_menpai(menpai)
 	timer.create("fight", "fight", 0.5, function() perform_busy() end)
@@ -110,8 +111,10 @@ end
 
 function escape()
 	timer.stop("fight")
-	context.escape = true
-	core.safeback(context.f_escape, 0.3)
+	if(not context.noescape) then
+		context.escape = true
+		core.safeback(context.f_escape, 0.3)
+	end
 --[[
 	timer.tick("fight", 0.1, function()
 		if(context.escape == true) then return end
