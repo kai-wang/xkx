@@ -169,6 +169,7 @@ function search()
     core.safehalt(function()
         walk.run(roomAll[roomId].path, 
             function()
+                EnableTriggerGroup("jd", true)
                 EnableTriggerGroup("jd_kill", true)
                 Execute("ji ding") 
             end, 
@@ -196,8 +197,7 @@ end
 
 function fail()
     if(context.index > #jd_rooms) then context.index = 0 end
-    timer.stop("action")
-    EnableTriggerGroup("jd_ask", false)
+    timer.stop("action")    EnableTriggerGroup("jd_ask", false)
     EnableTriggerGroup("jd_kill", false)
     EnableTriggerGroup("jd", false)
     clean(context.f_fail)
@@ -206,7 +206,10 @@ end
 function done()
     sleep(function()
         var.jd_available_time = os.time()
-        clean(context.f_ok)
+        EnableTriggerGroup("jd_ask", false)
+        EnableTriggerGroup("jd_kill", false)
+        EnableTriggerGroup("jd", false)
+        clean(context.f_done)
     end)
 end
 
