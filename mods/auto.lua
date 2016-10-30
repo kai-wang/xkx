@@ -274,7 +274,7 @@ local tasks = {
 		name = "jiding",
 		main = function(f_next)
 			anti_idle(200)
-			double(function() ss.main(f_next, f_next) end)
+			double(function() jiding.main(f_next, f_next) end)
 		end,
 		
 		clear = function()
