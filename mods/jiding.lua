@@ -184,7 +184,7 @@ function jd_kill()
 	timer.tickonce("action", 1, function()
         local busy_list = config.busy_list
 		local attack_list = config.attack_list2
-		fight.prepare(busy_list, attack_list)
+		fight.prepare(busy_list, attack_list, nil, nil, nil, true)
 		fight.start()
 	end)
 end
