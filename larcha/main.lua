@@ -34,8 +34,8 @@ loadmod("songxin")
 loadmod("xiao")
 loadmod("sstask")
 loadmod("maze")
-loadmod("chatter")
 loadmod("jiding")
+loadmod("chatter")
 
 map.loadall()
 
