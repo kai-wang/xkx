@@ -31,7 +31,6 @@ local jd_rooms = {
     { id = 368, name = "树林" },
     { id = 390, name = "树林" },
     { id = 570, name = "大森林" },
-    { id = 571, name = "黑森林" },
     { id = 588, name = "密林" },
     { id = 716, name = "草地" },
     { id = 718, name = "草地" },
@@ -73,14 +72,14 @@ local jd_rooms = {
     { id = 2756, name = "树林" },
     { id = 2757, name = "树林" },
     { id = 2758, name = "树林" },
-    { id = 2780, name = "树林" },
-    { id = 2781, name = "树林" },
-    { id = 2782, name = "树林" },
-    { id = 2783, name = "树林" },
-    { id = 2784, name = "树林" },
-    { id = 2785, name = "树林" },
-    { id = 2786, name = "树林" },
-    { id = 2796, name = "草地" },
+  --  { id = 2780, name = "树林" },
+  --  { id = 2781, name = "树林" },
+  --  { id = 2782, name = "树林" },
+  --  { id = 2783, name = "树林" },
+  --  { id = 2784, name = "树林" },
+  --  { id = 2785, name = "树林" },
+  --  { id = 2786, name = "树林" },
+ --   { id = 2796, name = "草地" },
     { id = 2896, name = "树林" },
     { id = 2897, name = "树林" },
     { id = 2902, name = "树林" },
@@ -95,8 +94,9 @@ local context = {}
 function init()
     context.index = 0
     EnableTriggerGroup("jd_ask", false)
-    EnableTriggerGroup("jd_kill", false)
+    EnableTriggerGroup("jd_kill_ding", false)
     EnableTriggerGroup("jd", false)
+    EnableTriggerGroup("jd_kill_npc", false)
 end
 
 function main(f_done, f_fail)
@@ -122,6 +122,8 @@ end
 
 function kill_jd_npc(name, line, wildcards)
     EnableTriggerGroup("jd_ask", false)
+    EnableTriggerGroup("jd_kill_npc", true)
+
 	timer.stop("action")
 	var.jd_available_time = os.time() + 300
 	var.jd_npc_name = wildcards[2]
@@ -153,6 +155,7 @@ function kill_jd_npc_start()
 end
 
 function kill_jd_npc_end()
+    EnableTriggerGroup("jd_kill_npc", false)
     core.busytest(function()
         var.kantou_flag = true
         kantou(function()
@@ -170,7 +173,7 @@ function search()
         walk.run(roomAll[roomId].path, 
             function()
                 EnableTriggerGroup("jd", true)
-                EnableTriggerGroup("jd_kill", true)
+                --EnableTriggerGroup("jd_kill", true)
                 Execute("ji ding") 
             end, 
             search, search)
@@ -195,9 +198,11 @@ end
 
 function fail()
     if(context.index > #jd_rooms) then context.index = 0 end
-    timer.stop("action")    EnableTriggerGroup("jd_ask", false)
-    EnableTriggerGroup("jd_kill", false)
+    timer.stop("action")    
+    EnableTriggerGroup("jd_ask", false)
+    EnableTriggerGroup("jd_kill_ding", false)
     EnableTriggerGroup("jd", false)
+    EnableTriggerGroup("jd_kill_npc", false)
     clean(context.f_fail)
 end
 
@@ -205,8 +210,9 @@ function done()
     sleep(function()
         var.jd_available_time = os.time()
         EnableTriggerGroup("jd_ask", false)
-        EnableTriggerGroup("jd_kill", false)
+        EnableTriggerGroup("jd_kill_ding", false)
         EnableTriggerGroup("jd", false)
+        EnableTriggerGroup("jd_kill_npc", false)
         me.full(context.f_done)
     end)
 end
@@ -216,6 +222,7 @@ function clean(f)
 end
 
 function kill_dcq()
+    EnableTriggerGroup("jd_kill_ding", true)
     timer.stop("action")
 	timer.tickonce("action", 1, function()
         local busy_list = config.busy_list
@@ -229,6 +236,14 @@ end
 function kill_dcq_end()
     var.jd_available_time = os.time() + 60
     fail()
+end
+
+function retry()
+    core.busytest(function() 
+        sleep(function()
+            jiding.ask()
+        end)
+    end, 0.2)
 end
 
 function auto()
