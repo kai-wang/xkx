@@ -240,7 +240,9 @@ end
 
 function kill_dcq_end()
     var.jd_available_time = os.time() + 60
-    fail()
+    core.busytest(function()
+        fail()
+    end)
 end
 
 function retry()
