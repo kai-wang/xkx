@@ -110,13 +110,13 @@ function ask()
 	walk.run("fly xx;n;n", function() Execute("ask ding about ÉñÄ¾Íõ¶¦") end, fail, fail)
 
 	timer.tickonce("action", 5, function()
-        var.jd_available_time = os.time() + 60
+        var.jd_available_time = os.time() + 30
         fail()
     end)
 end
 
 function ask_fail()
-    var.jd_available_time = os.time() + 60
+    var.jd_available_time = os.time() + 30
     fail()
 end
 
@@ -239,7 +239,7 @@ function kill_dcq()
 end
 
 function kill_dcq_end()
-    var.jd_available_time = os.time() + 60
+    var.jd_available_time = os.time() + 30
     core.busytest(function()
         fail()
     end)
