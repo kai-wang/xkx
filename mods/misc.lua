@@ -40,7 +40,7 @@ end
 
 function check_ding(f_ok, f_fail)
 	wait.make(function()
-		Execute("fly xx;look ding")
+		Execute("fly wm;nw;look ding")
 		local l, w = wait.regexp("^(> )*(你要看什么)|(木鼎)|(神木王鼎).*$", 5)
 		if(not l or l:match("你要看什么")) then 
 			print("没有鼎")
