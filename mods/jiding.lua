@@ -157,10 +157,8 @@ end
 function kill_jd_npc_end()
     EnableTriggerGroup("jd_kill_npc", false)
     core.busytest(function()
-        var.kantou_flag = true
-        kantou(function()
-            clean(function() Execute("fly xx;n;n;give ding head") end)
-        end)
+        Execute("wield dao;wield jian;kantou corpse")
+        clean(function() Execute("fly xx;n;n;give ding head") end)
 	end)
 end
 
