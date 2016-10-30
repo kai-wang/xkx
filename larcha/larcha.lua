@@ -34,7 +34,7 @@ var.ss_can_stop = 1
 var.study_threshold = 10000
 var.kantou_flag = false
 
-auto_list = {"wei", "guanfu","guo","event","reconnect", "xiao_high", "double", "jiding"}
+auto_list = {"wei", "guanfu","guo","event","reconnect", "xiao_high", "double", "jiding", "study"}
 
 weapon_list = {"wanyue zhen", "tianfeng dao"}
 
@@ -216,7 +216,7 @@ attack_list5 = { 4, 5, 3, 2, 1 }	-- xiao
 
 study_list = {
 	--{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu finger 10000;et;set study done", post_action="fly wm;e;s;s;s;w;w;u;gamble big skill finger 2000"}
-	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu kuihua-xinfa 1000", wear_int = true, interval = 0.8 }
+	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu kuihua-xinfa 10000", wear_int = true, interval = 0.8 }
 	--{ loc = "fly mj", cmd = "xue wei strike 100;et",pre_action="bai wei yixiao", post_action="bai xie xun"}
 }
 
