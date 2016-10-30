@@ -176,7 +176,7 @@ function search()
                 Execute("ji ding") 
             end, 
             search, search)
-    end, 0.2)
+    end, 0.3)
 end
 
 function jd_kill()
@@ -192,7 +192,7 @@ end
 function jd_kill_done()
     core.safehalt(function()
         done()
-    end, 0.2)
+    end, 0.3)
 end
 
 function fail()
@@ -248,7 +248,7 @@ end
 function retry()
     core.busytest(function()
         done()
-    end, 0.2)
+    end, 0.3)
 end
 
 function auto()
