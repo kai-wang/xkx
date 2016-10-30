@@ -156,6 +156,7 @@ end
 
 function kill_jd_npc_end()
     EnableTriggerGroup("jd_kill_npc", false)
+    EnableTriggerGroup("jd_ask", true)
     core.busytest(function()
         Execute("wield dao;wield jian;kantou corpse")
         clean(function() Execute("fly xx;n;n;give ding head") end)
