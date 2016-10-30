@@ -24,7 +24,7 @@ local jd_rooms = {
     { id = 60, name = "草地" },
     { id = 61, name = "树林" },
     { id = 62, name = "密林" },
-    { id = 63, name = "密林" },
+ --   { id = 63, name = "密林" },
     { id = 78, name = "草地" },
     { id = 79, name = "树林" },
     { id = 80, name = "树林" },
@@ -212,12 +212,18 @@ function done()
         EnableTriggerGroup("jd_kill_ding", false)
         EnableTriggerGroup("jd", false)
         EnableTriggerGroup("jd_kill_npc", false)
-        me.full(context.f_done)
+        me.full(function() 
+            Execute("fly wm;nw")
+            call(context.f_done)
+        end)
     end)
 end
 
 function clean(f)
-	me.qfull(f)
+	me.qfull(function() 
+        Execute("fly wm;nw")
+        call(f)
+    end)
 end
 
 function kill_dcq()

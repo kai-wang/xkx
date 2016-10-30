@@ -87,6 +87,8 @@ blocker_npcs["巴依"] = {id = "bayi"}
 blocker_npcs["定逸师太"] = {id = "dingyi shitai", pfm = true, exp=5000000}
 blocker_npcs["丘处机"] = {id = "qiu chuji", pfm = true, exp=5000000}
 blocker_npcs["刘处玄"] = {id = "liu chuxuan", pfm = true, exp=3000000}
+blocker_npcs["石嫂"] = {id = "shi sao"}
+blocker_npcs["居士"] = {id = "jushi", pfm = true, exp=5000000, dadizi=true}
 
 -- lht npcs -------------------------------------------------
 blocker_npcs["安健刚"] = {id = "an jiangang", pfm = false}
@@ -382,7 +384,7 @@ handlers = {
 		
 		var.walk_blocker_id = blocker_npcs[var.walk_blocker_name].id
 		print("blocker: " .. var.walk_blocker_name .. " " .. var.walk_blocker_id)
-		
+		if(bl.dadizi == true) then var.walk_blocker_name = var.walk_dadizi_name end
 		if(bl.pfm == true) then handlers.startFight() else Execute("kill " .. var.walk_blocker_id) end
 	end,
 	

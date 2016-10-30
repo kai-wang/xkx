@@ -347,6 +347,7 @@ local npc_list = {
 	["æ’Ω£"] = {room = 2077, name = "ju jian"},
 	["Œ⁄¿œ¥Û"] = {room = 2078, name = "wu laoda", exp=3000000},
 	["÷ÒΩ£"] = {room = 2080, name = "zhu jian"},
+    ["”‡∆≈∆≈"] = {room = 2086, name = "yu popo"},
 	["∑˚√Ù“«"] = {room = 2087, name = "fu minyi"},
 	[" Ø…©"] = {room = 2090, name = "shi sao"},
 	["√…√Ê≈Æ¿…"] = {room = 2092, name = "nv lang"},
