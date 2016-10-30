@@ -270,6 +270,26 @@ local tasks = {
 		end
 	},
 
+	["jiding"] = {
+		name = "jiding",
+		main = function(f_next)
+			anti_idle(200)
+			double(function() ss.main(f_next, f_next) end)
+		end,
+		
+		clear = function()
+			jiding.init()
+		end,
+		
+		wait = function()
+			if(var.jd_available_time == nil) then return os.time() else return tonumber(var.jd_available_time) end
+		end,
+		
+		priority = function()
+			return 23
+		end
+	},
+
 	["wine"] = {
 		name = "wine",
 		main = function(f_next)
@@ -390,7 +410,7 @@ local tasks = {
 		end,
 		
 		priority = function()
-			return 22
+			return 24
 		end
 	}
 }

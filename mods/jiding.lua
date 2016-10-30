@@ -244,10 +244,8 @@ function kill_dcq_end()
 end
 
 function retry()
-    core.busytest(function() 
-        sleep(function()
-            jiding.ask()
-        end)
+    core.busytest(function()
+        done()
     end, 0.2)
 end
 
