@@ -207,7 +207,7 @@ function done()
         EnableTriggerGroup("jd_ask", false)
         EnableTriggerGroup("jd_kill", false)
         EnableTriggerGroup("jd", false)
-        clean(context.f_done)
+        me.full(context.f_done)
     end)
 end
 
