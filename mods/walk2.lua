@@ -89,8 +89,8 @@ blocker_npcs["定逸师太"] = {id = "dingyi shitai", pfm = true, exp=5000000}
 blocker_npcs["丘处机"] = {id = "qiu chuji", pfm = true, exp=5000000}
 blocker_npcs["刘处玄"] = {id = "liu chuxuan", pfm = true, exp=3000000}
 blocker_npcs["石嫂"] = {id = "shi sao"}
-blocker_npcs["居士"] = {id = "jushi", pfm = true, exp=10000000, dadizi=true}
-blocker_npcs["侯爷"] = {id = "houye", pfm = true, exp=10000000, dadizi=true}
+blocker_npcs["jushi"] = {id = "jushi", pfm = true, exp=10000000, dadizi=true}
+blocker_npcs["houye"] = {id = "houye", pfm = true, exp=10000000, dadizi=true}
 blocker_npcs["傅思归"] = {id = "fu sigui", pfm = true}
 
 -- lht npcs -------------------------------------------------
@@ -371,7 +371,7 @@ handlers = {
 		end
 	end,
 	
-	k_blocker = function()--line, name, wildcards)
+	k_blocker = function(ddz_name)--line, name, wildcards)
 		local c = handlers.cxt
 		c.k_blocker = true
 		
@@ -379,15 +379,17 @@ handlers = {
 		--移到trigger里了
 		--var.walk_blocker_name = wildcards[2]
 		local bl = blocker_npcs[var.walk_blocker_name]
+		if(ddz_name ~= nil) then bl = blocker_npcs[ddz_name] end
 		if(bl == nil or (bl.exp ~= nil and tonumber(var.hp_exp) < bl.exp)) then 
 			print("没有blocker id或者经验不足") 
 			handlers.fail() 
 			return 
 		end
 		
-		var.walk_blocker_id = blocker_npcs[var.walk_blocker_name].id
+		--var.walk_blocker_id = blocker_npcs[var.walk_blocker_name].id
+		var.walk_blocker_id = bl.id
 		print("blocker: " .. var.walk_blocker_name .. " " .. var.walk_blocker_id)
-		if(bl.dadizi == true) then var.walk_blocker_name = var.walk_dadizi_name end
+		--if(bl.dadizi == true) then var.walk_blocker_name = var.walk_dadizi_name end
 		if(bl.pfm == true) then handlers.startFight() else Execute("kill " .. var.walk_blocker_id) end
 	end,
 	
