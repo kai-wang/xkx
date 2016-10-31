@@ -1,17 +1,17 @@
 require "var"
 module ("config", package.seeall)
 
-var.dazuo_desc = "(你坐下来运气用功，一股内息开始在体内流动。)|(你盘膝入定，凝聚体内真气，摧动内息将腹中一丝丝游气慢慢增厚。)"
-var.dazuo_end_desc = "(你一周天行将下来，顿时浑身发暖，感到腹中内劲又增加一分。)|(你运功完毕，深深吸了口气，站了起来。)|(你吸气入丹田，真气运转渐缓，慢慢收功，双手抬起，站了起来。)"
-var.dazuo_halt_desc = "(你把正在运行的真气强行压回丹田，站了起来。)|(你面色一沉，迅速收气，站了起来。)|(你突然双手向胸前一合，压住腹中内息，凌空跃起。)"
+var.dazuo_desc = "(你坐下来运气用功，一股内息开始在体内流动。)|(你盘膝入定，凝聚体内真气，摧动内息将腹中一丝丝游气慢慢增厚。)|(你气运丹田，将体内毒素慢慢逼出，控制着它环绕你缓缓飘动。你感觉到内劲开始有所加强了。)"
+var.dazuo_end_desc = "(你一周天行将下来，顿时浑身发暖，感到腹中内劲又增加一分。)|(你运功完毕，深深吸了口气，站了起来。)|(你吸气入丹田，真气运转渐缓，慢慢收功，双手抬起，站了起来。)|(你感觉毒素越转越快，就快要脱离你的控制了！你连忙收回毒素和内息，冷笑一声站了起来。)"
+var.dazuo_halt_desc = "(你把正在运行的真气强行压回丹田，站了起来。)|(你面色一沉，迅速收气，站了起来。)|(你突然双手向胸前一合，压住腹中内息，凌空跃起。)|(你双眼一睁，眼中射出一道精光，接着阴阴一笑，站了起来。)"
 var.dazuo_full_desc = "你的内力修为似乎已经达到了瓶颈，无法再靠打坐来提升了。"
 var.me_id = "byj"
 var.me_pwd = "Flying1a"
 var.me_name = "白玉京"
-var.me_menpai = "明教"
-var.me_family = "明教"
+var.me_menpai = "星宿"
+var.me_family = "星宿"
 var.me_dazuo = "dazuo 30000;dazuo max"
-var.me_dazuo_factor = 1.3
+var.me_dazuo_factor = 0.9
 var.gf_money = "no"
 var.task_id = "byj's task"
 var.ttask_id = "byj's ttask"
@@ -34,7 +34,7 @@ var.ss_can_stop = 1
 var.study_threshold = 10000
 var.kantou_flag = true
 
-auto_list = {"wei", "guanfu","guo","event","reconnect", "sstask", "xiao", "double", "wine", "task", "study", "wait_for_task"}
+auto_list = {"wei", "guanfu","guo","event","reconnect", "sstask", "xiao", "double", "wine","jiding", "study"}
 
 weapon_list = {"haoqi qin", "sanqing dao", "kunlun qin", "shentong zhang", "qiankun dao", "kunlun zhang"}
 
@@ -49,7 +49,9 @@ pfm = {
 	[8]= {	name="天马行空", desc="你使出身空行，身形回转，如天马跃空而行", cd=false },
 	[9]= {	name="焚心以火", desc="你聚气于掌，使出一招「焚心以火」", cd=false },
 	[10]={	name="飞杖降魔", desc="你大喝一声将手中急转着的", cd=false, tx_finish=true, fz_back=true },
-	[11]={	name="千年玄冰", desc="你使出玄天指绝技「千年玄冰」", cd=false }
+	[11]={	name="千年玄冰", desc="你使出玄天指绝技「千年玄冰」", cd=false },
+	[12]= {	name="zhaohuo", desc="你用全身的内力注入地上！对着地上一指", cd=false, reset_time=15 },
+	[13]= {	name="抽髓三掌", desc="你眼光一闪，暗运化功大法", cd=false }
 	--[[
 	[1] = {name="一剑化三清", 		desc="你大喝一声，剑招突变", 			cd=false},
 	[2] = {name="附骨缠身", 		desc="你大喝一声，缠身而上", 			cd=false},
@@ -137,22 +139,22 @@ end
 -- busy perform
 --
 busy_perform_array = {
-	[1] = { i = 11,
-			action = function()
-				Execute("unwield all;enable finger xuantian-zhi;perform finger.xuanbing " .. var.pfm_target)
-			end
-	},
-
-	[2] = { i = 6,
+	[1] = { i = 6,
 			action = function()
 				local wp = choose_blade()
 				Execute("unwield all;enable blade hujia-daofa;wield " .. wp .. ";perform blade.huanying " .. var.pfm_target .. ";unwield all")
 			end
 	},
 
-	[3] = { i = 8,
+	[2] = { i = 8,
 			action = function()
 				Execute("enable move shenkong-xing;perform move.tianmaxingkong " .. var.pfm_target)
+			end
+	},
+
+	[3] = { i = 12,
+			action = function()
+				Execute("unwield all;enable strike chousui-zhang;perform strike.zhaohuo " .. var.pfm_target)
 			end
 	}
 }
@@ -215,39 +217,28 @@ attack_perform_array = {
 
 	[8] = { i = 4,
 			action = function()
-				Execute("unwield all;bei none;bei huoyan-dao;perform strike.xiuluo " .. var.pfm_target)
+				Execute("unwield all;bei none;bei huoyan-dao;enable strike.huoyan-dao;perform strike.xiuluo " .. var.pfm_target)
 			end
 	},
 
-	[9] = { i = 2,
+	[9] = { i = 13,
 			action = function()
-				local wp = choose_sword()
 				choose_force()
-				Execute("enable parry pomo-jianfa;enable sword wuyun-jianfa;unwield all;wield " .. wp .. ";perform parry.zuijian " .. var.pfm_target .. ";unwield all")
-				Execute("unwield all")
+				Execute("unwield all;enable strike chousui-zhang;perform strike.chousui " .. var.pfm_target)
 			end
 	},
 
-	[10] = { i = 2,
+	[10] = { i = 9,
 			action = function()
-				local wp = choose_sword()
-				choose_force()
-				Execute("enable parry pomo-jianfa;enable sword yuxiao-jian;unwield all;wield " .. wp .. ";perform parry.zuijian " .. var.pfm_target .. ";unwield all")
-				Execute("unwield all")
-			end
-	},
-
-	[11] = { i = 9,
-			action = function()
-				Execute("unwield all;perform strike.fen " .. var.pfm_target)
+				Execute("unwield all;enable strike huoyan-dao;perform strike.fen " .. var.pfm_target)
 			end		
 	}
 }
 
 task_busy_list = { 1, 2, 3}
-task_attack_list = {2, 3, 1, 9, 5, 4, 8}
+task_attack_list = {2, 3, 1, 5, 8}
 
-gf_busy_list = { 1, 3 }
+gf_busy_list = { 1, 2 }
 gf_attack_list = { 6, 7 }
 
 ttask_busy_list = { 1, 2, 3, 4 }
@@ -256,14 +247,14 @@ ttask_attack_list = { 1, 2, 3, 4 }
 busy_list = { 1, 2, 3}
 busy_list2 = { 1, 2, 3 }
 attack_list1 = { 7, 6, 8 } 			-- shan / blocker
-attack_list2 = { 1, 4, 9, 5, 8, 7 }	-- xiao
-attack_list3 = { 7, 11, 5}			-- wei / xiao
+attack_list2 = { 1, 5, 8, 7, 2 }	-- xiao
+attack_list3 = { 7, 10, 5}			-- wei / xiao
 attack_list4 = { 6 }				-- shan / wei
-attack_list5 = { 4, 5, 9, 8, 1 }	-- xiao
+attack_list5 = { 5, 8, 7, 1 }	-- ss
 
 study_list = {
 	--{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu finger 10000;et;set study done", post_action="fly wm;e;s;s;s;w;w;u;gamble big skill finger 2000"}
-	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu longxiang 1000", wear_int = true, interval = 0.8 }
+	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu huagong-dafa 1000", wear_int = true, interval = 0.8 }
 	--{ loc = "fly mj", cmd = "xue wei strike 100;et",pre_action="bai wei yixiao", post_action="bai xie xun"}
 }
 
@@ -289,7 +280,7 @@ function choose_force(sf)
 end
 
 function powerup()
-	Execute("enable force longxiang;yun powerup;enable force wuzheng-xinfa;yun bingxin;yun powerup")
+	Execute("enable force longxiang;yun powerup;yun shield;enable force huagong-dafa;yun powerup;enable force longxiang")
 end
 
 function set_menpai(menpai)
@@ -305,7 +296,7 @@ function set_menpai(menpai)
 		r1,r2,r3 = re:match(menpai)
 		if(r3 ~= nil) then
 			print("换木系内功了.......")
-			return choose_force("wuzheng-xinfa")
+			return choose_force("longxiang")
 		end
 
 		re = rex.new("(武当|日月|逍遥|昆仑|丐帮)")
@@ -317,11 +308,11 @@ function set_menpai(menpai)
 	end
 
 	print("默认换成木系内功了.......")
-	return choose_force("wuzheng-xinfa")
+	return choose_force("longxiang")
 end
 
 function buff(menpai)
-	Execute("unwield all;jiali max;perform strike.honglian;jiali 0")
+	Execute("unwield all;jiali max;enable strike huoyan-dao;perform strike.honglian;jiali 0")
 end
 
 function anti_touxi()

@@ -173,6 +173,7 @@ function search()
             function()
                 EnableTriggerGroup("jd", true)
                 --EnableTriggerGroup("jd_kill", true)
+                config.powerup()
                 Execute("ji ding") 
             end, 
             search, search)
