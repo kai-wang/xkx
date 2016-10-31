@@ -95,6 +95,7 @@ local npc_list = {
     ["锦衣卫士"] = {room = 519, name = "wei shi"},
 	["古笃诚"] = {room = 517, name = "gu ducheng"},
 	["巴天石"] = {room = 519, name = "ba tianshi"},
+    ["华赫艮"] = {room = 520, name = "hua hegen"},
 	["范骅"] = {room = 521, name = "fan ye"},
 	["段无畏"] = {room = 526, name = "duan wuwei"},
 	["小道姑"] = {room = 555, name = "xiao daogu"},
