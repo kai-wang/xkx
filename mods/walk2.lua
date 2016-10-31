@@ -91,6 +91,7 @@ blocker_npcs["¡ı¥¶–˛"] = {id = "liu chuxuan", pfm = true, exp=3000000}
 blocker_npcs[" Ø…©"] = {id = "shi sao"}
 blocker_npcs["æ” ø"] = {id = "jushi", pfm = true, exp=10000000, dadizi=true}
 blocker_npcs["∫Ó“Ø"] = {id = "houye", pfm = true, exp=10000000, dadizi=true}
+blocker_npcs["∏µÀºπÈ"] = {id = "fu sigui", pfm = true}
 
 -- lht npcs -------------------------------------------------
 blocker_npcs["∞≤Ω°∏’"] = {id = "an jiangang", pfm = false}
