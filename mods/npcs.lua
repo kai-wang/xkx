@@ -531,6 +531,7 @@ local npc_list = {
     ["道正禅师"] = {room = 1456, name = "daozheng chanshi"}, 
     ["玄苦大师"] = {room = 1489, name = "xuanku dashi", exp=10000000},
     ["玄难大师"] = {room = 1478, name = "xuannan dashi", exp=10000000},
+    ["玄悲大师"] = {room = 1515, name = "xuanbei dashi", exp=10000000},
     ["清乐比丘"] = {room = 1494, name = "qingle biqiu"},
     ["玄慈大师"] = {room = 1495, name = "xuanci dashi", exp=10000000},
     ["苏星河"] = {room = 2742, name = "su xinghe", exp=5000000},
