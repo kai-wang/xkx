@@ -96,6 +96,16 @@ pfm = {
 	]]--
 }
 
+function set_hg_status()
+	for i, v in ipairs(config.pfm) do
+		if(v.name == "huagong") then
+			v.cd = true
+			v.cd_time = os.time()
+			return
+		end
+	end
+end
+
 function set_fz_status()
 	--print(color)
 	for i, v in ipairs(config.pfm) do
