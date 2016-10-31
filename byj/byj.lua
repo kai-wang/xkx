@@ -20,6 +20,7 @@ var.chatter_whitelist = "byj;lbt;happy;"
 var.chatter_blacklist = ""
 var.weapon = "qin"
 var.weapon2 = "dao"
+var.kantou_wp = "dao;wield qin"
 var.study_seq = 1
 var.fast_mode = 1
 var.xiao_full = 0
