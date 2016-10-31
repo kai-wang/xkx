@@ -3541,7 +3541,7 @@
       }
     },
     "name": "前殿",
-    "path": "fly dl;s;w;w;n;ask fu about join;n",
+    "path": "fly dl;s;w;w;n;ask fu about join;|!k1::n|",
     "zone": "大理"
   }, {
     "desc": "    这里是大理国皇宫的御花园，两旁的花开得争奇斗艳，边上有一个小水池，山上流下来的泉水就会集在那里，几只仙鹤在水边抓鱼，一副旁若无人的样子，往北是花廊，往南是前殿。",
@@ -3558,7 +3558,7 @@
       }
     },
     "name": "御花园",
-    "path": "fly dl;s;w;w;n;ask fu about join;n;n",
+    "path": "fly dl;s;w;w;n;ask fu about join;|!k1::n|;n",
     "zone": "大理"
   }, {
     "desc": "    这里是大理国皇宫的花廊，走廊下到处是奇花异草，往北是正殿，往南是御花园，往西是御膳房，往东是偏殿。",
@@ -3583,7 +3583,7 @@
       }
     },
     "name": "花廊",
-    "path": "fly dl;s;w;w;n;ask fu about join;n;n;n",
+    "path": "fly dl;s;w;w;n;ask fu about join;|!k1::n|;n;n",
     "zone": "大理"
   }, {
     "desc": "    这里是大理国皇宫的正殿，大理国当今保定帝通常都在这里处理国事，往南是长廊。",
@@ -3596,7 +3596,7 @@
       }
     },
     "name": "正殿",
-    "path": "fly dl;s;w;w;n;ask fu about join;n;n;n;n",
+    "path": "fly dl;s;w;w;n;ask fu about join;|!k1::n|;n;n;n",
     "zone": "大理"
   }, {
     "desc": "    这里是大理国皇宫的御膳坊，这里的厨具都是金银做成的。皇帝不在这里也就息火了，往东是长廊。",
@@ -3609,7 +3609,7 @@
       }
     },
     "name": "御膳坊",
-    "path": "fly dl;s;w;w;n;ask fu about join;n;n;n;w",
+    "path": "fly dl;s;w;w;n;ask fu about join;|!k1::n|;n;n;w",
     "zone": "大理"
   }, {
     "desc": "    这里是大理国皇宫的偏殿，大理皇帝常在这里接见心腹大臣，但现在显得空空荡荡的，往西是长廊。",
@@ -3622,7 +3622,7 @@
       }
     },
     "name": "偏殿",
-    "path": "fly dl;s;w;w;n;ask fu about join;n;n;n;e",
+    "path": "fly dl;s;w;w;n;ask fu about join;|!k1::n|;n;n;e",
     "zone": "大理"
   } ]
 }
