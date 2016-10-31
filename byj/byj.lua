@@ -217,14 +217,14 @@ attack_perform_array = {
 
 	[8] = { i = 4,
 			action = function()
-				Execute("unwield all;bei none;bei huoyan-dao;enable strike.huoyan-dao;perform strike.xiuluo " .. var.pfm_target)
+				Execute("unwield all;enable strike huoyan-dao;bei none;bei huoyan-dao;perform strike.xiuluo " .. var.pfm_target)
 			end
 	},
 
 	[9] = { i = 13,
 			action = function()
 				choose_force()
-				Execute("unwield all;enable strike chousui-zhang;perform strike.chousui " .. var.pfm_target)
+				Execute("unwield all;enable strike chousui-zhang;bei chousui-zhang;perform strike.chousui " .. var.pfm_target)
 			end
 	},
 
