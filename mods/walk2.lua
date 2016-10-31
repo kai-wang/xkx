@@ -57,6 +57,7 @@ blocker_npcs["流氓头"] = {id = "tou"}
 blocker_npcs["丫鬟"] = {id = "ya huan"}
 blocker_npcs["锦衣卫士"] = {id = "wei shi"}
 blocker_npcs["黄衣卫士"] = {id = "wei shi"}
+blocker_npcs["素衣卫士"] = {id = "wei shi"}
 blocker_npcs["山贼头"] = {id = "tou"}
 blocker_npcs["静心师太"] = {id = "jingxin shitai"}
 blocker_npcs["摘星子"] = {id = "zhaixing zi"}
