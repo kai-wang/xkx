@@ -88,7 +88,8 @@ blocker_npcs["定逸师太"] = {id = "dingyi shitai", pfm = true, exp=5000000}
 blocker_npcs["丘处机"] = {id = "qiu chuji", pfm = true, exp=5000000}
 blocker_npcs["刘处玄"] = {id = "liu chuxuan", pfm = true, exp=3000000}
 blocker_npcs["石嫂"] = {id = "shi sao"}
-blocker_npcs["居士"] = {id = "jushi", pfm = true, exp=5000000, dadizi=true}
+blocker_npcs["居士"] = {id = "jushi", pfm = true, exp=10000000, dadizi=true},
+blocker_npcs["侯爷"] = {id = "houye", pfm = true, exp=10000000, dadizi=true}
 
 -- lht npcs -------------------------------------------------
 blocker_npcs["安健刚"] = {id = "an jiangang", pfm = false}
