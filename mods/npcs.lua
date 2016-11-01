@@ -541,7 +541,8 @@ local npc_list = {
     ["苟读"] = {room = 2743, name = "gou du", exp=3000000},
     ["逍遥子"] = {room = 2981, name = "xiaoyao zi", exp=50000000},
     ["朱丹臣"] = {room = 3049, name = "zhu danchen"},
-    ["青云"] = {room = 2982, name = "qingyun"}
+	["青云"] = {room = 2982, name = "qingyun"},
+	["段正明"] = {room = 3052, name = "duan zhengming"}
 }
 
 return npc_list

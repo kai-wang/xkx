@@ -56,6 +56,31 @@ local tasks = {
 		end
 	},
 
+	["wait_for_jd"] = {
+		name = "等待jiding开始",	
+		main = function(f_next)	
+			anti_idle(30)
+			local diff = tonumber(var.jd_available_time) - os.time()
+			if(diff > 0) then 
+				print("等待jiding 开始: " .. diff)
+				wait.time(diff) 
+			end
+			call(f_next)
+		end,
+		
+		wait = function()
+			local diff = tonumber(var.jd_available_time) - os.time()
+			if(diff > 0 and diff < 15) then return 0 else return os.time() + 180 end
+		end,
+		
+		clear = function()
+		end,
+		
+		priority = function()
+			return 22
+		end
+	},
+
 	["guanfu"] = {
 		name = "guanfu",
 		main = function(f_next)
