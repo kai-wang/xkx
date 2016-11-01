@@ -540,7 +540,8 @@ local npc_list = {
     ["·ë°¢Èý"] = {room = 2755, name = "feng asan", exp=3000000},
     ["¹¶¶Á"] = {room = 2743, name = "gou du", exp=3000000},
     ["åÐÒ£×Ó"] = {room = 2981, name = "xiaoyao zi", exp=50000000},
-    ["Öìµ¤³¼"] = {room = 3049, name = "zhu danchen"}
+    ["Öìµ¤³¼"] = {room = 3049, name = "zhu danchen"},
+    ["ÇàÔÆ"] = {room = 2982, name = "qingyun"}
 }
 
 return npc_list

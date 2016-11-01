@@ -158,7 +158,7 @@ function kill_jd_npc_end()
     EnableTriggerGroup("jd_kill_npc", false)
     EnableTriggerGroup("jd_ask", true)
     core.busytest(function()
-        Execute("wield " .. var.kantou_wp .. ";kantou corpse")
+        Execute("unwield all;wield " .. var.kantou_wp .. ";kantou corpse")
         clean(function() Execute("fly xx;n;n;give ding head") end)
 	end)
 end

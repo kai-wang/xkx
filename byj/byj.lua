@@ -35,7 +35,7 @@ var.ss_can_stop = 1
 var.study_threshold = 10000
 var.kantou_flag = true
 
-auto_list = {"wei", "guanfu","guo","event","reconnect", "sstask", "xiao", "double", "wine","jiding", "study"}
+auto_list = {"wei", "guanfu","guo","event","reconnect", "sstask", "xiao", "double", "wine","jiding", "study", "task"}
 
 weapon_list = {"haoqi qin", "sanqing dao", "kunlun qin", "shentong zhang", "qiankun dao", "kunlun zhang"}
 
