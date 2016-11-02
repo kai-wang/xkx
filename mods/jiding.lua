@@ -135,6 +135,12 @@ function kill_jd_npc(name, line, wildcards)
     end
 
 	var.jd_npc_id = t.name
+    if(t.touxi == true) then
+        var.jd_npc_kill_cmd = "touxi " .. var.jd_npc_id 
+    else
+        var.jd_npc_kill_cmd = "kill " .. var.jd_npc_id 
+    end
+
 	print(var.jd_npc_name .. " id¡¾" .. var.jd_npc_id .. "¡¿  room¡¾" .. t.room .. "¡¿")
 
 	timer.tickonce("action", 1, function()
@@ -150,7 +156,8 @@ function kill_jd_npc_start()
 		local attack_list = config.attack_list2
 		EnableTriggerGroup("jd_kill", true)
 		fight.prepare(busy_list, attack_list)
-		fight.start("kill " .. var.jd_npc_id)
+		--fight.start("kill " .. var.jd_npc_id)
+        fight.start(var.jd_npc_kill_cmd)
 	end)
 end
 
