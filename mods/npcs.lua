@@ -513,7 +513,7 @@ local npc_list = {
     ["盛皮罗客商"] = {room = 465, name = "ke shang"},
     ["虚竹"] = {room = 2052, name = "xu zhu", exp=10000000},
     ["段誉"] = {room = 907, name = "duan yu", exp=20000000},
-	["萧峰"] = {room = 907, name = "xiao feng", exp=50000000},
+	--["萧峰"] = {room = 907, name = "xiao feng", exp=50000000},
     ["天山童姥"] = {room = 2091, name = "tong lao", exp=30000000},
     ["清法比丘"] = {room = 1427, name = "qingfa biqiu"},
     ["道果禅师"] = {room = 1436, name = "daoguo chanshi"},
