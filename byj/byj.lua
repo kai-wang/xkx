@@ -265,7 +265,7 @@ attack_list4 = { 6 }				-- shan / wei
 attack_list5 = { 5, 8, 7, 1 }	-- ss
 
 study_list = {
-	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu claw 10000;et;set study done", post_action="fly wm;e;s;s;s;w;w;u;gamble big skill claw 2000"},
+	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu claw 10000", wear_int = true, interval = 0.8, post_action="fly wm;e;s;s;s;w;w;u;gamble big skill claw 2000"},
 	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu longxiang 10000", wear_int = true, interval = 0.8 },
 	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu huagong-dafa 5000", wear_int = true, interval = 0.8 }
 	--{ loc = "fly mj", cmd = "xue wei strike 100;et",pre_action="bai wei yixiao", post_action="bai xie xun"}
