@@ -309,18 +309,18 @@ function set_menpai(menpai)
 		r1,r2,r3 = re:match(menpai)
 		if(r3 ~= nil) then
 			print("换木系内功了.......")
-			return choose_force("longxiang")
+			return choose_force("huagong-dafa")
 		end
 
 		re = rex.new("(武当|日月|逍遥|昆仑|丐帮)")
 		r1,r2,r3 = re:match(menpai)
 		if(r3 ~= nil) then
-			print("换金系内功了.......")
-			return choose_force("longxiang")
+			print("换木系内功了.......")
+			return choose_force("huagong-dafa")
 		end
 	end
 
-	print("默认换成木系内功了.......")
+	print("默认换成金系内功了.......")
 	return choose_force("longxiang")
 end
 
