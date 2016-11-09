@@ -130,13 +130,13 @@ end
 -- busy perform
 --
 busy_perform_array = {
-	[1] = { i = 10,
+	[2] = { i = 10,
 			action = function()
 				Execute("enable dodge lingboweibu;perform dodge.lingbo " .. var.pfm_target)
 			end
 	},
 
-	[2] = { i = 12,
+	[1] = { i = 12,
 			action = function()
 				Execute("enable move yueying-wubu;perform move.yueguangruying " .. var.pfm_target)
 			end
