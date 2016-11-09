@@ -11,10 +11,12 @@ var.me_name = "·螃蟹·"
 var.me_menpai = "明教"
 var.me_family = "明教"
 var.me_dazuo = "dazuo 30000;dazuo max"
-var.me_dazuo_factor = 1.2
+var.me_dazuo_factor = 0.8
+var.fz_coin = 4414
 var.gf_money = "no"
 var.task_id = "crab's task"
 var.ttask_id = "crab's ttask"
+var.task_auto_kill = 1
 var.dig_dummy = "lbt"
 var.chatter_whitelist = "byj;lbt;happy;"
 var.chatter_blacklist = ""
@@ -33,7 +35,7 @@ var.xiao_walk_danger_level = 5
 var.ss_shuffle = 0
 var.ss_can_stop = 1
 var.study_threshold = 10000
-var.kantou_flag = true
+var.kantou_flag = false
 var.sleep_loc = "fly bt;n;w;n" 
 
 auto_list = {"wei", "guanfu","guo","event","reconnect", "xiao", "double", "baobiao", "shan", "wine", "task", "wait_for_task"}
@@ -82,6 +84,30 @@ pfm = {
 	[37]= {name="天马行空", 	desc="你使出身空行，身形回转，如天马跃空而行", cd=false},
 	[38]= {name="亡魂一击", 	desc="你突然将双掌变爪合于胸前，然后象风车般急转数圈", cd=false}
 }
+
+function set_hg_status()
+	for i, v in ipairs(config.pfm) do
+		if(v.name == "huagong") then
+			v.cd = true
+			v.cd_time = os.time()
+			return
+		end
+	end
+end
+
+function set_fz_status()
+	--print(color)
+	for i, v in ipairs(config.pfm) do
+		-- 飞杖回来而且调息结束
+		if(v.fz_back ~= nil and v.tx_finish == true) then 
+			v.fz_back = true
+			v.cd = false
+			v.cd_time = os.time()
+			v.inuse = false
+			return
+		end
+	end
+end
 
 function set_cd_status(l, flag, color)
 	--print(color)
@@ -240,14 +266,13 @@ function powerup()
 	Execute("enable force wuzheng-xinfa;yun bingxin;yun powerup;enable force beiming-shengong;yun beiming")
 end
 
-function buff(menpai)
+function set_menpai(menpai)
 	if(menpai ~= nil) then
 		local re = rex.new("(桃花|星宿|峨嵋|梅庄|慕容|峨眉|灵鹫|铁掌|华山|白驼|雪山|密宗|独孤|采花)")
 		local r1,r2,r3 = re:match(menpai)
 		if(r3 ~= nil) then
 			print("换金系内功了.......")
 			var.choose_force = "xiaowuxiang"
-			Execute("perform dodge.mengyulingbo")
 			return
 		end
 
@@ -256,7 +281,6 @@ function buff(menpai)
 		if(r3 ~= nil) then
 			print("换水系内功了.......")
 			var.choose_force = "beiming-shengong"
-			Execute("perform dodge.mengyulingbo")
 			return
 		end
 
@@ -265,7 +289,6 @@ function buff(menpai)
 		if(r3 ~= nil) then
 			print("换木系内功了.......")
 			var.choose_force = "wuzheng-xinfa"
-			Execute("perform dodge.mengyulingbo")
 			return
 		end
 
@@ -274,14 +297,17 @@ function buff(menpai)
 		if(r3 ~= nil) then
 			print("换土系内功了.......")
 			var.choose_force = "beiming-shengong"
-			Execute("perform dodge.mengyulingbo")
 			return
 		end
 	end
 
 	print("默认换成水系内功了.......")
 	var.choose_force = "beiming-shengong"
-	Execute("enable force beiming-shengong;yun beiming;perform dodge.mengyulingbo")
+
+end
+
+function buff(menpai)
+	Execute("perform dodge.mengyulingbo")
 end
 
 
