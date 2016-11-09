@@ -221,10 +221,10 @@ attack_perform_array = {
 }
 
 task_busy_list = { 1, 2, 3, 4 }
-task_attack_list = { 6, 4, 7, 1, 3 }
+task_attack_list = { 6, 7, 4, 1, 3 }
 
 gf_busy_list = { 1, 3 }
-gf_attack_list = { 3, 1 }
+gf_attack_list = { 3, 7 }
 
 ttask_busy_list = { 1, 2, 3, 4 }
 ttask_attack_list = { 1, 2, 3, 4 }
@@ -232,7 +232,7 @@ ttask_attack_list = { 1, 2, 3, 4 }
 busy_list = { 1, 2, 3, 4 }
 busy_list2 = { 1, 2, 3, 4 }
 attack_list1 = { 3, 1, 7 } 			-- shan / blocker
-attack_list2 = { 6, 4, 7, 1, 3 }	-- xiao
+attack_list2 = { 6, 7, 4, 1, 3 }	-- xiao
 attack_list3 = { 3, 5, 8}			-- wei / xiao
 attack_list4 = { 3 }				-- shan / wei
 attack_list5 = { 6, 4, 7, 1, 3 }	-- xiao
