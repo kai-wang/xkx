@@ -38,7 +38,7 @@ var.study_threshold = 10000
 var.kantou_flag = false
 var.sleep_loc = "fly bt;n;w;n" 
 
-auto_list = {"wei", "guanfu","guo","event","reconnect", "xiao", "double", "baobiao", "shan", "wine", "task", "wait_for_task"}
+auto_list = {"wei", "guanfu","guo","event","reconnect", "xiao", "double", "baobiao", "shan", "wine", "task", "wait_for_task", "sstask"}
 
 weapon_list = {"tianqu qin", "tianyu qin", "guiqi qin", "tianfeng qin"}
 
@@ -284,7 +284,7 @@ function set_menpai(menpai)
 			return
 		end
 
-		re = rex.new("(少林|全真)")
+		re = rex.new("(少林|全真|神雕|古墓)")
 		r1,r2,r3 = re:match(menpai)
 		if(r3 ~= nil) then
 			print("换木系内功了.......")
