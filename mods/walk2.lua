@@ -464,12 +464,14 @@ handlers = {
 	
 	["thmz"] = function(dir)
 		wait.make(function()
+			local count = 0
 			local l, w
 			repeat
 				Execute(dir)
 				l, w = wait.regexp("^(> )*(你走了半天，终于走出了桃花迷阵)|(突然一阵桃花瓣象雨点般疾射你).*$", 2)
-				wait.time(2)
-			until(l and l:match("终于走出了桃花迷阵"))
+				count = count + 1
+				wait.time(1)
+			until((l and l:match("终于走出了桃花迷阵")) or count > 10) 
 
 			if(l:match("终于走出了桃花迷阵")) then
 				handlers.done()
