@@ -36,7 +36,7 @@ var.study_threshold = 10000
 var.kantou_flag = true
 var.sleep_loc = "fly bt;n;w;n" 
 
-auto_list = {"wei", "guanfu","guo","event","reconnect", "sstask", "xiao", "double", "wine","jiding", "study", "wait_for_jd", "task"}
+auto_list = {"wei", "guanfu","guo","event","reconnect", "xiao", "double", "wine","jiding", "study", "wait_for_jd", "task"}
 
 weapon_list = {"haoqi qin", "sanqing dao", "kunlun qin", "shentong zhang", "qiankun dao", "kunlun zhang"}
 
@@ -265,7 +265,9 @@ attack_list4 = { 6 }				-- shan / wei
 attack_list5 = { 5, 8, 7, 1 }	-- ss
 
 study_list = {
-	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu claw 10000", wear_int = true, interval = 0.8, post_action="fly wm;e;s;s;s;w;w;u;gamble big skill claw 2000"},
+	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu finger 10000", wear_int = true, interval = 0.8, post_action="fly wm;e;s;s;s;w;w;u;gamble big skill finger 2000"},
+	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu force 10000", wear_int = true, interval = 0.8, post_action="fly wm;e;s;s;s;w;w;u;gamble big skill force 2000"},
+	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu dodge 10000", wear_int = true, interval = 0.8, post_action="fly wm;e;s;s;s;w;w;u;gamble big skill dodge 2000"},
 	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu longxiang 10000", wear_int = true, interval = 0.8 },
 	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu huagong-dafa 5000", wear_int = true, interval = 0.8 }
 	--{ loc = "fly mj", cmd = "xue wei strike 100;et",pre_action="bai wei yixiao", post_action="bai xie xun"}
