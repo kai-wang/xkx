@@ -144,6 +144,11 @@ function location(name, line, wildcards)
 	print(wildcards[2])
 	var.ss_city = wildcards[2]
 	var.ss_loc = wildcards[3]
+
+	if(var.ss_loc == "ÎäÃí" or var.ss_loc == "ÎäÃíÄÚµî") then 
+		search() 
+		return 
+	end
 	
 	if(mappings[var.ss_city] ~= nil) then var.ss_city = mappings[var.ss_city] end
 	if(var.ss_city == "Ñªµ¶ÃÅ" and var.ss_city_1 == "Ñ©É½ËÂ") then var.ss_city = "Ñ©É½ËÂ" end

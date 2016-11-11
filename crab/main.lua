@@ -29,7 +29,7 @@ loadmod("shan")
 loadmod("item")
 loadmod("study")
 loadmod("guo")
-loadmod("auto")
+--loadmod("auto")
 loadmod("songxin")
 loadmod("xiao")
 loadmod("sstask")
@@ -40,4 +40,6 @@ loadmod("chatter")
 map.loadall()
 
 -- 可能需要第一次手动设置一下me_id，然后重新导入脚本
-me.profile = dofile(modPath .. "\\" .. folder .. "\\" .. myId .. ".lua")
+dofile(modPath .. "\\" .. folder .. "\\" .. myId .. ".lua")
+-- 屏蔽掉标准auto
+dofile(modPath .. "\\" .. folder .. "\\" .. "auto.lua")
