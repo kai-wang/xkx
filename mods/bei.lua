@@ -51,7 +51,7 @@ function ask()
 	end)
 
 	-- timeout
-	timer.tickonce("action", 10, function()
+	timer.tickonce("action", 5, function()
 		fail()
 	end)
 
