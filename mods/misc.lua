@@ -28,15 +28,16 @@ function kantou(f)
 	end
 end
 
-function fanqi(f)
+function fangqi(f, c)
 	local count = 0
+	local limit = c or 100
 	wait.make(function()
 		Execute("fly xi;w;n;n;n")
 		repeat
 			count = count + 1
 			Execute("ask guo about job;ask guo about fangqi")
 			wait.time(0.2)
-		until(count > 100)
+		until(count > limit)
 		core.safeback(f)
 	end)
 end
