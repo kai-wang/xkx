@@ -28,7 +28,7 @@ function kantou(f)
 	end
 end
 
-function fanqi(f)
+function fangqi(f)
 	local count = 0
 	wait.make(function()
 		Execute("fly xi;w;n;n;n")
