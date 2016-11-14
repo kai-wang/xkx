@@ -101,7 +101,7 @@ local tasks = {
 			if(var.gf_amount ~= nil and var.gf_amount_limit ~= nil and tonumber(var.gf_amount) > tonumber(var.gf_amount_limit)) then
 				print("官府超过上限了")
 				--if(var.hp_star_guanfu ~= "1") then return 10 else return -1 end
-				if(var.hp_star_guanfu ~= "1") then return 10 else return 1 end
+				if(var.hp_star_guanfu ~= "1") then return 10 else return -1 end
 			else
 				if(var.hp_star_guanfu ~= "1") then return 10 else return 6 end
 			end
@@ -197,7 +197,7 @@ local tasks = {
 		priority = function()
 			if(var.shan_amount ~= nil and var.shan_amount_limit ~= nil and tonumber(var.shan_amount) > tonumber(var.shan_amount_limit)) then
 				print("单正任务超过上限了")
-				if(var.hp_star_shan ~= "1") then return 10 else return 2 end
+				if(var.hp_star_shan ~= "1") then return 10 else return -1 end
 			else
 				if(var.hp_star_shan ~= "1") then return 10 else return 5 end
 			end
@@ -392,6 +392,26 @@ local tasks = {
 		
 		priority = function()
 			if(tonumber(var.hp_qn) >= tonumber(var.study_threshold)) then return 25 else return 1 end
+		end
+	},
+
+	["fangqi"] = {
+		name = "fangqi",
+		main = function(f_next)
+			anti_idle(60)
+			fangqi(f_next)
+		end,
+		
+		clear = function()
+			---var.double_bonus = false
+		end,
+		
+		wait = function()			
+			return os.time()
+		end,
+		
+		priority = function()
+			return 1
 		end
 	},
 	

@@ -28,6 +28,19 @@ function kantou(f)
 	end
 end
 
+function fanqi(f)
+	local count = 0
+	wait.make(function()
+		Execute("fly xi;w;n;n;n")
+		repeat
+			count = count + 1
+			Execute("ask guo about job;ask guo about fangqi")
+			wait.time(0.2)
+		until(count > 100)
+		core.safeback(f)
+	end)
+end
+
 function sleep(f)
 	wait.make(function()
 		local room = var.sleep_loc or "fly wm;e;n;e;e;n;n"
