@@ -357,7 +357,7 @@ end
 
 function fight_wear(f_done)
 	wait.make(function()
-		Execute("unwield all;tuo all;wear tianfeng qin;wear ningshuang xue;wear luyu mao;wear taimen yi;wear yanlong hushou;wear wuxing jiezhi")
+		Execute("drop bu yi;drop bu xie;unwield all;tuo all;wear tianfeng qin;wear ningshuang xue;wear luyu mao;wear taimen yi;wear yanlong hushou;wear wuxing jiezhi")
 		wait.time(1)
 		core.busytest(function() call(f_done) end)
 	end)
