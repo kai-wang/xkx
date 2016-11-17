@@ -360,8 +360,8 @@ end
 
 function quit(f_ok)
 	core.safeback(function()
-		Execute("fly mj;quit")
-		capture("kickbye", function()
+		Execute("fly mj")
+		capture("kickbye;quit", function()
 			timer.reconnect(30, function()
 				var.quit_required = 0
 				config.fight_wear(f_ok)
