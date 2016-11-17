@@ -437,6 +437,30 @@ local tasks = {
 		priority = function()
 			return 24
 		end
+	},
+
+	["quit"] = {
+		name = "quit",
+		main = function(f_next)
+			anti_idle(60)
+			quit(f_next)
+		end,
+		
+		clear = function()
+			---var.double_bonus = false
+		end,
+		
+		wait = function()	
+			if(var.quit_required == "1") then
+				return os.time() 
+			else
+				return os.time() + 900
+			end
+		end,
+		
+		priority = function()
+			return 26
+		end
 	}
 }
 

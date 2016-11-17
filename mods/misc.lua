@@ -168,8 +168,15 @@ function get_shanpai(f_ok, f_fail)
 			Execute("set brief;fly hy;n;w;w;w;w;s;n;s;ask zhang about 赏善")
 			--wait.time(5)
 			Execute("fly wm;nw;give shan pai to " .. var.me_id)
-			l, w = wait.regexp("^(> )*(你要看什么)|(赏善铜牌).*$")
+			l, w = wait.regexp("^(> )*(张三说道：不是叫你去找黄衣使者吗)|(你要看什么)|(赏善铜牌).*$")
 			--if(var.fast_mode == "1") then wait.time(1) end
+			if(l:match("张三说道：不是叫你去找黄衣使者吗") ~= nil) then
+				if(var.fast_mode == "1") then wait.time(1) end
+				print("赏善铜牌失败了")
+				var.quit_required = 1
+				call(f_fail) 
+				return 
+			end
 			if(l:match("你要看什么") ~= nil) then 
 				if(var.fast_mode == "1") then wait.time(1) end
 				print("赏善铜牌失败了") 
@@ -349,6 +356,18 @@ function reconn2(f_ok)
 			end)
 		end)
 	end, 1)
+end
+
+function quit(f_ok)
+	core.safeback(function()
+		Execute("fly mj;quit")
+		capture("kickbye", function()
+			timer.reconnect(30, function()
+				var.quit_required = 0
+				config.fight_wear(f_ok)
+			end)
+		end)
+	end)
 end
 
 function jicun(f_done)
