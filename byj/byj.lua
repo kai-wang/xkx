@@ -34,7 +34,7 @@ var.ss_shuffle = 0
 var.ss_can_stop = 1
 var.study_threshold = 10000
 var.kantou_flag = true
-var.sleep_loc = "fly bt;n;w;n" 
+--var.sleep_loc = "fly bt;n;w;n" 
 
 auto_list = {"wei", "guanfu","guo","event","reconnect", "xiao", "double", "wine","jiding", "study", "wait_for_jd", "task"}
 
