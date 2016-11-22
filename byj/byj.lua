@@ -36,7 +36,7 @@ var.study_threshold = 10000
 var.kantou_flag = true
 --var.sleep_loc = "fly bt;n;w;n" 
 
-auto_list = {"wei", "guanfu","guo","event","reconnect", "xiao", "double", "wine","jiding", "study", "wait_for_jd", "task"}
+auto_list = {"wei", "guanfu","guo","event","reconnect", "double", "wine","jiding", "study", "wait_for_jd"}
 
 weapon_list = {"haoqi qin", "sanqing dao", "kunlun qin", "shentong zhang", "qiankun dao", "kunlun zhang"}
 

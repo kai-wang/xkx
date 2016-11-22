@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE muclient>
-<!-- Saved on ÐÇÆÚÈÕ, Ê®Ò»ÔÂ 13, 2016, 6:30 ÏÂÎç -->
+<!-- Saved on ÐÇÆÚÒ», Ê®Ò»ÔÂ 21, 2016, 3:49 ÏÂÎç -->
 <!-- MuClient version 4.84 -->
 <!-- Written by Nick Gammon -->
 <!-- Home Page: http://www.mushclient.com/ -->
@@ -8,7 +8,7 @@
 <world
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-11-13 18:30:25"
+   date_saved="2016-11-21 15:49:55"
 
    auto_say_override_prefix="-"
    auto_say_string="say "
@@ -115,7 +115,7 @@
 <triggers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-11-13 18:30:25"
+   date_saved="2016-11-21 15:49:55"
   >
   <trigger
    group="walk_special"
@@ -160,6 +160,7 @@ SetVariable("walk_blocker_name", name)
 walk.handlers.k_blocker()</send>
   </trigger>
   <trigger
+   enabled="y"
    expand_variables="y"
    group="xiao"
    match="    Î÷ÏÄÒ»Æ·ÌÃ¡¸(@!me_name)µÄÄ¿±ê¡¹(.*)\((.*)\) &lt;»èÃÔ²»ÐÑ&gt;$"
@@ -173,7 +174,6 @@ xiao.fighthalt()</send>
   </trigger>
   <trigger
    custom_colour="16"
-   enabled="y"
    expand_variables="y"
    group="guanfu"
    keep_evaluating="y"
@@ -390,6 +390,7 @@ Execute("nuoyi " .. var.me_id)&#9;
 fight.start("kill " .. var.ttask_id)</send>
   </trigger>
   <trigger
+   enabled="y"
    group="walk"
    match="^    (\S+)(Á½|¸ù)(»Æ½ð|½ðÌõ|ÒøÆ±)\((.*)\)$"
    regexp="y"
@@ -422,6 +423,7 @@ print("%1" .. "---" .. "%2" .. " --- " .. "%3")
   <send>maze.stop()</send>
   </trigger>
   <trigger
+   enabled="y"
    group="xiao"
    match="^    ÃÉÃæÉ±ÊÖÕý×øÔÚµØÏÂÔË¹¦ÁÆÉË¡£$"
    regexp="y"
@@ -460,6 +462,7 @@ walk.stop()</send>
   </trigger>
   <trigger
    custom_colour="14"
+   enabled="y"
    expand_variables="y"
    group="xiao"
    keep_evaluating="y"
@@ -474,7 +477,6 @@ walk.stop()
 print("¡¾" .. var.xiao_action .. "¡¿ É±ÊÖ")</send>
   </trigger>
   <trigger
-   enabled="y"
    group="guanfu"
    match="^(&gt; )*(.*)´÷ÉÏÁËÒ»¸ö¾«¹¦ÖÆ³ÉµÄÈËÆ¤Ãæ¾ß¡£$"
    regexp="y"
@@ -605,16 +607,6 @@ songxin.goto_place2()</send>
   </trigger>
   <trigger
    expand_variables="y"
-   group="study_ob"
-   keep_evaluating="y"
-   match="^(&gt; )*(@!dazuo_end_desc)$"
-   omit_from_output="y"
-   regexp="y"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
-   expand_variables="y"
    group="dazuo"
    keep_evaluating="y"
    match="^(&gt; )*(@!dazuo_end_desc)$"
@@ -623,6 +615,16 @@ songxin.goto_place2()</send>
    sequence="100"
   >
   <send>dazuo.emit("dazuo_end","continue")</send>
+  </trigger>
+  <trigger
+   expand_variables="y"
+   group="study_ob"
+   keep_evaluating="y"
+   match="^(&gt; )*(@!dazuo_end_desc)$"
+   omit_from_output="y"
+   regexp="y"
+   sequence="100"
+  >
   </trigger>
   <trigger
    expand_variables="y"
@@ -658,7 +660,6 @@ songxin.goto_place2()</send>
 Execute("look")</send>
   </trigger>
   <trigger
-   enabled="y"
    expand_variables="y"
    group="guanfu"
    keep_evaluating="y"
@@ -669,7 +670,6 @@ Execute("look")</send>
   >
   </trigger>
   <trigger
-   enabled="y"
    expand_variables="y"
    group="guanfu"
    keep_evaluating="y"
@@ -680,7 +680,6 @@ Execute("look")</send>
   >
   </trigger>
   <trigger
-   enabled="y"
    expand_variables="y"
    group="guanfu"
    keep_evaluating="y"
@@ -940,6 +939,7 @@ shan.done()</send>
   >
   </trigger>
   <trigger
+   enabled="y"
    group="xiao"
    match="^(&gt; )*(ÃÉÃæÉ±ÊÖËµµÀ£ºËãÁË£¬ÎÒÈÏÊäÀ²£¬ËãÄãºÝ£¡)|(ÄãºÙºÙÒ»Ð¦£º¡¸ÃÉÃæÉ±ÊÖ£¬Äã¶¼µ½ÁËÈç´ËÌïµØ£¬ÔõµØ»¹ÊÇÖ´ÃÔ²»Îò£¿¡¹).*$"
    regexp="y"
@@ -1164,6 +1164,7 @@ walk.handlers.k_blocker()</send>
   >
   </trigger>
   <trigger
+   enabled="y"
    group="guanfu_ask"
    keep_evaluating="y"
    match="^(&gt; )*\S+¡¸(.*)¡¹£¬ÐüÉÍ×½ÄÃ¡±¡£¾Ý·É¸ë´«Êé£¬¸Ã·¸Ä¿Ç°³öÃ»ÓÚ¡¸(.*)¡ó(.*)¡¹¸½½ü¡£$"
@@ -1173,6 +1174,7 @@ walk.handlers.k_blocker()</send>
   >
   </trigger>
   <trigger
+   enabled="y"
    group="guanfu_ask"
    keep_evaluating="y"
    match="^(&gt; )*\S+½üÓÐÈÅÃñÒ°ÊÞ¡¸(.*)¡¹³öÃ»ÓÚ¡¸(.*)¡ó(.*)¡¹¸½½ü.*$"
@@ -1484,7 +1486,6 @@ walk.handlers.k_blocker()</send>
   <send>var.me_status_ssf=true</send>
   </trigger>
   <trigger
-   enabled="y"
    expand_variables="y"
    group="guanfu"
    keep_evaluating="y"
@@ -1611,6 +1612,7 @@ fight.start()</send>
   >
   </trigger>
   <trigger
+   enabled="y"
    group="xiao"
    match="^(&gt; )*ÃÉÃæÉ±ÊÖÉíÐÐÒ»ÉÁ£¬·ÉÒ»ÑùµØÏò(.*)ÌÓÈ¥.*$"
    regexp="y"
@@ -1619,6 +1621,7 @@ fight.start()</send>
   >
   </trigger>
   <trigger
+   enabled="y"
    group="xiao"
    match="^(&gt; )*ÃÉÃæÉ±ÊÖËµµÀ£º¼ÈÈ».*´Í½Ì£¬ÔÚÏÂÖ»ºÃ·îÅã¡£$"
    regexp="y"
@@ -1628,6 +1631,7 @@ fight.start()</send>
   <send>fight.start()</send>
   </trigger>
   <trigger
+   enabled="y"
    group="xiao"
    match="^(&gt; )*ÃÉÃæÉ±ÊÖÍù(.*)(Àë¿ª|Âä»Ä¶øÌÓÁË)¡£$"
    regexp="y"
@@ -1636,7 +1640,6 @@ fight.start()</send>
   >
   </trigger>
   <trigger
-   enabled="y"
    group="guanfu"
    keep_evaluating="y"
    match="^(&gt; )*Ä¿±êºÃÏñÍù¡¸(.*)(¡ò|¡î)(.*)¡¹´¦ÁïÁË¡£$"
@@ -1732,6 +1735,7 @@ var.double_times = -1</send>
   <send>SetVariable("lll", "#5 (mian jian);et")</send>
   </trigger>
   <trigger
+   enabled="y"
    group="xiao"
    match="^(&gt; )*Äã·ÉÉí×ÝÆð£¬ÆËÏòÃÉÃæÉ±ÊÖ£¡$"
    regexp="y"
@@ -1802,7 +1806,6 @@ print("shan : " .. var.shan_amount .. " / " .. var.shan_amount_limit)
 shan.done()</send>
   </trigger>
   <trigger
-   enabled="y"
    group="guanfu"
    match="^(&gt; )*Äã½ñÈÕÒÑÍê³ÉÁË (\d+)\/(\d+) ´Î¹Ù¸®ÈÎÎñ.*$"
    regexp="y"
@@ -1845,7 +1848,6 @@ print("wei : " .. var.wei_amount .. " / " .. var.wei_amount_limit)</send>
   >
   </trigger>
   <trigger
-   enabled="y"
    group="guanfu"
    keep_evaluating="y"
    match="^(&gt; )*Äã¿ÉÒÔÑ¡ÔñÍ¬Òâ\(yes\)»òÕß¾Ü¾ø\(no\)¡£$"
@@ -1904,6 +1906,7 @@ var.double_bonus = true</send>
   >
   </trigger>
   <trigger
+   enabled="y"
    group="xiao"
    match="^(&gt; )*ÄãÇÀÉÏÒ»²½£¬Ö»¼ûÃÉÃæÉ±ÊÖÒÂÁìÉÏ¼¸¸öÓ¬Í·Ð¡×Ö£¬ÏÔÊÇÃÉÃæÉ±ÊÖÐÕÃû¡£$"
    regexp="y"
@@ -2000,16 +2003,6 @@ walk.abort()
 timer.tickonce("action", 15, function() safeback("halt;fly wm", function() if(var.auto_stop ~= "1") then var.task_available_time=os.time()+30 auto.restart() end end) end)</send>
   </trigger>
   <trigger
-   group="study"
-   keep_evaluating="y"
-   match="^(&gt; )*ÄãÒ»´ÎÊäÈëÌ«¶àÃüÁîÁË¡£$"
-   regexp="y"
-   send_to="12"
-   sequence="100"
-  >
-  <send>study.emit("study_end", "waitandretry")</send>
-  </trigger>
-  <trigger
    group="fight_ob"
    match="^(&gt; )*ÄãÒ»´ÎÊäÈëÌ«¶àÃüÁîÁË¡£$"
    send_to="12"
@@ -2023,6 +2016,16 @@ fight.start()
 end)</send>
   </trigger>
   <trigger
+   group="study"
+   keep_evaluating="y"
+   match="^(&gt; )*ÄãÒ»´ÎÊäÈëÌ«¶àÃüÁîÁË¡£$"
+   regexp="y"
+   send_to="12"
+   sequence="100"
+  >
+  <send>study.emit("study_end", "waitandretry")</send>
+  </trigger>
+  <trigger
    group="system_ob"
    match="^(&gt; )*ÄãÒ»»ØÍ·£¬ÕýºÃ·¢ÏÖ(.*)µÄÊÖÕý×¥×Å.*$"
    regexp="y"
@@ -2034,6 +2037,7 @@ end)</send>
 if(name ~= var.task_npc) then safehalt(function() Execute("er;look") end) end</send>
   </trigger>
   <trigger
+   enabled="y"
    group="guanfu_ask"
    match="^(&gt; )*ÄãÒÑ¾­½Ò¹ý°ñÁË£¬ÄÑµÀ²»Ïë×öÁË.*$"
    regexp="y"
@@ -2055,19 +2059,19 @@ guanfu.fail()</send>
 var.double_available_time = os.time() + 60</send>
   </trigger>
   <trigger
-   group="fight_ob"
-   match="^(&gt; )*ÄãÖ»¾õµÃÍ·»èÄÔÕÍ£¬ÑÛÇ°Ò»ºÚ£¬½Ó×ÅÊ²Ã´Ò²²»ÖªµÀÁË¡­¡­$"
-   regexp="y"
-   script="fight.faint"
-   sequence="100"
-  >
-  </trigger>
-  <trigger
    group="bei"
    keep_evaluating="y"
    match="^(&gt; )*ÄãÖ»¾õµÃÍ·»èÄÔÕÍ£¬ÑÛÇ°Ò»ºÚ£¬½Ó×ÅÊ²Ã´Ò²²»ÖªµÀÁË¡­¡­$"
    regexp="y"
    script="bei.faint"
+   sequence="100"
+  >
+  </trigger>
+  <trigger
+   group="fight_ob"
+   match="^(&gt; )*ÄãÖ»¾õµÃÍ·»èÄÔÕÍ£¬ÑÛÇ°Ò»ºÚ£¬½Ó×ÅÊ²Ã´Ò²²»ÖªµÀÁË¡­¡­$"
+   regexp="y"
+   script="fight.faint"
    sequence="100"
   >
   </trigger>
@@ -2084,6 +2088,7 @@ var.double_available_time = os.time() + 60</send>
   >
   </trigger>
   <trigger
+   enabled="y"
    group="xiao"
    match="^(&gt; )*Äã×ß½üÃÉÃæÉ±ÊÖ£¬Ö»¼ûÃÉÃæÉ±ÊÖÒÂÁìÉÏ¼¸¸öÓ¬Í·Ð¡×Ö£¬ÏÔÊÇÃÉÃæÉ±ÊÖÐÕÃû¡£$"
    regexp="y"
@@ -2092,6 +2097,7 @@ var.double_available_time = os.time() + 60</send>
   >
   </trigger>
   <trigger
+   enabled="y"
    group="xiao"
    match="^(&gt; )*Äã×ßÉÏÇ°È¥£¬ÊÔÍ¼È°·þÃÉÃæÉ±ÊÖ£¬µ«ÃÉÃæÉ±ÊÖ²»ÄÍ·³µÄ×ªÁË¸öÉí£¬²»Ô¸ÌýÄãËµÏÂÈ¥¡£$"
    regexp="y"
@@ -2120,6 +2126,7 @@ var.double_available_time = os.time() + 60</send>
   <send>Execute("%2")</send>
   </trigger>
   <trigger
+   enabled="y"
    group="walk"
    match="^(&gt; )*Éè¶¨»·¾³±äÊý£ºrun = &quot;ok&quot;$"
    regexp="y"
@@ -2222,6 +2229,7 @@ bei.cleanup()</send>
   <send>var.gf_available = true</send>
   </trigger>
   <trigger
+   enabled="y"
    group="walk"
    keep_evaluating="y"
    match="^(&gt; )*Õâ¸ö·½ÏòÃ»ÓÐ³öÂ·¡£$"
@@ -2242,13 +2250,13 @@ bei.cleanup()</send>
   <send>Execute("give 50 silver to yu zu;out;d;e;s;sw")</send>
   </trigger>
   <trigger
-   group="wei_kill"
-   keep_evaluating="y"
+   group="jd_kill_npc"
    match="^(&gt; )*ÕâÀïÃ»ÓÐÕâ¸öÈË¡£$"
    regexp="y"
-   script="wei.kill_done"
+   send_to="12"
    sequence="100"
   >
+  <send>jiding.fail()</send>
   </trigger>
   <trigger
    group="shan"
@@ -2260,13 +2268,13 @@ bei.cleanup()</send>
   >
   </trigger>
   <trigger
-   group="jd_kill_npc"
+   group="wei_kill"
+   keep_evaluating="y"
    match="^(&gt; )*ÕâÀïÃ»ÓÐÕâ¸öÈË¡£$"
    regexp="y"
-   send_to="12"
+   script="wei.kill_done"
    sequence="100"
   >
-  <send>jiding.fail()</send>
   </trigger>
   <trigger
    group="guo"
@@ -2343,6 +2351,14 @@ walk.handlers.k_blocker()</send>
   >
   </trigger>
   <trigger
+   group="HP"
+   match="^[&gt; ]*¡¾ Æø Ñª ¡¿\s+(\d+)\/\s+(\d+)\s+\(\s*(\d+)%\)\s+¡¾ ÄÚ Á¦ ¡¿\s+(\d+)\s\/\s(\d+).*$"
+   regexp="y"
+   script="on_hp2_update"
+   sequence="100"
+  >
+  </trigger>
+  <trigger
    group="study_ob"
    keep_evaluating="y"
    match="^[&gt; ]*¡¾ Æø Ñª ¡¿\s+(\d+)\/\s+(\d+)\s+\(\s*(\d+)%\)\s+¡¾ ÄÚ Á¦ ¡¿\s+(\d+)\s\/\s(\d+).*$"
@@ -2352,14 +2368,6 @@ walk.handlers.k_blocker()</send>
   >
   <send>
 </send>
-  </trigger>
-  <trigger
-   group="HP"
-   match="^[&gt; ]*¡¾ Æø Ñª ¡¿\s+(\d+)\/\s+(\d+)\s+\(\s*(\d+)%\)\s+¡¾ ÄÚ Á¦ ¡¿\s+(\d+)\s\/\s(\d+).*$"
-   regexp="y"
-   script="on_hp2_update"
-   sequence="100"
-  >
   </trigger>
   <trigger
    group="HP"
@@ -2394,7 +2402,6 @@ walk.handlers.k_blocker()</send>
   >
   </trigger>
   <trigger
-   enabled="y"
    expand_variables="y"
    group="guanfu"
    keep_evaluating="y"
@@ -2430,7 +2437,6 @@ walk.handlers.k_blocker()</send>
 Execute("kill " .. var.task_id)</send>
   </trigger>
   <trigger
-   enabled="y"
    expand_variables="y"
    group="guanfu"
    keep_evaluating="y"
@@ -2443,6 +2449,7 @@ Execute("kill " .. var.task_id)</send>
 walk.stop()</send>
   </trigger>
   <trigger
+   enabled="y"
    group="xiao"
    match="^\( ÃÉÃæÉ±ÊÖ¿´ÆðÀ´ÒÑ¾­Á¦²»´ÓÐÄÁË¡£ \)|\( ÃÉÃæÉ±ÊÖÒÑ¾­Ò»¸±Í·ÖØ½ÅÇáµÄÄ£Ñù£¬ÕýÔÚÃãÁ¦Ö§³ÅÖø²»µ¹ÏÂÈ¥¡£ \).*$"
    regexp="y"
@@ -2489,7 +2496,7 @@ walk.stop()</send>
 <aliases
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-11-13 18:30:25"
+   date_saved="2016-11-21 15:49:55"
   >
   <alias
    match="^k1 (.+)"
@@ -3451,7 +3458,7 @@ leitai</send>
 <timers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-11-13 18:30:25"
+   date_saved="2016-11-21 15:49:55"
   >
   <timer name="action" second="0.30" offset_second="0.00"    send_to="12"
 group="action" >
@@ -3477,7 +3484,7 @@ at_time="y" group="ss" >
   <send>var.ss_can_stop = 1</send>
 
   </timer>
-  <timer name="auto" minute="10" second="0.00" offset_second="0.00"    send_to="12"
+  <timer name="auto" enabled="y" minute="3" second="0.00" offset_second="0.00"    send_to="12"
 group="auto" >
   <send>timer.fire("auto")</send>
 
@@ -3503,7 +3510,7 @@ group="idle" >
 <macros
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-11-13 18:30:25"
+   date_saved="2016-11-21 15:49:55"
   >
 
   <macro name="up" type="send_now" >
@@ -3597,9 +3604,9 @@ group="idle" >
 <variables
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-11-13 18:30:25"
+   date_saved="2016-11-21 15:49:55"
   >
-  <variable name="auto_stop">1</variable>
+  <variable name="auto_stop">0</variable>
   <variable name="bag_dummy_id">hsly</variable>
   <variable name="baobiao_exp">142</variable>
   <variable name="baobiao_loc">ÂÒÊ¯ÆÂ</variable>
@@ -3620,78 +3627,78 @@ group="idle" >
   <variable name="dig_dummy">lbt</variable>
   <variable name="dig_loc">ÈªÖÝ</variable>
   <variable name="dig_start_time">1435212648</variable>
-  <variable name="double_available_time">1479039037</variable>
+  <variable name="double_available_time">1479672121</variable>
   <variable name="double_bonus">false</variable>
   <variable name="drink_wine">0</variable>
-  <variable name="event_flag">true</variable>
-  <variable name="event_loc">ºâÉ½</variable>
-  <variable name="event_room">1312</variable>
-  <variable name="event_start_time">1479032747</variable>
+  <variable name="event_flag">false</variable>
+  <variable name="event_loc">³¤°×É½</variable>
+  <variable name="event_room">1602</variable>
+  <variable name="event_start_time">1479649590</variable>
   <variable name="faint">0</variable>
   <variable name="faint_flag">false</variable>
   <variable name="fast_mode">1</variable>
   <variable name="fz_coin">3331</variable>
-  <variable name="gf_amount">26</variable>
-  <variable name="gf_amount_limit">400</variable>
+  <variable name="gf_amount">8</variable>
+  <variable name="gf_amount_limit">200</variable>
   <variable name="gf_available">true</variable>
-  <variable name="gf_available_time">1479028218</variable>
-  <variable name="gf_city">ÈªÖÝ</variable>
-  <variable name="gf_escape_dir">±±</variable>
+  <variable name="gf_available_time">1479668960</variable>
+  <variable name="gf_city">¹âÃ÷¶¥</variable>
+  <variable name="gf_escape_dir">ÄÏ</variable>
   <variable name="gf_found">true</variable>
-  <variable name="gf_id">wolf</variable>
-  <variable name="gf_loc">²èÍ¤</variable>
+  <variable name="gf_id">bear</variable>
+  <variable name="gf_loc">ÃçÈË²¿Âä</variable>
   <variable name="gf_money">no</variable>
-  <variable name="gf_npc">»ÒÃ«¶ñÀÇ</variable>
+  <variable name="gf_npc">°×¾±»ÒÐÜ</variable>
   <variable name="gf_option"></variable>
   <variable name="gf_status">done</variable>
   <variable name="gf_walk_danger_level">5</variable>
-  <variable name="guo_amount">6</variable>
-  <variable name="guo_amount_limit">200</variable>
-  <variable name="guo_available_time">1479027915</variable>
+  <variable name="guo_amount">2</variable>
+  <variable name="guo_amount_limit">100</variable>
+  <variable name="guo_available_time">1479669202</variable>
   <variable name="guo_kill_place">fly mj</variable>
-  <variable name="guo_npc_name">ÎäÈýÍ¨</variable>
+  <variable name="guo_npc_name">Æ«½«</variable>
   <variable name="heal_dummy_id">hqly</variable>
   <variable name="hp_dt">0</variable>
   <variable name="hp_dt_max">5</variable>
-  <variable name="hp_exp">1024430730</variable>
-  <variable name="hp_food">2725</variable>
+  <variable name="hp_exp">1734010787</variable>
+  <variable name="hp_food">1987</variable>
   <variable name="hp_food_max">432</variable>
-  <variable name="hp_jl">6960</variable>
-  <variable name="hp_jl_max">6960</variable>
-  <variable name="hp_js">14489</variable>
-  <variable name="hp_jsP">99</variable>
-  <variable name="hp_js_max">14489</variable>
-  <variable name="hp_nl">39985</variable>
-  <variable name="hp_nl_max">79971</variable>
-  <variable name="hp_qn">32220</variable>
-  <variable name="hp_qn_max">55761</variable>
-  <variable name="hp_qx">52647</variable>
-  <variable name="hp_qxP">98</variable>
-  <variable name="hp_qx_max">52647</variable>
+  <variable name="hp_jl">6966</variable>
+  <variable name="hp_jl_max">6966</variable>
+  <variable name="hp_js">13722</variable>
+  <variable name="hp_jsP">97</variable>
+  <variable name="hp_js_max">13722</variable>
+  <variable name="hp_nl">119176</variable>
+  <variable name="hp_nl_max">80843</variable>
+  <variable name="hp_qn">25661</variable>
+  <variable name="hp_qn_max">56279</variable>
+  <variable name="hp_qx">52978</variable>
+  <variable name="hp_qxP">99</variable>
+  <variable name="hp_qx_max">52978</variable>
   <variable name="hp_star_bb">0</variable>
-  <variable name="hp_star_guanfu">0</variable>
+  <variable name="hp_star_guanfu">1</variable>
   <variable name="hp_star_guo">1</variable>
   <variable name="hp_star_shan">0</variable>
   <variable name="hp_star_sx">0</variable>
   <variable name="hp_star_task">1</variable>
-  <variable name="hp_star_wei">0</variable>
-  <variable name="hp_water">605</variable>
+  <variable name="hp_star_wei">1</variable>
+  <variable name="hp_water">505</variable>
   <variable name="hp_water_max">432</variable>
-  <variable name="hp_xw">47129</variable>
+  <variable name="hp_xw">47768</variable>
   <variable name="hp_yl">7264023</variable>
   <variable name="hp_zq">109614642</variable>
   <variable name="item_drop_list"></variable>
   <variable name="item_eat_list"></variable>
   <variable name="item_jicun_list"></variable>
-  <variable name="item_sell_list">drop qiankun yi;</variable>
-  <variable name="item_store_list">give kunlun qin to byj;</variable>
-  <variable name="jd_available_time">1479032772</variable>
-  <variable name="jd_npc_id">li sao</variable>
-  <variable name="jd_npc_kill_cmd">kill li sao</variable>
-  <variable name="jd_npc_name">ÀîÉ©</variable>
+  <variable name="item_sell_list">drop shentong mao;drop fengyun zhang;</variable>
+  <variable name="item_store_list"></variable>
+  <variable name="jd_available_time">1479669796</variable>
+  <variable name="jd_npc_id">ben guan</variable>
+  <variable name="jd_npc_kill_cmd">kill ben guan</variable>
+  <variable name="jd_npc_name">±¾¹Û</variable>
   <variable name="kantou_flag">true</variable>
   <variable name="kantou_wp">dao;wield qin</variable>
-  <variable name="last_wuchang">1478939905</variable>
+  <variable name="last_wuchang">1479635668</variable>
   <variable name="lll">yanjiu dodge 10000</variable>
   <variable name="login_drop">drop dao pao;drop ma xie</variable>
   <variable name="login_wear">give yinling xue to byj;give songluan hushou to byj;give cangyan mao to byj;give yuquan yi to byj;give chunjiang jian to byj;wear all;wield jian</variable>
@@ -3705,11 +3712,11 @@ group="idle" >
   <variable name="me_name">°×Óñ¾©</variable>
   <variable name="me_pwd">Flying1a</variable>
   <variable name="me_qukuan">qukuan 99 silver;qukuan 19 gold</variable>
-  <variable name="me_silver">99</variable>
+  <variable name="me_silver">634</variable>
   <variable name="me_status_poison">false</variable>
   <variable name="me_status_ssf">false</variable>
   <variable name="me_xunzhang">true</variable>
-  <variable name="pfm_target"></variable>
+  <variable name="pfm_target">byj's task</variable>
   <variable name="quqing_loc">¼ÎÐË</variable>
   <variable name="reconnect_required">0</variable>
   <variable name="research_num">1</variable>
@@ -3722,8 +3729,7 @@ group="idle" >
   <variable name="shan_npc_id">fat's waxwork</variable>
   <variable name="shan_npc_name">¶«·½²»°Ü</variable>
   <variable name="shan_qn">19</variable>
-  <variable name="sleep_loc">fly bt;n;w;n</variable>
-  <variable name="ss_available_time">1479012736</variable>
+  <variable name="ss_available_time">1479666185</variable>
   <variable name="ss_can_stop">0</variable>
   <variable name="ss_city">ÖØÑô¹¬</variable>
   <variable name="ss_escape_dir">ÄÏ</variable>
@@ -3749,60 +3755,60 @@ group="idle" >
   <variable name="system_magic_number">2238534</variable>
   <variable name="system_walk_delay">100</variable>
   <variable name="task_auto_kill">0</variable>
-  <variable name="task_available_time">1479030575</variable>
-  <variable name="task_city">ËÕÖÝ</variable>
+  <variable name="task_available_time">1479669857</variable>
+  <variable name="task_city">ÌìÁúËÂ</variable>
   <variable name="task_done_time">1402232931</variable>
-  <variable name="task_end_time">1479030510</variable>
-  <variable name="task_escape_dir">¶«</variable>
+  <variable name="task_end_time">1479669754</variable>
+  <variable name="task_escape_dir"></variable>
   <variable name="task_fail_time">1433599936</variable>
   <variable name="task_found">true</variable>
   <variable name="task_fullname">Byj's task</variable>
   <variable name="task_id">byj's task</variable>
-  <variable name="task_loc">Ï·Ô°×Ó</variable>
-  <variable name="task_menpai">ÉÙÁÖËÂ³¤ÀÏ</variable>
-  <variable name="task_npc">Æ½¾ÅÒ¯</variable>
+  <variable name="task_loc">ËþÁÖ</variable>
+  <variable name="task_menpai">²É»¨Ð¡Ôô</variable>
+  <variable name="task_npc">Ö§Ê®ÀÉ</variable>
   <variable name="task_retry_max">3</variable>
   <variable name="task_retry_times">1</variable>
   <variable name="task_search">false</variable>
-  <variable name="task_start_time">1479030455</variable>
+  <variable name="task_start_time">1479669737</variable>
   <variable name="task_status">done</variable>
   <variable name="task_walk_dager_level">5</variable>
   <variable name="task_walk_danger_level">5</variable>
   <variable name="ttask_id">byj's ttask</variable>
   <variable name="ttask_npc">¼Ð¹ÈÊ®Ò¯</variable>
   <variable name="walk_blocker">¹Ù±ø</variable>
-  <variable name="walk_blocker_id">jushi</variable>
-  <variable name="walk_blocker_name">±¾µµ×îºóÒ»·¢</variable>
+  <variable name="walk_blocker_id">bayi</variable>
+  <variable name="walk_blocker_name">°ÍÒÀ</variable>
   <variable name="walk_bloker_name">¾ÓÊ¿</variable>
   <variable name="walk_dadizi_name">±¾µµ×îºóÒ»·¢</variable>
   <variable name="walk_danger_level">5</variable>
   <variable name="walk_deepth">5</variable>
   <variable name="weapon">qin</variable>
   <variable name="weapon2">dao</variable>
-  <variable name="wei_amount">5</variable>
-  <variable name="wei_amount_limit">200</variable>
-  <variable name="wei_available_time">1479027796</variable>
-  <variable name="wei_cancel_amt">60 silver</variable>
+  <variable name="wei_amount">2</variable>
+  <variable name="wei_amount_limit">100</variable>
+  <variable name="wei_available_time">1479669007</variable>
+  <variable name="wei_cancel_amt">50 silver</variable>
   <variable name="wei_fail_times">0</variable>
   <variable name="wei_item">±ùÌÇºùÂ«</variable>
-  <variable name="wei_item_id">bu yi</variable>
-  <variable name="wei_item_name">´Ö²¼ÒÂ</variable>
-  <variable name="wei_item_path">ca;n;u;u;k1 suan xiucai</variable>
-  <variable name="wei_npc_name">ËáÐã²Å</variable>
-  <variable name="wei_start_time">1479018717</variable>
-  <variable name="xiao_action">ÈÏÊä</variable>
-  <variable name="xiao_available_time">1479030760</variable>
-  <variable name="xiao_city">ÏåÑô</variable>
-  <variable name="xiao_escape_dir">±±</variable>
-  <variable name="xiao_found">true</variable>
+  <variable name="wei_item_id">tou jin</variable>
+  <variable name="wei_item_name">Ì¨ÒÄÍ·½í</variable>
+  <variable name="wei_item_path">dl;s;w;#9 s;e;e;k1 lie</variable>
+  <variable name="wei_npc_name">Ì¨ÒÄÁÔÈË</variable>
+  <variable name="wei_start_time">1479668883</variable>
+  <variable name="xiao_action">ÇÜ»Ø</variable>
+  <variable name="xiao_available_time">1479669517</variable>
+  <variable name="xiao_city">ÐÇËÞº£</variable>
+  <variable name="xiao_escape_dir">Î÷</variable>
+  <variable name="xiao_found">false</variable>
   <variable name="xiao_full">0</variable>
-  <variable name="xiao_killer_heal">true</variable>
+  <variable name="xiao_killer_heal">false</variable>
   <variable name="xiao_level">4</variable>
-  <variable name="xiao_loc">Ê¯½×</variable>
-  <variable name="xiao_npc_id">shi shengluan</variable>
+  <variable name="xiao_loc">ÌìÉ½É½Â·</variable>
+  <variable name="xiao_npc_id">fei kun</variable>
   <variable name="xiao_retry_threshold">3</variable>
-  <variable name="xiao_retry_times">4</variable>
-  <variable name="xiao_rewalk_times">0</variable>
+  <variable name="xiao_retry_times">0</variable>
+  <variable name="xiao_rewalk_times">1</variable>
   <variable name="xiao_start">1</variable>
   <variable name="xiao_walk_danger_level">5</variable>
 </variables>
@@ -3812,7 +3818,7 @@ group="idle" >
 <colours
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-11-13 18:30:25"
+   date_saved="2016-11-21 15:49:55"
   >
 
 <ansi>
@@ -3869,7 +3875,7 @@ group="idle" >
 <keypad
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-11-13 18:30:25"
+   date_saved="2016-11-21 15:49:55"
   >
 
   <key name="0" >
@@ -3983,7 +3989,7 @@ group="idle" >
 <printing
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2016-11-13 18:30:25"
+   date_saved="2016-11-21 15:49:55"
   >
 
 <ansi>
