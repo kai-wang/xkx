@@ -247,7 +247,7 @@ local tasks = {
 		
 		priority = function()
 			-- exceed the limit
-			return 18
+			return 12
 		end
 	},
 
