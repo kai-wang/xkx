@@ -295,7 +295,7 @@ function set_menpai(menpai)
 		r1,r2,r3 = re:match(menpai)
 		if(r3 ~= nil) then
 			print("换土系内功了.......")
-			var.choose_force = "beiming-shengong"
+			var.choose_force = "xixing-dafa"
 			return
 		end
 	end
