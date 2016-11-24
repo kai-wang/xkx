@@ -15,6 +15,7 @@ var.me_dazuo_factor = 1.2
 var.gf_money = "no"
 var.task_id = "byj's task"
 var.ttask_id = "byj's ttask"
+var.task_auto_kill = 1
 var.dig_dummy = "lbt"
 var.chatter_whitelist = "byj;lbt;happy;"
 var.chatter_blacklist = ""
@@ -36,7 +37,7 @@ var.study_threshold = 10000
 var.kantou_flag = true
 --var.sleep_loc = "fly bt;n;w;n" 
 
-auto_list = {"wei", "guanfu","guo","event","reconnect", "double", "wine","jiding", "study", "wait_for_jd"}
+auto_list = {"wei", "guanfu","guo","event","double", "baobiao", "shan", "wine", "task", "wait_for_task"}
 
 weapon_list = {"haoqi qin", "sanqing dao", "kunlun qin", "shentong zhang", "qiankun dao", "kunlun zhang"}
 
@@ -162,13 +163,15 @@ busy_perform_array = {
 			action = function()
 				Execute("enable move shenkong-xing;perform move.tianmaxingkong " .. var.pfm_target)
 			end
-	},
+	}
+--[[	,
 
 	[3] = { i = 12,
 			action = function()
 				Execute("unwield all;enable strike chousui-zhang;perform strike.zhaohuo " .. var.pfm_target)
 			end
 	}
+]]--
 }
 
 --
@@ -247,8 +250,8 @@ attack_perform_array = {
 	}
 }
 
-task_busy_list = { 1, 2, 3}
-task_attack_list = {2, 3, 1, 5, 8}
+task_busy_list = { 1, 2}
+task_attack_list = {5, 4, 1, 2, 3}
 
 gf_busy_list = { 1, 2 }
 gf_attack_list = { 6, 7 }
@@ -256,9 +259,9 @@ gf_attack_list = { 6, 7 }
 ttask_busy_list = { 1, 2, 3, 4 }
 ttask_attack_list = { 1, 2, 3, 4 }
 
-busy_list = { 1, 2, 3}
-busy_list2 = { 1, 2, 3 }
-attack_list1 = { 7, 6, 8 } 			-- shan / blocker
+busy_list = { 1, 2}
+busy_list2 = { 1, 2 }
+attack_list1 = { 6, 7, 8 } 			-- shan / blocker
 attack_list2 = { 1, 5, 8, 7, 2 }	-- xiao
 attack_list3 = { 7, 10, 5}			-- wei / xiao
 attack_list4 = { 6 }				-- shan / wei
