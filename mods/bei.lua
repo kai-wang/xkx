@@ -260,7 +260,11 @@ function startFight()
 	local attack_list = config.task_attack_list
 	local long_attack_list = config.task_long_attack_list
 	fight.prepare(busy_list, attack_list, escape, var.task_menpai, var.task_id)
-	fight.start("touxi " .. var.task_id)
+	if(var.task_kill_flag == "1") then
+		fight.start("kill " .. var.task_id)
+	else
+		fight.start("touxi " .. var.task_id)
+	end
 end
 
 function escape()

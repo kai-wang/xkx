@@ -16,6 +16,7 @@ var.gf_money = "no"
 var.task_id = "byj's task"
 var.ttask_id = "byj's ttask"
 var.task_auto_kill = 1
+var.task_kill_flag = 1
 var.dig_dummy = "lbt"
 var.chatter_whitelist = "byj;lbt;happy;"
 var.chatter_blacklist = ""
