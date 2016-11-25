@@ -352,7 +352,7 @@ handlers = {
 	end,
 	
 	["lht"] = function(name)
-		if(tonumber(var.hp_exp) < 5000000) then 
+		if(tonumber(var.hp_exp) < 5000000 and var.lht_skil_exp_check ~= "1") then 
 			handlers.fail()
 		else
 			EnableTriggerGroup("walk_special_lht", true)
