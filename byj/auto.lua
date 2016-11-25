@@ -97,6 +97,9 @@ local tasks = {
 		end,
 		
 		priority = function()
+			-- double 下别做
+			if(var.double_bonus == "true") then return -1 end
+
 			-- exceed the limit
 			if(var.gf_amount ~= nil and var.gf_amount_limit ~= nil and tonumber(var.gf_amount) > tonumber(var.gf_amount_limit)) then
 				print("官府超过上限了")
@@ -225,7 +228,7 @@ local tasks = {
 		priority = function()
 			-- double 下别做
 			if(var.double_bonus == "true") then return -1 end
-			
+
 			if(var.guo_amount ~= nil and var.guo_amount_limit ~= nil and tonumber(var.guo_amount) > tonumber(var.guo_amount_limit)) then
 				print("郭靖任务超过上限了")
 				if(var.hp_star_guo ~= "1") then return 10 else return -1 end
