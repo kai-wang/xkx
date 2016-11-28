@@ -315,6 +315,7 @@ end
 
 function give_dummy(f)
 	wait.make(function()
+		Execute("fly wm;w")
 		for k, v in pairs(shenshu_list) do
 			if(v.num == 1) then 
 				Execute("give " .. v.name .. " to " .. var.ss_dummy) 
