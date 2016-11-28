@@ -306,7 +306,11 @@ function fail()
 end
 
 function clean(f)
-	me.qfull(f)
+	if(var.ss_give_dummy == "1") then
+		give_dummy(function() me.qfull(f) end)
+	else
+		me.qfull(f)
+	end
 end
 
 function give_dummy(f)
@@ -317,7 +321,7 @@ function give_dummy(f)
 			else
 				for i = 1, v.num do
 					Execute("give " .. v.name .. i .. " to " .. var.ss_dummy)
-					wait.time(0.1)
+					wait.time(0.15)
 				end
 			end
 		end
