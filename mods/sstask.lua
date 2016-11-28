@@ -301,16 +301,18 @@ function fail()
 		Execute("er;et;ef")
 		var.ss_available_time = os.time() + 1200
 		--var.reconnect_required = 1
-		clean(function() jicun(function() reconn2(context.f_fail) end) end)
+		if(var.ss_give_dummy == "1") then
+			give_dummy(function() 
+				clean(function() jicun(function() reconn2(context.f_fail) end) end) 
+			end)
+		else
+			clean(function() jicun(function() reconn2(context.f_fail) end) end)
+		end
 	end, 1)
 end
 
 function clean(f)
-	if(var.ss_give_dummy == "1") then
-		give_dummy(function() me.qfull(f) end)
-	else
-		me.qfull(f)
-	end
+	me.qfull(f)
 end
 
 function give_dummy(f)
