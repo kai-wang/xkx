@@ -42,7 +42,7 @@ local npc_loc = {
 }
 
 local shenshu_list = {
-	["飞狐外传"] = { name = "fhwz", num = 3 }
+	["飞狐外传"] = { name = "fhwz", num = 3 },
 	["雪山飞狐"] = { name = "xsfh", num = 2 },
 	["连城诀"] = { name = "lcjue", num = 2 },
 	["天龙八部"] = { name = "tlbb", num = 5 },
