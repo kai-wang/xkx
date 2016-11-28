@@ -41,6 +41,23 @@ local npc_loc = {
 	["令狐冲"] = { loc="fly ws;sd;su;su;enter", id="linghu chong"}
 }
 
+local shenshu_list = {
+	["飞狐外传"] = { name = "fhwz", num = 3 }
+	["雪山飞狐"] = { name = "xsfh", num = 2 },
+	["连城诀"] = { name = "lcjue", num = 2 },
+	["天龙八部"] = { name = "tlbb", num = 5 },
+	["射雕英雄传"] = { name = "sdyxz", num = 4 },
+	["白马啸西风"] = { name = "bmxxfeng", num = 1 },
+	["鹿鼎记"] = { name = "ldji", num = 5 },
+	["笑傲江湖"] = { name = "xajh", num = 4 },
+	["书剑恩仇录"] = { name = "sjec", num = 3 },
+	["神雕侠侣"] = { name = "sdxl", num = 4 },
+	["侠客行"] = { name = "xkx", num = 3 },
+	["倚天屠龙记"] = { name = "yttlj", num = 4 },
+	["碧血剑"] = { name = "bxsword", num = 3 },
+	["鸳鸯刀"] = { name = "yyblade", num = 1 }
+}
+
 function init() 
 	EnableTriggerGroup("ss_update", false)
 	EnableTriggerGroup("ss_search", false)
@@ -292,6 +309,28 @@ function clean(f)
 	me.qfull(f)
 end
 
+function give_dummy(f)
+	wait.make(function()
+		for k, v in pairs(shenshu_list) do
+			if(v.num == 1) then 
+				Execute("give " .. v.name .. " to " .. var.ss_dummy) 
+			else
+				for i = 1, v.num do
+					Execute("give " .. v.name .. i .. " to " .. var.ss_dummy)
+					wait.time(0.1)
+				end
+			end
+		end
+
+		repeat
+			Execute("tell " .. var.ss_dummy .. " shenshu")
+			local l, w = wait.regexp("^(> )*.*给你一本(.*)。$", 2)
+			if(l ~= nil) then Execute("chayue " .. shenshu_list[w[2]].name) end
+		until(l == nil)
+		
+		call(f)
+	end)
+end
 
 function auto()
 	local f = nil
