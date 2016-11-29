@@ -6,7 +6,7 @@ var.dazuo_end_desc = "(你一周天行将下来，顿时浑身发暖，感到腹中内劲又增加一分。)
 var.dazuo_halt_desc = "(你把正在运行的真气强行压回丹田，站了起来。)|(你面色一沉，迅速收气，站了起来。)|(你突然双手向胸前一合，压住腹中内息，凌空跃起。)|(你双眼一睁，眼中射出一道精光，接着阴阴一笑，站了起来。)"
 var.dazuo_full_desc = "你的内力修为似乎已经达到了瓶颈，无法再靠打坐来提升了。"
 var.me_id = "byj"
-var.me_pwd = "Flying1"
+var.me_pwd = "Flying0"
 var.me_name = "白玉京"
 var.me_menpai = "明教"
 var.me_family = "明教"
@@ -39,7 +39,7 @@ var.kantou_flag = true
 var.lht_skil_exp_check = 1
 --var.sleep_loc = "fly bt;n;w;n" 
 
-auto_list = {"wei", "guanfu","guo","event","double", "baobiao", "shan", "wine", "task", "wait_for_task", "reconnect"}
+auto_list = {"wei", "guanfu","guo","event","double", "baobiao", "shan", "wine", "task", "wait_for_task"}
 
 weapon_list = {"haoqi qin", "sanqing dao", "kunlun qin", "shentong zhang", "qiankun dao", "kunlun zhang"}
 
@@ -238,12 +238,10 @@ attack_perform_array = {
 			end
 	},
 
-	[9] = { i = 2,
+	[9] = { i = 13,
 			action = function()
-				local wp = choose_sword()
 				choose_force()
-				Execute("enable parry pomo-jianfa;enable sword wuyun-jianfa;unwield all;wield " .. wp .. ";perform parry.zuijian " .. var.pfm_target .. ";unwield all")
-				Execute("unwield all")
+				Execute("unwield all;enable strike chousui-zhang;bei chousui-zhang;perform strike.chousui " .. var.pfm_target)
 			end
 	},
 
@@ -255,7 +253,7 @@ attack_perform_array = {
 }
 
 task_busy_list = { 2, 1}
-task_attack_list = {9, 5, 4, 1, 7, 2}
+task_attack_list = {5, 4, 1, 7, 2}
 
 gf_busy_list = { 1, 2 }
 gf_attack_list = { 6, 7 }
@@ -302,7 +300,7 @@ function choose_force(sf)
 end
 
 function powerup()
-	Execute("enable force wuzheng-xinfa;yun bingxin;enable force longxiang;yun powerup;yun shield")
+	Execute("enable force longxiang;yun powerup;yun shield;enable force huagong-dafa;yun powerup;enable force longxiang")
 end
 
 function set_menpai(menpai)
@@ -318,14 +316,14 @@ function set_menpai(menpai)
 		r1,r2,r3 = re:match(menpai)
 		if(r3 ~= nil) then
 			print("换木系内功了.......")
-			return choose_force("wuzheng-xinfa")
+			return choose_force("huagong-dafa")
 		end
 
 		re = rex.new("(武当|日月|逍遥|昆仑|丐帮)")
 		r1,r2,r3 = re:match(menpai)
 		if(r3 ~= nil) then
 			print("换木系内功了.......")
-			return choose_force("wuzheng-xinfa")
+			return choose_force("huagong-dafa")
 		end
 	end
 
