@@ -85,9 +85,9 @@ blocker_npcs["竹剑"] = {id = "zhu jian"}
 blocker_npcs["菊剑"] = {id = "ju jian"}
 blocker_npcs["谢烟客"] = {id = "xie yanke", pfm = true}
 blocker_npcs["巴依"] = {id = "bayi"}
-blocker_npcs["定逸师太"] = {id = "dingyi shitai", pfm = true, exp=5000000}
-blocker_npcs["丘处机"] = {id = "qiu chuji", pfm = true, exp=5000000}
-blocker_npcs["刘处玄"] = {id = "liu chuxuan", pfm = true, exp=3000000}
+blocker_npcs["定逸师太"] = {id = "dingyi shitai", pfm = true, exp=2000000}
+blocker_npcs["丘处机"] = {id = "qiu chuji", pfm = true, exp=2000000}
+blocker_npcs["刘处玄"] = {id = "liu chuxuan", pfm = true, exp=2000000}
 blocker_npcs["石嫂"] = {id = "shi sao"}
 blocker_npcs["jushi"] = {id = "jushi", pfm = true, exp=10000000, dadizi=true}
 blocker_npcs["houye"] = {id = "houye", pfm = true, exp=10000000, dadizi=true}
