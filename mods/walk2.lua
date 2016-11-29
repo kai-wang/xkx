@@ -71,8 +71,8 @@ blocker_npcs["»Ê¹¬ÎÀÊ¿"] = {id = "wei shi"}
 blocker_npcs["òşÉß"] = {id = "mang she"}
 blocker_npcs["°¢±Ì"] = {id = "a bi"}
 blocker_npcs["ÃÉÃæÅ®ÀÉ"] = {id = "nv lang", pfm = true}
-blocker_npcs["ÕÅËÉÏª"] = {id = "zhang songxi", pfm = true, exp=3000000}
-blocker_npcs["ÄªÉù¹È"] = {id = "mo shenggu", pfm = true, exp=3000000}
+blocker_npcs["ÕÅËÉÏª"] = {id = "zhang songxi", pfm = true, exp=2000000}
+blocker_npcs["ÄªÉù¹È"] = {id = "mo shenggu", pfm = true, exp=2000000}
 blocker_npcs["³à¹Ú¾Şòş"] = {id = "ju man"}
 blocker_npcs["ÎŞ¸ùµÀ³¤"] = {id = "wugen daozhang", pfm = true}
 blocker_npcs["ÂéÒÂ³¤ÀÏ"] = {id = "mayi zhanglao"}
