@@ -16,7 +16,7 @@ var.gf_money = "no"
 var.task_id = "byj's task"
 var.ttask_id = "byj's ttask"
 var.task_auto_kill = 1
---var.task_kill_flag = 1
+var.task_kill_flag = 1
 var.dig_dummy = "lbt"
 var.chatter_whitelist = "byj;lbt;happy;"
 var.chatter_blacklist = ""
@@ -39,7 +39,7 @@ var.kantou_flag = true
 var.lht_skil_exp_check = 1
 --var.sleep_loc = "fly bt;n;w;n" 
 
-auto_list = {"wei", "guanfu","guo","event","double", "baobiao", "shan", "wine", "task", "wait_for_task", "reconnect"}
+auto_list = {"wei", "guanfu","guo","event","double", "baobiao", "shan", "wine", "task", "wait_for_task", "reconnect", "quit"}
 
 weapon_list = {"haoqi qin", "sanqing dao", "kunlun qin", "shentong zhang", "qiankun dao", "kunlun zhang"}
 
@@ -255,7 +255,7 @@ attack_perform_array = {
 }
 
 task_busy_list = { 2, 1}
-task_attack_list = {9, 5, 4, 1, 7, 2}
+task_attack_list = {5, 9, 4, 1, 7, 2}
 
 gf_busy_list = { 1, 2 }
 gf_attack_list = { 6, 7 }
@@ -266,7 +266,7 @@ ttask_attack_list = { 1, 2, 3, 4 }
 busy_list = { 1, 2}
 busy_list2 = { 1, 2 }
 attack_list1 = { 6, 7, 8 } 			-- shan / blocker
-attack_list2 = { 1, 5, 8, 7, 2 }	-- xiao
+attack_list2 = { 5, 9, 4, 1, 7, 2 }	-- xiao
 attack_list3 = { 7, 10, 5}			-- wei / xiao
 attack_list4 = { 6 }				-- shan / wei
 attack_list5 = { 5, 8, 7, 1 }	-- ss
