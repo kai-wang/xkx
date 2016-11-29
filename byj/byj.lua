@@ -255,7 +255,7 @@ attack_perform_array = {
 }
 
 task_busy_list = { 2, 1}
-task_attack_list = {5, 9, 8, 1, 7, 2}
+task_attack_list = {5, 9, 1, 7, 4, 2}
 
 gf_busy_list = { 1, 2 }
 gf_attack_list = { 6, 7 }
