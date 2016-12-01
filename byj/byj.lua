@@ -56,7 +56,8 @@ pfm = {
 	[10]={	name="飞杖降魔", desc="你大喝一声将手中急转着的", cd=false, tx_finish=true, fz_back=true },
 	[11]={	name="千年玄冰", desc="你使出玄天指绝技「千年玄冰」", cd=false },
 	[12]= {	name="zhaohuo", desc="你用全身的内力注入地上！对着地上一指", cd=false, reset_time=15 },
-	[13]= {	name="抽髓三掌", desc="你眼光一闪，暗运化功大法", cd=false }
+	--[13]= {	name="抽髓三掌", desc="你眼光一闪，暗运化功大法", cd=false },
+	[13]= {name="长相思",			desc="你使出痴心情长剑之绝舞",				cd=false}
 	--[[
 	[1] = {name="一剑化三清", 		desc="你大喝一声，剑招突变", 			cd=false},
 	[2] = {name="附骨缠身", 		desc="你大喝一声，缠身而上", 			cd=false},
@@ -247,15 +248,17 @@ attack_perform_array = {
 			end
 	},
 
-	[10] = { i = 9,
+	[10] = { i = 13,
 			action = function()
-				Execute("unwield all;enable strike huoyan-dao;perform strike.fen " .. var.pfm_target)
+				local wp = choose_sword()
+				choose_force()
+				Execute("unwield all;wield " .. var.wp .. ";enable sword chixin-qingchang-jian;perform sword.xiangsi " .. var.pfm_target .. ";unwield all")
 			end		
 	}
 }
 
 task_busy_list = { 2, 1}
-task_attack_list = {5, 9, 1, 7, 4, 2}
+task_attack_list = {5, 9, 10, 7, 4}
 
 gf_busy_list = { 1, 2 }
 gf_attack_list = { 6, 7 }
@@ -265,11 +268,11 @@ ttask_attack_list = { 1, 2, 3, 4 }
 
 busy_list = { 1, 2}
 busy_list2 = { 1, 2 }
-attack_list1 = { 6, 7, 8 } 			-- shan / blocker
-attack_list2 = { 5, 9, 4, 1, 7, 2 }	-- xiao
+attack_list1 = { 6, 7, 10 } 			-- shan / blocker
+attack_list2 = { 5, 9, 10, 7, 4 }	-- xiao
 attack_list3 = { 7, 10, 5}			-- wei / xiao
 attack_list4 = { 6 }				-- shan / wei
-attack_list5 = { 5, 8, 7, 1 }	-- ss
+attack_list5 = { 5, 10, 7, 1 }	-- ss
 
 study_list = {
 	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu finger 10000", wear_int = true, interval = 0.8, post_action="fly wm;e;s;s;s;w;w;u;gamble big skill finger 2000"},
@@ -302,7 +305,7 @@ function choose_force(sf)
 end
 
 function powerup()
-	Execute("enable force wuzheng-xinfa;yun bingxin;enable force longxiang;yun powerup;yun shield")
+	Execute("enable force wuzheng-xinfa;yun bingxin;enable force beiming-shengong;yun beiming;yun shield")
 end
 
 function set_menpai(menpai)
@@ -311,7 +314,7 @@ function set_menpai(menpai)
 		local r1,r2,r3 = re:match(menpai)
 		if(r3 ~= nil) then
 			print("换金系内功了.......")
-			return choose_force("longxiang")
+			return choose_force("beiming-shengong")
 		end
 
 		re = rex.new("(明教|大理|神龙|江湖|云龙|少林|全真)")
@@ -330,7 +333,7 @@ function set_menpai(menpai)
 	end
 
 	print("默认换成金系内功了.......")
-	return choose_force("longxiang")
+	return choose_force("beiming-shengong")
 end
 
 function buff(menpai)
