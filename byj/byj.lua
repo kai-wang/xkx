@@ -57,8 +57,7 @@ pfm = {
 	[11]={	name="千年玄冰", desc="你使出玄天指绝技「千年玄冰」", cd=false },
 	[12]= {	name="zhaohuo", desc="你用全身的内力注入地上！对着地上一指", cd=false, reset_time=15 },
 	--[13]= {	name="抽髓三掌", desc="你眼光一闪，暗运化功大法", cd=false },
-	[13]= {name="长相思",			desc="你使出痴心情长剑之绝舞",				cd=false},
-	[14]= {name="月光如影",			desc="你照着月光的映射",				cd=false}
+	[13]= {name="长相思",			desc="你使出痴心情长剑之绝舞",				cd=false}
 	--[[
 	[1] = {name="一剑化三清", 		desc="你大喝一声，剑招突变", 			cd=false},
 	[2] = {name="附骨缠身", 		desc="你大喝一声，缠身而上", 			cd=false},
@@ -163,9 +162,9 @@ busy_perform_array = {
 			end
 	},
 
-	[2] = { i = 14,
+	[2] = { i = 11,
 			action = function()
-				Execute("enable move yueying-wubu;perform move.yueguangruying " .. var.pfm_target)
+				Execute("unwield all;enable finger xuantian-zhi;perform finger.xuanbing " .. var.pfm_target)
 			end
 	}
 --[[	,
