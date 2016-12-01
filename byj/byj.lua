@@ -252,7 +252,7 @@ attack_perform_array = {
 			action = function()
 				local wp = choose_sword()
 				choose_force()
-				Execute("unwield all;wield " .. var.wp .. ";enable sword chixin-qingchang-jian;perform sword.xiangsi " .. var.pfm_target .. ";unwield all")
+				Execute("unwield all;wield " .. wp .. ";enable sword chixin-qingchang-jian;perform sword.xiangsi " .. var.pfm_target .. ";unwield all")
 			end		
 	}
 }
