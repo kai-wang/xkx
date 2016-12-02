@@ -41,7 +41,7 @@ var.lht_skil_exp_check = 1
 
 auto_list = {"wei", "guanfu","guo","event","double", "baobiao", "shan", "wine", "task", "wait_for_task", "reconnect", "quit"}
 
-weapon_list = {"haoqi qin", "sanqing dao", "kunlun qin", "shentong zhang", "qiankun dao", "kunlun zhang"}
+weapon_list = {"haoqi qin", "kunlun dao", "kunlun qin", "shentong zhang", "bagua dao", "kunlun zhang"}
 
 pfm = {
 	[1]= {	name="双手互博之术", desc="你平心静气", cd=false },
@@ -393,7 +393,7 @@ end
 
 function fight_wear(f_done)
 	wait.make(function()
-		Execute("tuo all;wear shentong xue;wear bagua xue;wear shentong mao;wear shenshui mao;wear taiji yi;wear xuanyuan yi;wear xuanyuan hushou;wear lianyu ring;give sanqing dao to " .. var.me_id)
+		Execute("tuo all;wear shentong xue;wear bagua xue;wear shentong mao;wear shenshui mao;wear taiji yi;wear xuanyuan yi;wear xuanyuan hushou;wear lianyu ring;give kunlun dao to " .. var.me_id)
 		wait.time(1)
 		core.busytest(function() call(f_done) end)
 	end)
