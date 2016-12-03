@@ -317,14 +317,14 @@ function set_menpai(menpai)
 			return choose_force("xiaowuxiang")
 		end
 
-		re = rex.new("(明教|大理|神龙|江湖|云龙|少林|全真|武当|日月|逍遥|昆仑|丐帮)")
+		re = rex.new("(明教|大理|神龙|江湖|云龙|武当|逍遥|昆仑|丐帮)")
 		r1,r2,r3 = re:match(menpai)
 		if(r3 ~= nil) then
 			print("换水系内功了.......")
 			return choose_force("beiming-shengong")
 		end
 
-		re = rex.new("(少林|全真|古墓|神雕)")
+		re = rex.new("(少林|全真|古墓|神雕|日月)")
 		r1,r2,r3 = re:match(menpai)
 		if(r3 ~= nil) then
 			print("换木系内功了.......")
