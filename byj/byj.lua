@@ -272,7 +272,7 @@ attack_list1 = { 6, 7, 10 } 			-- shan / blocker
 attack_list2 = { 5, 9, 10, 7, 4 }	-- xiao
 attack_list3 = { 7, 10, 5}			-- wei / xiao
 attack_list4 = { 6 }				-- shan / wei
-attack_list5 = { 5, 10, 7, 1 }	-- ss
+attack_list5 = { 5, 9, 10, 7, 4 }	-- ss
 
 study_list = {
 	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu finger 10000", wear_int = true, interval = 0.8, post_action="fly wm;e;s;s;s;w;w;u;gamble big skill finger 2000"},
