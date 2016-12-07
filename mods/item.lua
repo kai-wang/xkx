@@ -130,6 +130,7 @@ end
 
 function addtolist(action, id)
 	if(action == "sell") then return table.insert(sell_list, id) end
+	if(action == "eat") then return table.insert(eat_list, id) end
 	if(action == "drop") then return table.insert(drop_list, id) end
 	if(action == "store") then return table.insert(store_list, id) end
 	if(action == "fenjie") then return table.insert(fenjie_list) end
