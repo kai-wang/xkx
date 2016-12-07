@@ -4,7 +4,7 @@ require "var"
 
 module ("item", package.seeall)
 
-local sell_list, store_list, drop_list, eat_list = {}, {}, {}, {}
+local sell_list, store_list, drop_list, eat_list, fenjie_list = {}, {}, {}, {}, {}
 local eat_items = {"何首乌","人参","老山参","新鲜蛇胆","熊胆"}
 local jicun_items = {"九转银丹","九转金丹"}
 local store_items = {"菩提子","美容丸","仙丹","神力丸"}--,"玛瑙","翡翠","珠宝","琥珀","灰玉","水晶"}
@@ -15,6 +15,7 @@ function init()
 	store_list = {}
 	drop_list = {}
 	eat_list = {}
+	fenjie_list = {}
 end
 
 function eat()
@@ -38,6 +39,13 @@ function drop()
 	end
 end
 
+function fenjie()
+	for i, #fenjie_list do
+		wait.time(0.1)
+		Execute("fenjie " .. fenjie_list[i])
+	end
+end
+
 function store()
 end
 
@@ -58,6 +66,7 @@ function lookandget(f_done)
 				eat()
 				sell()
 				store()
+				fenjie()
 				if(var.fast_mode == "1") then wait.time(1) end
 				call(f_done)
 			end)
@@ -108,7 +117,9 @@ function sort(item, id, style)
 	--白的，蓝的，黄的装备卖掉
 	if(color == "white" or color == "blue" or color == "yellow") then
 		addtolist("drop", id)
-	elseif(color == "magenta" or color == "red") then
+	elseif(color == "red") then
+		addtolist("fenjie", id)
+	elseif(color == "magenta") then
 	--红的，紫的留着
 		addtolist("store", id)
 	else
@@ -121,46 +132,9 @@ function addtolist(action, id)
 	if(action == "sell") then return table.insert(sell_list, id) end
 	if(action == "drop") then return table.insert(drop_list, id) end
 	if(action == "store") then return table.insert(store_list, id) end
+	if(action == "fenjie") then return table.insert(fenjie_list) end
 end
 
---[[
-function sort(item, id, style)
-	local color = getColourName(style, item)
-	--白的，蓝的，黄的装备卖掉
-	--or color == "yellow" or color == "red"
-	if(color == "white" or color == "blue" or color == "yellow") then
-		addtolist("sell", id)
-		--color == "red" or 
-	elseif(color == "magenta" or color == "red") then
-	--红的，紫的留着
-		addtolist("store", id)
-	else
-	--其他的扔掉
-		addtolist("drop", id)
-	end
-end
-
-function addtolist(action, id)
-	if(action == "sell") then
-		if(var.item_sell_list == nil) then var.item_sell_list = "" end
-		--var.item_sell_list = var.item_sell_list .. "give " .. id .. " to ouye zi;drop " .. id .. ";"
-		-- just drop, not give
-		var.item_sell_list = var.item_sell_list .. "drop " .. id .. ";"
-	elseif(action == "store") then 
-		if(var.item_store_list == nil) then var.item_store_list = "" end
-		var.item_store_list = var.item_store_list .. "give " .. id .. " to byj;"-- .. var.dami_equip .. ";"
-	elseif(action == "drop") then
-		if(var.item_drop_list == nil) then var.item_drop_list = "" end
-		var.item_drop_list = var.item_drop_list .. "drop " .. id .. ";"
-	elseif(action == "eat") then
-		if(var.item_eat_list == nil) then var.item_eat_list = "" end
-		var.item_eat_list = var.item_eat_list .. "eat " .. id .. ";"
-	elseif(action == "jicun") then
-		if(var.item_jicun_list == nil) then var.item_jicun_list = "" end
-		var.item_jicun_list = var.item_jicun_list .. "jicun " .. id .. ";"
-	end
-end
-]]--
 
 function getColourName(style, item)
 	for i, v in ipairs(style) do
