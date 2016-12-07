@@ -360,10 +360,12 @@ end
 
 function quit(f_ok)
 	core.safeback(function()
-		Execute("fly mj;quit")
-		timer.reconnect(30, function()
-			var.quit_required = 0
-			config.fight_wear(f_ok)
+		jicun(function()
+			Execute("fly mj;quit")
+			timer.reconnect(30, function()
+				var.quit_required = 0
+				config.fight_wear(f_ok)
+			end)
 		end)
 	end)
 end
@@ -382,6 +384,12 @@ function jicun(f_done)
 			local l, w = wait.regexp("^(> )*(你要寄存什么)|(你将一颗九转金丹存了起来).*$", 1)
 			wait.time(0.2)
 		until(l == nil or l:match("你要寄存什么"))
+		repeat
+			Execute("jicun gang")
+			local l, w = wait.regexp("^(> )*(你要寄存什么)|(你将一块百炼精钢存了起来).*$", 1)
+			wait.time(0.2)
+		until(l == nil or l:match("你要寄存什么"))
+
 		call(f_done)
 	end)
 end
