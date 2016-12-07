@@ -67,7 +67,7 @@ function lookandget(f_done)
 				sell()
 				store()
 				fenjie()
-				if(var.fast_mode == "1") then wait.time(1) end
+			--	if(var.fast_mode == "1") then wait.time(1) end
 				call(f_done)
 			end)
 		end)
