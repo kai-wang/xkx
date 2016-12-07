@@ -40,7 +40,7 @@ function drop()
 end
 
 function fenjie()
-	for i, #fenjie_list do
+	for i = 1, #fenjie_list do
 		wait.time(0.1)
 		Execute("fenjie " .. fenjie_list[i])
 	end
