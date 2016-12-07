@@ -85,6 +85,7 @@ function match2(name, line, wildcards, style)
 		if(wildcards[2] == "Òø½£") then addtolist("drop", id) return end
 		sort(item, id, style)
 		return
+	end
 	
 	if(wildcards[7] ~= nil and wildcards[7] ~= "") then
 		item, id = wildcards[7], string.lower(wildcards[8])
