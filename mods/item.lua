@@ -86,7 +86,7 @@ function match2(name, line, wildcards, style)
 		sort(item, id, style)
 		return
 	end
-	
+
 	if(wildcards[7] ~= nil and wildcards[7] ~= "") then
 		item, id = wildcards[7], string.lower(wildcards[8])
 		for i, v in ipairs(eat_items) do 
@@ -114,7 +114,7 @@ function sort(item, id, style)
 	--白的，蓝的，黄的装备卖掉
 	if(color == "white" or color == "blue" or color == "yellow") then
 		addtolist("drop", id)
-	if(color == "magenta" or color == "red") then
+	elseif(color == "magenta" or color == "red") then
 	--红的，紫的留着
 		addtolist("store", id)
 	else
