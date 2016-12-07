@@ -17,32 +17,28 @@ function init()
 	eat_list = {}
 end
 
-function eat(f)
+function eat()
 	for i = 1, #eat_list do
 		wait.time(0.1)
 		Execute("eat " .. eat_list[i])
 	end
-	call(f)
 end
 
-function sell(f)
+function sell()
 	for i = 1, #sell_list do
 		wait.time(0.1)
 		Execute("give " .. sell_list[i] .. "to ouye zi")
 	end
-	call(f)
 end
 
-function drop(f)
+function drop()
 	for i = 1, #drop_list do
 		wait.time(0.1)
 		Execute("drop " .. drop_list[i])
 	end
-	call(f)
 end
 
-function store(f)
-	call(f)
+function store()
 end
 
 function lookandget(f_done)
@@ -57,15 +53,13 @@ function lookandget(f_done)
 
 		core.safeback(function()
 			Execute("u")
-			drop(function() 
-				eat(function()
-					sell(function() 
-						store(function() 
-							if(var.fast_mode == "1") then wait.time(1) end
-							call(f_done) 
-						end)
-					end) 
-				end) 
+			wait.make(function()
+				drop()
+				eat()
+				sell()
+				store()
+				if(var.fast_mode == "1") then wait.time(1) end
+				call(f_done)
 			end)
 		end)
 	end)
