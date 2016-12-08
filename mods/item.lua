@@ -26,6 +26,7 @@ function lookandget(f_done)
 		if(var.item_eat_list ~= nil and var.item_eat_list ~= "") then Execute(var.item_eat_list) end
 		if(var.item_drop_list ~= nil and var.item_drop_list ~= "") then Execute(var.item_drop_list) end
 		if(var.item_sell_list ~= nil and var.item_sell_list ~= "") then Execute("fly wm;u;" .. var.item_sell_list) end
+		if(var.item_jicun_list ~= nil and var.item_jicun_list ~= "") then Execute("fly wm;u;" .. var.item_jicun_list) end
 		if(var.item_store_list ~= nil and var.item_drop_list ~= "") then Execute("fly wm;nw") Execute(var.item_store_list) end
 
 		if(var.fast_mode == "1") then wait.time(1) end
@@ -70,11 +71,6 @@ function match2(name, line, wildcards, style)
 		
 		addtolist("drop", id)
 		
-		--[[
-		if(item:match("白银") == nil and item:match("黄金") == nil and item:match("金条") == nil and item:match("银票") == nil ) then
-			addtolist("drop", id)
-		end
-		]]--
 	end
 end
 
@@ -83,9 +79,11 @@ function sort(item, id, style)
 	--白的，蓝的，黄的装备卖掉
 	--or color == "yellow" or color == "red"
 	if(color == "white" or color == "blue" or color == "yellow") then
-		addtolist("sell", id)
+		addtolist("drop", id)
 		--color == "red" or 
-	elseif(color == "magenta" or color == "red") then
+	elseif(color == "red") then
+		addtolist("jicun", id)
+	elseif(color == "magenta") then
 	--红的，紫的留着
 		addtolist("store", id)
 	else
@@ -112,7 +110,7 @@ function addtolist(action, id)
 		var.item_eat_list = var.item_eat_list .. "eat " .. id .. ";"
 	elseif(action == "jicun") then
 		if(var.item_jicun_list == nil) then var.item_jicun_list = "" end
-		var.item_jicun_list = var.item_jicun_list .. "jicun " .. id .. ";"
+		var.item_jicun_list = var.item_jicun_list .. "fenjie " .. id .. ";"
 	end
 end
 
