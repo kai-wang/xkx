@@ -98,7 +98,7 @@ local tasks = {
 		
 		priority = function()
 			-- double ÏÂ±ğ×ö
-			if(var.double_bonus == "true") then return -1 end
+			-- if(var.double_bonus == "true") then return -1 end
 
 			-- exceed the limit
 			if(var.gf_amount ~= nil and var.gf_amount_limit ~= nil and tonumber(var.gf_amount) > tonumber(var.gf_amount_limit)) then
