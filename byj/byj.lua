@@ -39,7 +39,7 @@ var.kantou_flag = true
 var.lht_skil_exp_check = 1
 --var.sleep_loc = "fly bt;n;w;n" 
 
-auto_list = {"wei", "guanfu","guo","event","double", "baobiao", "shan", "wine", "task", "wait_for_task", "reconnect", "quit", "study"}
+auto_list = {"wei", "guanfu","guo","event","double", "baobiao", "shan", "wine", "task", "wait_for_task", "reconnect", "quit", "study", "xiao"}
 
 weapon_list = {"haoqi qin", "kunlun dao", "kunlun qin", "shentong zhang", "bagua dao", "kunlun zhang"}
 
