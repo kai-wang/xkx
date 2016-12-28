@@ -270,7 +270,7 @@ busy_list = { 1, 2}
 busy_list2 = { 1, 2 }
 attack_list1 = { 6, 7, 10 } 			-- shan / blocker
 attack_list2 = { 5, 9, 10, 7, 4 }	-- xiao
-attack_list3 = { 7, 10, 5}			-- wei / xiao
+attack_list3 = { 5, 9, 10, 7}			-- wei / xiao
 attack_list4 = { 6 }				-- shan / wei
 attack_list5 = { 5, 9, 10, 7, 4 }	-- ss
 
