@@ -15,7 +15,7 @@ var.me_dazuo_factor = 0.8
 var.gf_money = "no"
 var.task_id = "byj's task"
 var.ttask_id = "byj's ttask"
-var.task_auto_kill = 1
+var.task_auto_kill = 0
 var.task_kill_flag = 0
 var.dig_dummy = "lbt"
 var.chatter_whitelist = "byj;lbt;happy;"
@@ -39,7 +39,7 @@ var.kantou_flag = true
 var.lht_skil_exp_check = 1
 --var.sleep_loc = "fly bt;n;w;n" 
 
-auto_list = {"wei", "guanfu","guo","event","double", "baobiao", "shan", "wine", "task", "wait_for_task", "reconnect", "quit", "study", "xiao_high"}
+auto_list = {"wei", "guanfu","guo","event","double", "baobiao", "shan", "wine", "task", "wait_for_task", "reconnect", "quit", "study", "xiao_high", "sstask"}
 
 weapon_list = {"haoqi qin", "kunlun dao", "kunlun qin", "shentong zhang", "bagua dao", "kunlun zhang"}
 
