@@ -10,8 +10,8 @@ var.me_pwd = "111zzZ"
 var.me_name = "白玉京"
 var.me_menpai = "明教"
 var.me_family = "明教"
-var.me_dazuo = "dazuo 30000;dazuo max"
-var.me_dazuo_factor = 1.2
+var.me_dazuo = "dazuo 25000;dazuo max"
+var.me_dazuo_factor = 1.4
 var.gf_money = "no"
 var.task_id = "byj's task"
 var.ttask_id = "byj's ttask"
@@ -259,7 +259,7 @@ attack_perform_array = {
 }
 
 task_busy_list = { 1, 2}
-task_attack_list = {2, 3, 5, 9, 5, 10, 7, 4}
+task_attack_list = {2, 3, 9, 5, 10, 7, 4}
 
 gf_busy_list = { 1, 2 }
 gf_attack_list = { 6, 7 }
