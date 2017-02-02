@@ -11,7 +11,7 @@ var.me_name = "白玉京"
 var.me_menpai = "明教"
 var.me_family = "明教"
 var.me_dazuo = "dazuo 30000;dazuo max"
-var.me_dazuo_factor = 0.8
+var.me_dazuo_factor = 1.2
 var.gf_money = "no"
 var.task_id = "byj's task"
 var.ttask_id = "byj's ttask"
@@ -192,7 +192,7 @@ attack_perform_array = {
 			action = function()
 				local wp = choose_xuedao()
 				choose_force()
-				Execute("unwield all;wield " .. wp .. ";enable blade xue-dao;jiali max;perform blade.kuangdao " .. var.pfm_target .. ";jiali 0;unwield all")
+				Execute("unwield all;wield " .. wp .. ";enable blade xue-dao;jiali max;enable force xiaowuxiang;yun wuxiang " .. var.pfm_target .. ";jiali 0;unwield all")
 			end
 	},
 
@@ -258,7 +258,7 @@ attack_perform_array = {
 }
 
 task_busy_list = { 1, 2}
-task_attack_list = {5, 9, 10, 7, 4}
+task_attack_list = {2, 3, 5, 9, 5, 10, 7, 4}
 
 gf_busy_list = { 1, 2 }
 gf_attack_list = { 6, 7 }
