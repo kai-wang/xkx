@@ -39,7 +39,7 @@ var.kantou_flag = true
 var.lht_skil_exp_check = 1
 --var.sleep_loc = "fly bt;n;w;n" 
 
-auto_list = {"wei", "guanfu","guo","event","double", "baobiao", "shan", "wine", "task", "wait_for_task", "reconnect", "quit", "study", "xiao_high", "sstask"}
+auto_list = {"wei", "guanfu","guo","event","double", "baobiao", "shan", "wine", "jiding", "wait_for_task", "reconnect", "quit", "study", "xiao", "sstask"}
 
 weapon_list = {"haoqi qin", "kunlun dao", "kunlun qin", "shentong zhang", "bagua dao", "kunlun zhang"}
 
@@ -163,9 +163,9 @@ busy_perform_array = {
 			end
 	},
 
-	[2] = { i = 11,
+	[2] = { i = 8,
 			action = function()
-				Execute("unwield all;enable finger xuantian-zhi;perform finger.xuanbing " .. var.pfm_target)
+				Execute("enable dodge shenkong-xing;perform dodge.tianmaxingkong " .. var.pfm_target)
 			end
 	}
 --[[	,
@@ -270,7 +270,7 @@ ttask_attack_list = { 1, 2, 3, 4 }
 busy_list = { 1, 2}
 busy_list2 = { 1, 2 }
 attack_list1 = { 6, 7, 10 } 			-- shan / blocker
-attack_list2 = { 5, 9, 10, 7, 4 }	-- xiao
+attack_list2 = { 5, 10, 7, 2 }	-- xiao
 attack_list3 = { 5, 9, 10, 7}			-- wei / xiao
 attack_list4 = { 6 }				-- shan / wei
 attack_list5 = { 5, 9, 10, 7, 4 }	-- ss
@@ -280,7 +280,7 @@ study_list = {
 	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu force 5000", wear_int = true, interval = 0.8, post_action="fly wm;e;s;s;s;w;w;u;gamble big skill force 2000"},
 	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu dodge 5000", wear_int = true, interval = 0.8, post_action="fly wm;e;s;s;s;w;w;u;gamble big skill dodge 2000"},
 	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu beiming-shengong 10000", wear_int = true, interval = 0.8 },
-	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu wuzheng-xinfa 5000", wear_int = true, interval = 0.8 },
+	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu huagong-dafa 5000", wear_int = true, interval = 0.8 },
 	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu xiaowuxiang 5000", wear_int = true, interval = 0.8 }
 	--{ loc = "fly mj", cmd = "xue wei strike 100;et",pre_action="bai wei yixiao", post_action="bai xie xun"}
 }
@@ -307,7 +307,7 @@ function choose_force(sf)
 end
 
 function powerup()
-	Execute("enable force wuzheng-xinfa;yun bingxin;enable force beiming-shengong;yun beiming;yun shield")
+	Execute("enable force xiaowuxiang;yun powerup;enable force beiming-shengong;yun beiming;yun shield")
 end
 
 function set_menpai(menpai)
@@ -330,7 +330,7 @@ function set_menpai(menpai)
 		r1,r2,r3 = re:match(menpai)
 		if(r3 ~= nil) then
 			print("换木系内功了.......")
-			return choose_force("wuzheng-xinfa")
+			return choose_force("xiaowuxiang")
 		end
 	end
 
