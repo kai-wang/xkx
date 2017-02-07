@@ -39,7 +39,7 @@ var.kantou_flag = true
 var.lht_skil_exp_check = 1
 --var.sleep_loc = "fly bt;n;w;n" 
 
-auto_list = {"wei", "guanfu","guo","event","double", "baobiao", "shan", "wine", "jiding", "wait_for_task", "reconnect", "quit", "study", "xiao", "sstask"}
+auto_list = {"wei", "guanfu","guo","event","double", "jiding", "reconnect", "quit", "study", "xiao", "sstask"}
 
 weapon_list = {"haoqi qin", "kunlun dao", "kunlun qin", "shentong zhang", "bagua dao", "kunlun zhang"}
 
@@ -255,11 +255,18 @@ attack_perform_array = {
 				choose_force()
 				Execute("unwield all;wield " .. wp .. ";enable sword chixin-qingchang-jian;perform sword.xiangsi " .. var.pfm_target .. ";unwield all")
 			end		
-	}
+	},
+
+	[11] = { i = 14,
+			action = function()
+				choose_force()
+				Execute("unwield all;bei none;enable finger sun-finger;bei sun-finger;enable force xiaowuxiang;yun wuxiang " .. var.pfm_target .. ";unwield all")
+			end
+	},
 }
 
 task_busy_list = { 1, 2}
-task_attack_list = {2, 3, 9, 5, 10, 7, 4}
+task_attack_list = {2, 3, 5, 10, 7}
 
 gf_busy_list = { 1, 2 }
 gf_attack_list = { 6, 7 }
@@ -271,9 +278,9 @@ busy_list = { 1, 2}
 busy_list2 = { 1, 2 }
 attack_list1 = { 6, 7, 10 } 			-- shan / blocker
 attack_list2 = { 5, 10, 7, 2 }	-- xiao
-attack_list3 = { 5, 9, 10, 7}			-- wei / xiao
+attack_list3 = { 5, 10, 7, 11}			-- wei / xiao
 attack_list4 = { 6 }				-- shan / wei
-attack_list5 = { 5, 9, 10, 7, 4 }	-- ss
+attack_list5 = { 5, 10, 7, 11 }	-- ss
 
 study_list = {
 	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu finger 5000", wear_int = true, interval = 0.8, post_action="fly wm;e;s;s;s;w;w;u;gamble big skill finger 2000"},
