@@ -58,7 +58,9 @@ pfm = {
 	[12]= {	name="zhaohuo", desc="你用全身的内力注入地上！对着地上一指", cd=false, reset_time=15 },
 	--[13]= {	name="抽髓三掌", desc="你眼光一闪，暗运化功大法", cd=false },
 	[13]= {name="长相思",			desc="你使出痴心情长剑之绝舞",				cd=false},
-	[14]= {name="无色无相", 	desc="你使出小无相绝技「无色无相」，招式变幻莫测", cd=false}
+	[14]= {name="无色无相", 	desc="你使出小无相绝技「无色无相」，招式变幻莫测", cd=false},
+	[15]= {name="意恍惚诀",			desc="你凝神定气，使出七伤拳总诀中的「意恍惚诀」", cd=false},
+	[16]= {name="三焦齐逆诀",		desc="你凝神定气，企图使出七伤拳总诀中的「三焦齐逆诀」", cd=false}
 	--[[
 	[1] = {name="一剑化三清", 		desc="你大喝一声，剑招突变", 			cd=false},
 	[2] = {name="附骨缠身", 		desc="你大喝一声，缠身而上", 			cd=false},
@@ -167,6 +169,12 @@ busy_perform_array = {
 			action = function()
 				Execute("enable dodge shenkong-xing;perform dodge.tianmaxingkong " .. var.pfm_target)
 			end
+	},
+
+	[3] = { i = 15,
+			action = function()
+				Execute("unwield all;perform cuff.yihuangyu " .. var.pfm_target)
+			end
 	}
 --[[	,
 
@@ -263,10 +271,18 @@ attack_perform_array = {
 				Execute("unwield all;bei none;enable finger sun-finger;bei sun-finger;enable force xiaowuxiang;yun wuxiang " .. var.pfm_target .. ";unwield all")
 			end
 	},
+
+	[12] = { i = 16,
+			action = function()
+				choose_force()
+				Execute("unwield all;perform cuff.sanjiao " .. var.pfm_target)
+			end
+	}
+
 }
 
-task_busy_list = { 1, 2}
-task_attack_list = {2, 3, 5, 10, 7}
+task_busy_list = { 1, 2, 3}
+task_attack_list = {2, 12, 3, 5, 10, 7}
 
 gf_busy_list = { 1, 2 }
 gf_attack_list = { 6, 7 }
