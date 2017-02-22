@@ -173,7 +173,7 @@ busy_perform_array = {
 
 	[3] = { i = 15,
 			action = function()
-				Execute("unwield all;perform cuff.yihuangyu " .. var.pfm_target)
+				Execute("unwield all;perform cuff.yihuanghu " .. var.pfm_target)
 			end
 	}
 --[[	,
