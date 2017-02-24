@@ -361,7 +361,7 @@ function set_menpai(menpai)
 end
 
 function buff(menpai)
-	--Execute("unwield all;jiali max;enable strike huoyan-dao;perform strike.honglian;jiali 0")
+	Execute("nuoyi " .. var.me_id)
 end
 
 function anti_touxi()
