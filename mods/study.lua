@@ -88,7 +88,7 @@ function start(f_done, t_interval)
 						tmp = tmp + 1
 						Execute(var.lll)
 					else
-						study.emit("study_end", "done"")
+						study.emit("study_end", "done")
 					end
 				end)
 	
