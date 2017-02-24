@@ -17,6 +17,7 @@ function main(f)
 	cxt.learnlist = config.study_list[tonumber(var.study_seq)]
 	var.study_seq = tonumber(var.study_seq) + 1
 	var.lll = cxt.learnlist.cmd
+	var.study_times = cxt.learnlist.times
 
 	local go_study = function()
 		walk.run(cxt.learnlist.loc, start(function() done(f) end, cxt.learnlist.interval), f, f)
@@ -80,7 +81,14 @@ function start(f_done, t_interval)
 
 	local interval = t_interval
 	if(not interval) then interval = 0.2 end
-	timer.tick("action", interval, function() Execute(var.lll) end)
+	local tmp = 0
+	timer.tick("action", interval, 
+				function() 
+					if(var.study_times == nil or tmp < tonumber(var.study_times)) then
+						tmp = tmp + 1
+						Execute(var.lll)
+					end
+				end)
 	
 end
 

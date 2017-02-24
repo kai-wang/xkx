@@ -300,7 +300,7 @@ attack_list5 = { 5, 10, 7, 11 }	-- ss
 
 study_list = {
 	--{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu finger 5000", wear_int = true, interval = 0.8, post_action="fly wm;e;s;s;s;w;w;u;gamble big skill finger 2000"},
-	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu force 5000", wear_int = true, interval = 0.8, post_action="fly wm;e;s;s;s;w;w;u;gamble big skill force 2000"},
+	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu dodge 5000", wear_int = true, interval = 0.8, times = 5, post_action="fly wm;e;s;s;s;w;w;u;gamble big skill force 2000"},
 	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu beiming-shengong 10000", wear_int = true, interval = 0.8 },
 	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu jiuyang-shengong 10000", wear_int = true, interval = 0.8 },
 	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu xiaowuxiang 10000", wear_int = true, interval = 0.8 }
