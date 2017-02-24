@@ -87,6 +87,8 @@ function start(f_done, t_interval)
 					if(var.study_times == nil or tmp < tonumber(var.study_times)) then
 						tmp = tmp + 1
 						Execute(var.lll)
+					else
+						study.emit("study_end", "done"")
 					end
 				end)
 	
