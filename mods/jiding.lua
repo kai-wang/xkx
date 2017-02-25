@@ -131,7 +131,8 @@ function kill_jd_npc(name, line, wildcards)
 
 	if(t == nil or (t.exp ~= nil and tonumber(var.hp_exp) < t.exp)) then 
         print("ÕÒ²»µ½ " .. var.jd_npc_name)
-        return fail() 
+       -- return fail() 
+       return kill_dcq2()
     end
 
 	var.jd_npc_id = t.name
