@@ -145,7 +145,9 @@ function kill_jd_npc(name, line, wildcards)
 
 	timer.tickonce("action", 1, function()
 		core.busytest(function()
-			walk.run(roomAll[t.room].path, kill_jd_npc_start, fail, fail)
+			-- 改成找不到就回去杀丁
+            -- walk.run(roomAll[t.room].path, kill_jd_npc_start, fail, fail)
+            walk.run(roomAll[t.room].path, kill_jd_npc_start, kill_dcq2, fail)
 		end, 1)
 	end)
 end
@@ -244,6 +246,13 @@ function kill_dcq()
 		fight.prepare(busy_list, attack_list)
 		fight.start("kill ding chunqiu")
 	end)
+end
+
+function kill_dcq2()
+    core.safehalt(function()
+        Execute("fly xx;n;n")
+        kill_dcq()
+    end)
 end
 
 function kill_dcq_end()
