@@ -301,6 +301,7 @@ attack_list5 = { 5, 10, 7, 11 }	-- ss
 study_list = {
 	--{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu finger 5000", wear_int = true, interval = 0.8, post_action="fly wm;e;s;s;s;w;w;u;gamble big skill finger 2000"},
 	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu dodge 5000", wear_int = true, interval = 0.8, times = 5, post_action="fly wm;e;s;s;s;w;w;u;gamble big skill dodge 2000"},
+	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu force 5000", wear_int = true, interval = 0.8, times = 5, post_action="fly wm;e;s;s;s;w;w;u;gamble big skill force 2000"},
 	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu beiming-shengong 10000", wear_int = true, interval = 0.8 },
 	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu jiuyang-shengong 10000", wear_int = true, interval = 0.8 },
 	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu xiaowuxiang 10000", wear_int = true, interval = 0.8 }
@@ -334,11 +335,18 @@ end
 
 function set_menpai(menpai)
 	if(menpai ~= nil) then
-		local re = rex.new("(桃花|星宿|峨嵋|梅庄|慕容|峨眉|灵鹫|铁掌|华山|白驼|雪山|密宗|独孤|采花)")
+		local re = rex.new("(桃花|星宿|峨嵋|梅庄|慕容|峨眉)")
 		local r1,r2,r3 = re:match(menpai)
 		if(r3 ~= nil) then
 			print("换金系内功了.......")
 			return choose_force("xiaowuxiang")
+		end
+
+		re = rex.new("(灵鹫|铁掌|华山|白驼|雪山|密宗|独孤|采花)")
+		r1,r2,r3 = re:match(menpai)
+		if(r3 ~= nil) then
+			print("换火系内功了.......")
+			return choose_force("jiuyang-shengong")
 		end
 
 		re = rex.new("(明教|大理|神龙|江湖|云龙|武当|逍遥|昆仑|丐帮)")
@@ -352,7 +360,7 @@ function set_menpai(menpai)
 		r1,r2,r3 = re:match(menpai)
 		if(r3 ~= nil) then
 			print("换木系内功了.......")
-			return choose_force("xiaowuxiang")
+			return choose_force("huagong-dafa")
 		end
 	end
 
