@@ -300,11 +300,12 @@ attack_list5 = { 5, 10, 7, 11 }	-- ss
 
 study_list = {
 	--{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu finger 5000", wear_int = true, interval = 0.8, post_action="fly wm;e;s;s;s;w;w;u;gamble big skill finger 2000"},
-	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu parry 5000", wear_int = true, interval = 0.8, times = 5, post_action="fly wm;e;s;s;s;w;w;u;gamble big skill parry 2000"},
-	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu move 5000", wear_int = true, interval = 0.8, times = 5, post_action="fly wm;e;s;s;s;w;w;u;gamble big skill move 2000"},
-	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu beiming-shengong 10000", wear_int = true, interval = 0.8 },
-	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu jiuyang-shengong 10000", wear_int = true, interval = 0.8 },
-	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu xiaowuxiang 10000", wear_int = true, interval = 0.8 }
+	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu parry 10000", wear_int = true, interval = 0.8, times = 3, post_action="fly wm;e;s;s;s;w;w;u;gamble big skill parry 2000"},
+	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu move 10000", wear_int = true, interval = 0.8, times = 3, post_action="fly wm;e;s;s;s;w;w;u;gamble big skill move 2000"},
+	{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu force 10000", wear_int = true, interval = 0.8, times = 3, post_action="fly wm;e;s;s;s;w;w;u;gamble big skill force 2000"}
+	--{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu beiming-shengong 10000", wear_int = true, interval = 0.8 },
+	--{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu jiuyang-shengong 10000", wear_int = true, interval = 0.8 },
+	--{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu xiaowuxiang 10000", wear_int = true, interval = 0.8 }
 	--{ loc = "fly mj", cmd = "xue wei strike 100;et",pre_action="bai wei yixiao", post_action="bai xie xun"}
 }
 
