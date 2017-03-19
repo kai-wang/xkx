@@ -157,7 +157,8 @@ function attack()
 end
 
 function on_busy_success()
-	timer.tick("fight", 0.2, attack)
+	local t = math.max(var.pfm_run_time or 0, 0.2)
+	timer.tick("fight", tonumber(t), attack)
 end
 
 function on_busy_success_long()
