@@ -61,7 +61,7 @@ pfm = {
 	[14]= {name="无色无相", 	desc="你使出小无相绝技「无色无相」，招式变幻莫测", cd=false},
 	[15]= {name="意恍惚诀",			desc="你凝神定气，使出七伤拳总诀中的「意恍惚诀」", cd=false},
 	[16]= {name="三焦齐逆诀",		desc="你凝神定气，企图使出七伤拳总诀中的「三焦齐逆诀」", cd=false},
-	[17]= {name="快剑",		 desc="你使出慕容剑法中的绝招［快剑］，一招连环六剑", cd=false, run_time=7}
+	[17]= {name="快剑",		 desc="你使出慕容剑法中的绝招［快剑］，一招连环六剑", cd=false, run_time=6}
 	--[[
 	[1] = {name="一剑化三清", 		desc="你大喝一声，剑招突变", 			cd=false},
 	[2] = {name="附骨缠身", 		desc="你大喝一声，缠身而上", 			cd=false},
@@ -284,7 +284,7 @@ attack_perform_array = {
 			action = function()
 			    local wp = choose_sword()
 				choose_force()
-				Execute("enable finger canhe-zhi;wield " .. wp .. ";enable sword murong-jianfa;perform sword.sanhua;perform sword.lianhuan;perform sword.kuaijian " .. var.pfm_target)
+				Execute("enable finger canhe-zhi;bei none;bei canhe-zhi;wield " .. wp .. ";enable sword murong-jianfa;perform sword.sanhua;perform sword.lianhuan;perform sword.kuaijian " .. var.pfm_target)
 			end
 	}
 
