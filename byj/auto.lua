@@ -144,6 +144,7 @@ local tasks = {
 		end,
 		
 		wait = function()
+			if(var.hp_zq ~= nil and tonumber(var.hp_zq) < 0) then return os.time() + 100 end
 			if(var.bb_available_time == nil) then return os.time() else return tonumber(var.bb_available_time) end
 		end,
 		
