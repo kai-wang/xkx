@@ -192,6 +192,7 @@ end
 
 function heal(f_done)
 	core.busytest(function()
+		Execute("ef;et")
 		local startTime = os.time()
 		dazuo.start(function()
 		--	Execute("halt;er;ef;et")
