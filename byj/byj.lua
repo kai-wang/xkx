@@ -291,7 +291,7 @@ attack_perform_array = {
 	[14] = { i = 17,
 			action = function()
 				choose_force()
-				Execute("unwield all;enable dodge xuanfeng-tui;perform unarmed.kuangfeng; " .. var.pfm_target .. ";unwield all")
+				Execute("unwield all;enable dodge xuanfeng-tui;perform unarmed.kuangfeng " .. var.pfm_target .. ";unwield all")
 			end
 	}
 
