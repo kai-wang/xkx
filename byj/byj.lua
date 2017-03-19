@@ -39,7 +39,7 @@ var.kantou_flag = true
 var.lht_skil_exp_check = 1
 --var.sleep_loc = "fly bt;n;w;n" 
 
-auto_list = {"wei", "guanfu","guo","event", "jiding", "reconnect", "quit", "study", "sstask", "wait_for_jd"}
+auto_list = {"wei", "guanfu","guo","event", "reconnect", "quit", "study", "sstask", "task", "xiao", "baobiao", "double"}
 
 weapon_list = {"haoqi qin", "kunlun dao", "kunlun qin", "shentong zhang", "bagua dao", "kunlun zhang"}
 
@@ -284,7 +284,7 @@ attack_perform_array = {
 			action = function()
 			    local wp = choose_xuedao()
 				choose_force()
-				Execute("unwield all;enable dodge xuanfeng-tui;enable blade xue-dao;wield " .. wp .. ";jiali max;perform unarmed.kuangfeng; " .. var.pfm_target .. ";unwield all")
+				Execute("unwield all;enable dodge xuanfeng-tui;enable blade xue-dao;wield " .. wp .. ";jiali max;perform unarmed.kuangfeng " .. var.pfm_target .. ";unwield all")
 			end
 	},
 
