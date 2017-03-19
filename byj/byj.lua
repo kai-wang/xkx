@@ -392,7 +392,7 @@ function set_menpai(menpai)
 		r1,r2,r3 = re:match(menpai)
 		if(r3 ~= nil) then
 			print("换木系内功了.......")
-			return choose_force("shenyuan-gong")
+			return choose_force("bibo-shengong")
 		end
 	end
 
