@@ -284,7 +284,7 @@ attack_perform_array = {
 			action = function()
 			    local wp = choose_sword()
 				choose_force()
-				Execute("unwield all;enable finger canhe-zhi;wield " .. wp .. ";enable sword murong-jianfa;perform sword.sanhua;perform sword.lianhuan;perform sword.kuaijian " .. var.pfm_target)
+				Execute("enable finger canhe-zhi;wield " .. wp .. ";enable sword murong-jianfa;perform sword.sanhua;perform sword.lianhuan;perform sword.kuaijian " .. var.pfm_target)
 			end
 	}
 
