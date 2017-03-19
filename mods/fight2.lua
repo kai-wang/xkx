@@ -90,6 +90,7 @@ function perform_attack()
 		local attack = config.attack_perform_array[v]
 		local pfm = config.pfm[attack.i]
 		local reset_time = pfm.reset_time or 30
+		var.pfm_run_time = pfm.run_time
 		if(pfm.cd_time ~= nil and (os.time() - tonumber(pfm.cd_time) > tonumber(reset_time))) then pfm.cd = false end
 		
 		if(not pfm.cd) then 
@@ -151,7 +152,8 @@ end
 
 function attack()
 	perform_attack()
-	timer.tick("fight", 0.8, function() perform_busy() end)
+	local t = var.pfm_run_time or 0.8
+	timer.tick("fight", tonumber(t), function() perform_busy() end)
 end
 
 function on_busy_success()
