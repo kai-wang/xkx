@@ -1,15 +1,15 @@
 require "var"
 module ("config", package.seeall)
 
-var.dazuo_desc = "(你坐下来运气用功，一股内息开始在体内流动。)|(你盘膝入定，凝聚体内真气，摧动内息将腹中一丝丝游气慢慢增厚。)|(你气运丹田，将体内毒素慢慢逼出，控制着它环绕你缓缓飘动。你感觉到内劲开始有所加强了。)"
-var.dazuo_end_desc = "(你一周天行将下来，顿时浑身发暖，感到腹中内劲又增加一分。)|(你运功完毕，深深吸了口气，站了起来。)|(你吸气入丹田，真气运转渐缓，慢慢收功，双手抬起，站了起来。)|(你感觉毒素越转越快，就快要脱离你的控制了！你连忙收回毒素和内息，冷笑一声站了起来。)"
-var.dazuo_halt_desc = "(你把正在运行的真气强行压回丹田，站了起来。)|(你面色一沉，迅速收气，站了起来。)|(你突然双手向胸前一合，压住腹中内息，凌空跃起。)|(你双眼一睁，眼中射出一道精光，接着阴阴一笑，站了起来。)"
+var.dazuo_desc = "(你坐下来运气用功，一股内息开始在体内流动。)|(你盘膝入定，凝聚体内真气，摧动内息将腹中一丝丝游气慢慢增厚。)|(你气运丹田，将体内毒素慢慢逼出，控制着它环绕你缓缓飘动。你感觉到内劲开始有所加强了。)|(你随意一站，双手缓缓抬起，深吸一口气，真气开始在体内运转。)"
+var.dazuo_end_desc = "(你一周天行将下来，顿时浑身发暖，感到腹中内劲又增加一分。)|(你运功完毕，深深吸了口气，站了起来。)|(你吸气入丹田，真气运转渐缓，慢慢收功，双手抬起，站了起来。)|(你感觉毒素越转越快，就快要脱离你的控制了！你连忙收回毒素和内息，冷笑一声站了起来。)|(你将真气在体内沿脉络运行了一圈，缓缓纳入丹田，放下手，长吐了一口气。)"
+var.dazuo_halt_desc = "(你把正在运行的真气强行压回丹田，站了起来。)|(你面色一沉，迅速收气，站了起来。)|(你突然双手向胸前一合，压住腹中内息，凌空跃起。)|(你双眼一睁，眼中射出一道精光，接着阴阴一笑，站了起来。)|(你眉头一皱，急速运气，把手放了下来。)"
 var.dazuo_full_desc = "你的内力修为似乎已经达到了瓶颈，无法再靠打坐来提升了。"
 var.me_id = "byj"
 var.me_pwd = "111zzZ"
 var.me_name = "白玉京"
-var.me_menpai = "星宿"
-var.me_family = "星宿"
+var.me_menpai = "慕容"
+var.me_family = "慕容"
 var.me_dazuo = "dazuo 20000;dazuo max"
 var.me_dazuo_factor = 1.2
 var.gf_money = "no"
@@ -60,7 +60,8 @@ pfm = {
 	[13]= {name="长相思",			desc="你使出痴心情长剑之绝舞",				cd=false},
 	[14]= {name="无色无相", 	desc="你使出小无相绝技「无色无相」，招式变幻莫测", cd=false},
 	[15]= {name="意恍惚诀",			desc="你凝神定气，使出七伤拳总诀中的「意恍惚诀」", cd=false},
-	[16]= {name="三焦齐逆诀",		desc="你凝神定气，企图使出七伤拳总诀中的「三焦齐逆诀」", cd=false}
+	[16]= {name="三焦齐逆诀",		desc="你凝神定气，企图使出七伤拳总诀中的「三焦齐逆诀」", cd=false},
+	[17]= {name="快剑",		 desc="你使出慕容剑法中的绝招［快剑］，一招连环六剑", cd=false}
 	--[[
 	[1] = {name="一剑化三清", 		desc="你大喝一声，剑招突变", 			cd=false},
 	[2] = {name="附骨缠身", 		desc="你大喝一声，缠身而上", 			cd=false},
@@ -277,12 +278,20 @@ attack_perform_array = {
 				choose_force()
 				Execute("unwield all;perform cuff.sanjiao " .. var.pfm_target)
 			end
+	},
+
+	[13] = { i = 17,
+			action = function()
+			    local wp = choose_sword()
+				choose_force()
+				Execute("unwield all;enable finger canhe-zhi;wield " .. wp .. ";enable sword murong-jianfa;perform sword.sanhua;perform sword.lianhuan;perform sword.kuaijian " .. var.pfm_target)
+			end
 	}
 
 }
 
 task_busy_list = { 1, 2, 3}
-task_attack_list = {2, 3, 5, 10, 7}
+task_attack_list = {2, 3, 13, 5, 7}
 
 gf_busy_list = { 1, 2 }
 gf_attack_list = { 6, 7 }
@@ -292,11 +301,11 @@ ttask_attack_list = { 1, 2, 3, 4 }
 
 busy_list = { 1, 2}
 busy_list2 = { 1, 2 }
-attack_list1 = { 6, 7, 10 } 			-- shan / blocker
-attack_list2 = { 5, 10, 7, 2 }	-- xiao
-attack_list3 = { 5, 10, 7, 11}			-- wei / xiao
+attack_list1 = { 6, 7, 13 } 			-- shan / blocker
+attack_list2 = { 5, 13, 7, 2 }	-- xiao
+attack_list3 = { 5, 13, 7, 11}			-- wei / xiao
 attack_list4 = { 6 }				-- shan / wei
-attack_list5 = { 5, 10, 7, 11 }	-- ss
+attack_list5 = { 5, 13, 7, 11 }	-- ss
 
 study_list = {
 	--{ loc = "fly wm;e;n;e;e;n;n;", cmd = "yanjiu finger 5000", wear_int = true, interval = 0.8, post_action="fly wm;e;s;s;s;w;w;u;gamble big skill finger 2000"},
@@ -362,7 +371,7 @@ function set_menpai(menpai)
 		r1,r2,r3 = re:match(menpai)
 		if(r3 ~= nil) then
 			print("换木系内功了.......")
-			return choose_force("huagong-dafa")
+			return choose_force("shenyuan-gong")
 		end
 	end
 
