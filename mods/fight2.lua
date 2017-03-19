@@ -153,6 +153,7 @@ end
 function attack()
 	perform_attack()
 	local t = var.pfm_run_time or 0.8
+	print("等待出下个pfm : " .. t)
 	timer.tick("fight", tonumber(t), function() perform_busy() end)
 end
 
