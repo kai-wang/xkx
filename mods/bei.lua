@@ -199,7 +199,10 @@ end
 function gofortask()
 	local busy_list = config.task_busy_list
 	local attack_list = config.task_attack_list
-	local long_attack_list = config.task_long_attack_list
+
+	if(config.customize_task_pfm ~= nil) then
+		busy_list, attack_list = customize_task_pfm(var.task_menpai)
+	end
 
 	fight.prepare(busy_list, attack_list, escape, var.task_menpai, var.task_id)
 	config.powerup()
@@ -258,7 +261,11 @@ function startFight()
 	timer.stop("action")
 	local busy_list = config.task_busy_list
 	local attack_list = config.task_attack_list
-	local long_attack_list = config.task_long_attack_list
+
+	if(config.customize_task_pfm ~= nil) then
+		busy_list, attack_list = customize_task_pfm(var.task_menpai)
+	end
+
 	fight.prepare(busy_list, attack_list, escape, var.task_menpai, var.task_id)
 	if(var.task_kill_flag == "1") then
 		fight.start("kill " .. var.task_id)
