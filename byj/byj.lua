@@ -39,7 +39,7 @@ var.kantou_flag = true
 var.lht_skil_exp_check = 1
 --var.sleep_loc = "fly bt;n;w;n" 
 
-auto_list = {"wei", "guanfu","guo","event", "reconnect", "quit", "study", "sstask", "task", "xiao", "baobiao", "double"}
+auto_list = {"wei", "guanfu","guo","event", "reconnect", "quit", "study", "sstask", "task", "xiao", "baobiao", "double", "wait_for_task"}
 
 weapon_list = {"haoqi qin", "kunlun dao", "kunlun qin", "shentong zhang", "bagua dao", "kunlun zhang"}
 
@@ -310,7 +310,7 @@ ttask_attack_list = { 1, 2, 3, 4 }
 busy_list = { 1, 2}
 busy_list2 = { 1, 2 }
 attack_list1 = { 6, 7, 13 } 			-- shan / blocker
-attack_list2 = { 5, 14, 10, 7, 2 }	-- xiao
+attack_list2 = { 5, 14, 10, 7, 11 }	-- xiao
 attack_list3 = { 5, 14, 10, 7, 11}			-- wei / xiao
 attack_list4 = { 6 }				-- shan / wei
 attack_list5 = { 5, 14, 10, 7, 11 }	-- ss
