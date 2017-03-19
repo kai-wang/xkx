@@ -201,7 +201,7 @@ function gofortask()
 	local attack_list = config.task_attack_list
 
 	if(config.customize_task_pfm ~= nil) then
-		busy_list, attack_list = customize_task_pfm(var.task_menpai)
+		busy_list, attack_list = config.customize_task_pfm(var.task_menpai)
 	end
 
 	fight.prepare(busy_list, attack_list, escape, var.task_menpai, var.task_id)
@@ -263,7 +263,7 @@ function startFight()
 	local attack_list = config.task_attack_list
 
 	if(config.customize_task_pfm ~= nil) then
-		busy_list, attack_list = customize_task_pfm(var.task_menpai)
+		busy_list, attack_list = config.customize_task_pfm(var.task_menpai)
 	end
 
 	fight.prepare(busy_list, attack_list, escape, var.task_menpai, var.task_id)
