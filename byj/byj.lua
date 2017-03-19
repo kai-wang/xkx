@@ -284,7 +284,7 @@ attack_perform_array = {
 			action = function()
 			    local wp = choose_xuedao()
 				choose_force()
-				Execute("unwield all;enable dodge xuanfeng-tui;wield " .. wp .. ";perform unarmed.kuangfeng; " .. var.pfm_target .. ";unwield all")
+				Execute("unwield all;enable dodge xuanfeng-tui;enable blade xue-dao;wield " .. wp .. ";jiali max;perform unarmed.kuangfeng; " .. var.pfm_target .. ";unwield all")
 			end
 	},
 
