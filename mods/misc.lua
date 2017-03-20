@@ -361,7 +361,7 @@ end
 function quit(f_ok)
 	core.safeback(function()
 		jicun(function()
-			Execute("fly mj;quit")
+			Execute("fly mj;jia;quit")
 			timer.reconnect(30, function()
 				var.quit_required = 0
 				config.fight_wear(f_ok)
