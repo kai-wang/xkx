@@ -289,7 +289,7 @@ handlers = {
 		print("special handle stop")
 		EnableTriggerGroup("walk_special", false)
 		local c = handlers.cxt
-		call(c.f_stop)
+		--call(c.f_stop)
 	end,
 	
 	fail = function()
