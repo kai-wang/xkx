@@ -37,6 +37,7 @@ var.ss_can_stop = 1
 var.study_threshold = 10000
 var.kantou_flag = true
 var.lht_skil_exp_check = 1
+var.drop_gold_loc = "fly thd;e;u;"
 --var.sleep_loc = "fly bt;n;w;n" 
 
 auto_list = {"wei", "guanfu","guo","event", "reconnect", "quit", "study", "sstask", "task", "xiao", "baobiao", "double", "wait_for_task"}

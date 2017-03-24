@@ -405,7 +405,8 @@ check_money = function(f_done)
 			local l, w = wait.regexp("^(> )*ÄúÔÚ±×ºÅÖ»ÄÜ´æ.*$", 5)
 			if(l ~= nil) then
 				wait.time(5)
-				Execute("fly mj;s;sd;e;drop gold;drop gold-bar;get 19 gold")
+				if(var.drop_gold_loc ~= nil) then Execute(var.drop_gold_loc) else Execute("fly mj;s;sd;e") end
+				Execute("drop gold;drop gold-bar;get 19 gold")
 				wait.time(1)
 				Execute("fly wm")
 			else
