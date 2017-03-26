@@ -82,6 +82,7 @@ function exit()
 	EnableTriggerGroup("xiao_ask", false)
 	EnableTriggerGroup("xiao", false)
 	EnableTriggerGroup("xiao_fight", false)
+	EnableTriggerGroup("xiao_found", false)
 	timer.stop("action")
 end
 
