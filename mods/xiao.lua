@@ -43,7 +43,8 @@ function start()
 	EnableTriggerGroup("xiao_fight", false)
 
 	timer.stop("action")
-	walk.sl(var.xiao_city, var.xiao_loc, notfound, rewalk, foundnpc)
+	--walk.sl(var.xiao_city, var.xiao_loc, notfound, rewalk, foundnpc)
+	walk.sl(var.xiao_city, var.xiao_loc, notfound, rewalk, startLook)
 end
 
 function fail()
@@ -95,6 +96,20 @@ function foundnpc()
 	end
 end
 
+function startLook()
+	wait.make(function()
+		Execute("look shashou")
+		local l, w = wait.regexp("  √(.*)\(.*\).*$", 3)
+		print(l)
+		if(l ~= nil and l:find("琴") ~= nil) then
+			print("!!!! meizhuang !!!!")
+			if(var.xiao_skip_mz == "1") then return fail() end
+		end
+		print("not meizhuang")
+		foundnpc()	
+	end)
+end
+
 -- 走完都没找到
 function notfound()
 	var.xiao_found = false
@@ -103,7 +118,8 @@ function notfound()
 	--如果walkaround走完还没找到，就retry吧
 	print("走完还没找到")
 	core.safehalt(function()
-		walk.walkaround(5, nil, rewalk, rewalk, foundnpc)
+		--walk.walkaround(5, nil, rewalk, rewalk, foundnpc)
+		walk.walkaround(5, nil, rewalk, rewalk, startLook)
 	end, 1)
 end
 
@@ -183,7 +199,8 @@ function retry()
 			end
 			core.busytest(function()
 				EnableTriggerGroup("xiao", true)
-				walk.walkaround(2, var.xiao_escape_dir, notfound, rewalk, foundnpc)
+				--walk.walkaround(2, var.xiao_escape_dir, notfound, rewalk, foundnpc)
+				walk.walkaround(2, var.xiao_escape_dir, notfound, rewalk, startLook)
 			end)
 		end)
 	end)
@@ -245,7 +262,8 @@ function searchKiller()
 	core.safehalt(function()
 		print("从 " .. var.xiao_escape_dir .. " 开始walkaround" )
 		Execute("er;et;ef")
-		walk.walkaround(3, var.xiao_escape_dir, notfound, rewalk, foundnpc)
+		--walk.walkaround(3, var.xiao_escape_dir, notfound, rewalk, foundnpc)
+		walk.walkaround(3, var.xiao_escape_dir, notfound, rewalk, startLook)
 	end, 1)
 end
 

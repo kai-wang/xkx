@@ -32,6 +32,7 @@ var.task_walk_danger_level = 5
 var.gf_walk_danger_level = 5
 var.ss_walk_danger_level = 5
 var.xiao_walk_danger_level = 5
+var.xiao_skip_mz = 1
 var.ss_shuffle = 0
 var.ss_can_stop = 1
 var.study_threshold = 10000
