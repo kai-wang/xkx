@@ -15,6 +15,7 @@ function init()
 	EnableTriggerGroup("xiao", false)
 	EnableTriggerGroup("xiao_fight", false)
 	EnableTriggerGroup("xiao_halt", false)
+	EnableTriggerGroup("xiao_found", false)
 end
 
 function main(f_ok, f_fail)
@@ -40,6 +41,7 @@ function start()
 	if var.xiao_start ~= "1" then return fail() end
 	EnableTriggerGroup("xiao_ask", false)
 	EnableTriggerGroup("xiao", true)
+	EnableTriggerGroup("xiao_found", true)
 	EnableTriggerGroup("xiao_fight", false)
 
 	timer.stop("action")
@@ -98,9 +100,10 @@ end
 
 function startLook()
 	wait.make(function()
+		EnableTriggerGroup("xiao_found", false)
 		Execute("look shashou")
-		local l, w = wait.regexp("  √(.*)\(.*\).*$", 3)
-		print(l)
+		local l, w = wait.regexp("^  √手持(.*)\(.*\).*$", 1)
+		EnableTriggerGroup("xiao_found", true)
 		if(l ~= nil and l:find("琴") ~= nil) then
 			print("!!!! meizhuang !!!!")
 			if(var.xiao_skip_mz == "1") then return fail() end
@@ -245,6 +248,7 @@ end
 -------- task 跑了，在原地范围内进行深度为5的遍历-----------------------------------
 function search(name, line, wildcards)
 	if(var.xiao_found == "true") then
+		EnableTriggerGroup("xiao_found", true)
 		print("task 往【" .. wildcards[2] .. "】跑了")
 		local dir = wildcards[2]
 		dir = dir:gsub("边",""):gsub("面", ""):gsub("方向", ""):gsub("方", "")
@@ -258,6 +262,7 @@ end
 function searchKiller()
 	--DeleteTemporaryTriggers()
 	timer.stop("action")
+	EnableTriggerGroup("xiao_found", true)
 	--Execute("halt")
 	core.safehalt(function()
 		print("从 " .. var.xiao_escape_dir .. " 开始walkaround" )
