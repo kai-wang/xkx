@@ -299,7 +299,7 @@ function fail()
 	init()
 	core.safeback(function()
 		Execute("er;et;ef")
-		var.ss_available_time = os.time() + 1200
+		var.ss_available_time = os.time() + 1800
 		--var.reconnect_required = 1
 		if(var.ss_give_dummy == "1") then
 			give_dummy(function() 
@@ -317,7 +317,7 @@ end
 
 function give_dummy(f)
 	wait.make(function()
-		Execute("fly wm;w")
+		Execute("fly wm")
 		for k, v in pairs(shenshu_list) do
 			if(v.num == 1) then 
 				Execute("give " .. v.name .. " to " .. var.ss_dummy) 
