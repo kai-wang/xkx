@@ -328,13 +328,13 @@ function give_dummy(f)
 				end
 			end
 		end
+	
+	--	repeat
+	--		Execute("tell " .. var.ss_dummy .. " shenshu")
+	--		local l, w = wait.regexp("^(> )*.*给你一本(.*)。$", 2)
+	--		if(l ~= nil) then Execute("chayue " .. shenshu_list[w[2]].name) end
+	--	until(l == nil)
 
-		repeat
-			Execute("tell " .. var.ss_dummy .. " shenshu")
-			local l, w = wait.regexp("^(> )*.*给你一本(.*)。$", 2)
-			if(l ~= nil) then Execute("chayue " .. shenshu_list[w[2]].name) end
-		until(l == nil)
-		
 		call(f)
 	end)
 end
