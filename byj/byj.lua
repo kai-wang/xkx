@@ -359,7 +359,7 @@ end
 
 function customize_task_pfm(menpai)
 	if(menpai ~= nil) then
-		local re = rex.new("(Ã“ª®|…Ÿ¡÷|∂Î·“|∂Î√º)")
+		local re = rex.new("(Ã“ª®|…Ÿ¡÷|∂Î·“|∂Î√º|–«Àﬁ)")
 		local r1,r2,r3 = re:match(menpai)
 		if(r3 ~= nil) then
 			return config.task_busy_list, config.task_attack_list2
