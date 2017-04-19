@@ -45,7 +45,7 @@ var.drop_gold_loc = "fly wm;e;s;s;enter dong;say 天堂有路你不走呀;d;9"
 
 auto_list = {"wei", "guanfu","guo","event", "reconnect", "quit", "study", "sstask", "task", "xiao", "baobiao", "double", "wait_for_task"}
 
-weapon_list = {"haoqi qin", "kunlun dao", "kunlun qin", "shentong zhang", "bagua dao", "kunlun zhang"}
+weapon_list = {"haoqi qin", "kunlun dao", "kunlun qin", "shentong zhang", "bagua dao", "sanqing qin"}
 
 pfm = {
 	[1]= {	name="双手互博之术", desc="你平心静气", cd=false },
@@ -453,7 +453,7 @@ end
 function int_wear(f_done)
 	wait.make(function()
 		Execute("unwield all;tuo all")
-		Execute("wield bagua dao;wear lianyu yi;wear shentong mao;wear shenshui mao;wear xunzhang;wear kunlun xue;wear jiulong hushou;wear sanqing ring")
+		Execute("wield bagua dao;wear kunlun yi;wear shentong mao;wear shenshui mao;wear xunzhang;wear kunlun xue;wear jiulong hushou;wear sanqing ring")
 		wait.time(1)
 		call(f_done)
 	end)
@@ -461,7 +461,7 @@ end
 
 function fight_wear(f_done)
 	wait.make(function()
-		Execute("tuo all;wear shentong xue;wear bagua xue;wear shentong mao;wear shenshui mao;wear taiji yi;wear xuanyuan yi;wear xuanyuan hushou;wear shentong ring;give kunlun dao to " .. var.me_id)
+		Execute("tuo all;wear shentong xue;wear bagua xue;wear shentong mao;wear shenshui mao;wear kunlun yi;wear taiji yi;wear xuanyuan hushou;wear shentong ring;give kunlun dao to " .. var.me_id)
 		wait.time(1)
 		core.busytest(function() call(f_done) end)
 	end)
