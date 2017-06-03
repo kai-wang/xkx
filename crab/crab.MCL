@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE muclient>
-<!-- Saved on ÐÇÆÚÎå, ÈýÔÂ 17, 2017, 5:06 ÏÂÎç -->
+<!-- Saved on ÐÇÆÚÎå, ÈýÔÂ 31, 2017, 4:53 ÏÂÎç -->
 <!-- MuClient version 4.84 -->
 <!-- Written by Nick Gammon -->
 <!-- Home Page: http://www.mushclient.com/ -->
@@ -8,7 +8,7 @@
 <world
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2017-03-17 17:06:34"
+   date_saved="2017-03-31 16:53:29"
 
    auto_say_override_prefix="-"
    auto_say_string="say "
@@ -115,7 +115,7 @@
 <triggers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2017-03-17 17:06:34"
+   date_saved="2017-03-31 16:53:29"
   >
   <trigger
    group="walk_special"
@@ -2008,19 +2008,6 @@ fight.busy()</send>
   <send>study.emit("study_end", "waitandretry")</send>
   </trigger>
   <trigger
-   enabled="y"
-   group="system"
-   match="^(&gt; )*ÄãÒ»´ÎÊäÈëÌ«¶àÃüÁîÁË¡£$"
-   regexp="y"
-   send_to="12"
-   sequence="100"
-  >
-  <send>fight.stop()
-walk.abort()
-
-timer.tickonce("action", 15, function() safeback("halt;fly wm", function() if(var.auto_stop ~= "1") then var.task_available_time=os.time()+30 auto.restart() end end) end)</send>
-  </trigger>
-  <trigger
    group="fight_ob"
    match="^(&gt; )*ÄãÒ»´ÎÊäÈëÌ«¶àÃüÁîÁË¡£$"
    send_to="12"
@@ -2032,6 +2019,19 @@ wait.make(function()
 wait.time(8)
 fight.start()
 end)</send>
+  </trigger>
+  <trigger
+   enabled="y"
+   group="system"
+   match="^(&gt; )*ÄãÒ»´ÎÊäÈëÌ«¶àÃüÁîÁË¡£$"
+   regexp="y"
+   send_to="12"
+   sequence="100"
+  >
+  <send>fight.stop()
+walk.abort()
+
+timer.tickonce("action", 15, function() safeback("halt;fly wm", function() if(var.auto_stop ~= "1") then var.task_available_time=os.time()+30 auto.restart() end end) end)</send>
   </trigger>
   <trigger
    group="system_ob"
@@ -2498,7 +2498,7 @@ walk.stop()</send>
 <aliases
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2017-03-17 17:06:34"
+   date_saved="2017-03-31 16:53:29"
   >
   <alias
    match="^k1 (.+)"
@@ -3460,7 +3460,7 @@ leitai</send>
 <timers
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2017-03-17 17:06:34"
+   date_saved="2017-03-31 16:53:29"
   >
   <timer name="action" second="1.50" offset_second="0.00"    send_to="12"
 group="action" >
@@ -3486,13 +3486,13 @@ at_time="y" group="ss" >
   <send>var.ss_can_stop = 1</send>
 
   </timer>
-  <timer enabled="y" second="59.00" offset_second="0.00" >
-  <send>hi</send>
-
-  </timer>
   <timer name="idle" minute="5" second="0.00" offset_second="0.00"    send_to="12"
 group="idle" >
   <send>timer.fire("idle")</send>
+
+  </timer>
+  <timer enabled="y" second="59.00" offset_second="0.00" >
+  <send>hi</send>
 
   </timer>
 </timers>
@@ -3502,7 +3502,7 @@ group="idle" >
 <macros
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2017-03-17 17:06:34"
+   date_saved="2017-03-31 16:53:29"
   >
 
   <macro name="up" type="send_now" >
@@ -3596,7 +3596,7 @@ group="idle" >
 <variables
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2017-03-17 17:06:34"
+   date_saved="2017-03-31 16:53:29"
   >
   <variable name="auto_stop">1</variable>
   <variable name="bag_dummy_id">hsly</variable>
@@ -3813,7 +3813,7 @@ group="idle" >
 <colours
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2017-03-17 17:06:34"
+   date_saved="2017-03-31 16:53:29"
   >
 
 <ansi>
@@ -3870,7 +3870,7 @@ group="idle" >
 <keypad
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2017-03-17 17:06:34"
+   date_saved="2017-03-31 16:53:29"
   >
 
   <key name="0" >
@@ -3984,7 +3984,7 @@ group="idle" >
 <printing
    muclient_version="4.84"
    world_file_version="15"
-   date_saved="2017-03-17 17:06:34"
+   date_saved="2017-03-31 16:53:29"
   >
 
 <ansi>
